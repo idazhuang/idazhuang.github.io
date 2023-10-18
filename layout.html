@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的响应式个人主页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .profile-image {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+        .content {
+            padding: 20px;
+        }
+        @media (min-width: 768px) {
+            .content {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>欢迎来到我的响应式个人主页</h1>
+    </header>
+    <div class="container">
+        <div class="content">
+            <img class="profile-image" src="your-image.jpg" alt="Your Name">
+            <div>
+                <h2>关于我</h2>
+                <p>我是一个Web开发者，热爱编程和设计。欢迎来访我的个人主页。</p>
+                <h2>联系信息</h2>
+                <p>Email: your.email@example.com</p>
+                <p>社交媒体: <a href="https://twitter.com/yourusername">Twitter</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
