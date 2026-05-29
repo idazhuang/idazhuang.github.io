@@ -209,15 +209,15 @@
   <!-- ========== HERO / ABOUT ========== -->
   <header class="hero" id="about">
     <div class="hero-text reveal">
-      <div class="kicker">PhD Student</div>
-      <h1>张永壮</h1>
-      <div class="pinyin">Yongzhuang Zhang</div>
+      <div class="kicker">[职位 · 如 PhD Student / Assistant Professor]</div>
+      <h1>[你的名字]</h1>
+      <div class="pinyin">[拼音或英文名，如 Zhang San · 张三]</div>
       <p class="role">
         [一句身份说明，如：] <b>[院系/实验室]</b>，[大学名]。<br>
         [可加一行：导师 / 团队，如 Advised by Prof. X.]
       </p>
       <p class="lede">
-        I work on <span class="hl">[machine learning and computer vision]</span>.
+        I work on <span class="hl">[你的研究领域，如 machine learning and computer vision]</span>.
         我的研究聚焦于 [一两句话概括你的研究问题与目标，如：如何让模型在数据稀缺的条件下高效学习与可靠推理]。
         [可补一句愿景或近况。]
       </p>
