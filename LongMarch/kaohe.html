@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>史实校核与出处说明 · 大渡河—夹金山系列</title>
+<style>
+  :root{
+    --bg:#0a0e16; --bg2:#0f1a28; --line:rgba(224,183,92,.22);
+    --ink:#eaf1fb; --muted:#a7b6c9; --faint:#6f8094;
+    --red:#e23b2e; --red2:#ff7a6d; --reddeep:#8f1610;
+    --gold:#e0b75c; --gold2:#f6d98a;
+    --teal2:#5fc3d2; --ice:#8fc3dc; --yi2:#f2c987;
+    --font:"PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans SC","Source Han Sans SC","Heiti SC",sans-serif;
+    --serif:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{font-family:var(--font);color:var(--ink);
+    background:radial-gradient(120% 120% at 70% -10%, #16243a 0%, var(--bg2) 38%, var(--bg) 78%) fixed;
+    -webkit-font-smoothing:antialiased;padding-bottom:36px;}
+  header{display:flex;align-items:center;gap:16px;padding:14px 28px 12px;
+    border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(10,14,22,.6), rgba(10,14,22,0));}
+  .badge{width:40px;height:40px;flex:none;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--red2), var(--reddeep));
+    box-shadow:0 0 0 2px rgba(224,183,92,.5), 0 4px 14px rgba(226,59,46,.4);
+    display:grid;place-items:center;color:#ffe9b0;font-size:20px;}
+  .titles h1{font-size:22px;letter-spacing:.1em;font-weight:800}
+  .titles .sub{font-family:var(--serif);font-size:13.5px;color:var(--gold);letter-spacing:.12em;margin-top:4px}
+  .spacer{flex:1}
+  .topbtn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);
+    padding:8px 13px;border-radius:8px;font-size:13.5px;cursor:pointer;letter-spacing:.05em;transition:.18s;text-decoration:none}
+  .topbtn:hover{color:var(--ink);border-color:var(--gold);background:rgba(224,183,92,.08)}
+
+  main{max-width:920px;margin:0 auto;padding:24px 24px 0}
+  .intro{font-size:15px;line-height:1.75;color:var(--muted);border:1px solid var(--line);border-radius:12px;
+    background:rgba(255,255,255,.018);padding:16px 18px;margin-bottom:24px}
+  .intro b{color:var(--ink);font-weight:600}
+
+  .evt{border:1px solid rgba(255,255,255,.09);border-radius:13px;background:rgba(255,255,255,.015);
+    padding:18px 20px;margin-bottom:18px}
+  .evt-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:11px;margin-bottom:13px}
+  .evt-h .n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:var(--reddeep);color:var(--gold2);font-size:14px;font-weight:800;font-family:var(--serif)}
+  .evt-h .t{font-size:20px;font-weight:800;letter-spacing:.05em}
+  .evt-h .d{font-family:var(--serif);font-size:12.5px;color:#0a0e16;background:var(--gold);
+    padding:3px 10px;border-radius:20px;font-weight:700;white-space:nowrap}
+  .sub-h{font-size:13.5px;font-weight:700;letter-spacing:.08em;display:flex;align-items:center;gap:8px;margin:13px 0 7px}
+  .sub-h::before{content:"";width:8px;height:8px;border-radius:2px}
+  .sub-h.fact{color:var(--red2)} .sub-h.fact::before{background:var(--red)}
+  .sub-h.var{color:var(--gold2)} .sub-h.var::before{background:var(--gold)}
+  ul{list-style:none;padding-left:2px}
+  li{font-size:14px;line-height:1.62;color:var(--muted);padding-left:18px;position:relative;margin-bottom:6px}
+  li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--faint)}
+  .sub-h.fact + ul li::before{background:var(--red2)}
+  .sub-h.var + ul li::before{background:var(--gold2)}
+  li b{color:var(--ink);font-weight:600} .k{color:var(--gold2);font-weight:600}
+
+  .ref{border:1px solid var(--line);border-radius:13px;background:rgba(224,183,92,.05);padding:18px 20px;margin-bottom:18px}
+  .ref h2{font-size:17px;font-weight:800;letter-spacing:.06em;color:var(--gold2);margin-bottom:11px}
+  .ref li::before{background:var(--gold)}
+  .disc{font-size:12.5px;color:var(--faint);line-height:1.65;letter-spacing:.02em;
+    border-top:1px solid rgba(255,255,255,.07);padding-top:12px;margin-top:6px}
+
+  footer{max-width:920px;margin:18px auto 0;padding:14px 24px 0;border-top:1px solid rgba(255,255,255,.07)}
+  .note{font-size:12px;color:var(--faint);line-height:1.6}
+  a.back{color:var(--gold2);text-decoration:none} a.back:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+  <header>
+    <div class="badge">✓</div>
+    <div class="titles">
+      <h1>史实校核与出处说明</h1>
+      <div class="sub">彝海结盟 · 强渡大渡河 · 飞夺泸定桥 · 翻越夹金山</div>
+    </div>
+    <div class="spacer"></div>
+    <a class="topbtn back" href="index.html">← 返回总目录</a>
+  </header>
+
+  <main>
+    <div class="intro">
+      本系列演示<b>以历史真实为准则</b>，史实（人物、时间、番号、兵力、经过、因果）依据党史军史著作与各纪念馆、革命遗址的通行记述编写。地图中的单位位置、行军路线、地形走向均为<b>教学示意，非按实际地理比例</b>。凡史界记载存在出入的具体数据，本系列一律取<b>通行口径</b>，并在下文逐项说明。本页为教学辅助，未逐条标注版本与页码；用于正式场合时，请以权威党史军史著作与纪念馆的最新结论为准。
+    </div>
+
+    <!-- 彝海结盟 -->
+    <div class="evt">
+      <div class="evt-h"><span class="n">一</span><span class="t">彝海结盟</span><span class="d">1935年5月22日</span></div>
+      <div class="sub-h fact">核心史实</div>
+      <ul>
+        <li>1935年5月22日，红军先遣队司令员<b>刘伯承</b>与彝族果基家首领<b>小叶丹</b>，在冕宁<b>彝海</b>边按彝族传统歃血为盟、结为兄弟。</li>
+        <li>先遣队由红一军团一部（含军委工兵连）组成，<b>刘伯承任司令员、聂荣臻任政委</b>，任务是为全军开路、迅速通过彝区。</li>
+        <li>红军严格执行党的民族政策，进入彝区遇阻、器材被收时<b>坚持不向彝族同胞开枪</b>，以宣传与纪律取信于彝族同胞。</li>
+        <li>结盟后成立"<b>中国彝民红军沽鸡支队</b>"，刘伯承授队旗、赠枪，小叶丹任支队长。</li>
+        <li>小叶丹派向导护送红军<b>安全通过彝区</b>，为红军抢渡大渡河赢得了宝贵时间。彝海结盟是党的民族政策的成功实践。</li>
+      </ul>
+      <div class="sub-h var">史界有异 · 本演示取用的通行口径</div>
+      <ul>
+        <li>小叶丹之名：又作<span class="k">"果基约达""果基小叶丹"</span>（彝名音译不同）。</li>
+        <li>支队番号：作<span class="k">"沽鸡支队"或"果基支队"</span>，本演示标注为"沽鸡支队（果基支队）"。</li>
+        <li>结盟细节（饮血酒方式）、赠枪数量等记述略有出入，本演示从简、不作细节定量。</li>
+      </ul>
+    </div>
+
+    <!-- 强渡大渡河 -->
+    <div class="evt">
+      <div class="evt-h"><span class="n">二</span><span class="t">强渡大渡河（安顺场）</span><span class="d">1935年5月25日</span></div>
+      <div class="sub-h fact">核心史实</div>
+      <ul>
+        <li>1935年5月25日，红一团一营在<b>安顺场</b>强渡大渡河成功；强渡前曾以红五团在下游大树堡<b>佯渡</b>、声东击西。</li>
+        <li>渡河突击队由一营营长<b>孙继先</b>组织，连长<b>熊尚林</b>任队长；<b>神炮手赵章成</b>以迫击炮火力支援。</li>
+        <li>当地船工自愿撑船摆渡；刘伯承、聂荣臻亲临前沿组织火力掩护。</li>
+        <li>因渡船极少、单渡口输送能力低，<b>难以短期渡完全军</b>，遂决定兵分两路、夹江北上夺取泸定桥。</li>
+      </ul>
+      <div class="sub-h var">史界有异 · 本演示取用的通行口径</div>
+      <ul>
+        <li>突击队人数：通行作<span class="k">"十七勇士"</span>，亦有"十八勇士"之说（是否计入指挥/船工口径不同）。</li>
+        <li>渡船数：通行作<span class="k">3—4只</span>（最初缴获1只，后于下游修复破船）。</li>
+        <li>续渡兵力：先遣队<span class="k">"七千余/八千余"人</span>等记述略有出入。</li>
+        <li>江宽与强渡时刻：<span class="k">"百余米/三百余米"</span>（指不同河段/水情）、<span class="k">"7时/9时"</span>等记述不一。</li>
+      </ul>
+    </div>
+
+    <!-- 飞夺泸定桥 -->
+    <div class="evt">
+      <div class="evt-h"><span class="n">三</span><span class="t">飞夺泸定桥</span><span class="d">1935年5月29日</span></div>
+      <div class="sub-h fact">核心史实</div>
+      <ul>
+        <li>红军兵分两路夹大渡河北上抢桥：<b>右路红一师及干部团沿东岸</b>、<b>左路红四团为前锋沿西岸</b>并进。</li>
+        <li>红四团<b>团长王开湘（黄开湘）、政委杨成武</b>，受领限时夺桥命令，<b>一昼夜奔袭</b>赶到桥西。</li>
+        <li>泸定桥为铁索桥，由<b>13根铁链</b>组成（9根作底链、4根作扶手），长百余米；守敌已<b>抽去桥板</b>、以机枪扼守东桥头（泸定城）。</li>
+        <li>二连连长<b>廖大珠</b>率突击队<b>攀踏铁索</b>向东岸突击，后续部队边前进边铺桥板；守敌纵火烧桥头，勇士<b>冲过火海</b>夺占桥头。</li>
+        <li>与沿东岸赶到的右路部队<b>会攻夺取泸定城</b>，中央红军主力由泸定桥渡过大渡河、跳出合围。</li>
+      </ul>
+      <div class="sub-h var">史界有异 · 本演示取用的通行口径</div>
+      <ul>
+        <li>团长姓名：记作<span class="k">"王开湘"或"黄开湘"</span>，系同一人（方言/记音差异）。</li>
+        <li>奔袭里程：通行作<span class="k">"240里"（约120公里）</span>。</li>
+        <li>突击队人数：通行作<span class="k">"二十二勇士"</span>。</li>
+        <li>攻击发起时刻：通行作<span class="k">"5月29日16时（下午4时）"</span>。</li>
+      </ul>
+    </div>
+
+    <!-- 翻越夹金山 -->
+    <div class="evt">
+      <div class="evt-h"><span class="n">四</span><span class="t">翻越夹金山</span><span class="d">1935年6月</span></div>
+      <div class="sub-h fact">核心史实</div>
+      <ul>
+        <li>1935年6月，中央红军（红一方面军）翻越<b>夹金山</b>——这是长征途中<b>翻越的第一座大雪山</b>。</li>
+        <li>夹金山位于今四川宝兴与小金之间，<b>终年积雪、空气稀薄缺氧、气候瞬息万变</b>、山上无路。</li>
+        <li>翻山前部队<b>轻装并备御寒之物</b>（姜汤、辣椒、烧酒等），总结出<b>择正午前后翻越、不停留久坐、互相搀扶</b>的经验。</li>
+        <li>翻越途中风雪严酷，<b>不少指战员牺牲、长眠雪山</b>。</li>
+        <li>翻过夹金山后，红一方面军先头部队在<b>达维</b>与红四方面军先头部队会师——<b>红一、四方面军首次会师</b>。</li>
+      </ul>
+      <div class="sub-h var">史界有异 · 本演示取用的通行口径</div>
+      <ul>
+        <li>海拔：取<span class="k">"约4000余米（主峰逾4900米）"</span>（不同资料对垭口与主峰海拔表述不同）。</li>
+        <li>会师时间与地点：通行作<span class="k">"1935年6月12日前后，在达维（懋功境内）会师"</span>；"懋功会师"亦指这一会师。</li>
+      </ul>
+    </div>
+
+    <!-- 参考资料 -->
+    <div class="ref">
+      <h2>主要参考资料（类别）</h2>
+      <ul>
+        <li>权威党史军史著作中关于红军长征的<b>通行记述</b>，如《中国共产党历史》（中共党史出版社）及反映红军长征的军史、战史类著作。</li>
+        <li>相关<b>纪念馆与革命遗址</b>的陈列与说明，如安顺场（中国工农红军强渡大渡河纪念馆）、泸定桥及泸定桥革命文物陈列馆、彝海结盟纪念地、达维会师遗址等。</li>
+      </ul>
+      <div class="disc">说明：上列为本系列通行记述所依据的资料类别，本页未逐条标注具体版本与页码；凡数字有异者已在各事件"通行口径"中注明。若用于考试、出版或正式教学，请以权威党史军史著作与纪念馆的最新结论为准，并核对原始出处。</div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="note">本页与四个态势演示同属教学辅助材料。地图为示意、非按比例；史实以党史军史与纪念馆资料的通行记述为准。 · <a class="back" href="index.html">返回总目录</a></div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>翻越夹金山 · 雪山行军态势演示</title>
+<style>
+
+  :root{
+    --bg:#0a0e16; --bg2:#0f1a28;
+    --panel:rgba(13,21,33,.93); --line:rgba(224,183,92,.22);
+    --ink:#eaf1fb; --muted:#a7b6c9; --faint:#6f8094;
+    --red:#e23b2e; --red2:#ff7a6d; --reddeep:#8f1610;
+    --blue:#4f86bd; --blue2:#9cc0e8; --bluedeep:#21364c;
+    --river:#15545c; --river2:#46bccb;
+    --gold:#e0b75c; --gold2:#f6d98a;
+    --font:"PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans SC","Source Han Sans SC","Heiti SC",sans-serif;
+    --serif:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);
+    background:radial-gradient(120% 120% at 70% -10%, #16243a 0%, var(--bg2) 38%, var(--bg) 78%);
+    overflow:hidden;-webkit-font-smoothing:antialiased;}
+  .app{display:flex;flex-direction:column;height:100vh;width:100vw}
+
+  header{display:flex;align-items:center;gap:16px;padding:10px 22px 8px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(10,14,22,.6), rgba(10,14,22,0));flex:none;}
+  .badge{width:38px;height:38px;flex:none;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--red2), var(--reddeep));
+    box-shadow:0 0 0 2px rgba(224,183,92,.5), 0 4px 14px rgba(226,59,46,.4);
+    display:grid;place-items:center;color:#ffe9b0;font-size:20px;}
+  .titles h1{font-size:23px;letter-spacing:.16em;font-weight:800}
+  .titles .sub{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.2em;margin-top:3px}
+  .spacer{flex:1}
+  .topbtn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);
+    padding:7px 12px;border-radius:8px;font-family:var(--font);font-size:13.5px;cursor:pointer;letter-spacing:.05em;transition:.18s;}
+  .topbtn:hover{color:var(--ink);border-color:var(--gold);background:rgba(224,183,92,.08)}
+
+  .body{flex:1;display:flex;min-height:0}
+  .mapwrap{position:relative;flex:1;min-width:0;padding:14px 8px 14px 16px}
+  .frame{position:absolute;inset:14px 8px 14px 16px;border:1px solid var(--line);border-radius:10px;
+    pointer-events:none;box-shadow:inset 0 0 60px rgba(0,0,0,.55);}
+  svg.map{width:100%;height:100%;display:block}
+
+  aside{width:374px;flex:none;border-left:1px solid var(--line);background:var(--panel);
+    padding:12px 16px 10px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+  .ph{font-size:13px;letter-spacing:.26em;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:8px}
+  .ph::after{content:"";flex:1;height:1px;background:var(--line)}
+  .force{display:flex;flex-direction:column;gap:7px;overflow-y:auto;flex:1;min-height:0;padding-right:3px}
+  .fcard{border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:9px 11px;background:rgba(255,255,255,.015)}
+  .fcard.red{border-top:3px solid var(--red)} .fcard.blue{border-top:3px solid var(--blue)} .fcard.env{border-top:3px solid var(--river2)}
+  .fcard.env .side{color:var(--river2)} .fcard.env .dot{background:var(--river2)}
+  .fcard .side{font-size:14.5px;font-weight:800;letter-spacing:.08em;margin-bottom:5px;display:flex;gap:7px;align-items:center}
+  .fcard.red .side{color:var(--red2)} .fcard.blue .side{color:var(--blue2)}
+  .dot{width:9px;height:9px;border-radius:2px} .fcard.red .dot{background:var(--red)} .fcard.blue .dot{background:var(--blue)}
+  .fcard p{font-size:14px;line-height:1.56;color:var(--muted)} .fcard b{color:var(--ink);font-weight:600}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);padding:2px 0}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .lg{width:14px;height:10px;border-radius:2px;display:inline-block}
+  .pnote{font-size:11px;color:var(--faint);letter-spacing:.02em;line-height:1.45;margin-top:auto;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)}
+
+  footer{flex:none;border-top:1px solid var(--line);
+    background:linear-gradient(0deg, rgba(10,14,22,.55), rgba(10,14,22,0));padding:10px 22px 12px}
+  .caption{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;min-height:40px}
+  .cap-name{font-size:21px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+  .cap-time{font-family:var(--serif);font-size:13.5px;color:#0a0e16;background:var(--gold);
+    padding:3px 9px;border-radius:20px;letter-spacing:.06em;white-space:nowrap;font-weight:700}
+  .cap-desc{font-size:15px;color:var(--muted);line-height:1.5;flex:1}
+
+  .track{position:relative;height:46px;margin:0 4px 11px}
+  .rail{position:absolute;top:10px;left:0;right:0;height:3px;background:rgba(255,255,255,.09);border-radius:2px}
+  .rail-fill{position:absolute;top:10px;left:0;height:3px;background:linear-gradient(90deg,var(--reddeep),var(--gold));border-radius:2px;transition:width .5s ease;width:0}
+  .nodes{position:absolute;inset:0;display:flex;justify-content:space-between}
+  .node{display:flex;flex-direction:column;align-items:center;cursor:pointer;flex:1}
+  .node .nd{width:14px;height:14px;border-radius:50%;border:2px solid var(--faint);background:var(--bg);margin-top:3px;transition:.25s;position:relative;z-index:2}
+  .node .nl{font-size:12px;color:var(--faint);margin-top:7px;letter-spacing:.02em;transition:.2s;text-align:center;white-space:nowrap}
+  .node.done .nd{border-color:var(--red);background:var(--red)}
+  .node.active .nd{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 4px rgba(224,183,92,.22);transform:scale(1.25)}
+  .node.active .nl{color:var(--gold2);font-weight:700} .node:hover .nl{color:var(--ink)}
+
+  .ctrls{display:flex;align-items:center;justify-content:center;gap:10px}
+  button.ctl{font-family:var(--font);font-size:14px;letter-spacing:.04em;cursor:pointer;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink);
+    padding:9px 15px;border-radius:9px;transition:.16s;display:flex;align-items:center;gap:7px}
+  button.ctl:hover{border-color:var(--gold);background:rgba(224,183,92,.1)}
+  button.ctl:disabled{opacity:.32;cursor:default;border-color:var(--line);background:transparent}
+  button.ctl.primary{background:linear-gradient(180deg,var(--red),var(--reddeep));border-color:var(--red2);color:#fff;font-weight:700;padding:9px 22px;box-shadow:0 4px 16px rgba(226,59,46,.32)}
+  button.ctl.primary:hover{filter:brightness(1.08)}
+  .ctl .ic{font-size:14px;line-height:1}
+
+  .toast{position:absolute;top:24px;left:50%;transform:translateX(-50%);
+    background:rgba(13,21,33,.94);border:1px solid var(--gold);color:var(--gold2);
+    padding:9px 18px;border-radius:30px;font-size:13.5px;letter-spacing:.05em;z-index:30;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);transition:opacity .5s;pointer-events:none}
+
+  /* SVG */
+  .unit{transition:transform 1.5s cubic-bezier(.45,.05,.2,1), opacity .55s ease;cursor:default}
+  .unit.hidden{opacity:0}
+  .pill{fill:var(--reddeep);stroke:var(--red2);stroke-width:1.4;filter:url(#softsh)}
+  .pill.blue{fill:var(--bluedeep);stroke:var(--blue2)} .pill.sm{filter:none}
+  .u-name{fill:#fff;font-size:17px;font-weight:700;text-anchor:middle;letter-spacing:.03em}
+  .u-name.s{font-size:14.5px}
+  .u-sub{fill:var(--gold2);font-size:13px;text-anchor:middle;letter-spacing:.02em}
+  .u-sub.blue{fill:var(--blue2)}
+  .flag{fill:var(--red2)}
+  .boatHull{fill:#6b4a2e;stroke:#caa06a;stroke-width:1.4}
+  .oar{stroke:#caa06a;stroke-width:1.5} .crew{fill:#ffd27a} .mast{stroke:#caa06a;stroke-width:1.6}
+  .firemk{fill:var(--reddeep);stroke:var(--gold);stroke-width:1.2}
+  .firemk-l{fill:var(--gold2);font-size:12.5px;text-anchor:middle;letter-spacing:.02em}
+  .fireline{stroke:var(--red2);stroke-width:2.3;stroke-dasharray:7 9;opacity:0;filter:drop-shadow(0 0 4px rgba(255,122,109,.8))}
+  .fireline.firing{opacity:.9;animation:tracer .5s linear infinite, flick 1.1s ease-in-out infinite}
+  @keyframes tracer{to{stroke-dashoffset:-32}} @keyframes flick{0%,100%{opacity:.45}50%{opacity:.95}}
+  .fort{fill:#2a3b50;stroke:var(--blue2);stroke-width:1.6} .fort-slit{stroke:var(--blue2);stroke-width:1.4}
+  #u_enemyN.routed{opacity:.3;transform:translate(770px,150px)!important}
+  .flagpole{stroke:#e8e8e8;stroke-width:2}
+  #flag .bigflag{fill:var(--red);transform-origin:left center;transition:transform .7s cubic-bezier(.2,1.4,.4,1),opacity .5s}
+  #flag.down .bigflag{transform:scaleX(0);opacity:0}
+  /* 纵队箭头：线条由JS逐段画出，箭头三角随线头同步移动；默认透明，仅N7显形 */
+  .colarrow{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;
+    filter:drop-shadow(0 0 5px rgba(226,59,46,.5));opacity:0}
+  .colhead{fill:var(--red);filter:drop-shadow(0 0 4px rgba(226,59,46,.6));opacity:0}
+  .col-l{fill:var(--red2);font-size:14px;font-weight:700;letter-spacing:.04em}
+  .stratlbl{fill:var(--muted);font-size:13.5px;letter-spacing:.04em} .stratlbl.blue{fill:var(--blue2)}
+  .stratarrow{stroke:var(--blue);stroke-width:3;marker-end:url(#bluehead);opacity:.75}
+  .pursuit{stroke:var(--blue);stroke-width:3.5;marker-end:url(#bluehead);opacity:.85;stroke-dasharray:9 7}
+  .feintarrow{fill:none;stroke:var(--red2);stroke-width:3;stroke-dasharray:8 7;marker-end:url(#redhead);opacity:.9}
+  .feintlbl{fill:var(--red2);font-size:13.5px;opacity:.92;letter-spacing:.04em}
+  .label-place{fill:var(--gold2);font-size:16px;font-weight:700;letter-spacing:.04em}
+  .label-sm{fill:var(--muted);font-size:13px;letter-spacing:.03em}
+  .label-gold{fill:var(--gold2);font-size:13.5px;letter-spacing:.03em}
+  .label-river{fill:#cdf3f9;font-size:34px;font-weight:800;letter-spacing:.5em;opacity:.55;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  /* 河流·自然岸线填充河面 + 中泓深槽 + 三条顺流水流线（上/中/下，中泓最急） */
+  .riverband{stroke:rgba(176,228,236,.30);stroke-width:1.5;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+  .deepchan{fill:none;stroke:rgba(5,32,36,.5);stroke-width:40;stroke-linecap:butt}
+  .flow{fill:none;stroke-linecap:round}
+  .flow.f1{stroke:rgba(196,244,251,.42);stroke-width:2.6;stroke-dasharray:3 20;animation:flow1 2.6s linear infinite}
+  .flow.f2{stroke:rgba(150,231,243,.6);stroke-width:3;stroke-dasharray:4 16;animation:flow2 1.7s linear infinite}
+  .flow.f3{stroke:rgba(196,244,251,.4);stroke-width:2.4;stroke-dasharray:2 22;animation:flow3 3s linear infinite}
+  @keyframes flow1{to{stroke-dashoffset:-46}}
+  @keyframes flow2{to{stroke-dashoffset:-40}}
+  @keyframes flow3{to{stroke-dashoffset:-48}}
+  .rivertag-box{fill:rgba(8,24,28,.78);stroke:var(--river2);stroke-width:1;opacity:.9}
+  .rivertag-t{fill:#bdeef4;font-size:13px;letter-spacing:.04em}
+  .nightveil{fill:#04101f;opacity:0;transition:opacity 1s ease;pointer-events:none} .nightveil.on{opacity:.4}
+  .mtn-far{fill:#13202f;stroke:rgba(224,183,92,.06);stroke-width:1} .mtn-near{fill:#172737;stroke:rgba(224,183,92,.08);stroke-width:1}
+  .snow{fill:rgba(220,232,245,.18)} .contour{fill:none;stroke:rgba(224,183,92,.06);stroke-width:1.1}
+  .house{fill:#26323f;stroke:rgba(224,183,92,.14);stroke-width:1} .house-roof{fill:#3a2a22;stroke:rgba(224,183,92,.14);stroke-width:1}
+  .ferryboat{animation:bob 2.6s ease-in-out infinite}
+  .ferryboat:nth-of-type(2){animation-delay:.6s} .ferryboat:nth-of-type(3){animation-delay:1.2s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .boom{fill:none;stroke:#ffd27a;stroke-width:2;opacity:0} .boom.go{animation:boom 1s ease-out}
+  @keyframes boom{0%{opacity:.9;r:4}100%{opacity:0;r:34}}
+  .inset-box{fill:rgba(8,13,22,.85);stroke:var(--line);stroke-width:1}
+  .inset-title{fill:var(--gold);font-size:11.5px;letter-spacing:.06em;font-weight:700}
+  .inset-river{fill:none;stroke:var(--river2);stroke-width:3;opacity:.7}
+  .inset-lbl{fill:var(--muted);font-size:11px} .inset-here{fill:var(--gold2);font-size:11px;font-weight:700}
+  .inset-route{fill:none;stroke:var(--red2);stroke-width:2;stroke-dasharray:4 4;marker-end:url(#redhead)}
+
+  /* 矮屏（笔记本/投影 ≤920px）下紧凑排版，确保我情/敌情/战场环境三卡全显（字号仍大于原版） */
+  @media (max-height: 920px){
+    aside{gap:7px}
+    .force{gap:6px}
+    .fcard{padding:8px 11px}
+    .fcard .side{font-size:13.5px;margin-bottom:4px}
+    .fcard p{font-size:13px;line-height:1.5}
+    .pnote{font-size:10.5px;line-height:1.4;padding-top:5px}
+    .caption{margin-bottom:8px;min-height:36px}
+    .cap-desc{font-size:14px}
+  }
+
+
+  :root{--snow:#e9f2f8;--ice:#8fc3dc;}
+  .snowmt{fill:url(#snowGrad);stroke:rgba(180,210,228,.55);stroke-width:1.2;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+  .snowmt2{fill:#c2d4e2;opacity:.55}
+  .ridge{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.4}
+  .snowcap{fill:#ffffff;opacity:.92}
+  .pass-l{fill:#2c3a49;font-size:14px;font-weight:700;letter-spacing:.04em}
+  .alt-l{fill:#cfe8f2;font-size:13.5px;letter-spacing:.03em;opacity:.92}
+  .route-bg{fill:none;stroke:rgba(60,72,90,.30);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 10}
+  .route{fill:none;stroke:var(--red);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(226,59,46,.55))}
+  .fcard.blue{border-top:3px solid var(--ice)} .fcard.blue .side{color:#bfe3f2} .fcard.blue .dot{background:var(--ice)}
+  .snowline{stroke:rgba(228,243,251,.6);stroke-width:1.7;stroke-dasharray:2 14;stroke-linecap:round;animation:snowfall .9s linear infinite}
+  @keyframes snowfall{to{stroke-dashoffset:-80}}
+  .veil{fill:#dfeefa;opacity:.10}
+  .place{fill:var(--gold2);font-size:15px;font-weight:700;letter-spacing:.05em}
+  .note-blue{fill:#bfe3f2;font-size:13.5px;letter-spacing:.03em;opacity:.9}
+  .meet-l{fill:var(--gold2);font-size:14px;text-anchor:middle;font-weight:700;letter-spacing:.03em;filter:drop-shadow(0 1px 3px rgba(0,0,0,.85))}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="badge">★</div>
+    <div class="titles">
+      <h1>翻 越 夹 金 山</h1>
+      <div class="sub">翻越雪山 · 北上会师 　 1935年6月</div>
+    </div>
+    <div class="spacer"></div>
+	<a class="topbtn" href="index.html" style="text-decoration:none">← 总目录</a>
+    <button class="topbtn" id="helpBtn">操作说明</button>
+    <button class="topbtn" id="fsBtn">⛶ 全屏</button>
+  </header>
+
+  <div class="body">
+    <div class="mapwrap">
+      <div class="frame"></div>
+      <div class="toast" id="toast">按　→ / 空格　或点「演示下一段」推进　·　← 后退　·　点时间轴圆点跳转　·　F 全屏</div>
+      <svg class="map" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="vig" cx="55%" cy="42%" r="78%">
+            <stop offset="60%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,.45)"/>
+          </radialGradient>
+          <filter id="softsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".5"/></filter>
+          <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+          <marker id="redhead" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--red)"/></marker>
+          <marker id="bluehead" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--blue)"/></marker>
+          <linearGradient id="snowGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="0.42" stop-color="#dbe8f1"/><stop offset="0.76" stop-color="#aebfce"/><stop offset="1" stop-color="#7e8ea0"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="1280" height="760" fill="url(#grain)" opacity="0.04"/>
+        <!-- 夹金山雪山 -->
+        <g>
+          <path class="snowmt" d="M-20,760 L-20,600 L140,500 L300,540 L440,360 L560,150 L640,205 L700,205 L780,150 L900,360 L1040,520 L1180,500 L1300,600 L1300,760 Z"/>
+          <polygon class="snowmt2" points="780,150 900,360 1040,520 820,460 700,205"/>
+          <polygon class="snowmt2" points="560,150 440,360 300,540 470,470 640,205"/>
+          <path class="ridge" d="M140,500 L300,540 L440,360 L560,150 L640,205 L700,205 L780,150 L900,360 L1040,520 L1180,500"/>
+          <polygon class="snowcap" points="560,150 588,196 532,196"/><polygon class="snowcap" points="780,150 808,196 752,196"/>
+          <!-- 垭口 -->
+          <path d="M690,196 L668,176 M690,196 L712,176" stroke="#33404f" stroke-width="2" fill="none"/>
+          <text class="pass-l" x="690" y="168" text-anchor="middle" fill="#2c3a49">垭口</text>
+        </g>
+
+        <!-- 标题/海拔（深色天空区，浅色字） -->
+        <text x="640" y="86" text-anchor="middle" fill="#dfeef7" font-size="30" font-weight="800" letter-spacing=".34em" opacity=".66" filter="drop-shadow(0 1px 3px rgba(0,0,0,.7))">夹 金 山</text>
+        <text class="alt-l" x="640" y="116" text-anchor="middle">海拔约4000余米（主峰逾4900米）· 终年积雪 · 空气稀薄</text>
+
+        <!-- 翻山路线 -->
+        <path class="route-bg" d="M240,716 L360,668 L268,620 L392,566 L300,516 L430,464 L344,414 L470,360 L398,312 L540,266 L632,226 L690,206 L756,236 L726,300 L852,338 L812,404 L918,446 L892,510 L996,556 L1010,706"/>
+        <path class="route" id="route" d="M240,716 L360,668 L268,620 L392,566 L300,516 L430,464 L344,414 L470,360 L398,312 L540,266 L632,226 L690,206 L756,236 L726,300 L852,338 L812,404 L918,446 L892,510 L996,556 L1010,706"/>
+
+        <!-- 达维 -->
+        <text class="place" x="1010" y="744" text-anchor="middle">达维</text>
+
+        <!-- 战略背景（N0） -->
+        <g class="unit hidden" id="g_ctx">
+          <text class="note-blue" x="60" y="300">泸定桥后北上 · 为与红四方面军会师</text>
+          <text class="note-blue" x="60" y="324">须翻越长征第一座大雪山——夹金山</text>
+        </g>
+
+        <!-- 翻越准备（N2） -->
+        <g class="unit hidden" id="g_prep">
+          <text class="meet-l" x="232" y="690" text-anchor="start" style="font-weight:600">轻装 · 姜汤辣椒烧酒御寒</text>
+          <text class="meet-l" x="232" y="712" text-anchor="start" style="font-weight:600">择正午翻越 · 不停留 · 互相搀扶</text>
+        </g>
+
+        <!-- 暴风雪（N5-6）：一向斜向雪幕，非来回飘点 -->
+        <g class="unit hidden" id="g_storm">
+          <rect class="veil" x="0" y="0" width="1280" height="660"/>
+          <line class="snowline" x1="220" y1="50" x2="70" y2="380" style="animation-delay:0.0s"/>
+          <line class="snowline" x1="312" y1="64" x2="162" y2="394" style="animation-delay:0.13s"/>
+          <line class="snowline" x1="404" y1="78" x2="254" y2="408" style="animation-delay:0.26s"/>
+          <line class="snowline" x1="496" y1="50" x2="346" y2="380" style="animation-delay:0.39s"/>
+          <line class="snowline" x1="588" y1="64" x2="438" y2="394" style="animation-delay:0.52s"/>
+          <line class="snowline" x1="680" y1="78" x2="530" y2="408" style="animation-delay:0.65s"/>
+          <line class="snowline" x1="772" y1="50" x2="622" y2="380" style="animation-delay:0.78s"/>
+          <line class="snowline" x1="864" y1="64" x2="714" y2="394" style="animation-delay:0.01s"/>
+          <line class="snowline" x1="956" y1="78" x2="806" y2="408" style="animation-delay:0.14s"/>
+          <line class="snowline" x1="1048" y1="50" x2="898" y2="380" style="animation-delay:0.27s"/>
+        </g>
+
+        <!-- 红四方面军（接应/会师，N6+） -->
+        <g class="unit hidden" id="u_red4f" transform="translate(1140,720)">
+          <polygon class="flag" points="-58,-15 -58,-29 -34,-22 -58,-15"/>
+          <line x1="-58" y1="-15" x2="-58" y2="3" stroke="var(--red2)" stroke-width="1.6"/>
+          <rect class="pill" x="-56" y="-15" width="112" height="30" rx="7"/>
+          <text class="u-name s" y="4">红四方面军（先头）</text>
+        </g>
+
+        <!-- 达维会师徽标（N7） -->
+        <g class="unit hidden" id="g_meet" transform="translate(1140,660)">
+          <line x1="0" y1="2" x2="-15" y2="-20" stroke="var(--gold2)" stroke-width="1.6"/><polygon class="flag" points="-15,-20 -15,-10 -1,-15"/>
+          <line x1="0" y1="2" x2="15" y2="-20" stroke="var(--gold2)" stroke-width="1.6"/><polygon points="15,-20 15,-10 1,-15" fill="var(--red2)"/>
+          <circle cx="0" cy="-24" r="3.2" fill="var(--gold2)"/>
+          <text class="meet-l" x="0" y="26">达维会师</text>
+        </g>
+
+        <!-- 翻山前锋（随路线头移动，N3+） -->
+        <g class="unit hidden" id="u_climb">
+          <rect class="pill" x="-58" y="-15" width="116" height="30" rx="7"/>
+          <polygon class="flag" points="-58,-15 -58,-27 -36,-21 -58,-15"/>
+          <text class="u-name s" y="4">红四团 · 前锋（开路）</text>
+        </g>
+        <rect class="nightveil" id="nightveil" x="0" y="0" width="1280" height="760"/>
+        <rect x="0" y="0" width="1280" height="760" fill="url(#vig)" pointer-events="none"/>
+      </svg>
+    </div>
+
+    <aside>
+      <div class="ph">翻越雪山 · 北上会师 · 夹金山</div>
+      <div class="force">
+        <div class="fcard red"><div class="side"><span class="dot"></span>我情 · 红军（翻山部队）</div><p id="redForce"></p></div>
+        <div class="fcard blue"><div class="side"><span class="dot"></span>天险 · 夹金山雪山</div><p id="blueForce"></p></div>
+        <div class="fcard env"><div class="side"><span class="dot"></span>行动环境 · 御寒/纪律/会师</div><p id="envInfo"></p></div>
+      </div>
+      <div class="legend">
+        <span><i class="lg" style="background:var(--reddeep);border:1px solid var(--red2)"></i>红军</span>
+        <span><i class="lg" style="background:#e9f2f8;border:1px solid #aebfce"></i>夹金山·雪山</span>
+        <span><i class="lg" style="background:var(--red);border-radius:6px"></i>翻山路线</span>
+        <span><i class="lg" style="background:var(--gold);border-radius:6px"></i>会师地·达维</span>
+      </div>
+      <div class="pnote">教学示意图：山形、路线、垭口位置为示意，非按实际地理比例。史实依党史军史与纪念馆资料；个别数据史界有异（夹金山海拔取"约4000余米，主峰逾4900米"；达维会师时间记作"1935年6月12日前后"），均取通行口径，仅供教学参考。</div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="caption">
+      <span class="cap-name" id="capName"></span><span class="cap-time" id="capTime"></span><span class="cap-desc" id="capDesc"></span>
+    </div>
+    <div class="track"><div class="rail"></div><div class="rail-fill" id="railFill"></div><div class="nodes" id="nodes"></div></div>
+    <div class="ctrls">
+      <button class="ctl" id="prevBtn"><span class="ic">◀</span>上一步</button>
+      <button class="ctl primary" id="nextBtn"><span class="ic">▶</span><span id="nextLbl">演示下一段</span></button>
+      <button class="ctl" id="replayBtn"><span class="ic">↻</span>重播本段</button>
+      <button class="ctl" id="autoBtn"><span class="ic">⏯</span>自动播放</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const T=(el,x,y)=>{ if(el) el.style.transform=`translate(${x}px,${y}px)`; };
+const show=(el,on)=>{ if(el) el.classList.toggle("hidden",!on); };
+let scene=0, token=0, raf=null, auto=false;
+const timers=[];
+function clearTimers(){ timers.forEach(clearTimeout); timers.length=0; if(raf){cancelAnimationFrame(raf);raf=null;} }
+function setT(fn,ms){ const id=setTimeout(fn,ms); timers.push(id); return id; }
+function bezier(el,P0,P1,P2,dur,tok){ const t0=performance.now();
+  (function f(now){ if(tok!==token) return; const t=Math.min(1,(now-t0)/dur),u=1-t;
+    T(el, u*u*P0[0]+2*u*t*P1[0]+t*t*P2[0], u*u*P0[1]+2*u*t*P1[1]+t*t*P2[1]);
+    if(t<1) raf=requestAnimationFrame(f); })(performance.now()); }
+function placeHead(path, head, len){ const L=path.getTotalLength(); len=Math.max(0,Math.min(L,len));
+  const p=path.getPointAtLength(len), a=path.getPointAtLength(Math.max(0,len-1)), b=path.getPointAtLength(Math.min(L,len+1));
+  const ang=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI; if(head) head.setAttribute("transform",`translate(${p.x},${p.y}) rotate(${ang})`); }
+function hideColumn(path, head){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.strokeDashoffset=L; path.style.opacity=0; if(head) head.style.opacity=0; }
+function drawColumn(path, head, dur, tok, animate){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.opacity=1; if(head) head.style.opacity=1;
+  if(!animate || dur<=0){ path.style.strokeDashoffset=0; if(head) placeHead(path,head,L); return; }
+  const t0=performance.now(); (function f(now){ if(tok!==token) return; const t=Math.min(1,(now-t0)/dur);
+    path.style.strokeDashoffset=L*(1-t); if(head) placeHead(path, head, t*L); if(t<1) requestAnimationFrame(f); })(performance.now()); }
+function tweenReveal(path, head, f0, f1, dur, tok, animate){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.opacity=1; if(head) head.style.opacity=1;
+  if(!animate||dur<=0){ path.style.transition='none'; path.style.strokeDashoffset=L*(1-f1); if(head) placeHead(path,head,L*f1); return; }
+  path.style.transition='none'; const t0=performance.now();
+  (function fr(now){ if(tok!==token)return; const t=Math.min(1,(now-t0)/dur); const f=f0+(f1-f0)*t;
+    path.style.strokeDashoffset=L*(1-f); if(head) placeHead(path,head,L*f); if(t<1) requestAnimationFrame(fr); })(performance.now()); }
+
+
+const SCENES=[
+ { name:"战略态势 · 北上翻雪山", time:"1935年6月",
+   desc:"飞夺泸定桥、渡过大渡河后，中央红军（红一方面军）继续北上，准备与在川西北活动的红四方面军会师。横亘在前的，是长征途中要翻越的第一座大雪山——夹金山。当地民谣称其为'神山'，只有神仙才能飞过；要会师、要北上，就必须翻越这座终年积雪的高山。",
+   red:"中央红军（红一方面军）翻山北上，<b>志在与红四方面军会师</b>。部队连续征战、衣装单薄、给养匮乏，却要挑战从未经历的高寒雪山。",
+   blue:"夹金山——<b>长征翻越的第一座大雪山</b>，是横在北上路上最大的'拦路虎'；蒋军虽在后追堵，但雪山天险本身就是最严酷的考验。",
+   env:"由泸定北上、地势骤然抬升；前方<b>夹金山终年积雪、空气稀薄</b>。翻越雪山，成为红军又一道生死攸关的难关。" },
+ { name:"雪山天险", time:"夹金山",
+   desc:"夹金山海拔约4000余米（主峰逾4900米），终年冰雪覆盖，空气稀薄、严重缺氧，气温极低且气候瞬息万变——时而晴朗、转瞬便狂风暴雪冰雹齐下。山上没有道路、人迹罕至。",
+   red:"部队面对的是<b>缺氧、严寒、暴风雪与无路</b>的极端环境；许多战士来自南方，从未见过这样的大雪山。",
+   blue:"<b>海拔约4000余米（主峰逾4900米）</b>，终年积雪、空气稀薄缺氧、严寒，<b>气候瞬息万变</b>；当地视之为不可逾越的'神山'。",
+   env:"<b>高寒缺氧、风雪无常</b>、无路可循；体力稍有不支、停步久坐，就可能再也站不起来。" },
+ { name:"翻越准备", time:"翻越前",
+   desc:"翻山前，部队进行充分准备和动员：尽量轻装，准备辣椒、生姜、烧酒等御寒之物，并总结出经验——选择正午前后气温较高时翻越，途中不停留、不久坐、互相照应。",
+   red:"部队<b>轻装上阵</b>，备<b>姜汤、辣椒、烧酒</b>御寒；定下规矩：<b>择正午前后翻越、不停留不久坐、互相搀扶</b>。",
+   blue:"雪山气候上午相对稳定、午后多突变；<b>正午前后是相对'安全'的翻越窗口</b>。",
+   env:"充分的<b>思想动员与御寒准备</b>，是与高寒缺氧抗争的关键；纪律与互助，是翻越雪山的'装备'。" },
+ { name:"红四团前锋 · 拂晓出发", time:"拂晓",
+   desc:"由红四团等前锋部队开路，拂晓时分开始从南坡向上攀登，为后续大部队探路、踏出雪中的脚印。",
+   red:"<b>红四团等前锋开路</b>，拂晓自南坡起步登山，为后续部队踏出雪中通路。",
+   blue:"南坡积雪深厚、坡陡难行；越往上空气越稀薄。",
+   env:"<b>拂晓出发</b>，趁气温尚可、抓紧时间上山；前锋每一步都在为后续部队探路。" },
+ { name:"顶风冒雪 · 互相搀扶", time:"翻山途中",
+   desc:"部队顶着刺骨寒风、踏着没膝积雪，一步一步向上攀登。空气稀薄、呼吸困难，战士们互相搀扶、彼此鼓励，绝不停下脚步。",
+   red:"指战员<b>顶风冒雪、互相搀扶</b>，在缺氧严寒中艰难上行；<b>不停留、不掉队</b>，咬牙坚持向山顶攀登。",
+   blue:"越接近山顶，<b>空气越稀薄、风雪越猛</b>，体力消耗剧增。",
+   env:"<b>没膝深雪、刺骨寒风、严重缺氧</b>；全靠意志与互助一步步向上——这是对革命意志的极限考验。" },
+ { name:"暴风雪冰雹突袭 · 减员牺牲", time:"近山顶",
+   desc:"接近山顶时，天气骤变，狂风、暴雪、冰雹突然袭来，气温骤降。一些体力不支或停下休息的战士，永远长眠在了雪山上。",
+   red:"风雪骤起，<b>不少指战员倒在风雪中、长眠雪山</b>；幸存者强忍悲痛，继续向垭口攀登。",
+   blue:"<b>狂风、暴雪、冰雹骤然袭来</b>、气温骤降；雪山以最残酷的方式考验着这支队伍。",
+   env:"<b>暴风雪与冰雹突袭</b>，能见度极低、寒冷彻骨；停步即危——红军以巨大牺牲挑战着生命极限。" },
+ { name:"翻过垭口 · 向北坡下山", time:"过垭口",
+   desc:"部队终于翻过山顶垭口，开始沿北坡下山。下山同样艰险，但翻过最高点，胜利已经在望。",
+   red:"部队<b>翻过山顶垭口</b>、转入北坡下山；越过最高点，全军士气为之一振。",
+   blue:"北坡冰雪同样湿滑陡峭、下山需格外小心；但最险的山顶已被征服。",
+   env:"<b>翻越垭口</b>是全程最艰险的一关；过此一关，海拔渐降、空气转好，下山向达维进发。" },
+ { name:"达维会师", time:"约6月12日",
+   desc:"1935年6月（约6月12日前后），翻过夹金山的红一方面军先头部队，在山北的达维与前来接应的红四方面军先头部队胜利会师。这是红一、红四方面军的首次会师，长征又翻过了一座险关。",
+   red:"翻越夹金山的<b>红一方面军先头部队抵达达维</b>，与红四方面军先头部队<b>胜利会师</b>。",
+   blue:"山北达维，<b>红四方面军先头部队前来接应</b>——风雪之后，是会师的喜悦。",
+   env:"<b>1935年6月（约12日前后）达维会师</b>——红一、四方面军首次会师；翻越夹金山，长征又征服了一座天险。" }
+];
+const NODE_LABELS=["战略态势","雪山天险","翻越准备","拂晓出发","顶风攀登","风雪突袭","翻过垭口","达维会师"];
+const LAST=SCENES.length-1;
+const SCENE_DUR=[1800,2200,2200,2000,2400,2600,2200,2600];
+const STOPS=[0,0,0,0.22,0.50,0.64,0.82,1.0];
+const els={};
+["route","u_climb","g_ctx","g_prep","g_storm","g_meet","u_red4f",
+ "capName","capTime","capDesc","redForce","blueForce","envInfo","railFill","nodes",
+ "prevBtn","nextBtn","replayBtn","autoBtn","nextLbl"].forEach(k=>els[k]=$(k));
+let prevFrac=0;
+function applyScene(N,animate){
+  token++; const tok=token; clearTimers();
+  const L=els.route.getTotalLength(); const f=STOPS[N];
+  const showRoute=N>=3;
+  tweenReveal(els.route,null,prevFrac,f,1100,tok,animate); prevFrac=f;
+  show(els.route, showRoute);
+  const p=els.route.getPointAtLength(L*Math.max(f,0.001));
+  els.u_climb.style.transition= animate?"transform 1s ease":"none";
+  T(els.u_climb,p.x,p.y);
+  show(els.u_climb, showRoute);
+  show(els.g_ctx,N===0);
+  show(els.g_prep,N===2);
+  show(els.g_storm,N===5||N===6);
+  show(els.u_red4f,N>=6);
+  show(els.g_meet,N===7);
+  if(!animate) requestAnimationFrame(()=>{ if(els.u_climb) els.u_climb.style.transition=""; });
+  renderUI(N);
+}
+
+
+function renderUI(N){ const sc=SCENES[N];
+  els.capName.textContent=sc.name; els.capTime.textContent=sc.time; els.capDesc.textContent=sc.desc;
+  els.redForce.innerHTML=sc.red; els.blueForce.innerHTML=sc.blue; els.envInfo.innerHTML=sc.env;
+  els.railFill.style.width=(N/LAST*100)+"%";
+  document.querySelectorAll(".node").forEach((nd,i)=>{ nd.classList.toggle("active",i===N); nd.classList.toggle("done",i<N); });
+  els.prevBtn.disabled=(N===0);
+  els.nextLbl.textContent=(N===LAST)?"重新开始":"演示下一段";
+  els.nextBtn.querySelector(".ic").textContent=(N===LAST)?"↺":"▶"; }
+function goTo(n,animate){ n=Math.max(0,Math.min(LAST,n)); scene=n; applyScene(n,animate); }
+function next(){ if(scene>=LAST){ stopAuto(); goTo(0,false);} else goTo(scene+1,true); }
+function prev(){ stopAuto(); if(scene>0) goTo(scene-1,false); }
+function replay(){ stopAuto(); const cur=scene; if(cur===0){ goTo(0,true); return; } goTo(cur-1,false); setT(()=>{ scene=cur; applyScene(cur,true); },90); }
+function autoStep(){ if(!auto)return; if(scene>=LAST){ stopAuto(); return; } goTo(scene+1,true); setT(()=>{ if(auto) autoStep(); }, (SCENE_DUR[scene]||2200)+1500); }
+function startAuto(){ auto=true; els.autoBtn.querySelector(".ic").textContent="❚❚"; els.autoBtn.lastChild.textContent="暂停播放"; if(scene>=LAST) goTo(0,false); autoStep(); }
+function stopAuto(){ auto=false; els.autoBtn.querySelector(".ic").textContent="⏯"; els.autoBtn.lastChild.textContent="自动播放"; }
+function toggleAuto(){ auto?stopAuto():startAuto(); }
+NODE_LABELS.forEach((lbl,i)=>{ const node=document.createElement("div"); node.className="node";
+  node.innerHTML=`<div class="nd"></div><div class="nl">${lbl}</div>`;
+  node.addEventListener("click",()=>{ stopAuto(); goTo(i,false); }); els.nodes.appendChild(node); });
+els.nextBtn.addEventListener("click",next); els.prevBtn.addEventListener("click",prev);
+els.replayBtn.addEventListener("click",replay); els.autoBtn.addEventListener("click",toggleAuto);
+$("fsBtn").addEventListener("click",()=>{ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); });
+$("helpBtn").addEventListener("click",()=>{ alert("操作说明\n\n· 点「演示下一段」或按 → / 空格：播放本段动画并进入下一时间节点\n· ← ：返回上一节点\n· 点底部时间轴圆点：直接跳到该节点\n· 「重播本段」：重新播放当前这段动画\n· 「自动播放」：连续自动演示全程\n· F 或右上「全屏」：进入全屏演示"); });
+document.addEventListener("keydown",(e)=>{ if(e.key==="ArrowRight"||e.key===" "){ e.preventDefault(); next(); }
+  else if(e.key==="ArrowLeft"){ e.preventDefault(); prev(); } else if(e.key.toLowerCase()==="r"){ replay(); } else if(e.key.toLowerCase()==="f"){ $("fsBtn").click(); } });
+setTimeout(()=>{ const t=$("toast"); if(t) t.style.opacity="0"; },5600);
+document.querySelector(".mapwrap").addEventListener("click",()=>{ const t=$("toast"); if(t) t.style.opacity="0"; });
+goTo(0,false);
+
+</script>
+</body>
+</html>

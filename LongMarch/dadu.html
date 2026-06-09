@@ -23,18 +23,18 @@
     overflow:hidden;-webkit-font-smoothing:antialiased;}
   .app{display:flex;flex-direction:column;height:100vh;width:100vw}
 
-  header{display:flex;align-items:center;gap:16px;padding:12px 22px 11px;
+  header{display:flex;align-items:center;gap:16px;padding:10px 22px 8px;
     border-bottom:1px solid var(--line);
     background:linear-gradient(180deg, rgba(10,14,22,.6), rgba(10,14,22,0));flex:none;}
   .badge{width:38px;height:38px;flex:none;border-radius:50%;
     background:radial-gradient(circle at 35% 30%, var(--red2), var(--reddeep));
     box-shadow:0 0 0 2px rgba(224,183,92,.5), 0 4px 14px rgba(226,59,46,.4);
     display:grid;place-items:center;color:#ffe9b0;font-size:20px;}
-  .titles h1{font-size:21px;letter-spacing:.16em;font-weight:800}
-  .titles .sub{font-family:var(--serif);font-size:12.5px;color:var(--gold);letter-spacing:.2em;margin-top:3px}
+  .titles h1{font-size:23px;letter-spacing:.16em;font-weight:800}
+  .titles .sub{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.2em;margin-top:3px}
   .spacer{flex:1}
   .topbtn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);
-    padding:7px 12px;border-radius:8px;font-family:var(--font);font-size:12.5px;cursor:pointer;letter-spacing:.05em;transition:.18s;}
+    padding:7px 12px;border-radius:8px;font-family:var(--font);font-size:13.5px;cursor:pointer;letter-spacing:.05em;transition:.18s;}
   .topbtn:hover{color:var(--ink);border-color:var(--gold);background:rgba(224,183,92,.08)}
 
   .body{flex:1;display:flex;min-height:0}
@@ -43,29 +43,30 @@
     pointer-events:none;box-shadow:inset 0 0 60px rgba(0,0,0,.55);}
   svg.map{width:100%;height:100%;display:block}
 
-  aside{width:342px;flex:none;border-left:1px solid var(--line);background:var(--panel);
-    padding:15px 16px 12px;display:flex;flex-direction:column;gap:11px;overflow:hidden;}
-  .ph{font-size:12px;letter-spacing:.26em;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:8px}
+  aside{width:374px;flex:none;border-left:1px solid var(--line);background:var(--panel);
+    padding:12px 16px 10px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+  .ph{font-size:13px;letter-spacing:.26em;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:8px}
   .ph::after{content:"";flex:1;height:1px;background:var(--line)}
-  .force{display:flex;flex-direction:column;gap:10px;overflow-y:auto;padding-right:2px}
-  .fcard{border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:10px 12px;background:rgba(255,255,255,.015)}
-  .fcard.red{border-top:3px solid var(--red)} .fcard.blue{border-top:3px solid var(--blue)}
-  .fcard .side{font-size:13px;font-weight:800;letter-spacing:.08em;margin-bottom:5px;display:flex;gap:7px;align-items:center}
+  .force{display:flex;flex-direction:column;gap:7px;overflow-y:auto;flex:1;min-height:0;padding-right:3px}
+  .fcard{border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:9px 11px;background:rgba(255,255,255,.015)}
+  .fcard.red{border-top:3px solid var(--red)} .fcard.blue{border-top:3px solid var(--blue)} .fcard.env{border-top:3px solid var(--river2)}
+  .fcard.env .side{color:var(--river2)} .fcard.env .dot{background:var(--river2)}
+  .fcard .side{font-size:14.5px;font-weight:800;letter-spacing:.08em;margin-bottom:5px;display:flex;gap:7px;align-items:center}
   .fcard.red .side{color:var(--red2)} .fcard.blue .side{color:var(--blue2)}
   .dot{width:9px;height:9px;border-radius:2px} .fcard.red .dot{background:var(--red)} .fcard.blue .dot{background:var(--blue)}
-  .fcard p{font-size:12.5px;line-height:1.6;color:var(--muted)} .fcard b{color:var(--ink);font-weight:600}
-  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11px;color:var(--muted);padding:2px 0}
+  .fcard p{font-size:14px;line-height:1.56;color:var(--muted)} .fcard b{color:var(--ink);font-weight:600}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);padding:2px 0}
   .legend span{display:inline-flex;align-items:center;gap:5px}
   .lg{width:14px;height:10px;border-radius:2px;display:inline-block}
-  .pnote{font-size:10.5px;color:var(--faint);letter-spacing:.02em;line-height:1.5;margin-top:auto;padding-top:6px;border-top:1px solid rgba(255,255,255,.06)}
+  .pnote{font-size:11px;color:var(--faint);letter-spacing:.02em;line-height:1.45;margin-top:auto;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)}
 
   footer{flex:none;border-top:1px solid var(--line);
-    background:linear-gradient(0deg, rgba(10,14,22,.55), rgba(10,14,22,0));padding:12px 22px 14px}
-  .caption{display:flex;align-items:baseline;gap:14px;margin-bottom:12px;min-height:44px}
-  .cap-name{font-size:19px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
-  .cap-time{font-family:var(--serif);font-size:12px;color:#0a0e16;background:var(--gold);
+    background:linear-gradient(0deg, rgba(10,14,22,.55), rgba(10,14,22,0));padding:10px 22px 12px}
+  .caption{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;min-height:40px}
+  .cap-name{font-size:21px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+  .cap-time{font-family:var(--serif);font-size:13.5px;color:#0a0e16;background:var(--gold);
     padding:3px 9px;border-radius:20px;letter-spacing:.06em;white-space:nowrap;font-weight:700}
-  .cap-desc{font-size:13px;color:var(--muted);line-height:1.5;flex:1}
+  .cap-desc{font-size:15px;color:var(--muted);line-height:1.5;flex:1}
 
   .track{position:relative;height:46px;margin:0 4px 11px}
   .rail{position:absolute;top:10px;left:0;right:0;height:3px;background:rgba(255,255,255,.09);border-radius:2px}
@@ -73,13 +74,13 @@
   .nodes{position:absolute;inset:0;display:flex;justify-content:space-between}
   .node{display:flex;flex-direction:column;align-items:center;cursor:pointer;flex:1}
   .node .nd{width:14px;height:14px;border-radius:50%;border:2px solid var(--faint);background:var(--bg);margin-top:3px;transition:.25s;position:relative;z-index:2}
-  .node .nl{font-size:10.5px;color:var(--faint);margin-top:7px;letter-spacing:.02em;transition:.2s;text-align:center;white-space:nowrap}
+  .node .nl{font-size:12px;color:var(--faint);margin-top:7px;letter-spacing:.02em;transition:.2s;text-align:center;white-space:nowrap}
   .node.done .nd{border-color:var(--red);background:var(--red)}
   .node.active .nd{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 4px rgba(224,183,92,.22);transform:scale(1.25)}
   .node.active .nl{color:var(--gold2);font-weight:700} .node:hover .nl{color:var(--ink)}
 
   .ctrls{display:flex;align-items:center;justify-content:center;gap:10px}
-  button.ctl{font-family:var(--font);font-size:13px;letter-spacing:.04em;cursor:pointer;
+  button.ctl{font-family:var(--font);font-size:14px;letter-spacing:.04em;cursor:pointer;
     border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink);
     padding:9px 15px;border-radius:9px;transition:.16s;display:flex;align-items:center;gap:7px}
   button.ctl:hover{border-color:var(--gold);background:rgba(224,183,92,.1)}
@@ -90,7 +91,7 @@
 
   .toast{position:absolute;top:24px;left:50%;transform:translateX(-50%);
     background:rgba(13,21,33,.94);border:1px solid var(--gold);color:var(--gold2);
-    padding:9px 18px;border-radius:30px;font-size:12.5px;letter-spacing:.05em;z-index:30;
+    padding:9px 18px;border-radius:30px;font-size:13.5px;letter-spacing:.05em;z-index:30;
     box-shadow:0 8px 30px rgba(0,0,0,.5);transition:opacity .5s;pointer-events:none}
 
   /* SVG */
@@ -98,15 +99,15 @@
   .unit.hidden{opacity:0}
   .pill{fill:var(--reddeep);stroke:var(--red2);stroke-width:1.4;filter:url(#softsh)}
   .pill.blue{fill:var(--bluedeep);stroke:var(--blue2)} .pill.sm{filter:none}
-  .u-name{fill:#fff;font-size:14.5px;font-weight:700;text-anchor:middle;letter-spacing:.03em}
-  .u-name.s{font-size:12.5px}
-  .u-sub{fill:var(--gold2);font-size:11px;text-anchor:middle;letter-spacing:.02em}
+  .u-name{fill:#fff;font-size:17px;font-weight:700;text-anchor:middle;letter-spacing:.03em}
+  .u-name.s{font-size:14.5px}
+  .u-sub{fill:var(--gold2);font-size:13px;text-anchor:middle;letter-spacing:.02em}
   .u-sub.blue{fill:var(--blue2)}
   .flag{fill:var(--red2)}
   .boatHull{fill:#6b4a2e;stroke:#caa06a;stroke-width:1.4}
   .oar{stroke:#caa06a;stroke-width:1.5} .crew{fill:#ffd27a} .mast{stroke:#caa06a;stroke-width:1.6}
   .firemk{fill:var(--reddeep);stroke:var(--gold);stroke-width:1.2}
-  .firemk-l{fill:var(--gold2);font-size:10.5px;text-anchor:middle;letter-spacing:.02em}
+  .firemk-l{fill:var(--gold2);font-size:12.5px;text-anchor:middle;letter-spacing:.02em}
   .fireline{stroke:var(--red2);stroke-width:2.3;stroke-dasharray:7 9;opacity:0;filter:drop-shadow(0 0 4px rgba(255,122,109,.8))}
   .fireline.firing{opacity:.9;animation:tracer .5s linear infinite, flick 1.1s ease-in-out infinite}
   @keyframes tracer{to{stroke-dashoffset:-32}} @keyframes flick{0%,100%{opacity:.45}50%{opacity:.95}}
@@ -115,24 +116,32 @@
   .flagpole{stroke:#e8e8e8;stroke-width:2}
   #flag .bigflag{fill:var(--red);transform-origin:left center;transition:transform .7s cubic-bezier(.2,1.4,.4,1),opacity .5s}
   #flag.down .bigflag{transform:scaleX(0);opacity:0}
-  /* 纵队箭头：默认整体透明（含箭头），仅 .draw 时显形 —— 修复开局即出现红箭头 */
-  .colarrow{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;marker-end:url(#redhead);
-    filter:drop-shadow(0 0 5px rgba(226,59,46,.5));stroke-dasharray:780;stroke-dashoffset:780;opacity:0;
-    transition:stroke-dashoffset 1.7s ease, opacity .4s ease}
-  .colarrow.draw{stroke-dashoffset:0;opacity:1}
-  .col-l{fill:var(--red2);font-size:12.5px;font-weight:700;letter-spacing:.04em}
-  .stratlbl{fill:var(--muted);font-size:12px;letter-spacing:.04em} .stratlbl.blue{fill:var(--blue2)}
+  /* 纵队箭头：线条由JS逐段画出，箭头三角随线头同步移动；默认透明，仅N7显形 */
+  .colarrow{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;
+    filter:drop-shadow(0 0 5px rgba(226,59,46,.5));opacity:0}
+  .colhead{fill:var(--red);filter:drop-shadow(0 0 4px rgba(226,59,46,.6));opacity:0}
+  .col-l{fill:var(--red2);font-size:14px;font-weight:700;letter-spacing:.04em}
+  .stratlbl{fill:var(--muted);font-size:13.5px;letter-spacing:.04em} .stratlbl.blue{fill:var(--blue2)}
   .stratarrow{stroke:var(--blue);stroke-width:3;marker-end:url(#bluehead);opacity:.75}
   .pursuit{stroke:var(--blue);stroke-width:3.5;marker-end:url(#bluehead);opacity:.85;stroke-dasharray:9 7}
   .feintarrow{fill:none;stroke:var(--red2);stroke-width:3;stroke-dasharray:8 7;marker-end:url(#redhead);opacity:.9}
-  .feintlbl{fill:var(--red2);font-size:12px;opacity:.92;letter-spacing:.04em}
-  .label-place{fill:var(--gold2);font-size:13.5px;font-weight:700;letter-spacing:.04em}
-  .label-sm{fill:var(--muted);font-size:11px;letter-spacing:.03em}
-  .label-gold{fill:var(--gold2);font-size:11.5px;letter-spacing:.03em}
-  .label-river{fill:#bfeef4;font-size:25px;font-weight:800;letter-spacing:.45em;opacity:.5}
-  .flowdash{fill:none;stroke:rgba(180,240,248,.4);stroke-width:2.2;stroke-dasharray:2 18;stroke-linecap:round;animation:flow 2.4s linear infinite}
-  @keyframes flow{to{stroke-dashoffset:-40}}
-  .rapid{stroke:rgba(220,245,250,.55);stroke-width:2;fill:none;stroke-linecap:round;animation:flow 1.8s linear infinite}
+  .feintlbl{fill:var(--red2);font-size:13.5px;opacity:.92;letter-spacing:.04em}
+  .label-place{fill:var(--gold2);font-size:16px;font-weight:700;letter-spacing:.04em}
+  .label-sm{fill:var(--muted);font-size:13px;letter-spacing:.03em}
+  .label-gold{fill:var(--gold2);font-size:13.5px;letter-spacing:.03em}
+  .label-river{fill:#cdf3f9;font-size:34px;font-weight:800;letter-spacing:.5em;opacity:.55;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  /* 河流·自然岸线填充河面 + 中泓深槽 + 三条顺流水流线（上/中/下，中泓最急） */
+  .riverband{stroke:rgba(176,228,236,.30);stroke-width:1.5;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+  .deepchan{fill:none;stroke:rgba(5,32,36,.5);stroke-width:40;stroke-linecap:butt}
+  .flow{fill:none;stroke-linecap:round}
+  .flow.f1{stroke:rgba(196,244,251,.42);stroke-width:2.6;stroke-dasharray:3 20;animation:flow1 2.6s linear infinite}
+  .flow.f2{stroke:rgba(150,231,243,.6);stroke-width:3;stroke-dasharray:4 16;animation:flow2 1.7s linear infinite}
+  .flow.f3{stroke:rgba(196,244,251,.4);stroke-width:2.4;stroke-dasharray:2 22;animation:flow3 3s linear infinite}
+  @keyframes flow1{to{stroke-dashoffset:-46}}
+  @keyframes flow2{to{stroke-dashoffset:-40}}
+  @keyframes flow3{to{stroke-dashoffset:-48}}
+  .rivertag-box{fill:rgba(8,24,28,.78);stroke:var(--river2);stroke-width:1;opacity:.9}
+  .rivertag-t{fill:#bdeef4;font-size:13px;letter-spacing:.04em}
   .nightveil{fill:#04101f;opacity:0;transition:opacity 1s ease;pointer-events:none} .nightveil.on{opacity:.4}
   .mtn-far{fill:#13202f;stroke:rgba(224,183,92,.06);stroke-width:1} .mtn-near{fill:#172737;stroke:rgba(224,183,92,.08);stroke-width:1}
   .snow{fill:rgba(220,232,245,.18)} .contour{fill:none;stroke:rgba(224,183,92,.06);stroke-width:1.1}
@@ -143,10 +152,22 @@
   .boom{fill:none;stroke:#ffd27a;stroke-width:2;opacity:0} .boom.go{animation:boom 1s ease-out}
   @keyframes boom{0%{opacity:.9;r:4}100%{opacity:0;r:34}}
   .inset-box{fill:rgba(8,13,22,.85);stroke:var(--line);stroke-width:1}
-  .inset-title{fill:var(--gold);font-size:10.5px;letter-spacing:.06em;font-weight:700}
+  .inset-title{fill:var(--gold);font-size:11.5px;letter-spacing:.06em;font-weight:700}
   .inset-river{fill:none;stroke:var(--river2);stroke-width:3;opacity:.7}
-  .inset-lbl{fill:var(--muted);font-size:10px} .inset-here{fill:var(--gold2);font-size:10px;font-weight:700}
+  .inset-lbl{fill:var(--muted);font-size:11px} .inset-here{fill:var(--gold2);font-size:11px;font-weight:700}
   .inset-route{fill:none;stroke:var(--red2);stroke-width:2;stroke-dasharray:4 4;marker-end:url(#redhead)}
+
+  /* 矮屏（笔记本/投影 ≤920px）下紧凑排版，确保我情/敌情/战场环境三卡全显（字号仍大于原版） */
+  @media (max-height: 920px){
+    aside{gap:7px}
+    .force{gap:6px}
+    .fcard{padding:8px 11px}
+    .fcard .side{font-size:13.5px;margin-bottom:4px}
+    .fcard p{font-size:13px;line-height:1.5}
+    .pnote{font-size:10.5px;line-height:1.4;padding-top:5px}
+    .caption{margin-bottom:8px;min-height:36px}
+    .cap-desc{font-size:14px}
+  }
 </style>
 </head>
 <body>
@@ -158,6 +179,8 @@
       <div class="sub">声东击西 · 强渡天险 　 1935年5月23—29日</div>
     </div>
     <div class="spacer"></div>
+	<a class="topbtn" href="index.html" style="text-decoration:none">← 总目录</a>
+	<a class="topbtn" href="dadu_model.html" style="text-decoration:none">▶ 战法量化推演</a>
     <button class="topbtn" id="helpBtn">操作说明</button>
     <button class="topbtn" id="fsBtn">⛶ 全屏</button>
   </header>
@@ -169,7 +192,7 @@
       <svg class="map" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="riverGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#2a8a93"/><stop offset="0.5" stop-color="#15545c"/><stop offset="1" stop-color="#0c373d"/>
+            <stop offset="0" stop-color="#3aa6b0"/><stop offset="0.26" stop-color="#1d6d77"/><stop offset="0.62" stop-color="#0f4a52"/><stop offset="1" stop-color="#0a363c"/>
           </linearGradient>
           <radialGradient id="vig" cx="55%" cy="42%" r="78%">
             <stop offset="60%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,.45)"/>
@@ -191,16 +214,24 @@
         </g>
         <g class="contours"><path class="contour" d="M-20,700 C 240,748 460,672 700,710 S 1060,754 1300,710"/><path class="contour" d="M-20,728 C 240,766 460,700 700,734 S 1060,768 1300,734"/></g>
 
-        <!-- RIVER -->
-        <path d="M-60,405 C 240,365 470,450 700,408 S 1080,372 1340,418" fill="none" stroke="url(#riverGrad)" stroke-width="140" stroke-linecap="round"/>
-        <path d="M-60,405 C 240,365 470,450 700,408 S 1080,372 1340,418" class="flowdash" fill="none"/>
-        <path class="rapid" d="M430,402 q14,-7 28,0 q14,7 28,0"/>
-        <path class="rapid" d="M560,414 q14,-7 28,0 q14,7 28,0" style="animation-delay:.5s"/>
-        <path class="rapid" d="M690,404 q14,-7 28,0 q14,7 28,0" style="animation-delay:1s"/>
-        <text class="label-river" x="250" y="415" transform="rotate(-4 250 415)">大渡河</text>
-        <text x="1132" y="392" fill="#bfeef4" font-size="13" opacity=".7" letter-spacing=".08em">水流湍急 →</text>
-        <text x="60" y="300" fill="var(--muted)" font-size="13" letter-spacing=".2em" opacity=".72">北岸（左岸·对岸）</text>
-        <text x="70" y="560" fill="var(--muted)" font-size="13" letter-spacing=".2em" opacity=".72">南岸（右岸）</text>
+        <!-- RIVER 大渡河天险 -->
+        <!-- 河床主体：自然岸线、宽窄不一的填充河面（非等宽圆管） -->
+        <path class="riverband" d="M-60.0,336.4 L-48.0,337.9 L-36.0,339.4 L-24.0,340.8 L-12.0,342.1 L0.0,343.3 L12.0,344.4 L24.0,345.4 L36.0,346.3 L48.0,347.0 L60.0,347.6 L72.0,348.2 L84.0,348.6 L96.0,348.9 L108.0,349.2 L120.0,349.5 L132.0,349.8 L144.0,350.0 L156.0,350.4 L168.0,350.8 L180.0,351.2 L192.0,351.8 L204.0,352.5 L216.0,353.3 L228.0,354.3 L240.0,355.4 L252.0,356.6 L264.0,357.9 L276.0,359.3 L288.0,360.8 L300.0,362.3 L312.0,363.8 L324.0,365.3 L336.0,366.7 L348.0,368.0 L360.0,369.2 L372.0,370.1 L384.0,370.9 L396.0,371.4 L408.0,371.6 L420.0,371.5 L432.0,371.0 L444.0,370.2 L456.0,369.0 L468.0,367.5 L480.0,365.6 L492.0,363.4 L504.0,360.9 L516.0,358.2 L528.0,355.1 L540.0,351.9 L552.0,348.6 L564.0,345.1 L576.0,341.6 L588.0,338.1 L600.0,334.7 L612.0,331.4 L624.0,328.2 L636.0,325.3 L648.0,322.7 L660.0,320.3 L672.0,318.3 L684.0,316.6 L696.0,315.3 L708.0,314.3 L720.0,313.8 L732.0,313.6 L744.0,313.7 L756.0,314.2 L768.0,315.0 L780.0,316.0 L792.0,317.3 L804.0,318.8 L816.0,320.4 L828.0,322.1 L840.0,323.9 L852.0,325.6 L864.0,327.4 L876.0,329.0 L888.0,330.6 L900.0,332.0 L912.0,333.3 L924.0,334.5 L936.0,335.4 L948.0,336.2 L960.0,336.9 L972.0,337.4 L984.0,337.7 L996.0,338.0 L1008.0,338.1 L1020.0,338.2 L1032.0,338.3 L1044.0,338.4 L1056.0,338.6 L1068.0,338.8 L1080.0,339.2 L1092.0,339.6 L1104.0,340.3 L1116.0,341.1 L1128.0,342.1 L1140.0,343.3 L1152.0,344.7 L1164.0,346.3 L1176.0,348.0 L1188.0,350.0 L1200.0,352.0 L1212.0,354.2 L1224.0,356.5 L1236.0,358.8 L1248.0,361.1 L1260.0,363.3 L1272.0,365.5 L1284.0,367.5 L1296.0,369.4 L1308.0,371.1 L1320.0,372.6 L1332.0,373.7 L1332.0,487.6 L1320.0,487.8 L1308.0,487.7 L1296.0,487.4 L1284.0,486.9 L1272.0,486.2 L1260.0,485.3 L1248.0,484.3 L1236.0,483.2 L1224.0,482.1 L1212.0,480.9 L1200.0,479.7 L1188.0,478.6 L1176.0,477.5 L1164.0,476.6 L1152.0,475.7 L1140.0,475.0 L1128.0,474.4 L1116.0,474.0 L1104.0,473.8 L1092.0,473.8 L1080.0,473.9 L1068.0,474.1 L1056.0,474.5 L1044.0,475.0 L1032.0,475.6 L1020.0,476.2 L1008.0,476.9 L996.0,477.6 L984.0,478.3 L972.0,478.9 L960.0,479.4 L948.0,479.8 L936.0,480.1 L924.0,480.3 L912.0,480.3 L900.0,480.1 L888.0,479.8 L876.0,479.3 L864.0,478.7 L852.0,477.9 L840.0,477.0 L828.0,476.0 L816.0,474.9 L804.0,473.8 L792.0,472.7 L780.0,471.5 L768.0,470.4 L756.0,469.3 L744.0,468.3 L732.0,467.4 L720.0,466.6 L708.0,466.0 L696.0,465.5 L684.0,465.1 L672.0,464.9 L660.0,464.8 L648.0,464.9 L636.0,465.1 L624.0,465.4 L612.0,465.8 L600.0,466.3 L588.0,466.8 L576.0,467.4 L564.0,467.9 L552.0,468.4 L540.0,468.9 L528.0,469.4 L516.0,469.8 L504.0,470.1 L492.0,470.3 L480.0,470.4 L468.0,470.4 L456.0,470.4 L444.0,470.2 L432.0,470.1 L420.0,469.9 L408.0,469.6 L396.0,469.4 L384.0,469.3 L372.0,469.2 L360.0,469.2 L348.0,469.3 L336.0,469.6 L324.0,470.0 L312.0,470.6 L300.0,471.4 L288.0,472.4 L276.0,473.6 L264.0,475.1 L252.0,476.7 L240.0,478.5 L228.0,480.5 L216.0,482.6 L204.0,484.7 L192.0,487.0 L180.0,489.3 L168.0,491.5 L156.0,493.7 L144.0,495.8 L132.0,497.8 L120.0,499.5 L108.0,501.0 L96.0,502.3 L84.0,503.2 L72.0,503.8 L60.0,504.1 L48.0,504.0 L36.0,503.5 L24.0,502.7 L12.0,501.6 L0.0,500.1 L-12.0,498.3 L-24.0,496.2 L-36.0,493.9 L-48.0,491.5 L-60.0,488.8 Z" fill="url(#riverGrad)"/>
+        <!-- 中泓深槽（暗色，示意河心深约20米的急流主槽） -->
+        <path class="deepchan" d="M-60.0,412.6 L-48.0,414.7 L-36.0,416.7 L-24.0,418.5 L-12.0,420.2 L0.0,421.7 L12.0,423.0 L24.0,424.1 L36.0,424.9 L48.0,425.5 L60.0,425.9 L72.0,426.0 L84.0,425.9 L96.0,425.6 L108.0,425.1 L120.0,424.5 L132.0,423.8 L144.0,422.9 L156.0,422.1 L168.0,421.2 L180.0,420.3 L192.0,419.4 L204.0,418.6 L216.0,417.9 L228.0,417.4 L240.0,416.9 L252.0,416.6 L264.0,416.5 L276.0,416.5 L288.0,416.6 L300.0,416.8 L312.0,417.2 L324.0,417.6 L336.0,418.1 L348.0,418.7 L360.0,419.2 L372.0,419.7 L384.0,420.1 L396.0,420.4 L408.0,420.6 L420.0,420.7 L432.0,420.5 L444.0,420.2 L456.0,419.7 L468.0,419.0 L480.0,418.0 L492.0,416.9 L504.0,415.5 L516.0,414.0 L528.0,412.3 L540.0,410.4 L552.0,408.5 L564.0,406.5 L576.0,404.5 L588.0,402.5 L600.0,400.5 L612.0,398.6 L624.0,396.8 L636.0,395.2 L648.0,393.8 L660.0,392.6 L672.0,391.6 L684.0,390.9 L696.0,390.4 L708.0,390.2 L720.0,390.2 L732.0,390.5 L744.0,391.0 L756.0,391.8 L768.0,392.7 L780.0,393.8 L792.0,395.0 L804.0,396.3 L816.0,397.7 L828.0,399.1 L840.0,400.4 L852.0,401.8 L864.0,403.0 L876.0,404.2 L888.0,405.2 L900.0,406.1 L912.0,406.8 L924.0,407.4 L936.0,407.8 L948.0,408.0 L960.0,408.1 L972.0,408.1 L984.0,408.0 L996.0,407.8 L1008.0,407.5 L1020.0,407.2 L1032.0,407.0 L1044.0,406.7 L1056.0,406.6 L1068.0,406.5 L1080.0,406.5 L1092.0,406.7 L1104.0,407.0 L1116.0,407.6 L1128.0,408.3 L1140.0,409.1 L1152.0,410.2 L1164.0,411.4 L1176.0,412.8 L1188.0,414.3 L1200.0,415.9 L1212.0,417.6 L1224.0,419.3 L1236.0,421.0 L1248.0,422.7 L1260.0,424.3 L1272.0,425.8 L1284.0,427.2 L1296.0,428.4 L1308.0,429.4 L1320.0,430.2 L1332.0,430.7"/>
+        <!-- 三条主水流线：上层、中泓（最急）、下层，顺流而下 -->
+        <path class="flow f1" d="M-60.0,390.6 L-48.0,392.7 L-36.0,394.7 L-24.0,396.5 L-12.0,398.2 L0.0,399.7 L12.0,401.0 L24.0,402.1 L36.0,402.9 L48.0,403.5 L60.0,403.9 L72.0,404.0 L84.0,403.9 L96.0,403.6 L108.0,403.1 L120.0,402.5 L132.0,401.8 L144.0,400.9 L156.0,400.1 L168.0,399.2 L180.0,398.3 L192.0,397.4 L204.0,396.6 L216.0,395.9 L228.0,395.4 L240.0,394.9 L252.0,394.6 L264.0,394.5 L276.0,394.5 L288.0,394.6 L300.0,394.8 L312.0,395.2 L324.0,395.6 L336.0,396.1 L348.0,396.7 L360.0,397.2 L372.0,397.7 L384.0,398.1 L396.0,398.4 L408.0,398.6 L420.0,398.7 L432.0,398.5 L444.0,398.2 L456.0,397.7 L468.0,397.0 L480.0,396.0 L492.0,394.9 L504.0,393.5 L516.0,392.0 L528.0,390.3 L540.0,388.4 L552.0,386.5 L564.0,384.5 L576.0,382.5 L588.0,380.5 L600.0,378.5 L612.0,376.6 L624.0,374.8 L636.0,373.2 L648.0,371.8 L660.0,370.6 L672.0,369.6 L684.0,368.9 L696.0,368.4 L708.0,368.2 L720.0,368.2 L732.0,368.5 L744.0,369.0 L756.0,369.8 L768.0,370.7 L780.0,371.8 L792.0,373.0 L804.0,374.3 L816.0,375.7 L828.0,377.1 L840.0,378.4 L852.0,379.8 L864.0,381.0 L876.0,382.2 L888.0,383.2 L900.0,384.1 L912.0,384.8 L924.0,385.4 L936.0,385.8 L948.0,386.0 L960.0,386.1 L972.0,386.1 L984.0,386.0 L996.0,385.8 L1008.0,385.5 L1020.0,385.2 L1032.0,385.0 L1044.0,384.7 L1056.0,384.6 L1068.0,384.5 L1080.0,384.5 L1092.0,384.7 L1104.0,385.0 L1116.0,385.6 L1128.0,386.3 L1140.0,387.1 L1152.0,388.2 L1164.0,389.4 L1176.0,390.8 L1188.0,392.3 L1200.0,393.9 L1212.0,395.6 L1224.0,397.3 L1236.0,399.0 L1248.0,400.7 L1260.0,402.3 L1272.0,403.8 L1284.0,405.2 L1296.0,406.4 L1308.0,407.4 L1320.0,408.2 L1332.0,408.7"/>
+        <path class="flow f2" d="M-60.0,412.6 L-48.0,414.7 L-36.0,416.7 L-24.0,418.5 L-12.0,420.2 L0.0,421.7 L12.0,423.0 L24.0,424.1 L36.0,424.9 L48.0,425.5 L60.0,425.9 L72.0,426.0 L84.0,425.9 L96.0,425.6 L108.0,425.1 L120.0,424.5 L132.0,423.8 L144.0,422.9 L156.0,422.1 L168.0,421.2 L180.0,420.3 L192.0,419.4 L204.0,418.6 L216.0,417.9 L228.0,417.4 L240.0,416.9 L252.0,416.6 L264.0,416.5 L276.0,416.5 L288.0,416.6 L300.0,416.8 L312.0,417.2 L324.0,417.6 L336.0,418.1 L348.0,418.7 L360.0,419.2 L372.0,419.7 L384.0,420.1 L396.0,420.4 L408.0,420.6 L420.0,420.7 L432.0,420.5 L444.0,420.2 L456.0,419.7 L468.0,419.0 L480.0,418.0 L492.0,416.9 L504.0,415.5 L516.0,414.0 L528.0,412.3 L540.0,410.4 L552.0,408.5 L564.0,406.5 L576.0,404.5 L588.0,402.5 L600.0,400.5 L612.0,398.6 L624.0,396.8 L636.0,395.2 L648.0,393.8 L660.0,392.6 L672.0,391.6 L684.0,390.9 L696.0,390.4 L708.0,390.2 L720.0,390.2 L732.0,390.5 L744.0,391.0 L756.0,391.8 L768.0,392.7 L780.0,393.8 L792.0,395.0 L804.0,396.3 L816.0,397.7 L828.0,399.1 L840.0,400.4 L852.0,401.8 L864.0,403.0 L876.0,404.2 L888.0,405.2 L900.0,406.1 L912.0,406.8 L924.0,407.4 L936.0,407.8 L948.0,408.0 L960.0,408.1 L972.0,408.1 L984.0,408.0 L996.0,407.8 L1008.0,407.5 L1020.0,407.2 L1032.0,407.0 L1044.0,406.7 L1056.0,406.6 L1068.0,406.5 L1080.0,406.5 L1092.0,406.7 L1104.0,407.0 L1116.0,407.6 L1128.0,408.3 L1140.0,409.1 L1152.0,410.2 L1164.0,411.4 L1176.0,412.8 L1188.0,414.3 L1200.0,415.9 L1212.0,417.6 L1224.0,419.3 L1236.0,421.0 L1248.0,422.7 L1260.0,424.3 L1272.0,425.8 L1284.0,427.2 L1296.0,428.4 L1308.0,429.4 L1320.0,430.2 L1332.0,430.7"/>
+        <path class="flow f3" d="M-60.0,434.6 L-48.0,436.7 L-36.0,438.7 L-24.0,440.5 L-12.0,442.2 L0.0,443.7 L12.0,445.0 L24.0,446.1 L36.0,446.9 L48.0,447.5 L60.0,447.9 L72.0,448.0 L84.0,447.9 L96.0,447.6 L108.0,447.1 L120.0,446.5 L132.0,445.8 L144.0,444.9 L156.0,444.1 L168.0,443.2 L180.0,442.3 L192.0,441.4 L204.0,440.6 L216.0,439.9 L228.0,439.4 L240.0,438.9 L252.0,438.6 L264.0,438.5 L276.0,438.5 L288.0,438.6 L300.0,438.8 L312.0,439.2 L324.0,439.6 L336.0,440.1 L348.0,440.7 L360.0,441.2 L372.0,441.7 L384.0,442.1 L396.0,442.4 L408.0,442.6 L420.0,442.7 L432.0,442.5 L444.0,442.2 L456.0,441.7 L468.0,441.0 L480.0,440.0 L492.0,438.9 L504.0,437.5 L516.0,436.0 L528.0,434.3 L540.0,432.4 L552.0,430.5 L564.0,428.5 L576.0,426.5 L588.0,424.5 L600.0,422.5 L612.0,420.6 L624.0,418.8 L636.0,417.2 L648.0,415.8 L660.0,414.6 L672.0,413.6 L684.0,412.9 L696.0,412.4 L708.0,412.2 L720.0,412.2 L732.0,412.5 L744.0,413.0 L756.0,413.8 L768.0,414.7 L780.0,415.8 L792.0,417.0 L804.0,418.3 L816.0,419.7 L828.0,421.1 L840.0,422.4 L852.0,423.8 L864.0,425.0 L876.0,426.2 L888.0,427.2 L900.0,428.1 L912.0,428.8 L924.0,429.4 L936.0,429.8 L948.0,430.0 L960.0,430.1 L972.0,430.1 L984.0,430.0 L996.0,429.8 L1008.0,429.5 L1020.0,429.2 L1032.0,429.0 L1044.0,428.7 L1056.0,428.6 L1068.0,428.5 L1080.0,428.5 L1092.0,428.7 L1104.0,429.0 L1116.0,429.6 L1128.0,430.3 L1140.0,431.1 L1152.0,432.2 L1164.0,433.4 L1176.0,434.8 L1188.0,436.3 L1200.0,437.9 L1212.0,439.6 L1224.0,441.3 L1236.0,443.0 L1248.0,444.7 L1260.0,446.3 L1272.0,447.8 L1284.0,449.2 L1296.0,450.4 L1308.0,451.4 L1320.0,452.2 L1332.0,452.7"/>
+        <text class="label-river" x="232" y="416" transform="rotate(-4 232 416)">大渡河</text>
+        <!-- 河流水文数据标注（战场环境上图） -->
+        <g transform="translate(40,520)">
+          <rect class="rivertag-box" x="0" y="0" width="312" height="26" rx="6"/>
+          <text class="rivertag-t" x="12" y="17">江宽约100余米　|　河心水深近20米　|　水流湍急</text>
+        </g>
+        <text x="1118" y="470" fill="#bdeef4" font-size="13.5" opacity=".75" letter-spacing=".08em">下游·大树堡方向 →</text>
+        <text x="56" y="288" fill="var(--muted)" font-size="15.5" letter-spacing=".22em" opacity=".78">北岸（左岸 · 对岸）</text>
+        <text x="66" y="572" fill="var(--muted)" font-size="15.5" letter-spacing=".22em" opacity=".78">南岸（右岸 · 安顺场）</text>
 
         <!-- 安顺场 houses (decoration) -->
         <g opacity=".95">
@@ -253,7 +284,7 @@
         <g id="u_redwu" class="unit hidden">
           <path class="feintarrow" d="M1100,584 C 1140,540 1150,510 1175,478"/>
           <path class="feintarrow" d="M1082,586 C 1072,545 1064,512 1056,480"/>
-          <rect class="pill" x="-52" y="-15" width="104" height="30" rx="7" transform="translate(1115,600)"/>
+          <rect class="pill" x="-59" y="-15" width="118" height="30" rx="7" transform="translate(1115,600)"/>
           <text class="u-name s" x="1115" y="605">红五团 · 佯渡</text>
           <text class="label-sm" x="1115" y="632" text-anchor="middle">大树堡（下游约30里）· 造船扎筏</text>
         </g>
@@ -278,6 +309,8 @@
         <!-- columns (N7) -->
         <path id="col_w" class="colarrow" d="M540,600 C 380,560 220,510 70,468"/>
         <path id="col_e" class="colarrow" d="M690,235 C 500,255 280,305 95,335"/>
+        <path id="col_w_head" class="colhead" d="M0,0 L-15,-7 L-15,7 Z"/>
+        <path id="col_e_head" class="colhead" d="M0,0 L-15,-7 L-15,7 Z"/>
         <text id="col_wl" class="col-l unit hidden" x="250" y="560">左纵队 · 主力（右岸/南岸）</text>
         <text id="col_el" class="col-l unit hidden" x="300" y="300">右纵队 · 红一师（左岸/北岸）</text>
         <g id="s_luding" class="unit hidden" transform="translate(34,432)">
@@ -290,7 +323,7 @@
         <g class="unit blue" id="u_enemyN">
           <g transform="translate(-44,-40)"><rect class="fort" x="-12" y="-12" width="24" height="20"/><polygon class="fort" points="-12,-12 12,-12 8,-20 -8,-20"/><line class="fort-slit" x1="-7" y1="-4" x2="7" y2="-4"/></g>
           <g transform="translate(44,-40)"><rect class="fort" x="-12" y="-12" width="24" height="20"/><polygon class="fort" points="-12,-12 12,-12 8,-20 -8,-20"/><line class="fort-slit" x1="-7" y1="-4" x2="7" y2="-4"/></g>
-          <rect class="pill blue" x="-58" y="-30" width="116" height="30" rx="6"/>
+          <rect class="pill blue" x="-66" y="-30" width="132" height="30" rx="6"/>
           <text class="u-name" y="-10">川军·北岸工事</text>
           <text class="u-sub blue" y="32">第5旅·韩槐阶营（筑堡封江）</text>
         </g>
@@ -303,13 +336,13 @@
         <g class="unit hidden" id="u_fire_mg"><rect class="firemk" x="-13" y="-9" width="26" height="18" rx="3"/><text class="firemk-l" y="25">机枪火力</text></g>
         <g class="unit hidden" id="u_fire_mortar"><polygon class="firemk" points="0,-12 12,9 -12,9"/><text class="firemk-l" y="25">迫击炮·赵章成</text></g>
         <g class="unit hidden" id="u_liubocheng">
-          <rect class="pill sm" x="-50" y="-14" width="100" height="28" rx="6"/>
-          <polygon class="flag" points="-50,-14 -50,-26 -28,-20 -50,-14"/>
+          <rect class="pill sm" x="-62" y="-14" width="124" height="28" rx="6"/>
+          <polygon class="flag" points="-62,-14 -62,-26 -40,-20 -62,-14"/>
           <text class="u-name s" y="4">刘伯承·前沿指挥</text>
         </g>
 
         <!-- 萧华群工 (N3) -->
-        <g class="unit hidden" id="u_xiaohua"><rect class="pill sm" x="-46" y="-13" width="92" height="26" rx="6"/><text class="u-name s" y="4">萧华·群工队</text></g>
+        <g class="unit hidden" id="u_xiaohua"><rect class="pill sm" x="-50" y="-13" width="100" height="26" rx="6"/><text class="u-name s" y="4">萧华·群工队</text></g>
 
         <!-- ferry (N7) -->
         <g class="unit hidden" id="u_ferry">
@@ -349,16 +382,18 @@
     </div>
 
     <aside>
-      <div class="ph">兵力对比 · 态势</div>
+      <div class="ph">作战态势 · 兵力 · 环境</div>
       <div class="force">
-        <div class="fcard red"><div class="side"><span class="dot"></span>红军（中央红军先遣队）</div><p id="redForce"></p></div>
-        <div class="fcard blue"><div class="side"><span class="dot"></span>守敌（川军刘文辉部）</div><p id="blueForce"></p></div>
+        <div class="fcard red"><div class="side"><span class="dot"></span>我情 · 中央红军先遣队</div><p id="redForce"></p></div>
+        <div class="fcard blue"><div class="side"><span class="dot"></span>敌情 · 川军刘文辉部</div><p id="blueForce"></p></div>
+        <div class="fcard env"><div class="side"><span class="dot"></span>战场环境 · 地形/水文/天候</div><p id="envInfo"></p></div>
       </div>
       <div class="legend">
         <span><i class="lg" style="background:var(--reddeep);border:1px solid var(--red2)"></i>红军</span>
         <span><i class="lg" style="background:var(--bluedeep);border:1px solid var(--blue2)"></i>川军</span>
         <span><i class="lg" style="background:transparent;border:1px dashed var(--red2)"></i>佯动</span>
         <span><i class="lg" style="background:transparent;border:1px dashed var(--blue2)"></i>敌防/追击</span>
+        <span><i class="lg" style="background:var(--river);border:1px solid var(--river2)"></i>急流天险</span>
       </div>
       <div class="pnote">教学示意态势图：单位位置、河道走向为示意，非按实际地理比例。史实（人物、时间、番号、兵力、经过、因果）依党史军史与纪念馆资料；个别数据史界有异（勇士"十七/十八"、船只"3/4"只、续渡"7000余/8000余"人、河宽"100余/300余"米、强渡时刻"7时/9时"），均取通行口径，仅供教学参考。</div>
     </aside>
@@ -384,35 +419,43 @@ const SCENES = [
   { name:"战略态势", time:"1935年5月",
     desc:"中央红军巧渡金沙江后挥师北上，被大渡河天险阻于安顺场（南岸/右岸）。蒋介石企图凭天险与追兵将红军聚歼于南岸，重演翼王石达开在紫打地（安顺场）全军覆灭的旧事。",
     red:"<b>中央红军主力 约2万余人</b>；先遣队·红1团（团长杨得志、政委黎林），由先遣队司令刘伯承、政委聂荣臻直接指挥。长途疲惫、缺粮少弹、无重型火力与渡河器材。",
-    blue:"<b>川军刘文辉部第5旅</b>：北岸韩槐阶营筑堡封江、收缴船只粮食北运；南岸安顺场由赖执中部据守。后方 <b>薛岳部约10万</b> 尾追、<b>刘文辉部约20万</b> 沿河布防。" },
+    blue:"<b>川军刘文辉部第5旅</b>：北岸韩槐阶营筑堡封江、收缴船只粮食北运；南岸安顺场由赖执中部据守。后方 <b>薛岳部约10万</b> 尾追、<b>刘文辉部约20万</b> 沿河布防。",
+    env:"两岸横断山峡谷、地势险峻、道路狭仄；南岸安顺场为彝汉杂居小镇，<b>仅靠木船强渡这宽逾百米、水深流急的天险</b>。" },
   { name:"大树堡佯渡（声东击西）", time:"5月23日",
     desc:"强渡前一日，左权率红五团在安顺场下游约三十里的大树堡造船扎筏、佯作渡河，并散布红军将由大树堡过河、进攻成都的消息，调动迷惑川军。",
     red:"左权·红五团在 <b>大树堡造船扎筏佯渡</b>，散布“攻成都”消息，把守敌注意力引向下游。",
-    blue:"安顺场守军误判红军主攻方向在大树堡，加之天降大雨，对渡口戒备渐松。" },
+    blue:"安顺场守军误判红军主攻方向在大树堡，加之天降大雨，对渡口戒备渐松。",
+    env:"下游约30里的<b>大树堡</b>系另一可渡点，地形开阔、便于造船扎筏惑敌；时值<b>大雨</b>，江水陡涨、流速更急、能见度低，利于佯动隐蔽。" },
   { name:"夜袭夺取渡口", time:"5月24日 夜",
     desc:"红1团经一昼夜140余里急行军逼近安顺场；政委黎林率二营向下游佯攻，团长杨得志率一营冒雨分路隐蔽接近，22时许突然发起攻击，约20余分钟击溃守敌、夺占渡口，缴获赖执中预留的逃命木船一只。",
     red:"一营（营长孙继先）夜袭安顺场、二营（黎林）下游佯攻；<b>约20余分钟击溃守敌</b>，缴获木船 1 只（赖执中预留的逃命船）。",
-    blue:"南岸安顺场守敌（赖执中部）被击溃；北岸韩槐阶营碉堡工事未动、继续封锁江面。" },
+    blue:"南岸安顺场守敌（赖执中部）被击溃；北岸韩槐阶营碉堡工事未动、继续封锁江面。",
+    env:"<b>夜暗、大雨</b>。红1团循山路一昼夜140余里急行军逼近；安顺场渡口背靠民居、面临急流，是南岸唯一可控的登船点。" },
   { name:"动员船工（军民同心）", time:"5月24日 夜",
     desc:"当夜，红一军团组织部长萧华带群工干部与宣传队走家串户做群众工作；当地船工因长期受川军欺压、又愤于守军欲焚街，纷纷报名——先有二十余人、后达77人，愿为红军摆渡。",
     red:"萧华率群工队连夜动员；先后 <b>77名当地船工</b> 自愿撑船——强渡的“船”与“桨”，是军民同心换来的。",
-    blue:"——（守敌据守北岸，未察南岸动员）" },
+    blue:"——（守敌据守北岸，未察南岸动员）",
+    env:"夜色掩护下于南岸渡口集结。当地船工<b>熟悉水情、暗流与上游牵引航路</b>，是急流行船不可或缺的条件。" },
   { name:"组织强渡 · 火力部署", time:"5月25日 晨",
     desc:"营长孙继先从二连挑选17名勇士组成渡河突击队、连长熊尚林任队长，帅仕高等4名当地船工摆渡；勇士每人配大刀、冲锋枪、短枪与手榴弹。刘伯承、聂荣臻亲临前沿，组织轻重机枪与迫击炮火力掩护。",
     red:"<b>突击队·十七勇士</b>（队长熊尚林，营长孙继先组织，各配大刀/冲锋枪/短枪/手榴弹），4名船工摆渡；南岸集中机枪、迫击炮（神炮手赵章成），刘伯承亲临指挥掩护。",
-    blue:"韩槐阶营据守北岸碉堡，居高临下，火力封锁约100余米宽、河心深近20米、水流湍急的江面。" },
+    blue:"韩槐阶营据守北岸碉堡，居高临下，火力封锁约100余米宽、河心深近20米、水流湍急的江面。",
+    env:"<b>晨光初现</b>，渡场无遮蔽。江宽约100余米、河心深近20米、水流湍急；北岸碉堡<b>居高临下</b>，可俯瞰全部江面与登陆点。" },
   { name:"勇士抢渡大渡河", time:"5月25日 7时",
     desc:"木船须先牵引至上游、再沿斜线冲向对岸。7时许强渡开始，单船在惊涛骇浪中颠簸前进；南岸轻重武器同时开火压制，神炮手赵章成两发迫击炮弹命中对岸碉堡，十七勇士冒着弹雨向北岸突进。",
     red:"<b>单船强渡</b>：先牵引上游、再斜插过江；南岸火力全力压制，<b>赵章成两发炮弹命中敌碉堡</b>，掩护突击队前进。",
-    blue:"凭北岸碉堡居高射击，企图将渡船击毁、阻敌于江心。" },
+    blue:"凭北岸碉堡居高射击，企图将渡船击毁、阻敌于江心。",
+    env:"江心<b>惊涛骇浪、漩涡密布</b>；木船须先牵引至上游、再斜插过江以抵消急流冲偏，全船在敌火下<b>暴露约2—3分钟</b>。" },
   { name:"抢滩夺岸 · 巩固滩头", time:"5月25日",
     desc:"船近对岸时川军反扑，杨得志命令再打两炮、正中敌阵；十七勇士迅速登岸奋勇冲杀，第二波8名战士携2挺轻机枪增援，击退反扑、击溃川军一个营，控制渡口、巩固滩头。",
     red:"十七勇士登岸夺占工事，<b>再发两炮命中</b>、第二波8人（携2挺轻机枪）增援，<b>击溃川军1个营</b>，控制渡口、巩固滩头。",
-    blue:"反扑被击退，北岸碉堡阵地易手、守军（1个营）溃散。" },
+    blue:"反扑被击退，北岸碉堡阵地易手、守军（1个营）溃散。",
+    env:"北岸登陆点<b>狭窄</b>、紧邻碉堡工事，背水仰攻；滩头一旦巩固，即可掩护后续梯队续渡。" },
   { name:"续渡天险 · 兵分两路奔袭泸定桥", time:"5月25日—26日后",
     desc:"红军又在下游安靖坝寻得破损木船修复，连同缴获共3—4只，77名船工“人歇船不歇”摆渡7天7夜，将先遣队红1师及干部团7000余人渡过；但船少难以短期渡完全军，毛泽东等遂决定兵分两路、夹江北上，抢占约160公里外的泸定桥——29日红四团飞夺泸定桥。",
     red:"<b>3—4只船、77船工7天7夜续渡</b>（先遣队7000余人）；船少难短期渡完全军，遂 <b>兵分两路</b>：右纵队（红一师·已渡河·沿左岸/北岸）与左纵队（主力·沿右岸/南岸）夹江北上、奔袭泸定桥。",
-    blue:"大渡河防线被撕开，妄图聚歼红军于南岸、重演石达开旧事的企图彻底落空。" }
+    blue:"大渡河防线被撕开，妄图聚歼红军于南岸、重演石达开旧事的企图彻底落空。",
+    env:"仅<b>3—4只木船</b>、单渡口输送能力极低，全军渡完需<b>以周计</b>；薛岳、刘文辉重兵正在合围，上游约160公里的<b>泸定桥</b>遂成夹江北上的唯一出路。" }
 ];
 const NODE_LABELS = ["战略态势","大树堡佯渡","夜袭夺渡口","动员船工","组织强渡","勇士抢渡","抢滩夺岸","续渡分兵"];
 const LAST = SCENES.length - 1;
@@ -431,8 +474,8 @@ const $ = id => document.getElementById(id);
 const els = {};
 ["u_red1","u_enemyN","u_enemyS","u_fire_mg","u_fire_mortar","u_liubocheng","u_assault","u_wave2",
  "u_ferry","u_follow","u_redwu","u_xiaohua","boatmen","flag","fl1","fl2","fl3","boom",
- "col_w","col_e","col_wl","col_el","s_luding","s_xueyue","s_liuwenhui","feint_ds","nightveil",
- "capName","capTime","capDesc","redForce","blueForce","railFill","nodes",
+ "col_w","col_e","col_w_head","col_e_head","col_wl","col_el","s_luding","s_xueyue","s_liuwenhui","feint_ds","nightveil",
+ "capName","capTime","capDesc","redForce","blueForce","envInfo","railFill","nodes",
  "prevBtn","nextBtn","replayBtn","autoBtn","nextLbl"].forEach(k=>els[k]=$(k));
 
 let scene=0, token=0, boatRAF=null, auto=false;
@@ -470,6 +513,34 @@ function setBoats(N, animate, tok){
   if(!animate) requestAnimationFrame(()=>{ els.u_assault.style.transition=""; els.u_wave2.style.transition=""; });
 }
 
+function placeHead(path, head, len){
+  const L=path.getTotalLength();
+  len=Math.max(0,Math.min(L,len));
+  const p=path.getPointAtLength(len);
+  const a=path.getPointAtLength(Math.max(0,len-1));
+  const b=path.getPointAtLength(Math.min(L,len+1));
+  const ang=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
+  head.setAttribute("transform",`translate(${p.x},${p.y}) rotate(${ang})`);
+}
+function hideColumn(path, head){
+  const L=path.getTotalLength();
+  path.style.strokeDasharray=L; path.style.strokeDashoffset=L;
+  path.style.opacity=0; head.style.opacity=0;
+}
+function drawColumn(path, head, dur, tok, animate){
+  const L=path.getTotalLength();
+  path.style.strokeDasharray=L;
+  path.style.opacity=1; head.style.opacity=1;
+  if(!animate || dur<=0){ path.style.strokeDashoffset=0; placeHead(path,head,L); return; }
+  const t0=performance.now();
+  (function f(now){ if(tok!==token) return;
+    const t=Math.min(1,(now-t0)/dur);
+    path.style.strokeDashoffset=L*(1-t);   /* 线从起点生长 */
+    placeHead(path, head, t*L);            /* 箭头随线头同步前移 */
+    if(t<1) requestAnimationFrame(f);
+  })(performance.now());
+}
+
 function applyScene(N, animate){
   token++; const tok=token; clearTimers();
 
@@ -505,10 +576,18 @@ function applyScene(N, animate){
 
   const col=(N===7);
   show(els.col_wl,col); show(els.col_el,col); show(els.s_luding,col);
-  if(col){ if(animate){ els.col_w.classList.remove("draw"); els.col_e.classList.remove("draw");
-      setT(()=>els.col_w.classList.add("draw"),140); setT(()=>els.col_e.classList.add("draw"),560);
-    } else { els.col_w.classList.add("draw"); els.col_e.classList.add("draw"); } }
-  else { els.col_w.classList.remove("draw"); els.col_e.classList.remove("draw"); }
+  if(col){
+    if(animate){
+      hideColumn(els.col_w, els.col_w_head); hideColumn(els.col_e, els.col_e_head);
+      setT(()=>drawColumn(els.col_w, els.col_w_head, 1700, tok, true),140);
+      setT(()=>drawColumn(els.col_e, els.col_e_head, 1700, tok, true),620);
+    } else {
+      drawColumn(els.col_w, els.col_w_head, 0, tok, false);
+      drawColumn(els.col_e, els.col_e_head, 0, tok, false);
+    }
+  } else {
+    hideColumn(els.col_w, els.col_w_head); hideColumn(els.col_e, els.col_e_head);
+  }
 
   setBoats(N, animate, tok);
   if(!animate) requestAnimationFrame(()=>{ els.u_red1.style.transition=""; els.u_xiaohua.style.transition=""; });
@@ -519,7 +598,7 @@ function flash(tok){ if(tok!==token)return; els.boom.classList.remove("go"); voi
 function renderUI(N){
   const sc=SCENES[N];
   els.capName.textContent=sc.name; els.capTime.textContent=sc.time; els.capDesc.textContent=sc.desc;
-  els.redForce.innerHTML=sc.red; els.blueForce.innerHTML=sc.blue;
+  els.redForce.innerHTML=sc.red; els.blueForce.innerHTML=sc.blue; els.envInfo.innerHTML=sc.env;
   els.railFill.style.width=(N/LAST*100)+"%";
   document.querySelectorAll(".node").forEach((nd,i)=>{ nd.classList.toggle("active",i===N); nd.classList.toggle("done",i<N); });
   els.prevBtn.disabled=(N===0);

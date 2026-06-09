@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>飞夺泸定桥 · 攀索夺桥量化推演（现代建模）</title>
+<style>
+  :root{
+    --bg:#0a0e16; --bg2:#0f1a28; --panel:rgba(13,21,33,.93); --line:rgba(224,183,92,.22);
+    --ink:#eaf1fb; --muted:#a7b6c9; --faint:#6f8094;
+    --red:#e23b2e; --red2:#ff7a6d; --reddeep:#8f1610;
+    --blue:#4f86bd; --blue2:#9cc0e8; --bluedeep:#21364c;
+    --river:#15545c; --river2:#46bccb;
+    --gold:#e0b75c; --gold2:#f6d98a; --ok:#49c46e; --bad:#ff5a4d;
+    --font:"PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans SC","Source Han Sans SC","Heiti SC",sans-serif;
+    --serif:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC",serif;
+    --mono:"SF Mono","Menlo","Consolas",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);
+    background:radial-gradient(120% 120% at 70% -10%, #16243a 0%, var(--bg2) 38%, var(--bg) 78%);
+    overflow:hidden;-webkit-font-smoothing:antialiased;}
+  .app{display:flex;flex-direction:column;height:100vh;width:100vw}
+  header{display:flex;align-items:center;gap:16px;padding:10px 22px 8px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(10,14,22,.6), rgba(10,14,22,0));flex:none;}
+  .badge{width:38px;height:38px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 30%, var(--red2), var(--reddeep));
+    box-shadow:0 0 0 2px rgba(224,183,92,.5), 0 4px 14px rgba(226,59,46,.4);display:grid;place-items:center;color:#ffe9b0;font-size:20px;}
+  .titles h1{font-size:22px;letter-spacing:.08em;font-weight:800}
+  .titles .sub{font-family:var(--serif);font-size:13.5px;color:var(--gold);letter-spacing:.12em;margin-top:3px}
+  .spacer{flex:1}
+  .topbtn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);padding:7px 12px;border-radius:8px;
+    font-family:var(--font);font-size:13.5px;cursor:pointer;letter-spacing:.05em;transition:.18s;text-decoration:none}
+  .topbtn:hover{color:var(--ink);border-color:var(--gold);background:rgba(224,183,92,.08)}
+
+  .body{flex:1;display:flex;min-height:0}
+  .mapwrap{position:relative;flex:1;min-width:0;padding:12px 8px 12px 14px}
+  .frame{position:absolute;inset:12px 8px 12px 14px;border:1px solid var(--line);border-radius:10px;pointer-events:none;box-shadow:inset 0 0 60px rgba(0,0,0,.55)}
+  svg.scene{width:100%;height:100%;display:block}
+
+  aside{width:430px;flex:none;border-left:1px solid var(--line);background:var(--panel);padding:12px 14px;display:flex;flex-direction:column;gap:11px;overflow-y:auto}
+  .ph{font-size:12.5px;letter-spacing:.2em;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:8px}
+  .ph::after{content:"";flex:1;height:1px;background:var(--line)}
+  .presets{display:flex;gap:8px;flex-wrap:wrap}
+  .preset{flex:1;min-width:120px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--muted);
+    padding:9px 10px;border-radius:9px;cursor:pointer;font-size:13px;text-align:center;transition:.16s;line-height:1.3}
+  .preset:hover{border-color:var(--gold);color:var(--ink)}
+  .preset.on{border-color:var(--gold);background:rgba(224,183,92,.12);color:var(--gold2);font-weight:700}
+  .preset small{display:block;font-size:11px;color:var(--faint);margin-top:2px}
+
+  .ctrl{margin-bottom:2px}
+  .ctrl label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted);margin-bottom:3px}
+  .ctrl label b{color:var(--gold2);font-family:var(--mono);font-size:13px}
+  .ctrl input[type=range]{width:100%;accent-color:var(--gold);height:4px;cursor:pointer}
+  .hintrow{font-size:11px;color:var(--faint);margin-top:1px;line-height:1.4}
+
+  .stat{display:flex;gap:8px}
+  .box{flex:1;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;padding:8px 6px;text-align:center}
+  .box .v{font-size:20px;font-weight:800;font-family:var(--mono);line-height:1.1}
+  .box .l{font-size:11px;color:var(--faint);margin-top:3px;letter-spacing:.02em}
+
+  .mchead{display:flex;align-items:center;gap:10px}
+  .runbtn{border:1px solid var(--red2);background:linear-gradient(180deg,var(--red),var(--reddeep));color:#fff;font-weight:700;
+    padding:8px 14px;border-radius:9px;cursor:pointer;font-size:13.5px;letter-spacing:.04em;transition:.16s}
+  .runbtn:hover{filter:brightness(1.1)}
+  .nsel{margin-left:auto;font-size:12px;color:var(--faint)}
+
+  .gauge{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:11px;padding:12px 14px;background:rgba(255,255,255,.02)}
+  .gauge .big{font-size:40px;font-weight:800;font-family:var(--mono);line-height:1}
+  .gauge .gl{font-size:12px;color:var(--faint)}
+  .gauge .side{flex:1;display:flex;flex-direction:column;gap:6px}
+  .gauge .side .r{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+  .gauge .side .r b{font-family:var(--mono);color:var(--ink)}
+
+  .hist{width:100%;height:104px;flex:none;display:block}
+  .sens{width:100%;height:118px;flex:none;display:block;background:rgba(255,255,255,.015);border:1px solid var(--line);border-radius:8px}
+  .senstit{font-size:12px;color:var(--muted);margin:8px 0 3px;display:flex;justify-content:space-between}
+  .senstit b{color:var(--gold2);font-family:var(--mono)}
+  .verdict{border-left:3px solid var(--gold);background:rgba(255,255,255,.02);border-radius:0 9px 9px 0;padding:10px 12px;font-size:13px;line-height:1.6;color:var(--muted)}
+  .verdict b{color:var(--ink)}
+  .verdict .vh{font-weight:800;font-size:14px;letter-spacing:.03em;margin-bottom:4px;display:block}
+
+  footer{flex:none;border-top:1px solid var(--line);background:linear-gradient(0deg, rgba(10,14,22,.55), rgba(10,14,22,0));padding:7px 22px 8px}
+  .foot{font-size:11px;color:var(--faint);line-height:1.5;letter-spacing:.01em}
+  .foot b{color:var(--muted)}
+
+  .legend{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:12px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .lg{width:14px;height:10px;border-radius:2px;display:inline-block}
+
+  /* scene element styles */
+  .bank-n{fill:#172331} .bank-s{fill:#14202e}
+  .river{fill:url(#rg)} .rband{stroke:rgba(160,210,220,.28);stroke-width:1.4}
+  .flow{fill:none;stroke:var(--river2);stroke-width:2;opacity:.5;stroke-dasharray:16 18}
+  .lbl{fill:var(--muted);font-size:13px;letter-spacing:.04em}
+  .lbl.s{font-size:12px;fill:var(--faint)}
+  .gold-l{fill:var(--gold2);font-size:13px;font-weight:700}
+  .fort{fill:#2a3b50;stroke:var(--blue2);stroke-width:1.5} .slit{stroke:var(--blue2);stroke-width:1.4}
+  .vec{stroke-width:3;fill:none} .vb{stroke:var(--red2);marker-end:url(#ah-r)} .vc{stroke:var(--river2);marker-end:url(#ah-c)} .vr{stroke:var(--gold2);marker-end:url(#ah-g);stroke-dasharray:5 4}
+  .traj{fill:none;stroke:var(--gold);stroke-width:2;stroke-dasharray:6 6;opacity:.7}
+  .traj0{fill:none;stroke:rgba(255,255,255,.18);stroke-width:1.5;stroke-dasharray:3 6}
+  .efire{stroke:var(--red2);stroke-width:1.6;opacity:.85;filter:drop-shadow(0 0 3px rgba(255,90,77,.8))}
+  .supp{stroke:var(--gold2);stroke-width:2;opacity:.5;stroke-dasharray:7 6}
+  .boatHull{fill:#6b4a2e;stroke:#caa06a;stroke-width:1.4} .crew{fill:#ffd27a}
+  .hitmk{fill:var(--bad)}
+
+  /* —— 泸定桥场景 —— */
+  .cliff{fill:#172331}
+  .gorge-river{fill:url(#rg)} .gorge-band{stroke:rgba(150,205,214,.28);stroke-width:1.4}
+  .gflow{fill:none;stroke:var(--river2);stroke-width:2;opacity:.45;stroke-dasharray:14 18}
+  .chain{stroke:#dbe4ec;stroke-width:1.5;opacity:.85} .chain.rail{stroke-width:2.4;opacity:.95}
+  .hanger{stroke:#dbe4ec;stroke-width:1;opacity:.4}
+  .tower{fill:#2b3a4d;stroke:var(--gold2);stroke-width:1.5} .tower-roof{fill:#3a4d63;stroke:var(--gold2);stroke-width:1.2}
+  .plank{fill:#8a5e2c;opacity:.96}
+  .flame{transform-box:fill-box;transform-origin:center bottom;fill:#ff8a3c;opacity:0}
+  .flame.lit{opacity:.95;animation:flick2 .55s ease-in-out infinite alternate}
+  @keyframes flick2{from{opacity:.6;transform:translateY(0) scaleY(.88)}to{opacity:.98;transform:translateY(-3px) scaleY(1.16)}}
+  .crawl-i{fill:#ffd27a;stroke:#7a3a10;stroke-width:.8}
+  .bank-l{fill:var(--muted);font-size:13px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="badge">★</div>
+    <div class="titles">
+      <h1>飞夺泸定桥 · 攀索夺桥量化推演</h1>
+      <div class="sub">现代建模 · 暴露时长 + 命中概率 + 蒙特卡洛模拟　1935.5.29 泸定桥</div>
+    </div>
+    <div class="spacer"></div>
+    <a class="topbtn" href="index.html" style="text-decoration:none">← 总目录</a>
+    <button class="topbtn" id="helpBtn">说明</button>
+    <button class="topbtn" id="fsBtn">⛶ 全屏</button>
+  </header>
+
+  <div class="body">
+    <div class="mapwrap">
+      <div class="frame"></div>
+            <svg class="scene" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="rg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0f4a52"/><stop offset="0.5" stop-color="#15545c"/><stop offset="1" stop-color="#0c3b42"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 两岸峭壁 -->
+        <polygon class="cliff" points="-20,232 175,232 175,600 -20,600"/>
+        <polygon class="cliff" points="755,232 1020,232 1020,600 755,600"/>
+        <text class="bank-l" x="24" y="300">西岸 · 桥西（我 · 红四团）</text>
+        <text class="bank-l" x="772" y="300">东岸 · 桥东（敌 · 泸定城）</text>
+
+        <!-- 桥下深谷急流 -->
+        <rect class="gorge-river gorge-band" x="175" y="500" width="580" height="58"/>
+        <path class="gflow" d="M180,520 H750" style="animation:fl 2.4s linear infinite"/>
+        <path class="gflow" d="M180,540 H750" style="animation:fl 2.4s linear infinite reverse"/>
+        <text class="bank-l" x="465" y="536" text-anchor="middle" fill="#bfeef4" style="font-size:13px;opacity:.8">大渡河深谷 · 桥下急流</text>
+        <text class="gold-l" x="465" y="206" text-anchor="middle">13根铁索 · 桥板被抽（悬空）</text>
+
+        <!-- 铁索桥 -->
+        <g id="bridge">
+          <line class="chain" x1="175" y1="242" x2="755" y2="242"/>
+          <line class="chain" x1="175" y1="244" x2="755" y2="244"/>
+          <line class="chain" x1="175" y1="246" x2="755" y2="246"/>
+          <line class="chain" x1="175" y1="248" x2="755" y2="248"/>
+          <line class="chain" x1="175" y1="250" x2="755" y2="250"/>
+          <line class="chain" x1="175" y1="252" x2="755" y2="252"/>
+          <line class="chain" x1="175" y1="254" x2="755" y2="254"/>
+          <line class="chain" x1="175" y1="256" x2="755" y2="256"/>
+          <line class="chain" x1="175" y1="258" x2="755" y2="258"/>
+          <line class="chain rail" x1="175" y1="236" x2="755" y2="236"/>
+          <line class="chain rail" x1="175" y1="266" x2="755" y2="266"/>
+          <line class="hanger" x1="175" y1="236" x2="175" y2="266"/>
+          <line class="hanger" x1="223" y1="236" x2="223" y2="266"/>
+          <line class="hanger" x1="272" y1="236" x2="272" y2="266"/>
+          <line class="hanger" x1="320" y1="236" x2="320" y2="266"/>
+          <line class="hanger" x1="368" y1="236" x2="368" y2="266"/>
+          <line class="hanger" x1="417" y1="236" x2="417" y2="266"/>
+          <line class="hanger" x1="465" y1="236" x2="465" y2="266"/>
+          <line class="hanger" x1="513" y1="236" x2="513" y2="266"/>
+          <line class="hanger" x1="562" y1="236" x2="562" y2="266"/>
+          <line class="hanger" x1="610" y1="236" x2="610" y2="266"/>
+          <line class="hanger" x1="658" y1="236" x2="658" y2="266"/>
+          <line class="hanger" x1="707" y1="236" x2="707" y2="266"/>
+          <line class="hanger" x1="755" y1="236" x2="755" y2="266"/>
+          <rect class="plank" id="planks" x="175" y="242" width="0" height="18"/>
+          <g><rect class="tower" x="163" y="214" width="24" height="72" rx="2"/><polygon class="tower-roof" points="163,214 187,214 175,200"/></g>
+          <g><rect class="tower" x="743" y="214" width="24" height="72" rx="2"/><polygon class="tower-roof" points="743,214 767,214 755,200"/></g>
+          <g class="flame" id="flame1" transform="translate(755,238)"><path d="M0,0 C -7,-11 -3,-19 0,-26 C 3,-19 8,-11 0,0 Z"/></g>
+          <g class="flame" id="flame2" transform="translate(755,266)"><path d="M0,0 C -7,-11 -3,-19 0,-26 C 3,-19 8,-11 0,0 Z"/></g>
+        </g>
+
+        <!-- 红四团（西岸·火力掩护） -->
+        <g transform="translate(92,360)">
+          <rect class="pill" x="-66" y="-16" width="132" height="32" rx="7" fill="var(--reddeep)" stroke="var(--red2)" stroke-width="1.4"/>
+          <text class="u-name s" y="-1" fill="#fff" style="font-size:14px;font-weight:700;text-anchor:middle">红四团 · 火力掩护</text>
+          <text y="31" fill="var(--gold2)" style="font-size:12px;text-anchor:middle">团长王开湘（黄开湘）· 政委杨成武</text>
+        </g>
+        <g transform="translate(120,300)"><rect x="-13" y="-8" width="26" height="16" rx="3" fill="var(--reddeep)" stroke="var(--gold)" stroke-width="1.2"/><text class="lbl s" x="0" y="26" text-anchor="middle" fill="var(--gold2)">轻重机枪 · 压制东桥头</text></g>
+        <line class="supp" id="supp1" x1="150" y1="295" x2="742" y2="246"/>
+        <line class="supp" id="supp2" x1="150" y1="305" x2="742" y2="256"/>
+
+        <!-- 川军守敌（东桥头·泸定城） -->
+        <g id="u_chuan">
+          <g transform="translate(800,250)"><rect class="fort" x="-12" y="-12" width="24" height="20"/><polygon class="fort" points="-12,-12 12,-12 8,-20 -8,-20"/><line class="slit" x1="-7" y1="-4" x2="7" y2="-4"/></g>
+          <rect class="pill blue" x="-66" y="-15" width="132" height="30" rx="6" transform="translate(872,340)" fill="var(--bluedeep)" stroke="var(--blue2)"/>
+          <text x="872" y="345" fill="#fff" style="font-size:14px;font-weight:700;text-anchor:middle">川军守军 · 泸定城</text>
+          <text x="872" y="372" fill="var(--blue2)" style="font-size:12px;text-anchor:middle">机枪扼守东桥头 · 桥板被抽</text>
+        </g>
+
+        <!-- 敌火 / 坠落标记 -->
+        <g id="efireg"></g>
+        <g id="fallg"></g>
+
+        <!-- 二十二勇士（沿铁索西→东） -->
+        <g id="assaultg" transform="translate(185,250)">
+          <circle class="crawl-i" cx="-10" cy="-3" r="3"/><circle class="crawl-i" cx="-2" cy="-6" r="3"/>
+          <circle class="crawl-i" cx="4" cy="-1" r="3"/><circle class="crawl-i" cx="10" cy="-5" r="3"/>
+          <circle class="crawl-i" cx="-4" cy="3" r="3"/><circle class="crawl-i" cx="6" cy="4" r="3"/>
+          <polygon class="flag" points="0,-8 0,-20 16,-15" fill="var(--red2)"/>
+          <text class="firemk-l" y="-30" fill="var(--gold2)" style="font-size:12.5px;text-anchor:middle">二十二勇士 · 夺桥突击队</text>
+        </g>
+        <text id="outcome" x="465" y="120" text-anchor="middle" font-size="22" font-weight="800" opacity="0"></text>
+
+        <!-- 提示角标 -->
+        <g transform="translate(770,392)">
+          <rect x="-12" y="-44" width="216" height="120" rx="10" fill="rgba(8,13,22,.78)" stroke="var(--line)"/>
+          <text class="lbl s" x="96" y="-24" text-anchor="middle" fill="var(--gold)">攀索夺桥（示意）</text>
+          <text class="lbl s" x="96" y="-2" text-anchor="middle">桥板被抽 → 仅余悬空铁索</text>
+          <text class="lbl s" x="96" y="20" text-anchor="middle">手攀脚踏 → 爬行慢、暴露久</text>
+          <text class="lbl s" x="96" y="42" text-anchor="middle">中弹多坠入桥下急流</text>
+          <text class="lbl s" x="96" y="64" text-anchor="middle" fill="var(--gold2)">全团火力压制是关键</text>
+        </g>
+      </svg>
+    </div>
+
+    <aside>
+      <div class="ph">推演情形 · 预设</div>
+      <div class="presets">
+        <div class="preset" id="p_hist" onclick="applyPreset('hist')">历史实际<small>抢先到达+火力压制+铺板</small></div>
+        <div class="preset" id="p_cold" onclick="applyPreset('cold')">冷算·正面强攻<small>白昼·无压制·敌火全开</small></div>
+        <div class="preset" id="p_ideal" onclick="applyPreset('ideal')">强化压制<small>火力完全压制（理想）</small></div>
+      </div>
+
+            <div class="ph">战场参数（可调）</div>
+      <div class="ctrl"><label>桥长 L（米）<b id="vL">100</b></label><input type="range" id="L" min="60" max="140" step="2" value="100"></div>
+      <div class="ctrl"><label>攀爬速度 v（米/秒）<b id="vVc">0.60</b></label><input type="range" id="Vc" min="0.15" max="0.8" step="0.01" value="0.60">
+        <div class="hintrow">手攀脚踏悬空铁索的前进速度，远慢于步行；越慢暴露越久</div></div>
+      <div class="ctrl"><label>敌有效火力点 g（折合挺）<b id="vG">4</b></label><input type="range" id="G" min="0" max="8" step="1" value="4"></div>
+      <div class="ctrl"><label>单火力点命中率 ρ（次/秒·命中期望）<b id="vRho">0.009</b></label><input type="range" id="Rho" min="0.004" max="0.04" step="0.001" value="0.009"></div>
+      <div class="ctrl"><label>我方火力压制率 S<b id="vS">0.90</b></label><input type="range" id="S" min="0" max="0.95" step="0.01" value="0.90">
+        <div class="hintrow">红四团全团火力压制东桥头机枪，使敌有效火力下降 S 比例</div></div>
+      <div class="ctrl"><label>桥头纵火强度 F<b id="vF">0.12</b></label><input type="range" id="F" min="0" max="0.6" step="0.02" value="0.12">
+        <div class="hintrow">敌纵火烧桥头堡，对冲到桥东的勇士造成额外阻滞/杀伤</div></div>
+      <div class="ctrl"><label>突击队·勇士（人）<b id="vN">22</b></label><input type="range" id="Nn" min="10" max="30" step="1" value="22"></div>
+
+      <div class="ph">即时计算</div>
+      <div class="stat">
+        <div class="box"><div class="v" id="oT">—</div><div class="l">暴露时长 T（秒）</div></div>
+        <div class="box"><div class="v" id="oMu">—</div><div class="l">单兵期望命中 μ（发）</div></div>
+        <div class="box"><div class="v" id="oNeed2">—</div><div class="l">需突入桥东（人）</div></div>
+      </div>
+
+      <div class="ph">蒙特卡洛推演</div>
+      <div class="mchead">
+        <button class="runbtn" id="runBtn">▶ 运行并演示一次夺桥</button>
+        <span class="nsel">N = <b id="vN">3000</b> 次</span>
+      </div>
+      <div class="gauge">
+        <div><div class="big" id="oP">—</div><div class="gl">渡河成功率</div></div>
+        <div class="side">
+          <div class="r">平均伤亡<b id="oCas">—</b></div>
+          <div class="r">平均突入桥东<b id="oSink">—</b></div>
+          <div class="r">成功判据：突入桥东 ≥ <b id="oNeed">6</b> 人</div>
+        </div>
+      </div>
+      <svg class="hist" id="hist" viewBox="0 0 400 104" preserveAspectRatio="none"></svg>
+      <div class="legend" style="margin-top:-4px">
+        <span><i class="lg" style="background:var(--ok)"></i>成功</span>
+        <span><i class="lg" style="background:var(--bad)"></i>失败/被击沉</span>
+        <span><i class="lg" style="background:var(--gold)"></i>压制火力</span>
+        <span><i class="lg" style="background:var(--red2)"></i>敌火</span>
+      </div>
+
+      <div class="verdict" id="verdict"><span class="vh">解读</span>拖动参数或选择预设，实时查看成功率。</div>
+
+      <div class="ph">敏感性曲线（成功率随关键变量变化）</div>
+      <div class="senstit">成功率 vs 火力压制率 S　<span>当前 S=<b id="sxS">0.82</b></span></div>
+      <svg class="sens" id="sensS" viewBox="0 0 400 118" preserveAspectRatio="none"></svg>
+      <div class="senstit">成功率 vs 攀爬速度 v　<span>当前 v=<b id="sxV">0.60</b></span></div>
+      <svg class="sens" id="sensVc" viewBox="0 0 400 118" preserveAspectRatio="none"></svg>
+      <div class="hintrow" style="margin-top:4px">曲线随其他参数实时更新；可见<b style="color:var(--gold2)">压制率 S 是最敏感的变量</b>——成功率随 S 升高、随攀爬速度 v 升高（暴露更短）而上升。</div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="foot"><b>史实锚点（通行记述）：</b>泸定桥铁索桥13根铁链（9底链+4扶手）、桥板被抽、长百余米；红四团一昼夜奔袭240里抢先到达桥西；二连连长廖大珠率二十二勇士攀踏铁索夺桥，后续部队边铺桥板、全团火力压制东桥头；敌纵火烧桥头，勇士冲过火海夺占泸定城。　<b>模型假设：</b>攀爬速度、敌火力点数与命中率、压制率、纵火强度等为工程估计、非史料实测，仅供教学推演。本模型为简化推演，未涵盖士气、指挥、敌情、天候与偶然，不构成对历史的重新评判。</div>
+  </footer>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const P={ L:100, vClimb:0.60, g:4, rho:0.009, S:0.90, F:0.12, n:22, cFall:0.30, N:3000 };
+const PRESETS={
+  hist:{L:100,vClimb:0.60,g:4,rho:0.009,S:0.90,F:0.12,n:22},
+  cold:{L:100,vClimb:0.30,g:5,rho:0.030,S:0.00,F:0.40,n:22},
+  ideal:{L:100,vClimb:0.70,g:4,rho:0.009,S:0.95,F:0.10,n:22}
+};
+let curPreset="hist";
+function poisson(l){ if(l<=0)return 0; if(l>30){ let x=Math.round(l+Math.sqrt(l)*gauss()); return x<0?0:x; } const L=Math.exp(-l); let k=0,p=1; do{k++;p*=Math.random();}while(p>L); return k-1; }
+function gauss(){ let u=0,v=0; while(u===0)u=Math.random(); while(v===0)v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function binom(n,p){ if(n<=0)return 0; let c=0; for(let i=0;i<n;i++) if(Math.random()<p)c++; return c; }
+function fmt(x,n){ return x.toFixed(n); }
+function colorP(p){ return p>=0.7?"var(--ok)": p>=0.4?"var(--gold2)": p>=0.1?"#f0a44e":"var(--bad)"; }
+
+function derived(){ const T=P.L/P.vClimb; const muMan=P.g*P.rho*T*(1-P.S); const need=Math.ceil(P.n*0.27); return {T,muMan,need}; }
+function simOnce(d){ let reached=0;
+  for(let i=0;i<P.n;i++){ const hits=poisson(d.muMan); if(binom(hits,P.cFall)>0) continue; if(Math.random()<P.F*0.5) continue; reached++; }
+  return {reached, cas:P.n-reached, success:reached>=d.need}; }
+function monteCarlo(d,N){ let succ=0,casSum=0; const dist=new Array(P.n+1).fill(0);
+  for(let i=0;i<N;i++){ const r=simOnce(d); if(r.success)succ++; casSum+=r.cas; dist[Math.min(r.cas,P.n)]++; }
+  return {P:succ/N, avgCas:casSum/N, reachAvg:P.n-casSum/N, dist}; }
+
+function updateScene(d){
+  document.querySelectorAll(".supp").forEach(s=>s.style.opacity=(0.3+0.6*P.S));
+  document.querySelectorAll(".gflow").forEach(f=>{});
+  $("flame1").classList.remove("lit"); $("flame2").classList.remove("lit");
+  $("planks").setAttribute("width","0");
+  $("assaultg").setAttribute("transform","translate(185,250)");
+  $("efireg").innerHTML=""; $("fallg").innerHTML=""; $("outcome").setAttribute("opacity","0");
+}
+
+function render(run){
+  $("vL").textContent=P.L; $("vVc").textContent=fmt(P.vClimb,2); $("vG").textContent=P.g;
+  $("vRho").textContent=fmt(P.rho,3); $("vS").textContent=fmt(P.S,2); $("vF").textContent=fmt(P.F,2); $("vN").textContent=P.n;
+  const d=derived();
+  $("oT").textContent=fmt(d.T,0); $("oMu").textContent=fmt(d.muMan,2); $("oNeed2").textContent=d.need;
+  $("oNeed").textContent=d.need;
+  updateScene(d);
+  const mc=monteCarlo(d,P.N);
+  $("oP").textContent=Math.round(mc.P*100)+"%"; $("oP").style.color=colorP(mc.P);
+  $("oCas").textContent=fmt(mc.avgCas,1)+" 人"; $("oSink").textContent=fmt(mc.reachAvg,1)+" 人";
+  drawHist(mc.dist,P.n,d.need);
+  updateVerdict(mc,d);
+  renderSensitivity(mc.P);
+  if(run) playCrossing(d);
+}
+
+function drawHist(dist,n,need){
+  const svg=$("hist"); svg.innerHTML=""; const W=400,H=104,pad=6, bw=(W-2*pad)/dist.length, max=Math.max(1,...dist);
+  for(let i=0;i<dist.length;i++){ const h=(dist[i]/max)*(H-22), x=pad+i*bw, y=H-16-h;
+    const r=document.createElementNS(NS,"rect"); r.setAttribute("x",x+0.5);r.setAttribute("y",y);r.setAttribute("width",Math.max(1,bw-1));r.setAttribute("height",h);
+    r.setAttribute("fill", i<=Math.floor(n*0.5)?"var(--ok)":"var(--bad)"); r.setAttribute("opacity",".75"); svg.appendChild(r); }
+  svg.appendChild(mk("line",{x1:pad,y1:H-16,x2:W-pad,y2:H-16,stroke:"rgba(255,255,255,.15)"}));
+  [["0",pad,"start"],[Math.floor(n/2)+"",pad+(n/2)*bw,"middle"],[n+" 伤亡",W-pad,"end"]].forEach(([t,x,a])=>{
+    const tx=mk("text",{x:x,y:H-3,fill:"var(--faint)","font-size":10,"text-anchor":a}); tx.textContent=t; svg.appendChild(tx); });
+}
+
+function updateVerdict(mc,d){
+  const p=mc.P; let cls,vh,txt;
+  if(p>=0.7){ cls="var(--ok)"; vh="战法奏效 · 夺桥可行";
+    txt=`蒙特卡洛 ${P.N} 次推演成功率 <b>${Math.round(p*100)}%</b>、平均伤亡约 <b>${fmt(mc.avgCas,1)}</b> 人。关键在于 <b>火力压制率 S=${fmt(P.S,2)}</b> 把敌有效火力压到单兵 μ≈${fmt(d.muMan,2)} 发——这正是红四团全团火力压制东桥头的作用。<b>不是单凭意志，而是『一昼夜奔袭240里抢先到达（敌未及增援/彻底毁桥）+ 全团火力压制 + 边铺桥板 + 选择总攻时机』</b>把成功概率抬到可行区间，再由二十二勇士冲过火海完成最后一击。`; }
+  else if(p>=0.4){ cls="var(--gold2)"; vh="险中夺桥 · 高风险可行";
+    txt=`成功率 <b>${Math.round(p*100)}%</b>、平均伤亡约 <b>${fmt(mc.avgCas,1)}</b> 人——具备可行性但极其凶险。试着调高 <b>压制率 S</b> 或 <b>攀爬速度 v</b>（缩短暴露），看成功率如何跃升：压制与速度是攀索夺桥的命脉。`; }
+  else if(p>=0.1){ cls="#f0a44e"; vh="九死一生 · 凶险";
+    txt=`成功率仅 <b>${Math.round(p*100)}%</b>、单兵期望命中 μ≈${fmt(d.muMan,2)} 发，多数勇士会在铁索上中弹坠江。此时仅凭意志强攀难以奏效——必须靠火力压制 S 与抢先到达改变态势。`; }
+  else{ cls="var(--bad)"; vh="正面攀索 · 几乎不可能";
+    txt=`成功率 <b>${Math.round(p*100)}%</b>：在<b>无压制、敌火全开</b>下，勇士要在悬空铁索上爬行约 ${fmt(d.T,0)} 秒、单兵承受 μ≈${fmt(d.muMan,2)} 发命中，几乎全部中弹坠入桥下急流。<b>这说明：单凭勇气强攀悬空铁索难以成功</b>；飞夺泸定桥靠的是『抢先到达 + 全团火力压制 + 边铺桥板 + 勇士冲锋』的合力。点『历史实际』看战法如何扭转结局。`; }
+  const v=$("verdict"); v.style.borderColor=cls; v.innerHTML=`<span class="vh" style="color:${cls}">${vh}</span>`+txt;
+}
+
+let _pending=false; function scheduleRender(){ if(_pending)return; _pending=true; requestAnimationFrame(()=>{ _pending=false; render(false); }); }
+function sweep(key, lo, hi, steps, Nper){ const saved=P[key]; const xs=[],ys=[];
+  for(let i=0;i<=steps;i++){ const x=lo+(hi-lo)*i/steps; P[key]=x; const d=derived(); xs.push(x); ys.push(monteCarlo(d,Nper).P); }
+  P[key]=saved; return {xs,ys}; }
+const NS="http://www.w3.org/2000/svg";
+function mk(tag,attrs){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
+function drawCurve(svgId, sw, lo, hi, curX, curY, xfmt){
+  const svg=$(svgId); svg.innerHTML=""; const W=400,H=118,pl=34,pr=10,pt=10,pb=20;
+  const X=x=> pl+(x-lo)/(hi-lo)*(W-pl-pr); const Y=y=> (H-pb)-y*(H-pt-pb);
+  [0,0.5,1].forEach(g=>{ const y=Y(g); svg.appendChild(mk("line",{x1:pl,x2:W-pr,y1:y,y2:y,stroke:"rgba(255,255,255,.10)"}));
+    const t=mk("text",{x:pl-5,y:y+3,fill:"var(--faint)","font-size":9,"text-anchor":"end"}); t.textContent=Math.round(g*100)+"%"; svg.appendChild(t); });
+  [lo,(lo+hi)/2,hi].forEach((xv,k)=>{ const t=mk("text",{x:X(xv),y:H-6,fill:"var(--faint)","font-size":9,"text-anchor":k===0?"start":k===2?"end":"middle"}); t.textContent=xfmt(xv); svg.appendChild(t); });
+  const dpath="M"+sw.xs.map((x,i)=>`${X(x).toFixed(1)},${Y(sw.ys[i]).toFixed(1)}`).join(" L");
+  svg.appendChild(mk("path",{d:dpath+` L${X(hi).toFixed(1)},${Y(0)} L${X(lo).toFixed(1)},${Y(0)} Z`,fill:"rgba(224,183,92,.12)"}));
+  svg.appendChild(mk("path",{d:dpath,fill:"none",stroke:"var(--gold2)","stroke-width":2}));
+  const vx=X(curX); svg.appendChild(mk("line",{x1:vx,x2:vx,y1:pt,y2:H-pb,stroke:"var(--red2)","stroke-dasharray":"4 3","stroke-width":1.4}));
+  svg.appendChild(mk("circle",{cx:vx,cy:Y(curY),r:3.5,fill:"var(--red)",stroke:"#fff","stroke-width":1}));
+}
+function renderSensitivity(curP){
+  drawCurve("sensS", sweep("S",0,0.95,22,350), 0,0.95, P.S, curP, x=>x.toFixed(2));
+  drawCurve("sensVc", sweep("vClimb",0.15,0.8,22,350), 0.15,0.8, P.vClimb, curP, x=>x.toFixed(2));
+  $("sxS").textContent=fmt(P.S,2); $("sxV").textContent=fmt(P.vClimb,2);
+}
+
+let animRAF=null;
+function spawnFall(g,x,y){ const c=mk("circle",{cx:x,cy:y,r:3,fill:"var(--bad)"}); g.appendChild(c);
+  const t0=performance.now(); (function f(now){ const t=Math.min(1,(now-t0)/950); c.setAttribute("cy",(y+t*210).toFixed(0)); c.setAttribute("opacity",(1-t).toFixed(2)); if(t<1)requestAnimationFrame(f); })(performance.now()); }
+function playCrossing(d){
+  if(animRAF)cancelAnimationFrame(animRAF);
+  const x0=185,x1=745,y=250;
+  const efg=$("efireg"), fallg=$("fallg"), ass=$("assaultg"), out=$("outcome"), planks=$("planks");
+  efg.innerHTML=""; fallg.innerHTML=""; out.setAttribute("opacity","0");
+  $("flame1").classList.remove("lit"); $("flame2").classList.remove("lit");
+  const dur=Math.max(2600,Math.min(6500, d.T*16));
+  const result=simOnce(d); const fallAt=[]; for(let i=0;i<result.cas;i++) fallAt.push(0.12+Math.random()*0.82);
+  const t0=performance.now();
+  (function fr(now){ const t=Math.min(1,(now-t0)/dur);
+    const bx=x0+(x1-x0)*t; ass.setAttribute("transform",`translate(${bx},${y})`); planks.setAttribute("width",(bx-x0+10).toFixed(0));
+    if(Math.random()<0.6){ efg.innerHTML=""; const k=1+Math.round(Math.random()*Math.max(0,P.g*(1-P.S)));
+      for(let j=0;j<k;j++){ const jx=bx+(Math.random()*16-8), jy=y+(Math.random()*10-5);
+        efg.innerHTML+=`<line class="efire" x1="745" y1="${y}" x2="${jx.toFixed(0)}" y2="${jy.toFixed(0)}"/>`; } }
+    fallAt.forEach((fa,idx)=>{ if(fa<=t && !fallAt['d'+idx]){ fallAt['d'+idx]=1; spawnFall(fallg, x0+(x1-x0)*fa, y); } });
+    if(t>0.7){ $("flame1").classList.add("lit"); $("flame2").classList.add("lit"); }
+    if(t<1) animRAF=requestAnimationFrame(fr);
+    else{ efg.innerHTML="";
+      if(result.success){ out.setAttribute("fill","var(--ok)"); out.textContent="✔ 夺占东桥头 · 攻入泸定城"; }
+      else{ out.setAttribute("fill","var(--bad)"); out.textContent="✘ 突入兵力不足 · 夺桥受挫"; }
+      out.setAttribute("opacity","1");
+    }
+  })(performance.now());
+}
+
+function applyPreset(name){ const pr=PRESETS[name]; Object.assign(P,pr); curPreset=name;
+  ["hist","cold","ideal"].forEach(n=>$("p_"+n).classList.toggle("on",n===name));
+  $("L").value=P.L; $("Vc").value=P.vClimb; $("G").value=P.g; $("Rho").value=P.rho; $("S").value=P.S; $("F").value=P.F; $("Nn").value=P.n;
+  render(true); }
+const map=[["L","L"],["Vc","vClimb"],["G","g"],["Rho","rho"],["S","S"],["F","F"],["Nn","n"]];
+map.forEach(([id,key])=>{ $(id).addEventListener("input",()=>{ P[key]=parseFloat($(id).value);
+  ["hist","cold","ideal"].forEach(n=>$("p_"+n).classList.remove("on")); curPreset="custom"; scheduleRender(); }); });
+$("runBtn").addEventListener("click",()=>render(true));
+$("fsBtn").addEventListener("click",()=>{ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); });
+$("helpBtn").addEventListener("click",()=>{ alert("攀索夺桥量化推演 · 说明\n\n· 模型用『暴露时长(爬行) + 命中概率(泊松) + 蒙特卡洛』估计二十二勇士攀踏悬空铁索夺桥的成功率与伤亡。\n· 拖动参数即实时重算；点『运行并演示一次渡河』播放一次攀索动画（含坠落/铺板/桥头火）。\n· 预设：历史实际 / 冷算·正面强攻 / 强化压制。\n· 关键变量：火力压制率 S 与攀爬速度 v（缩短暴露）。\n\n注意：参数为工程估计、非史料实测；模型为简化推演，不能涵盖士气、指挥、敌情、天候与偶然，不构成对历史的重新评判。"); });
+
+applyPreset("hist");
+</script>
+</body>
+</html>

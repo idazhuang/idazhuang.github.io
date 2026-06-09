@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>飞夺泸定桥 · 夺桥战斗态势演示</title>
+<style>
+
+  :root{
+    --bg:#0a0e16; --bg2:#0f1a28;
+    --panel:rgba(13,21,33,.93); --line:rgba(224,183,92,.22);
+    --ink:#eaf1fb; --muted:#a7b6c9; --faint:#6f8094;
+    --red:#e23b2e; --red2:#ff7a6d; --reddeep:#8f1610;
+    --blue:#4f86bd; --blue2:#9cc0e8; --bluedeep:#21364c;
+    --river:#15545c; --river2:#46bccb;
+    --gold:#e0b75c; --gold2:#f6d98a;
+    --font:"PingFang SC","Microsoft YaHei UI","Microsoft YaHei","Noto Sans SC","Source Han Sans SC","Heiti SC",sans-serif;
+    --serif:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);
+    background:radial-gradient(120% 120% at 70% -10%, #16243a 0%, var(--bg2) 38%, var(--bg) 78%);
+    overflow:hidden;-webkit-font-smoothing:antialiased;}
+  .app{display:flex;flex-direction:column;height:100vh;width:100vw}
+
+  header{display:flex;align-items:center;gap:16px;padding:10px 22px 8px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(10,14,22,.6), rgba(10,14,22,0));flex:none;}
+  .badge{width:38px;height:38px;flex:none;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--red2), var(--reddeep));
+    box-shadow:0 0 0 2px rgba(224,183,92,.5), 0 4px 14px rgba(226,59,46,.4);
+    display:grid;place-items:center;color:#ffe9b0;font-size:20px;}
+  .titles h1{font-size:23px;letter-spacing:.16em;font-weight:800}
+  .titles .sub{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.2em;margin-top:3px}
+  .spacer{flex:1}
+  .topbtn{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);
+    padding:7px 12px;border-radius:8px;font-family:var(--font);font-size:13.5px;cursor:pointer;letter-spacing:.05em;transition:.18s;}
+  .topbtn:hover{color:var(--ink);border-color:var(--gold);background:rgba(224,183,92,.08)}
+
+  .body{flex:1;display:flex;min-height:0}
+  .mapwrap{position:relative;flex:1;min-width:0;padding:14px 8px 14px 16px}
+  .frame{position:absolute;inset:14px 8px 14px 16px;border:1px solid var(--line);border-radius:10px;
+    pointer-events:none;box-shadow:inset 0 0 60px rgba(0,0,0,.55);}
+  svg.map{width:100%;height:100%;display:block}
+
+  aside{width:374px;flex:none;border-left:1px solid var(--line);background:var(--panel);
+    padding:12px 16px 10px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+  .ph{font-size:13px;letter-spacing:.26em;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:8px}
+  .ph::after{content:"";flex:1;height:1px;background:var(--line)}
+  .force{display:flex;flex-direction:column;gap:7px;overflow-y:auto;flex:1;min-height:0;padding-right:3px}
+  .fcard{border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:9px 11px;background:rgba(255,255,255,.015)}
+  .fcard.red{border-top:3px solid var(--red)} .fcard.blue{border-top:3px solid var(--blue)} .fcard.env{border-top:3px solid var(--river2)}
+  .fcard.env .side{color:var(--river2)} .fcard.env .dot{background:var(--river2)}
+  .fcard .side{font-size:14.5px;font-weight:800;letter-spacing:.08em;margin-bottom:5px;display:flex;gap:7px;align-items:center}
+  .fcard.red .side{color:var(--red2)} .fcard.blue .side{color:var(--blue2)}
+  .dot{width:9px;height:9px;border-radius:2px} .fcard.red .dot{background:var(--red)} .fcard.blue .dot{background:var(--blue)}
+  .fcard p{font-size:14px;line-height:1.56;color:var(--muted)} .fcard b{color:var(--ink);font-weight:600}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);padding:2px 0}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .lg{width:14px;height:10px;border-radius:2px;display:inline-block}
+  .pnote{font-size:11px;color:var(--faint);letter-spacing:.02em;line-height:1.45;margin-top:auto;padding-top:5px;border-top:1px solid rgba(255,255,255,.06)}
+
+  footer{flex:none;border-top:1px solid var(--line);
+    background:linear-gradient(0deg, rgba(10,14,22,.55), rgba(10,14,22,0));padding:10px 22px 12px}
+  .caption{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;min-height:40px}
+  .cap-name{font-size:21px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+  .cap-time{font-family:var(--serif);font-size:13.5px;color:#0a0e16;background:var(--gold);
+    padding:3px 9px;border-radius:20px;letter-spacing:.06em;white-space:nowrap;font-weight:700}
+  .cap-desc{font-size:15px;color:var(--muted);line-height:1.5;flex:1}
+
+  .track{position:relative;height:46px;margin:0 4px 11px}
+  .rail{position:absolute;top:10px;left:0;right:0;height:3px;background:rgba(255,255,255,.09);border-radius:2px}
+  .rail-fill{position:absolute;top:10px;left:0;height:3px;background:linear-gradient(90deg,var(--reddeep),var(--gold));border-radius:2px;transition:width .5s ease;width:0}
+  .nodes{position:absolute;inset:0;display:flex;justify-content:space-between}
+  .node{display:flex;flex-direction:column;align-items:center;cursor:pointer;flex:1}
+  .node .nd{width:14px;height:14px;border-radius:50%;border:2px solid var(--faint);background:var(--bg);margin-top:3px;transition:.25s;position:relative;z-index:2}
+  .node .nl{font-size:12px;color:var(--faint);margin-top:7px;letter-spacing:.02em;transition:.2s;text-align:center;white-space:nowrap}
+  .node.done .nd{border-color:var(--red);background:var(--red)}
+  .node.active .nd{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 4px rgba(224,183,92,.22);transform:scale(1.25)}
+  .node.active .nl{color:var(--gold2);font-weight:700} .node:hover .nl{color:var(--ink)}
+
+  .ctrls{display:flex;align-items:center;justify-content:center;gap:10px}
+  button.ctl{font-family:var(--font);font-size:14px;letter-spacing:.04em;cursor:pointer;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink);
+    padding:9px 15px;border-radius:9px;transition:.16s;display:flex;align-items:center;gap:7px}
+  button.ctl:hover{border-color:var(--gold);background:rgba(224,183,92,.1)}
+  button.ctl:disabled{opacity:.32;cursor:default;border-color:var(--line);background:transparent}
+  button.ctl.primary{background:linear-gradient(180deg,var(--red),var(--reddeep));border-color:var(--red2);color:#fff;font-weight:700;padding:9px 22px;box-shadow:0 4px 16px rgba(226,59,46,.32)}
+  button.ctl.primary:hover{filter:brightness(1.08)}
+  .ctl .ic{font-size:14px;line-height:1}
+
+  .toast{position:absolute;top:24px;left:50%;transform:translateX(-50%);
+    background:rgba(13,21,33,.94);border:1px solid var(--gold);color:var(--gold2);
+    padding:9px 18px;border-radius:30px;font-size:13.5px;letter-spacing:.05em;z-index:30;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);transition:opacity .5s;pointer-events:none}
+
+  /* SVG */
+  .unit{transition:transform 1.5s cubic-bezier(.45,.05,.2,1), opacity .55s ease;cursor:default}
+  .unit.hidden{opacity:0}
+  .pill{fill:var(--reddeep);stroke:var(--red2);stroke-width:1.4;filter:url(#softsh)}
+  .pill.blue{fill:var(--bluedeep);stroke:var(--blue2)} .pill.sm{filter:none}
+  .u-name{fill:#fff;font-size:17px;font-weight:700;text-anchor:middle;letter-spacing:.03em}
+  .u-name.s{font-size:14.5px}
+  .u-sub{fill:var(--gold2);font-size:13px;text-anchor:middle;letter-spacing:.02em}
+  .u-sub.blue{fill:var(--blue2)}
+  .flag{fill:var(--red2)}
+  .boatHull{fill:#6b4a2e;stroke:#caa06a;stroke-width:1.4}
+  .oar{stroke:#caa06a;stroke-width:1.5} .crew{fill:#ffd27a} .mast{stroke:#caa06a;stroke-width:1.6}
+  .firemk{fill:var(--reddeep);stroke:var(--gold);stroke-width:1.2}
+  .firemk-l{fill:var(--gold2);font-size:12.5px;text-anchor:middle;letter-spacing:.02em}
+  .fireline{stroke:var(--red2);stroke-width:2.3;stroke-dasharray:7 9;opacity:0;filter:drop-shadow(0 0 4px rgba(255,122,109,.8))}
+  .fireline.firing{opacity:.9;animation:tracer .5s linear infinite, flick 1.1s ease-in-out infinite}
+  @keyframes tracer{to{stroke-dashoffset:-32}} @keyframes flick{0%,100%{opacity:.45}50%{opacity:.95}}
+  .fort{fill:#2a3b50;stroke:var(--blue2);stroke-width:1.6} .fort-slit{stroke:var(--blue2);stroke-width:1.4}
+  #u_enemyN.routed{opacity:.3;transform:translate(770px,150px)!important}
+  .flagpole{stroke:#e8e8e8;stroke-width:2}
+  #flag .bigflag{fill:var(--red);transform-origin:left center;transition:transform .7s cubic-bezier(.2,1.4,.4,1),opacity .5s}
+  #flag.down .bigflag{transform:scaleX(0);opacity:0}
+  /* 纵队箭头：线条由JS逐段画出，箭头三角随线头同步移动；默认透明，仅N7显形 */
+  .colarrow{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;
+    filter:drop-shadow(0 0 5px rgba(226,59,46,.5));opacity:0}
+  .colhead{fill:var(--red);filter:drop-shadow(0 0 4px rgba(226,59,46,.6));opacity:0}
+  .col-l{fill:var(--red2);font-size:14px;font-weight:700;letter-spacing:.04em}
+  .stratlbl{fill:var(--muted);font-size:13.5px;letter-spacing:.04em} .stratlbl.blue{fill:var(--blue2)}
+  .stratarrow{stroke:var(--blue);stroke-width:3;marker-end:url(#bluehead);opacity:.75}
+  .pursuit{stroke:var(--blue);stroke-width:3.5;marker-end:url(#bluehead);opacity:.85;stroke-dasharray:9 7}
+  .feintarrow{fill:none;stroke:var(--red2);stroke-width:3;stroke-dasharray:8 7;marker-end:url(#redhead);opacity:.9}
+  .feintlbl{fill:var(--red2);font-size:13.5px;opacity:.92;letter-spacing:.04em}
+  .label-place{fill:var(--gold2);font-size:16px;font-weight:700;letter-spacing:.04em}
+  .label-sm{fill:var(--muted);font-size:13px;letter-spacing:.03em}
+  .label-gold{fill:var(--gold2);font-size:13.5px;letter-spacing:.03em}
+  .label-river{fill:#cdf3f9;font-size:34px;font-weight:800;letter-spacing:.5em;opacity:.55;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))}
+  /* 河流·自然岸线填充河面 + 中泓深槽 + 三条顺流水流线（上/中/下，中泓最急） */
+  .riverband{stroke:rgba(176,228,236,.30);stroke-width:1.5;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+  .deepchan{fill:none;stroke:rgba(5,32,36,.5);stroke-width:40;stroke-linecap:butt}
+  .flow{fill:none;stroke-linecap:round}
+  .flow.f1{stroke:rgba(196,244,251,.42);stroke-width:2.6;stroke-dasharray:3 20;animation:flow1 2.6s linear infinite}
+  .flow.f2{stroke:rgba(150,231,243,.6);stroke-width:3;stroke-dasharray:4 16;animation:flow2 1.7s linear infinite}
+  .flow.f3{stroke:rgba(196,244,251,.4);stroke-width:2.4;stroke-dasharray:2 22;animation:flow3 3s linear infinite}
+  @keyframes flow1{to{stroke-dashoffset:-46}}
+  @keyframes flow2{to{stroke-dashoffset:-40}}
+  @keyframes flow3{to{stroke-dashoffset:-48}}
+  .rivertag-box{fill:rgba(8,24,28,.78);stroke:var(--river2);stroke-width:1;opacity:.9}
+  .rivertag-t{fill:#bdeef4;font-size:13px;letter-spacing:.04em}
+  .nightveil{fill:#04101f;opacity:0;transition:opacity 1s ease;pointer-events:none} .nightveil.on{opacity:.4}
+  .mtn-far{fill:#13202f;stroke:rgba(224,183,92,.06);stroke-width:1} .mtn-near{fill:#172737;stroke:rgba(224,183,92,.08);stroke-width:1}
+  .snow{fill:rgba(220,232,245,.18)} .contour{fill:none;stroke:rgba(224,183,92,.06);stroke-width:1.1}
+  .house{fill:#26323f;stroke:rgba(224,183,92,.14);stroke-width:1} .house-roof{fill:#3a2a22;stroke:rgba(224,183,92,.14);stroke-width:1}
+  .ferryboat{animation:bob 2.6s ease-in-out infinite}
+  .ferryboat:nth-of-type(2){animation-delay:.6s} .ferryboat:nth-of-type(3){animation-delay:1.2s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .boom{fill:none;stroke:#ffd27a;stroke-width:2;opacity:0} .boom.go{animation:boom 1s ease-out}
+  @keyframes boom{0%{opacity:.9;r:4}100%{opacity:0;r:34}}
+  .inset-box{fill:rgba(8,13,22,.85);stroke:var(--line);stroke-width:1}
+  .inset-title{fill:var(--gold);font-size:11.5px;letter-spacing:.06em;font-weight:700}
+  .inset-river{fill:none;stroke:var(--river2);stroke-width:3;opacity:.7}
+  .inset-lbl{fill:var(--muted);font-size:11px} .inset-here{fill:var(--gold2);font-size:11px;font-weight:700}
+  .inset-route{fill:none;stroke:var(--red2);stroke-width:2;stroke-dasharray:4 4;marker-end:url(#redhead)}
+
+  /* 矮屏（笔记本/投影 ≤920px）下紧凑排版，确保我情/敌情/战场环境三卡全显（字号仍大于原版） */
+  @media (max-height: 920px){
+    aside{gap:7px}
+    .force{gap:6px}
+    .fcard{padding:8px 11px}
+    .fcard .side{font-size:13.5px;margin-bottom:4px}
+    .fcard p{font-size:13px;line-height:1.5}
+    .pnote{font-size:10.5px;line-height:1.4;padding-top:5px}
+    .caption{margin-bottom:8px;min-height:36px}
+    .cap-desc{font-size:14px}
+  }
+
+
+  :root{--chain:#dbe4ec;--flame:#ff8a3c;}
+  .riverband{stroke:rgba(150,205,214,.30);stroke-width:1.5;filter:drop-shadow(0 0 9px rgba(0,0,0,.5))}
+  .deepchan{fill:none;stroke:rgba(5,28,32,.5);stroke-width:64;stroke-linecap:butt}
+  .gorge-l{fill:#bfeef4;font-size:26px;font-weight:800;letter-spacing:.34em;opacity:.5;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7))}
+  .route-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:5;stroke-linecap:round;stroke-dasharray:1 11}
+  .route{fill:none;stroke:var(--red);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(226,59,46,.5))}
+  .route2{fill:none;stroke:var(--red2);stroke-width:3.4;stroke-linecap:round;stroke-dasharray:9 7;opacity:.8}
+  .chain{stroke:var(--chain);stroke-width:1.7;opacity:.85} .chain.rail{stroke-width:2.6;opacity:.95}
+  .hanger{stroke:var(--chain);stroke-width:1;opacity:.45}
+  .tower{fill:#2b3a4d;stroke:var(--gold2);stroke-width:1.5} .tower-roof{fill:#3a4d63;stroke:var(--gold2);stroke-width:1.2}
+  .plank{fill:#8a5e2c;opacity:.96}
+  .assault-i{fill:#ffd27a;stroke:#7a3a10;stroke-width:.8}
+  .flame{transform-box:fill-box;transform-origin:center bottom;fill:var(--flame);opacity:0}
+  .flame.lit{opacity:.95;animation:flick2 .55s ease-in-out infinite alternate}
+  @keyframes flick2{from{opacity:.6;transform:translateY(0) scaleY(.88)}to{opacity:.98;transform:translateY(-3px) scaleY(1.16)}}
+  #u_chuan.routed{opacity:.35;transition:opacity .6s ease}
+  .place{fill:var(--gold2);font-size:14.5px;font-weight:700;letter-spacing:.04em}
+  .bank-l{fill:var(--muted);font-size:14px;letter-spacing:.14em;opacity:.82}
+  .guide-l{fill:var(--gold2);font-size:13.5px;letter-spacing:.02em}
+  .note-blue{fill:var(--blue2);font-size:13.5px;letter-spacing:.03em;opacity:.9}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="badge">★</div>
+    <div class="titles">
+      <h1>飞 夺 泸 定 桥</h1>
+      <div class="sub">夹江北上 · 攀索夺桥 　 1935年5月29日</div>
+    </div>
+    <div class="spacer"></div>
+	<a class="topbtn" href="index.html" style="text-decoration:none">← 总目录</a>
+	<a class="topbtn" href="luding_model.html" style="text-decoration:none">▶ 战法量化推演</a>
+    <button class="topbtn" id="helpBtn">操作说明</button>
+    <button class="topbtn" id="fsBtn">⛶ 全屏</button>
+  </header>
+
+  <div class="body">
+    <div class="mapwrap">
+      <div class="frame"></div>
+      <div class="toast" id="toast">按　→ / 空格　或点「演示下一段」推进　·　← 后退　·　点时间轴圆点跳转　·　F 全屏</div>
+      <svg class="map" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="vig" cx="55%" cy="42%" r="78%">
+            <stop offset="60%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,.45)"/>
+          </radialGradient>
+          <filter id="softsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".5"/></filter>
+          <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+          <marker id="redhead" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--red)"/></marker>
+          <marker id="bluehead" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--blue)"/></marker>
+          <linearGradient id="gorgeGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#16545c"/><stop offset="0.5" stop-color="#0a363c"/><stop offset="1" stop-color="#16545c"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="1280" height="760" fill="url(#grain)" opacity="0.04"/>
+        <!-- 峡谷石壁 -->
+        <g>
+          <path class="mtn-far" d="M-20,300 L120,150 L240,250 L360,140 L500,260 L640,150 L780,250 L920,150 L1060,250 L1200,160 L1300,260 L1300,300 Z" opacity=".7"/>
+          <path class="mtn-near" d="M-20,330 L120,250 L300,330 L300,760 L-20,760 Z" opacity=".95"/>
+          <path class="mtn-near" d="M1300,330 L1180,250 L1000,330 L1000,760 L1300,760 Z" opacity=".95"/>
+        </g>
+
+        <!-- 大渡河（竖向峡谷急流） -->
+        <path class="riverband" d="M518.4,-60.0 L519.6,-48.0 L520.8,-36.0 L521.8,-24.0 L522.8,-12.0 L523.8,0.0 L524.6,12.0 L525.4,24.0 L526.1,36.0 L526.7,48.0 L527.3,60.0 L527.9,72.0 L528.3,84.0 L528.8,96.0 L529.2,108.0 L529.6,120.0 L530.0,132.0 L530.5,144.0 L530.9,156.0 L531.4,168.0 L531.9,180.0 L532.4,192.0 L533.0,204.0 L533.6,216.0 L534.2,228.0 L534.9,240.0 L535.6,252.0 L536.3,264.0 L537.1,276.0 L537.8,288.0 L538.6,300.0 L539.3,312.0 L540.0,324.0 L540.7,336.0 L541.2,348.0 L541.7,360.0 L542.1,372.0 L542.4,384.0 L542.6,396.0 L542.6,408.0 L542.5,420.0 L542.2,432.0 L541.7,444.0 L541.1,456.0 L540.3,468.0 L539.3,480.0 L538.1,492.0 L536.8,504.0 L535.3,516.0 L533.6,528.0 L531.8,540.0 L529.8,552.0 L527.7,564.0 L525.5,576.0 L523.2,588.0 L520.8,600.0 L518.4,612.0 L516.0,624.0 L513.5,636.0 L511.1,648.0 L508.7,660.0 L506.4,672.0 L504.2,684.0 L502.1,696.0 L500.1,708.0 L498.2,720.0 L496.5,732.0 L495.0,744.0 L493.7,756.0 L492.6,768.0 L491.6,780.0 L490.9,792.0 L490.4,804.0 L490.2,816.0 L739.9,816.0 L740.2,804.0 L740.8,792.0 L741.5,780.0 L742.3,768.0 L743.3,756.0 L744.4,744.0 L745.6,732.0 L746.8,720.0 L748.0,708.0 L749.2,696.0 L750.3,684.0 L751.4,672.0 L752.3,660.0 L753.1,648.0 L753.8,636.0 L754.3,624.0 L754.6,612.0 L754.8,600.0 L754.7,588.0 L754.5,576.0 L754.2,564.0 L753.7,552.0 L753.1,540.0 L752.4,528.0 L751.6,516.0 L750.7,504.0 L749.9,492.0 L749.1,480.0 L748.3,468.0 L747.6,456.0 L747.1,444.0 L746.7,432.0 L746.4,420.0 L746.4,408.0 L746.6,396.0 L747.1,384.0 L747.8,372.0 L748.7,360.0 L749.9,348.0 L751.4,336.0 L753.2,324.0 L755.1,312.0 L757.3,300.0 L759.7,288.0 L762.3,276.0 L765.0,264.0 L767.7,252.0 L770.6,240.0 L773.4,228.0 L776.2,216.0 L778.9,204.0 L781.5,192.0 L784.0,180.0 L786.3,168.0 L788.3,156.0 L790.0,144.0 L791.5,132.0 L792.6,120.0 L793.3,108.0 L793.7,96.0 L793.7,84.0 L793.4,72.0 L792.6,60.0 L791.5,48.0 L790.0,36.0 L788.2,24.0 L786.1,12.0 L783.7,0.0 L781.1,-12.0 L778.2,-24.0 L775.1,-36.0 L771.9,-48.0 L768.6,-60.0 Z" fill="url(#gorgeGrad)"/>
+        <path class="deepchan" d="M643.5,-60.0 L645.8,-48.0 L647.9,-36.0 L650.0,-24.0 L651.9,-12.0 L653.7,0.0 L655.4,12.0 L656.8,24.0 L658.1,36.0 L659.1,48.0 L660.0,60.0 L660.6,72.0 L661.0,84.0 L661.2,96.0 L661.3,108.0 L661.1,120.0 L660.7,132.0 L660.2,144.0 L659.6,156.0 L658.8,168.0 L657.9,180.0 L657.0,192.0 L655.9,204.0 L654.9,216.0 L653.8,228.0 L652.7,240.0 L651.7,252.0 L650.6,264.0 L649.7,276.0 L648.8,288.0 L648.0,300.0 L647.2,312.0 L646.6,324.0 L646.0,336.0 L645.6,348.0 L645.2,360.0 L644.9,372.0 L644.7,384.0 L644.6,396.0 L644.5,408.0 L644.5,420.0 L644.4,432.0 L644.4,444.0 L644.4,456.0 L644.3,468.0 L644.2,480.0 L644.0,492.0 L643.8,504.0 L643.4,516.0 L643.0,528.0 L642.4,540.0 L641.7,552.0 L640.9,564.0 L640.0,576.0 L639.0,588.0 L637.8,600.0 L636.5,612.0 L635.1,624.0 L633.7,636.0 L632.1,648.0 L630.5,660.0 L628.9,672.0 L627.3,684.0 L625.6,696.0 L624.0,708.0 L622.5,720.0 L621.1,732.0 L619.7,744.0 L618.5,756.0 L617.4,768.0 L616.5,780.0 L615.8,792.0 L615.3,804.0 L615.1,816.0"/>
+        <path class="flow f1" d="M643.5,-60.0 L645.8,-48.0 L647.9,-36.0 L650.0,-24.0 L651.9,-12.0 L653.7,0.0 L655.4,12.0 L656.8,24.0 L658.1,36.0 L659.1,48.0 L660.0,60.0 L660.6,72.0 L661.0,84.0 L661.2,96.0 L661.3,108.0 L661.1,120.0 L660.7,132.0 L660.2,144.0 L659.6,156.0 L658.8,168.0 L657.9,180.0 L657.0,192.0 L655.9,204.0 L654.9,216.0 L653.8,228.0 L652.7,240.0 L651.7,252.0 L650.6,264.0 L649.7,276.0 L648.8,288.0 L648.0,300.0 L647.2,312.0 L646.6,324.0 L646.0,336.0 L645.6,348.0 L645.2,360.0 L644.9,372.0 L644.7,384.0 L644.6,396.0 L644.5,408.0 L644.5,420.0 L644.4,432.0 L644.4,444.0 L644.4,456.0 L644.3,468.0 L644.2,480.0 L644.0,492.0 L643.8,504.0 L643.4,516.0 L643.0,528.0 L642.4,540.0 L641.7,552.0 L640.9,564.0 L640.0,576.0 L639.0,588.0 L637.8,600.0 L636.5,612.0 L635.1,624.0 L633.7,636.0 L632.1,648.0 L630.5,660.0 L628.9,672.0 L627.3,684.0 L625.6,696.0 L624.0,708.0 L622.5,720.0 L621.1,732.0 L619.7,744.0 L618.5,756.0 L617.4,768.0 L616.5,780.0 L615.8,792.0 L615.3,804.0 L615.1,816.0"/>
+        <text class="gorge-l" x="362" y="150" transform="rotate(90 362 150)">大 渡 河</text>
+        <text class="bank-l" x="120" y="250">西岸（右岸 · 桥西）</text>
+        <text class="bank-l" x="1006" y="250" text-anchor="start">东岸（左岸 · 桥东 · 泸定城）</text>
+        <text class="place" x="640" y="42" text-anchor="middle">↑ 上游（北）</text>
+        <text class="place" x="640" y="740" text-anchor="middle">下游（南）· 安顺场方向（约320里/160km） ↓</text>
+
+        <!-- 行军路线 -->
+        <path class="route-bg" d="M300,724 C 360,652 402,600 432,548 C 470,486 502,452 540.6,408"/>
+        <path class="route2" id="route_right" d="M1004,724 C 944,652 884,592 842,520 C 802,452 766,430 748.5,408"/>
+        <path class="route" id="route_left" d="M300,724 C 360,652 402,600 432,548 C 470,486 502,452 540.6,408"/>
+
+        <!-- 铁索桥 -->
+        <g id="bridge">
+          <line class="chain" x1="540.6" y1="384" x2="748.5" y2="384"/>
+          <line class="chain" x1="540.6" y1="388" x2="748.5" y2="388"/>
+          <line class="chain" x1="540.6" y1="392" x2="748.5" y2="392"/>
+          <line class="chain" x1="540.6" y1="396" x2="748.5" y2="396"/>
+          <line class="chain" x1="540.6" y1="400" x2="748.5" y2="400"/>
+          <line class="chain" x1="540.6" y1="404" x2="748.5" y2="404"/>
+          <line class="chain" x1="540.6" y1="408" x2="748.5" y2="408"/>
+          <line class="chain" x1="540.6" y1="412" x2="748.5" y2="412"/>
+          <line class="chain" x1="540.6" y1="416" x2="748.5" y2="416"/>
+          <line class="chain rail" x1="540.6" y1="372" x2="748.5" y2="372"/>
+          <line class="chain rail" x1="540.6" y1="428" x2="748.5" y2="428"/>
+          <line class="hanger" x1="540.6" y1="372" x2="540.6" y2="428"/><line class="hanger" x1="561.4" y1="372" x2="561.4" y2="428"/><line class="hanger" x1="582.2" y1="372" x2="582.2" y2="428"/><line class="hanger" x1="603.0" y1="372" x2="603.0" y2="428"/><line class="hanger" x1="623.8" y1="372" x2="623.8" y2="428"/><line class="hanger" x1="644.6" y1="372" x2="644.6" y2="428"/><line class="hanger" x1="665.4" y1="372" x2="665.4" y2="428"/><line class="hanger" x1="686.1" y1="372" x2="686.1" y2="428"/><line class="hanger" x1="706.9" y1="372" x2="706.9" y2="428"/><line class="hanger" x1="727.7" y1="372" x2="727.7" y2="428"/><line class="hanger" x1="748.5" y1="372" x2="748.5" y2="428"/>
+          <!-- 桥板（自西向东铺设，宽度随夺桥推进增长） -->
+          <rect class="plank" id="planks" x="540.6" y="384" width="0" height="32"/>
+          <!-- 桥头堡（塔） -->
+          <g><rect class="tower" x="527.6" y="356" width="26" height="88" rx="2"/><polygon class="tower-roof" points="527.6,356 553.6,356 540.6,340"/></g>
+          <g><rect class="tower" x="735.5" y="356" width="26" height="88" rx="2"/><polygon class="tower-roof" points="735.5,356 761.5,356 748.5,340"/></g>
+          <!-- 东桥头火焰（N6+） -->
+          <g class="flame" id="flame1" transform="translate(748.5,374)"><path d="M0,0 C -7,-11 -3,-19 0,-26 C 3,-19 8,-11 0,0 Z"/></g>
+          <g class="flame" id="flame2" transform="translate(748.5,428)"><path d="M0,0 C -7,-11 -3,-19 0,-26 C 3,-19 8,-11 0,0 Z"/></g>
+        </g>
+
+        <!-- 国民党/背景（N0） -->
+        <g class="unit hidden" id="g_ctx">
+          <text class="note-blue" x="120" y="300">安顺场仅数船 · 难短期渡完全军</text>
+          <text class="note-blue" x="120" y="324">中革军委决断：夹江北上 · 抢占泸定桥</text>
+        </g>
+
+        <!-- 红四团（西岸·桥西） -->
+        <g class="unit hidden" id="u_red4" transform="translate(430,478)">
+          <polygon class="flag" points="-64,-17 -64,-31 -38,-24 -64,-17"/>
+          <line x1="-64" y1="-17" x2="-64" y2="2" stroke="var(--red2)" stroke-width="1.6"/>
+          <rect class="pill" x="-62" y="-16" width="124" height="32" rx="7"/>
+          <text class="u-name s" y="-1">红四团 · 前锋</text><text class="u-sub" y="31">团长王开湘（黄开湘）· 政委杨成武</text>
+        </g>
+        <!-- 红一师（东岸·右路） -->
+        <g class="unit hidden" id="u_red1div" transform="translate(986,486)">
+          <rect class="pill" x="-58" y="-15" width="116" height="30" rx="7"/>
+          <text class="u-name s" y="4">右路 · 红一师/干部团</text>
+        </g>
+
+        <!-- 川军守敌（东桥头·泸定城） -->
+        <g class="unit" id="u_chuan">
+          <g transform="translate(806,360)"><rect class="fort" x="-12" y="-12" width="24" height="20"/><polygon class="fort" points="-12,-12 12,-12 8,-20 -8,-20"/><line class="fort-slit" x1="-7" y1="-4" x2="7" y2="-4"/></g>
+          <g transform="translate(806,440)"><rect class="fort" x="-12" y="-12" width="24" height="20"/><polygon class="fort" points="-12,-12 12,-12 8,-20 -8,-20"/><line class="fort-slit" x1="-7" y1="-4" x2="7" y2="-4"/></g>
+          <rect class="pill blue" x="-66" y="-15" width="132" height="30" rx="6" transform="translate(880,330)"/>
+          <text class="u-name s" x="880" y="335">川军守军 · 泸定城</text>
+          <text class="u-sub blue" x="880" y="362">刘文辉部 · 李全山团（守桥·抽板）</text>
+        </g>
+
+        <!-- 西岸火力掩护（N5-6） -->
+        <g class="unit hidden" id="u_firewest"><rect class="firemk" x="-13" y="-9" width="26" height="18" rx="3" transform="translate(470,520)"/><text class="firemk-l" x="470" y="545">红四团 火力掩护</text></g>
+
+        <!-- 火力线 -->
+        <path id="fl_e1" class="fireline" d="M806,366 L640,398"/>
+        <path id="fl_e2" class="fireline" d="M806,434 L650,404"/>
+        <path id="fl_w1" class="fireline" d="M470,512 L600,402"/>
+        <path id="fl_w2" class="fireline" d="M470,512 L560,400"/>
+
+        <!-- 后续铺桥板说明（N5+） -->
+        <g class="unit hidden" id="platoon_note"><text class="guide-l" x="300" y="558" fill="var(--gold2)">后续部队 · 边铺桥板边跟进 →</text></g>
+
+        <!-- 二十二勇士·夺桥突击队（沿铁索西→东，N5+） -->
+        <g class="unit hidden" id="assault">
+          <circle class="assault-i" cx="-10" cy="-3" r="3"/><circle class="assault-i" cx="-2" cy="-7" r="3"/>
+          <circle class="assault-i" cx="4" cy="-1" r="3"/><circle class="assault-i" cx="10" cy="-5" r="3"/>
+          <circle class="assault-i" cx="-4" cy="3" r="3"/><circle class="assault-i" cx="6" cy="5" r="3"/>
+          <polygon class="flag" points="0,-8 0,-20 16,-15"/>
+          <text class="firemk-l" y="-32" fill="var(--gold2)">二十二勇士 · 夺桥突击队</text>
+        </g>
+        <rect class="nightveil" id="nightveil" x="0" y="0" width="1280" height="760"/>
+        <rect x="0" y="0" width="1280" height="760" fill="url(#vig)" pointer-events="none"/>
+      </svg>
+    </div>
+
+    <aside>
+      <div class="ph">夹江北上 · 飞夺天险 · 泸定桥</div>
+      <div class="force">
+        <div class="fcard red"><div class="side"><span class="dot"></span>我情 · 红军（红四团·夺桥突击队）</div><p id="redForce"></p></div>
+        <div class="fcard blue"><div class="side"><span class="dot"></span>敌情 · 川军（泸定守军）</div><p id="blueForce"></p></div>
+        <div class="fcard env"><div class="side"><span class="dot"></span>战场环境 · 桥/河/天候</div><p id="envInfo"></p></div>
+      </div>
+      <div class="legend">
+        <span><i class="lg" style="background:var(--reddeep);border:1px solid var(--red2)"></i>红军</span>
+        <span><i class="lg" style="background:var(--bluedeep);border:1px solid var(--blue2)"></i>川军</span>
+        <span><i class="lg" style="background:var(--red);border-radius:6px"></i>行军路线</span>
+        <span><i class="lg" style="background:#16545c;border:1px solid #46bccb"></i>大渡河急流</span>
+        <span><i class="lg" style="background:transparent;border:1px dashed var(--red2)"></i>火力</span>
+      </div>
+      <div class="pnote">教学示意图：地形、河道、桥位为示意，非按实际地理比例。史实依党史军史与纪念馆资料；个别记载史界略有出入（红四团团长记作"王开湘/黄开湘"，系同一人；奔袭里程"240里"、铁链"13根"、突击队"二十二勇士"、攻击时刻"29日16时"等取通行口径），仅供教学参考。</div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="caption">
+      <span class="cap-name" id="capName"></span><span class="cap-time" id="capTime"></span><span class="cap-desc" id="capDesc"></span>
+    </div>
+    <div class="track"><div class="rail"></div><div class="rail-fill" id="railFill"></div><div class="nodes" id="nodes"></div></div>
+    <div class="ctrls">
+      <button class="ctl" id="prevBtn"><span class="ic">◀</span>上一步</button>
+      <button class="ctl primary" id="nextBtn"><span class="ic">▶</span><span id="nextLbl">演示下一段</span></button>
+      <button class="ctl" id="replayBtn"><span class="ic">↻</span>重播本段</button>
+      <button class="ctl" id="autoBtn"><span class="ic">⏯</span>自动播放</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const T=(el,x,y)=>{ if(el) el.style.transform=`translate(${x}px,${y}px)`; };
+const show=(el,on)=>{ if(el) el.classList.toggle("hidden",!on); };
+let scene=0, token=0, raf=null, auto=false;
+const timers=[];
+function clearTimers(){ timers.forEach(clearTimeout); timers.length=0; if(raf){cancelAnimationFrame(raf);raf=null;} }
+function setT(fn,ms){ const id=setTimeout(fn,ms); timers.push(id); return id; }
+function bezier(el,P0,P1,P2,dur,tok){ const t0=performance.now();
+  (function f(now){ if(tok!==token) return; const t=Math.min(1,(now-t0)/dur),u=1-t;
+    T(el, u*u*P0[0]+2*u*t*P1[0]+t*t*P2[0], u*u*P0[1]+2*u*t*P1[1]+t*t*P2[1]);
+    if(t<1) raf=requestAnimationFrame(f); })(performance.now()); }
+function placeHead(path, head, len){ const L=path.getTotalLength(); len=Math.max(0,Math.min(L,len));
+  const p=path.getPointAtLength(len), a=path.getPointAtLength(Math.max(0,len-1)), b=path.getPointAtLength(Math.min(L,len+1));
+  const ang=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI; if(head) head.setAttribute("transform",`translate(${p.x},${p.y}) rotate(${ang})`); }
+function hideColumn(path, head){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.strokeDashoffset=L; path.style.opacity=0; if(head) head.style.opacity=0; }
+function drawColumn(path, head, dur, tok, animate){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.opacity=1; if(head) head.style.opacity=1;
+  if(!animate || dur<=0){ path.style.strokeDashoffset=0; if(head) placeHead(path,head,L); return; }
+  const t0=performance.now(); (function f(now){ if(tok!==token) return; const t=Math.min(1,(now-t0)/dur);
+    path.style.strokeDashoffset=L*(1-t); if(head) placeHead(path, head, t*L); if(t<1) requestAnimationFrame(f); })(performance.now()); }
+function tweenReveal(path, head, f0, f1, dur, tok, animate){ const L=path.getTotalLength(); path.style.strokeDasharray=L; path.style.opacity=1; if(head) head.style.opacity=1;
+  if(!animate||dur<=0){ path.style.transition='none'; path.style.strokeDashoffset=L*(1-f1); if(head) placeHead(path,head,L*f1); return; }
+  path.style.transition='none'; const t0=performance.now();
+  (function fr(now){ if(tok!==token)return; const t=Math.min(1,(now-t0)/dur); const f=f0+(f1-f0)*t;
+    path.style.strokeDashoffset=L*(1-f); if(head) placeHead(path,head,L*f); if(t<1) requestAnimationFrame(fr); })(performance.now()); }
+
+
+const SCENES=[
+ { name:"战略态势 · 抢占泸定桥", time:"5月25日",
+   desc:"1935年5月25日，红军在安顺场强渡大渡河成功，但仅有数只小船、靠摆渡难以在短期内将全军渡过，而敌军正南北夹击、企图聚歼红军于大渡河畔。中革军委当机立断：兵分两路、夹江北上，限期夺取上游约160公里（320里）外的泸定桥，打开北上通道。",
+   red:"中央红军主力北上；<b>安顺场仅数船、难速渡全军</b>。中革军委决定<b>夹江北上抢占泸定桥</b>，以铁索桥渡过大渡河。",
+   blue:"川军刘文辉部沿大渡河两岸布防；<b>泸定城及泸定桥由川军据守</b>（李全山团），并抽去桥板、设防东桥头。",
+   env:"大渡河<b>深谷急流、两岸壁立</b>；安顺场至泸定<b>约320里（160公里）</b>山道崎岖。泸定桥是当时大渡河上唯一可通大部队的桥梁，志在必夺。" },
+ { name:"兵分两路 · 夹江北上", time:"5月26—28日",
+   desc:"红军兵分两路、夹大渡河北上抢桥：右路以红一师及干部团（已渡河者）沿东岸（左岸）前进；左路以红二师红四团为前锋沿西岸（右岸）北上。两路并进、互相策应，直取泸定桥。",
+   red:"<b>左路·红四团（前锋）</b>沿西岸北上、夺桥主攻；<b>右路·红一师及干部团</b>沿东岸北上、策应并夹击泸定城。",
+   blue:"川军凭两岸地形阻击、迟滞红军，并向泸定增援、加固桥东防御。",
+   env:"两路<b>夹江并进</b>、山高路险、隔河相望；谁先抢到泸定桥东西两端，谁就掌握主动。" },
+ { name:"红四团受命 · 限时夺桥", time:"5月28日",
+   desc:"军委严令红四团必须在限定时间内赶到并夺取泸定桥。任务紧急——晚到一步，敌增援赶到或彻底毁桥，全军北上之路就可能被封死。",
+   red:"红四团<b>受领限时夺桥的死命令</b>；团长王开湘（黄开湘）、政委杨成武率部昼夜兼程。",
+   blue:"川军一面阻击、一面向泸定增兵，企图赶在红军之前完成布防、必要时毁桥。",
+   env:"<b>时间就是胜负</b>。限定时限内必须抵桥——这是一场与敌增援、与天险赛跑的急行军。" },
+ { name:"一昼夜奔袭240里", time:"5月29日 拂晓",
+   desc:"红四团冒着大雨，在崎岖山道上一昼夜强行军240里（约120公里），途中智取、强攻沿途阻敌，于5月29日拂晓赶到泸定桥西岸，创造了行军史上的奇迹。",
+   red:"红四团<b>一昼夜奔袭240里（约120公里）</b>、冒雨夜行、边走边战，<b>29日拂晓抵达桥西</b>，按时到位。",
+   blue:"桥东川军守军凭泸定城与桥头工事据守；<b>已抽去桥板</b>、仅余铁索，以机枪封锁桥面。",
+   env:"<b>大雨泥泞、山道悬绝</b>，对岸敌火与火把可见；红四团以惊人速度抢在敌增援合拢之前赶到。" },
+ { name:"泸定桥态势", time:"5月29日",
+   desc:"泸定桥为铁索桥，由13根铁链构成（9根作底链、4根作扶手），长100余米、横跨大渡河深谷。守敌已抽去桥面木板，只剩悬空铁索；东桥头依托泸定城构筑工事、以机枪封锁，桥下即是汹涌急流。",
+   red:"红四团已抵<b>桥西</b>、准备强攻；面对的是<b>抽板后悬空的13根铁索</b>与对岸密集火力。",
+   blue:"川军守<b>桥东（泸定城）</b>：抽去桥板、机枪扼守桥头堡，居高封锁百余米长的铁索桥面。",
+   env:"<b>13根铁链、长100余米</b>，桥板被抽、铁索悬空；桥下<b>大渡河急流轰鸣</b>，攀索强攻，险绝至极。" },
+ { name:"火力掩护 · 二十二勇士攀索夺桥", time:"5月29日 16时",
+   desc:"29日16时，总攻开始。红四团集中所有火力压制对岸，二连连长廖大珠率22名突击队员手攀冰冷铁索、脚踏悬空铁链，冒着弹雨向东桥头匍匐攀进；紧随其后的部队一边前进、一边铺设桥板。",
+   red:"<b>二连连长廖大珠率二十二勇士</b>攀踏铁索向东岸突击；<b>后续部队边铺桥板边跟进</b>，全团火力掩护。",
+   blue:"守敌以机枪猛烈扫射桥面，企图将勇士压制、击落于铁索之上。",
+   env:"<b>悬空铁索、脚下急流</b>，弹雨横飞；勇士手脚并用、攀链而进——这是用血肉之躯抢夺的天险。" },
+ { name:"火烧桥头 · 勇士冲过火海", time:"5月29日",
+   desc:"勇士们接近东桥头时，守敌放火焚烧桥头堡，妄图以烈火挡住红军。廖大珠等勇士毫不畏惧，奋身冲过熊熊火海，扑向敌阵、展开近战。",
+   red:"勇士迫近桥东，守敌<b>纵火烧桥头</b>；廖大珠等<b>冒着烈火冲过火海</b>、突入敌阵、短兵相接。",
+   blue:"守敌纵火负隅顽抗，火攻不成、阵脚动摇。",
+   env:"<b>桥头堡烈焰冲天</b>；勇士在火海与弹雨中冲锋——'飞夺'之名，正出于这舍生忘死的最后一冲。" },
+ { name:"夺占泸定城 · 会师打开通道", time:"5月29日",
+   desc:"突击队夺占东桥头，后续部队迅速跟进；与沿东岸赶到的右路红一师等部队会攻，击溃守敌、夺取泸定城。中央红军主力随即由泸定桥渡过大渡河，彻底跳出了敌人的包围圈，打开了继续北上的通道。",
+   red:"勇士<b>夺占东桥头、攻入泸定城</b>，与右路红一师会攻夺城；中央红军主力由泸定桥<b>渡过大渡河、跳出合围</b>。",
+   blue:"川军守军<b>溃败</b>、泸定城失守；凭大渡河聚歼红军的企图彻底破产。",
+   env:"泸定桥既得，<b>大渡河天险被打开</b>；红军主力踏桥北上，与翼王石达开的覆灭命运彻底告别。（下接'翻越夹金山'）" }
+];
+const NODE_LABELS=["战略态势","兵分两路","限时夺桥","奔袭240里","泸定桥","攀索夺桥","火烧桥头","夺城会师"];
+const LAST=SCENES.length-1;
+const SCENE_DUR=[1800,2200,2000,2600,2400,4200,3000,3000];
+const STOPS_L=[0,0.45,0.62,1.0,1.0,1.0,1.0,1.0];
+const STOPS_R=[0,0.42,0.55,0.80,0.86,0.92,0.96,1.0];
+const BR={xW:540.6,xE:748.5,y:400};
+const AF=[0,0,0,0,0,0.62,0.90,1.0];
+const PF=[0,0,0,0,0,0.50,0.85,1.0];
+const els={};
+["route_left","route_right","u_red4","u_red1div","u_chuan","assault","planks",
+ "fl_e1","fl_e2","fl_w1","fl_w2","flame1","flame2","g_ctx","u_firewest","platoon_note",
+ "capName","capTime","capDesc","redForce","blueForce","envInfo","railFill","nodes",
+ "prevBtn","nextBtn","replayBtn","autoBtn","nextLbl"].forEach(k=>els[k]=$(k));
+let prevL=0, prevR=0, prevPlankW=0;
+function tweenWidth(el, w0, w1, dur, tok){
+  if(dur<=0){ el.setAttribute("width", w1.toFixed(1)); return; }
+  const t0=performance.now();
+  (function fr(now){ if(tok!==token)return; const t=Math.min(1,(now-t0)/dur); const w=w0+(w1-w0)*t;
+    el.setAttribute("width", w.toFixed(1)); if(t<1) requestAnimationFrame(fr); })(performance.now());
+}
+function applyScene(N,animate){
+  token++; const tok=token; clearTimers();
+  tweenReveal(els.route_left,null,prevL,STOPS_L[N],1000,tok,animate); prevL=STOPS_L[N];
+  tweenReveal(els.route_right,null,prevR,STOPS_R[N],1000,tok,animate); prevR=STOPS_R[N];
+  show(els.route_left,N>=1); show(els.route_right,N>=1);
+  show(els.g_ctx,N===0);
+  show(els.u_red4,N>=1); show(els.u_red1div,N>=1);
+  show(els.u_firewest, N>=5 && N<=6);
+  show(els.platoon_note, N>=5);
+  const af=AF[N], pf=PF[N], showA=N>=5;
+  show(els.assault,showA);
+  els.assault.style.transition = (animate&&showA) ? "transform 3.6s linear":"none";
+  T(els.assault, BR.xW+(BR.xE-BR.xW)*af, BR.y);
+  const targetW=(BR.xE-BR.xW)*pf;
+  tweenWidth(els.planks, prevPlankW, targetW, (animate? 3600:0), tok); prevPlankW=targetW;
+  const fireE=(N===5||N===6), fireW=(N>=5&&N<=6);
+  els.fl_e1.classList.toggle("firing",fireE); els.fl_e2.classList.toggle("firing",fireE);
+  els.fl_w1.classList.toggle("firing",fireW); els.fl_w2.classList.toggle("firing",fireW);
+  els.flame1.classList.toggle("lit",N===6||N===7); els.flame2.classList.toggle("lit",N===6||N===7);
+  els.u_chuan.classList.toggle("routed",N===7);
+  if(!animate) requestAnimationFrame(()=>{ if(els.assault) els.assault.style.transition=""; });
+  renderUI(N);
+}
+
+
+function renderUI(N){ const sc=SCENES[N];
+  els.capName.textContent=sc.name; els.capTime.textContent=sc.time; els.capDesc.textContent=sc.desc;
+  els.redForce.innerHTML=sc.red; els.blueForce.innerHTML=sc.blue; els.envInfo.innerHTML=sc.env;
+  els.railFill.style.width=(N/LAST*100)+"%";
+  document.querySelectorAll(".node").forEach((nd,i)=>{ nd.classList.toggle("active",i===N); nd.classList.toggle("done",i<N); });
+  els.prevBtn.disabled=(N===0);
+  els.nextLbl.textContent=(N===LAST)?"重新开始":"演示下一段";
+  els.nextBtn.querySelector(".ic").textContent=(N===LAST)?"↺":"▶"; }
+function goTo(n,animate){ n=Math.max(0,Math.min(LAST,n)); scene=n; applyScene(n,animate); }
+function next(){ if(scene>=LAST){ stopAuto(); goTo(0,false);} else goTo(scene+1,true); }
+function prev(){ stopAuto(); if(scene>0) goTo(scene-1,false); }
+function replay(){ stopAuto(); const cur=scene; if(cur===0){ goTo(0,true); return; } goTo(cur-1,false); setT(()=>{ scene=cur; applyScene(cur,true); },90); }
+function autoStep(){ if(!auto)return; if(scene>=LAST){ stopAuto(); return; } goTo(scene+1,true); setT(()=>{ if(auto) autoStep(); }, (SCENE_DUR[scene]||2200)+1500); }
+function startAuto(){ auto=true; els.autoBtn.querySelector(".ic").textContent="❚❚"; els.autoBtn.lastChild.textContent="暂停播放"; if(scene>=LAST) goTo(0,false); autoStep(); }
+function stopAuto(){ auto=false; els.autoBtn.querySelector(".ic").textContent="⏯"; els.autoBtn.lastChild.textContent="自动播放"; }
+function toggleAuto(){ auto?stopAuto():startAuto(); }
+NODE_LABELS.forEach((lbl,i)=>{ const node=document.createElement("div"); node.className="node";
+  node.innerHTML=`<div class="nd"></div><div class="nl">${lbl}</div>`;
+  node.addEventListener("click",()=>{ stopAuto(); goTo(i,false); }); els.nodes.appendChild(node); });
+els.nextBtn.addEventListener("click",next); els.prevBtn.addEventListener("click",prev);
+els.replayBtn.addEventListener("click",replay); els.autoBtn.addEventListener("click",toggleAuto);
+$("fsBtn").addEventListener("click",()=>{ if(!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); });
+$("helpBtn").addEventListener("click",()=>{ alert("操作说明\n\n· 点「演示下一段」或按 → / 空格：播放本段动画并进入下一时间节点\n· ← ：返回上一节点\n· 点底部时间轴圆点：直接跳到该节点\n· 「重播本段」：重新播放当前这段动画\n· 「自动播放」：连续自动演示全程\n· F 或右上「全屏」：进入全屏演示"); });
+document.addEventListener("keydown",(e)=>{ if(e.key==="ArrowRight"||e.key===" "){ e.preventDefault(); next(); }
+  else if(e.key==="ArrowLeft"){ e.preventDefault(); prev(); } else if(e.key.toLowerCase()==="r"){ replay(); } else if(e.key.toLowerCase()==="f"){ $("fsBtn").click(); } });
+setTimeout(()=>{ const t=$("toast"); if(t) t.style.opacity="0"; },5600);
+document.querySelector(".mapwrap").addEventListener("click",()=>{ const t=$("toast"); if(t) t.style.opacity="0"; });
+goTo(0,false);
+
+</script>
+</body>
+</html>
