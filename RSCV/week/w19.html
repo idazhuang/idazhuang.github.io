@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="19">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W19 · 消融全面深化（8 类）—— 系统证明你方法里“每 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M5 主实验全面铺开</span><span>·</span><span>Week 19</span><span>·</span><span>D127–D133</span></div><h1 class="title">消融全面深化（8 类）—— 系统证明你方法里“每个零件”都有用</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="127" data-k="am" title="D127 上午段"></i><i data-d="127" data-k="noon" title="D127 中午段"></i><i data-d="127" data-k="pm" title="D127 晚上段"></i></span><span class="sday"><i data-d="128" data-k="am" title="D128 上午段"></i><i data-d="128" data-k="noon" title="D128 中午段"></i><i data-d="128" data-k="pm" title="D128 晚上段"></i></span><span class="sday"><i data-d="129" data-k="am" title="D129 上午段"></i><i data-d="129" data-k="noon" title="D129 中午段"></i><i data-d="129" data-k="pm" title="D129 晚上段"></i></span><span class="sday"><i data-d="130" data-k="am" title="D130 上午段"></i><i data-d="130" data-k="noon" title="D130 中午段"></i><i data-d="130" data-k="pm" title="D130 晚上段"></i></span><span class="sday"><i data-d="131" data-k="am" title="D131 上午段"></i><i data-d="131" data-k="noon" title="D131 中午段"></i><i data-d="131" data-k="pm" title="D131 晚上段"></i></span><span class="sday"><i data-d="132" data-k="am" title="D132 上午段"></i><i data-d="132" data-k="noon" title="D132 中午段"></i><i data-d="132" data-k="pm" title="D132 晚上段"></i></span><span class="sday"><i data-d="133" data-k="am" title="D133 上午段"></i><i data-d="133" data-k="noon" title="D133 中午段"></i><i data-d="133" data-k="pm" title="D133 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：主实验(W17–W18)证明了“你的方法整体比 baseline 好”；本周要回答更尖锐的问题——“<strong>好，是靠哪个零件？每个零件都必要吗？</strong>” 你要做 <strong>8 类消融</strong>（比 M3 的 5 类更系统），逐一量化每个组件的贡献，并据此<strong>最终定稿方法、删掉没用的零件</strong>。最后更新 Proposal v3、做 M5 月复盘。
+<strong>本周科研能力目标</strong>（你原计划，保留）：系统性地证明你方法中每个组件的有效性。
+<strong>先给你打个预防针</strong>：消融最容易踩的坑是“<strong>一个消融改了不止一处</strong>”——那样你根本说不清是哪个改动导致的变化，整组消融作废。本周的铁律就一条：<strong>每个消融，只改一个变量</strong>。另外，<strong>如果消融发现某个你精心设计的组件其实没用——删掉它，别心疼</strong>。论文偏爱“简洁有效”，删冗余还能减参数、提速度，反而是加分（尤其对你单卡的高效卖点）。
+<strong>本周精力怎么分配</strong>：跑 8 类消融是“启动→挂机→评估”的体力活（复用 W12/W17 框架，几乎零新代码）；真正烧脑、最值钱的是三件——<strong>8 类消融的设计（每类对应一个验证目的）、消融“故事”的提炼、据消融精简方法</strong>。教学重头放这三件。</p>
+</blockquote>
+<hr />
+<h2>🧭 W19 总览：8 类消融，每一类回答一个问题</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>消融</th>
+<th>改什么（只改这一处）</th>
+<th>验证什么问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>去掉核心组件 1</td>
+<td>组件 1 到底有没有用、贡献多大</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>去掉核心组件 2</td>
+<td>组件 2 的贡献</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>把你的 loss 换成标准 loss</td>
+<td>你的 loss 设计是否有效</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>换 backbone(ResNet / Swin / ConvNeXt)</td>
+<td>方法是否依赖特定 backbone（鲁棒性）</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>换数据增强策略</td>
+<td>增强（含遥感特有）的贡献</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>换训练 epoch(12/24/36)</td>
+<td>训练是否充分</td>
+</tr>
+<tr>
+<td>A7</td>
+<td>换输入分辨率(512/768/1024)</td>
+<td>分辨率对你方法的影响</td>
+</tr>
+<tr>
+<td>A8</td>
+<td>换超参(lr / weight_decay)</td>
+<td>方法对超参的敏感性</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：主实验回答“我好不好”，消融回答“<strong>我为什么好、哪部分在起作用、能不能更精简</strong>”——审稿人对消融的期待通常是 4–6 个，你做 8 个 = 超出预期、且证据扎实。</p>
+<hr />
+</section>
+<article class="day" id="d127" data-d="127"><header class="day-head"><span class="dnum">D127</span><h2 class="day-t">周一 · 设计 8 类消融 + 启动 A1–A4</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天先把“8 个实验各自要证明什么”想清楚（这是本周最烧脑的一步），再把前 4 个推上 GPU。<strong>复用 W12 的消融框架</strong>，几乎不用写新代码——你写的是“配置 + 验证目的”。</p>
+<p><strong>预期管理</strong>：今天设计 8 类消融（本周最烧脑一步）+ 启动前 4 个。提醒：消融的铁律就一条——<strong>每个消融只改一个变量</strong>（改了不止一处就无法归因、整组作废）；每个消融要有明确“验证目的”（没目的的消融是浪费），且你论文声称的每个创新组件都要有对应的“去掉它”消融，否则证明不了该组件值得写。复用 W12 框架，几乎不用写新代码。</p>
+</blockquote>
+</div><section class="slot" id="d127-am" data-d="127" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D127 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计 8 类消融实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（假设你只在 M3 做过 5 类消融）</h4><div class="blk-b"><ul>
+<li><strong>消融实验(ablation)</strong>：每次<strong>只去掉/替换你方法的一个部分</strong>，看性能变化，从而量化“这部分有没有用、用多大”。把它想成<strong>医生做排除诊断</strong>——一次只停一种药，看症状怎么变，才知道是哪种药在起作用。</li>
+<li><strong>8 类比 5 类更系统</strong>：审稿人通常期望 4–6 个消融，你做 8 个 = 覆盖“组件 / loss / backbone / 增强 / 训练充分性 / 分辨率 / 超参”七个维度，证据更全。</li>
+<li><strong>核心要求——每个消融有明确的“验证目的”</strong>:A1 验证组件 1 有效、A3 验证 loss 设计、A4 验证不依赖特定 backbone……<strong>没有验证目的的消融是浪费</strong>。</li>
+<li><strong>和 M3 的关系</strong>:M3 你已经会做基础消融；本周是“加量 + 加系统性”，并直接服务于论文 Experiment 章。</li>
+<li><strong>为什么消融是论文“必答题”而非“加分题”</strong>：主实验证明了“我的方法整体上好”，但审稿人会立刻追问“<strong>你的方法里堆了那么多设计，到底是哪个在起作用？会不会其实只有一个组件有用、其余都是凑数的？</strong>”——如果你答不上来，审稿人无法确信你的提升来自你声称的创新点，论文很可能被要求补充消融甚至被拒。<strong>消融就是逐个回答“每个零件都必要吗、各贡献多少”</strong>，它是论文论证完整性的核心。没有消融的方法论文，几乎不可能被接收。</li>
+<li><strong>“每个 contribution 配一个消融”是设计的起点</strong>：设计 8 类消融时，<strong>先看你论文要声称几个创新点(contribution)——每一个都必须配一个“去掉它”的消融</strong>（A1去组件1、A2去组件2…）。这是因为：你在论文里说“我的组件X有效”，就必须用“去掉X后掉点”来证明；没有这个消融，X的有效性就是空口无凭。<strong>所以消融设计不是随便选几个变量，而是从你的 contribution 列表倒推</strong>——每个声称都要有对应的实验证据。剩下的维度（loss/backbone/增强/epoch/分辨率/超参）再各补一个，凑成系统的 8 类。</li>
+<li><strong>“医生排除诊断”这个类比为什么贴切</strong>：病人同时吃了5种药，症状好转了——到底是哪种药起的作用？医生的做法是“一次只停一种药，看症状变化”，而不是同时停三种（那样无法归因）。消融完全一样：你的方法有多个组件，要知道每个的作用，就<strong>一次只去掉一个，其余不动</strong>，看性能变化。这个“控制变量、逐一隔离”的思想，是所有实证研究归因的基础。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在 <code>docs/消融设计v2.md</code> 列出 8 类，每类写清“<strong>改哪一个变量、验证什么目的、预期结果</strong>”：<figure class="code" data-lang="markdown"><pre><code>| 编号 | 改动(只改一处) | 验证目的 | 预期 |
+|------|---------------|---------|------|
+| A1 | 去掉组件1 | 组件1有效性 | 去掉后掉点→组件1有用 |
+| A3 | loss换标准loss | 我的loss设计 | 换掉后掉点→我的loss有效 |
+| ... | ... | ... | ... |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>基于<strong>最终方法的 config</strong>，各派生一个消融 config（<strong>只改一处</strong>），命名规范:<code>A1_wo_comp1.yaml</code>、<code>A3_stdloss.yaml</code>……</li>
+<li>复用 W12 的消融运行框架。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>8 类消融定义清晰——每类只改一个变量、每类有明确验证目的、命名规范（一眼知道改了什么）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>一个消融改了多处</strong>（如同时换 loss 又换 backbone）→ 无法归因，这组消融作废。<strong>铁律：只改一处</strong>。</li>
+<li><strong>消融和你的 contribution 对不上</strong>：你论文声称的每个创新组件，<strong>都该有一个对应的“去掉它”消融</strong>，否则无法证明那个组件值得写进论文。</li>
+<li><strong>命名无规律</strong>(abl1/abl2)→ 8 个里你自己都分不清改了什么。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不知道该设哪些消融?→ ① 你方法的<strong>每个创新组件</strong>配一个“去掉它”(A1、A2)② loss 有改动就配一个“换回标准 loss”(A3)③ 其余按 backbone / 增强 / epoch / 分辨率 / 超参各补一个(A4–A8)。组件之间有依赖、去掉一个会报错?→ 用“替换成最简版”代替“直接删”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>设计系统、全面、每类有验证目的的消融</strong>。<strong>做了</strong>（8 类消融设计文档）、<strong>学了</strong>(消融=排除诊断、每次只改一处、每类一个验证目的、消融要覆盖每个 contribution)、<strong>会了</strong>（为一个方法规划成体系的消融）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融设计两原则</strong>:① <strong>每个消融只改一个变量</strong>（否则无法归因）② <strong>每个 contribution 都要有对应消融</strong>（否则证明不了该组件值得写进论文）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d127-noon" data-d="127" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D127 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 A1 + A2（核心组件消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A1（去组件 1）、A2（去组件 2）是<strong>最重要的两个消融</strong>——它们直接证明你论文的核心创新点有没有用。其余设置必须和最终方法<strong>完全相同</strong>，只去掉对应组件。</p>
+<ul>
+<li><strong>为什么先跑A1/A2（优先级最高）</strong>：你的GPU时间有限，要把最关键的消融最先跑出来。A1/A2去掉的是你论文的核心卖点组件——它们的结果直接关系到“你这篇论文立不立得住”。<strong>如果A1/A2显示核心组件贡献显著，你就吃了定心丸，可以放心推进</strong>；如果显示核心组件其实没用，你需要尽早知道（及时调整方法或重新审视idea），而不是等其他消融都跑完才发现核心有问题。所以A1/A2优先级最高，周一就启动。</li>
+<li><strong>“只去掉对应组件、其余完全相同”是铁律</strong>:A1只去组件1,A2只去组件2，<strong>除了去掉的那一个组件，所有其他设置（lr、数据、增强、epoch、其余组件）必须和完整方法一模一样</strong>。否则你无法确定“性能变化是去掉组件1导致的，还是别的改动导致的”。这就是消融“每次只改一个变量”原则的具体落实——A1/A2作为最重要的消融，尤其要守住这条，任何额外改动都会让“组件1/2有效”这个核心结论失去说服力。</li>
+<li><strong>从最终方法config派生（操作要点）</strong>:A1/A2的config应该<strong>基于你的最终方法config，只把对应组件关掉</strong>（改一处），而非从头另写一个config（容易引入不一致）。这样能保证“除了那一个组件，其余完全相同”。如果去掉组件会导致代码报错（组件被别处依赖），用“替换成恒等映射/最简实现”代替“直接删”——效果等价于关掉它，又不破坏代码结构。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用 A1、A2 的 config 启动（固定 seed，只去掉对应组件）：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A1_wo_comp1.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A1
+python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A2_wo_comp2.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A2
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>矩阵/消融表里记“进行中”。</li>
+<li>wandb 监控。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A1、A2 启动，各只去掉了对应组件（其余与最终方法一致），独立 work_dir。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>启动 A1 时顺手改了别的（lr/增强）→ 不可比；去掉组件后代码报错（组件被别处依赖）→ 改成“替换最简版”而非硬删。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>去掉组件报错?→ 看哪里依赖它，把它替换成恒等映射/最简实现（等效于“关掉它”的效果）;OOM → 降 batch。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你启动了最关键的核心组件消融。<strong>做了</strong>（A1/A2 启动）、<strong>学了</strong>（组件消融最重要、只去对应组件）、<strong>会了</strong>（在严格控制下启动组件消融，并用“替换最简版”绕过依赖）。</p>
+</div></section></section><section class="slot" id="d127-pm" data-d="127" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D127 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 A3 + A4（loss / backbone 消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A3（换标准 loss）验证你的 loss 设计是否真有效；A4（换 backbone:ResNet/Swin/ConvNeXt）验证你的方法<strong>不只在某个 backbone 上有效</strong>(泛化到不同 backbone = 更强的说服力)。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动 A3（只把 loss 换成标准 loss）、A4（只换 backbone）：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A3_stdloss.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A3
+python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A4_swin.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A4
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>错峰跑（避免和 A1/A2 抢显存）。</li>
+<li>记录。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A3、A4 启动，各只改一处(loss / backbone)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>A4 换大 backbone(Swin-L)OOM → 降 batch;A4 换 backbone 时连带改了别的训练设置 → 只换 backbone。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>A4 OOM → 降 batch + 梯度累积；不同 backbone 输入要求不同 → 用各自标准预处理但保持数据/划分一致。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你推进了 loss / backbone 两个维度的消融。<strong>做了</strong>（A3/A4 启动）、<strong>学了</strong>（loss 消融验证设计、backbone 消融验证不依赖特定骨架）、<strong>会了</strong>（隔离 loss / backbone 这两个变量做实验）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 消融设计文档 v2 ✅ A1–A4 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D127</summary><textarea data-note="d127" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d128" data-d="128"><header class="day-head"><span class="dnum">D128</span><h2 class="day-t">周二 · A1/A2 分析 + 启动 A5/A6</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天分析最关键的两个消融（组件 1/2 的贡献），并把增强、训练充分性两个维度推上去。</p>
+<p><strong>预期管理</strong>：今天分析最关键的 A1/A2（核心组件贡献）+ 启动 A5/A6。提醒：判断“组件是否真有贡献”要看去掉后的下降是否<strong>超过 std</strong>（否则在噪声内，不算显著）；如果去掉某组件反而更好（Δ为正），别心疼——那组件可能有害，大胆考虑删（论文要“每个组件都有用”）。A6（不同epoch）还回答审稿人常问的“你是不是只是训得久才赢的”。</p>
+</blockquote>
+</div><section class="slot" id="d128-am" data-d="128" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D128 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">A1 结果分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A1 训完，看“去掉组件 1 后性能下降了多少”——<strong>下降 X% 就说明组件 1 贡献了约 X% 的性能</strong>。下降越多 = 组件 1 越重要；几乎不降 = 组件 1 可有可无（考虑删）。判断“是否真有贡献”要看下降是否<strong>超过 std</strong>（否则在噪声内）。</p>
+<ul>
+<li><strong>为什么“去掉它看掉多少”能量化贡献</strong>：这是消融的核心逻辑——如果组件1真的在起作用，那去掉它性能就会下降，下降的幅度就是它的贡献大小。完整方法(Full)是78.1，去掉组件1后变75.9，那“组件1贡献了约2.2”。<strong>这是一种“反事实”推理：通过“没有它会怎样”来衡量“它的作用”</strong>。下降多=贡献大=重要组件；几乎不降=没贡献=冗余（可删）。这个逻辑简单但强大，是量化每个设计价值的标准方法。</li>
+<li><strong>为什么必须用“是否超过std”判显著（关键）</strong>：实验有随机波动（不同seed结果会差零点几），所以“去掉组件后掉了0.2”可能只是噪声，不代表组件真有用。<strong>只有当下降幅度明显超过std（噪声尺度）时，才能确信这个下降是组件的真实贡献，而非随机波动</strong>。比如Full=78.1±0.3、去组件后=77.9±0.4，下降只有0.2，而std有0.3-0.4——这0.2完全在噪声内，说明组件1贡献不显著（该考虑删）。反之如果下降2.2而std只有0.3-0.4，那2.2远超噪声，组件1贡献确凿。<strong>别被噪声内的微小下降骗了去保留一个其实没用的组件</strong>。</li>
+<li><strong>A1/A2 为什么是“最重要的两个消融”</strong>:A1、A2 去掉的是你论文声称的<strong>核心创新组件</strong>——它们直接回答“你论文最核心的卖点到底有没有用”。如果A1/A2显示你的核心组件贡献显著（掉点明显），你论文的立论就稳了；如果显示核心组件其实没什么用，那你整篇论文的核心卖点就有问题（要么换卖点，要么这个idea本身要重新审视）。<strong>所以A1/A2的结果某种程度上决定了你论文的成败</strong>，要最先跑、最仔细分析。其余消融（loss/backbone/增强等）是支撑性的，重要但不及核心组件消融关键。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 A1，和<strong>完整方法(Full)</strong>比，算“去掉组件 1 的性能损失”。</li>
+<li>看损失是否超过 std（用补充包的显著性粗判）。</li>
+<li>写一句结论（组件 1 贡献多大、是否显著）。</li>
+</ol>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 判断&quot;去掉组件后的下降&quot;是否显著（超过噪声）——消融判贡献的核心</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_significant</span><span class="p">(</span><span class="n">full_mean</span><span class="p">,</span> <span class="n">full_std</span><span class="p">,</span> <span class="n">abl_mean</span><span class="p">,</span> <span class="n">abl_std</span><span class="p">):</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">full_mean</span> <span class="o">-</span> <span class="n">abl_mean</span>          <span class="c1"># 去掉组件后掉了多少（正=该组件有用）</span>
+    <span class="n">pooled_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">full_std</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">abl_std</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>   <span class="c1"># 合并标准差作噪声尺度</span>
+    <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">pooled_std</span><span class="p">:</span>               <span class="c1"># Δ为负且超噪声 → 去掉反而更好 → 组件有害，删！</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Δ=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> 去掉反而更好 → 该组件有害，删掉&quot;</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">pooled_std</span><span class="p">:</span>          <span class="c1"># 在噪声内 → 贡献不显著</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Δ=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> 在噪声内(±</span><span class="si">{</span><span class="n">pooled_std</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">) → 贡献不显著，考虑删&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Δ=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> &gt; 噪声(</span><span class="si">{</span><span class="n">pooled_std</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">) → 该组件有显著贡献，保留+写进论文&quot;</span>
+<span class="c1"># 例：Full=78.1±0.3, 去组件1后=75.9±0.4 → Δ=+2.2 远超噪声 → 组件1贡献最大</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">is_significant</span><span class="p">(</span><span class="mf">78.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">75.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">))</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A1 vs Full 的差值 + 结论(如“去掉组件 1 掉 2.2,&gt;std，组件 1 贡献最大”)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>下降一点点（在 std 内）就认定“有用” → 不显著就不算；去掉组件 1 反而<strong>更好</strong> → 那组件 1 可能有害，大胆考虑删（论文要“每个组件都有用”）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>差值在 std 内?→ 多 seed 确认，或承认该组件贡献有限；去掉反而更好?→ 删它（D131 会处理），方法更干净。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从消融量化一个核心组件的贡献并判断显著性</strong>。<strong>做了</strong>（A1 分析）、<strong>学了</strong>（去组件→看损失→判贡献、要超 std）、<strong>会了</strong>（用消融量化并判定组件价值）。</p>
+</div></section></section><section class="slot" id="d128-noon" data-d="128" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D128 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">A2 结果分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同 A1，评估去掉组件 2 的损失，量化组件 2 的贡献。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 A2 vs Full，算组件 2 损失。</li>
+<li>判显著性。</li>
+<li>写结论。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A2 vs Full 差值 + 结论。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>同 A1（不看 std；舍不得删没用的）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>同 A1。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你量化了第二个核心组件。<strong>做了</strong>（A2 分析）、<strong>学了</strong>（组件贡献量化）、<strong>会了</strong>（评估第二组件的价值）。</p>
+</div></section></section><section class="slot" id="d128-pm" data-d="128" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D128 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 A5 + A6（增强 / epoch 消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A5（换/去数据增强）验证增强（含你的遥感特有增强）的贡献；A6（不同 epoch:12/24/36）验证训练是否充分——<strong>A6 也回答“我是不是只是训得久才赢的”这个审稿人常问的问题</strong>。</p>
+<ul>
+<li><strong>为什么“epoch消融”能挡住一个致命质疑</strong>：审稿人看到你的方法比baseline好，可能会想“会不会你只是把你的方法训了更多epoch、而baseline训得少，所以你赢了？”——如果是这样，你的“提升”就不是方法的功劳，而是训练时长的功劳，对比不公平。<strong>A6通过展示“在相同的、多个epoch设置下，你的方法都领先baseline”，直接堵住这个质疑</strong>：无论训12、24还是36个epoch，你都比baseline好，说明优势来自方法本身而非训练时长。这是个很重要的“防质疑”消融。</li>
+<li><strong>A6是“趋势型”消融，要呈现趋势而非单点</strong>:A6不是看“某个epoch下谁赢”，而是看“<strong>随着epoch增加，你的方法和baseline的表现怎么变化</strong>”——理想情况是你的方法在各个epoch都领先，且可能更快收敛（更少epoch就达到好效果，这也是效率卖点）。所以A6要画成趋势图（x轴epoch、y轴指标，两条线：你的方法vs baseline），展示完整趋势，而不是只报最好的那个epoch的数字。<strong>呈现趋势既回答了“是否训练充分”，也堵住了“是否只是训久了”的质疑</strong>。</li>
+<li><strong>增强消融(A5)的价值</strong>:A5验证数据增强（尤其你针对遥感设计的特有增强）的贡献。如果你在方法里用了某种遥感特有的增强（如针对SAR的、针对旋转的）,A5（&quot;去掉这个增强&quot;）能证明它有用。注意：增强是训练技巧，不是模型组件，但它同样影响最终性能，所以也值得消融——审稿人会想知道&quot;你的提升有多少来自模型设计、多少来自增强技巧&quot;。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动 A5（只改增强策略）、A6（分别 12/24/36 epoch，是多组）：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A5_no_aug.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A5
+<span class="k">for</span><span class="w"> </span>ep<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">36</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A6.yaml<span class="w"> </span>--epochs<span class="w"> </span><span class="nv">$ep</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A6_ep<span class="nv">$ep</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>错峰跑。</li>
+<li>记录。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A5、A6（三个 epoch 设置）启动。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>A6 多个 epoch 设置=多组实验，一起跑会 OOM → 错峰；A5 改增强时连带改了别的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>A6 太多组跑不完 → 至少跑 12/24/36 三个关键点；错峰。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你推进了增强 / 训练充分性消融。<strong>做了</strong>（A5/A6 启动）、<strong>学了</strong>（增强消融、epoch 消融回答“是否只是训久了”）、<strong>会了</strong>（验证增强贡献与训练充分性）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ A1–A2 分析 ✅ A5–A6 启动。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融判贡献（三态）</strong>：去掉某组件后，看相对 Full 的变化 Δ —— ① <strong>掉点且超过 std</strong> = 该组件有显著贡献（写进论文）;② <strong>掉点但在 std 内</strong> = 贡献不显著（诚实记，或考虑删）;③ <strong>反而涨点（Δ为正）</strong> = 该组件有害，<strong>删掉</strong>（方法更简洁+更高效）。永远拿“是否超过 std”判显著，别被噪声内的微小变化骗。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D128</summary><textarea data-note="d128" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d129" data-d="129"><header class="day-head"><span class="dnum">D129</span><h2 class="day-t">周三 · A3/A4 分析 + 启动 A7/A8</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天分析 loss 与 backbone 两个消融，并把分辨率、超参两个维度推上去——8 类就全部在跑了。</p>
+<p><strong>预期管理</strong>：今天分析 A3(loss)/A4(backbone)+ 启动 A7/A8,8 类就全在跑了。提醒：A4 在多个 backbone(ResNet/Swin/ConvNeXt)上都增益=方法不依赖特定骨架、通用性强（很有说服力）;loss 收益若不显著就诚实记、别硬说有效；A8 对超参不敏感=方法稳健，这是优点。每个消融始终只改一处。</p>
+</blockquote>
+</div><section class="slot" id="d129-am" data-d="129" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D129 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">A3 结果分析（loss 消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A3 训完，比较“你的 loss vs 标准 loss”。若换回标准 loss 掉点 → 你的 loss 设计有效；若几乎不变 → 你的 loss 收益有限（诚实记）。</p>
+<ul>
+<li><strong>loss消融怎么做</strong>：如果你的方法里设计了特殊的损失函数(loss),A3就是“把你的loss换回标准loss、其余不变”，看性能变化。换回标准loss后掉点→说明你的loss设计有效（贡献了那部分性能）；几乎不变→说明你的loss其实没带来多少收益。<strong>这隔离出了“loss设计”这个变量的贡献</strong>，和组件消融是一个道理（只不过换的是loss而非模块）。</li>
+<li><strong>loss收益小怎么办（诚实+取舍）</strong>：如果A3显示你的loss收益很小（换回标准loss几乎不掉点），要诚实面对——别硬说“我的loss很有效”。<strong>这时有两个选择</strong>:① 如果loss收益确实可忽略，考虑在论文里弱化甚至不强调这个卖点（把重点放在真正有贡献的组件上）;② 如果loss有小幅但稳定的收益，如实报告其贡献大小即可。<strong>关键是诚实</strong>：消融数据说loss贡献多大，就报多大，不夸大。一个诚实但贡献明确的卖点，胜过一个夸大但站不住的卖点。</li>
+<li><strong>loss改动也要看per-class</strong>:loss的改动有时主要影响某一类样本（比如你设计的loss专门改善难样本/小目标），总分上可能看不出大变化，但per-class上某类提升明显。<strong>所以loss消融除了看总分，也要看per-class</strong>——可能发现“我的loss总分只提升0.5，但在难分类别上提升2.3”，这就是有价值的细分发现，比“总分+0.5”更能说明你loss的作用机理。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 A3（标准 loss）vs Full（你的 loss）。</li>
+<li>写结论（你的 loss 是否有效、贡献多大）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A3 结论（如“换回标准 loss 掉 1.1，我的 loss 有效”）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>loss 收益不显著还硬说有效 → 诚实；只看总分（loss 改动可能主要影响某类）→ 也看 per-class。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>loss 收益小?→ 如实记；若几乎为 0，考虑论文里弱化这个卖点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你验证了 loss 设计的价值。<strong>做了</strong>（A3 分析）、<strong>学了</strong>（loss 消融）、<strong>会了</strong>（证明/诚实评估你的 loss 设计）。</p>
+</div></section></section><section class="slot" id="d129-noon" data-d="129" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D129 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">A4 结果分析（backbone 消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A4 比较你的方法在不同 backbone(ResNet/Swin/ConvNeXt)上的表现。<strong>理想结果</strong>：在多个 backbone 上都比对应 baseline 增益 → 说明方法<strong>不依赖特定 backbone、通用性强</strong>（很有说服力）。</p>
+<ul>
+<li><strong>为什么“不依赖特定backbone”是很强的卖点</strong>：如果你的方法只在某一个backbone（如ResNet）上有效，换成Swin就不行了，审稿人会怀疑“你的提升是不是只是恰好适配了那个backbone的某个特性，而非真正解决了问题”。<strong>但如果你的方法在ResNet、Swin、ConvNeXt三种结构迥异的backbone上都能稳定增益，这就强有力地证明：你的方法捕捉的是任务的本质规律（如怎么更好地检测小目标），而非依赖某个网络的特殊性质</strong>——它是个通用、可移植的改进。这种“backbone无关的有效性”是方法鲁棒、有普适价值的体现，审稿人很看重。</li>
+<li><strong>这个消融怎么挡审稿人的质疑</strong>：审稿人常质疑“你的方法换个backbone还行吗？”——A4就是提前回答这个。你在论文里展示“我们的方法在三种backbone上分别带来+0.9/+1.2/+0.8的增益”，审稿人的这个疑虑就被消除了。<strong>好的消融是预判审稿人会问什么，提前用实验回答</strong>——A4（backbone通用性）和A6（epoch，回答“是否只是训久了”）都是典型的“防质疑消融”。</li>
+<li><strong>不必每个backbone都赢（诚实）</strong>：理想是每个backbone上都增益，但如果某个backbone上你的方法没增益甚至略降，<strong>也要如实记并分析</strong>（可能与该backbone的某个特性有关）。不必为了“好看”而隐藏——诚实呈现“在两种backbone上有效、在第三种上增益不明显，我们推测因为…”反而比“声称处处都赢”更可信。多数backbone上有效，就足以支撑“通用性较强”的结论。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 A4 各 backbone 下你的方法 vs 对应 baseline。</li>
+<li>写结论（是否对不同 backbone 都增益）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A4 结论（如“换 Swin-T 后仍 +0.9，方法不依赖特定 backbone”）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只在一个 backbone 上测就下“通用”结论 → 至少两三个；换 backbone 没对齐对应 baseline。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某 backbone 上没增益?→ 如实记并分析（可能与该 backbone 特性有关），不必每个都赢。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你验证了方法对 backbone 的鲁棒性/通用性。<strong>做了</strong>（A4 分析）、<strong>学了</strong>（backbone 消融证明通用性）、<strong>会了</strong>（证明方法不依赖特定骨架）。</p>
+</div></section></section><section class="slot" id="d129-pm" data-d="129" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D129 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 A7 + A8（分辨率 / 超参消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A7（不同输入分辨率 512/768/1024）看分辨率对你方法的影响（遥感小目标常受益于高分辨率）;A8（不同 lr/weight_decay）看方法对超参的敏感性(<strong>对超参不敏感 = 方法稳健，是优点</strong>)。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动 A7（三个分辨率）、A8（几组关键超参）：<figure class="code" data-lang="bash"><pre><code><span class="k">for</span><span class="w"> </span>r<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">512</span><span class="w"> </span><span class="m">768</span><span class="w"> </span><span class="m">1024</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/A7.yaml<span class="w"> </span>--img_size<span class="w"> </span><span class="nv">$r</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/A7_<span class="nv">$r</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>错峰跑（A7 高分辨率吃显存）。</li>
+<li>记录。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A7（三分辨率）、A8（几组超参）启动。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>A7 高分辨率 OOM → 降 batch;A8 改超参时连带改结构。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>A7 的 1024 OOM → 降 batch + 梯度累积；超参组合太多 → 选关键几组。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你推进了分辨率 / 超参消融。<strong>做了</strong>（A7/A8 启动）、<strong>学了</strong>（分辨率消融、超参敏感性消融、对超参不敏感是优点）、<strong>会了</strong>（验证分辨率影响与超参稳健性）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ A3–A4 分析 ✅ A7–A8 启动。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜两个“防质疑”消融</strong>:① <strong>backbone 消融(A4)</strong>——在 ResNet/Swin/ConvNeXt 上都比对应 baseline 增益，证明“方法不依赖特定骨架、通用性强”（挡住“换个backbone就不行了吧”的质疑）;② <strong>epoch 消融(A6)</strong>——呈现不同训练轮数下你仍领先，挡住审稿人最爱问的“你是不是只是训得久才赢的”。这两个消融专门用来堵审稿人的常见质疑，很值得做。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D129</summary><textarea data-note="d129" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d130" data-d="130"><header class="day-head"><span class="dnum">D130</span><h2 class="day-t">周四 · A5–A8 分析 + 完整消融表 + 柱状图</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把剩余 4 个消融分析完，汇总成<strong>完整消融表（论文 Table 2）</strong>，再画柱状图——一眼看出哪个零件最重要。</p>
+<p><strong>预期管理</strong>：今天分析完 A5–A8 + 产出完整消融表（论文 Table 2）+ 柱状图。提醒：消融表从上到下按“重要性递减”排（组件→loss→backbone/增强/超参），最后一行 Full 加粗，每行标“相对 Full 的变化Δ”;A6/A7 是趋势型（要呈现随 epoch/分辨率怎么变，别只报最好那个点）；柱状图加 Full 虚线参照，一眼看出哪个零件去掉掉得最多。</p>
+</blockquote>
+</div><section class="slot" id="d130-am" data-d="130" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D130 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">A5–A8 结果分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>逐个评估 A5（增强）、A6(epoch)、A7（分辨率）、A8（超参），各写一句结论。<strong>A6/A7 是趋势型</strong>（看随 epoch/分辨率怎么变）,A5/A8 是对照型。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 A5–A8。</li>
+<li>各写结论：增强贡献多大？多少 epoch 够？最佳分辨率？对超参敏不敏感？</li>
+<li>A6/A7 可顺手画个小趋势图。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A5–A8 各自结论（含 A6/A7 的趋势观察）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>A6 只报最好的 epoch → 要呈现趋势（训练充分性）;A7 同理。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>趋势不单调?→ 如实呈现并简单解释（如分辨率过高反而引入噪声）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了全部 8 类消融的分析。<strong>做了</strong>（A5–A8 分析）、<strong>学了</strong>（对照型 vs 趋势型消融的解读）、<strong>会了</strong>（系统分析多维消融）。</p>
+</div></section></section><section class="slot" id="d130-noon" data-d="130" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D130 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整合所有消融到一张表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（消融表怎么排）</h4><div class="blk-b"><p>从上到下按“<strong>重要性递减</strong>”排：先组件消融(A1、A2)，再 loss(A3)，再 backbone/增强/超参(A4–A8)；<strong>最后一行是完整方法(Full)，加粗</strong>。每行标“相对 Full 的变化(Δ)”和“验证目的/备注”。</p>
+<ul>
+<li><strong>为什么消融表要“按重要性排”而非随便排</strong>：读者（审稿人）看消融表时，希望<strong>一眼看出“哪些是核心、哪些是辅助”</strong>。把贡献最大的核心组件消融(A1/A2)放最上面，读者先看到最重要的；然后是loss、backbone等支撑性消融。这种有序排列引导读者理解“你方法的主次结构”。如果随便排（把超参消融放最上、核心组件放最下），读者抓不住重点。<strong>排序本身就是一种表达——它告诉读者你方法里什么最关键</strong>。</li>
+<li><strong>为什么每行必须标“Δ vs Full”</strong>：消融表的核心信息不是“去掉组件后的绝对分数”，而是“<strong>相对完整方法掉了多少</strong>”(Δ)——这个差值才直接体现组件贡献。只给绝对分数(如A1=75.9)，读者还得自己和Full(78.1)做减法；直接给Δ(-2.2)，贡献一目了然。<strong>Δ列是消融表的灵魂</strong>，它把“每个组件值多少”直接摆出来。Full行加粗，作为所有Δ的参照基准。</li>
+<li><strong>这张表就是论文的 Table 2</strong>：主实验的整合大表是Table 1（证明“整体好”），消融表是Table 2（证明“每个零件都有用、各值多少”）——这两张表是论文实验部分的两大支柱。审稿人通过Table 2判断你方法的设计是否扎实、有没有冗余。<strong>所以这张表要做得规范、清晰、有序、带Δ</strong>，它和Table 1一样是论文的硬核证据。做好它，你的方法论证就完整了。</li>
+<li><strong>Δ为正的行要如实标（诚实）</strong>：如果某个组件的消融Δ为正（去掉它反而涨点），说明该组件有害——<strong>要如实标在表里，并在D131决定删它</strong>。不要因为“难看”而隐藏或粉饰。诚实呈现“我们发现某组件无益甚至有害，故移除”反而显得你严谨。表的价值在于真实反映每个组件的作用，包括那些“原来没用”的发现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合成完整消融表:<code>配置 | 指标 | Δ vs Full | 验证目的/结论</code>。</li>
+<li>8 行 + Full 行（加粗），按重要性排。</li>
+<li>标出每行的 Δ。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>完整消融表（8 类 + Full，按重要性排，带 Δ 和结论）——就是论文 Table 2。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不标“相对 Full 的变化” → 看不出贡献；排列乱（无序）→ 按重要性。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某组件 Δ 为正（去掉反而更好）?→ 如实标，D131 考虑删它。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>完整消融表(Table 2)</strong>。<strong>做了</strong>（完整消融表）、<strong>学了</strong>（消融表按重要性排、标 Δ、Full 加粗）、<strong>会了</strong>（把系统消融组织成论文级表）。</p>
+</div></section></section><section class="slot" id="d130-pm" data-d="130" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D130 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">画消融柱状图</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>柱状图：x 轴=8 个消融配置，y 轴=指标，<strong>用虚线标出 Full 的性能</strong>作参照。比纯表格更直观——一眼看出哪个零件去掉后掉得最多（贡献最大）。</p>
+<ul>
+<li><strong>为什么消融除了表还要配图</strong>：表(Table 2)给精确数字，图（柱状图）给直观印象——<strong>两者互补</strong>。读者扫一眼柱状图，立刻能看出“哪根柱子最矮(去掉它掉得最多=贡献最大)、哪根接近Full虚线(去掉它几乎没影响=可能冗余)”。这种视觉冲击是纯表格给不了的。论文里“表给精度、图给直觉”是标配，消融部分也不例外。</li>
+<li><strong>Full虚线参照线是关键</strong>：柱状图上一定要画一条<strong>水平虚线代表完整方法(Full)的性能</strong>——所有消融配置的柱子都和这条线比。柱子越矮于虚线，说明去掉对应组件掉点越多（贡献越大）。没有这条参照线，读者不知道“掉到多少算掉得多”。<strong>Full虚线是衡量每根柱子的基准</strong>，必须有。柱子的排列也和表一致（按重要性），保持表图呼应。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用 matplotlib 画柱状图（8 配置 + Full 虚线参照，代码见补充包）。</li>
+<li>标题/坐标轴清晰。</li>
+<li>存进 <code>paper/figures/</code>。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>消融柱状图（8 配置 + Full 虚线），直观显示各组件贡献。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>没参照线 → 加 Full 虚线；柱子无序 → 和表一致按重要性排。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>柱子太多挤?→ 横向柱状图或缩短标签。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你可视化了消融结果。<strong>做了</strong>（消融柱状图）、<strong>学了</strong>（柱状图 + Full 参照线展示贡献）、<strong>会了</strong>（把消融画成直观图）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融表/图三要点</strong>:① 按重要性从上到下排 ② 每行标 Δ vs Full、Full 行加粗 ③ 柱状图加 Full 虚线参照。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>完整消融表</strong> ✅ 消融柱状图。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D130</summary><textarea data-note="d130" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d131" data-d="131"><header class="day-head"><span class="dnum">D131</span><h2 class="day-t">周五 · 消融“故事” + 删无效组件 + 消融分析段落</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天是本周最烧脑、最体现学术品味的一天：把 8 个消融读成一个“<strong>故事</strong>”，据此<strong>精简方法</strong>（删没用的零件），并写成论文段落。</p>
+<p><strong>预期管理</strong>：今天最体现学术品味——把 8 个消融读成一个“故事”+ 删无效组件 + 写消融段落。提醒：好的消融分析像讲案情(有主角=贡献最大的组件、有意外发现、有结论)，不是“每个组件都有用”的平铺；<strong>发现某组件没用就删掉，别心疼沉没成本</strong>——简洁有效 &gt; 堆料，删冗余还减参数、提速度（对你单卡高效卖点反而加分）。删了要记消融依据。</p>
+</blockquote>
+</div><section class="slot" id="d131-am" data-d="131" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D131 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">分析消融的“故事”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>消融不只“证明有效”，更要讲出<strong>一个故事</strong>：哪个组件贡献最大？有没有<strong>意外结果</strong>（本以为有用的其实没用）？<strong>有没有组件去掉后反而更好</strong>（说明该删）？好的消融分析像讲案情——有主角（贡献最大的组件）、有意外、有结论。</p>
+<ul>
+<li><strong>为什么消融要“讲成故事”而非“列一堆数字”</strong>：一张消融表（A1掉2.2、A2掉1.5、A3掉1.1…）是原料，不是分析。读者需要的是<strong>从这些数字里读出的洞见</strong>：“我们的方法中，组件1贡献最大（去掉掉2.2），是性能的主要来源；组件2次之；有意思的是，A4显示我们的方法在三种backbone上都有增益，说明它捕捉的是任务本质而非依赖特定网络；而所有组件去掉后都掉点，说明方法不存在明显冗余。”——<strong>这样有主角、有层次、有意外、有结论的叙述，才叫消融分析</strong>，它体现你对自己方法的深刻理解。</li>
+<li><strong>“故事”的三个看点（可操作）</strong>:① <strong>主角</strong>——哪个组件贡献最大？（去掉后掉得最多的）这是你方法的核心，论文里要重点强调;② <strong>意外</strong>——有没有“本以为很重要的组件其实贡献不大”或“本以为是辅助的其实很关键”？意外发现最有价值（显示你诚实且有深度）;③ <strong>结论</strong>——方法是否已经精简（没有可删的冗余），还是发现了该删的组件？<strong>按“谁是主角→有没有意外→能不能更精简”三问走一遍，故事就出来了</strong>。</li>
+<li><strong>为什么“意外发现”在消融里特别值钱</strong>：如果你的消融结果完全符合预期（每个组件都如你设计时所想那样有用），这固然好，但略显平淡；<strong>如果有意外（某个你以为关键的组件其实没用，或某个不起眼的设计意外地很重要），这反而是亮点</strong>——它说明你做了真实的探索、有真实的发现，而非“设计好就一定对”的想当然。诚实呈现意外（哪怕它显示你最初的某个设计判断错了），审稿人会觉得你客观、严谨、有研究品味。<strong>不要为了“显得我都设计对了”而隐藏意外</strong>——意外是你研究深度的体现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从完整消融表归纳：组件贡献<strong>排序</strong>。</li>
+<li>找意外发现（哪个不如预期、哪个超预期）。</li>
+<li>标出<strong>可删</strong>的组件（Δ 接近 0 或为正的）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>消融故事（贡献排序 + 意外发现 + 可删项），如“组件 1 贡献最大(-2.2)，组件 2 次之；A4 显示不依赖 backbone；无组件去掉反而更好，说明方法已无明显冗余”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只说“每个组件都有用” → 要排序、找意外、找可删项；回避“某组件没用” → 诚实面对。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>看不出故事?→ 按“谁贡献最大→有没有反常→能不能更精简”三问走一遍。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从消融提炼洞见（讲故事）</strong>。<strong>做了</strong>（消融故事）、<strong>学了</strong>（消融的叙事：主角/意外/结论）、<strong>会了</strong>（从一堆消融数字里提炼出洞见）。</p>
+</div></section></section><section class="slot" id="d131-noon" data-d="131" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D131 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">据分析更新方法（删无效组件）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（发现组件无效怎么办——重要心法）</h4><div class="blk-b"><p><strong>删掉它。</strong> 论文不需要“堆料”——一个简洁、每部分都有用的方法，比一个复杂但冗余的方法更受审稿人青睐。删掉无效组件还能<strong>减少参数量、提升推理速度</strong>——这对你单卡的高效卖点反而是加分。</p>
+<ul>
+<li><strong>为什么“简洁有效”远胜“复杂堆料”</strong>：新手常有个误区——觉得方法里组件越多、越复杂，显得工作量越大、越高级。<strong>恰恰相反</strong>：审稿人和好的研究者都欣赏“用最少的设计达到最好的效果”。一个有 5 个组件但其中 2 个没用的方法，不如一个只有 3 个组件且每个都有用的方法——后者更简洁、更优雅、更容易被理解和复现。<strong>“我加了很多东西”不是贡献，“我找到了真正有效的那几个关键设计”才是</strong>。消融帮你识别出哪些是真有用的，删掉凑数的，你的方法反而更强。</li>
+<li><strong>删冗余对你单卡路线是双重加分</strong>:① <strong>学术上</strong>——简洁有效更受青睐，方法更清晰;② <strong>效率上</strong>——删掉无用组件直接减少参数量、提升 FPS，而“更小更快”正是你单卡高效路线的核心卖点！所以当消融发现某组件没用时，删掉它不仅让方法更优雅，还<strong>强化了你“精度持平但更高效”的论文卖点</strong>——你可以写“我们通过消融移除了冗余组件，在保持精度的同时进一步降低了计算成本”。<strong>对你而言，删冗余是稳赚不赔的</strong>。</li>
+<li><strong>克服“沉没成本”心理（最难的一关）</strong>：删掉自己精心设计、花了时间调试的组件，心理上很难受——“我费了那么大劲做的，就这么删了？”这就是<strong>沉没成本谬误</strong>：你已经投入的时间是收不回的，不该因为“舍不得”而保留一个数据证明没用的组件。<strong>理性的决策只看“这个组件现在有没有用”，而非“我为它花了多少功夫”</strong>。一个成熟的研究者敢于删掉自己的心血之作——因为他追求的是最好的方法，而非“保住自己做过的东西”。把“舍不得”换成“数据说了算”，你的方法和论文都会更好。</li>
+<li><strong>删之前的确认（谨慎但果断）</strong>：决定删一个组件前，确认它的消融 Δ 确实在 std 内（没用）或为正（有害）——而非因为单次 seed 的噪声误判。如果不确定，多跑一两个 seed 确认。确认后就果断删，并<strong>记下删除的消融依据</strong>（审稿人可能问“你为什么没用某种常见设计”，你要能答“我们消融过，它在本任务上无显著收益”）。删完后 D132 会重跑最终方法确认数字。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>若消融发现某组件无效（Δ 在噪声内）或有害（Δ 为正），从方法里<strong>删掉</strong>。</li>
+<li>确定方法<strong>最终版</strong>（删后）。</li>
+<li>记录“为什么删”（有消融数据支撑）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>方法最终版确定（已删无效组件，如有），且删除有消融数据依据。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>舍不得删自己设计的组件</strong>（沉没成本）→ 没用就删，简洁有效 &gt; 堆料；删了不记原因 → 记下消融依据（审稿可能问）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定删不删?→ 看它消融贡献是否<strong>显著且为正</strong>；不显著（在 std 内）就删。删了担心掉点?→ 重跑确认（下午/明天 D132）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>据证据精简方法（删冗余）</strong>。<strong>做了</strong>（方法最终版）、<strong>学了</strong>(&quot;简洁有效&quot;&gt;&quot;堆料&quot;、删冗余还提效率)、<strong>会了</strong>（用消融证据决定删哪个组件）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜删组件的决策</strong>：消融 Δ 在 std 内（没用）或为正（有害）→ <strong>删</strong>。好处：方法更简洁 + 参数更少 + 速度更快（单卡卖点），且更容易被审稿人接受。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d131-pm" data-d="131" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D131 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写消融分析段落（≥500 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把消融表 + 故事整合成论文 Experiment 章的<strong>消融段落</strong>（≥500 字）——逐组件说贡献 + 关键发现，直接可进论文。</p>
+<ul>
+<li><strong>消融段落怎么写才&quot;直接可进论文&quot;</strong>：不是把表念一遍（&quot;A1掉2.2,A2掉1.5…&quot;），而是<strong>有逻辑、有解读地叙述</strong>：先点出整体结论（&quot;消融实验证明我们方法的每个组件都有贡献&quot;），再逐个关键消融说&quot;去掉/换了什么→掉/变了多少→说明什么&quot;(如&quot;去掉组件1导致mAP下降2.2，是所有组件中影响最大的，验证了它在[某机理]上的关键作用&quot;)，最后总结故事（&quot;综合来看，组件1是性能主来源，且方法在不同backbone上均有效，表明其通用性&quot;）。<strong>每个数字都配解读，整段有起承转合</strong>，这样才是论文段落而非数据罗列。</li>
+<li><strong>要和表/图配合引用</strong>：消融段落不孤立——它要引用消融表(Table 2)和柱状图(Fig X)：“如Table 2所示,…”；“Fig X直观展示了各组件的贡献”。<strong>文字负责解读和叙述，表/图负责呈现数据，三者配合</strong>。审稿人读Experiment章时，文字引导他看表和图，表和图支撑文字的论断。这是论文实验部分的标准写法。</li>
+<li><strong>突出三个重点</strong>：写消融段落时，确保突出① <strong>贡献最大的组件</strong>（你方法的核心，重点说）;② <strong>意外发现</strong>（如果有，这是亮点）;③ <strong>方法的简洁性</strong>（&quot;所有组件都有用，无明显冗余&quot;或&quot;我们移除了某冗余组件&quot;）。<strong>这三点是消融故事的精华，段落要让读者get到</strong>，而非平均着墨于每个消融。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写消融段落（≥500 字）：逐个关键消融说“去掉/换了什么 → 掉/变了多少 → 说明什么”。</li>
+<li>突出贡献最大的组件 + 意外发现 + “方法已无冗余/已删某冗余”。</li>
+<li>配合消融表和柱状图引用（&quot;如 Table 2 / Fig X 所示&quot;）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>消融分析段落（≥500 字，有数据、有解读、有故事），直接可放进论文 4.3。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只贴表不解读 → 要文字分析每个关键消融；平铺直叙无重点 → 突出主角组件和意外。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>写不长?→ 每个关键消融都写“现象+解释”，再加一句总结性的故事。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把消融<strong>写成了论文段落</strong>。<strong>做了</strong>（消融段落 ≥500 字）、<strong>学了</strong>（消融结果→论文文字）、<strong>会了</strong>（把系统消融写进论文 Experiment 章）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 消融分析文档 ✅ 方法最终版确定。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D131</summary><textarea data-note="d131" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d132" data-d="132"><header class="day-head"><span class="dnum">D132</span><h2 class="day-t">周六 · （集中日）· 最终方法重跑 + 实验归档</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把“删/调之后的最终方法”重跑确认（确保论文里的数字就是最终版的），并把所有实验归档——为下周开始写论文打好“数据底座”。</p>
+<p><strong>预期管理</strong>：今天重跑最终方法(3-seed)确认数字 + 归档所有实验。提醒：删了组件/调整后方法变了，<strong>必须重跑</strong>——论文里的数字必须是最终版的（不能用含已删组件的旧数字）；若删组件后掉点明显，说明该组件其实有用，回退保留（消融判断可能受std影响）。关键实验都要有 config/seed/命令记录（可复现），并 pip freeze 导出环境。</p>
+</blockquote>
+</div><section class="slot" id="d132-am" data-d="132" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D132 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">最终方法在主数据集重跑(3-seed)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>删了无效组件/调整后，方法变了，<strong>必须重跑</strong>，确保“你要写进论文的数字”就是<strong>最终版</strong>的(3-seed)。不能用旧版（含已删组件）的数字。</p>
+<ul>
+<li><strong>为什么“改了方法必须重跑”是铁律</strong>：你在D131删掉了某个组件，方法就和之前不一样了——之前的实验数字（含那个组件时跑的）不再代表你现在的最终方法。<strong>如果论文里用旧数字，但方法描述是删后的版本，就出现了“数字和方法对不上”的硬伤</strong>（审稿人复现时会发现对不上）。所以删/调方法后，必须用最终版config重跑，拿到最终版的真实数字。这是诚实和严谨的基本要求——论文里的每个数字都必须来自论文描述的那个方法。</li>
+<li><strong>重跑也是对“删组件决策”的最终确认</strong>：重跑最终方法（删了组件的版本）时，如果发现性能和“完整版”差不多甚至更好，说明你删对了（那个组件确实冗余/有害）；<strong>但如果删了组件后掉点明显，说明那个组件其实有用，你的消融判断可能受了单次seed噪声的影响——这时要回退，把组件加回来</strong>，并多跑几个seed重新评估。所以D132的重跑既是“锁定最终数字”，也是“对D131删除决策的复核”——用最终的3-seed结果一锤定音。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用最终方法 config 在主数据集重跑 3-seed:<figure class="code" data-lang="bash"><pre><code><span class="k">for</span><span class="w"> </span>s<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/final.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="nv">$s</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/final-s<span class="nv">$s</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>评估，算 3-seed mean±std。</li>
+<li>确认这就是论文要用的数字。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>最终方法结果确认(3-seed mean±std)，与论文将报的数字一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>重跑结果和之前对不上 → 确认用的是<strong>最终 config</strong>（不是含已删组件的旧 config）；只跑 1 seed → 3-seed。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>删组件后掉点明显?→ 说明该组件其实有用，回退保留（消融判断可能受 std 影响，多 seed 再确认）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你锁定了论文要用的最终数字。<strong>做了</strong>（最终方法重跑）、<strong>学了</strong>（改方法后必重跑、用最终版数字）、<strong>会了</strong>（锁定一个方法的最终可信结果）。</p>
+</div></section></section><section class="slot" id="d132-noon" data-d="132" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D132 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">确保所有实验可复现</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>写论文/投稿/日后被问，都需要实验<strong>可复现</strong>——关键实验都要有 config + seed + 运行命令记录（W16 学过的可复现要素）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>检查主实验/消融/迁移的关键实验都有 config/seed/命令记录。</li>
+<li>补齐缺失的记录。</li>
+<li>导出环境(<code>pip freeze &gt; requirements.txt</code>)。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>关键实验均可复现（有完整记录 + requirements）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只存结果不存配置/命令 → 无法复现；不记 seed → 数字对不上。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>记录散乱?→ 汇到一份文档（下一步归档）；环境记不全 → pip freeze 自动导。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你保障了实验可复现。<strong>做了</strong>（可复现检查 + requirements）、<strong>学了</strong>（可复现要素）、<strong>会了</strong>（让全部关键实验可重现）。</p>
+</div></section></section><section class="slot" id="d132-pm" data-d="132" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D132 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写完整的实验日志归档文档</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把所有实验（主实验/8 类消融/迁移）归档成<strong>一份文档</strong>（每个实验：ID / 配置 / 结果 / 结论），便于写论文时随时查、便于复现、也是 supplementary 素材。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写实验日志归档文档（汇总矩阵 + 关键结果 + 每个的结论）。</li>
+<li>按“主实验 / 消融 / 迁移”分区。</li>
+<li>存进 <code>experiments/</code>。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>实验日志归档文档（完整、分区、可查）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>实验散落各处 → 汇总成一份；只记数字不记结论 → 结论才是写论文时要的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>太多记不全?→ 至少把进论文的那些实验记全（主表/消融/迁移）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把全部实验归档了。<strong>做了</strong>（实验日志归档）、<strong>学了</strong>（实验归档的价值）、<strong>会了</strong>（把实验沉淀成可查文档/supplementary 素材）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 最终方法结果确认 ✅ 实验日志归档。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜实验可复现五要素</strong>：关键实验都要留 ① <strong>config 文件</strong>（全部超参）② <strong>随机 seed</strong> ③ <strong>运行命令</strong> ④ <strong>代码版本(git commit hash)</strong> ⑤ <strong>环境</strong>(<code>pip freeze &gt; requirements.txt</code>)。五样齐全，你日后（或审稿人）才能精确重现“那次”的数字。改了方法一定<strong>重跑</strong>——论文里的数字必须是最终版的，不能用含已删组件的旧数字。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D132</summary><textarea data-note="d132" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d133" data-d="133"><header class="day-head"><span class="dnum">D133</span><h2 class="day-t">周日 · （月复盘日）· W19 复盘 + Proposal v3 + M5 月复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾 + M5 整月收官：复盘、把 Proposal 迭代到 v3、做“实验够了吗、能开始写论文了吗”的 go 决策。</p>
+<p><strong>预期管理</strong>:M5 月收官：W19 复盘 + Proposal v3（融入全部实验）+ M5 月复盘做“能否进入写作”的 go 决策。提醒：Proposal 的 Method 要改成最终版（删了组件就同步删）、Experiment 填三数据集大表+8类消融+迁移、Contribution 用真实数字精确化；月复盘对照 M5 硬交付清单逐项核对，确认主实验+消融到位后再决定进入 M6 写作——别实验没齐就急着写。</p>
+</blockquote>
+</div><section class="slot" id="d133-am" data-d="133" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D133 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W19 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“系统消融”的经验（8 类设计、删组件的判断）；记“最终方法 + 8 类消融”的完成情况。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填。</li>
+<li>记消融周的卡点 + 对策。</li>
+<li>记最终方法 + 消融完成情况。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W19 周报。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周（多半是消融归因或删组件的纠结）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了消融周。<strong>做了</strong>（W19 周报）、<strong>学了</strong>（消融周复盘）、<strong>会了</strong>（沉淀系统消融经验）。</p>
+</div></section></section><section class="slot" id="d133-noon" data-d="133" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D133 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">更新 Proposal v3（融入所有实验结果）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Proposal 是活文档(M3 v1、M4 v2)，现在主实验 + 8 类消融 + 迁移都齐了，迭代到 <strong>v3</strong>——Method 改成最终版（删了组件）、Experiment 填三数据集大表 + 8 类消融 + 迁移、Contribution 用真实数字精确化。</p>
+<ul>
+<li><strong>为什么Proposal是“活文档”、要不断迭代</strong>:Proposal（研究计划书）不是写一次就锁死的——它随着你研究的推进不断更新。M3时的v1是“我打算做什么”（基于初步想法）;M4的v2是“我的方法初步成型”；现在M5的v3是“方法定稿、实验完成”。<strong>每个版本都反映你当前最新的真实状态</strong>。这种“活文档”的好处:① 你随时有一份最新的、完整的项目全貌（写论文时直接基于它）;② 它记录了你方法的演进历程（从v1到v3，方法怎么一步步成熟的）;③ 投稿/找导师/汇报时，v3就是一份现成的、详尽的工作总结。</li>
+<li><strong>v3要更新的三处关键</strong>:① <strong>Method改成最终版</strong>——如果D131删了某个无效组件，Proposal的方法描述里也要把它删掉（别让Proposal还写着已经不存在的组件，前后矛盾）;② <strong>Experiment填真实结果</strong>——把三数据集整合大表、8类消融表、迁移结果都填进去（之前可能是“计划做”的占位，现在是真实数据）;③ <strong>Contribution用真实数字精确化</strong>——之前可能写“提升明显”，现在用消融和主实验的真实数字写“在三数据集上平均提升X、其中核心组件贡献Y”。<strong>v3要做到与你的最终方法和完整实验完全一致</strong>。</li>
+<li><strong>v3 就是论文的“蓝图”</strong>：到这一步，Proposal v3 实际上已经包含了论文的所有核心要素——Title、Motivation、Method（最终版）、Experiment（完整结果）、Contribution（真实数字）。<strong>M6写论文时，你就是把v3扩写、润色成正式论文</strong>（补全相关工作、把要点展开成段落、规范图表）。所以v3做得越完整、越准确，M6写论文就越省力——你不是从零写，而是基于一份扎实的蓝图扩写。这就是为什么要持续维护Proposal：它最终成为你论文的骨架。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>更新 Proposal:Method（最终版）+ Experiment（全部结果）+ Contribution（真实数字）。</li>
+<li>通读确认与实验一致。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Proposal v3（与全部实验同步，Method 是删后最终版）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Proposal 还写着已删的组件 → 同步删；贡献写空 → 用真实数字。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定改哪 → 对照最终方法和最新结果逐节更新。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把 Proposal 迭代到 v3。<strong>做了</strong>(Proposal v3)、<strong>学了</strong>（Proposal 随实验更新）、<strong>会了</strong>（让计划书反映最终方法与完整实验）。</p>
+</div></section></section><section class="slot" id="d133-pm" data-d="133" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D133 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">M5 月复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>M5 月复盘核心：<strong>“实验够了吗？可以开始写论文了吗？”</strong> 对照 M5 硬交付清单（3 数据集主实验 / 8 类消融 / 迁移 / 整合大表 / 可视化 / Method 章 / Experiment 章 / 实验归档）。</p>
+<ul>
+<li><strong>为什么“实验→写作”是个需要刻意做的决策（而非自然过渡）</strong>：很多新手要么“实验没做够就急着写”（结果写到一半发现缺数据，又回去补，反复横跳），要么“实验做不完、一直想再多做点”（完美主义，迟迟不动笔）。<strong>正确的做法是在一个明确的检查点（M5月末），对照硬交付清单，理性判断“实验是否已经足够支撑一篇论文”</strong>——够了就果断进入写作(M6)，不够就明确还差什么、补齐再写。这个“go/no-go决策”要刻意做，而非含糊地“感觉差不多了就开始写”。</li>
+<li><strong>怎么判断“实验够了”（对照清单）</strong>：核心三样必须齐——① <strong>主实验</strong>（3数据集 × 多方法 × 多seed，整合大表）;② <strong>消融</strong>（系统的8类，证明每个组件）;③ <strong>可视化</strong>（三数据集定性图，含负面）。这三样是论文的骨架，缺一不可。迁移实验是加分项（有更好，时间紧可标注“future”）。<strong>如果主实验+消融+可视化都到位，就可以进入写作了</strong>——剩下的小缺口（如某个数据集的可视化数量）可以在写作过程中补。别等“100%完美”才动笔，那永远等不到。</li>
+<li><strong>为什么“及时进入写作”很重要（别拖延）</strong>：实验可以无止境地做下去（总有新的消融能补、新的数据集能加），但论文要在窗口期内写出来、投出去才有价值。<strong>当实验已经足够讲一个完整的故事（方法有效+泛化+每个组件有用），就该转入写作</strong>——写作过程中如果发现确实缺某个关键实验，再针对性补（而非漫无目的地继续做实验）。M5的任务是“把实验做扎实”,M6的任务是“把它写成论文”——这个月末就是这两个阶段的交接点，做好决策、干净利落地过渡。</li>
+<li><strong>M5整月的意义（回顾）</strong>：经过M5，你的方法从M3/M4的“小规模验证”成长为“有完整主实验（3数据集）+系统消融（8类）+迁移泛化证据”的扎实工作——这是一篇论文的全部实验基础。<strong>你已经从“探索一个idea”走到了“一个idea被充分验证、可以写成论文”</strong>，这是质的飞跃。M6就是把这些实验成果组织成一篇可投稿的论文。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 M5 月报（对照硬交付清单逐项）。</li>
+<li>回答“实验是否充分、能否进入写作(M6)”。</li>
+<li>制定 M6 计划（论文 v1 + 竞赛启动）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M5 月报 + “可进入写作”的判断 + M6 计划。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>实验没齐就急着写 → 对照清单确认主实验/消融/迁移到位；某项缺（如可视化数量不够）→ 标 M6 补。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某硬交付没全（如迁移）?→ 决定补还是写作时标注；主实验+消融齐了就可进 M6。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做了“实验→写作”的阶段决策。<strong>做了</strong>（M5 月报 + M6 计划）、<strong>学了</strong>（实验充分性判断、go 决策）、<strong>会了</strong>（决定何时从实验转入写作）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W19 ✅ <strong>M5 月报</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W19 累计交付</h2><p>8 类消融全部完成 + 完整消融表 + 柱状图、消融故事分析 + 消融段落（≥500 字）、方法最终版（删冗余）、最终方法 3-seed 重跑确认、实验日志归档、Proposal v3、W19 周报 + M5 月报。本周你系统证明了方法里“每个零件都有用”，并据消融<strong>精简了方法、删掉了冗余</strong>（这对你单卡的高效卖点是双重加分：更简洁+更小更快）。至此你的方法定稿、主实验+消融+迁移俱全——经过整个 M5，你从“探索一个 idea”走到了“一个 idea 被充分验证、可以写成论文”的质变，M6 就把这些扎实的实验成果组织成可投稿的论文。</p>
+</section><section class="wtail"><h2>🎓 W19 你“长出来”的能力清单</h2><ul>
+<li>设计/执行 8 类系统消融（每类一个验证目的，复用框架）+ 完整消融表 + 柱状图</li>
+<li>从消融讲“故事”（主角/意外/结论）、据证据精简方法（删无效组件）</li>
+<li>把消融写成论文段落 + 锁定最终方法数字 + 实验归档</li>
+<li>Proposal v3 + “实验→写作”阶段 go 决策</li>
+<li><strong>核心心法</strong>：消融判贡献看“是否超过std”（别被噪声骗）、发现组件没用就删(克服沉没成本，简洁有效&gt;堆料，删冗余还提效率=单卡卖点加分)</li>
+<li><strong>防质疑消融意识</strong>:backbone消融（挡“换骨架就不行”）、epoch消融（挡“只是训久了”）——好消融是预判审稿人质疑、提前用实验回答</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D133</summary><textarea data-note="d133" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W19 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例</h2>
+<h3>范例 A — 完整消融表（8 类，按重要性排，Δ=相对 Full）</h3>
+<figure class="code" data-lang="markdown"><pre><code>| 配置 | 指标 | Δ | 验证目的/结论 |
+|---|---|---|---|
+| A1 w/o 组件1 | 75.9 | -2.2 | 组件1 贡献最大(有用) |
+| A2 w/o 组件2 | 76.8 | -1.3 | 组件2 有效 |
+| A3 换标准loss | 77.0 | -1.1 | 我的loss有效 |
+| A5 去遥感增强 | 76.9 | -1.2 | 增强有用 |
+| A7 分辨率512 | 76.5 | -1.6 | 高分辨率更好(小目标) |
+| A6 epoch=12 | 77.1 | -1.0 | 训练需充分(非靠训久取胜) |
+| A4 backbone→Swin | 79.0 | +0.9 | 对更强backbone也增益(不依赖骨架) |
+| A8 lr×2 | 77.3 | -0.8 | 对lr有一定敏感 |
+| <span class="gs">**Full(Ours)**</span> | <span class="gs">**78.1**</span> | — | 完整方法 |
+故事:组件1&gt;增强&gt;分辨率&gt;组件2&gt;loss;A4 证明不依赖骨架;无组件去掉反而更好→已无明显冗余。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 B — 消融分析段落（节选，进论文 4.3）</h3>
+<figure class="code" data-lang="markdown"><pre><code>我们逐一移除/替换各组件以验证其有效性(Table 2)。移除组件1导致 mAP 下降 2.2，
+为所有消融中最大，表明其捕获的{某能力}对{任务}至关重要；将我们的损失替换为标准损失
+下降 1.1，验证了损失设计的有效性。值得注意的是，方法在 Swin 骨架上仍带来 +0.9 的增益，
+说明其不依赖特定骨架。所有组件移除均导致性能下降，表明方法不含冗余设计。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — 消融批量运行 + 显著性粗判 + 柱状图</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># ① 批量评估各消融(复用 W12/W17 框架),收集指标</span>
+<span class="n">ablations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A1_wo_c1&quot;</span><span class="p">,</span><span class="s2">&quot;A2_wo_c2&quot;</span><span class="p">,</span><span class="s2">&quot;A3_stdloss&quot;</span><span class="p">,</span><span class="s2">&quot;A5_no_aug&quot;</span><span class="p">,</span><span class="s2">&quot;A7_res512&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;A6_ep12&quot;</span><span class="p">,</span><span class="s2">&quot;A4_swin&quot;</span><span class="p">,</span><span class="s2">&quot;A8_lr2x&quot;</span><span class="p">,</span><span class="s2">&quot;Full&quot;</span><span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">ablations</span><span class="p">:</span>
+    <span class="c1"># metric = eval_ckpt(f&quot;work_dirs/{name}/best.pth&quot;)   # 调你的评测</span>
+    <span class="n">metric</span> <span class="o">=</span> <span class="o">...</span>                                          <span class="c1"># 替换为真实结果</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+
+<span class="c1"># ② 显著性粗判:Δ 是否超过 std(否则在噪声内)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sig</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;显著&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">std</span> <span class="k">else</span> <span class="s2">&quot;在噪声内(不显著)&quot;</span>
+
+<span class="c1"># ③ 柱状图(8 配置 + Full 虚线参照)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_ablation</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="s2">&quot;ablation8.png&quot;</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ablations</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">results</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;Full&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;Full&quot;</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Full&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;metric&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saved&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">demo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A1_wo_c1&quot;</span><span class="p">:</span><span class="mf">75.9</span><span class="p">,</span><span class="s2">&quot;A2_wo_c2&quot;</span><span class="p">:</span><span class="mf">76.8</span><span class="p">,</span><span class="s2">&quot;A3_stdloss&quot;</span><span class="p">:</span><span class="mf">77.0</span><span class="p">,</span><span class="s2">&quot;A5_no_aug&quot;</span><span class="p">:</span><span class="mf">76.9</span><span class="p">,</span>
+            <span class="s2">&quot;A7_res512&quot;</span><span class="p">:</span><span class="mf">76.5</span><span class="p">,</span><span class="s2">&quot;A6_ep12&quot;</span><span class="p">:</span><span class="mf">77.1</span><span class="p">,</span><span class="s2">&quot;A4_swin&quot;</span><span class="p">:</span><span class="mf">79.0</span><span class="p">,</span><span class="s2">&quot;A8_lr2x&quot;</span><span class="p">:</span><span class="mf">77.3</span><span class="p">,</span><span class="s2">&quot;Full&quot;</span><span class="p">:</span><span class="mf">78.1</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">demo</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">!=</span><span class="s2">&quot;Full&quot;</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: Δ=</span><span class="si">{</span><span class="n">v</span><span class="o">-</span><span class="n">demo</span><span class="p">[</span><span class="s1">&#39;Full&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">sig</span><span class="p">(</span><span class="n">v</span><span class="o">-</span><span class="n">demo</span><span class="p">[</span><span class="s1">&#39;Full&#39;</span><span class="p">],</span><span class="mf">0.3</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">plot_ablation</span><span class="p">(</span><span class="n">demo</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>：打印每个消融相对 Full 的 Δ 及是否显著；生成柱状图（8 配置 + Full 虚线参照）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D127</strong>：① 消融的核心原则（每次改几个变量）？② 为什么每个 contribution 都要有对应消融？8 类比 5 类好在哪？为什么说消融是论文“必答题”？</li>
+<li><strong>D128</strong>：① 去掉组件后下降 2% 说明什么？多小算“没用”（和谁比）？② 去掉反而更好怎么办？</li>
+<li><strong>D129</strong>：① loss 消融 / backbone 消融各验证什么？为什么 backbone 消融能说明“通用性”？</li>
+<li><strong>D130</strong>：① 消融表怎么排列、标什么？柱状图为什么要加 Full 参照线？Δ列为什么是灵魂？</li>
+<li><strong>D131</strong>：① 消融“故事”包含哪三要素（主角/意外/结论）？② 发现组件无效该怎么办？删了有什么额外好处（对单卡卖点）？</li>
+<li><strong>D132</strong>：① 为什么改方法后必须重跑(3-seed)？② 重跑后发现删了组件掉点明显说明什么、该怎么办？</li>
+<li><strong>D133</strong>：① M5 月复盘的 go 决策核心问题是什么？② 判断“实验够了”看哪三样核心？③ 为什么别等“100%完美”才动笔写论文？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>消融归因不清</td>
+<td>一个消融改多处</td>
+<td>每个只改一处</td>
+</tr>
+<tr>
+<td>去掉组件代码报错</td>
+<td>组件被别处依赖</td>
+<td>替换成恒等/最简版（等效关掉）</td>
+</tr>
+<tr>
+<td>某消融“提升”实为波动</td>
+<td>单 seed</td>
+<td>多 seed，看是否超 std</td>
+</tr>
+<tr>
+<td>舍不得删无效组件</td>
+<td>沉没成本</td>
+<td>没用就删，简洁有效+减参提速</td>
+</tr>
+<tr>
+<td>A4/A7 OOM</td>
+<td>backbone/分辨率大</td>
+<td>降 batch + 梯度累积</td>
+</tr>
+<tr>
+<td>最终重跑对不上</td>
+<td>没用最终 config</td>
+<td>确认用删后最终 config；多 seed</td>
+</tr>
+<tr>
+<td>消融段落只贴表</td>
+<td>没解读</td>
+<td>文字分析每个关键消融 + 故事</td>
+</tr>
+<tr>
+<td>消融表排列乱无序</td>
+<td>没按重要性</td>
+<td>组件→loss→backbone/增强/超参，Full行加粗</td>
+</tr>
+<tr>
+<td>loss收益小还硬说有效</td>
+<td>怕卖点弱</td>
+<td>诚实记；贡献小就弱化该卖点，也看per-class</td>
+</tr>
+<tr>
+<td>Proposal还写着已删组件</td>
+<td>没同步更新</td>
+<td>Method同步删，Experiment填真实数字</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w18.html"><span class="dir">← 上一篇</span><span class="nm">W18 主实验 Round 2（数据集 2 收尾</span></a><a class="next" href="w20.html"><span class="dir">下一篇 →</span><span class="nm">W20 Method 章定稿 + Experim</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d127">D127 周一</a><a class="sub" href="#d127-am">上午 设计 8 类消融实验</a><a class="sub" href="#d127-noon">中午 启动 A1 + A2（核心组件消</a><a class="sub" href="#d127-pm">晚上 启动 A3 + A4（loss </a><a href="#d128">D128 周二</a><a class="sub" href="#d128-am">上午 A1 结果分析</a><a class="sub" href="#d128-noon">中午 A2 结果分析</a><a class="sub" href="#d128-pm">晚上 启动 A5 + A6（增强 / </a><a href="#d129">D129 周三</a><a class="sub" href="#d129-am">上午 A3 结果分析（loss 消融）</a><a class="sub" href="#d129-noon">中午 A4 结果分析（backbone</a><a class="sub" href="#d129-pm">晚上 启动 A7 + A8（分辨率 /</a><a href="#d130">D130 周四</a><a class="sub" href="#d130-am">上午 A5–A8 结果分析</a><a class="sub" href="#d130-noon">中午 整合所有消融到一张表</a><a class="sub" href="#d130-pm">晚上 画消融柱状图</a><a href="#d131">D131 周五</a><a class="sub" href="#d131-am">上午 分析消融的“故事”</a><a class="sub" href="#d131-noon">中午 据分析更新方法（删无效组件）</a><a class="sub" href="#d131-pm">晚上 写消融分析段落（≥500 字）</a><a href="#d132">D132 周六</a><a class="sub" href="#d132-am">上午 最终方法在主数据集重跑(3-se</a><a class="sub" href="#d132-noon">中午 确保所有实验可复现</a><a class="sub" href="#d132-pm">晚上 写完整的实验日志归档文档</a><a href="#d133">D133 周日</a><a class="sub" href="#d133-am">上午 W19 周复盘</a><a class="sub" href="#d133-noon">中午 更新 Proposal v3（融</a><a class="sub" href="#d133-pm">晚上 M5 月复盘</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

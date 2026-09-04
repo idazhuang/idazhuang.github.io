@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W2 · DOTA + 旋转检测 baseline ——  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M1 入门与环境</span><span>·</span><span>Week 2</span><span>·</span><span>D8–D14</span></div><h1 class="title">DOTA + 旋转检测 baseline —— 跑通你人生第一个完整科研实验闭环</h1><p class="subtitle">「教-学-做」带教版</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="8" data-k="am" title="D8 上午段"></i><i data-d="8" data-k="noon" title="D8 中午段"></i><i data-d="8" data-k="pm" title="D8 晚上段"></i></span><span class="sday"><i data-d="9" data-k="am" title="D9 上午段"></i><i data-d="9" data-k="noon" title="D9 中午段"></i><i data-d="9" data-k="pm" title="D9 晚上段"></i></span><span class="sday"><i data-d="10" data-k="am" title="D10 上午段"></i><i data-d="10" data-k="noon" title="D10 中午段"></i><i data-d="10" data-k="pm" title="D10 晚上段"></i></span><span class="sday"><i data-d="11" data-k="am" title="D11 上午段"></i><i data-d="11" data-k="noon" title="D11 中午段"></i><i data-d="11" data-k="pm" title="D11 晚上段"></i></span><span class="sday"><i data-d="12" data-k="am" title="D12 上午段"></i><i data-d="12" data-k="noon" title="D12 中午段"></i><i data-d="12" data-k="pm" title="D12 晚上段"></i></span><span class="sday"><i data-d="13" data-k="am" title="D13 上午段"></i><i data-d="13" data-k="noon" title="D13 中午段"></i><i data-d="13" data-k="pm" title="D13 晚上段"></i></span><span class="sday"><i data-d="14" data-k="am" title="D14 上午段"></i><i data-d="14" data-k="noon" title="D14 中午段"></i><i data-d="14" data-k="pm" title="D14 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的位置</strong>:W1 你把“地基”打好了（环境、读论文、知识库、第一个脚本）。W2 你要在这套地基上<strong>真正跑出一个结果</strong>——把 Oriented R-CNN 在 DOTA 上训练到 mAP ~75，并做你第一个消融。走完这一周，你就完整体验了“<strong>数据 → 训练 → 监控 → 评估 → 分析 → 改进</strong>”这条科研主回路。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会复现开源代码；理解“从配置到训练到评估”的完整实验流程；掌握旋转检测的核心概念。
+<strong>心态提醒</strong>：这周会第一次面对“训练跑起来了但要等几小时”“loss 不降”这类真实科研场景。<strong>等待和报错都是常态</strong>，不是出问题。下面每一步都给了“卡住自救”。</p>
+</blockquote>
+<hr />
+<h2>🧭 W2 总览：从“会装环境”到“会复现”</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周的关键跃迁</th>
+<th>具体含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>看得懂别人的代码</td>
+<td>能读懂一个 config 文件每个参数在说什么</td>
+</tr>
+<tr>
+<td>能把训练跑起来</td>
+<td>切图 → dry-run → 正式训练（用上你的 4090）</td>
+</tr>
+<tr>
+<td>看得懂训练健不健康</td>
+<td>会看 loss/mAP 曲线，知道“正常”长什么样</td>
+</tr>
+<tr>
+<td>能评估并分析结果</td>
+<td>算出 mAP、per-class AP，从数字里<strong>发现研究问题</strong></td>
+</tr>
+<tr>
+<td>会做受控实验</td>
+<td>第一个消融：只改 backbone，看效果变化</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>本周精读 5 篇方法论文</strong>（你的清单）:Oriented R-CNN、RoI Transformer、ReDet、Gliding Vertex、R3Det;<strong>泛读</strong>:S²A-Net、Oriented RepPoints、ARC。</p>
+<hr />
+</section>
+<article class="day" id="d8" data-d="8"><header class="day-head"><span class="dnum">D8</span><h2 class="day-t">周一 · 读第一篇“方法论文”(Oriented R-CNN)+ 读懂 config + dry-run</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天你读第一篇<strong>方法论文</strong>（不是综述、不是数据集，是“提出一个新网络”的论文）。<strong>读法第三次升级</strong>：重点放在“它的核心招数是什么、画成图长什么样”。同时学一个全新技能：<strong>读懂一个 config 配置文件</strong>——这是复现任何 MM 系列代码的钥匙。</p>
+<p><strong>预期管理</strong>：今天的产物是“读懂一篇方法论文 + 读懂一个 config + dry-run 跑通”，还不是完整训练。提醒：第一次读 config 会被 <code>_base_</code> 继承绕晕、第一次 dry-run 可能因路径/显存报错——这都正常，下面每步都给了自救。今天的目标是“看懂别人的实验怎么设置的”，明天才正式开训。</p>
+</blockquote>
+</div><section class="slot" id="d8-am" data-d="8" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D8 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 Oriented R-CNN(Xie et al. 2021, ICCV)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>方法论文</strong>：核心是“<strong>它提出了什么新东西、为什么比前人好</strong>”。读它你要能回答：它解决了旋转检测里的哪个具体痛点？用什么招？</li>
+<li><strong>两阶段检测器(two-stage)</strong>：先“<strong>生成候选框(proposal)</strong>”（可能有目标的区域），再“<strong>对候选框做精细分类+回归</strong>”。Oriented R-CNN 属于这一类，它的创新在于<strong>高效地生成“旋转候选框”</strong>。</li>
+<li><strong>一阶段 vs 两阶段（这个范式对比要刻进脑子）</strong>：<strong>一阶段</strong>（如 YOLO 系）直接在特征图上预测框，<strong>快但通常精度略低</strong>；<strong>两阶段</strong>先选候选区再精修，<strong>准但通常慢一些</strong>。遥感旋转检测里两类都有人做。理解这个权衡，你看任何检测论文都能先归位它属于哪类、为什么这么选。</li>
+<li><strong>RoI(Region of Interest)</strong>：候选框框出的那块特征区域。旋转检测里是 <strong>Rotated RoI</strong>（旋转的候选区）。把候选框对应的特征“抠”出来送进第二阶段精修——这个“抠特征”的操作（RoI Align/旋转 RoI Align）是两阶段检测的关键零件。</li>
+<li><strong>为什么从 Oriented R-CNN 开篇</strong>：它是空天院孙显组的代表作、社区复现成熟、在 DOTA 上是强 baseline——既是你第一个要跑通的实验，也是你后续改进（M3–M4 加自己的组件）的基座。读懂它，等于读懂了“两阶段旋转检测器”这一整类。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>精读 3 遍（综述/方法/应用对应 5/3/2 遍，这是方法论文→3 遍）。第 1 遍 标题+摘要+Fig1+Tab1；第 2 遍 Intro+Conclusion；第 3 遍 Section 3 Method,<strong>死磕一件事：它的“旋转 RoI/旋转 proposal”是怎么生成的</strong>。笔记第 2 段用<strong>一句话+一个手画 pipeline</strong> 说清它的招数。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2021_Xie_OrientedRCNN.md</code>，第 2 段能讲清“它怎么又快又准地产生旋转候选框”，并标注“它比前人（如 RoI Transformer）省在哪”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>陷入数学公式细节出不来——第一遍抓“<strong>思想/流程</strong>”就行，公式 D9 对比时再深究。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>看不懂 Method → 去看它的 Fig 2/3（方法流程图），遥感/CV 方法论文的图就是“方法的说明书”，看图顺序跟着箭头走。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>读方法论文的姿势</strong>（抓核心创新+画出 pipeline+对比前人），并理解了“两阶段检测+RoI”这个 CV 基础范式。</p>
+</div></section></section><section class="slot" id="d8-noon" data-d="8" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D8 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">打开 MMRotate 源码，逐行读 Oriented R-CNN 的 config</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>config（配置文件）</strong>:MM 系列把“用什么模型、什么数据、怎么训”全写在一个 <code>.py</code> 配置里。<strong>读懂 config = 读懂整个实验设置</strong>，这是复现的核心技能。</li>
+<li>config 的五大块（对应你昨天读论文学的概念）：<strong>backbone</strong>（主干，提特征，如 ResNet-50）、<strong>neck</strong>（脖子，多尺度特征融合，如 FPN）、<strong>head</strong>（头，做最终的检测预测）、<strong>loss</strong>（损失函数，告诉模型“错多少”）、<strong>schedule</strong>（训练计划：学习率、训多少轮）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>打开 <code>configs/oriented_rcnn/</code> 下的配置文件，<strong>逐行读注释</strong>。对照上面五大块，在 <code>20-代码实验/config注释_OrientedRCNN.md</code> 里写下：这个实验用的 backbone / neck / head / loss / 学习率 / batch_size / 训练轮数分别是什么。读 config 时对照这张“五大块地图”：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># Oriented R-CNN config 的五大块（简化示意，真实 config 会用 _base_ 继承拆开）</span>
+<span class="n">model</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;OrientedRCNN&#39;</span><span class="p">,</span>
+    <span class="n">backbone</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;ResNet&#39;</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>        <span class="c1"># ① 主干：提特征</span>
+    <span class="n">neck</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;FPN&#39;</span><span class="p">,</span> <span class="n">in_channels</span><span class="o">=</span><span class="p">[</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">2048</span><span class="p">],</span> <span class="o">...</span><span class="p">),</span>  <span class="c1"># ② 脖子：多尺度融合</span>
+    <span class="n">rpn_head</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;OrientedRPNHead&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>          <span class="c1"># ③ 头(第一阶段)：产生旋转proposal</span>
+    <span class="n">roi_head</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;OrientedStandardRoIHead&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span>  <span class="c1"># ③ 头(第二阶段)：精分类+回归</span>
+    <span class="n">train_cfg</span><span class="o">=...</span><span class="p">,</span> <span class="n">test_cfg</span><span class="o">=...</span><span class="p">)</span>                          <span class="c1"># 训练/测试的匹配、NMS 等</span>
+<span class="c1"># 数据块</span>
+<span class="n">dataset_type</span><span class="o">=</span><span class="s1">&#39;DOTADataset&#39;</span>
+<span class="n">data_root</span><span class="o">=</span><span class="s1">&#39;/abs/path/to/split_dota/&#39;</span>                     <span class="c1"># ← 改成你切好图的绝对路径</span>
+<span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">samples_per_gpu</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>                        <span class="c1"># ← samples_per_gpu 就是 batch_size</span>
+<span class="c1"># schedule 块</span>
+<span class="n">optimizer</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;SGD&#39;</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.0025</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>  <span class="c1"># ④ 学习率/优化器</span>
+<span class="n">runner</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;EpochBasedRunner&#39;</span><span class="p">,</span> <span class="n">max_epochs</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>      <span class="c1"># ⑤ 训多少轮(1×=12)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>对照这个，把真实 config 里对应的值抄进你的注释文档(注意真实值可能分散在 <code>_base_</code> 继承的多个文件里)。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份注释文档，能指着 config 说出“它用 ResNet-50 + FPN,SGD,lr=0.005,12 epochs”这种级别的信息。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>被 <code>_base_ = [...]</code>(继承的基类配置)绕晕——MM 的 config 会<strong>继承</strong>其他文件。顺着 <code>_base_</code> 进去看被继承的部分，它们合起来才是完整配置。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>某参数不知含义 → 先记进文档标“待查”，大部分参数 D9–D11 跑起来后你会自然懂；关键的(backbone/lr/epoch)务必搞清。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你掌握了<strong>“读 config 反推实验设置”</strong>这把万能钥匙——以后复现任何 MM 系列代码，第一步都是读它的 config。</p>
+</div></section></section><section class="slot" id="d8-pm" data-d="8" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D8 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">准备训练 config + 改 batch_size 适配 4090 + dry-run</h3></div>
+<div class="note"><b>★ 本周四道闸门都缺关键一步，先看补充页</b>　DOTA 没给下载地址和目录结构、切图命令没说要先改 json、"改好的 config"从没给出内容、学习率与 batch 的配比只字未提、评测没说 test 集根本没有标注。<a href="w2-baseline.html">《W2 DOTA baseline 保姆级实操》</a> 把这五处全部补齐。另有 <a href="w2-d8-full.html">D8 详注版</a>（Oriented R-CNN 完整导读 + config 逐行）与 <a href="w2-d10-d14-full.html">D10–D14 详注版</a>（四篇论文导读 + 旋转框 IoU 完整实现）。<br><b>另外</b>：本周要精读 Oriented R-CNN、逐行读 config、分析 per-class AP，这些全部建立在 backbone/FPN/anchor/IoU/mAP 之上，而全书从没讲过这层——开始前先读 <a href="../start/cv-concepts.html">《检测与训练核心概念详解》</a>。</div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>dry-run（试运行）</strong>：正式开跑前，<strong>先只跑 1 个 epoch / 几十个 iteration</strong>，确认“能正常训练、不报错”，再投入几小时正式训练。这是避免“跑了 3 小时才发现路径写错”的保命操作。</li>
+<li><strong>batch_size（批大小）</strong>：一次喂给模型几张图。<strong>越大越稳但越吃显存</strong>。你是 <strong>4090(24GB)</strong>,Oriented R-CNN + ResNet-50 通常能开 <code>batch_size=2</code>(甚至更高)，比 12GB 卡宽裕得多——这是你硬件的优势。</li>
+<li><strong>dry-run 是一种“先排雷再投入”的科研习惯</strong>：训练动辄几小时，如果路径、显存、标签有问题，等几小时崩了再发现，时间全浪费。先用 1 epoch/几十 iter 快速验证“链路通不通”，通了再正式投入——这个习惯能帮你省下大量“白等”的时间，以后每个新实验都该先 dry-run。</li>
+<li><strong>把单卡 4090 写成你的“卖点”而非“短板”</strong>：你只有一张卡，看似不如实验室的多卡集群，但<strong>这恰恰是你论文的差异化定位</strong>——“在单张消费级 GPU 上实现 X”本身就是高效性的证明。从第一个实验起就记录“我用单张 4090、batch_size=2、训练耗时 X 小时”，这些数字以后会变成你论文里 Params/FPS/单卡可复现的卖点。<strong>资源受限不是借口，是你的特色。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>复制一份 config 改成你的:① 改数据路径指向你下载/切好的 DOTA;② <code>batch_size</code> 先设 2（4090 够）;③ 跑一次 dry-run（把 epoch 临时设 1，或只跑几十 iter）看能否正常前进。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># ① 复制一份你自己的 config（别改官方原文件）</span>
+cp<span class="w"> </span>configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py<span class="w"> </span>configs/my_orcnn_r50.py
+<span class="c1"># ② 在 my_orcnn_r50.py 里改两处：data_root 指向切好图的绝对路径；samples_per_gpu=2</span>
+<span class="c1"># ③ dry-run：单卡、训练（先把 max_epochs 临时设 1 或 Ctrl+C 看前几十 iter 是否正常）</span>
+python<span class="w"> </span>tools/train.py<span class="w"> </span>configs/my_orcnn_r50.py
+<span class="c1"># 观察终端：应持续打印 loss（有限数、在变化），无报错 → 数据通了、模型能训</span>
+nvidia-smi<span class="w">          </span><span class="c1"># 另开一个终端，确认 4090 显存被占用、GPU 利用率不为 0</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>dry-run 时终端持续打印 loss（且是有限数、在变化），无报错——截图存证。这说明数据通了、模型能训。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 直接开正式训练不 dry-run → 几小时后才暴雷;② batch_size 设太大爆显存(<code>CUDA out of memory</code>);③ 数据路径用了相对路径在后台跑时找不到。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li><code>CUDA out of memory</code> → 把 batch_size 降到 1；仍不行→减小输入分辨率或开混合精度(fp16)。</li>
+<li>loss 打印出 <code>nan</code> → 学习率太大，先按“batch_size 减半则 lr 减半”的线性原则调小 lr。</li>
+<li>报“找不到标注/图片” → 路径错，用<strong>绝对路径</strong>，并确认 DOTA 已按需要切过图（明天 D9 做）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>“改 config 适配自己硬件 + 用 dry-run 排雷”</strong>——这是复现别人代码时最实用的两招，能帮你省下大量“跑半天才发现错”的时间。<strong>做了</strong>（可训练的 config + dry-run 通过）、<strong>学了</strong>（config 五大块、batch_size 与显存关系、dry-run 的意义）、<strong>会了</strong>（改路径/batch_size、读懂 OOM/nan 报错并对症）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复现一份 MM 代码的开局四步</strong>:① 读 config（反推实验设置）→ ② 改数据路径 + batch_size 适配你的 GPU → ③ dry-run 1 epoch 排雷 → ④ 确认 loss 正常再正式开训。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ Oriented R-CNN 笔记 ✅ config 注释文档 ✅ dry-run 成功截图。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜读检测 config 四看</strong>:① model（检测器+backbone+head）② dataset（路径/类别数/数据增强 pipeline）③ schedule（lr/epoch/优化器）④ runtime（日志/保存）。看懂这四块，任何 MMxx config 都能改；改完先 <code>--dry-run</code>/小步验证再正式训。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D8</summary><textarea data-note="d8" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d9" data-d="9"><header class="day-head"><span class="dnum">D9</span><h2 class="day-t">周二 · 读 RoI Transformer 对比 + 切图（为什么要切）+ 启动正式训练</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天有两个新东西：<strong>理解“大图为什么要切成小块”</strong>（遥感特有的工程问题），和<strong>启动你人生第一次正式训练</strong>（然后它会在后台跑几小时——你要学会“挂着它去干别的”）。</p>
+<p><strong>预期管理</strong>：今天会启动训练，但训练要跑几小时，今天看不到最终结果——这正是科研常态（等待是日常）。提醒：关键不是盯着它跑，而是“正确启动 + 记好命令和 log 路径 + 让它后台跑”，然后去干别的，明天回来看。第一次切图脚本可能因目录结构报错，对照官方文档摆好即可。</p>
+</blockquote>
+</div><section class="slot" id="d9-am" data-d="9" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D9 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 RoI Transformer(Ding et al. 2019, CVPR)+ 与 Oriented R-CNN 对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>RRoI(Rotated RoI)变换</strong>——RoI Transformer 的核心是“把水平候选框<strong>学着变换</strong>成旋转候选框”。它是 Oriented R-CNN 的“前辈”，理解它能让你看清 Oriented R-CNN 改进在哪。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>精读 3 遍，<strong>专门做一件事</strong>：在笔记里画一张“对比小表”——RoI Transformer vs Oriented R-CNN 在“如何得到旋转候选框”上的差异、谁更快/更简洁。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张两行对比表 + 一句话结论（&quot;Oriented R-CNN 用更轻的方式直接产生旋转 proposal，省掉了 RoI Trans 的某步&quot;）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>孤立地读、不和昨天的 Oriented R-CNN 联系——方法论文要<strong>成对/成族地对比读</strong>，才记得住、才会写 Related Work。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>RRoI 变换看不懂 → 看它的方法图，关注“输入是什么框、输出是什么框、中间那步在干嘛”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你练了<strong>“对比阅读”</strong>——把新论文挂到已读论文的坐标系上，这是构建“方法族谱”的基本功（W2 末你会画出旋转检测四大家族图）。</p>
+</div></section></section><section class="slot" id="d9-noon" data-d="9" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D9 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">运行 DOTA 切图工具（理解“为什么切”+ overlap 的作用）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>为什么切图(image split)</strong>:DOTA 原图常 2000×4000+，<strong>整张塞进 GPU 既爆显存又让小目标更小</strong>。所以把大图切成 1024×1024 的小块(patch)再训练。这是遥感检测<strong>特有的工程步骤</strong>，通用 CV（图本就小）不需要。</li>
+<li><strong>overlap（重叠）</strong>：切块时让相邻块<strong>重叠一部分</strong>（如 200 像素），避免一个目标正好被切在边界上、两块都只看到半个。</li>
+<li><strong>为什么这是遥感“特有”的坑</strong>：通用 CV 数据集(COCO)的图本来就几百像素、目标占比也合适，直接喂就行；遥感是“超大图 + 超小目标”的极端组合，不切图根本训不了。<strong>这个差异是你理解“遥感 CV 难在哪”的一个具体切口</strong>——很多遥感特有的设计都源于“图太大、目标太小、还任意朝向”。</li>
+<li><strong>切图带来的新问题（也是你未来可做的点）</strong>：切块会<strong>割裂大目标</strong>（一座桥被切到两块），也会让模型<strong>看不到全局上下文</strong>；推理时还要把各块的预测<strong>拼回原图</strong>并去重。这些都是遥感检测的工程难点，记下来——它们既是你现在要正确处理的，也可能是未来论文里可以改进的地方（如何更好地处理跨块目标）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>运行 MMRotate 的切图脚本 <code>tools/data/dota/split/img_split.py</code>(参数照官方文档)，把 train/val 切成 1024×1024、overlap 200 的 patch。切完看一眼输出目录的图和标注。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># DOTA 切图：1024×1024、overlap 200（用官方提供的 split 配置 json）</span>
+python<span class="w"> </span>tools/data/dota/split/img_split.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--base-json<span class="w"> </span>tools/data/dota/split/split_configs/ss_trainval.json
+<span class="c1"># ss = single-scale 单尺度切图；配置 json 里指定了 patch 尺寸(1024)、gap(200=overlap)、</span>
+<span class="c1">#      输入 DOTA 目录、输出目录。改 json 里的路径指向你的 DOTA。</span>
+<span class="c1"># 切完：输出目录是一堆 1024×1024 小图 + 切好的标注；用 D6 的 vis_dota.py 抽查一张确认框还对</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>得到一堆 1024×1024 的小图 + 对应切好的标注；随手用你 D6 的 <code>vis_dota.py</code> 可视化一张切块，框仍然对。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 忘了切图直接拿原图训→OOM 或效果差;② overlap 设 0→边界目标被切碎，掉点;③ 切完没更新 config 里的数据路径（要指向切后的目录）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>切图脚本报错 → 多半是输入/输出路径或 DOTA 目录结构不符脚本预期，对照官方文档的目录结构摆好。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你理解了<strong>遥感大图必须切块训练</strong>这一关键工程常识，以及 overlap 的设计动机——这在你后面所有遥感检测/分割实验里都会用到。</p>
+</div></section></section><section class="slot" id="d9-pm" data-d="9" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D9 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 Oriented R-CNN 正式训练(ResNet-50, 1× schedule)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>schedule / 1×</strong>:MM 框架约定 <strong>1× = 12 epochs,2× = 24,3× = 36</strong>。<strong>epoch</strong> = 训练集完整过一遍。初次复现用 1× 即可。</li>
+<li><strong>后台挂训练</strong>：训练要跑几小时，你要让它在后台跑、<strong>记下启动命令和 log 路径</strong>，然后去睡觉/干别的，明天回来看结果。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>用你 D8 改好的 config 启动正式训练(ResNet-50,1×,batch_size=2)。<strong>关键动作</strong>:① 把启动命令完整记进 <code>20-代码实验/实验日志.md</code>;② 记下 <code>work_dirs/</code> 里这次实验的输出目录（log、checkpoint 都在这）;③ 让它后台跑(<code>nohup ... &amp;</code> 或用 tmux/screen，避免关终端就断)。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 方式一：nohup 后台跑（输出重定向到日志，关终端也不断）</span>
+nohup<span class="w"> </span>python<span class="w"> </span>tools/train.py<span class="w"> </span>configs/my_orcnn_r50.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--work-dir<span class="w"> </span>work_dirs/orcnn_r50<span class="w"> </span>&gt;<span class="w"> </span>train_r50.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;启动时间: </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span><span class="w">          </span><span class="c1"># 记下启动时间，好估算何时跑完</span>
+<span class="c1"># 方式二（更推荐）：tmux 里跑，可随时回去看</span>
+<span class="c1">#   tmux new -s train  → 在里面跑 python tools/train.py ...  → Ctrl+B then D 脱离</span>
+<span class="c1">#   回来看：tmux attach -t train</span>
+nvidia-smi<span class="w">          </span><span class="c1"># 确认 4090 在干活（显存占用 + 利用率高）</span>
+<span class="c1"># 实验日志.md 里记三样：完整命令 + work_dir 路径 + 启动时间</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>训练在后台运行，log 文件在持续写入（loss 在下降），你已记录“命令 + log 路径 + 启动时间”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 前台跑、一关 SSH/终端训练就死（用 nohup/tmux）;② 不记命令和路径，明天找不到这次实验;③ 不记启动时间，无法估算何时跑完。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>启动即崩 → 回看 D8 的 OOM/nan/路径决策树；训练极慢 → 确认真的在用 GPU(<code>nvidia-smi</code> 看显存占用和利用率，4090 应被吃满)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你启动了<strong>人生第一次正式深度学习训练</strong>，并学会了“切图→改路径→后台挂训→记录命令与 log”这套训练工程流程。<strong>做了</strong>（切好的 DOTA + 正在跑的训练）、<strong>学了</strong>（切图/overlap、schedule/epoch、后台训练）、<strong>会了</strong>（记录可复现的训练命令、用 nvidia-smi 确认 GPU 在干活）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ RoI Transformer 笔记 ✅ DOTA 切图完成 ✅ 训练已启动 + log 路径已记录。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜遥感大图：切图 + 后台挂训</strong>:① 大图必须切块(1024×1024)再训（否则爆显存、小目标更小），切块要带 overlap（如 200）防边界目标被切碎;② 切完更新 config 数据路径指向切后目录;③ 训练几小时起，用 nohup/tmux 后台跑（关终端不断），并记“完整命令+work_dir+启动时间”;④ <code>nvidia-smi</code> 确认 GPU 真在干活。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D9</summary><textarea data-note="d9" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d10" data-d="10"><header class="day-head"><span class="dnum">D10</span><h2 class="day-t">周三 · 读 ReDet + 学会“看训练健不健康”（TensorBoard / loss 曲线）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>你的训练昨晚在跑。今天的核心新技能是：<strong>怎么判断“训练是健康的还是出问题了”</strong>——看 loss 曲线、学习率曲线、mAP 曲线。这是每个炼丹师的基本功。</p>
+<p><strong>预期管理</strong>：今天学“看曲线诊断训练健康度”，这是会跟随你整个博士生涯的基本功。提醒：loss 会上下抖动是正常的（看趋势不看单点）；如果发现 loss 不降或变 nan，别慌——那说明你学会了“诊断”，下面的决策树会带你定位是 lr、数据还是标签的问题。</p>
+</blockquote>
+</div><section class="slot" id="d10-am" data-d="10" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D10 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 ReDet(Han et al. 2021, CVPR)——旋转等变网络</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>旋转等变(rotation-equivariant)</strong>——直觉：遥感目标朝向随机，如果网络“图转了多少度、特征也跟着转多少度”，就天然对朝向鲁棒。ReDet 把这种“等变性”设计进网络。理解“<strong>为什么旋转等变对遥感重要</strong>”即可。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>精读 3 遍，笔记第 2 段答：它靠什么实现旋转等变？这相比“靠数据增强见过各种角度”好在哪？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>能用一句话向外行解释“旋转等变”是什么、对遥感为什么有用。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>陷进群卷积(group conv)的数学——抓“等变=输入转则特征同步转”的直觉即可。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>概念太抽象 → 类比：CNN 对“平移”天然等变（物体挪个位置照样认）,ReDet 想让它对“旋转”也这样。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你接触到“<strong>把先验（目标会旋转）设计进网络结构</strong>”这种思路——这是一类高级 idea 的来源，后面你想自己的方法时用得上。</p>
+</div></section></section><section class="slot" id="d10-noon" data-d="10" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D10 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">监控训练：TensorBoard + 看懂三条曲线</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>TensorBoard</strong>：可视化训练过程的工具，能画出 loss、学习率、mAP 随训练步数的曲线。</li>
+<li>三条曲线的“健康长相”：<strong>loss</strong> 应<strong>总体平稳下降</strong>（可以抖，但趋势向下）；<strong>学习率</strong> 按 schedule 变化（常见先 warmup 上升再阶梯下降）；<strong>mAP</strong>（若每隔几 epoch 验证一次）应<strong>逐步上升</strong>。</li>
+<li><strong>为什么看曲线比看终端数字强</strong>：终端滚动的数字你只能看到“此刻这一个值”，看不出趋势；曲线把整个训练过程画出来，一眼就能判断“在降/在升/卡住/发散”。<strong>这是诊断训练的核心手段</strong>，以后每次训练都要做这个“体检”。</li>
+<li><strong>不健康的几种长相</strong>（看到就要排查）:loss <strong>不降反升</strong>或<strong>长期持平</strong>（lr 太大/数据标签有 bug）;loss <strong>突然飙到 nan/inf</strong>（lr 太大或脏数据）;loss 降但 <strong>mAP 一直是 0</strong>（标签/类别映射/评测路径错）。<strong>记住这几种“病征”对应的“病因”</strong>，下面决策树会用到。</li>
+<li><strong>学习率曲线为什么要看</strong>：它能确认 schedule 真的按预期在跑（warmup 有没有生效、阶梯下降在第几 epoch），若 loss 在某个点突然变化，对照 lr 曲线常能解释（比如 lr 阶梯下降时 loss 跟着下一个台阶）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p><code>tensorboard --logdir work_dirs/</code> 打开，浏览器看曲线。在实验日志里记下:① loss 有没有在降?② 当前到第几 epoch?③ 有没有验证 mAP、是多少？</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 启动 TensorBoard（若 config 里开了 TensorboardLoggerHook，work_dirs 下会有 tf_logs）</span>
+tensorboard<span class="w"> </span>--logdir<span class="w"> </span>work_dirs/orcnn_r50<span class="w"> </span>--port<span class="w"> </span><span class="m">6006</span>
+<span class="c1"># 浏览器开 http://localhost:6006（远程服务器需 ssh -L 6006:localhost:6006 做端口转发）</span>
+<span class="c1"># 没开 TensorBoard hook 也没关系：MM 的 .log.json 里有逐 iter 的 loss，可用补充包 plot_loss 画</span>
+tail<span class="w"> </span>-f<span class="w"> </span>work_dirs/orcnn_r50/*.log<span class="w">        </span><span class="c1"># 实时看训练日志滚动（loss 在降就健康）</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>你能指着曲线说“loss 从 X 降到 Y，在平稳下降，训练健康”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 只看终端数字不看曲线——<strong>曲线一眼看出趋势，数字看不出</strong>;② loss 抖一下就以为崩了——<strong>正常会抖</strong>，看趋势不看单点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>loss <strong>不降或上升</strong> → 学习率可能太大（调小）或数据/标签有 bug（回 D9 检查切图后标注对不对）。</li>
+<li>loss <strong>变 <code>nan</code>/爆炸</strong> → lr 太大，显著调小；或有脏数据。</li>
+<li><strong>mAP 一直是 0</strong> → 几乎一定是标签/类别映射错了，或评测数据路径错。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>“用 TensorBoard 三条曲线判断训练健康度”</strong>——这是你以后每次训练都要做的体检。能看懂曲线，你就从“盲跑”升级成“会诊断”。<strong>做了</strong>（监控并记录了训练状态）、<strong>学了</strong>（loss/lr/mAP 曲线的健康长相）、<strong>会了</strong>（从曲线异常反推问题：lr/数据/标签）。</p>
+</div></section></section><section class="slot" id="d10-pm" data-d="10" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D10 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读 S²A-Net（泛读）+ 画“旋转检测四大家族”对比表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>S²A-Net</strong>(Han 2022, TGRS)是另一种旋转检测思路（特征对齐）。读到这，你已读了 4 个方法，该<strong>横向收编成一张族谱</strong>了。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>泛读 S²A-Net（30min，只抓核心 idea）；然后做一张 <strong>“旋转检测四大家族”对比表</strong>:Oriented R-CNN / RoI Transformer / ReDet / S²A-Net，各列“核心招数 / 属于哪类思路 / 相对优劣 / 代表场景”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张 4 行对比表，存 <code>10-论文笔记/旋转检测_族谱.md</code>。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>把对比表写成各自的摘要——要<strong>横向对齐字段</strong>（同一维度下比），才看得出门道。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>不知怎么归类 → 简单分“两阶段 proposal 类 / 等变类 / 特征对齐类”即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你第一次把多篇方法论文<strong>收编成族谱</strong>——这正是你未来写论文 <strong>Related Work 章节</strong>的骨架，也是选题时“看清这片地谁做过什么”的地图。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ ReDet 笔记 ✅ S²A-Net 笔记 ✅ 四大家族对比表。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜旋转检测四大家族</strong>:① 直接回归角度（五参数 θ，有角度周期/边界突变）② 顶点偏移（Gliding Vertex，绕开角度回归）③ 两阶段对齐（RoI Transformer：水平 RoI→旋转 RoI）④ 旋转等变（ReDet：特征对旋转鲁棒）。选型先问“目标朝向乱不乱、要不要等变”。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D10</summary><textarea data-note="d10" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d11" data-d="11"><header class="day-head"><span class="dnum">D11</span><h2 class="day-t">周四 · 读 Gliding Vertex + 评估 baseline(mAP / per-class AP)+ 写复现报告</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天你的训练应该跑完了。核心事件：<strong>第一次评估自己的模型、读懂 mAP 与 per-class AP，并从数字里“发现研究问题”</strong>——这是“从数据中找选题”的起点，也是科研最迷人的一步。</p>
+<p><strong>预期管理</strong>：今天你会第一次拿到自己训练的模型的分数。提醒：如果 mAP 落在 74–76 就是复现成功（别因为不是 100 就失落，检测任务 mAP 75 已是很好的水平）；如果 mAP≈0 几乎一定是标签/路径配错，不是方法问题。今天最有价值的不是那个 mAP 数字，而是“从 per-class AP 里看出哪类弱、追问为什么”——这是你 M3 找 Gap 的起点。</p>
+</blockquote>
+</div><section class="slot" id="d11-am" data-d="11" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D11 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 Gliding Vertex(Xu et al. 2021, TPAMI)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>滑动顶点(gliding vertex)</strong>——一种“巧妙表示旋转框”的方式：在水平框的四条边上各滑出一个顶点来逼近旋转框，<strong>避免角度回归的不连续问题</strong>（角度从 359°→0° 会突变，让网络难学）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>精读 3 遍，笔记答：它用什么方式回避了“角度回归不连续”这个坑？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>能说清“角度突变问题”是什么、滑动顶点怎么绕开它。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤</h4><div class="blk-b"><p>不懂“角度周期性”→记住“0° 和 360° 其实是同一个朝向，但数值上差很大，直接回归角度会让网络困惑”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你接触到旋转检测里一个经典痛点（角度表示）及其多种解法——这类“表示方式”的小创新，正是“小而硬”题目的富矿。</p>
+</div></section></section><section class="slot" id="d11-noon" data-d="11" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D11 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">跑评估脚本，记录 mAP</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>测试/评估</strong>：用训好的权重(<code>work_dirs/.../latest.pth</code>)在验证/测试集上跑，算出指标。</li>
+<li><strong>mAP</strong>：所有类别 AP 的平均，检测的总分。DOTA-v1.0 上 <strong>Oriented R-CNN + ResNet-50</strong> 复现到 <strong>mAP ≈ 75–76</strong> 算正常。</li>
+<li><strong>mAP 到底在量什么</strong>:AP（平均精度）综合衡量一个类别“查得全（召回）又查得准（精度）”的程度；一个检测算正确，要求预测框和 GT 框的 IoU 超过阈值（如 0.5）且类别对。mAP 就是把所有类别的 AP 平均。<strong>它一个数概括了检测器的综合水平</strong>，所以是检测的“总分”。</li>
+<li><strong>关键坑：评测协议要对齐(07 vs 12 metric)</strong>：同一份预测，用 VOC2007 的 11 点插值还是 VOC2012 的连续积分算 AP，数值会差一两个点。<strong>复现对比时必须用和论文/社区同一种协议</strong>，否则“我比它低 2 个点”可能只是协议不同，不是方法差。DOTA 社区常用 07 metric。</li>
+<li><strong>“复现到接近公认值”是金标准</strong>：你怎么知道自己做对了?——把 mAP 和“社区/论文公认的 ~75–76”对比，落在这个范围就说明你整条流程（数据/训练/评估）都对了。这种“对参考值”的习惯，贯穿你以后所有复现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>运行 <code>python tools/test.py &lt;config&gt; work_dirs/.../latest.pth --eval mAP</code>，记录得到的 mAP。和“参考值 75–76”对比。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 评估：用训好的权重在验证集上算 mAP</span>
+python<span class="w"> </span>tools/test.py<span class="w"> </span>configs/my_orcnn_r50.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>work_dirs/orcnn_r50/latest.pth<span class="w"> </span>--eval<span class="w"> </span>mAP
+<span class="c1"># 输出会打印总 mAP 和每个类别的 AP（per-class AP，下一步要用）</span>
+<span class="c1"># 想把预测结果存下来供 D13 可视化：加 --out work_dirs/orcnn_r50/result.pkl</span>
+<span class="c1"># DOTA 测试集无标注 → 评估在 val 上做；或用 --format-only 生成提交文件传官方服务器评测</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>你的 mAP 落在 ~74–76；若明显偏低(如 &lt;70 或几乎为 0)，进自救。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 评估用错 config/权重路径;② 评估数据没切图或路径不对;③ 得到很低就慌——先排查，不一定是方法问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>mAP≈0 → 类别映射/标签路径错；mAP 明显偏低 → 确认是否训满 12 epoch、评估集是否和训练同一套切图协议、是否用了对的权重。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>评估模型并用“参考值”判断复现成不成功</strong>——“复现到接近论文/社区公认数值”是判断你做对了的金标准。</p>
+</div></section></section><section class="slot" id="d11-pm" data-d="11" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D11 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">分析 per-class AP + 写《DOTA baseline 复现报告》</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>per-class AP</strong>:mAP 是平均分，但<strong>不同类别难度天差地别</strong>。看每个类别各自的 AP，能告诉你“<strong>问题出在哪</strong>”。比如大目标（篮球场）AP 很高、小目标(small-vehicle)AP 很低 → <strong>小目标检测就是一个可做的研究问题</strong>。这就是“<strong>从数据中发现研究问题</strong>”。</li>
+<li><strong>为什么这一步是科研最迷人的起点</strong>：很多人以为选题靠灵感，其实更多是靠“看数据看出来的”。per-class AP 就是一面镜子，照出你的方法在哪类目标上栽跟头；那个最弱的类，往往就藏着一个具体、可做、有意义的研究问题。<strong>你 M3 要找的 Gap，源头就在这种“看 per-class 找弱项”的训练里</strong>。</li>
+<li><strong>怎么从弱类提炼问题</strong>：看最弱的几类有什么<strong>共性</strong>——是不是都“小”(small-vehicle)？都“密集”(ship)？都“样本少”(swimming-pool)？共性指向原因，原因指向解法。比如“最弱的几类都是小而密集的目标”→ 推测“切块后小目标特征丢失”→ 解法方向“高分辨率特征/专门的小目标检测头”。</li>
+<li><strong>记录 vs 科研的分水岭</strong>：看到 small-vehicle 弱，只写“它 AP 低”是<strong>记录</strong>（工程）；追问“为什么低、能不能做文章”才是<strong>科研</strong>。今天你要练的是后者——这是研究者和调包工的核心区别。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>让评估输出 per-class AP（MMRotate 评估通常会打印每类 AP）。</li>
+<li>在复现报告里列出<strong>最高的 3 类</strong>和<strong>最低的 3 类</strong>。</li>
+<li>写《DOTA baseline 复现报告》（≥1000 字）到 <code>20-代码实验/复现报告_OrientedRCNN.md</code>，<strong>至少含</strong>：训练参数（backbone/lr/bs/epoch/优化器）、硬件（你的 4090）、训练耗时、总 mAP、per-class AP 表、loss 曲线截图、<strong>一段“观察与研究问题”</strong>（从 per-class AP 看出什么、哪类弱、可能为什么）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>报告完整；“观察”段写出类似“small-vehicle/ship 等<strong>小而密集</strong>目标 AP 明显偏低，可能因切块后小目标特征丢失——这是潜在选题方向”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 报告只贴一个 mAP 数字（没人能从中学到东西）——要有参数、曲线、per-class、分析;② 看到弱类只记录不追问“为什么”——<strong>追问“为什么弱”才是科研，记录只是工程</strong>。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知“观察段”写什么 → 套这个句式：“<strong>X 类 AP 最低(<strong>)，它们的共同特点是</strong>，推测原因是__，这提示一个方向:__</strong>”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了<strong>第一次完整评估 + 从 per-class AP 中识别研究问题</strong>，并产出了一份合格的复现报告。“<strong>从数据/结果里发现问题</strong>”是研究者最核心的能力之一，你今天第一次做了它。<strong>做了</strong>（评估结果 + 复现报告）、<strong>学了</strong>（mAP/per-class AP 的含义与用法）、<strong>会了</strong>（用参考值判断复现、从弱类追问“为什么”→提炼选题方向）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜读检测结果三连</strong>:① 总 mAP 对参考值（判断复现成败）→ ② per-class AP 找最弱类 → ③ 追问“这些弱类有什么共性？为什么弱？能不能做文章？”。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ Gliding Vertex 笔记 ✅ mAP 数值 ✅ 复现报告（≥1000 字）。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复现对齐判定</strong>：复现值与论文报告差 &lt;2% 算“对齐”，可当 baseline；差很多先查 metric(VOC07/12)、数据切分、是否用官方 config。per-class AP 看方法在哪类强/弱（Discussion 素材）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D11</summary><textarea data-note="d11" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d12" data-d="12"><header class="day-head"><span class="dnum">D12</span><h2 class="day-t">周五 · 读 R3Det + 整理六大流派 + 你的第一个消融（换 backbone）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天你做<strong>人生第一个消融实验</strong>：只改一个变量(backbone:ResNet-50 → ResNet-101)，看 mAP 怎么变。这就是科研最基础的方法论——<strong>控制变量法</strong>。换 backbone 是最简单、最安全的消融，最适合新手练手。</p>
+<p><strong>预期管理</strong>：今天启动第二个训练（R101 消融），结果同样要等几小时（明天 D14 填表得结论）。提醒：消融的纪律是“只改一处、其余完全不变”——今天最容易犯的错是顺手把 lr 也调了，那结果就无法干净归因。R101 不一定比 R50 高（更大不总更好），无论高低都是有效结论。</p>
+</blockquote>
+</div><section class="slot" id="d12-am" data-d="12" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D12 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 R3Det(Yang et al. 2021, AAAI)——特征精修</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>特征精修(feature refinement)</strong>——R3Det 先粗检测一次，再<strong>根据粗结果重新对齐特征</strong>做第二次精修，提升旋转框精度。理解“<strong>为什么旋转检测需要这种二次对齐</strong>”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>精读 3 遍，笔记答：它的“精修”在解决什么问题（粗检测的框和特征没对齐）？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>/④/⑤</h4><div class="blk-b"><p>抓“先粗后精、用粗结果对齐特征”的直觉即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你又收一个“<strong>精修/级联</strong>”范式入族谱，理解了一类提升精度的通用思路。</p>
+</div></section></section><section class="slot" id="d12-noon" data-d="12" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D12 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整理“旋转检测六大流派”表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>读了 6 篇方法后，把旋转检测的<strong>解法范式</strong>收编全：角度回归法、关键点法、像素级预测法、多阶段精修法、等变网络法、滑动顶点法。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>在 <code>10-论文笔记/旋转检测_族谱.md</code> 扩成六大流派表，每种 2 句话 + 代表论文。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>6 行表，每行有“核心思想 + 代表作”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>流派和单篇论文混为一谈——流派是“一类思路”，一个流派下可有多篇。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>某篇归不进现有流派 → 新开一类即可，分类是为理解不是为标准答案。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你把一个子领域<strong>结构化成“流派地图”</strong>——这是写 Related Work、找空白、判断“我的 idea 属于哪类/有没有被做过”的底图。</p>
+</div></section></section><section class="slot" id="d12-pm" data-d="12" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D12 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">第一个消融：ResNet-50 → ResNet-101，重启训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>消融实验(ablation)</strong>：<strong>只改一个变量、其余完全不变</strong>，看这个变量对结果的贡献。它是科研中最基础、审稿人最看重的实验方法。<strong>换 backbone 是最安全的入门消融</strong>。</li>
+<li><strong>控制变量</strong>：除了 backbone,lr/bs/epoch/数据全保持和 D9 那次<strong>完全一致</strong>，这样 mAP 的差异才能<strong>干净地归因到 backbone</strong>。</li>
+<li><strong>为什么消融是科研的硬通货</strong>：任何“我加了 X 让性能变好”的论断，都必须用消融证明——去掉 X、其他不变，性能确实掉了，才说明 X 真有用。否则审稿人会问“你怎么知道是 X 起的作用，而不是顺便调的别的？”。<strong>控制变量是消融的灵魂</strong>：多改一个东西，归因就被污染，整个实验白做。</li>
+<li><strong>换 backbone 为什么最适合入门</strong>:① 改动极小（config 里 depth 50→101 + 换预训练权重）;② 因果清晰（backbone 容量变了→看 mAP 怎么变）;③ 不涉及你还没设计的新模块。<strong>这套“只改一处→干净归因”的纪律，和你 M3–M4 给自己方法的每个组件做消融，是一模一样的方法论</strong>——现在用最简单的 backbone 练熟它。</li>
+<li><strong>结论可能反直觉</strong>:R101 比 R50 大，但不一定 mAP 更高（可能数据量不足以喂饱更大模型，或欠训）。<strong>“更大不总更好”本身就是有价值的结论</strong>，如实记录即可。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复制 D8 的 config,<strong>只把 backbone 从 ResNet-50 改成 ResNet-101</strong>（改 backbone 段 + 对应预训练权重），其余不动。</li>
+<li>后台启动训练，在实验日志里记一行<strong>对比表</strong>:<code>实验 | backbone | lr | bs | epoch | mAP</code>，先填 ResNet-50 那行（D11 已有）,ResNet-101 行等跑完填。</li>
+</ol>
+<figure class="code" data-lang="bash"><pre><code>cp<span class="w"> </span>configs/my_orcnn_r50.py<span class="w"> </span>configs/my_orcnn_r101.py
+<span class="c1"># 在 my_orcnn_r101.py 里【只改 backbone 这一处】，其余（lr/bs/epoch/数据）一字不动：</span>
+<span class="c1">#   backbone=dict(type=&#39;ResNet&#39;, depth=101,                       # 50 → 101</span>
+<span class="c1">#       init_cfg=dict(type=&#39;Pretrained&#39;,</span>
+<span class="c1">#           checkpoint=&#39;torchvision://resnet101&#39;))                # 预训练权重也换成 r101</span>
+diff<span class="w"> </span>configs/my_orcnn_r50.py<span class="w"> </span>configs/my_orcnn_r101.py<span class="w">   </span><span class="c1"># 确认只差 backbone 那几行</span>
+nohup<span class="w"> </span>python<span class="w"> </span>tools/train.py<span class="w"> </span>configs/my_orcnn_r101.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--work-dir<span class="w"> </span>work_dirs/orcnn_r101<span class="w"> </span>&gt;<span class="w"> </span>train_r101.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>ResNet-101 训练已启动；实验日志里有一张“待填 mAP”的对比表，两行只有 backbone 不同。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① <strong>同时改了好几个东西</strong>（顺手把 lr 也调了）——那结果就无法归因，消融失效;② 没换对应的 ImageNet 预训练权重（R101 要用 R101 的预训练）;③ 不记对比表，跑完忘了和谁比。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>R101 OOM → 你是 4090 一般够，真不够就 bs 降到 1（但<strong>注意</strong>：若为显存被迫改 bs，要在报告里注明，否则就不是“只改 backbone”的干净消融）；权重加载报错 → 确认预训练权重与 backbone 匹配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做了<strong>人生第一个消融</strong>，真正理解了“控制变量”在科研里怎么落地。这套“只改一个变量→干净归因”的思维，是你 M3–M4 给<strong>自己的方法</strong>做组件消融的地基。<strong>做了</strong>（R101 消融训练 + 对比表）、<strong>学了</strong>（消融/控制变量的定义与纪律）、<strong>会了</strong>（配一个“只差一个变量”的对照实验、警惕“多变量污染”）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ R3Det 笔记 ✅ 六大流派表 ✅ ResNet-101 训练启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D12</summary><textarea data-note="d12" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d13" data-d="13"><header class="day-head"><span class="dnum">D13</span><h2 class="day-t">周六 · （集中日）· 升级可视化脚本（看模型预测对错）+ 物理背景</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把你 D6 的可视化脚本<strong>升级成“看模型预测对错”的工具</strong>。科研里光看 mAP 数字不够，还要<strong>看图</strong>——模型预测对了哪些、错了哪些、漏了哪些。这叫<strong>定性分析</strong>，是论文 Experiment 章必备。</p>
+<p><strong>预期管理</strong>：今天是集中日，上午两段补遥感物理背景（轻量，够用即可），晚上做核心——把可视化升级成“看预测对错”的定性分析工具。提醒：旋转框算 IoU 较复杂，第一次可以先只画“预测框（绿）vs GT 框（红）”把“对/错/漏”看清就达标，IoU 标注作为选做。</p>
+</blockquote>
+</div><section class="slot" id="d13-am" data-d="13" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D13 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">武大 MOOC 第 5–6 讲（光学遥感 + 热红外遥感）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>补两讲物理。<strong>热红外</strong>遥感（测地物温度）是你方向里“光学–SAR–红外”多模态的“红外”那一块，先有个概念。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>看第 5–6 讲，各记 2 句；特别记一句“热红外能拍到什么（温度/夜间），光学拍不到”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第 5–6 讲各 2 句笔记，含一句“热红外能拍到什么（温度/夜间），光学拍不到”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 想把物理课当主线深究（陷进辐射传输方程）→ 这是补充背景，抓“能拍到什么、有什么独特价值”即可;② 看了不记笔记 → 哪怕 2 句也要落到知识库。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>概念太多记不住 → 只记“每种模态拍什么、别的模态拍不到的是什么”这一条主线；时间紧 → 1.5 倍速过，抓关键讲解。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>补齐多模态里“红外”模态的基本概念，呼应你未来的“光学–SAR–红外”方向。</p>
+</div></section></section><section class="slot" id="d13-noon" data-d="13" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D13 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">韦玉春第 5 章（图像增强）选读</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>直方图均衡化、滤波</strong>等图像增强手段，通用 CV 也有，但遥感有特殊需求（动态范围大、噪声特性不同）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>选读，记“直方图均衡化在干嘛、为什么遥感图常需要它”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一句“直方图均衡化在干嘛、为什么遥感图常需要它”的笔记。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 把图像增强当成最终目的（为增强而增强）→ 它是为后续任务（检测/分类）服务的预处理手段;② 只记术语不记“为什么遥感需要”→ 记动机（遥感动态范围大、噪声特性不同）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不懂直方图均衡化 → 直觉理解为“把过暗/过亮、对比度低的图拉得更清晰可读”；和 W3 的呼应记不住 → 记一句“SAR 图也要类似的增强（log 变换）,W3 会用到”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>理解“增强=让图像更可读/更利于后续处理”；这与 W3 你处理 SAR 时的 log 变换会呼应。</p>
+</div></section></section><section class="slot" id="d13-pm" data-d="13" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D13 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">把 `vis_dota.py` 升级为 `vis_results.py`(画预测框 vs GT 框 + 算 IoU)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>定性分析(qualitative analysis)</strong>：不只看数字，<strong>看图</strong>判断模型好坏。标准做法：同一张图上画<strong>预测框（绿）</strong>和<strong>真值 GT 框（红）</strong>，一眼看出对/错/漏。</li>
+<li><strong>GT(ground truth)</strong>：人工标注的“标准答案”框。</li>
+<li><strong>IoU(Intersection over Union)</strong>：预测框与 GT 框的“重叠程度”= 交集面积 / 并集面积，<strong>0~1，越接近 1 越准</strong>。它是判断“这个预测框算不算检测正确”的核心度量。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>基于 D6 的脚本扩写 <code>20-代码实验/utils/vis_results.py</code>:① 读模型推理结果（MMRotate 可输出预测，存成 pkl/json）;② 在图上画预测框（绿）和 GT 框（红）;③ 选做：对一对框算 IoU 并标在框上。</p>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># 把旋转框 (cx,cy,w,h,θ) 转成 4 个角点用于画框</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">obb_to_corners</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>
+    <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">ang</span> <span class="o">=</span> <span class="n">box</span>
+    <span class="n">c</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ang</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span>
+    <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">h</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="o">-</span><span class="n">dy</span><span class="p">),(</span><span class="n">dx</span><span class="p">,</span><span class="o">-</span><span class="n">dy</span><span class="p">),(</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">),(</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">cx</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">c</span><span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">s</span><span class="p">,</span> <span class="n">cy</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="n">pts</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_pred_vs_gt</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">gts</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gts</span><span class="p">:</span>   <span class="n">cv2</span><span class="o">.</span><span class="n">polylines</span><span class="p">(</span><span class="n">img</span><span class="p">,[</span><span class="n">obb_to_corners</span><span class="p">(</span><span class="n">g</span><span class="p">)],</span><span class="kc">True</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># GT 红</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">preds</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">polylines</span><span class="p">(</span><span class="n">img</span><span class="p">,[</span><span class="n">obb_to_corners</span><span class="p">(</span><span class="n">p</span><span class="p">)],</span><span class="kc">True</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># 预测 绿</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+    <span class="c1"># 看图：只有红没绿=漏检；只有绿没红=误检；红绿重合=检对</span>
+<span class="c1"># 拿预测结果：tools/test.py ... --out result.pkl，再读 pkl 取每张图的框</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>输出图上绿框=预测、红框=GT；能直观看到“哪些目标被准确框中、哪些漏检（只有红没绿）、哪些误检（只有绿没红）”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 预测结果的坐标格式和 GT 不一致（都要转成 8 点角点再画）;② 颜色不区分，看不出对错（务必预测/GT 不同色）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>拿不到模型预测结果 → 用 <code>tools/test.py</code> 加 <code>--out result.pkl</code> 把预测存下来再读；IoU 算旋转框较复杂 → 第一次可先只画框、不算 IoU，把“对错漏”看清就达标。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做出了<strong>第一个“定性分析”工具</strong>，从此能“看图诊断”而不只是“看数字”。漏检/误检的可视化，正是论文里展示方法优势、也是你发现“模型在哪类目标上栽跟头”的利器。<strong>做了</strong>(<code>vis_results.py</code>)、<strong>学了</strong>（定性分析、GT、IoU）、<strong>会了</strong>（把预测与真值叠加可视化、用“对/错/漏”读图）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ MOOC 第 5–6 讲笔记 ✅ 韦玉春第 5 章笔记 ✅ <code>vis_results.py</code>。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜定性分析：对/错/漏读图</strong>：光看 mAP 不够，要看图诊断。同图上画<strong>预测框（绿）+ GT 框（红）</strong>：只有红没绿=<strong>漏检</strong>、只有绿没红=<strong>误检</strong>、红绿重合=<strong>检对</strong>。漏检/误检的图既是论文展示方法优势的素材，也是你发现“模型在哪类目标上栽跟头”的线索。旋转框 IoU 算起来复杂，第一次先把“对/错/漏”看清即达标。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D13</summary><textarea data-note="d13" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d14" data-d="14"><header class="day-head"><span class="dnum">D14</span><h2 class="day-t">周日 · （复盘日）· 韦玉春第 7 章 + backbone 对比 + W2 周复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>第一个完整实验周收尾。今天把消融结果落定，并做第二次周复盘——这次复盘的重点是：<strong>回顾你第一次走完“数据→训练→评估→分析”全流程，卡在哪一步最久</strong>。</p>
+<p><strong>预期管理</strong>：收官日：R101 消融跑完了，填表得出你第一个消融结论；然后周复盘+写复现心得。提醒：复现心得不要写“挺难但学到很多”这种空话，要写“具体哪步、什么报错、怎么解决的”——这才是能复用的 SOP。第一次复现卡环境/路径很久是 100% 正常的，你已经跑出 mAP 75，这是实打实的成果。</p>
+</blockquote>
+</div><section class="slot" id="d14-am" data-d="14" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D14 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">韦玉春第 7 章（特征提取）选读</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>纹理特征、光谱特征</strong>等是遥感<strong>特有</strong>的特征类型（光谱来自多/高光谱的多通道）。了解“传统遥感怎么提特征”，能帮你理解深度学习“自动学特征”替代了什么。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>选读，记“光谱特征/纹理特征大致是什么、和 CNN 学的特征有何不同”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一句“光谱特征/纹理特征大致是什么、和 CNN 学的特征有何不同”的笔记。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 纠结传统特征工程的细节公式 → 抓“传统靠人工设计特征、深度学习自动学特征”这个对比即可;② 不补进差异卡片 → 顺手补，积累“通用 CV vs 遥感”的差异清单。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>光谱特征不懂 → 记“多/高光谱有几十上百个波段，每个波段是一种'颜色'通道，光谱特征就是利用这些通道的信息”；和 CNN 特征对比不清 → 记“CNN 自动学的是层次化的抽象特征，传统光谱/纹理是人工定义的”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>够用即可；把“光谱特征”补进差异卡片（通用 CV 是 RGB 3 通道，遥感可有几十上百通道）。</p>
+</div></section></section><section class="slot" id="d14-noon" data-d="14" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D14 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整理 W2 笔记 + 填完 backbone 消融对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>把 ResNet-101 的结果填进对比表，得出你<strong>第一个消融结论</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>R101 跑完，记录其 mAP；填完“R50 vs R101”对比表，写一句结论（如“R101 比 R50 高 __ mAP，代价是显存/时间增加”）。给本周 5 篇笔记打标签、归档。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张完整的两行对比表 + 一句归因结论。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只记数字不下结论——消融的产出是“<strong>结论</strong>”（谁更好、代价是什么），不是两个数。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>R101 反而更低?→ 也是有效结论（更大不总更好），如实记录并推测原因（可能欠训/数据量不足以喂饱更大模型）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你完成了“消融→得出结论”的闭环，理解了“实验是用来回答问题、给出结论的，不是堆数字”。</p>
+</div></section></section><section class="slot" id="d14-pm" data-d="14" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D14 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">W2 周复盘 + W3 计划 + 写“第一次复现心得”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>这次复盘多一个维度——你第一次走完了完整实验流程，要专门回答：<strong>这条“数据→训练→评估→分析”链路里，你卡最久的是哪一环？下次怎么提速？</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 W1 的同款模板填 W2 周报（完成度/论文/代码/卡点/对策/下周三件事/情绪/工时）；<strong>额外</strong>写一段“第一次 baseline 复现心得”（≥500 字）：你卡在环境？切图？OOM？评估路径?——把“踩坑→怎么爬出来”写下来，这就是你 SOP 的增量。下周三件事默认:① SAR 入门（理解 SAR vs 光学本质差异）② 跑通第二个 baseline（SAR 分类）③ MOOC 第 7–8 讲（SAR 成像）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>填满的 W2 周报 + 一段具体的复现心得（有真实卡点和对策）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 心得写成“挺难的但学到很多”（空）——要写<strong>具体哪一步、具体什么报错、具体怎么解决</strong>;② 因为某步卡很久而否定自己——<strong>第一次复现卡环境/路径是 100% 正常的</strong>，你已经跑出 mAP 75 了，这是实打实的成果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知心得写什么 → 翻你这周的实验日志，把出现过的报错和你最终的解法各写一条，自然成文。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了“第一个完整实验周”的复盘，把“踩坑经验”沉淀成可复用资产，并锻炼了“对自己的科研流程做诊断”的元能力。<strong>做了</strong>（W2 周报 + 复现心得 + W3 计划）、<strong>学了</strong>（实验链路的瓶颈意识）、<strong>会了</strong>（把一次复现的真实坑→写成可复用 SOP/心得）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ 韦玉春第 7 章笔记 ✅ backbone 对比结果 ✅ 周报 W2。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W2 累计交付（对照你原计划）</h2><p>5 篇旋转检测论文笔记(Oriented R-CNN / RoI Trans / ReDet / Gliding Vertex / R3Det)+ 3 篇泛读、Oriented R-CNN baseline 跑通(mAP ~75)、复现报告（≥1000 字）、backbone 消融(R50 vs R101)、可视化工具升级(<code>vis_results.py</code>)、旋转检测族谱（四大家族 + 六大流派）。</p>
+<p><strong>W1–W2 论文阅读进度</strong>：精读 8 篇 + 泛读 1 篇起步（本周泛读 S²A-Net 等）≈ 累计 9–11 篇，朝 M1 的“≥18 篇”稳步推进。本周你还第一次完整走通了“数据→训练→评估→分析→改进”这条科研主回路，这是后面所有实验的底层套路。</p>
+</section><section class="wtail"><h2>🎓 W2 你“长出来”的能力清单</h2><ul>
+<li>读方法论文（抓核心创新 + 画 pipeline + 成族对比）</li>
+<li>读懂 config、改 config 适配 4090、dry-run 排雷</li>
+<li>切图/overlap、后台挂训、记录可复现命令、用 nvidia-smi 确认 GPU</li>
+<li>看 TensorBoard 三条曲线诊断训练健康度</li>
+<li>评估(mAP/per-class AP)、用参考值判断复现、从弱类提炼研究问题</li>
+<li>做第一个消融（控制变量）、得出结论</li>
+<li>定性分析工具（预测 vs GT + IoU）</li>
+<li>把单卡 4090 当卖点记录（batch_size/训练耗时/显存→未来论文的高效性证据，资源受限是特色不是借口）</li>
+</ul>
+<blockquote class="quote">
+<p><strong>下一格预告(W3)</strong>：进入 <strong>SAR 世界</strong>。你会第一次亲眼看到 SAR 图像（和光学完全不一样的“颗粒感”），理解 <strong>speckle 噪声、log 变换、方位角敏感</strong>这些 SAR 特有难题，并跑通你的<strong>第二个 baseline（SAR 船舶分类）</strong>。
+⚠️ <strong>重要订正预告</strong>：你原计划 W3 的 D17 让你精读“SARCLIP（孙显组）”。但据你计划开头的<strong>導读③</strong>，“SARCLIP”这个标题<strong>未能核实存在、疑为占位符</strong>。到 W3 我会把它替换成<strong>已核实的真实锚点</strong>（RemoteCLIP / GeoChat，以及王超组 2025 年真实的 SAR+视觉语言代表作 <strong>TACMT</strong>），并据此带你读，绝不让你把时间花在一篇可能不存在的论文上。</p>
+</blockquote>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D14</summary><textarea data-note="d14" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W2 加厚补充包（对齐 M1-W1 标准：范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 《DOTA baseline 复现报告》长这样（D11 对照着写）</h2>
+<blockquote class="quote">
+<p>D11 要写复现报告，但“合格报告”什么样很多人没数。下面是达标范例（你写自己的，数字换成你跑出来的；<strong>关键是要有“参数+per-class+一段观察”，不只一个 mAP</strong>）：</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># DOTA-v1.0 旋转检测 baseline 复现报告（Oriented R-CNN）</span>
+<span class="gu">## 1. 配置</span>
+<span class="k">-</span><span class="w"> </span>模型：Oriented R-CNN ｜ backbone：ResNet-50 ｜ neck：FPN
+<span class="k">-</span><span class="w"> </span>数据：DOTA-v1.0，切图 1024×1024，overlap 200
+<span class="k">-</span><span class="w"> </span>训练：bs=2（4090 适配），lr=0.0025，1× schedule(12 ep)，SGD
+<span class="k">-</span><span class="w"> </span>硬件：单张 RTX 4090
+
+<span class="gu">## 2. 总体结果</span>
+<span class="k">-</span><span class="w"> </span>mAP(07 metric) = 75.3 ｜ 与官方报告(~75.7)差 0.4,在合理复现范围内。
+
+<span class="gu">## 3. Per-class AP（节选）</span>
+| 类别 | AP | 观察 |
+|---|---|---|
+| plane | 89.1 | 大而规则,最好 |
+| small-vehicle | 58.4 | 最差之一:目标极小+密集 |
+| ship | 72.0 | 海面密集排列,有粘连 |
+| swimming-pool | 51.2 | 形状多变、样本少 |
+
+<span class="gu">## 4. 观察与下一步</span>
+small-vehicle / swimming-pool 明显拖后腿,根因是&quot;小目标+密集&quot;。
+→ 这正是我后续可发力的 Gap(高分辨率特征/小目标检测头)。
+
+<span class="gu">## 5. 复现踩的坑</span>
+<span class="k">-</span><span class="w"> </span>bs 默认 2 在 4090 上 OOM 过一次 → 降到 2 并关闭部分增强后通过。
+<span class="k">-</span><span class="w"> </span>首次 mAP=0:评估用的标注路径配错,改对后正常。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么给你这个</strong>：它示范了“复现不是只报一个 mAP”，而是 <strong>配置可复现 + per-class 找弱类 + 一段把弱类转成 Gap 的观察</strong>——弱类(small-vehicle)就是你 M3 找 Gap 的素材。</p>
+<h2>二、完整可运行代码 — ① 画训练 loss 曲线 ② per-class AP 柱状图</h2>
+<blockquote class="quote">
+<p>配合 D10（看训练健不健康）和 D11（评估）。存 <code>20-代码实验/utils/plot_curves.py</code>：</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># ① 从 MM 框架的 log（.log.json，每行一个 json）画 loss 曲线</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_loss</span><span class="p">(</span><span class="n">log_json_path</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="s2">&quot;loss.png&quot;</span><span class="p">):</span>
+    <span class="n">iters</span><span class="p">,</span> <span class="n">losses</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_json_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;train&quot;</span> <span class="ow">and</span> <span class="s2">&quot;loss&quot;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">iters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;iter&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">iters</span><span class="p">)))</span>
+                <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">losses</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;iter&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saved&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+
+<span class="c1"># ② per-class AP 柱状图（手动把评估打印的 per-class AP 填进 dict 即可）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_perclass_ap</span><span class="p">(</span><span class="n">ap_dict</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="s2">&quot;perclass_ap.png&quot;</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ap_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">());</span> <span class="n">vals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ap_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;AP&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Per-class AP&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saved&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># plot_loss(&quot;work_dirs/oriented_rcnn_r50/20240101_000000.log.json&quot;)</span>
+    <span class="n">plot_perclass_ap</span><span class="p">({</span><span class="s2">&quot;plane&quot;</span><span class="p">:</span><span class="mf">89.1</span><span class="p">,</span> <span class="s2">&quot;small-vehicle&quot;</span><span class="p">:</span><span class="mf">58.4</span><span class="p">,</span> <span class="s2">&quot;ship&quot;</span><span class="p">:</span><span class="mf">72.0</span><span class="p">,</span> <span class="s2">&quot;swimming-pool&quot;</span><span class="p">:</span><span class="mf">51.2</span><span class="p">})</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:<code>loss.png</code> 是一条总体下降（有波动正常）的曲线;<code>perclass_ap.png</code> 一眼看出哪类最低（就是你要攻的弱类）。</p>
+<h2>三、实验日志 + 消融对比表模板（D9 起就这样记，养成可复现习惯）</h2>
+<blockquote class="quote">
+<p>从第一个实验就把“记录”做对，后面做几十个实验才不会乱。存 <code>20-代码实验/实验日志.md</code>：</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 实验日志（每个实验一段，按时间倒序）</span>
+<span class="gu">## exp001  Oriented R-CNN R50 baseline</span>
+<span class="k">-</span><span class="w"> </span>时间：2024-01-01 22:30 启动
+<span class="k">-</span><span class="w"> </span>命令：python tools/train.py configs/my_orcnn_r50.py --work-dir work_dirs/orcnn_r50
+<span class="k">-</span><span class="w"> </span>work_dir：work_dirs/orcnn_r50/  （log/checkpoint 都在这）
+<span class="k">-</span><span class="w"> </span>配置：R50+FPN, bs=2, lr=0.0025, 1x(12ep), SGD
+<span class="k">-</span><span class="w"> </span>结果：mAP=75.3（07 metric）；耗时约 X 小时
+<span class="k">-</span><span class="w"> </span>备注：首次 mAP=0 因评测标注路径错，改对后正常
+
+<span class="gu">## exp002  消融：R50 → R101（只改 backbone）</span>
+<span class="k">-</span><span class="w"> </span>与 exp001 唯一差异：backbone depth 50→101 + 预训练换 r101
+<span class="k">-</span><span class="w"> </span>结果：mAP=___（待填）
+
+<span class="gh"># 消融对比表（结论导向，不只是两个数）</span>
+| 实验 | backbone | lr | bs | epoch | mAP | 结论 |
+|---|---|---|---|---|---|---|
+| exp001 | ResNet-50 | 0.0025 | 2 | 12 | 75.3 | baseline |
+| exp002 | ResNet-101 | 0.0025 | 2 | 12 | ___ | 待填：更大backbone是否值回成本 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么从第一天就这样记</strong>:① 可复现——半年后或换机器，照命令能重跑;② 可归因——消融表“只差一处”才能把 mAP 差异干净归到那一处;③ 这套“独立目录 + 记 meta + 对比表”的习惯，就是你 M3–M4 做大规模消融、M5 写论文实验章的地基。<strong>记录是科研的肌肉记忆，越早养成越省心。</strong></p>
+<h2>四、每日“今日自测”（合上笔记能答=真学会）</h2>
+<ul>
+<li><strong>D8</strong>:① 两阶段检测器和一阶段的区别是什么?② config 里改 <code>batch_size</code> 适配 4090 时，bs 太大最常见的报错是什么?③ “dry-run”是干嘛的、为什么先做它？</li>
+<li><strong>D9</strong>:① 为什么遥感大图训练前要“切图(image splitting)”?② 切图的 overlap（重叠）有什么用，设 0 会怎样？</li>
+<li><strong>D10</strong>:① 训练时该盯哪三条曲线?② loss 突然变 NaN，最可能的两个原因？</li>
+<li><strong>D11</strong>:① mAP 和 per-class AP 各看什么?② 为什么“分析最差的类”比“报总 mAP”更有科研价值？</li>
+<li><strong>D12</strong>:① 你的“旋转检测六大流派”能说出几类（两阶段/一阶段/anchor-free/等变…）？</li>
+<li><strong>D13</strong>:① 可视化里怎么同时画“预测框 vs GT 框”并判断对错？IoU 在这里起什么作用？</li>
+<li><strong>D14</strong>:① 做 backbone 消融(R50→R101)时，除了 backbone 还能不能改别的？为什么？</li>
+<li><strong>综合</strong>:① 完整跑一遍“数据→训练→评估→分析”的主回路，每一步分别用什么工具/命令?② 为什么说“从 per-class AP 弱类追问为什么”比“报一个总 mAP”更接近科研？</li>
+</ul>
+<h2>五、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练 OOM（显存爆）</td>
+<td>batch_size/分辨率过大</td>
+<td>降 bs(4090 旋检常用 bs=2)、关部分增强、或用梯度累积</td>
+</tr>
+<tr>
+<td>训练 loss=NaN</td>
+<td>lr 太大 / 数据有脏标注</td>
+<td>降 lr；检查切图后有无空标注/越界框</td>
+</tr>
+<tr>
+<td>评估 mAP=0 或极低</td>
+<td>评估标注路径/类别名配错</td>
+<td>核对 config 里 data root 与类别列表；确认评测协议(07/12 metric)</td>
+</tr>
+<tr>
+<td>dry-run 就报错</td>
+<td>config 路径/版本不匹配</td>
+<td>先跑通官方 demo，再在其 config 上最小改动</td>
+</tr>
+<tr>
+<td>切图后目标被切碎</td>
+<td>overlap 太小</td>
+<td>增大 overlap（如 200），保留跨边界目标</td>
+</tr>
+<tr>
+<td>训练极慢</td>
+<td>num_workers 太小/没用 GPU</td>
+<td>调大 num_workers；确认模型 <code>.cuda()</code>、<code>nvidia-smi</code> 有占用</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w1-d3-d7-full.html"><span class="dir">← 上一篇</span><span class="nm">W1-D3~D7 详注版</span></a><a class="next" href="w2-d8-full.html"><span class="dir">下一篇 →</span><span class="nm">W2-D8 详注版</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d8">D8 周一</a><a class="sub" href="#d8-am">上午 精读 Oriented R-CN</a><a class="sub" href="#d8-noon">中午 打开 MMRotate 源码，逐</a><a class="sub" href="#d8-pm">晚上 准备训练 config + 改 </a><a href="#d9">D9 周二</a><a class="sub" href="#d9-am">上午 精读 RoI Transform</a><a class="sub" href="#d9-noon">中午 运行 DOTA 切图工具（理解“</a><a class="sub" href="#d9-pm">晚上 启动 Oriented R-CN</a><a href="#d10">D10 周三</a><a class="sub" href="#d10-am">上午 精读 ReDet(Han et </a><a class="sub" href="#d10-noon">中午 监控训练：TensorBoard</a><a class="sub" href="#d10-pm">晚上 读 S²A-Net（泛读）+ 画</a><a href="#d11">D11 周四</a><a class="sub" href="#d11-am">上午 精读 Gliding Verte</a><a class="sub" href="#d11-noon">中午 跑评估脚本，记录 mAP</a><a class="sub" href="#d11-pm">晚上 分析 per-class AP </a><a href="#d12">D12 周五</a><a class="sub" href="#d12-am">上午 精读 R3Det(Yang et</a><a class="sub" href="#d12-noon">中午 整理“旋转检测六大流派”表</a><a class="sub" href="#d12-pm">晚上 第一个消融：ResNet-50 </a><a href="#d13">D13 周六</a><a class="sub" href="#d13-am">上午 武大 MOOC 第 5–6 讲（</a><a class="sub" href="#d13-noon">中午 韦玉春第 5 章（图像增强）选读</a><a class="sub" href="#d13-pm">晚上 把 `vis_dota.py` </a><a href="#d14">D14 周日</a><a class="sub" href="#d14-am">上午 韦玉春第 7 章（特征提取）选读</a><a class="sub" href="#d14-noon">中午 整理 W2 笔记 + 填完 ba</a><a class="sub" href="#d14-pm">晚上 W2 周复盘 + W3 计划 +</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

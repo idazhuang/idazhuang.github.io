@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="26">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W26 · 补实验收尾 + 进投稿系统 + 竞赛冲刺 ——  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M7 打磨 + 正式投稿</span><span>·</span><span>Week 26</span><span>·</span><span>D176–D182</span></div><h1 class="title">补实验收尾 + 进投稿系统 + 竞赛冲刺 —— 把论文送到“门口”，但先别敲门</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="176" data-k="am" title="D176 上午段"></i><i data-d="176" data-k="noon" title="D176 中午段"></i><i data-d="176" data-k="pm" title="D176 晚上段"></i></span><span class="sday"><i data-d="177" data-k="am" title="D177 上午段"></i><i data-d="177" data-k="noon" title="D177 中午段"></i><i data-d="177" data-k="pm" title="D177 晚上段"></i></span><span class="sday"><i data-d="178" data-k="am" title="D178 上午段"></i><i data-d="178" data-k="noon" title="D178 中午段"></i><i data-d="178" data-k="pm" title="D178 晚上段"></i></span><span class="sday"><i data-d="179" data-k="am" title="D179 上午段"></i><i data-d="179" data-k="noon" title="D179 中午段"></i><i data-d="179" data-k="pm" title="D179 晚上段"></i></span><span class="sday"><i data-d="180" data-k="am" title="D180 上午段"></i><i data-d="180" data-k="noon" title="D180 中午段"></i><i data-d="180" data-k="pm" title="D180 晚上段"></i></span><span class="sday"><i data-d="181" data-k="am" title="D181 上午段"></i><i data-d="181" data-k="noon" title="D181 中午段"></i><i data-d="181" data-k="pm" title="D181 晚上段"></i></span><span class="sday"><i data-d="182" data-k="am" title="D182 上午段"></i><i data-d="182" data-k="noon" title="D182 中午段"></i><i data-d="182" data-k="pm" title="D182 晚上段"></i></span></div></div>
+<div class="note"><b>★ Cover Letter 怎么写</b>　D177 让你"核对 Cover Letter"，但全书没教过怎么写。<a href="stage2-full.html">《阶段二详注版》</a> 给了可直接用的四段模板、投稿文件清单、以及 arXiv 上传要点（含 endorsement）。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：论文从 v2.1 走向<strong>最终定稿 v2.2（封版）</strong>——明确“这就是要投出去的版本”；然后<strong>熟悉并填好投稿系统（IEEE 系用 ScholarOne）、上传文件、预览核验</strong>，但<strong>故意先不点 Submit</strong>（留 48h 冷静期）。竞赛侧上更高阶的 trick：半监督(Mean Teacher)、知识蒸馏，并做 trick 组合搜索冲刺。
+<strong>本周科研能力目标</strong>（你原计划，保留）：论文定稿 + 投稿系统就绪（只差最后点一下 Submit）；竞赛把 trick 榨干、找最优组合。
+<strong>先给你打个预防针</strong>:① <strong>投稿系统第一次用会陌生、紧张</strong>——本周提前注册、走一遍流程、把文件备齐，就是为了消化掉这种陌生，投稿当天不手忙脚乱;② <strong>“一切就绪却不点 Submit”会让你很憋</strong>——但留 48h 冷静期是成熟的投稿纪律，你可能明早就发现一个小错误，改了再投远好过投出去再撤稿;③ 竞赛的高阶 trick（半监督/蒸馏）和你“小样本/单卡高效”的发力线高度相关——半监督利用无标注数据（遥感标注贵，是真问题）、蒸馏把大模型知识塞进小模型（契合你高效路线），不只是竞赛技巧，也是你方向的真问题。
+<strong>本周精力怎么分配</strong>：论文侧是“封版 + 投稿系统操作 + 预览核验”（细致、别出错）；竞赛侧是“理解半监督/蒸馏原理 + trick 组合搜索”。教学按双线组织，每天上午论文/投稿、中午晚上竞赛。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d176" data-d="176"><header class="day-head"><span class="dnum">D176</span><h2 class="day-t">周一 · 补完残余实验 + 竞赛半监督(Mean Teacher)</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午补完未完成的补充实验（或读一篇最新论文）、更新论文表格；中午晚上竞赛上半监督 Mean Teacher。</p>
+<p><strong>预期管理</strong>：今天补完残余补充实验 + 竞赛上半监督(Mean Teacher)。提醒：若上周的补充实验（数据量曲线等）还没跑完，今天跑完、把结果更新进论文表格（新数字也要纳入数字审计）；若已跑完，读一篇你方向的最新论文保持跟进；<strong>半监督 Mean Teacher 用“教师模型”（学生的滑动平均EMA）给无标注数据产生一致性目标，让学生在有标注+无标注数据上一起学</strong>——这和你“小样本/标注稀缺”发力线高度相关（遥感标注贵，半监督是真问题），不只是竞赛trick。</p>
+</blockquote>
+</div><section class="slot" id="d176-am" data-d="176" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D176 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">补完残余补充实验 + 更新论文表格</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（投稿前补完所有实验欠账）</h4><div class="blk-b"><ul>
+<li>上周(W25)你启动了加分补实验（数据量曲线、效率曲线）——<strong>如果还有没跑完的，今天必须跑完</strong>（投稿在即，不能带着“半截实验”投）。如果都跑完了，就读一篇你方向的最新论文（保持对前沿的跟进，也可能发现投稿前还能补的小点）。</li>
+<li><strong>为什么补实验要在投稿前彻底了结</strong>：你计划下周(W27)正式投稿。投稿前所有要进论文的实验都必须有最终结果（数字确定、图表规范）。<strong>带着未完成的实验投稿，等于论文里有“待补”的空缺</strong>——要么数字不全、要么声称没证据支撑。所以本周一是补实验的最后窗口，跑完、整理、更新进论文。</li>
+<li><strong>新结果要纳入数字审计</strong>：补完的实验有新数字，<strong>这些新数字也要纳入 W25 学的数字审计</strong>（确保论文里它们和实验日志一致、三处一致）。别让新补的数字成为新的不一致来源。</li>
+<li><strong>“投稿前彻底了结”是项目收尾的通用纪律</strong>：无论做论文、做项目还是做产品，临近交付/发布前都有一条纪律——<strong>所有要进交付物的工作必须有最终结果，不能带着“半成品”交付</strong>。带半截实验投稿、带未测功能上线、带未完成模块交付，都是同一类错误：交付物里有“虚”的部分，经不起检验。<strong>投稿前这一天就是论文的“最后了结日”</strong>：把所有要进论文的实验跑完、数字定下来、图表做规范。了结之后，论文的每一部分都是“实”的、有据的。这种“交付前彻底了结、不留半成品”的纪律，是专业性的体现——它让你交付的东西可信、完整、经得起推敲。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>检查上周补充实验是否全跑完——没完成的今天跑完。</li>
+<li>把补实验的最终结果更新进论文表格（正文或 supplementary）。</li>
+<li>新数字纳入数字审计（和实验日志核对一致）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>所有补充实验跑完、结果更新进论文，新数字已审计一致（或：实验已完成，读完一篇最新论文并记录要点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>带着半截实验投稿</strong> → 投稿前所有要进论文的实验必须有最终结果。</li>
+<li><strong>补实验的新数字忘了审计</strong> → 新数字也要和日志核对一致。</li>
+<li><strong>实验都完成了却无所事事</strong> → 读最新论文保持跟进，或检查论文还有无可补的小点。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>补实验跑不完（时间不够）?→ 优先保证最有卖点的（数据量曲线）完整，次要的可标“future work”；读哪篇最新论文?→ 读和你方法最相关的、或你 Related Work 里最新引用的那篇的后续。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>了结了投稿前的实验欠账</strong>。<strong>做了</strong>（补完实验 + 更新表格 + 审计新数字）、<strong>学了</strong>（投稿前实验必须彻底完成、新数字也要审计）、<strong>会了</strong>（确保论文实验完整无缺口）。</p>
+</div></section></section><section class="slot" id="d176-noon" data-d="176" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D176 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛上半监督学习(Mean Teacher)原理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（半监督 Mean Teacher——契合你的发力线）</h4><div class="blk-b"><ul>
+<li><strong>半监督学习 = 同时用“有标注数据 + 无标注数据”训练</strong>。竞赛（和真实遥感场景）常有大量无标注数据（或测试集），半监督能利用这些无标注数据进一步提分。</li>
+<li><strong>Mean Teacher 怎么工作（原理）</strong>：维护两个模型——<strong>学生模型</strong>（正常训练、梯度更新）和<strong>教师模型</strong>（学生参数的<strong>滑动平均 EMA</strong>，不直接训练）。对无标注数据，让<strong>学生的预测去逼近教师的预测（一致性约束）</strong>——因为教师是学生的平滑版本（更稳定），用它当“软目标”指导学生，能让学生从无标注数据里学到有用的信息。<strong>总损失 = 有标注数据的监督损失 + 无标注数据的一致性损失</strong>。</li>
+<li><strong>类比</strong>：教师模型像“学生自己的稳定版老师”——学生每天在变（波动），但把它每天的样子平均起来(EMA)就得到一个更稳的“老师”；让今天的学生去和这个稳定老师的判断保持一致，学生就被“自己的平均智慧”引导着进步，即使在没有标准答案（无标注）的数据上也能学。</li>
+<li><strong>为什么半监督和你的定位高度相关（不只是竞赛trick）</strong>：你的发力线是“小样本/标注稀缺”——<strong>遥感领域标注数据昂贵（需要专业知识标注），无标注数据却很多（海量卫星图）。半监督正是“标注少、无标注多”场景的核心技术</strong>。所以你学半监督，不只是为竞赛提分，更是在掌握你研究方向的一个真问题的解法。这可能成为你后续课题的方向之一（用半监督解决遥感标注稀缺）。</li>
+<li><strong>半监督 vs 你之前学的伪标签（联系与区别）</strong>：你 W23 学过伪标签——其实<strong>伪标签也是一种半监督方法</strong>（用模型给无标注数据打标再训练）。Mean Teacher 是更“优雅”的半监督：伪标签是“硬”地把高置信预测当标签（离散）,Mean Teacher 是“软”地让学生持续逼近教师的预测（连续的一致性约束），且教师是学生的 EMA（更稳定、自我蒸馏）。<strong>两者都在利用无标注数据，但 Mean Teacher 通常更稳、不需要设硬阈值</strong>。理解它俩的联系，你就把握了半监督的两种典型思路（自训练/伪标签 vs 一致性正则）。这对你做“标注稀缺”方向的研究很有用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>理解 Mean Teacher 的两个模型（学生 + 教师EMA）和两个损失（监督 + 一致性）。</li>
+<li>实现 Mean Teacher(教师 = 学生的 EMA，无标注数据算一致性损失，见补充包)。</li>
+<li>设好一致性损失权重和 EMA 衰减率。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Mean Teacher 框架搭好（学生+教师EMA、监督+一致性双损失），理解了原理。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把教师模型也直接梯度更新 → 教师只能是学生的 EMA，不直接训练；一致性损失权重过大 → 训练初期学生还没学好，一致性约束太强会带偏，权重要逐步上升(ramp-up)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不会实现 EMA?→ 每步用 <code>teacher = α·teacher + (1-α)·student</code> 更新（α 如 0.999）；不确定一致性损失用什么?→ 学生和教师预测的 MSE 或 KL 散度。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>半监督 Mean Teacher 的原理</strong>。<strong>做了</strong>（理解 + 搭框架）、<strong>学了</strong>（学生+教师EMA、监督+一致性双损失、半监督契合你标注稀缺的发力线）、<strong>会了</strong>（用无标注数据 + 一致性约束提分）。</p>
+</div></section></section><section class="slot" id="d176-pm" data-d="176" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D176 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">训练 Mean Teacher 半监督版</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>训练 Mean Teacher 版（有标注 + 无标注数据一起），提交看效果。<strong>关键调参</strong>：一致性损失权重（逐步 ramp-up）、EMA 衰减率（如 0.999）。无标注数据帮助有限时，可能该任务监督信号已够，换别的 trick。</p>
+<ul>
+<li><strong>训练要点</strong>：有标注数据走监督损失，无标注数据走一致性损失（学生逼近教师），两个损失加权求和。一致性权重前期小、逐步增大(ramp-up)，避免训练初期带偏。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>训练 Mean Teacher 版（有标注 + 无标注数据）。</li>
+<li>调一致性权重(ramp-up)和 EMA 衰减率。</li>
+<li>提交，记 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Mean Teacher 半监督版训练完成、提交，效果记录在 Trick 日志。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Mean Teacher 不收敛 → 检查一致性 loss 权重（太大?）和 EMA 衰减率；无标注数据没用对 → 确认无标注数据真的进了训练（只走一致性损失）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>半监督帮助有限?→ 该任务监督信号可能已够（标注充足），换别的 trick；不收敛 → 降一致性权重、用 ramp-up、检查 EMA。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>训练了半监督 Mean Teacher 并验证效果</strong>。<strong>做了</strong>（训练 + 调参 + 提交）、<strong>学了</strong>（一致性权重 ramp-up、EMA 衰减率、半监督的适用判断）、<strong>会了</strong>（用半监督利用无标注数据提分）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜半监督 Mean Teacher</strong>：学生模型（梯度训练）+ 教师模型（学生的EMA，不直接训）。无标注数据让学生预测逼近教师（一致性损失），总损失=监督损失+一致性损失（权重ramp-up）。利用无标注数据提分，契合遥感“标注稀缺”的真问题。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 补充实验完成（新数字已审计） ✅ 竞赛半监督版提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D176</summary><textarea data-note="d176" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d177" data-d="177"><header class="day-head"><span class="dnum">D177</span><h2 class="day-t">周二 · 论文定稿 v2.2（封版）+ 竞赛提交</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把论文最终定稿 v2.2、明确“这就是要投的版本”、核对 Cover Letter；中午晚上竞赛半监督结果提交。</p>
+<p><strong>预期管理</strong>：今天论文封版定稿v2.2 + 核对Cover Letter。提醒：<strong>“封版”=明确一个“就投它”的版本</strong>（打上submission version标记、git commit），避免投稿前还在反复改导致混乱、投错版本；v2.2要整合所有修改（补实验、v2.1门面通俗化）且确认无遗留；Cover Letter简述工作贡献+为何适合该刊，再核对一遍；竞赛半监督结果提交看排名。</p>
+</blockquote>
+</div><section class="slot" id="d177-am" data-d="177" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D177 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文最终定稿 v2.2（封版）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（给论文“封版”的意义）</h4><div class="blk-b"><ul>
+<li><strong>“封版”= 明确宣布“这就是要投出去的版本 v2.2”，此后不再做大改</strong>。从 v1.x 的打磨、v2.0 的投稿准备、v2.1 的门面通俗化，到现在 v2.2 ——你整合所有修改，确认它完整、无遗留，<strong>打上“submission version”标记、git commit，作为最终投稿版</strong>。</li>
+<li><strong>为什么要“封版”（避免反复改的混乱）</strong>：论文可以无止境地改（总觉得还能再润一点）——但<strong>投稿前必须有一个明确的“就投它”的定版</strong>，否则你会在投稿前一直改、改出新问题、甚至投稿时不知道该传哪一版。<strong>封版是一种纪律：到此为止，这版去投</strong>。封版后如果发现小错（冷静期内），做最小修正即可，不再大改。<strong>有明确定版，投稿流程才清晰、不混乱</strong>。</li>
+<li><strong>封版前的最后确认</strong>:v2.2 要确认——① 所有修改都整合了（补实验、门面通俗化、残余问题清零）;② 数字审计通过（含新补实验的数字）;③ 没有遗留的“待办”。确认这些后，才能放心封版。</li>
+<li><strong>“完美主义”是投稿的隐形敌人，封版是解药</strong>：很多人（尤其认真的人）迟迟不投稿，是因为“总觉得还能再改改、再完善一点”——这是完美主义陷阱。<strong>问题是：论文永远改不“完美”，再读总能找到可优化的地方</strong>。如果你被“再改改”困住，可能错过投稿窗口、或在原地打转。<strong>封版就是对完美主义的解药：承认“这一版已经足够好，该投了”，把“还能更好”的部分留给 minor revision（审稿后还有修改机会）或下一篇论文</strong>。学术不是一锤子买卖——投稿后有 rebuttal/修改环节，接收后还能在 camera-ready 微调。<strong>所以不必追求投稿版绝对完美，达到“扎实、可信、清楚”就该投</strong>。封版让你从“无限打磨”中解脱出来，把论文推向下一个阶段。这种“足够好就交付、不被完美主义拖住”的判断力，是科研（和工作）的重要能力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合所有修改（补实验、v2.1 门面、残余问题）→ v2.2。</li>
+<li>确认无遗留（数字审计✓、todo清零✓、门面✓）。</li>
+<li>打上&quot;submission version v2.2&quot;标记、git commit。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文定稿 v2.2（确认无遗留、标记为投稿版）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>封版后还反复大改 → 封版即定，小错最小修正、不大改；以为整合了其实漏了某修改 → 对照各版本/todo确认全整合。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定是否真“无遗留”?→ 逐项核对（数字审计、todo、门面、补实验都✓了吗）；老想再改 → 提醒自己“封版是纪律，改不完的留 minor revision 或下一篇”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>给论文封版定稿</strong>。<strong>做了</strong>（整合所有修改 + 标记 v2.2 投稿版）、<strong>学了</strong>（封版纪律、避免反复改的混乱）、<strong>会了</strong>（明确一个“就投它”的最终版本）。</p>
+</div></section></section><section class="slot" id="d177-noon" data-d="177" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D177 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">核对 Cover Letter</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Cover Letter 是什么）</h4><div class="blk-b"><p>Cover Letter（投稿信）是随论文一起提交给编辑的简短信件——<strong>简述你的工作贡献、为什么适合投这个期刊、声明原创性（未一稿多投）</strong>。它是编辑对你工作的第一印象，要简洁、专业、突出贡献。</p>
+<ul>
+<li><strong>Cover Letter 包含什么</strong>:① 简述论文做了什么、核心贡献（2-3句）;② 为什么适合这个期刊（和期刊范围的契合）;③ 声明（原创、未在别处发表、未同时投他刊）;④ 礼貌的结尾。<strong>简短（半页到一页）、突出贡献、专业得体</strong>。</li>
+<li><strong>为什么 Cover Letter 重要</strong>：编辑收到投稿，先看 Cover Letter 决定“这篇是否符合期刊范围、是否值得送审”。一封清晰、突出贡献、契合期刊的 Cover Letter，能让编辑对你的工作有好的第一印象、顺利送审。</li>
+<li><strong>Cover Letter 是突出你&quot;差异化卖点&quot;的好机会</strong>：论文正文要中立客观，但 Cover Letter 里你可以更主动地<strong>向编辑强调你工作的独特价值</strong>——尤其你的差异化卖点（&quot;高效、数据友好、单卡可部署&quot;）。比如可以写&quot;与依赖大规模预训练的方法不同，我们的方法在单 GPU 上即可训练、在少量标注数据下即有效，这对计算/标注资源受限的遥感应用尤为重要&quot;。<strong>这一句话就把你的定位（不拼规模、拼高效实用）清晰地传达给了编辑</strong>，让他理解你工作的价值点在哪、为什么适合这个面向应用的期刊。Cover Letter 简短，但用好它能让编辑 get 到你工作的独特之处，提高送审和被重视的机会。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>核对 Cover Letter：贡献表述准确吗？和目标期刊契合吗？声明完整吗？</li>
+<li>确认无误（或据 v2.2 的最终贡献微调）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Cover Letter 核对无误（贡献准确、契合期刊、声明完整）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Cover Letter 贡献和论文最终版不一致 → 据 v2.2 同步；漏了原创性声明 → 补上（编辑要求）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不会写 Cover Letter?→ 用期刊提供的模板，或参考标准结构（贡献+契合+声明）；不确定投哪个期刊?→ 回顾目标(GRSL&gt;JSTARS&gt;TGRS，按工作分量选)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>核对了 Cover Letter</strong>。<strong>做了</strong>（核对/微调 Cover Letter）、<strong>学了</strong>（Cover Letter 的作用与结构）、<strong>会了</strong>（准备一封突出贡献、契合期刊的投稿信）。</p>
+</div></section></section><section class="slot" id="d177-pm" data-d="177" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D177 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛半监督结果提交</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>提交昨天训练的 Mean Teacher 半监督版结果，看线上排名，记 Trick 日志。半监督若有效就保留、组合进最终方案；无效则记录、换别的高阶 trick（D180 的蒸馏）。无论有效与否，都记进 Trick 日志——这既是为周末组合搜索备料，也是 M8 竞赛技术报告的素材（报告里要呈现你试过哪些 trick、各自效果如何）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>生成半监督版提交、提交。</li>
+<li>看线上排名，记 Trick 日志（Δ分/是否保留）。</li>
+<li>有效则纳入最优组合候选。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>半监督版提交，排名变化记录在 Trick 日志。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>本地涨就以为线上涨 → 以线上为准；半监督没涨就全盘否定 → 记录，可能和别的 trick 组合才显效。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>线上没涨?→ 记录换招（蒸馏）；明显涨 → 保留，纳入 D181 的组合搜索。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>提交并验证了半监督效果</strong>。<strong>做了</strong>（半监督提交 + 看排名）、<strong>学了</strong>（以线上为准、纳入组合候选）、<strong>会了</strong>（迭代验证高阶 trick）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文封版</strong>：整合所有修改 → 定稿 v2.2，明确“这就是要投的版本”，打submission标记+git commit。封版是纪律：此后不大改（小错最小修正），避免投稿前反复改导致混乱、投错版本。封版前确认：数字审计✓、todo清零✓、门面✓。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Cover Letter</strong>：随论文给编辑的投稿信——简述贡献（2-3句）+为何契合该刊+原创性声明。简短专业、突出贡献。是编辑的第一印象，决定是否送审。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>论文定稿 v2.2（封版）</strong> ✅ Cover Letter 核对 ✅ 竞赛半监督提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D177</summary><textarea data-note="d177" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d178" data-d="178"><header class="day-head"><span class="dnum">D178</span><h2 class="day-t">周三 · 熟悉投稿系统(ScholarOne)+ 列文件清单 + 竞赛</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午注册并熟悉 IEEE 投稿系统 ScholarOne、走一遍流程；中午列投稿所需文件清单；晚上竞赛。</p>
+<p><strong>预期管理</strong>：今天熟悉投稿系统ScholarOne + 列文件清单。提醒：IEEE系期刊(TGRS/GRSL/JSTARS)投稿用ScholarOne Manuscripts系统，<strong>提前注册账号、点进去走一遍流程（不提交）熟悉每步要填什么</strong>，投稿当天才不手忙脚乱；列出投稿所需的所有文件清单（正文PDF、Cover Letter、supplementary、图源文件、作者信息、关键词等）；把“第一次投稿”的陌生与紧张提前消化掉。</p>
+</blockquote>
+</div><section class="slot" id="d178-am" data-d="178" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D178 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">注册并熟悉 ScholarOne 投稿系统</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（投稿系统：第一次投稿的“陌生关”）</h4><div class="blk-b"><ul>
+<li><strong>IEEE 系期刊（TGRS、GRSL、JSTARS 等）投稿用 ScholarOne Manuscripts 系统</strong>——一个在线投稿平台，你在上面注册、填信息、上传文件、提交。第一次用会陌生（界面多、步骤多、要填的字段杂）。</li>
+<li><strong>为什么提前熟悉（消化陌生与紧张）</strong>：如果你等到投稿当天(W27)才第一次打开 ScholarOne，会被一堆字段、上传要求、流程步骤搞得手忙脚乱、容易出错、徒增紧张。<strong>提前注册账号、点进投稿流程走一遍（不真提交），熟悉每一步要填什么、传什么</strong>——这样投稿当天你已经门清，从容操作。<strong>这是“把第一次的陌生提前消化掉”的策略</strong>：第一次投稿本就紧张，别再让不熟悉系统加重紧张。</li>
+<li><strong>走流程时看什么</strong>：注册账号后，点进“提交新稿件”的流程，<strong>看每一步要填什么</strong>（作者信息、标题摘要、关键词、领域分类、推荐审稿人、各种声明……）、<strong>要传什么文件</strong>（正文 PDF、图、Cover Letter、supplementary……），心里有数。不真提交，只熟悉。</li>
+<li><strong>这也是对“第一次做一件大事”的通用应对策略</strong>：第一次投稿、第一次答辩、第一次任何重要的事，紧张往往来自“不知道会发生什么”。<strong>应对方法是“提前预演”——把流程提前走一遍，把未知变成已知，紧张就大幅降低</strong>。投稿系统提前熟悉、流程提前走一遍，就是这个策略的应用。你会发现，真正让人手忙脚乱的，往往不是事情本身有多难，而是“第一次、不熟悉”——而这是完全可以通过提前预演来消除的。<strong>养成“重要的事提前预演”的习惯</strong>：第一次投稿前熟悉系统、第一次答辩前模拟演练、第一次汇报前过一遍流程。把第一次的不确定性提前消化掉，你就能在真正的时刻从容应对。这是一种可迁移的、降低重要时刻焦虑的元能力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>注册 ScholarOne 账号（目标期刊的投稿系统）。</li>
+<li>点进“提交新稿件”流程，<strong>逐步浏览</strong>（不提交），看每步要填什么、传什么。</li>
+<li>记下流程的关键步骤和要准备的东西。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>ScholarOne 账号就绪；走过一遍投稿流程，清楚每一步要填什么、传什么。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>投稿当天才第一次打开系统 → 提前熟悉，当天才不慌；走流程时不小心真提交了 → 看清“保存草稿”vs“提交”，别误点 Submit。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>系统操作生疏、看不懂某字段?→ 看期刊的 Author Guidelines / 投稿指南（通常有逐步说明）；不确定填什么 → 走流程时记下疑问，对照指南解决。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>熟悉了学术投稿系统 ScholarOne 的流程</strong>。<strong>做了</strong>（注册 + 走一遍流程）、<strong>学了</strong>（提前熟悉消化第一次投稿的陌生、每步要填传什么）、<strong>会了</strong>（从容操作投稿系统）。</p>
+</div></section></section><section class="slot" id="d178-noon" data-d="178" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D178 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">列投稿所需文件清单</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>投稿要传多个文件——<strong>列一份清单，确保齐全</strong>：正文 PDF、Cover Letter、supplementary、图源文件（有的期刊要单独的高清图）、作者信息、关键词、推荐审稿人（有的要）等。提前备齐，投稿当天直接上传。</p>
+<ul>
+<li><strong>为什么列文件清单</strong>：投稿要传的文件多而杂，临时找容易漏（漏了某个文件，投稿卡住或被退回补）。<strong>提前列清单、逐项备齐</strong>，投稿当天直接上传，不手忙脚乱。</li>
+<li><strong>清单化是你一路践行的工程习惯，投稿也不例外</strong>：回想你这一路——实验有实验日志、竞赛有 Trick 日志、论文有 todo 清单、投稿前有检查清单。<strong>“把要做/要核的事列成清单逐项过”是贯穿始终的工程纪律</strong>，它对抗的是“靠记忆容易漏”的人性弱点。投稿文件清单也是这个习惯的应用：把要传的文件列出来逐项备齐，确保万无一失。<strong>清单看似简单，却是专业可靠的基石</strong>——它让复杂、易漏的事变得有条理、可核查。把“凡是重要且多项的事，先列清单”内化成习惯，你做任何事都会更稳、更少出纰漏。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列投稿所需的所有文件清单（正文 PDF、Cover Letter、supplementary、图源、作者信息、关键词、推荐审稿人等）。</li>
+<li>逐项准备/确认齐全。</li>
+<li>放在一个文件夹，投稿时直接取用。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>投稿文件清单齐全，所有文件备好放在一处。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>漏了某文件（如高清图源）投稿时才发现 → 提前列清单备齐；作者信息/关键词没准备 → 一并列入清单。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知要传哪些文件?→ 看期刊的投稿要求（submission guidelines 列明所需文件）；要推荐审稿人?→ 提前想几个领域内合适的（避开利益冲突）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>备齐了投稿所需的所有文件</strong>。<strong>做了</strong>（列文件清单 + 逐项备齐）、<strong>学了</strong>（提前备齐避免投稿当天漏文件）、<strong>会了</strong>（系统准备投稿材料）。</p>
+</div></section></section><section class="slot" id="d178-pm" data-d="178" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D178 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛继续迭代</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>竞赛继续——用目前有效的 trick 继续提交、爬榜，并为 D181 的 trick 组合搜索做准备（确认手里有哪些验证有效的 trick:TTA、Ensemble、伪标签、半监督等，可供组合）。这几天的迭代不只是提分，更是在为周末的组合搜索“攒弹药”——你要清楚手里每张牌（每个trick）的效果如何，周末才能从有效的牌里挑出最优组合。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>竞赛用有效 trick 继续提交。</li>
+<li>清点手里验证有效的 trick（为 D181 组合搜索备料）。</li>
+<li>记 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛有新提交；手里有几个验证有效的 trick 可供周末组合。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>有效的 trick 没记清 → Trick 日志记清每个 trick 的效果（为组合搜索备料）；只单招不想组合 → 周末要组合，现在备齐有效招。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>trick 太多管不过来?→ Trick 日志按“有效/无效”分类，组合搜索时从有效的里挑。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>继续竞赛迭代并为组合搜索备料</strong>。<strong>做了</strong>（竞赛提交 + 清点有效 trick）、<strong>学了</strong>（为后续组合搜索积累有效招）、<strong>会了</strong>（有规划地推进竞赛）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜投稿系统ScholarOne</strong>:IEEE系期刊(TGRS/GRSL/JSTARS)投稿平台。提前注册+走一遍流程（不提交），熟悉每步填什么传什么；列文件清单（正文PDF/Cover Letter/supplementary/图源/作者信息/关键词）备齐。把第一次投稿的陌生提前消化掉。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 投稿系统账号就绪（走过流程） ✅ 投稿文件清单齐全 ✅ 竞赛迭代。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D178</summary><textarea data-note="d178" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d179" data-d="179"><header class="day-head"><span class="dnum">D179</span><h2 class="day-t">周四 · 系统里填信息 + 上传文件 + 预览核验</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午在投稿系统填作者信息/摘要/关键词；中午上传文件(PDF/Cover Letter/Supp)；晚上预览核验确保 PDF 显示正常。</p>
+<p><strong>预期管理</strong>：今天在投稿系统填信息+上传文件+预览。提醒：填作者信息（顺序/单位要对）、摘要、关键词；上传论文PDF+Cover Letter+Supplementary;<strong>务必检查预览PDF</strong>——确保审稿人看到的PDF图表显示正常、公式没乱、字体已嵌入（PDF字体没嵌入/图变形，审稿人看到的就是坏的）；用pdflatex生成的PDF默认嵌入字体、图用矢量PDF避免变形。</p>
+</blockquote>
+</div><section class="slot" id="d179-am" data-d="179" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D179 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">在投稿系统填作者信息、摘要、关键词</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（填信息要准确，尤其作者信息）</h4><div class="blk-b"><ul>
+<li>在 ScholarOne 里填写稿件的元信息：<strong>作者信息（姓名、顺序、单位、通讯作者、邮箱）、标题、摘要、关键词、领域分类</strong>等。这些信息会进入投稿记录，要准确。</li>
+<li><strong>作者信息尤其要慎重</strong>:① <strong>作者顺序</strong>——学术界作者顺序有讲究（通常第一作者是主要贡献者、通讯作者负责沟通），顺序填错可能引起纠纷;② <strong>单位</strong>——准确填写所属机构;③ <strong>通讯作者</strong>——指定负责和编辑沟通的人（通常导师或你）;④ <strong>邮箱</strong>——确保能收到审稿通知。<strong>这些一旦提交不好改，要填对</strong>。</li>
+<li><strong>摘要、关键词从论文里取</strong>：摘要直接用论文 v2.2 的 Abstract（你 W21 迭代5遍、W25 通俗化过的）；关键词选能代表你工作的术语（方便检索）。</li>
+<li><strong>关键词的选择有讲究（影响论文被检索到）</strong>：关键词不是随便填——它决定<strong>别人在数据库里搜什么词能搜到你的论文</strong>。选词原则:① 用领域内<strong>通用的检索词</strong>（别人会搜的词，如“oriented object detection”“remote sensing”“rotated detection”），而非生造的词;② 覆盖你工作的几个维度（任务+方法+领域，如“旋转目标检测+高效适配+遥感图像”）;③ 包含你想被关联到的方向的词（如果你想让做“小样本/高效”的人搜到你，就放相关关键词）。<strong>好的关键词让对的人能搜到你的论文、引用你的工作</strong>——这关系到你工作的可见度和影响力。花点心思选，别敷衍。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>填作者信息（姓名/顺序/单位/通讯作者/邮箱，仔细核对）。</li>
+<li>填标题、摘要（用 v2.2 的）、关键词、领域分类。</li>
+<li>核对一遍无误。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>投稿系统的作者信息、标题、摘要、关键词填写完毕且准确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>作者顺序/单位填错 → 仔细核对（一旦提交不好改）；通讯作者/邮箱错 → 确保能收审稿通知。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>作者顺序拿不准?→ 和导师/合作者确认；关键词选什么?→ 用论文里的核心术语 + 领域常用检索词。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>在投稿系统准确填写了稿件信息</strong>。<strong>做了</strong>（填作者信息/摘要/关键词）、<strong>学了</strong>（作者信息要慎重准确、一旦提交不好改）、<strong>会了</strong>（规范填写投稿元信息）。</p>
+</div></section></section><section class="slot" id="d179-noon" data-d="179" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D179 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">上传论文 PDF + Cover Letter + Supplementary</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上传投稿文件——<strong>正文 PDF、Cover Letter、Supplementary</strong>（以及图源等期刊要求的）。按系统要求的格式/类型上传（有的要分别标注文件类型）。</p>
+<ul>
+<li><strong>上传要点</strong>:① 按系统要求的文件类型上传（正文标“Main Document”、Cover Letter 标“Cover Letter”、附录标“Supplementary”）;② 文件命名规范;③ 确认每个文件都上传成功。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>上传正文 PDF（标注为主文档）。</li>
+<li>上传 Cover Letter、Supplementary（按类型标注）。</li>
+<li>确认所有文件上传成功。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>正文 PDF、Cover Letter、Supplementary 都上传成功、类型标注正确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>文件类型标错（把附录当主文档）→ 按系统要求的类型标；漏传某文件 → 对照文件清单确认全传。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知某文件该标什么类型?→ 看系统的文件类型选项说明；上传失败 → 检查文件大小/格式是否符合要求。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>上传了所有投稿文件</strong>。<strong>做了</strong>（上传 PDF/Cover Letter/Supp + 标注类型）、<strong>学了</strong>（按类型规范上传、确认成功）、<strong>会了</strong>（在系统里正确上传投稿材料）。</p>
+</div></section></section><section class="slot" id="d179-pm" data-d="179" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D179 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">预览核验：确保 PDF 显示正常</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（预览核验——审稿人看到的必须正常）</h4><div class="blk-b"><ul>
+<li>投稿系统上传文件后，会生成一个<strong>合并的 PDF 预览</strong>（系统把你的文件转成审稿人看到的样子）。<strong>务必检查这个预览</strong>——确保图表显示正常、公式没乱码、字体正常、排版没错位。<strong>审稿人看到的就是这个预览 PDF，如果它有问题（图变形、字体丢失、公式乱），审稿人看到的就是坏的，严重影响印象甚至无法评审</strong>。</li>
+<li><strong>最常见的坑：字体没嵌入、图变形</strong>:① <strong>字体没嵌入</strong>——PDF 如果没嵌入字体，在别人的电脑上可能显示成乱码/替代字体。<strong>用 pdflatex 生成的 PDF 默认嵌入字体</strong>（避免这个问题）;② <strong>图变形/模糊</strong>——位图图在转换中可能变形或模糊，<strong>用矢量 PDF 格式的图</strong>（避免变形）。</li>
+<li><strong>为什么这一步绝不能省</strong>：你前面所有的努力（写作、实验、打磨），最终都通过这个预览 PDF 呈现给审稿人。<strong>如果预览 PDF 坏了，审稿人看到的就是一份“残缺”的论文</strong>——再好的工作也白搭。所以上传后必须预览核验，确保审稿人看到的是显示完全正常的论文。</li>
+<li><strong>这是“交付物质量”意识的体现</strong>：你做工程一路养成的习惯——交付前要确认交付物本身没问题（代码要跑通、文件要能打开）。论文投稿也一样：<strong>你交付给审稿人的“产品”是这个预览 PDF，它必须完好</strong>。一个常见的惨剧是：作者本地的 PDF 完美，但上传系统转换后字体丢失/图变形，作者没预览就提交，审稿人收到一份乱码论文——本可避免的低级事故，却可能毁掉整篇投稿。<strong>预览核验就是投稿的“交付前质检”</strong>，花几分钟，避免几个月努力毁于一个显示问题。养成这个意识：任何交付给别人的东西，交付前都要站在对方角度确认它是好的。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在系统里生成/查看合并的预览 PDF。</li>
+<li>逐页检查：图表显示正常？公式没乱？字体正常？排版对？</li>
+<li>有问题就修（重新生成嵌入字体的 PDF、用矢量图），重新上传。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>预览 PDF 逐页检查，图表/公式/字体/排版全部显示正常。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>上传的 PDF 字体没嵌入/图变形</strong> → 审稿人看到的就是坏的，务必预览；用 pdflatex（默认嵌入字体）、矢量图。</li>
+<li><strong>不预览直接以为没问题</strong> → 必须预览核验，这是审稿人看到的样子。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>预览 PDF 异常?→ 用 <code>pdflatex</code> 生成嵌入字体的 PDF（检查字体嵌入：PDF 属性里看）；图变形 → 换矢量 PDF 图；乱码 → 字体嵌入问题，重新生成。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>预览核验确保审稿人看到正常的论文</strong>。<strong>做了</strong>（预览 PDF + 逐页核验）、<strong>学了</strong>（审稿人看到的是预览PDF、字体嵌入/矢量图避免坏）、<strong>会了</strong>（确保投稿 PDF 显示正常）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜投稿PDF预览核验</strong>：上传后系统生成审稿人看到的合并PDF——务必逐页核验图表/公式/字体/排版正常。最常见坑：字体没嵌入（用pdflatex默认嵌入）、图变形（用矢量PDF图）。审稿人看到的就是这个PDF，坏了再好的工作也白搭。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 投稿系统填写完成 ✅ 文件上传 ✅ 预览 PDF 核验正常。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D179</summary><textarea data-note="d179" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d180" data-d="180"><header class="day-head"><span class="dnum">D180</span><h2 class="day-t">周五 · 一切就绪但暂不 Submit（48h 冷静期）+ 竞赛蒸馏</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午最终确认所有信息无误、但故意暂不点 Submit（留 48h 冷静期）；中午晚上竞赛上模型蒸馏。</p>
+<p><strong>预期管理</strong>：今天投稿一切就绪但<strong>故意暂不点Submit</strong>（留48h冷静期）+ 竞赛上模型蒸馏。提醒：给自己48h冷静期——你可能明早突然发现一个小错误，修正了再投远好过投出去再撤稿；很想立刻投就提醒自己“48h后投只晚两天，但能避免投错”；<strong>知识蒸馏=把大模型（教师）的知识蒸馏到小模型（学生），然后大+小ensemble</strong>，这契合你单卡/高效路线（用小模型逼近大模型）；蒸馏温度/loss设置要当。</p>
+</blockquote>
+</div><section class="slot" id="d180-am" data-d="180" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D180 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">最终确认 + 暂不 Submit（48h 冷静期）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么“一切就绪却不点 Submit”）</h4><div class="blk-b"><ul>
+<li>投稿系统里一切都填好、传好、预览正常了——<strong>但故意先不点 Submit，留 48h 冷静期</strong>。</li>
+<li><strong>为什么留冷静期（避免冲动投出带错版本）</strong>:① <strong>你可能明早突然发现一个小错误</strong>（某个数字、某句话、某个图）——投稿前发现还能改，投出去再发现就要走撤稿/勘误的麻烦流程（很被动）;② <strong>48h 让你以更冷静的状态做最后检查</strong>——投稿前往往兴奋/紧张，容易忽略问题，隔两天冷静下来再看，更容易发现疏漏;③ <strong>修正了再投，远好过投出去再撤稿</strong>——撤稿/重投影响不好、流程麻烦，而晚投两天几乎没有代价。<strong>这是成熟的投稿纪律：好饭不怕晚，确认无误再投</strong>。</li>
+<li><strong>冷静期里做什么</strong>：不是干等——这两天（及周末）做最后的检查（大声朗读、再核数字、再看图表），周一以最佳状态正式投稿(W27 D183)。</li>
+<li><strong>冷静期背后的心理学（为什么“当下”判断不可靠）</strong>：投稿前你往往处在一种“亢奋+疲惫”的状态——为了赶投稿连日打磨，既兴奋（终于要投了）又疲惫（看这篇论文看了太多遍）。<strong>这种状态下你的判断力是下降的</strong>：疲惫让你“看不见”熟悉的错误（你已经看这句话几十遍，大脑默认它对），亢奋让你急于“完成”而忽略疏漏。<strong>隔 48 小时，亢奋退去、疲惫恢复，你以一个相对“陌生、清醒”的状态再看，往往能发现之前视而不见的问题</strong>。这和“写完文章放一晚再改”是同样的道理——时间创造距离，距离带来客观。<strong>对一篇要决定你几个月工作命运的论文，值得用 48 小时换一次清醒的复核</strong>。这是尊重自己劳动成果的表现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>最终确认系统里所有信息、文件、预览都无误。</li>
+<li><strong>暂不点 Submit</strong>——留 48h 冷静期到下周一。</li>
+<li>记下“待周一投稿”，冷静期里做最后检查。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>投稿一切就绪（信息/文件/预览都✓），但未点 Submit，留冷静期到周一。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>憋不住当天就投 → 留 48h 冷静期（可能漏掉小错）；冷静期干等啥也不做 → 用这两天做最后检查（朗读/核数字）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>很想立刻投?→ 提醒自己“48h 后投只晚两天，但能避免投错版本（撤稿很麻烦）”；担心拖延变忘?→ 明确记下“周一投稿”、设提醒。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>投稿前留 48h 冷静期</strong>。<strong>做了</strong>（最终确认 + 暂不 Submit）、<strong>学了</strong>（冷静期避免冲动投带错版本、修正再投好过撤稿）、<strong>会了</strong>（用成熟纪律对待投稿）。</p>
+</div></section></section><section class="slot" id="d180-noon" data-d="180" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D180 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛模型蒸馏（知识蒸馏）原理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（知识蒸馏——契合你单卡/高效路线）</h4><div class="blk-b"><ul>
+<li><strong>知识蒸馏 = 把一个“大模型（教师）”的知识，蒸馏/转移到一个“小模型（学生）”里</strong>，让小模型逼近大模型的性能。竞赛里可以“大+小 ensemble”（蒸馏后的小模型 + 大模型一起集成）。</li>
+<li><strong>怎么蒸馏（原理）</strong>:① 先训一个强大的教师模型（大、准）;② 训练学生模型时，<strong>不只让它学真实标签(hard label)，还让它学教师模型的“软预测”（soft label，教师输出的概率分布）</strong>——教师的软预测包含了“类别间的相似性”等丰富信息（比如“这个目标像A但也有点像B”），比硬标签信息更丰富;③ 学生在“真实标签 + 教师软标签”的双重指导下训练，能学到教师的知识、逼近其性能。<strong>关键参数：蒸馏温度 T</strong>（软化教师输出的概率分布，T 越大分布越软、暴露越多类间信息）。</li>
+<li><strong>类比</strong>：教师（大模型）像经验丰富的老师傅，学生（小模型）像学徒——老师傅不只告诉学徒“这是A”（硬标签），还会讲“这个看着像A，但要注意它有B的特征”（软标签，丰富的判断经验）。学徒在老师傅的细致指导下，能学到比死记答案更深的本事，小小的身板也能接近老师傅的水平。</li>
+<li><strong>为什么蒸馏契合你的定位（不只是竞赛trick）</strong>：你走“单卡/高效”路线——<strong>蒸馏正是“用小模型逼近大模型性能”的核心技术</strong>：把大模型的知识压进小模型，部署时用小模型（更快、更省、适合单卡/边缘），却有接近大模型的精度。<strong>这直接服务于你“精度持平但更小更快”的卖点</strong>。所以学蒸馏，既为竞赛（大+小ensemble），也契合你高效路线的研究方向。</li>
+<li><strong>蒸馏是你“单卡高效”路线的一张潜在王牌</strong>：你的论文卖点是“精度持平但更小更快”。蒸馏给了你一条具体的技术路径来强化这个卖点——<strong>用一个大模型（甚至是 RingMo 这类基础模型）当教师，蒸馏出一个小学生模型，在你单卡能跑的预算内逼近大模型的精度</strong>。这意味着你可以“借用”大模型的能力（通过蒸馏），却交付一个高效的小模型，既不和大模型拼规模（你拼不过），又能享受大模型的知识红利。<strong>这正是“下游特化/高效适配”思路的体现</strong>——不造更大的模型，而是把已有大模型的能力高效地“搬”到小模型上。后续课题里，“如何把遥感基础模型蒸馏到单卡可部署的小模型”会是一个很贴合你定位、也很有价值的方向。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>理解蒸馏：教师（大模型）→ 学生（小模型），学生学真实标签 + 教师软标签。</li>
+<li>实现蒸馏(蒸馏损失 = 硬标签损失 + 教师软标签的 KL 损失，带温度 T，见补充包)。</li>
+<li>训练学生模型。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>蒸馏框架搭好（教师软标签 + 温度 T + 蒸馏损失），理解了原理。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>蒸馏温度/loss 设置不当 → 调温度 T、平衡硬/软标签损失权重；教师模型不够强 → 蒸馏无效（教师要确实比学生强，才有知识可传）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>蒸馏没提升?→ 调蒸馏温度、确认教师模型确实更强、调硬/软损失权重；不会实现?→ 软标签用教师 logits/T 的 softmax，学生学它的 KL 散度。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>知识蒸馏的原理</strong>。<strong>做了</strong>（理解 + 搭蒸馏框架）、<strong>学了</strong>（教师软标签含丰富信息、温度T、蒸馏契合你单卡高效路线）、<strong>会了</strong>（用蒸馏把大模型知识转给小模型）。</p>
+</div></section></section><section class="slot" id="d180-pm" data-d="180" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D180 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">训练蒸馏版 + 提交</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>训练蒸馏后的小模型（学真实标签 + 教师软标签），可“大+小 ensemble”提交。看效果，记 Trick 日志。</p>
+<ul>
+<li><strong>大+小 ensemble</strong>：蒸馏后的小模型本身性能接近大模型，再和大模型集成（diversity 来自大小不同），可能进一步提分。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>训练蒸馏版小模型。</li>
+<li>可做“大+小 ensemble”提交。</li>
+<li>提交，记 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>蒸馏版（或大+小ensemble）提交，效果记录在 Trick 日志。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>蒸馏无效 → 调温度/确认教师更强；大+小ensemble没提升 → 检查两模型diversity。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>蒸馏没提升?→ 调蒸馏温度/损失权重、确认教师够强；时间紧 → 蒸馏作为可选，优先稳的组合。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>训练了蒸馏版并验证效果</strong>。<strong>做了</strong>（训练蒸馏 + 提交）、<strong>学了</strong>（大+小ensemble、以效果为准）、<strong>会了</strong>（用蒸馏 + 集成提分）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜知识蒸馏</strong>：大模型（教师）→ 小模型（学生）——学生学真实标签+教师软标签（soft label含类间相似信息，带温度T软化）。用小模型逼近大模型性能，契合你单卡/高效路线（&quot;更小更快但精度接近&quot;）。教师要确实更强才有知识可传。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 投稿一切就绪（暂不Submit，留冷静期） ✅ 竞赛蒸馏版提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D180</summary><textarea data-note="d180" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d181" data-d="181"><header class="day-head"><span class="dnum">D181</span><h2 class="day-t">周六 · （集中日）· 竞赛最终冲刺（trick 组合搜索）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>集中日：把所有剩余 trick 做组合（TTA+Ensemble+伪标签+半监督+WBF），每个组合提交一次，找最优组合。</p>
+<p><strong>预期管理</strong>：今天竞赛最终冲刺——trick组合搜索。提醒：把验证有效的trick做组合（TTA+Ensemble+伪标签+半监督+WBF），每个组合提交一次、记录得分、找最优组合；<strong>不是“trick越多越好”——trick之间可能互相干扰反而掉分</strong>，要试组合、看实际提交分数实证；某组合掉分就去掉冲突的trick；时间紧优先试“Ensemble+WBF+TTA”这个最稳的组合。</p>
+</blockquote>
+</div><section class="slot" id="d181-am" data-d="181" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D181 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">系统搜索 trick 组合</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（trick 组合搜索：不是堆 trick，是找最优组合）</h4><div class="blk-b"><ul>
+<li>你手里有一堆验证有效的 trick:TTA、Ensemble、伪标签、半监督、WBF……<strong>冲刺阶段要找到它们的“最优组合”</strong>——不是把所有 trick 都叠上（那不一定最好），而是系统地试不同组合、看哪个组合的实际提交分数最高。</li>
+<li><strong>为什么“不是 trick 越多越好”（可能互相干扰）</strong>：不同 trick 可能<strong>互相干扰</strong>——比如某两个 trick 的作用重叠（都在做类似的事，叠加无额外收益）、或某个 trick 在有了别的 trick 后反而拖后腿。<strong>盲目叠加所有 trick，可能反而掉分</strong>。所以要<strong>试组合、用实际提交分数判断</strong>，找出真正最优的组合，而非想当然地“全加上”。</li>
+<li><strong>怎么搜索（实证）</strong>：从验证有效的 trick 里，试不同的组合（如“Ensemble+WBF”、“Ensemble+WBF+TTA”、“Ensemble+WBF+TTA+伪标签”……），<strong>每个组合提交一次、记录得分</strong>，找出得分最高的组合。这是个实证搜索过程——用提交分数说话，不靠猜。</li>
+<li><strong>trick 组合搜索其实是“做实验”的又一次应用</strong>：你有没有发现——这个“系统试不同组合、用客观指标（提交分数）判断、找最优”的过程，和你做消融实验、跑实验矩阵的方法论是<strong>一模一样</strong>的？都是“控制变量、系统搜索、用数据判断、记录结果”。<strong>竞赛 trick 组合搜索，本质就是一次小型的实验设计与搜索</strong>。这说明你这一路练的“科学地做实验”的能力是通用的——无论是论文的消融、还是竞赛的调优，底层都是同一套“假设→实验→看数据→决策”的方法。<strong>把竞赛也当成“做实验”来对待（而非碰运气试 trick），你就能有条理地、可复现地爬榜</strong>，而不是一团乱麻地瞎试。这种迁移能力，正是你从带教里要长出来的核心素养。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列出验证有效的 trick（从 Trick 日志）。</li>
+<li>系统试不同组合（逐个加 trick，或试几个有代表性的组合）。</li>
+<li>每个组合提交一次、记录得分。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>试了几个 trick 组合，每个组合的得分都记录在表里。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>盲目叠加所有 trick</strong> → 可能互相干扰反而掉分，要试组合看实际得分。</li>
+<li><strong>不记录组合得分</strong> → 记“组合→得分”表，才能找出最优。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>某组合掉分?→ 去掉其中冲突的 trick；提交次数有限/时间紧?→ 优先试“Ensemble+WBF+TTA”这个最稳的组合（这几个通常稳定有效且不冲突）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>trick 组合搜索</strong>。<strong>做了</strong>（系统试组合 + 记录得分）、<strong>学了</strong>（不是trick越多越好、trick可能冲突、用提交分数实证）、<strong>会了</strong>（找最优 trick 组合而非盲目堆叠）。</p>
+</div></section></section><section class="slot" id="d181-noon" data-d="181" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D181 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">逐个提交组合 + 找最优</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>逐个提交不同 trick 组合，对比得分，确定最优组合。注意竞赛的每日提交次数限制，合理规划（优先试最可能好的组合）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐个提交 trick 组合（在提交次数限制内）。</li>
+<li>对比各组合得分。</li>
+<li>确定最优组合。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛最优组合确定 + 一张“组合→得分”表。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>提交次数用完了还没试完关键组合 → 优先试最可能好的(Ensemble+WBF+TTA)；组合太多试不过来 → 聚焦几个有代表性的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>提交次数有限?→ 优先级排序，先试最稳/最可能好的组合；得分接近难取舍 → 选线上最高的、或更稳健的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确定了竞赛最优组合</strong>。<strong>做了</strong>（提交组合 + 对比 + 确定最优）、<strong>学了</strong>（提交次数规划、优先试最可能好的）、<strong>会了</strong>（用实证找出最优方案）。</p>
+</div></section></section><section class="slot" id="d181-pm" data-d="181" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D181 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">记录组合得分 + 整理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>记录每种 trick 组合的得分（为 M8 竞赛技术报告攒料——“Trick 贡献分解表”），整理当前最优方案。这张“组合→得分”表是 M8 写竞赛技术报告的核心素材。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整理“组合→得分”表（每个组合 + 得分）。</li>
+<li>标出最优组合及其得分/排名。</li>
+<li>存好（为 M8 技术报告攒料）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>完整的“组合→得分”表，最优组合明确，为 M8 报告攒好料。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>组合得分没系统记 → 整理成表；只记最优忘了其他 → 都记（M8 报告要展示各 trick/组合的贡献）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>忘了某组合的分?→ 看提交历史；表太乱?→ 按得分排序，标清每个组合用了哪些 trick。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了组合得分为 M8 攒料</strong>。<strong>做了</strong>（整理组合得分表 + 标最优）、<strong>学了</strong>（为技术报告系统记录、Trick贡献分解）、<strong>会了</strong>（沉淀竞赛冲刺的完整记录）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜trick组合搜索</strong>：从验证有效的trick里试不同组合（非全叠），每个组合提交看得分，找最优。trick可能互相干扰（越多≠越好），用实际提交分数实证。时间紧优先“Ensemble+WBF+TTA”最稳组合。组合→得分表是M8技术报告素材。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛最优组合确定（组合→得分表）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D181</summary><textarea data-note="d181" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d182" data-d="182"><header class="day-head"><span class="dnum">D182</span><h2 class="day-t">周日 · （复盘日）· W26 复盘 + 大声朗读通读论文</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾：复盘、最后一次通读论文（大声朗读能发现默读漏掉的问题）、准备周一正式投稿。</p>
+<p><strong>预期管理</strong>:W26收尾：周复盘 + 大声朗读通读论文 + 准备周一投稿。提醒：<strong>大声朗读是简单但极有效的查错法</strong>——读出声能抓到默读时眼睛会自动脑补跳过的拗口句、错别字、语法问题（耳朵能发现眼睛漏掉的）；朗读觉得某句拗口，那就是读者也会卡的地方，改顺；确认周一(W27 D183)可正式投稿——这是冷静期的最后检查。</p>
+</blockquote>
+</div><section class="slot" id="d182-am" data-d="182" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D182 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W26 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“投稿准备”的经验（封版纪律、投稿系统操作、48h冷静期、竞赛高阶trick）。本周核心是<strong>把论文和投稿材料准备到“只差点一下Submit”的状态</strong>——经验值得沉淀：论文封版的纪律（明确定版）、投稿系统ScholarOne的流程、预览核验的重要性、48h冷静期的价值；竞赛侧接触了半监督、蒸馏、组合搜索等高阶技巧。</p>
+<ul>
+<li><strong>本周成果回顾</strong>：论文定稿v2.2（封版）、投稿系统就绪（信息填好、文件上传、预览核验）、暂不Submit留冷静期、竞赛（半监督Mean Teacher、知识蒸馏、trick组合搜索、最优组合确定）。下周就正式投稿了。</li>
+<li><strong>站在这里回望：你离“第一次投稿”只剩一步</strong>：从 M1 的零基础（连遥感是什么都不清楚），到现在论文封版、投稿系统就绪、只差周一点一下 Submit——<strong>这是一段了不起的跨越</strong>。复盘时不妨给自己一点肯定：你独立走完了“读文献→找 idea→做实验→写论文→打磨→准备投稿”的完整科研闭环，这正是科研工作者的核心能力。下周的投稿不只是一个动作，更是这一整段努力的里程碑。<strong>带着这份踏实（论文是扎实做出来的、投稿是充分准备的）迎接下周的投稿</strong>，你已经准备好了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（双线：论文/投稿 + 竞赛）。</li>
+<li>记投稿准备的经验 + 竞赛进展。</li>
+<li>记论文到 v2.2 封版 + 投稿系统就绪。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W26 周报（投稿准备进展 + 竞赛 + 经验沉淀）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账 → 记关键经验（封版纪律、投稿系统流程、冷静期）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周哪步最折腾（多半是投稿系统操作或某个高阶trick）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了投稿准备周</strong>。<strong>做了</strong>（W26 周报）、<strong>学了</strong>（投稿准备的经验沉淀）、<strong>会了</strong>（总结投稿准备 + 竞赛进展）。</p>
+</div></section></section><section class="slot" id="d182-noon" data-d="182" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D182 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">大声朗读通读论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（大声朗读校稿——简单但极有效）</h4><div class="blk-b"><ul>
+<li><strong>最后一次通读论文，这次“大声朗读”</strong>（读出声来）。这是一个简单但<strong>极其有效的查错法</strong>——读出声能发现默读时漏掉的问题。</li>
+<li><strong>为什么朗读比默读更能查错（原理）</strong>：默读时，你的眼睛和大脑会<strong>自动脑补、跳过</strong>——读到拗口的句子、小错别字、语法问题，大脑自动“修正”了，你没注意到。<strong>但朗读时，你必须逐字读出来，耳朵会听到不对劲的地方</strong>：某句读着拗口（说明句子结构有问题）、某个词读出来不对（错别字/用词错）、某处读不顺（语法问题）。<strong>耳朵能抓到眼睛漏掉的问题</strong>——这是朗读校稿的魔力。</li>
+<li><strong>朗读发现的就是读者会卡的</strong>：如果你朗读时某句觉得拗口、要读两遍才顺——<strong>那读者读到这里也会卡</strong>。把这些拗口处改顺，论文读起来就更流畅。<strong>朗读是站在“读者听感”的角度检验论文</strong>。</li>
+<li><strong>朗读为什么对非母语写作尤其有用</strong>：你写的是英文论文（非母语）——中式英语的句子，默读时你可能觉得“语法没错啊”，但<strong>朗读出来，那种“不像母语者会这么说”的生硬感会更明显</strong>（节奏不对、用词别扭、句子太长喘不过气）。朗读能帮你抓到这些“语法对但不地道/不流畅”的问题，这是默读难以察觉的。<strong>对非母语写作者，朗读是检验流畅度和地道度的好办法</strong>——读着顺口的英文，通常也是读者读着舒服的英文。读到喘不过气的长句，就拆短；读着别扭的表达，就换地道说法（查句式库）。这是你这一路建的句式库 + 朗读校稿的配合。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>大声朗读全文（逐字读出来）。</li>
+<li>标记朗读时拗口/读不顺/读错的地方（那些就是问题）。</li>
+<li>修正这些地方（改顺、改对）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>大声朗读全文完毕，朗读发现的拗口/错误处已修正。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>还是默读（没真读出声）→ 必须读出声，耳朵才能查错；朗读觉得拗口却不改 → 拗口=读者也会卡，改顺。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某句怎么改都拗口?→ 拆成短句、调整语序；不好意思读出声?→ 小声读也行，关键是“逐字过、用耳朵听”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>大声朗读校稿</strong>。<strong>做了</strong>（朗读全文 + 修正拗口处）、<strong>学了</strong>(朗读抓眼睛漏掉的、拗口=读者会卡)、<strong>会了</strong>（用朗读做最后的查错）。</p>
+</div></section></section><section class="slot" id="d182-pm" data-d="182" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D182 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">准备周一正式投稿</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>冷静期的最后确认——朗读改完、再核对一遍关键项（数字、图表、信息），确认<strong>周一(W27 D183)可以正式投稿</strong>。心理上也做好准备：周一就是里程碑（人生可能的第一次学术投稿）。</p>
+<ul>
+<li><strong>最后确认清单</strong>：朗读发现的问题改完了？数字还一致？投稿系统里信息/文件都对？预览正常?——这些都✓，周一就放心投。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>朗读改完后，再核对关键项（数字/图表/系统信息/预览）。</li>
+<li>确认周一可正式投稿。</li>
+<li>心理准备：周一是投稿里程碑。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文最终检查通过（朗读问题已修、关键项已核），确认周一可投稿。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>冷静期最后还想大改 → 只做最小修正（封版了）；没做最后核对就等周一 → 朗读后再核关键项。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>还很紧张?→ 你已经准备得很充分（封版、系统就绪、预览核验、朗读校稿），周一从容投即可；发现个小错 → 正好，冷静期的价值就在这，改了再投。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>为周一正式投稿做好了最后准备</strong>。<strong>做了</strong>（最后核对 + 确认周一可投）、<strong>学了</strong>（冷静期的最后确认、投稿前的心理准备）、<strong>会了</strong>（从容迎接投稿里程碑）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜大声朗读校稿</strong>：最后一次通读用朗读（读出声）。耳朵能抓到默读时眼睛自动脑补跳过的拗口句/错别字/语法问题。朗读觉得拗口的地方=读者也会卡，改顺。简单但极有效的查错法。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W26 ✅ 论文最终检查（朗读校稿） ✅ 周一投稿准备就绪。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W26 累计交付</h2><p>补充实验收尾（新数字已审计）、<strong>论文定稿 v2.2（封版）</strong> + Cover Letter 核对、投稿系统 ScholarOne 就绪（信息填写 + 文件上传 + 预览核验）、暂不 Submit（留 48h 冷静期）、大声朗读校稿 + 周一投稿准备、竞赛（半监督 Mean Teacher + 知识蒸馏 + trick 组合搜索 + 最优组合确定）、W26 周报。本周你把论文和投稿材料准备到了“只差点一下 Submit”的状态——学会了<strong>论文封版</strong>（明确定版避免反复改的混乱）、<strong>投稿系统 ScholarOne 全流程</strong>（提前消化第一次投稿的陌生）、<strong>预览核验</strong>（确保审稿人看到显示正常的论文）、<strong>48h 冷静期纪律</strong>（避免冲动投出带错版本）、<strong>大声朗读校稿</strong>；竞赛侧掌握了半监督（Mean Teacher，契合标注稀缺）、知识蒸馏（契合单卡高效）、trick 组合搜索等高阶技巧。</p>
+</section><section class="wtail"><h2>🎓 W26 你“长出来”的能力清单</h2><ul>
+<li>投稿前补完所有实验欠账（新数字纳入审计）</li>
+<li><strong>论文封版</strong> v2.2（明确“就投它”的定版、git 标记，避免反复改混乱）</li>
+<li>Cover Letter 核对（贡献+契合期刊+原创声明）</li>
+<li><strong>投稿系统 ScholarOne 全流程</strong>（注册/走流程/填信息/上传/预览核验）——提前消化第一次投稿的陌生</li>
+<li><strong>预览核验</strong>（字体嵌入、矢量图，确保审稿人看到的 PDF 正常）</li>
+<li><strong>48h 冷静期纪律</strong>（避免冲动投出带错版本，修正再投好过撤稿）</li>
+<li><strong>大声朗读校稿</strong>（耳朵抓眼睛漏掉的拗口/错误）</li>
+<li>竞赛高阶 trick:<strong>半监督 Mean Teacher</strong>（契合标注稀缺）、<strong>知识蒸馏</strong>（契合单卡高效）、<strong>trick 组合搜索</strong>（非堆叠、用得分实证）</li>
+<li><strong>核心认知</strong>：封版是纪律（避免反复改的混乱）、审稿人看到的是预览PDF（预览核验绝不能省）、48h冷静期好过冲动投错、trick不是越多越好（可能冲突）、半监督/蒸馏不只是竞赛trick（契合你标注稀缺+单卡高效的真问题）</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D182</summary><textarea data-note="d182" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W26 加厚补充包（范例 / 实用工具+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 投稿文件清单 + Cover Letter 骨架 + trick 组合表</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 投稿文件清单（提前备齐）</span>
+□ 正文 PDF（嵌入字体、矢量图）  □ Cover Letter  □ Supplementary PDF
+□ 高清图源（如期刊要求）  □ 作者信息（姓名/顺序/单位/通讯/邮箱）
+□ 关键词（5-6个核心术语）  □ 推荐审稿人（如需要，避利益冲突）
+
+<span class="gh"># Cover Letter 骨架</span>
+Dear Editor,
+  We submit our manuscript &quot;[标题]&quot; for consideration in [期刊].
+  [2-3句：本文做了什么、核心贡献——突出&quot;高效/数据友好&quot;卖点]。
+  This work fits [期刊] as it addresses [与期刊范围的契合].
+  We confirm this is original, not published elsewhere, and not under
+  consideration by another journal.
+  Sincerely, [作者]
+
+<span class="gh"># 竞赛 trick 组合 → 得分表（找最优 + M8报告素材）</span>
+| 组合 | 线上分 | 排名 |
+|---|---|---|
+| Ensemble+WBF | 0.686 | 32 |
+| Ensemble+WBF+TTA | 0.694 | 25 |
+| Ensemble+WBF+TTA+伪标签 | 0.698 | 21 |
+| 全叠(+半监督+蒸馏) | 0.695 | 23 |  ← 反而略降:半监督与伪标签冲突
+最优:Ensemble+WBF+TTA+伪标签 (0.698, Top 7%)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — Mean Teacher EMA + 知识蒸馏损失</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="c1"># ① Mean Teacher：教师 = 学生的 EMA（不梯度更新）</span>
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_teacher</span><span class="p">(</span><span class="n">teacher</span><span class="p">,</span> <span class="n">student</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.999</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">tp</span><span class="p">,</span> <span class="n">sp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">teacher</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">student</span><span class="o">.</span><span class="n">parameters</span><span class="p">()):</span>
+        <span class="n">tp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mul_</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span><span class="o">.</span><span class="n">add_</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>   <span class="c1"># EMA 更新</span>
+<span class="c1"># 损失 = 监督(有标注) + 一致性(无标注,学生逼近教师), 权重 ramp-up</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mt_loss</span><span class="p">(</span><span class="n">stu_sup</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stu_unl</span><span class="p">,</span> <span class="n">tea_unl</span><span class="p">,</span> <span class="n">w_consist</span><span class="p">):</span>
+    <span class="n">sup</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">stu_sup</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">consist</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">stu_unl</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">tea_unl</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">sup</span> <span class="o">+</span> <span class="n">w_consist</span> <span class="o">*</span> <span class="n">consist</span>        <span class="c1"># w_consist 前期小、逐步增大</span>
+
+<span class="c1"># ② 知识蒸馏：学生学 真实标签 + 教师软标签（温度 T）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">distill_loss</span><span class="p">(</span><span class="n">student_logits</span><span class="p">,</span> <span class="n">teacher_logits</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">hard</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">student_logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>                       <span class="c1"># 学真实标签</span>
+    <span class="n">soft</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">kl_div</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">student_logits</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+                    <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">teacher_logits</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span>
+                    <span class="n">reduction</span><span class="o">=</span><span class="s2">&quot;batchmean&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>                <span class="c1"># 学教师软标签</span>
+    <span class="k">return</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">hard</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">soft</span>   <span class="c1"># 教师要确实更强才有知识可传</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① Mean Teacher 用 EMA 教师 + 一致性损失利用无标注数据（权重 ramp-up）;② 蒸馏用教师软标签（温度 T 软化）把大模型知识传给小模型。两者分别契合你“标注稀缺”和“单卡高效”的发力线。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D176</strong>：① 为什么补实验要在投稿前彻底了结？② Mean Teacher 的两个模型/两个损失是什么？③ 为什么半监督契合你的发力线（不只是竞赛trick）？</li>
+<li><strong>D177</strong>：① “封版”是什么、为什么要封版（避免什么）？② Cover Letter 包含哪几部分？</li>
+<li><strong>D178</strong>：① 为什么要提前熟悉投稿系统（而非投稿当天）？② 投稿要备齐哪些文件？</li>
+<li><strong>D179</strong>：① 填作者信息为什么要慎重？② 预览核验查什么、最常见的坑（字体/图）怎么避免？</li>
+<li><strong>D180</strong>：① 为什么“一切就绪却不点 Submit”（48h冷静期的价值/背后心理）？② 知识蒸馏怎么工作、为什么契合你单卡高效路线（潜在王牌）？</li>
+<li><strong>D181</strong>：① trick 组合搜索为什么“不是越多越好”？② 时间紧优先试什么组合？③ 为什么说它本质是“做实验”？</li>
+<li><strong>D182</strong>：① 大声朗读校稿为什么比默读更能查错（尤其对非母语写作）？② 朗读觉得拗口的地方说明什么？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>带半截实验投稿</td>
+<td>实验没了结</td>
+<td>投稿前补完所有要进论文的实验，新数字纳入审计</td>
+</tr>
+<tr>
+<td>投稿前还反复大改</td>
+<td>没封版</td>
+<td>封版定稿v2.2，此后只最小修正</td>
+</tr>
+<tr>
+<td>投稿当天系统手忙脚乱</td>
+<td>没提前熟悉</td>
+<td>提前注册ScholarOne+走一遍流程（不提交）</td>
+</tr>
+<tr>
+<td>审稿人看到的PDF图变形/乱码</td>
+<td>字体没嵌入/位图</td>
+<td>pdflatex（默认嵌字体）+矢量图，务必预览核验</td>
+</tr>
+<tr>
+<td>冲动投出后发现错</td>
+<td>没留冷静期</td>
+<td>一切就绪也留48h冷静期，修正再投好过撤稿</td>
+</tr>
+<tr>
+<td>Mean Teacher不收敛</td>
+<td>一致性权重过大/EMA错</td>
+<td>权重ramp-up、检查EMA衰减率</td>
+</tr>
+<tr>
+<td>蒸馏无效</td>
+<td>教师不够强/温度不当</td>
+<td>确认教师更强、调温度T和硬软损失权重</td>
+</tr>
+<tr>
+<td>trick全叠反而掉分</td>
+<td>trick互相干扰</td>
+<td>试组合看实际得分，非越多越好</td>
+</tr>
+<tr>
+<td>默读查不出的错</td>
+<td>眼睛自动脑补</td>
+<td>大声朗读，耳朵抓拗口/错别字（非母语写作尤有效）</td>
+</tr>
+<tr>
+<td>完美主义投不出去</td>
+<td>总想再改</td>
+<td>封版定稿“足够好就投”，留minor revision/下篇</td>
+</tr>
+<tr>
+<td>关键词没人搜得到</td>
+<td>用了生造词</td>
+<td>选领域通用检索词+覆盖任务/方法/领域维度</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w25.html"><span class="dir">← 上一篇</span><span class="nm">W25 投稿前最终打磨 + 加分补实验 + 竞赛</span></a><a class="next" href="w27.html"><span class="dir">下一篇 →</span><span class="nm">W27 正式投稿 + 竞赛最终冲刺</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d176">D176 周一</a><a class="sub" href="#d176-am">上午 补完残余补充实验 + 更新论文表</a><a class="sub" href="#d176-noon">中午 竞赛上半监督学习(Mean Te</a><a class="sub" href="#d176-pm">晚上 训练 Mean Teacher </a><a href="#d177">D177 周二</a><a class="sub" href="#d177-am">上午 论文最终定稿 v2.2（封版）</a><a class="sub" href="#d177-noon">中午 核对 Cover Letter</a><a class="sub" href="#d177-pm">晚上 竞赛半监督结果提交</a><a href="#d178">D178 周三</a><a class="sub" href="#d178-am">上午 注册并熟悉 ScholarOne</a><a class="sub" href="#d178-noon">中午 列投稿所需文件清单</a><a class="sub" href="#d178-pm">晚上 竞赛继续迭代</a><a href="#d179">D179 周四</a><a class="sub" href="#d179-am">上午 在投稿系统填作者信息、摘要、关键</a><a class="sub" href="#d179-noon">中午 上传论文 PDF + Cover</a><a class="sub" href="#d179-pm">晚上 预览核验：确保 PDF 显示正常</a><a href="#d180">D180 周五</a><a class="sub" href="#d180-am">上午 最终确认 + 暂不 Submit</a><a class="sub" href="#d180-noon">中午 竞赛模型蒸馏（知识蒸馏）原理</a><a class="sub" href="#d180-pm">晚上 训练蒸馏版 + 提交</a><a href="#d181">D181 周六</a><a class="sub" href="#d181-am">上午 系统搜索 trick 组合</a><a class="sub" href="#d181-noon">中午 逐个提交组合 + 找最优</a><a class="sub" href="#d181-pm">晚上 记录组合得分 + 整理</a><a href="#d182">D182 周日</a><a class="sub" href="#d182-am">上午 W26 周复盘</a><a class="sub" href="#d182-noon">中午 大声朗读通读论文</a><a class="sub" href="#d182-pm">晚上 准备周一正式投稿</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

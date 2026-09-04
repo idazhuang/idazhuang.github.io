@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>检测与训练核心概念详解 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">地基 · 概念详解</span></div><h1 class="title">检测与训练核心概念详解</h1><p class="subtitle">全书 1378 个概念词条平均只有 140 字 —— 这一页把 W1–W4 会挡路的那些按 speckle 的标准全部写透</p></div><div class="note"><b>全书最大的地基缺口</b>　W2-D8 直接让你精读 Oriented R-CNN，但全书从没系统讲过检测器怎么工作；FPN 出现 49 次却从未解释过一次。这一页补的就是这块。遥感侧术语见 <a href="rs-basics-deep.html">《名词逐个讲透》</a>。</div>
+<h2 id="h-全书-1378-个概念词条平均只有-140-字-这一页把-W1-W4-会挡路的那些-按-speckle-的标准全部写透">全书 1378 个概念词条平均只有 140 字 —— 这一页把 W1–W4 会挡路的那些，按 speckle 的标准全部写透</h2>
+<blockquote class="quote callout callout-expect">
+<p><strong>这一页为什么存在</strong></p>
+<p>我把全书 110 份文档里所有「① 先垫概念」块提取出来数了一遍：<strong>共 1378 个概念词条，解释长度中位数 140 字，56% 在 150 字以内，20% 不到 80 字。</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>全书出现次数</th>
+<th>原文解释长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config</code></td>
+<td>443 次</td>
+<td>73 字</td>
+</tr>
+<tr>
+<td><code>mAP</code></td>
+<td>290 次</td>
+<td>85 字</td>
+</tr>
+<tr>
+<td><code>IoU</code></td>
+<td>195 次</td>
+<td>71 字</td>
+</tr>
+<tr>
+<td><code>overlap</code></td>
+<td>58 次</td>
+<td>51 字</td>
+</tr>
+<tr>
+<td><code>TensorBoard</code></td>
+<td>32 次</td>
+<td>37 字</td>
+</tr>
+<tr>
+<td><code>GT</code></td>
+<td>73 次</td>
+<td><strong>13 字</strong></td>
+</tr>
+<tr>
+<td><code>FPN</code></td>
+<td>49 次</td>
+<td><strong>全书从未解释</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>这和 speckle 是<strong>同一个毛病</strong>：结构上有“先垫概念”这一格，但每格只塞一句话。<strong>对已经懂的人是提醒，对不懂的人等于没写。</strong></p>
+<p><strong>更要命的是</strong>：全书从 W2 开始就让你读 Oriented R-CNN、看 config、跑训练、分析 per-class AP，<strong>却从没有任何一处系统讲过“目标检测是怎么工作的”</strong>。它默认你已经会通用 CV。如果你不会，W2 之后的每一天都是在假装看懂。</p>
+<p><strong>这一页补的就是这块地基。</strong> 读完它，你不需要再去看任何一本 CV 教材，就能读懂 W2–W16 的每一天。</p>
+<p><strong>怎么读</strong>：§1–§2 必须读，这是“神经网络凭什么能学会”和“检测器长什么样”。§3 是评测，W2-D11 之前读。§4 是实验方法，做消融前读。<strong>三个动手实验（IoU / NMS / AP）务必亲手跑，各 5 分钟，跑完这些概念你一辈子忘不掉。</strong></p>
+</blockquote>
+<hr />
+<h1 id="h-第一层-神经网络凭什么能学会">第一层 · 神经网络凭什么能学会</h1>
+<p>全书把 <code>backbone</code> 解释成“负责从图像提特征”。<strong>但从没说过什么叫“特征”。</strong> 从这里开始。</p>
+<h2 id="h-1-1-特征-feature">1.1 特征（feature）</h2>
+<p><strong>① 一句话</strong>：特征就是<strong>从原始像素里提炼出来的、对当前任务有用的数字</strong>。</p>
+<p><strong>② 打个比方</strong>：让你判断一张图里有没有飞机。你不会去看“第 3721 个像素是不是 R=128”，你看的是“有没有细长的机身”“有没有对称的两翼”“尾部有没有分叉”。<strong>这些“你实际在看的东西”就是特征。</strong> 原始像素是 3×1024×1024 个数字，特征是从中提炼出的、更抽象也更有用的一小把数字。</p>
+<p><strong>③ 底层在发生什么</strong>：</p>
+<p>早期 CV 靠<strong>人工设计</strong>特征——有人坐下来想“边缘怎么算”“角点怎么定义”，写出 SIFT、HOG 这类算子。问题是<strong>人想不全</strong>：飞机在遥感图上可以是任意朝向、任意大小、被云挡住一半，手工规则永远漏掉一些情况。</p>
+<p>深度学习的做法是<strong>让网络自己学出特征</strong>。你不告诉它“要看机身”，你只给它几万张“这是飞机 / 这不是飞机”的例子，让它自己调整内部参数，直到能分对。<strong>调完之后，网络内部那些中间结果，就是它自己学出来的特征。</strong></p>
+<p><strong>特征是分层的</strong>，这一点非常重要：</p>
+<figure class="code" data-lang="text"><pre><code>浅层（靠近输入）  → 边缘、颜色块、纹理        ← 通用，任何图像都需要
+中层             → 角点、条纹、简单形状
+深层（靠近输出）  → 机翼状结构、车顶状结构、整个目标  ← 任务专属
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这个分层结构解释了后面很多事</strong>：</p>
+<ul>
+<li><strong>为什么能用预训练权重</strong>：浅层学的边缘和纹理，在自然照片和遥感图上是通用的。所以拿 ImageNet 上训好的 ResNet 当起点，比从随机数开始快得多。这就是 W1-D1 你下载那个 <code>.pth</code> 的意义。</li>
+<li><strong>为什么小目标难</strong>：深层特征虽然语义强，但<strong>分辨率已经被压得很小</strong>（见 §1.2）。一辆 16 像素的车，到深层可能只剩不到 1 个像素——<strong>信息物理上已经没了</strong>。这直接引出 §2.3 的 FPN。</li>
+</ul>
+<p><strong>④ 在代码里长什么样</strong>：ResNet-50 吃进 <code>(3, 1024, 1024)</code>，吐出四个不同尺度的特征图：</p>
+<figure class="code" data-lang="text"><pre><code>C2: (256,  256, 256)   ← 1/4  分辨率，浅层
+C3: (512,  128, 128)   ← 1/8
+C4: (1024,  64,  64)   ← 1/16
+C5: (2048,  32,  32)   ← 1/32 分辨率，深层
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>读这四行</strong>：往下走，<strong>空间尺寸每层减半（分辨率变粗）、通道数每层翻倍（语义变强）</strong>。这就是“分辨率换语义”的取舍，是整个 CNN 设计的主线。</p>
+<p><strong>⑤ 不懂它会卡在哪</strong>：<code>backbone</code>、<code>neck</code>、<code>head</code>、<code>FPN</code>、<code>多尺度</code> 这些词全部建立在“特征”之上。不懂特征，W2 读 Oriented R-CNN 时每一段都在雾里。</p>
+<h2 id="h-1-2-卷积与感受野-全书出现-16-次和-5-次-从未真正解释">1.2 卷积与感受野（全书出现 16 次和 5 次，从未真正解释）</h2>
+<p><strong>① 一句话</strong>：卷积是“用一个小窗口在图上滑动，每滑一步算一次加权和”；感受野是“最终输出里的一个点，实际看到了原图多大一块区域”。</p>
+<p><strong>② 打个比方</strong>：卷积像用一个 3×3 的小印章在图上一格一格盖过去，每盖一次得到一个数。印章里的 9 个权重不是人定的，是<strong>训练学出来的</strong>——学到最后，有的印章专门对横边缘敏感，有的对红色块敏感。</p>
+<p><strong>③ 底层在发生什么</strong>：</p>
+<p>一个 3×3 卷积核，输出位置 (i,j) 的值 = 输入上以 (i,j) 为中心的 3×3 区域，和 9 个权重逐个相乘再求和。</p>
+<p><strong>关键性质有三个</strong>：</p>
+<ol>
+<li><strong>局部性</strong>：一次只看一小块，不看全图。符合“图像里相邻像素才相关”的直觉。</li>
+<li><strong>权重共享</strong>：同一个印章在整张图上滑，参数量极小。这也意味着<strong>它在左上角学会认边缘，右下角自动也会</strong>（平移不变）。</li>
+<li><strong>堆叠涨感受野</strong>：这是最关键的。</li>
+</ol>
+<p><strong>感受野怎么涨</strong>：一层 3×3 卷积，输出一个点看到原图 3×3。再叠一层 3×3，这个点看到的是上一层的 3×3，而上一层每个点又看 3×3 —— <strong>等效看到原图 5×5</strong>。再叠一层是 7×7。</p>
+<figure class="code" data-lang="text"><pre><code>1 层 3×3          → 感受野 3×3
+2 层 3×3          → 感受野 5×5
+3 层 3×3          → 感受野 7×7
+加一次下采样(stride 2) → 感受野直接翻倍
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>④ 为什么你必须懂这个</strong>：</p>
+<p><strong>感受野决定了网络“能不能看见”一个目标。</strong> 如果一座桥在图上跨了 800 像素，而你这一层的感受野只有 200 像素，<strong>这一层物理上不可能理解“这是一座完整的桥”</strong>——它只看得到桥的一小段。</p>
+<p>这直接解释了 W2 你会遇到的现象：<strong><code>bridge</code> 这一类的 AP 通常特别低。</strong> 桥又细又长，跨越多个 patch，感受野还不够。<strong>知道原因之后，“怎么增大有效感受野”就成了一个具体的、你能做的研究方向</strong>（空洞卷积、可变形卷积、注意力机制都是冲这个去的）。</p>
+<p><strong>⑤ 想深入去哪看</strong>：斯坦福 CS231n 的卷积那一讲（课程笔记公开，搜 <code>CS231n convolutional networks notes</code>），配图是全网最好的。看那一讲就够，不用看整门课。</p>
+<h2 id="h-1-3-训练三件套-损失函数-梯度下降-学习率">1.3 训练三件套：损失函数 / 梯度下降 / 学习率</h2>
+<p>全书把 <code>学习率</code> 解释成“每步调多大，太大→震荡/NaN”。<strong>对，但没说为什么。</strong> 这三个词必须一起讲才通。</p>
+<p><strong>① 一句话</strong>：损失函数是“打分器”，梯度下降是“改错的方法”，学习率是“每次改多少”。</p>
+<p><strong>② 打个比方</strong>：你在浓雾里下山，看不见山谷在哪，只能感觉脚下的坡度。</p>
+<ul>
+<li><strong>损失函数</strong> = 你现在的海拔（越低越好）</li>
+<li><strong>梯度</strong> = 脚下最陡的下坡方向</li>
+<li><strong>学习率</strong> = 你每一步迈多大</li>
+</ul>
+<p><strong>③ 底层在发生什么</strong>：</p>
+<p>网络有几千万个参数。训练就是不停重复这四步：</p>
+<figure class="code" data-lang="text"><pre><code>① 前向：把一批图喂进去，得到预测
+② 算损失：预测和真值差多少 → 一个数
+③ 反向传播：算出&quot;每个参数该往哪个方向调、调多少能让损失变小&quot; → 梯度
+④ 更新：参数 = 参数 − 学习率 × 梯度
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>第 ④ 步那个减法就是<strong>梯度下降</strong>，学习率就是那个乘数。</p>
+<p><strong>④ 学习率为什么是最关键的超参</strong>（回到那个下山的比方）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>学习率</th>
+<th>下山会发生什么</th>
+<th>训练日志上长什么样</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>太大</td>
+<td>一步迈过山谷，弹到对面山坡更高处，越走越高</td>
+<td><strong>loss 变成 <code>nan</code> 或 <code>inf</code></strong></td>
+</tr>
+<tr>
+<td>略大</td>
+<td>在山谷两侧来回横跳，下不去</td>
+<td>loss 上下震荡，不收敛</td>
+</tr>
+<tr>
+<td>合适</td>
+<td>稳步下降</td>
+<td><strong>loss 平滑下降</strong> ← 你要的</td>
+</tr>
+<tr>
+<td>太小</td>
+<td>一步挪一厘米</td>
+<td>loss 降得极慢，或卡在半山腰</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>这张表就是你 W2 判断训练健不健康的全部依据。</strong> 现在你知道为什么《W2 实操》里说“盯前 200 个 iter，看到 nan 就把 lr 减半”了。</p>
+<p><strong>⑤ 为什么 lr 要跟着 batch 变（线性缩放规则的真正原因）</strong>：</p>
+<p>梯度是在一个 batch 上算平均得到的。<strong>batch 越大，这个平均越稳、噪声越小</strong>，你就敢迈更大的步子。batch 翻倍 → 梯度可信度提高 → lr 也翻倍。这就是 W2 那条规则背后的道理，不是玄学。</p>
+<p><strong>⑥ warmup 是什么</strong>（W2 的 config 里有，原文没解释）：训练最开始参数是随机的，梯度方向极不可靠，这时候迈大步很危险。所以<strong>前几百个 iter 用很小的 lr，然后线性升到设定值</strong>——这就是 warmup。你在 W2 的日志里看到 <code>lr: 1.978e-03</code> 而 config 写的是 <code>0.005</code>，就是因为还在 warmup 期。</p>
+<h2 id="h-1-4-epoch-iteration-batch-全书出现-216-次和-158-次">1.4 epoch / iteration / batch（全书出现 216 次和 158 次）</h2>
+<p><strong>① 一句话</strong>：</p>
+<ul>
+<li><strong>batch</strong>：一次喂给网络多少张图</li>
+<li><strong>iteration</strong>：完成一次“前向+反向+更新”，即处理完一个 batch</li>
+<li><strong>epoch</strong>：训练集完整过一遍</li>
+</ul>
+<p><strong>② 三者的换算</strong>（W2 你会用到）：</p>
+<figure class="code" data-lang="text"><pre><code>iteration/epoch = 训练集图片数 ÷ batch
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>W2 切完的 DOTA 有约 2.16 万张，<code>samples_per_gpu=2</code>：</p>
+<figure class="code" data-lang="text"><pre><code>每 epoch = 21600 ÷ 2 = 10800 iterations
+12 epoch = 129600 iterations
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这就是为什么你在 W2 日志里看到 <code>Epoch [1][50/10800]</code></strong> —— 第 1 个 epoch 的第 50/10800 个 iteration。</p>
+<p><strong>③ 用它来估算训练时间</strong>（原文说“记下启动时间好估算”，但没教怎么估）：</p>
+<figure class="code" data-lang="text"><pre><code>看日志里两条相隔 50 iter 的时间戳 → 得到每 iter 秒数
+总时间 = 每iter秒数 × 10800 × 12
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>比如每 iter 0.35 秒：<code>0.35 × 10800 × 12 ÷ 3600 ≈ 12.6 小时</code>。<strong>现在你能在训练开始 2 分钟内知道它明早几点跑完。</strong></p>
+<p><strong>④ <code>1×</code> schedule 是什么</strong>：MM 系约定 <strong>1× = 12 epoch，2× = 24，3× = 36</strong>。这不是什么定理，就是 COCO 时代传下来的惯例，方便大家横向对比。</p>
+<h2 id="h-1-5-过拟合-训练集-验证集-测试集">1.5 过拟合 / 训练集-验证集-测试集</h2>
+<p><strong>① 一句话</strong>：过拟合 = 把训练数据背下来了，但换新数据就不行。</p>
+<p><strong>② 打个比方</strong>：学生把去年的期末试卷答案背得滚瓜烂熟，今年换套题就傻了。<strong>背题 = 过拟合，真会 = 泛化。</strong></p>
+<p><strong>③ 三个集合各自干嘛</strong>（这个区分在 W2 会直接害你）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>集合</th>
+<th>干什么</th>
+<th>能不能拿它调参</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>train</strong></td>
+<td>更新参数用</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>val</strong></td>
+<td>训练中途看效果、选超参、挑最好的 checkpoint</td>
+<td>✅ 可以</td>
+</tr>
+<tr>
+<td><strong>test</strong></td>
+<td><strong>最终报告数字，只用一次</strong></td>
+<td>❌ <strong>绝对不能</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>④ 为什么 test 不能碰</strong>：如果你用 test 挑模型（“这个 epoch 在 test 上高，就用它”），<strong>你已经把 test 的信息泄漏进了选择过程</strong>，报出来的数字就是虚高的。这在学术上是硬性规范。</p>
+<p><strong>⑤ 这直接解释了 W2 的两件事</strong>：</p>
+<ol>
+<li>DOTA 把 test 标注扣着不公开——<strong>就是为了防止所有人拿 test 调参</strong>，保证榜单公平。</li>
+<li>《W2 实操》里说“第一次复现允许 train/val 混着切，但这时的 mAP 偏高、不能写进论文”——因为混着切就是数据泄漏，你在拿见过的数据评自己。</li>
+</ol>
+<hr />
+<h1 id="h-第二层-目标检测是怎么工作的">第二层 · 目标检测是怎么工作的</h1>
+<p><strong>这是全书最大的空白。</strong> W2-D8 直接就让你精读 Oriented R-CNN，但从没讲过检测器长什么样。这一层补齐。</p>
+<h2 id="h-2-1-检测任务本身">2.1 检测任务本身</h2>
+<p><strong>① 一句话</strong>：分类是回答“这张图是什么”，检测是回答“<strong>图里有哪些东西，各自在哪</strong>”。</p>
+<p><strong>② 输出长什么样</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>分类的输出：  &quot;飞机&quot;                                （一个标签）
+检测的输出：  [(飞机, 0.95, x=120,y=88,w=64,h=40),
+              (飞机, 0.87, x=310,y=205,w=58,h=44),
+              (车,   0.71, x=52, y=430,w=12,h=9), ...]   （一个列表）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>每个框有三样东西</strong>：类别、置信度（0–1，模型有多确定）、位置。</p>
+<p><strong>③ 遥感的特殊之处</strong>：位置在通用 CV 里是<strong>水平框</strong> <code>(x, y, w, h)</code>；遥感因为俯视、目标任意朝向，用<strong>旋转框</strong> <code>(x, y, w, h, θ)</code>，多一个角度。<strong>这就是 MMRotate 存在的全部理由。</strong></p>
+<p><strong>④ GT 是什么</strong>（全书 73 次，原文只有 13 个字）：<strong>Ground Truth，真值</strong>，也就是人工标注的正确答案。W2 评测时“预测框 vs GT 框”算 IoU，就是拿你的答案和标准答案对。DOTA 的 <code>labelTxt/</code> 里那些 txt 就是 GT。</p>
+<h2 id="h-2-2-检测器的三段式结构-backbone-neck-head">2.2 检测器的三段式结构：backbone / neck / head</h2>
+<p><strong>几乎所有现代检测器都是这个结构</strong>，认准它，你以后读任何检测论文都能立刻定位作者改了哪一段。</p>
+<figure class="code" data-lang="text"><pre><code>输入图 →  [backbone 主干]  →  [neck 颈部]  →  [head 头部]  →  框
+          提特征             融合多尺度特征      预测类别和位置
+          ResNet/Swin        FPN               分类头+回归头
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>部件</th>
+<th>干什么</th>
+<th>常见选择</th>
+<th>换掉它意味着什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>backbone</strong></td>
+<td>从像素提特征（§1.1）</td>
+<td>ResNet-50/101、Swin、ConvNeXt</td>
+<td>换 = 提特征能力变强/变弱。<strong>W2-D12 的第一个消融就是把 R50 换成 R101</strong></td>
+</tr>
+<tr>
+<td><strong>neck</strong></td>
+<td>把不同层的特征融合起来</td>
+<td><strong>FPN</strong>、PAFPN、BiFPN</td>
+<td>换 = 多尺度处理方式变了</td>
+</tr>
+<tr>
+<td><strong>head</strong></td>
+<td>在特征上输出框</td>
+<td>RPN + RoI head（两阶段）；单个卷积头（一阶段）</td>
+<td>换 = 检测范式变了</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 现在回头看 W2 的 config，那些字段全部对上了</strong>：</p>
+<figure class="code" data-lang="python"><pre><code>model = dict(
+    type='OrientedRCNN',
+    backbone=dict(type='ResNet', depth=50, ...),      # ← 第一段
+    neck=dict(type='FPN', in_channels=[256,512,1024,2048],
+              out_channels=256, num_outs=5),          # ← 第二段
+    rpn_head=dict(type='OrientedRPNHead', ...),       # ← 第三段（第一阶段）
+    roi_head=dict(type='OrientedStandardRoIHead',...))# ← 第三段（第二阶段）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>原文让你“逐行读 config”却没给这张地图。有了它，config 就从天书变成了填空题。</strong></p>
+<h2 id="h-2-3-FPN-全书出现-49-次-从头到尾没有一句解释">2.3 FPN（全书出现 49 次，从头到尾没有一句解释）</h2>
+<p>这是全书最离谱的遗漏——FPN 出现了 49 次、写在 W2 每一个 config 里，却从没解释过。</p>
+<p><strong>① 一句话</strong>：FPN（Feature Pyramid Network，特征金字塔网络）<strong>把深层的“语义强但分辨率低”的特征，送回给浅层的“分辨率高但语义弱”的特征，让每一层都既清晰又懂语义。</strong></p>
+<p><strong>② 为什么需要它</strong>（回到 §1.1 那个矛盾）：</p>
+<figure class="code" data-lang="text"><pre><code>C5 深层：语义强（知道这是飞机）  但  分辨率只有 32×32（小车已经没了）
+C2 浅层：分辨率高 256×256（小车还在）但  语义弱（只知道有边缘，不知道是什么）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>大目标该用深层检测，小目标该用浅层检测。但浅层不认识东西。</strong> 这就是死结。</p>
+<p><strong>③ FPN 怎么解</strong>：<strong>自顶向下，把深层特征上采样后加到浅层上。</strong></p>
+<figure class="code" data-lang="text"><pre><code>C5 ─────────────────→ P5   （语义强）
+     ↓ 上采样2倍 + 相加
+C4 ─────────────────→ P4   （C4的分辨率 + C5的语义）
+     ↓ 上采样2倍 + 相加
+C3 ─────────────────→ P3
+     ↓ 上采样2倍 + 相加
+C2 ─────────────────→ P2   （高分辨率 + 语义也强了）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>结果</strong>：P2–P5 <strong>每一层都既有分辨率又有语义</strong>。然后按目标大小分配——小目标交给 P2，大目标交给 P5。</p>
+<p><strong>④ 在 config 里长什么样</strong>（<code>num_outs=5</code> 是什么意思，原文没说）：</p>
+<figure class="code" data-lang="python"><pre><code>neck=dict(type='FPN',
+          in_channels=[256, 512, 1024, 2048],  # 对应 backbone 的 C2~C5
+          out_channels=256,                     # 统一成 256 通道
+          num_outs=5)                           # 输出 5 层：P2,P3,P4,P5,P6
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><code>num_outs=5</code> 比输入多一层，多的 P6 是在 P5 上再下采样一次，专门检测超大目标。</p>
+<p><strong>⑤ 为什么这对遥感特别重要</strong>：遥感的<strong>尺度悬殊</strong>是核心难题之一（同一张图里有机场和小汽车）。<strong>FPN 就是通用 CV 里对付尺度问题的标准答案</strong>，而遥感把这个问题放大了十倍。<strong>所以“怎么把 FPN 改得更适合遥感的极端尺度分布”，是一个成熟且仍在出论文的方向</strong>——BiFPN、PAFPN、各种遥感专用 neck 都在做这件事。<strong>这是你 M3 找 Gap 时的一个现成候选。</strong></p>
+<h2 id="h-2-4-anchor-正负样本-标签分配">2.4 anchor、正负样本、标签分配</h2>
+<p><strong>① anchor 是什么</strong>（原文：“预设的一堆候选框，网络在其上微调”——对，但没说为什么）：</p>
+<p><strong>直接让网络凭空回归出框的坐标，太难了</strong>（坐标可以是 0 到 1024 之间任意数）。所以换个思路：<strong>先在图上密密麻麻铺一堆预设框（anchor），让网络只回答两件容易的事</strong>：</p>
+<ol>
+<li>这个 anchor 里有没有目标？（分类，二选一）</li>
+<li>如果有，真实框相对这个 anchor 该往哪偏一点？（回归，只需微调）</li>
+</ol>
+<p><strong>把“从零画框”变成了“选框 + 微调”，难度大幅下降。</strong> 这就是 anchor 的全部意义。</p>
+<p><strong>② 铺多密</strong>：特征图上<strong>每个位置</strong>铺 k 个不同尺度、不同长宽比的 anchor。P2 是 256×256，光这一层就有 <code>256×256×k</code> 个 anchor。全部加起来通常十几万个。</p>
+<p><strong>③ 正负样本分配</strong>（全书出现 1 次，从未解释，但它是现代检测的核心）：</p>
+<p>十几万个 anchor，绝大多数是背景。<strong>训练时必须先决定哪些算“正样本”（该学着预测目标）、哪些算“负样本”（该学着预测背景）。</strong> 规则通常是：</p>
+<figure class="code" data-lang="text"><pre><code>与某个 GT 的 IoU ≥ 0.7  → 正样本
+与所有 GT 的 IoU &lt; 0.3  → 负样本
+在 0.3~0.7 之间          → 忽略，不参与训练
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>④ 为什么这件事在遥感里特别难</strong>（★ 这是个真正的选题富矿）：</p>
+<ul>
+<li>遥感目标<strong>极小</strong>，anchor 和小目标的 IoU 天然就低 → <strong>小目标很难被分到正样本 → 学不到 → AP 低</strong>。这就是 W2 你会看到 <code>small-vehicle</code> AP 偏低的深层原因之一。</li>
+<li>遥感目标<strong>任意朝向</strong>，斜框之间的 IoU 计算本身就更复杂，阈值该设多少也不清楚。</li>
+</ul>
+<p><strong>“怎么给旋转的小目标做更好的标签分配”是近几年旋转检测的热点方向之一</strong>（ATSS、DAL、SASM 等工作都在这条线上）。<strong>W2 你读到这些论文时，回来看这一节。</strong></p>
+<p><strong>⑤ anchor-free 是什么</strong>：干脆不铺预设框，直接让网络预测“这个点到框四条边的距离”。少了一堆超参（anchor 尺度、比例怎么设），但小目标上不一定更好。<strong>两条路线现在并存，没有绝对优劣。</strong></p>
+<h2 id="h-2-5-IoU-原文-71-字-出现-195-次">2.5 IoU（原文 71 字，出现 195 次）</h2>
+<p><strong>① 一句话</strong>：两个框的<strong>交集面积 ÷ 并集面积</strong>，取值 0–1，衡量它们重合得有多好。</p>
+<p><strong>② 为什么用这个而不是别的</strong>：因为它<strong>对框的大小不敏感</strong>。两个 1000 像素的框差 10 像素，和两个 20 像素的框差 10 像素，绝对误差一样，但显然后者错得离谱。IoU 自动处理了这件事。</p>
+<p><strong>③ ★ 动手 5 分钟，把 IoU 变成直觉</strong>：</p>
+<figure class="code" data-lang="python"><pre><code>def iou(a, b):
+    &quot;&quot;&quot;a, b 格式 [x1, y1, x2, y2]（左上角、右下角）&quot;&quot;&quot;
+    x1, y1 = max(a[0], b[0]), max(a[1], b[1])     # 交集左上角
+    x2, y2 = min(a[2], b[2]), min(a[3], b[3])     # 交集右下角
+    inter = max(0, x2 - x1) * max(0, y2 - y1)     # max(0,·) 处理不相交的情况
+    union = (a[2]-a[0])*(a[3]-a[1]) + (b[2]-b[0])*(b[3]-b[1]) - inter
+    return inter / union
+
+gt = [100, 100, 200, 200]                          # 一个 100×100 的真值框
+for pred, name in [([100,100,200,200], '完全重合'),
+                   ([110,110,210,210], '每边差 10 像素'),
+                   ([150,150,250,250], '偏了半个框'),
+                   ([300,300,400,400], '完全没挨着')]:
+    print(f'{name:&lt;14} IoU = {iou(gt, pred):.3f}')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>完全重合           IoU = 1.000
+每边差 10 像素      IoU = 0.681
+偏了半个框          IoU = 0.143
+完全没挨着          IoU = 0.000
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 盯住第二行</strong>：一个 100×100 的框，每条边只偏 10 像素（看起来几乎重合），<strong>IoU 就掉到 0.68 了</strong>。</p>
+<p><strong>这个数字解释了两件你后面天天遇到的事</strong>：</p>
+<ol>
+<li><strong>为什么检测阈值常用 IoU 0.5</strong> —— 0.5 已经是“框得挺准”了，不是“随便挨着”。</li>
+<li><strong>为什么小目标那么难</strong> —— 一个 16×16 的小车，只要偏 3 个像素，IoU 就掉到 0.5 以下，直接算漏检。<strong>大目标偏 3 像素毫无影响。</strong> 把上面代码里的框改成 16×16 自己试一次，这个体感非常重要。</li>
+</ol>
+<p><strong>④ 旋转框的 IoU 更麻烦</strong>：两个斜框的交集是个不规则多边形，要用几何算法求。<strong>这就是 mmcv 里那个 <code>box_iou_rotated</code> CUDA 算子的作用</strong>——W1-D1 你装 <code>mmcv-full</code> 而不是 <code>mmcv</code>，就是为了它。<strong>现在你知道那一步在装什么了。</strong></p>
+<h2 id="h-2-6-NMS-原文出现-149-次">2.6 NMS（原文出现 149 次）</h2>
+<p><strong>① 一句话</strong>：同一个目标会被预测出好多个重叠的框，NMS（Non-Maximum Suppression，非极大值抑制）<strong>只留分最高的那个，把和它重叠太多的其他框删掉</strong>。</p>
+<p><strong>② 为什么需要</strong>：§2.4 说了，图上铺了十几万个 anchor。一架飞机周围的十几个 anchor 都会说“我这有飞机”。不去重的话，一架飞机会输出 15 个框。</p>
+<p><strong>③ 算法就三步</strong>（简单到你可以背下来）：</p>
+<figure class="code" data-lang="text"><pre><code>① 所有框按置信度从高到低排序
+② 取出当前最高分的框，放进&quot;保留&quot;列表
+③ 把剩下的框里，和它 IoU &gt; 阈值的全部删掉
+   → 回到 ②，直到没框可取
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>④ ★ 动手实现（10 行）</strong>：</p>
+<figure class="code" data-lang="python"><pre><code>import numpy as np
+
+def nms(boxes, scores, thr=0.5):
+    idx = np.argsort(scores)[::-1]          # 按分数从高到低
+    keep = []
+    while len(idx):
+        i = idx[0]
+        keep.append(i)                      # 最高分的一定留
+        idx = np.array([j for j in idx[1:] if iou(boxes[i], boxes[j]) &lt;= thr])
+    return keep
+
+boxes  = [[100,100,200,200], [105,105,205,205], [110,98,210,198], [400,400,500,500]]
+scores = np.array([0.9, 0.85, 0.8, 0.7])
+print('保留的框索引:', nms(boxes, scores, thr=0.5))
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>输出</strong>：<code>保留的框索引: [0, 3]</code></p>
+<p><strong>读这个结果</strong>：前三个框互相高度重叠（都在框同一个目标），<strong>只留了分最高的第 0 个</strong>；第 3 个框在很远的地方，独立保留。<strong>这就是从 4 个框变成 2 个目标的过程。</strong></p>
+<p><strong>⑤ 阈值怎么调，会怎样</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>NMS 阈值</th>
+<th>效果</th>
+<th>什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>低（0.3）</td>
+<td>删得狠，重复框少，但<strong>挨得近的两个真目标会被误删</strong></td>
+<td>目标稀疏</td>
+</tr>
+<tr>
+<td>高（0.7）</td>
+<td>保留得多，密集目标不误删，但<strong>重复框变多</strong></td>
+<td><strong>密集停车场、密集船只 ← 遥感常见</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>⑥ 为什么这在遥感里是个真问题</strong>：停车场里几十辆车紧挨着，<strong>它们之间的 IoU 天然就高</strong>。阈值设低了会把真车删掉，设高了满屏重复框。<strong>“密集场景下的 NMS”是遥感检测一个具体的、有人在做的小方向</strong>（Soft-NMS、Cluster-NMS 等）。<strong>这是一个门槛低、适合第一篇的口子。</strong></p>
+<h2 id="h-2-7-两阶段-vs-一阶段-proposal-RoI">2.7 两阶段 vs 一阶段 / proposal / RoI</h2>
+<p><strong>① 两阶段</strong>（Oriented R-CNN、Faster R-CNN 属于这类）：</p>
+<figure class="code" data-lang="text"><pre><code>第一阶段（RPN）：在全图上粗筛，输出约 1000 个&quot;可能有东西&quot;的候选框（proposal）
+                 只管有没有，不管是什么
+第二阶段（RoI head）：把每个 proposal 对应的特征抠出来，做精细的分类 + 框微调
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>② 一阶段</strong>（YOLO、RetinaNet 属于这类）：跳过粗筛，<strong>直接在特征图上一次性输出类别和位置</strong>。</p>
+<p><strong>③ 对比</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>两阶段</th>
+<th>一阶段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精度</td>
+<td>更高（尤其小目标）</td>
+<td>略低</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>遥感学术界</td>
+<td><strong>主流，DOTA 榜单基本是它</strong></td>
+<td>工程部署常用</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>④ proposal 和 RoI 是什么</strong>：<code>proposal</code> = 第一阶段输出的候选框。<code>RoI</code>（Region of Interest，感兴趣区域）= 这些候选框在特征图上对应的那块区域。<strong><code>RoI Align</code> 就是“把不规则大小的那块特征，抠出来变成固定大小（如 7×7）”的操作</strong>，因为后面的全连接层要求输入尺寸固定。</p>
+<p><strong>⑤ 现在回看 W2 的 config</strong>，<code>rpn_head</code> 和 <code>roi_head</code> 两个字段就是这两个阶段。<strong>Oriented R-CNN 那篇论文的全部创新，就在于“怎么让第一阶段高效地产出旋转的 proposal”</strong>——原文说它“创新在高效地生成旋转候选框”，现在你真的懂这句话了。</p>
+<hr />
+<h1 id="h-第三层-评测-mAP-到底怎么算出来的">第三层 · 评测：mAP 到底怎么算出来的</h1>
+<p>原文说 <code>mAP</code> “现在记住越高越好即可，D11 评估时细讲”——<strong>但 D11 也没细讲。</strong> 这里补上。</p>
+<h2 id="h-3-1-从一个框对不对-到一个数字">3.1 从一个框对不对，到一个数字</h2>
+<p><strong>判定单个预测框对不对</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>它和某个同类 GT 框的 IoU ≥ 0.5   →  TP（真阳性，检对了）
+IoU &lt; 0.5，或那个 GT 已被更高分的框认领 →  FP（假阳性，虚警）
+一个 GT 没有任何框认领           →  FN（漏检）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>两个基础指标</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>Precision（精确率）= TP / (TP + FP)   你报出的框里，有多少是对的
+Recall   （召回率）= TP / (TP + FN)   该找到的目标里，你找到了多少
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>② 为什么不能只看一个</strong>：把置信度阈值调到 0.99，你只报最有把握的几个框 → Precision 很高但 Recall 很低。调到 0.01，报出一万个框 → Recall 高但 Precision 惨不忍睹。<strong>单看任何一个都能作弊。</strong></p>
+<h2 id="h-3-2-P-R-曲线与-AP">3.2 P-R 曲线与 AP</h2>
+<p><strong>③ 所以要看两者的权衡</strong>：把置信度阈值从高到低滑动，每个阈值算一对 (Recall, Precision)，画出来就是 <strong>P-R 曲线</strong>。</p>
+<p><strong>AP（Average Precision）= 这条曲线下的面积。</strong> 面积越大 = 在各种权衡下都表现好。</p>
+<p><strong>④ mAP = 所有类别 AP 的平均</strong>（m = mean）。DOTA 有 15 类，就是 15 个 AP 求平均。</p>
+<h2 id="h-3-3-动手-VOC07-和-VOC12-两种算法差多少">3.3 ★ 动手：VOC07 和 VOC12 两种算法差多少</h2>
+<p>W2 复现时“数字对不上”，第一嫌疑人就是这个。亲手算一次：</p>
+<figure class="code" data-lang="python"><pre><code>import numpy as np
+
+def ap(rec, prec, use07=False):
+    if use07:                                    # VOC07：11 点插值
+        s = 0
+        for t in np.arange(0, 1.01, 0.1):        # 0, 0.1, ..., 1.0 共 11 个点
+            p = prec[rec &gt;= t].max() if (rec &gt;= t).any() else 0
+            s += p / 11
+        return s
+    mrec  = np.concatenate([[0], rec,  [1]])     # VOC12：连续积分
+    mpre  = np.concatenate([[0], prec, [0]])
+    for i in range(len(mpre) - 2, -1, -1):
+        mpre[i] = max(mpre[i], mpre[i + 1])      # 让精度曲线单调不增
+    idx = np.where(mrec[1:] != mrec[:-1])[0]
+    return float(((mrec[idx+1] - mrec[idx]) * mpre[idx+1]).sum())
+
+rec  = np.array([0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.75,0.80,0.82])
+prec = np.array([1.00,1.00,0.90,0.85,0.80,0.70,0.60,0.50,0.40,0.30])
+print(f'AP (VOC07 11点插值) = {ap(rec, prec, True):.4f}')
+print(f'AP (VOC12 连续积分) = {ap(rec, prec, False):.4f}')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>AP (VOC07 11点插值) = 0.6364
+AP (VOC12 连续积分) = 0.6360
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这个例子里两者只差 0.04 个点</strong>，但<strong>换一条形状不同的 P-R 曲线，差距可以到 1–2 个点</strong>——足够让你以为复现失败。<strong>在 MMRotate 里这个开关叫 <code>use_07_metric</code>，DOTA 传统上用 VOC07。</strong></p>
+<blockquote class="quote">
+<p><strong>所以《W2 实操》里那条“复现对不上先查评测协议”不是空话</strong>：同一个模型、同一组预测，换个 AP 算法数字就变。<strong>报告里不写协议的数字是没有意义的。</strong></p>
+</blockquote>
+<h2 id="h-3-4-per-class-AP-怎么读-W2-D11-晚上段的核心动作">3.4 per-class AP 怎么读（W2-D11 晚上段的核心动作）</h2>
+<p>W2 评测会打印一张 15 行的表。<strong>原文让你“分析 per-class AP”，但没说怎么分析。</strong> 按这三步：</p>
+<p><strong>第一步：找最低的 3 类。</strong> 典型是 <code>small-vehicle</code>、<code>bridge</code>、<code>roundabout</code>。</p>
+<p><strong>第二步：对每一类问“为什么低”，答案通常在这张表里</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>低分类别</th>
+<th>大概率原因</th>
+<th>对应本页哪一节</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>small-vehicle</code>、<code>ship</code></td>
+<td>目标太小，anchor 匹配不上、深层特征已丢失</td>
+<td>§1.1、§2.4、§2.5</td>
+</tr>
+<tr>
+<td><code>bridge</code></td>
+<td>细长、跨 patch 被切断、感受野不够</td>
+<td>§1.2、W2 切图</td>
+</tr>
+<tr>
+<td><code>roundabout</code>、<code>storage-tank</code></td>
+<td>近似圆形，角度定义本身有歧义</td>
+<td>《名词讲透》§5.2</td>
+</tr>
+<tr>
+<td>某类 <code>gts</code> 数量特别少</td>
+<td>类别不平衡，样本太少学不好</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>第三步：把“低分类别 + 你推测的原因”记进 <code>10-论文笔记/待做idea.md</code>。</strong></p>
+<blockquote class="quote">
+<p><strong>★ 这一步是全书 M3「找 Gap」的真正起点。</strong> 原文把找 Gap 放在 W9，但<strong>素材是从 W2 这张表开始攒的</strong>。你现在做的不是“分析实验结果”，是<strong>在收集你未来论文的选题</strong>。</p>
+</blockquote>
+<hr />
+<h1 id="h-第四层-实验方法">第四层 · 实验方法</h1>
+<h2 id="h-4-1-config-全书-443-次-原文-73-字">4.1 config（全书 443 次，原文 73 字）</h2>
+<p><strong>① 一句话</strong>：config 是一个 Python 文件，<strong>把“这次实验的所有选择”写在一处</strong>——模型结构、数据路径、训练策略、评测方式，全在里面。</p>
+<p><strong>② 为什么要有它</strong>：如果这些参数散落在代码各处，你改三次就说不清自己跑的到底是什么。<strong>config 的本质是“让实验可复现”</strong>：给别人一个 config + 一个权重，他就能得到和你一样的结果。</p>
+<p><strong>③ 一个 config 分四块，认准这四块你就能读任何 MM 的 config</strong>：</p>
+<figure class="code" data-lang="python"><pre><code>model    = dict(...)   # 模型：backbone / neck / head（§2.2）
+data     = dict(...)   # 数据：路径、batch、数据增强流水线
+optimizer / lr_config  # 训练：优化器、学习率、schedule（§1.3）
+evaluation = dict(...) # 评测：多久评一次、用什么指标（§3）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>④ 继承机制</strong>（W2 会用）：<code>_base_ = [...]</code> 表示“继承这些基础配置，我只写要改的”。<strong>好处是你的 config 只有十几行，一眼看清你和基线的差异在哪。</strong></p>
+<p><strong>⑤ 必须养成的纪律</strong>：<strong>永远新建自己的 config 去继承官方的，绝不直接编辑 <code>configs/</code> 下的官方文件。</strong> 理由见《W2 实操》§4.1。</p>
+<h2 id="h-4-2-消融实验与控制变量-原文-76-字和-77-字">4.2 消融实验与控制变量（原文 76 字和 77 字）</h2>
+<p><strong>① 一句话</strong>：消融实验（ablation study）= <strong>把你方法里的某个部件拿掉，看性能掉多少</strong>，以此证明这个部件真的有用。</p>
+<p><strong>② 打个比方</strong>：一道菜好吃，你说是因为加了某种香料。<strong>证明方式是做一份不加香料的，让人对比。</strong> 这就是消融。</p>
+<p><strong>③ 控制变量是它的前提</strong>：<strong>一次只改一处，其他全部保持不变。</strong></p>
+<p>W2-D12 让你把 ResNet-50 换成 ResNet-101，<strong>这时候你只能改 backbone</strong>。如果你顺手把 lr 也调了、epoch 也加了，那最后涨的那 1.2 个点，<strong>你永远说不清是谁的功劳</strong>——这次实验就废了。</p>
+<p><strong>④ 消融表长什么样</strong>（M3–M4 你会做很多张）：</p>
+<figure class="code" data-lang="text"><pre><code>| 方法                    | mAP   | Δ     |
+|-------------------------|-------|-------|
+| Baseline                | 73.2  |  —    |
+| + 组件 A                 | 74.5  | +1.3  |
+| + 组件 B                 | 74.1  | +0.9  |
+| + 组件 A + B（完整方法）  | 75.8  | +2.6  |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>⑤ ★ 一个新手必踩的坑</strong>：深度学习有随机性，<strong>同一个 config 跑两次，结果可能差 0.3–0.5 个点</strong>。</p>
+<p><strong>所以：涨了 0.3 个点不能算“组件有效”，那可能只是噪声。</strong> 严谨做法是跑 3 个不同随机种子，报均值和标准差。<strong>判断标准</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>提升 &lt; 0.5 点   → 可能是噪声，必须跑多 seed 才敢说
+提升 0.5–1 点   → 需要多 seed 支撑
+提升 &gt; 1 点     → 比较可信
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这条现在就要记住</strong>，否则你 M3 会拿一堆噪声当成果，M6 写论文时被审稿人一句话打回。</p>
+<h2 id="h-4-3-TensorBoard-与看曲线-原文-37-字">4.3 TensorBoard 与看曲线（原文 37 字）</h2>
+<p><strong>① 一句话</strong>：一个把训练日志画成曲线的网页工具，让你<strong>用眼睛而不是读数字</strong>判断训练健不健康。</p>
+<p><strong>② 怎么用</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>tensorboard --logdir work_dirs/orcnn_r50
+# 然后浏览器打开 http://localhost:6006
+# 服务器上跑的话：ssh -L 6006:localhost:6006 用户名@服务器  然后本地开这个地址
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>MM 系也可以直接从日志画：</p>
+<figure class="code" data-lang="bash"><pre><code>python tools/analysis_tools/analyze_logs.py plot_curve \
+    work_dirs/orcnn_r50/*.log.json --keys loss loss_cls loss_bbox
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>③ ★ 三条曲线怎么读</strong>（W2-D10 中午段的核心，原文说“看懂三条曲线”却没说怎么看）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>曲线</th>
+<th>健康的样子</th>
+<th>不健康 + 含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>total loss</strong></td>
+<td>前期陡降，后期缓慢下降，在 lr 衰减点（第 8、11 epoch）会有明显台阶式下跌</td>
+<td>震荡不降 → lr 太大（§1.3）；完全平直 → 数据或标注有问题</td>
+</tr>
+<tr>
+<td><strong>loss_cls</strong>（分类损失）</td>
+<td>稳步下降</td>
+<td>不降 → 类别数配错，或标注类别名对不上</td>
+</tr>
+<tr>
+<td><strong>loss_bbox</strong>（回归损失）</td>
+<td>下降但比 cls 慢、更抖</td>
+<td>突然飙升 → 数据里有非法框（宽或高为 0）</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>④ 一个关键的判读点</strong>：<strong>在第 8 和第 11 个 epoch，loss 应该有明显的台阶式下跌</strong>——那是 <code>1×</code> schedule 在这两个点把 lr 除以 10 造成的。<strong>看到这两个台阶，说明 lr schedule 正常生效了。</strong> 看不到，去检查 config 的 <code>lr_config</code>。</p>
+<hr />
+<h1 id="h-5-读完自测">5. 读完自测</h1>
+<p>答不出的回对应小节。<strong>第 3、5、7、9 题答不出，不要开始 W2。</strong></p>
+<ol>
+<li>“backbone 提特征”——什么是特征？为什么浅层和深层的特征不一样？</li>
+<li>感受野是什么？它为什么能解释 <code>bridge</code> 这一类 AP 偏低？</li>
+<li>学习率太大在训练日志上长什么样？为什么 batch 翻倍 lr 也要翻倍？</li>
+<li>训练集 21600 张、batch 2，一个 epoch 多少个 iteration？12 epoch 总共多少？</li>
+<li>FPN 解决的是什么矛盾？<code>num_outs=5</code> 是什么意思？</li>
+<li>anchor 为什么能让检测变简单？为什么小目标容易分不到正样本？</li>
+<li>一个 100×100 的框每条边偏 10 像素，IoU 大概是多少？换成 16×16 的小框呢？</li>
+<li>NMS 的三步是什么？密集停车场该把阈值调高还是调低？</li>
+<li>Precision 和 Recall 各自能怎么被“作弊”？AP 为什么能同时防住两种作弊？</li>
+<li>你的消融涨了 0.4 个点，能不能写进论文说这个组件有效？为什么？</li>
+</ol>
+<hr />
+<h1 id="h-6-这一页和其他补充页怎么配合">6. 这一页和其他补充页怎么配合</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>你要做的事</th>
+<th>先读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>装环境、跑第一个 demo</td>
+<td>《MMRotate 保姆级实操》</td>
+</tr>
+<tr>
+<td><strong>读懂 config、看懂论文、分析 mAP</strong></td>
+<td><strong>本页 §2、§3</strong></td>
+</tr>
+<tr>
+<td>跑通 W2 的完整 baseline</td>
+<td>《W2 DOTA baseline 实操》</td>
+</tr>
+<tr>
+<td>遇到遥感/SAR 术语</td>
+<td>《名词逐个讲透》</td>
+</tr>
+<tr>
+<td>资料某处没写清楚</td>
+<td>《通用自救手册》</td>
+</tr>
+<tr>
+<td>想知道哪一天会卡住</td>
+<td>《全书审计报告》</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>最后说一句实话</strong>：这一页补的东西，本该在 W1 就有——<strong>因为 W2-D8 让你精读 Oriented R-CNN 的那一刻，全书假设你已经懂 backbone、FPN、anchor、RPN、RoI、mAP 了。</strong> 而这些词在全书里加起来的解释不到 500 字。</p>
+<p><strong>把这一页读完（约 3 小时），你在 W2 的每一天都会踏实很多。</strong> 建议插在 W1-D2 和 W1-D3 之间，或者利用 W1 周末的机动时间。</p>
+</blockquote>
+<div class="pager"><a class="prev" href="rs-basics-deep.html"><span class="dir">← 上一篇</span><span class="nm">M0 补充 · 遥感名词逐个讲透</span></a><a class="next" href="learning-resources.html"><span class="dir">下一篇 →</span><span class="nm">M0 补充 · 学习资料地图</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#h-全书-1378-个概念词条平均只有-140-字-这一页把-W1-W4-会挡路的那些-按-speckle-的标准全部写透">全书 1378 个概念词条平均只有 140 字 —— 这一页把 W1–W4 会挡路的那些，按 speckle 的标准全部写透</a><a href="#h-第一层-神经网络凭什么能学会">第一层 · 神经网络凭什么能学会</a><a href="#h-1-1-特征-feature">1.1 特征（feature）</a><a href="#h-1-2-卷积与感受野-全书出现-16-次和-5-次-从未真正解释">1.2 卷积与感受野（全书出现 16 次和 5 次，从未真正解释）</a><a href="#h-1-3-训练三件套-损失函数-梯度下降-学习率">1.3 训练三件套：损失函数 / 梯度下降 / 学习率</a><a href="#h-1-4-epoch-iteration-batch-全书出现-216-次和-158-次">1.4 epoch / iteration / batch（全书出现 216 次和 158 次）</a><a href="#h-1-5-过拟合-训练集-验证集-测试集">1.5 过拟合 / 训练集-验证集-测试集</a><a href="#h-第二层-目标检测是怎么工作的">第二层 · 目标检测是怎么工作的</a><a href="#h-2-1-检测任务本身">2.1 检测任务本身</a><a href="#h-2-2-检测器的三段式结构-backbone-neck-head">2.2 检测器的三段式结构：backbone / neck / head</a><a href="#h-2-3-FPN-全书出现-49-次-从头到尾没有一句解释">2.3 FPN（全书出现 49 次，从头到尾没有一句解释）</a><a href="#h-2-4-anchor-正负样本-标签分配">2.4 anchor、正负样本、标签分配</a><a href="#h-2-5-IoU-原文-71-字-出现-195-次">2.5 IoU（原文 71 字，出现 195 次）</a><a href="#h-2-6-NMS-原文出现-149-次">2.6 NMS（原文出现 149 次）</a><a href="#h-2-7-两阶段-vs-一阶段-proposal-RoI">2.7 两阶段 vs 一阶段 / proposal / RoI</a><a href="#h-第三层-评测-mAP-到底怎么算出来的">第三层 · 评测：mAP 到底怎么算出来的</a><a href="#h-3-1-从一个框对不对-到一个数字">3.1 从一个框对不对，到一个数字</a><a href="#h-3-2-P-R-曲线与-AP">3.2 P-R 曲线与 AP</a><a href="#h-3-3-动手-VOC07-和-VOC12-两种算法差多少">3.3 ★ 动手：VOC07 和 VOC12 两种算法差多少</a><a href="#h-3-4-per-class-AP-怎么读-W2-D11-晚上段的核心动作">3.4 per-class AP 怎么读（W2-D11 晚上段的核心动作）</a><a href="#h-第四层-实验方法">第四层 · 实验方法</a><a href="#h-4-1-config-全书-443-次-原文-73-字">4.1 config（全书 443 次，原文 73 字）</a><a href="#h-4-2-消融实验与控制变量-原文-76-字和-77-字">4.2 消融实验与控制变量（原文 76 字和 77 字）</a><a href="#h-4-3-TensorBoard-与看曲线-原文-37-字">4.3 TensorBoard 与看曲线（原文 37 字）</a><a href="#h-5-读完自测">5. 读完自测</a><a href="#h-6-这一页和其他补充页怎么配合">6. 这一页和其他补充页怎么配合</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

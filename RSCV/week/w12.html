@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="12">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W12 · 第一波消融 + M3 月复盘 —— 用消融证明“ · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M3 选方向读穿</span><span>·</span><span>Week 12</span><span>·</span><span>D78–D84</span></div><h1 class="title">第一波消融 + M3 月复盘 —— 用消融证明“每个组件都有用”，并做 go/no-go 决策</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="78" data-k="am" title="D78 上午段"></i><i data-d="78" data-k="noon" title="D78 中午段"></i><i data-d="78" data-k="pm" title="D78 晚上段"></i></span><span class="sday"><i data-d="79" data-k="am" title="D79 上午段"></i><i data-d="79" data-k="noon" title="D79 中午段"></i><i data-d="79" data-k="pm" title="D79 晚上段"></i></span><span class="sday"><i data-d="80" data-k="am" title="D80 上午段"></i><i data-d="80" data-k="noon" title="D80 中午段"></i><i data-d="80" data-k="pm" title="D80 晚上段"></i></span><span class="sday"><i data-d="81" data-k="am" title="D81 上午段"></i><i data-d="81" data-k="noon" title="D81 中午段"></i><i data-d="81" data-k="pm" title="D81 晚上段"></i></span><span class="sday"><i data-d="82" data-k="am" title="D82 上午段"></i><i data-d="82" data-k="noon" title="D82 中午段"></i><i data-d="82" data-k="pm" title="D82 晚上段"></i></span><span class="sday"><i data-d="83" data-k="am" title="D83 上午段"></i><i data-d="83" data-k="noon" title="D83 中午段"></i><i data-d="83" data-k="pm" title="D83 晚上段"></i></span><span class="sday"><i data-d="84" data-k="am" title="D84 上午段"></i><i data-d="84" data-k="noon" title="D84 中午段"></i><i data-d="84" data-k="pm" title="D84 晚上段"></i></span></div></div>
+<div class="note"><b>★ +0.4 到底算不算提升</b>　原文说"判断显著性"却没给方法。<b>实测发现：只看 mean±std 会误杀真正有效的方法</b>，必须看同 seed 配对差。<a href="m3-full.html">《M3 详注版》</a> 含判定工具、5 组消融的时间账，以及 go/no-go 的三色标准。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>:M3 收官。W11 你有了第一组对比(v1 vs baseline)。本周做<strong>第一波消融实验</strong>——逐一验证你方法每个组件到底有没有用、贡献多大，并<strong>从消融里找下一步改进方向</strong>；最后做 <strong>M3 月复盘（go/no-go 决策点）</strong>。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会设计和执行消融实验；学会从消融结果中发现改进方向。
+<strong>承上启下</strong>：消融结果直接决定 M4 怎么把方法迭代到 v2/v3；消融表也是论文里仅次于主表的关键证据。</p>
+<p><strong>🧩 贯穿示例</strong>：沿用「DOTA 旋转检测 + 高分辨率小目标分支」。完整方法 = W11 的 v1;5 个消融示例：<strong>A1 去掉高分辨率分支</strong>（核心组件）、<strong>A2 融合方式换简单相加</strong>、<strong>A3 换标准 loss</strong>、<strong>A4 backbone 换 Swin-T</strong>、<strong>A5 去掉遥感特有增强</strong>。换方向就把这五个消融换成“你的组件去掉/替换”——设计、跑、读消融的流程完全一样。</p>
+</blockquote>
+<hr />
+<h2>🧭 W12 总览：这一周用消融把“方法”夯成“证据”</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设计并跑 5 个消融</td>
+<td>每个组件的贡献量化</td>
+<td>证明“每个组件都有用”</td>
+</tr>
+<tr>
+<td>完整消融表 + 柱状图</td>
+<td>论文 Table 2 雏形 + 可视化</td>
+<td>论文第二关键证据</td>
+</tr>
+<tr>
+<td>定性可视化（三类案例）</td>
+<td>正/负/部分改进案例图</td>
+<td>直观且诚实地展示效果</td>
+</tr>
+<tr>
+<td>从消融找改进方向</td>
+<td>M4 方法 v2 的依据</td>
+<td>把“结论”变成“下一步”</td>
+</tr>
+<tr>
+<td>系统超参搜索（网格）</td>
+<td>supplementary 素材</td>
+<td>显示严谨、选择有据</td>
+</tr>
+<tr>
+<td>M3 月复盘</td>
+<td>go/no-go 决策</td>
+<td>决定继续迭代还是 pivot</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>:D78–D81 是“跑消融 + 读消融”（实验密集，要并行管好 5 个实验）,D82–D83 是“找改进 + 搜超参”,D84 是“月复盘收官”。<strong>多个消融并行跑时，清晰命名 + 独立日志目录是不乱的关键（W11 的 logger 已经帮你做了）。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d78" data-d="78"><header class="day-head"><span class="dnum">D78</span><h2 class="day-t">周一 · 设计 5 个消融配置 + 启动</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天设计并启动第一波消融。<strong>核心纪律：每个消融只改一个变量</strong>——这是消融能“归因”的命门。今天产出消融设计文档 + 启动前两个(A1/A2)，后面几天陆续跑完读完。</p>
+</blockquote>
+</div><section class="slot" id="d78-am" data-d="78" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D78 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计 5 个消融配置</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（消融是什么、为什么每次只改一个变量）</h4><div class="blk-b"><ul>
+<li><strong>消融实验(ablation)</strong>= 每次<strong>只去掉/替换你方法的一个部分</strong>，看性能变化，从而证明“这个部分有没有用、有多大用”。<strong>核心原则：每个消融只改一个变量</strong>（控制变量）——这样性能变化才能干净地归因到那一个改动。</li>
+<li><strong>和通用 CV 一样、但对你更关键</strong>：消融是所有方法类论文的标配证据。审稿人会问“你这几个组件，哪个真有用？会不会去掉两个性能也一样？”——消融表就是回答。<strong>对你尤其重要</strong>：你的卖点之一是“单卡高效”，消融能证明“我没堆无用组件”，每个组件都名副其实。</li>
+<li><strong>常见 5 个</strong>:A1 去掉你的核心组件 / A2 把某组件换成简单版 / A3 换 loss / A4 换 backbone / A5 换数据增强策略。<strong>命名要清晰</strong>(<code>A1_wo_hrbranch</code>、<code>A2_simple_fuse</code>)，日志完整。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>docs/消融设计.md</code> 列出 5 个消融配置，每个写清“改了哪一个变量、预期说明什么”；为每个建一个 config（<strong>基于 v1 的 config 只改一处</strong>）。建 config 的正确姿势：</p>
+<figure class="code" data-lang="yaml"><pre><code><span class="c1"># configs/abl_wo_hrbranch.yaml —— A1：只把&quot;用不用高分辨率分支&quot;这一行关掉</span>
+<span class="c1"># 继承 v1 配置，只覆盖一个字段（其余全相同，保证可归因）</span>
+<span class="nt">_base_</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your_method.yaml</span>
+<span class="nt">model</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">use_hr_branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">        </span><span class="c1"># ← 唯一改动：去掉核心组件</span>
+<span class="c1"># 其余 lr/epochs/seed/data/aug 全部继承，不动</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>5 个消融配置定义清晰，每个只改一个变量，命名规范，且能 <code>diff</code> 出“相对 v1 只差一处”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 一个消融改了多处 → 无法归因（性能变了不知是哪个改动的功劳）;② 消融和你的 contribution 对不上（每个核心组件都该有一个对应消融，否则审稿人会问“这个 contribution 凭什么”）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知设哪些? → <strong>你方法的每个创新组件配一个“去掉它”的消融</strong>（对应一条 contribution），再加 backbone/loss/增强各一个凑够 5 个；config 不会继承? → 用框架的 <code>_base_</code> 继承机制，只写要覆盖的字段。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>设计控制变量的消融实验</strong>。<strong>做了</strong>（消融设计文档 + 5 个 config）、<strong>学了</strong>（消融定义、每次只改一个变量、消融对应 contribution）、<strong>会了</strong>（为方法的每个组件设计可归因的对应消融）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融设计原则</strong>：每个消融<strong>只改一个变量</strong>(用 config 继承 <code>_base_</code> 只覆盖一个字段)。每个核心组件配一个“去掉它”的消融，对应一条 contribution；再加 backbone/loss/增强维度。命名规范(<code>A1_wo_X</code>),<code>diff</code> 可见“只差一处”。改多处=无法归因。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d78-noon" data-d="78" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D78 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 A1 实验（去掉核心组件）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A1（去掉你的核心组件，如高分辨率分支）——<strong>如果去掉后性能明显下降，说明这个组件有用</strong>；几乎不降则说明它可有可无。这是最重要的一个消融（直接验证你的核心卖点）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 A1 config 启动训练（固定 seed，设置同 v1 只去核心组件）；记日志。</p>
+<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/abl_wo_hrbranch.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>&gt;<span class="w"> </span>experiments/A1_wo_hrbranch_seed0.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A1 启动，设置正确(只去掉核心组件,<code>diff</code> 确认只差一处)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>A1 顺手改了别的（lr/数据）→ 结果不可归因；务必只去核心组件。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>OOM → 降 batch/分辨率；不确定是否只改了一处 → <code>diff configs/abl_wo_hrbranch.yaml configs/your_method.yaml</code> 核对。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你启动了最关键的消融（验证核心组件）。<strong>做了</strong>（A1 启动）、<strong>学了</strong>（去组件消融的逻辑、它验证核心卖点）、<strong>会了</strong>（在控制变量下启动消融实验）。</p>
+</div></section></section><section class="slot" id="d78-pm" data-d="78" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D78 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 A2 实验（组件换简单版）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A2（把某组件换成简单版，如融合方式从注意力换成简单相加）——<strong>看你的“复杂设计”是否真比“简单版”强</strong>。如果简单版差不多，说明你该用简单版(简洁有效 &gt; 复杂冗余，论文和审稿人都偏爱简洁)。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 A2 config 启动（只把该组件换简单版）；记日志。<strong>多个消融可错峰/并行跑</strong>（GPU 空闲时启动下一个）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A2 启动，设置正确（只换该组件）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>A1/A2 同时跑显存不够 → 错峰（A1 跑完再 A2，或一个白天一个晚上）；管理多个实验靠清晰命名 + 独立目录（logger 已自动按时间戳+名建目录）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>并行显存不够 → 串行错峰；实验多了记混 → 一张“消融进度表”跟踪每个的状态（待跑/在跑/已评估）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你并行推进了多个消融，并体会替换式消融的意义。<strong>做了</strong>（A2 启动）、<strong>学了</strong>（替换式消融、简洁 vs 复杂）、<strong>会了</strong>（管理并行的多个消融实验）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 消融设计文档（5 个） ✅ A1、A2 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D78</summary><textarea data-note="d78" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d79" data-d="79"><header class="day-head"><span class="dnum">D79</span><h2 class="day-t">周二 · A1/A2 分析（组件到底有没有用）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读 A1/A2 的结果——这是消融最核心的技能：<strong>从“去掉后掉多少”判断一个组件的价值</strong>。同时启动 A3。重点提醒：判断“有没有用”要和 std 比，别被单次波动骗了。</p>
+</blockquote>
+</div><section class="slot" id="d79-am" data-d="79" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D79 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">A1 结果分析（并判断显著性）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么从消融判断组件价值 + 显著性）</h4><div class="blk-b"><p>A1 训完，看“去掉核心组件后性能下降多少”。<strong>下降越多 → 组件越有用</strong>；几乎不降 → 组件可有可无（考虑删）。<strong>关键：下降是否“显著”</strong>——要和 baseline 的 std 比，降幅 &gt; std 才算真有贡献，否则可能只是噪声。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估 A1，和完整方法(v1)对比；算“去掉组件的性能损失”；<strong>和 std 比判断显著性</strong>；写一句结论（组件贡献多大、是否显著）。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 判断消融差异是否显著（降幅 vs 噪声）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_significant</span><span class="p">(</span><span class="n">full_mean</span><span class="p">,</span> <span class="n">abl_mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">full_mean</span> <span class="o">-</span> <span class="n">abl_mean</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">k</span> <span class="o">*</span> <span class="n">std</span>            <span class="c1"># 降幅超过 std 才算显著</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Δ=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> (std=</span><span class="si">{</span><span class="n">std</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">) → </span><span class="si">{</span><span class="s1">&#39;显著&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">sig</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;在噪声内&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sig</span>
+<span class="c1"># 例：完整 76.3，A1 去组件后 74.5，std 0.4 → Δ=-1.8 远超 std → 组件显著有用</span>
+<span class="n">is_significant</span><span class="p">(</span><span class="mf">76.3</span><span class="p">,</span> <span class="mf">74.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A1 vs v1 的差值 + 显著性判断 + 结论（组件有用/没用，显著/不显著）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>下降一点点（在 std 内）就认定“有用” → 要看是否超过 std（显著性）；单 seed 不可靠，关键消融跑多 seed。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>去掉组件反而更好 → 那它可能有害，<strong>大胆考虑删</strong>（论文要“每个组件都有用”，留着有害组件反而扣分）；降幅在 std 内 → 补多 seed 确认，或归到“贡献有限”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从消融判断一个组件的价值并验证显著性</strong>。<strong>做了</strong>（A1 分析 + 显著性判断）、<strong>学了</strong>（去组件→看损失→比 std→判价值）、<strong>会了</strong>（用消融量化组件贡献并判断是否显著）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融解读</strong>：看“去掉/替换后相对完整方法的变化 Δ”，<strong>Δ 要和 std 比</strong>（超过才显著）。降得多=组件有用；几乎不降=可删；反而更好=有害，大胆删。论文要“每个组件都有用”，没用的简化掉反而加分。关键消融跑多 seed。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d79-noon" data-d="79" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D79 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 A3 实验（换 loss）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A3（换 loss，如把你的 loss 换成标准 loss）——看不同损失函数对你方法的影响，验证“你选的 loss 是否更适合这个任务”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 A3 config（只换 loss）启动训练；记日志。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A3 启动，设置正确（只换 loss）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>换 loss 时顺手调了 loss 权重以外的东西 → 只换 loss 本身；其余不动。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>换 loss 后训练不稳(NaN)→ 不同 loss 可能需要不同 lr，但为保持可比先用同 lr，若实在崩了在报告里注明该 loss 不适配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你推进了 loss 维度的消融。<strong>做了</strong>（A3 启动）、<strong>学了</strong>（loss 消融的意义）、<strong>会了</strong>（隔离 loss 这一变量做实验）。</p>
+</div></section></section><section class="slot" id="d79-pm" data-d="79" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D79 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">A2 结果分析（复杂设计值不值）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A2 训完，看“复杂组件 vs 简单版”——你的复杂设计若没明显更好（降幅在 std 内），<strong>可能该用简单版</strong>(简洁有效 &gt; 复杂冗余)。这是对“为复杂而复杂”的一次诚实检验。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估 A2，和完整方法对比；判断显著性；写结论（复杂设计值不值得保留）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A2 vs v1 差值 + 显著性 + 结论。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>坚持保留没用的复杂设计（舍不得花了功夫）→ 论文偏爱“简洁有效”，没用就简化，审稿人会因“无用的复杂”质疑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>简单版更好或持平 → 大胆换简单版，方法更干净、更快（还能强化你的“高效”卖点）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用消融检验“复杂设计是否必要”</strong>。<strong>做了</strong>（A2 分析）、<strong>学了</strong>（复杂 vs 简单的取舍）、<strong>会了</strong>（用证据决定保留还是简化设计）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ A1、A2 分析报告（含显著性） ✅ A3 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D79</summary><textarea data-note="d79" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d80" data-d="80"><header class="day-head"><span class="dnum">D80</span><h2 class="day-t">周三 · A3 分析 + A4/A5 启动 + 消融可视化</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读 A3、启动最后两个消融(A4/A5)，并把已出结果画成柱状图。柱状图能让你和读者“一眼看出哪个组件贡献最大”——比纯表格直观得多。</p>
+</blockquote>
+</div><section class="slot" id="d80-am" data-d="80" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D80 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">A3 结果分析（选 loss）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么 loss 这一维值得单独消融）</h4><div class="blk-b"><p>A3 训完，看“你的 loss vs 标准 loss”——若你的 loss 显著更好，说明它适配这个任务（可写成一条小贡献）；若没差别，用标准 loss 更省事。<strong>为什么旋转检测的 loss 特别值得试</strong>：通用水平框检测用 IoU/L1 loss 就够；但旋转框多了“角度”这一维，角度的周期性（0° 和 180° 接近）会让朴素 L1 loss 在边界处梯度异常，所以学界专门设计了旋转 IoU loss、高斯建模 loss(GWD/KLD)等——你的方法用哪种、是否更适合你的场景，正是这个消融要回答的。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估 A3，和完整方法对比，判断显著性，写结论（哪个 loss 更适合）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A3 vs v1 差值 + 显著性 + 结论（确定用哪个 loss）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>loss 差异在 std 内却硬说“我的 loss 更好” → 不显著就如实写“持平，选其一即可”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>你的 loss 没更好 → 没关系，换回标准 loss，把创新点集中在真正有效的组件上（不是每个设计都得是创新）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你确定了更优的 loss 选择。<strong>做了</strong>（A3 分析）、<strong>学了</strong>（loss 对结果的影响、不显著就诚实）、<strong>会了</strong>（用消融选 loss）。</p>
+</div></section></section><section class="slot" id="d80-noon" data-d="80" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D80 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 A4（换 backbone）+ A5（换增强）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A4（换 backbone，如 R50→Swin-T）看<strong>你的方法是否依赖特定 backbone</strong>（好方法应在不同 backbone 上都有增益，说明通用）;A5（去掉遥感特有增强）看<strong>增强的贡献</strong>。启动这两个（各只改一处）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 A4、A5 config 启动（分别只换 backbone / 去增强）；错峰跑。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A4、A5 启动，各只改一处。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① A4 换大 backbone OOM → 降 batch/分辨率/开 AMP;② 不小心改了 backbone 以外的东西 → 只改 backbone/增强这一处。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>A4 换 Swin 后接口对不上（通道数变了）→ 在你的模块入口处适配通道数（这也是“方法是否易迁移”的一次检验）；显存不够 → Swin-T 比 Swin-B 省，先用小的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你补齐了 backbone/增强维度的消融。<strong>做了</strong>（A4、A5 启动）、<strong>学了</strong>（backbone 消融验证通用性、增强消融）、<strong>会了</strong>（隔离这两个变量做实验）。</p>
+</div></section></section><section class="slot" id="d80-pm" data-d="80" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D80 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">消融结果可视化（柱状图）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把已出结果的消融画成<strong>柱状图</strong>(x 轴=不同消融配置，y 轴=指标，加一条“完整方法”参照线)，<strong>一眼看出哪个组件贡献最大</strong>——这种图论文里常出现（比纯表格直观）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 matplotlib 画消融柱状图（把完整方法和各消融的指标并排，标出完整方法参照线）；见补充包代码 ③。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张消融柱状图，直观显示各组件去掉/替换后的性能变化，有完整方法参照线。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 柱子没参照线 → 看不出“相对完整方法降了还是升了”，必须加完整方法基准线;② 数据没出全就画 → 先画已出的，明天 A4/A5 出了补全。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>柱子差异太小看不清 → y 轴别从 0 开始（从一个合适的下界开始放大差异），但要标注清楚避免误导。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>消融结果可视化</strong>。<strong>做了</strong>（消融柱状图）、<strong>学了</strong>（用柱状图展示组件贡献、参照线的必要）、<strong>会了</strong>（把消融数字画成直观图）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融可视化</strong>：柱状图 x=各消融配置、y=指标，<strong>必加“完整方法”水平参照线</strong>（否则看不出相对升降）。y 轴可适当放大差异但要标注避免误导。柱状图比表格直观，论文/汇报都爱用。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ A3 报告 ✅ A4、A5 启动 ✅ 消融柱状图（部分）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D80</summary><textarea data-note="d80" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d81" data-d="81"><header class="day-head"><span class="dnum">D81</span><h2 class="day-t">周四 · 完整消融表 + 定性可视化（三类案例）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把 5 个消融汇成完整消融表（论文 Table 2 雏形），归纳“哪个组件最有用”，并做定性可视化。<strong>定性可视化的关键纪律：必须含负面案例</strong>——只展示赢的会被审稿人当成 cherry-pick。</p>
+</blockquote>
+</div><section class="slot" id="d81-am" data-d="81" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D81 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">A4/A5 分析 + 完整消融表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A4/A5 训完分析后，把全部 5 个消融汇成<strong>一张完整消融表</strong>(<code>配置 | 指标 | 相对完整方法的变化 | 结论</code>)——这是你<strong>论文 Table 2 的雏形</strong>。表的价值在于“系统呈现每个组件的贡献”，让审稿人一眼信服“每个组件都有用”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估 A4/A5；把 A1–A5 + 完整方法汇成完整消融表，每行标“去掉/换了什么、指标、Δ vs 完整、结论（含显著性）”。这张表直接就是论文 Table 2 的雏形：</p>
+<figure class="code" data-lang="markdown"><pre><code>| 配置 | mAP(mean±std) | Δ vs 完整 | 显著? | 结论 |
+|---|---|---|---|---|
+| 完整方法(Ours) | 76.3 ± 0.4 | —    | —   | 基准 |
+| A1: 去高分辨率分支 | 74.5 ± 0.4 | -1.8 | 是 | 核心组件贡献大 |
+| A2: 融合换简单相加 | 76.0 ± 0.3 | -0.3 | 否 | 复杂融合收益小，可简化 |
+| A3: 换标准 loss   | 75.7 ± 0.4 | -0.6 | 临界 | 我的 loss 略有效 |
+| A4: backbone→Swin-T | 77.2 ± 0.4 | +0.9 | 是 | 更强 backbone 也增益(不依赖特定 backbone) |
+| A5: 去遥感增强    | 75.1 ± 0.4 | -1.2 | 是 | 遥感增强有用 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>怎么读这张表</strong>:① 看哪行 Δ 负得最多 → 那个组件最有用（这里 A1 -1.8 最大，核心组件价值得到证明）;② A2 只 -0.3 且不显著 → 复杂融合可简化（顺带提速，强化高效卖点）;③ A4 +0.9 是“好消息”——说明你的方法叠在更强 backbone 上仍有增益，<strong>不依赖特定 backbone（通用性的证据）</strong>。这张表把“我的方法有 5 个组件”变成了“每个组件值多少分，有据可查”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张完整消融表（5 消融 + 完整方法），能看出每个组件的贡献和显著性。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 表里不标“相对完整方法的变化” → 看不出贡献;② 不下结论（只有数字没有“有用/可删”的判断）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某组件贡献为负或在噪声内 → 如实记，标“考虑在 M4 删/简化”;A4 显示方法依赖特定 backbone → 也如实记（这是一个局限，但也指出了改进方向）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>完整消融表（Table 2 雏形）</strong>。<strong>做了</strong>（完整消融表）、<strong>学了</strong>（消融表的组织、标 Δ 和结论）、<strong>会了</strong>（把每个组件的贡献系统呈现）。</p>
+</div></section></section><section class="slot" id="d81-noon" data-d="81" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D81 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写“哪个组件最有用”分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>从消融表归纳“哪个组件贡献最大、哪个可有可无”——这直接指向 M4 改进方向（强化最有用的、删/简化没用的）。把消融从“证明”升级成“指路”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 200 字“组件贡献排序 + 哪个最该强化/该删”，每条对应消融证据。范本：</p>
+<figure class="code" data-lang="markdown"><pre><code>组件贡献排序（按 |Δ| 从大到小，对应 M4 优先级）：
+<span class="k">1.</span> 高分辨率分支（A1 -1.8，显著）—— 最有用，是方法的核心价值来源，
+   M4 应优先加强（如多尺度融合）。
+<span class="k">2.</span> 遥感特有增强（A5 -1.2，显著）—— 第二有用，保留并可探索更强增强。
+<span class="k">3.</span> 我的 loss（A3 -0.6，临界）—— 弱有效，保留但收益有限。
+<span class="k">4.</span> 复杂融合（A2 -0.3，不显著）—— 几乎没用，M4 简化为相加（提速）。
+结论：M4 的精力应压在&quot;加强高分辨率分支 + 补遮挡场景&quot;，
+同时简化融合换取速度——既提性能又强化&quot;单卡高效&quot;卖点。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这段为什么合格</strong>：不是“都有用”的和稀泥，而是<strong>按 |Δ| 排出优先级</strong>，每条挂消融证据，并直接给出 M4 的精力分配建议——把消融从“证明”用成了“指路”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>组件贡献排序（带数字）+ 明确的改进倾向（强化谁、删谁）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只说“都有用” → 要排序、要指出最强/最弱，排序才有指导价值。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>贡献差不多排不出序 → 按 Δ 绝对值排；有并列就并列，重点是标出最强和最弱两端。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把消融读成了“改进优先级”。<strong>做了</strong>（组件贡献分析）、<strong>学了</strong>（从消融定改进优先级）、<strong>会了</strong>（把消融结论转成下一步行动）。</p>
+</div></section></section><section class="slot" id="d81-pm" data-d="81" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D81 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">生成定性可视化（三类案例）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（三类案例为什么缺一不可）</h4><div class="blk-b"><p><strong>定性可视化</strong>= 选典型案例，展示你的方法 vs baseline 的预测差异。要选<strong>三类</strong>:① 你对 baseline 错（正面案例，证明改进）② 你错 baseline 对（负面案例，诚实暴露局限）③ 两者都错但你更接近 GT（部分改进）。<strong>论文展示这三类才有说服力</strong>——只展示正面会被审稿人当成 cherry-pick；含负面反而显得你诚实、了解方法边界。</p>
+<ul>
+<li><strong>&quot;敢放负面案例&quot;是一种反直觉但高级的可信度策略</strong>：新手的本能是&quot;只放我方法表现最好的图，藏起所有失败的&quot;——但审稿人见多了这种 cherry-pick，反而会警惕（&quot;挑了最好的几张，真实水平如何?&quot;）。<strong>而当你主动放出&quot;我的方法也会在这类情况下失败&quot;的负面案例时，传递的信号恰恰相反：这个人对自己方法的能力和边界有清醒、诚实的认识</strong>——这种诚实反而大幅提升了你整体结果的可信度（连失败都敢承认，那报告的提升肯定是真的），也让审稿人更愿意相信你其余的论断，为整篇论文逐步积累信任。这和你写 Limitation、做消融诚实报告组件贡献是同一种科研品格：<strong>对真相的尊重，最终会回报你以信任</strong>。所以挑案例时别只盯着漂亮的，主动覆盖三类，尤其那张负面案例——它看似&quot;自曝其短&quot;，实则是你专业性和可信度的加分项。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 M1 的可视化工具（画预测 vs GT），从结果里挑 5–10 个典型案例，覆盖上述三类，存图并标注；见补充包代码 ④（自动按“你对/baseline 对”分类挑案例）。并排画“baseline vs Ours vs GT”三联图最直观：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 三联对比图：左 baseline、中 Ours、右 GT，一眼看出差异</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_triptych</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">base_boxes</span><span class="p">,</span> <span class="n">ours_boxes</span><span class="p">,</span> <span class="n">gt_boxes</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">base_boxes</span><span class="p">,</span> <span class="n">ours_boxes</span><span class="p">,</span> <span class="n">gt_boxes</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Baseline&quot;</span><span class="p">,</span> <span class="s2">&quot;Ours&quot;</span><span class="p">,</span> <span class="s2">&quot;GT&quot;</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">:</span>
+            <span class="n">draw_rotated_box</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>          <span class="c1"># 复用你 M1 写的旋转框绘制</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>                       <span class="c1"># 如&quot;正面案例：密集小船 baseline 漏检&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># 三类各画几张，文件名带类别，方便组稿</span>
+<span class="k">for</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">cases</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;pos&quot;</span><span class="p">,</span> <span class="n">pos</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;neg&quot;</span><span class="p">,</span> <span class="n">neg</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;part&quot;</span><span class="p">,</span> <span class="n">part</span><span class="p">)]:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cases</span><span class="p">):</span>
+        <span class="n">draw_triptych</span><span class="p">(</span><span class="o">*</span><span class="n">load_case</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2"> case </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;qual_</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5–10 张定性对比图，覆盖正面/负面/部分改进三类，每张标注说明。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只挑你赢的案例(cherry-pick)→ 审稿人不信；要含负面案例（显示你诚实且了解局限）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>找不到负面案例 → 看你方法掉点的那类样本（per-class 分析里最差的类，或 A1 消融里下降的场景），那里通常有负面案例。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>做有说服力的定性可视化（含负面案例）</strong>。<strong>做了</strong>（三类定性可视化）、<strong>学了</strong>（三类案例的展示原则、为何含负面）、<strong>会了</strong>（诚实而有说服力地展示方法效果）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜定性可视化三类案例</strong>:① 你对/baseline 错（正面）② 你错/baseline 对（负面，诚实）③ 都错但你更近 GT（部分改进）。三类缺一不可——只放正面=cherry-pick，含负面反而可信。从掉点的类/场景里找负面案例。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 完整消融表（Table 2 雏形） ✅ “哪个组件最有用”分析 ✅ 三类定性可视化。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D81</summary><textarea data-note="d81" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d82" data-d="82"><header class="day-head"><span class="dnum">D82</span><h2 class="day-t">周五 · 从消融找改进方向（为方法 v2 铺路）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把消融从“证明有效”用到“发现改进空间”——这是 M4 方法 v2 的依据。再手动试几组关键超参，为明天的系统网格搜索缩范围。<strong>改进方向要砍成单卡可做的，别列一堆需要大算力的设想。</strong></p>
+</blockquote>
+</div><section class="slot" id="d82-am" data-d="82" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D82 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">基于消融结果找改进方向</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（消融更重要的作用是“指路”）</h4><div class="blk-b"><p>消融不只“证明有效”，更重要是<strong>“发现改进空间”</strong>：贡献大的组件能否进一步加强？贡献小的能否换成更好的？方法掉点的场景（从定性负面案例看）怎么补？这是 M4 方法 v2 的依据。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写改进方向清单：对最有用的组件，列 1–2 个“能否更强”的设想；对没用的，列“删或换”的方案；对负面案例暴露的弱点，列针对性改法。<strong>每条标注“单卡可做吗”</strong>。范本：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 方法 v2 改进方向清单（来自 W12 消融，每条标单卡可行性）</span>
+| # | 针对 | 改法 | 依据 | 预期 | 单卡可做? |
+|---|---|---|---|---|---|
+| 1 | 高分辨率分支(最有用) | 加多尺度融合，不止融两层 | A1 -1.8 证明它最关键，值得加强 | 小目标再 +0.5~1 | ✅ 模块级改动 |
+| 2 | 融合方式(没用的复杂) | 换回简单相加 | A2 -0.3 不显著，复杂没收益 | 持平但提速 | ✅ 删代码 |
+| 3 | 遮挡场景(负面案例弱点) | 加遮挡感知的 label assignment | 定性负面案例集中在遮挡 | 遮挡召回↑ | ✅ 训练策略 |
+| 4 | loss(临界) | 保留我的 loss + 调权重 | A3 -0.6 临界，有效但弱 | 微调或保持 | ✅ 调参 |
+弃用：换超大 backbone/超大数据（需大算力，违背单卡定位）→ 不列入。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么这样列</strong>:① 按消融证据排优先级（A1 最有用→优先加强）;② 没用的果断简化（A2→提速，强化高效卖点）;③ 负面案例→针对性改;④ 每条卡死“单卡可做”，把不切实际的大算力设想挡在门外。这张表就是 M4 的施工单。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进方向清单（每条：针对哪个组件/弱点、怎么改、预期、单卡可行性）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>改进方向全是需大算力的（换超大模型/超大数据）→ 砍成单卡可做的小改进（模块级改动、训练技巧），这才符合你的定位。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>想不出改进方向 → 看消融里“差一点就显著”的地方、定性负面案例的共性（如都集中在密集遮挡）、贡献最大组件的“能不能再强一点”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从消融里挖改进方向</strong>。<strong>做了</strong>（改进方向清单）、<strong>学了</strong>（消融→改进的思路、单卡可行性约束）、<strong>会了</strong>（把消融结论转成 v2 的改进计划）。</p>
+</div></section></section><section class="slot" id="d82-noon" data-d="82" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D82 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">调超参（找更优组合）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么先定结构再调超参、调参的边际收益）</h4><div class="blk-b"><p>在确定方法结构后，调超参（lr、训练轮数等）往往还能再提一点。今天先<strong>手动试几组关键超参</strong>，为明天的系统网格搜索缩小范围（别一上来就大网格，浪费算力）。<strong>为什么是这个顺序</strong>：结构改动（加组件）和超参改动（调 lr）如果混在一起，你分不清提升来自哪个；所以先用消融把结构锁定，再在固定结构上调超参——这样每一步的收益都干净可归因。<strong>心态</strong>：超参调优的边际收益通常远小于一个有效的结构创新（可能 +0.2~0.5 vs 结构 +1~2），所以别在调参上耗太久，它是“锦上添花”不是“雪中送炭”；真正的提升还得靠 M4 的结构迭代。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>挑 2–3 组关键超参手动试（<strong>只改超参，不改结构</strong>），记录；为明天的系统网格搜索缩小范围（如发现 lr 在 5e-4 附近好，明天就在它周围细搜）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>几组超参的初步结果，圈定值得细搜的范围。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 乱试一气没记录 → 有记录、缩范围;② 把超参改动和结构改动混在一起 → 结构已锁定，这阶段只动超参。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>超参试了没提升 → 正常，说明 v1 超参已不错；把精力转回 D82 上午的结构改进方向。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始系统地调超参。<strong>做了</strong>（初步调参）、<strong>学了</strong>（超参也能提分、先缩范围）、<strong>会了</strong>（为系统搜索缩小范围）。</p>
+</div></section></section><section class="slot" id="d82-pm" data-d="82" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D82 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">重训关键配置，确认最终结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>用你目前认为最好的配置（最优组件组合 + 较好超参）重训一遍，<strong>确认这就是 M3 的方法结果</strong>（M4 在此基础上迭代）。这一步是给 M3 的方法“定稿一个版本”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用当前最优配置重训（固定 seed，最好多 seed），评估，确认结果稳定；记入成绩单 + 存好 config 和权重。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>当前最优配置的结果确认并记录（含 config、权重、指标）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 结果波动大却只跑一个 seed → 多 seed 确认;② 重训忘了记 config → 以后复现不了，logger 已自动记。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>重训结果和之前对不上 → 检查 config 是否真的一致、seed 是否固定、有没有用错权重。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你确认了 M3 阶段的方法结果。<strong>做了</strong>（重训确认）、<strong>学了</strong>（确认最终配置、定稿一个版本）、<strong>会了</strong>（锁定一个阶段的方法结果）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 改进方向清单（单卡可行） ✅ 最优超参记录 ✅ M3 方法结果确认。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D82</summary><textarea data-note="d82" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d83" data-d="83"><header class="day-head"><span class="dnum">D83</span><h2 class="day-t">周六 · （集中日）· 系统超参搜索</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天系统地搜超参（网格搜索），把调参从“随意试”升级成“有据可查”。产出会成为论文 supplementary 的素材（展示你做得严谨）。网格别开太大，基于昨天缩的范围搜关键几组。</p>
+</blockquote>
+</div><section class="slot" id="d83-am" data-d="83" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D83 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计并启动网格搜索</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么系统搜而非随意试）</h4><div class="blk-b"><p><strong>超参搜索的正确态度</strong>——不要随意试，要<strong>系统地搜索</strong>。常用<strong>网格搜索(grid search)</strong>：如学习率 {1e-3, 5e-4, 1e-4} × 训练轮数 {12, 24, 36} 组合遍历。系统搜索的好处：结果可复现、能画“超参 vs 性能”曲线、选择有据（审稿人问“为什么用这个 lr”你有答案）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>定义网格（lr × epoch，基于昨天缩的范围），写脚本启动这些组合（错峰跑）；见补充包代码 ②。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 网格搜索批量启动（基于昨天缩小的范围）</span>
+<span class="k">for</span><span class="w"> </span>lr<span class="w"> </span><span class="k">in</span><span class="w"> </span>1e-3<span class="w"> </span>5e-4<span class="w"> </span>1e-4<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span>ep<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">36</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/your_method.yaml<span class="w"> </span>--lr<span class="w"> </span><span class="nv">$lr</span><span class="w"> </span>--epochs<span class="w"> </span><span class="nv">$ep</span><span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>&gt;<span class="w"> </span>experiments/grid_lr<span class="si">${</span><span class="nv">lr</span><span class="si">}</span>_ep<span class="si">${</span><span class="nv">ep</span><span class="si">}</span>.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="k">done</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>网格搜索启动，组合清晰、有记录（每个组合独立日志）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 网格太大跑不完（9 组 × 长训练超出单卡时间）→ 缩小到关键几组，或用短 epoch 先筛;② 没固定 seed → 组合间不可比。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>网格跑不完 → 先用 1/4 数据或短 epoch 把全网格快速筛一遍，再对前 2-3 名跑足；时间实在紧 → 只搜最关键的 lr 这一维。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>系统超参搜索（网格）</strong>。<strong>做了</strong>（网格搜索启动）、<strong>学了</strong>（grid search 方法、为何系统搜）、<strong>会了</strong>（系统而非随意地搜超参）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜系统超参搜索</strong>：网格搜索（如 lr×epoch 组合遍历），固定 seed 保证可比，每组独立日志。网格太大就先短 epoch/小数据快速初筛再对 top 跑足。产出“超参 vs 性能”表/曲线进 supplementary，让超参选择有据可查。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d83-noon" data-d="83" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D83 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">监控搜索</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（监控一批实验的重点 + 早停的判断）</h4><div class="blk-b"><p>网格搜索是一批实验，监控的重点是“哪些组合明显差（可提前停省时间）、哪些有希望”，并实时记到超参-性能表。<strong>早停怎么判断</strong>：不是看绝对值，而是看“在已训练的轮数里，这个组合的曲线是否明显低于当前最好组合且没有追上的趋势”——比如 lr=1e-3 在前 5 epoch 就 loss 发散/mAP 远低于 lr=5e-4，基本可以停。<strong>为什么对你尤其重要</strong>：单卡算力是稀缺资源，把时间浪费在注定输的组合上，就挤占了有希望组合跑足轮数的机会；学会“动态止损”，等于把有限的 GPU 小时花在刀刃上。这是工程经验，也是单卡选手的必修课。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>监控各组合的训练/结果；明显差的提前停（省 GPU）；记录到一张超参-性能表（lr | epoch | 指标）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>超参-性能表在累积，差的组合已提前停。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>让明显发散/差的组合白跑到底 → 早停省算力给有希望的组合。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定能不能停 → 若某组合明显低于已有最好且趋势没救，停；拿不准就让它跑完（单卡时间允许的话）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你在系统记录超参实验并动态管理算力。<strong>做了</strong>（监控 + 记录 + 早停）、<strong>学了</strong>（超参实验的记录与算力管理）、<strong>会了</strong>（维护超参-性能表、动态调度有限算力）。</p>
+</div></section></section><section class="slot" id="d83-pm" data-d="83" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D83 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整合超参搜索结果（supplementary 素材）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把网格搜索结果整理成表/曲线（超参 vs 性能）——这是你论文 <strong>supplementary material</strong> 的好素材（展示你做得严谨、超参选择有据），也帮你确认最优组合。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>整理超参-性能表/曲线；标出最优组合（必要时多 seed 确认）；存进 <code>experiments/超参搜索.md</code>(将来进 supplementary)。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份超参搜索结果（表/曲线）+ 最优组合（已确认）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 结果没整理就散在各日志里 → 趁热整理成一张表;② 最优组合只跑一个 seed 不稳 → 多 seed 确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>最优组合在不同 seed 下不稳定 → 选“平均好且方差小”的组合，而非单次最高的(稳健 &gt; 偶然最高)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>超参搜索的规范记录（supplementary 素材）</strong>。<strong>做了</strong>（超参搜索结果）、<strong>学了</strong>（超参结果的整理与价值、稳健优先）、<strong>会了</strong>（把调参过程沉淀为论文素材）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 超参搜索结果（表/曲线 + 最优组合）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D83</summary><textarea data-note="d83" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d84" data-d="84"><header class="day-head"><span class="dnum">D84</span><h2 class="day-t">周日 · （月复盘日）· M3 月复盘（go/no-go 决策点）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>:M3 收官日，也是一个 <strong>go/no-go 决策点</strong>。核心问题：方法有正信号吗？消融证明组件有效吗？能继续吗？<strong>重点心态：v1 提升小很正常，只要消融显示组件有效 + 有清晰改进方向，就是 go——别因为 v1 没惊艳就慌着 pivot。</strong></p>
+</blockquote>
+</div><section class="slot" id="d84-am" data-d="84" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D84 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">M3 月度复盘（核心：方法有正信号吗？能继续吗?）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（go/no-go 决策点是什么）</h4><div class="blk-b"><p>M3 月复盘是一个 <strong>go/no-go 决策点</strong>。核心问题：<strong>方法 v1 有正信号吗？消融证明组件有效吗？可以继续吗？</strong> 若有 → M4 继续迭代(v2/v3)；若 3 个 toy 全无信号且消融显示方法无效 → 才需 pivot（换课题）。<strong>但如果你前面认真做了 Gap 分析和穷人验证，大概率不会走到 pivot。</strong></p>
+<ul>
+<li><strong>★ “理性止损”和“轻易放弃”是两回事（go/no-go 的真正智慧）</strong>：设置 go/no-go 决策点，目的是给你一个“理性检视、避免在死方向上无限耗下去”的机制——但它绝不是“一遇到不顺就换方向”的借口。<strong>这两者的区别，恰恰是科研成熟度的体现</strong>:① <strong>理性止损</strong>是有明确证据（toy 全无信号 + 消融证明核心组件无效 + 找不到任何改进方向）时，果断承认方向不行、及时转向——这是对有限时间负责;② <strong>轻易放弃</strong>则是“v1 提升没到惊艳的程度就慌、就想换个新方向试试”——这是个人研究者最常见、也最致命的陷阱。<strong>为什么轻易 pivot 致命</strong>：研究的提升往往是渐进的（v1 小涨、v2 加强、v3 接近完整），如果你在 v1 阶段（提升还小、但消融已显示组件有效、且有清晰改进方向）就放弃，等于把几个月积累的框架、数据、领域理解全部清零，从头再来——而新方向同样会在早期“提升不惊艳”，你又想换……陷入“永远在开头、永远不深入”的恶性循环，最终一事无成。<strong>所以这个决策点的默认倾向应该是 go</strong>：只要消融证明你的组件确实在起作用、且你能看到下一步怎么改进，就坚持下去、在 M4 把它做强。真正该 no-go 的情况（全无信号 + 方法被证伪）是少数，且前提是你前面 toy 验证过（所以本来就不太会发生）。<strong>学会区分“该坚持的渐进”和“该止损的死路”，是你能不能做出成果的关键判断力之一。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用月复盘模板（见补充包），回答 go/no-go 核心问题 + 常规项；明确“继续(go)还是 pivot(no-go)”，并写清依据（信号 + 消融有效性 + 改进方向）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M3 复盘明确给出 go/no-go 结论（大概率 go），有据（引对比表 + 消融表 + 改进方向）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 信号弱就慌着 pivot → v1 提升小很正常，M4 还会迭代加强，别轻易推翻几个月的积累;② 信号其实没有却硬上 → 也要诚实（但前提是你 toy 验证过，通常有信号）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>信号在 std 之内（不显著）→ 看消融是否显示组件有效（A1 去核心组件掉得多吗）+ 是否有清晰改进方向(D82)；两者有其一（尤其消融有效）就 go。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会做 <strong>go/no-go 阶段决策</strong>。<strong>做了</strong>（M3 复盘 + go/no-go 结论）、<strong>学了</strong>（go/no-go 决策点、信号弱≠pivot）、<strong>会了</strong>（基于信号与消融决定继续还是转向）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜go/no-go 月复盘</strong>：决策点核心三问——方法有正信号吗？消融证明组件有效吗？有清晰改进方向吗？<strong>三者（尤其消融有效 + 有改进方向）成立即 go</strong>，别因 v1 提升小就 pivot。只有“toy 全无信号 + 消融证明方法无效”才 no-go。决策要引数据（对比表/消融表）为据。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d84-noon" data-d="84" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D84 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 M3 月报（用模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（月报为什么值得认真写、写给谁看）</h4><div class="blk-b"><p>M3 月报系统记录本月产出（Proposal、框架、对比表、消融、可视化、超参搜索）+ go/no-go 结论 + 经验，是阶段性的存档和对自己的交代。<strong>为什么对你这种长程作战（24 个月）尤其重要</strong>:① 写给三个月后的自己——科研记忆会衰减，月报让你随时能“回看当时为什么做这个决定”;② 写给（未来）导师/合作者——当有人问“你这半年做了什么”，月报就是现成的、有据可查的答卷，比口头复述可信得多;③ 写给论文——月报里的对比表/消融表/经验，将来直接是论文素材和“故事线”。<strong>一份好月报的判据</strong>：不是产出清单的堆砌，而是能回答“方法到底有没有戏 + 下个月该怎么改”——它是决策记录，不是流水账。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用月报模板（见补充包）写 M3 月报，盘点硬交付（对照 M3 检查清单），突出“方法有没有戏 + 下月怎么改”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M3 月报完整，硬交付逐项对照，go/no-go 结论清晰。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 写成流水账 → 突出“方法有没有戏 + 下月怎么改”;② 漏项 → 对照 M3 硬交付清单逐条核。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某项硬交付没完成 → 如实标注 + 写补救计划（列入 M4），别假装完成。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了 M3 的系统月报。<strong>做了</strong>（M3 月报）、<strong>学了</strong>（月报的结构、突出重点）、<strong>会了</strong>（系统盘点一个月的研究产出）。</p>
+</div></section></section><section class="slot" id="d84-pm" data-d="84" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D84 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">制定 M4 计划</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>M4 = 方法迭代(v2/v3)+ 论文骨架 + 阶段一收尾。基于 D82 的改进方向，排 M4 的迭代计划——把“改进方向清单”落成“每周做什么”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定 M4 计划（W13–W16 每周框架）：方法 v2（<strong>一次只改一处</strong>）+ 跨数据集验证 → v3 + 第三数据集 → 论文骨架(Intro/RW/Method)→ pipeline 复现性 + 阶段一收尾。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M4 计划（四周框架），首周从 D82 的改进方向开始。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 计划太满没缓冲 → 留缓冲（实验常超时）;② 改进方向需大算力 → 砍成单卡可做。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>改进方向太多排不下 → 按 D81 的“组件贡献排序”选最有希望的 1-2 个先做，其余排后面。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成 M3 收官并规划好 M4。<strong>做了</strong>（M4 计划）、<strong>学了</strong>（承接改进方向排计划、一次只改一处）、<strong>会了</strong>（把消融结论落成下月迭代路线）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ M3 月复盘(go/no-go) ✅ M3 月报 ✅ M4 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ M3 硬交付检查清单（对照你原计划）</h2><ul>
+<li>[ ] <strong>Proposal v1</strong>（≥3000 字，W10 已完成）</li>
+<li>[ ] 可复用实验代码框架（GitHub 私仓，W11 已完成）</li>
+<li>[ ] 第一组完整对比表（baseline vs your method,3-seed 平均，W11）</li>
+<li>[ ] 5 个消融实验完成 + 分析报告（本周）</li>
+<li>[ ] 论文阅读累计 ≥ 70 篇</li>
+<li>[ ] 定性可视化结果 5–10 张（本周）</li>
+<li>[ ] 超参搜索记录（本周）</li>
+</ul>
+</section><section class="wtail"><h2>🎓 M3 全月能力总览(W9–W12)</h2><ul>
+<li>找 Gap（从 Limitation 挖、查重、成功路径预演、穷人验证）→ 选题终决(W9–W10)</li>
+<li>写完整 Research Proposal（七节，W10）</li>
+<li>搭可复用实验框架 + 第一组 3-seed 对比(W11)</li>
+<li>设计/执行消融（控制变量）+ 完整消融表 + 定性可视化（三类案例）+ 系统超参搜索(W12)</li>
+<li>从消融找改进方向 + go/no-go 月度决策</li>
+<li><strong>战略校准贯穿</strong>：消融证明“无堆砌组件”（呼应高效定位）；改进方向砍成单卡可做；backbone 消融验证方法通用性</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D84</summary><textarea data-note="d84" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W12 加厚补充包（范例 / 完整代码 / 月报模板 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 完整消融表 + 定性可视化三类案例说明</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 消融实验表（论文 Table 2 雏形；相对&quot;完整方法&quot;的变化，3 seeds）</span>
+| 配置 | 指标(mean±std) | Δ vs 完整 | 显著? | 结论 |
+|---|---|---|---|---|
+| 完整方法(Ours) | 76.3 ± 0.4 | — | — | 基准 |
+| A1: 去掉高分辨率分支 | 74.5 ± 0.4 | -1.8 | 是 | 核心组件贡献大(有用) |
+| A2: 融合换简单相加 | 76.0 ± 0.3 | -0.3 | 否 | 复杂融合收益小(可简化) |
+| A3: 换标准 loss | 75.7 ± 0.4 | -0.6 | 临界 | 我的 loss 略有效 |
+| A4: backbone 换 Swin-T | 77.2 ± 0.4 | +0.9 | 是 | 更强 backbone 也增益(不依赖特定 backbone) |
+| A5: 去遥感特有增强 | 75.1 ± 0.4 | -1.2 | 是 | 遥感增强有用 |
+结论：贡献排序 高分辨率分支 ≈ 遥感增强 &gt; loss &gt; 融合复杂度；
+融合可简化（→提速，强化高效卖点），高分辨率分支/增强应强化（→M4 v2 方向）。
+
+<span class="gh"># 定性可视化三类案例（论文配图说明）</span>
+<span class="k">-</span><span class="w"> </span>正面：baseline 漏检港口密集小船，Ours 全检出（证明高分辨率分支对小目标有效）。
+<span class="k">-</span><span class="w"> </span>负面：某严重遮挡的目标 Ours 也漏检（诚实暴露局限，指向 M4 遮挡处理）。
+<span class="k">-</span><span class="w"> </span>部分改进：旋转框定位 baseline 角度偏移大，Ours 更贴合 GT（IoU 更高，虽都未完美）。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — ① 消融批量运行 ② 网格搜索 ③ 消融柱状图 ④ 三类案例自动挑选</h2>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ===== ① 消融批量运行：遍历配置（每个只改一处），收集结果 =====</span>
+<span class="n">ablation_cfgs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;full&quot;</span><span class="p">:</span>        <span class="s2">&quot;configs/your_method.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A1_wo_hr&quot;</span><span class="p">:</span>    <span class="s2">&quot;configs/abl_wo_hrbranch.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A2_simple&quot;</span><span class="p">:</span>   <span class="s2">&quot;configs/abl_simple_fuse.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A3_loss&quot;</span><span class="p">:</span>     <span class="s2">&quot;configs/abl_std_loss.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A4_swin&quot;</span><span class="p">:</span>     <span class="s2">&quot;configs/abl_swin.yaml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A5_no_aug&quot;</span><span class="p">:</span>   <span class="s2">&quot;configs/abl_no_rsaug.yaml&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_ablations</span><span class="p">(</span><span class="n">train_eval_fn</span><span class="p">):</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">ablation_cfgs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="n">train_eval_fn</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        <span class="c1"># 调你的 train/eval，返回指标</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metric</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># ===== ② 网格搜索（系统搜超参，非随意试）=====</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">grid_search</span><span class="p">(</span><span class="n">train_eval_fn</span><span class="p">,</span> <span class="n">base_cfg</span><span class="p">):</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">5e-4</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">],</span> <span class="s2">&quot;epochs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">36</span><span class="p">]}</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">lr</span><span class="p">,</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">],</span> <span class="n">grid</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">train_eval_fn</span><span class="p">(</span><span class="n">base_cfg</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">ep</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">lr</span><span class="p">,</span> <span class="n">ep</span><span class="p">,</span> <span class="n">m</span><span class="p">));</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lr=</span><span class="si">{</span><span class="n">lr</span><span class="si">}</span><span class="s2"> ep=</span><span class="si">{</span><span class="n">ep</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;最优: lr=</span><span class="si">{</span><span class="n">best</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> ep=</span><span class="si">{</span><span class="n">best</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">best</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">table</span><span class="p">,</span> <span class="n">best</span>
+
+<span class="c1"># ===== ③ 消融柱状图（直观看组件贡献，带完整方法参照线）=====</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_ablation</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="s2">&quot;ablation.png&quot;</span><span class="p">):</span>
+    <span class="n">names</span><span class="p">,</span> <span class="n">vals</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;full&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;full&quot;</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;full (Ours)&quot;</span><span class="p">)</span>
+    <span class="n">lo</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">lo</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>                  <span class="c1"># 放大差异（已标注，避免误导）</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;mAP&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saved&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+
+<span class="c1"># ===== ④ 三类定性案例自动挑选（你对/baseline对 → 分三类）=====</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pick_qualitative</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;samples: [(id, ours_correct: bool, base_correct: bool, ours_iou, base_iou)]&quot;&quot;&quot;</span>
+    <span class="n">pos</span>  <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">samples</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>            <span class="c1"># 你对 baseline 错</span>
+    <span class="n">neg</span>  <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">samples</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>          <span class="c1"># 你错 baseline 对</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">samples</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>  <span class="c1"># 都错但你更近</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;正面 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="si">}</span><span class="s2"> / 负面 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)</span><span class="si">}</span><span class="s2"> / 部分改进 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">part</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pos</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">neg</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">part</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>              <span class="c1"># 每类挑几张，覆盖三类</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># 用 mock 演示（真实项目替换 train_eval_fn 与 samples）</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="n">mock</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="mf">76.0</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">run_ablations</span><span class="p">(</span><span class="n">mock</span><span class="p">);</span> <span class="n">plot_ablation</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">pick_qualitative</span><span class="p">([(</span><span class="n">i</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">&gt;</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">&gt;</span><span class="mf">0.6</span><span class="p">,</span>
+                       <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)])</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出（示意）</strong>：各消融指标逐行打印；柱状图 <code>ablation.png</code> 生成（含 full 参照线）；网格搜索打印每组合结果并给出最优；三类案例打印“正面/负面/部分改进”各自数量并各挑几张。</p>
+<h2>三、M3 月报模板（go/no-go 收官）</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># M3 月报（W9–W12）</span>
+<span class="gu">## 一、go/no-go 决策（核心）</span>
+<span class="k">-</span><span class="w"> </span>方法有正信号吗？ Ours v1 76.3±0.4 vs baseline 75.5±0.3，+0.8（略&gt;std）→ 有弱正信号
+<span class="k">-</span><span class="w"> </span>消融证明组件有效吗？ A1 去核心组件 -1.8(显著)、A5 去增强 -1.2(显著) → 核心组件确有效
+<span class="k">-</span><span class="w"> </span>有清晰改进方向吗？ 有（强化高分辨率分支处理遮挡、简化融合提速）
+<span class="k">-</span><span class="w"> </span><span class="gs">**结论：GO**</span>（继续 M4 迭代 v2），依据：消融证明核心组件有效 + 有单卡可做的改进方向
+<span class="gu">## 二、硬交付盘点（对照清单）</span>
+Proposal v1 ✅ / 框架+私仓 ✅ / 3-seed 对比表 ✅ / 5 消融+分析 ✅ /
+论文阅读 ≥70 篇（实际 __）/ 定性图 5–10 张 ✅ / 超参搜索 ✅
+<span class="gu">## 三、本月经验（卡点→对策，能复用的）</span>
+<span class="k">-</span><span class="w"> </span>消融可归因靠&quot;每次只改一处&quot;；显著性要和 std 比
+<span class="k">-</span><span class="w"> </span>定性必含负面案例，否则像 cherry-pick
+<span class="gu">## 四、下月（M4）方向：v2 改进（一次只改一处）+ 跨数据集 + 论文骨架</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>四、每日“今日自测”</h2>
+<ul>
+<li><strong>D78</strong>:① 消融实验是什么？核心原则（每次改几个变量）?② 为什么每个核心组件都该有对应消融？怎么用 config 继承只改一处？</li>
+<li><strong>D79</strong>:① 去掉组件后性能下降说明什么？降多小算“没用”（和什么比）?② 复杂组件没明显更好该怎么办？</li>
+<li><strong>D80</strong>:① 消融柱状图为什么要加“完整方法”参照线?② A4 换 backbone 这个消融在验证方法的什么性质？</li>
+<li><strong>D81</strong>:① 定性可视化为什么必须含负面案例?② 完整消融表要标“相对完整方法的变化”和显著性是为什么？</li>
+<li><strong>D82</strong>:① 消融除了“证明有效”，更重要的作用是什么?② 为什么改进方向要标“单卡可行”？</li>
+<li><strong>D83</strong>:① 为什么用网格搜索而非随意试超参？网格太大跑不完怎么办?② 超参搜索结果放论文哪部分？</li>
+<li><strong>D84</strong>:① M3 月复盘的 go/no-go 核心三问是什么?② 信号弱（在 std 内）就该立刻 pivot 吗，看什么再定？</li>
+</ul>
+<h2>五、本周报错速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>消融结论说不清是哪个组件的功劳</td>
+<td>一个消融改了多处</td>
+<td>每个消融只改一个变量（config 继承只覆盖一字段）;<code>diff</code> 核对</td>
+</tr>
+<tr>
+<td>去掉组件反而更好</td>
+<td>该组件无用/有害</td>
+<td>大胆删，论文偏爱“简洁有效”</td>
+</tr>
+<tr>
+<td>消融提升/下降在噪声范围内被误判</td>
+<td>单 seed/没和 std 比</td>
+<td>关键消融多 seed,Δ 要超过 std 才算显著</td>
+</tr>
+<tr>
+<td>定性图只挑赢的（被质疑 cherry-pick）</td>
+<td>只展示正面案例</td>
+<td>必含负面+部分改进案例（三类）</td>
+</tr>
+<tr>
+<td>柱状图看不出相对升降</td>
+<td>没加完整方法参照线</td>
+<td><code>axhline</code> 标完整方法基准线</td>
+</tr>
+<tr>
+<td>网格搜索跑不完</td>
+<td>网格太大/单卡时间不够</td>
+<td>短 epoch/小数据初筛 → top 跑足；或只搜最关键维</td>
+</tr>
+<tr>
+<td>超参乱试、无法复现最优</td>
+<td>没系统搜索/没记录</td>
+<td>网格搜索 + 超参-性能表；固定 seed</td>
+</tr>
+<tr>
+<td>信号弱就想换课题</td>
+<td>误判 v1、忽略消融</td>
+<td>v1 提升小正常，看消融有效性+改进方向再定 go/no-go</td>
+</tr>
+<tr>
+<td>A4 换 backbone 接口报错</td>
+<td>通道数变了没适配</td>
+<td>在你的模块入口适配通道（也是迁移性的检验）</td>
+</tr>
+</tbody>
+</table></div>
+<h2>六、把消融“写进论文”——Experiment 段落范例</h2>
+<blockquote class="quote">
+<p>会跑消融还要会“写”消融。给你一段可套用的论文式写法（英文骨架 + 中文注释），让消融表配上有说服力的文字。</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gs">**Ablation Study.**</span> （先点题：这一段证明每个组件都有用）
+To validate the contribution of each component, we conduct ablation studies
+on DOTA-v1.0 (Table 2), averaging over 3 random seeds.
+（逐条解读，挂数字）
+Removing the high-resolution branch (A1) drops mAP by 1.8 points, the largest
+degradation, confirming it as the core of our gains, especially on dense small
+objects. Replacing our attentive fusion with simple addition (A2) yields a
+negligible change (-0.3, within std), indicating the gain comes from the
+branch rather than the fusion complexity; we therefore adopt the simpler
+fusion for efficiency. Our method also improves a stronger Swin-T backbone
+(A4, +0.9), showing it is backbone-agnostic. Removing remote-sensing-specific
+augmentation (A5) costs 1.2 points, verifying its necessity.
+（收尾：呼应卖点）
+These results show each retained component is justified, and the simplified
+design further supports our single-GPU efficiency goal.
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>写法要点</strong>:① 开头一句点明“证明每个组件都有用”;② 每条消融“动作 + 数字 + 结论”三件套;③ 不显著的诚实写“within std”并据此简化;④ 结尾呼应你的核心卖点（高效）。这套写法 M4 写论文 Experiment 章直接能用。</p>
+<h2>七、消融进度看板（并行管多个实验不乱）</h2>
+<blockquote class="quote">
+<p>5 个消融 + 多 seed 容易乱。一张看板跟踪状态，GPU 一空就启动下一个。</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code>| 实验 | config | seed0 | seed1 | seed2 | 指标(mean±std) | 状态 |
+|---|---|---|---|---|---|---|
+| full      | your_method.yaml   | ✅76.3 | ✅76.0 | ✅76.6 | 76.3±0.4 | 完成 |
+| A1_wo_hr  | abl_wo_hrbranch.yaml | ✅74.5 | 🔄    | ⬜    | —        | 跑seed1 |
+| A2_simple | abl_simple_fuse.yaml | ✅76.0 | ⬜    | ⬜    | —        | 待seed1 |
+| A3_loss   | abl_std_loss.yaml    | 🔄    | ⬜    | ⬜    | —        | 跑seed0 |
+| A4_swin   | abl_swin.yaml        | ⬜    | ⬜    | ⬜    | —        | 排队 |
+| A5_no_aug | abl_no_rsaug.yaml    | ⬜    | ⬜    | ⬜    | —        | 排队 |
+图例：✅完成 🔄进行中 ⬜待跑。GPU 一空就把&quot;排队&quot;里的启动；关键消融(A1)优先跑满 3 seed。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么需要</strong>：单卡只能串行/少量并行，看板让你① 不漏跑/不重跑;② 优先把关键消融(A1)跑满 seed;③ 一眼知道还差哪些、GPU 空了该启动谁。这是单卡选手管理多实验的必备工具。</p>
+<h2>八、进阶：按“类别”读消融（找出方法对哪些遥感目标有效）</h2>
+<blockquote class="quote">
+<p>总 mAP 只是一个数。把消融的提升拆到<strong>每个类别</strong>，才知道你的方法到底帮了谁、伤了谁——这是定性负面案例的来源，也是 M4 改进的精确制导。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 按类别对比 完整方法 vs A1(去核心组件)，看高分辨率分支帮了哪些类</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">per_class_delta</span><span class="p">(</span><span class="n">full_ap</span><span class="p">,</span> <span class="n">abl_ap</span><span class="p">,</span> <span class="n">classes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;full_ap/abl_ap: {类名: AP}；输出每类的提升，降序&quot;&quot;&quot;</span>
+    <span class="n">deltas</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(((</span><span class="n">c</span><span class="p">,</span> <span class="n">full_ap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">abl_ap</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">),</span>
+                    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">deltas</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">&lt;16</span><span class="si">}</span><span class="s2"> Δ=</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">deltas</span>
+
+<span class="c1"># 示例输出（DOTA 部分类别）：</span>
+<span class="c1">#   small-vehicle    Δ=+4.2   ← 小目标，提升最大（符合高分辨率分支的动机）</span>
+<span class="c1">#   ship             Δ=+3.8   ← 密集小目标，受益大</span>
+<span class="c1">#   storage-tank     Δ=+1.1</span>
+<span class="c1">#   harbor           Δ=+0.3</span>
+<span class="c1">#   ground-track     Δ=-0.2   ← 大目标，几乎不受影响（甚至略降）</span>
+<span class="c1">#   plane            Δ=-0.5   ← 大目标，反而略降 → 负面案例从这类里找</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>怎么用这张按类表</strong>:① <strong>验证动机</strong>——高分辨率分支应在小目标类(small-vehicle/ship)提升最大，结果吻合就坐实了“机制如预期”;② <strong>找负面案例</strong>——掉点的大目标类(plane)就是 D81 定性负面案例的来源;③ <strong>指导 M4</strong>——若发现“小目标涨、大目标略降”,M4 可考虑“只在小目标尺度启用该分支”，把副作用消掉。<strong>一句话</strong>：总 mAP 告诉你“行不行”，按类 mAP 告诉你“为什么、接下来改哪里”。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜按类别读结果</strong>：别只看总 mAP，把提升拆到每个类(<code>per_class_delta</code>)。① 提升最大的类应吻合你的方法动机（验证机制）;② 掉点的类=定性负面案例来源 + M4 精确改进目标。遥感类别尺度悬殊，按类分析尤其能暴露“方法只帮了某尺度”这类规律。</p>
+</blockquote>
+</section>
+<div class="pager"><a class="prev" href="w11.html"><span class="dir">← 上一篇</span><span class="nm">W11 搭实验框架 + 第一组对比</span></a><a class="next" href="w13.html"><span class="dir">下一篇 →</span><span class="nm">W13 方法 v2</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d78">D78 周一</a><a class="sub" href="#d78-am">上午 设计 5 个消融配置</a><a class="sub" href="#d78-noon">中午 启动 A1 实验（去掉核心组件）</a><a class="sub" href="#d78-pm">晚上 启动 A2 实验（组件换简单版）</a><a href="#d79">D79 周二</a><a class="sub" href="#d79-am">上午 A1 结果分析（并判断显著性）</a><a class="sub" href="#d79-noon">中午 启动 A3 实验（换 loss）</a><a class="sub" href="#d79-pm">晚上 A2 结果分析（复杂设计值不值）</a><a href="#d80">D80 周三</a><a class="sub" href="#d80-am">上午 A3 结果分析（选 loss）</a><a class="sub" href="#d80-noon">中午 启动 A4（换 backbone</a><a class="sub" href="#d80-pm">晚上 消融结果可视化（柱状图）</a><a href="#d81">D81 周四</a><a class="sub" href="#d81-am">上午 A4/A5 分析 + 完整消融表</a><a class="sub" href="#d81-noon">中午 写“哪个组件最有用”分析</a><a class="sub" href="#d81-pm">晚上 生成定性可视化（三类案例）</a><a href="#d82">D82 周五</a><a class="sub" href="#d82-am">上午 基于消融结果找改进方向</a><a class="sub" href="#d82-noon">中午 调超参（找更优组合）</a><a class="sub" href="#d82-pm">晚上 重训关键配置，确认最终结果</a><a href="#d83">D83 周六</a><a class="sub" href="#d83-am">上午 设计并启动网格搜索</a><a class="sub" href="#d83-noon">中午 监控搜索</a><a class="sub" href="#d83-pm">晚上 整合超参搜索结果（supplem</a><a href="#d84">D84 周日</a><a class="sub" href="#d84-am">上午 M3 月度复盘（核心：方法有正信</a><a class="sub" href="#d84-noon">中午 写 M3 月报（用模板）</a><a class="sub" href="#d84-pm">晚上 制定 M4 计划</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

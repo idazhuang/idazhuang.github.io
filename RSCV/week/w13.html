@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="13">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W13 · 方法 v2 —— 学会“基于实验反馈、一次只改一 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M4 方法成形</span><span>·</span><span>Week 13</span><span>·</span><span>D85–D91</span></div><h1 class="title">方法 v2 —— 学会“基于实验反馈、一次只改一处”地迭代方法</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="85" data-k="am" title="D85 上午段"></i><i data-d="85" data-k="noon" title="D85 中午段"></i><i data-d="85" data-k="pm" title="D85 晚上段"></i></span><span class="sday"><i data-d="86" data-k="am" title="D86 上午段"></i><i data-d="86" data-k="noon" title="D86 中午段"></i><i data-d="86" data-k="pm" title="D86 晚上段"></i></span><span class="sday"><i data-d="87" data-k="am" title="D87 上午段"></i><i data-d="87" data-k="noon" title="D87 中午段"></i><i data-d="87" data-k="pm" title="D87 晚上段"></i></span><span class="sday"><i data-d="88" data-k="am" title="D88 上午段"></i><i data-d="88" data-k="noon" title="D88 中午段"></i><i data-d="88" data-k="pm" title="D88 晚上段"></i></span><span class="sday"><i data-d="89" data-k="am" title="D89 上午段"></i><i data-d="89" data-k="noon" title="D89 中午段"></i><i data-d="89" data-k="pm" title="D89 晚上段"></i></span><span class="sday"><i data-d="90" data-k="am" title="D90 上午段"></i><i data-d="90" data-k="noon" title="D90 中午段"></i><i data-d="90" data-k="pm" title="D90 晚上段"></i></span><span class="sday"><i data-d="91" data-k="am" title="D91 上午段"></i><i data-d="91" data-k="noon" title="D91 中午段"></i><i data-d="91" data-k="pm" title="D91 晚上段"></i></span></div></div>
+<div class="note"><b>★ 三个改进单独有效，合起来不涨怎么办</b>　D88 说"验证不冲突"，但没说冲突了怎么处理。<a href="m4-full.html">《M4 详注版》</a> 给了四步定位法（先复核单独提升是否为真 → 看 per-class 是否重复 → 逐对组合 → 查超参）。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>:M3 你有了方法 v1 + 消融。M4 进入<strong>方法迭代期</strong>。本周基于 M3 消融暴露的问题，设计 3 个 v2 改进点，<strong>一次只改一个、看效果</strong>，把有效的整合成 v2，并做<strong>跨数据集验证</strong>（证明不是过拟合）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会基于实验反馈迭代改进方法。
+<strong>本周节奏（你计划的金句）</strong>：每次只改一个点，看效果——D85 改 1 → D86 看结果+改 2 → D87 看结果+改 3 → D88 整合。<strong>不要一次改 3 个，否则不知道哪个有效。</strong></p>
+<p><strong>🧩 贯穿示例</strong>：沿用「DOTA 旋转检测 + 高分辨率小目标分支」。v1 = M3 锁定的方法（高分辨率分支 + 遥感增强）。本周 3 个 v2 改进点示例（均来自 M3 消融/按类分析的发现）：<strong>改进 1 = 高分辨率分支加多尺度融合（W12 发现它最有用→加强）</strong>、<strong>改进 2 = 遮挡感知的 label assignment（W12 负面案例集中在遮挡）</strong>、<strong>改进 3 = 换更稳的旋转框 loss（W12 的 A3 loss 临界）</strong>。第二个数据集示例用 <strong>DIOR-R</strong>（或 HRSC）。换方向只需把“改进点”换成你那套——一次只改一处、看效果的流程完全一样。</p>
+</blockquote>
+<hr />
+<h2>🧭 W13 总览：把“一个 v1”迭代成“有数据支撑的 v2”</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设计 3 个 v2 改进点</td>
+<td>来自 M3 消融的明确依据</td>
+<td>改有所指，不为改而改</td>
+</tr>
+<tr>
+<td>一次只改一个、各跑一组</td>
+<td>每个改进的独立效果</td>
+<td>能干净归因谁有效</td>
+</tr>
+<tr>
+<td>整合有效改进=v2</td>
+<td>baseline + 真正有用的改进</td>
+<td>方法演进一个版本</td>
+</tr>
+<tr>
+<td>跨数据集验证</td>
+<td>两数据集 3-seed 结果表</td>
+<td>证明泛化（非过拟合）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>:D85–D88 是“改一个→跑→读→再改下一个→整合 v2”（迭代主线）;D89 三方对比+报告；D90 跨数据集；D91 汇总+复盘。<strong>纪律就一条：任何时候在跑的“改进实验”与 v1 只差一处，否则结果不可归因。</strong> W11 搭的框架 + logger（自动记 config/commit）这周帮你把多组实验管得井井有条。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d85" data-d="85"><header class="day-head"><span class="dnum">D85</span><h2 class="day-t">周一 · 设计 v2 改进点 3 个 + 启动改进 1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把 M3 消融的结论变成 3 个具体改进点，并启动第一个。<strong>核心纪律：每个改进单独加在 v1 上、一次只改一处</strong>——这样下周你才能干净地说“是哪个改进带来了提升”。今天产出 v2 设计文档 + 改进 1 启动，结果明后天看。</p>
+</blockquote>
+</div><section class="slot" id="d85-am" data-d="85" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D85 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">基于 M3 消融设计 3 个 v2 改进点</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（方法迭代为什么要“基于上一轮发现”而非凭空加）</h4><div class="blk-b"><ul>
+<li><strong>方法迭代</strong>不是凭空加东西，而是<strong>基于上一轮消融/分析暴露的问题</strong>有的放矢地改。从 M3 消融(W12)的结论出发，设计 3 个改进点。每个改进都要能对应“它解决 M3 发现的哪个问题”。</li>
+<li><strong>和通用 CV 一样、但对你尤其关键</strong>：顶会方法的演进几乎都是“发现问题→针对性改→验证”的循环，而不是灵机一动堆模块。<strong>对你这种单卡选手更要如此</strong>：算力有限，经不起“广撒网式乱试”，每一次改动都得是“消融指过的方向”，命中率才高。</li>
+<li><strong>本周 3 个改进的来历（对应 W12 发现）</strong>：改进 1 来自“高分辨率分支贡献最大→值得加强”（W12 排序第一）；改进 2 来自“负面案例集中在遮挡场景”（W12 定性）；改进 3 来自“我的 loss 只是临界有效”（W12 的 A3）。每条都挂着证据。</li>
+<li><strong>★ 为什么“一次只加一个改进”是铁律（控制变量的研究哲学）</strong>：本周你会看到一个反复出现的纪律——3 个改进点，<strong>一个一个地加、一个一个地验证</strong>，而不是三个一起上。这背后是科研最核心的方法论：<strong>控制变量</strong>。如果你三个改进一起加，效果变好了，你根本不知道是哪个改进起的作用（也许只有一个有用、另两个甚至有害但被掩盖了）；只有“在 v1 基础上只加改进 1、看效果；再只加改进 2、看效果……”这样隔离地验证，你才能清楚地知道每个改进各自的贡献。<strong>这正是你 M3 做消融的同一个思想的延续</strong>：消融是“减一个看降多少”，这里是“加一个看升多少”，本质都是隔离单一变量的因果。养成这个纪律，你的每一个结论都站得住脚（审稿人问“这个改进真有用吗”，你有隔离验证的数据）；反之，一把梭哈式的“我加了一堆东西效果好”是说不清、不可信的。<strong>对你这个要靠扎实工作建立信誉的转型者，这种“每个结论都有隔离证据”的严谨，是你区别于调参侠的核心。</strong></li>
+<li><strong>单卡选手更要“消融指过才动手”（命中率就是算力效率）</strong>：再强调一遍这对你的特殊意义——你只有一张 4090，跑一轮实验是有成本的（时间、电、机会成本）。<strong>广撒网式地乱试改进，大部分会失败，等于把宝贵的算力浪费在低命中率的尝试上</strong>。而“只改消融/分析指过的方向”（高分辨率分支最有用→加强它、遮挡是短板→针对它），命中率高得多——因为你改的是有证据表明“这里有提升空间”的地方。<strong>把有限的算力，押在高命中率的改进上，是你单卡条件下能跑赢的关键策略</strong>：不是比谁试得多，而是比谁试得准。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>docs/v2设计.md</code> 写 3 个改进点，每个写“针对 M3 的哪个问题、怎么改、预期”；基于 v1 的 config 各派生一个改进 config（只改一处）。设计文档骨架：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># v2 改进设计（每条挂 M3 证据 + 单卡可行性）</span>
+| # | 针对的 M3 发现 | 怎么改 | 预期 | 单卡可做? |
+|---|---|---|---|---|
+| 改进1 | A1 证明高分辨率分支最有用(-1.8) | 分支内加多尺度融合(融 3 层而非 2 层) | 小目标再涨 | ✅ 模块级 |
+| 改进2 | 定性负面案例集中在遮挡 | 遮挡感知 label assignment | 遮挡召回↑ | ✅ 训练策略 |
+| 改进3 | A3 我的 loss 仅临界有效(-0.6) | 换高斯建模旋转 loss(GWD/KLD) | 角度更准 | ✅ 换loss |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>3 个改进点定义清晰，每个对应一个 M3 发现的问题，单卡可做，且每个都能 <code>diff</code> 出“相对 v1 只改一处”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 改进点和 M3 发现脱节（为改而改，审稿人会问“你凭什么加这个”）;② 改进需要大算力（换超大 backbone/数据）→ 砍成单卡可做的小改进。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>想不出改进? → 看 M3 消融里“贡献大的能否更强、贡献小的能否换好的”+ per-class 最差的类怎么救 + 定性负面案例的共性；改进太多排不下? → 按 W12 的“组件贡献排序”选最有希望的 3 个。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从上一轮分析有依据地设计改进</strong>。<strong>做了</strong>（v2 设计文档）、<strong>学了</strong>（基于反馈迭代、改进要对应问题、单卡可行性约束）、<strong>会了</strong>（把消融结论转成具体改进点）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜基于反馈的迭代设计</strong>：改进点必须<strong>挂上一轮的证据</strong>（消融排序/定性负面/per-class 最差类），不凭空加。每条标注“针对哪个发现+怎么改+预期+单卡可行”，用 config 继承只改一处。命中率来自“消融指过的方向”，不是灵感。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d85-noon" data-d="85" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D85 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实现改进 1（只加这一个，最小改动）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>实现改进 1（在 v1 上<strong>只加这一个改进</strong>，最小改动）。先保证能跑、形状对，性能下周看。<strong>为什么强调最小改动</strong>：改动越集中，出 bug 越好查，归因越干净；v1 已经跑通，你只在它上面“动一个螺丝”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在代码里实现改进 1（只动这一处），用 dummy 输入跑通形状。以改进 1（多尺度融合）为例：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 在已有 HighResBranch 上扩成多尺度（只改这一个模块，其余 v1 不动）</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">HighResBranchV2</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;改进1：从融2层扩到融3层多尺度。只动这一个类，接口与 v1 完全相同。&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chs</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="n">out_ch</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lateral</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuse</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feats</span><span class="p">):</span>                     <span class="c1"># feats: 3 个尺度的特征</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">feats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>              <span class="c1"># 对齐到最高分辨率</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">l</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lateral</span><span class="p">,</span> <span class="n">feats</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuse</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="c1"># your_method 里把 self.hr = HighResBranch(...) 换成 HighResBranchV2(...)，其余不动</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 1 实现完成、<code>forward</code> 形状正确（和 v1 同接口）,dummy 输入不报错。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 一次顺手改了多处 → 只改改进 1;② 形状错（多尺度对齐没做好）→ print 各尺度 shape，统一 interpolate 到最高分辨率。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>形状对不上 → 在融合前打印每个 <code>l(f)</code> 的 shape，确认都 interpolate 到了 <code>target</code>；不确定只改了一处 → <code>git diff</code> 看改动范围。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你实现了第一个改进（隔离单变量）。<strong>做了</strong>（改进 1 实现）、<strong>学了</strong>（最小改动实现单个改进、保持同接口）、<strong>会了</strong>（在 v1 上隔离地加一个改进）。</p>
+</div></section></section><section class="slot" id="d85-pm" data-d="85" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D85 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑改进 1 实验（与 v1 只差一处）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>跑改进 1（设置和 v1 完全相同，只多改进 1），这样才能看出“改进 1 单独的效果”。这是控制变量在“方法迭代”场景下的应用——和消融是一枚硬币的两面（消融是“减一个看掉多少”，改进对照是“加一个看涨多少”）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用改进 1 config 启动训练（固定 seed，只差改进 1）；记日志、监控。</p>
+<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/v2_imp1_multiscale.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>&gt;<span class="w"> </span>experiments/imp1_seed0.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+diff<span class="w"> </span>configs/v2_imp1_multiscale.yaml<span class="w"> </span>configs/your_method.yaml<span class="w">   </span><span class="c1"># 确认只差一处</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 1 实验启动，设置正确(<code>diff</code> 显示只差改进 1),loss 正常下降。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 顺手改了别的（lr/数据）→ 只差改进 1;② OOM（多尺度多占显存）→ 降 batch 或开梯度累积。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>OOM → batch 减半 + AMP（W11 已在 train.py）;loss 不降 → 先确认改进 1 模块真的接进了前向（W12 学的“权重置零看输出变不变”）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你启动了“单改进对照实验”。<strong>做了</strong>（改进 1 启动）、<strong>学了</strong>（单变量对照、它与消融互为镜像）、<strong>会了</strong>（隔离评估一个改进）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v2 设计文档（3 改进挂证据） ✅ 改进 1 实现 + 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D85</summary><textarea data-note="d85" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d86" data-d="86"><header class="day-head"><span class="dnum">D86</span><h2 class="day-t">周二 · 改进 1 结果分析 + 实现/启动改进 2</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读改进 1 的结果（有效就留作候选、无效就如实记），并实现启动改进 2。提醒：判断“有效”要和 std 比，提升在噪声内的不算数——这条纪律贯穿整个 M4。</p>
+</blockquote>
+</div><section class="slot" id="d86-am" data-d="86" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D86 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">改进 1 结果分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么判断一个改进“真有效”）</h4><div class="blk-b"><p>改进 1 训完，看它相对 v1 是否提升、提升多少（<strong>超过 std 才算真有效</strong>）。<strong>有效→保留候选；无效→记下（不一定进 v2）</strong>。判断逻辑和 W12 消融显著性一样:Δ 要超过噪声(std)。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估改进 1，和 v1 对比，<strong>和 std 比判断显著性</strong>，写一句结论（改进 1 是否有效、提升多少）；可用补充包的 <code>compare_methods</code>。单改进评估长这样：</p>
+<figure class="code" data-lang="text"><pre><code>方法        mean±std        Δ vs v1     显著?
+v1          75.9±0.40       -           -
+v1+imp1     76.70±0.30      +0.80       是（&gt;std=0.40）
+→ 结论：改进1（多尺度融合）有效，+0.8 显著，小目标类提升最明显 → 保留为 v2 候选</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>判读要点</strong>:① Δ=+0.80 要和 std(≈0.40)比，超过才算显著（这里超了，有效）;② 顺手看一眼 per-class——如果提升集中在小目标类，正好印证“多尺度融合帮小目标”的设计动机，说明不是碰运气而是机制对了。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 1 vs v1 差值 + 显著性判断 + 结论（有效/待定/无效）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 提升在 std 内就当“有效” → 不算显著，标“待定”;② 掉点就立刻丢弃 → 先排查是不是 bug（模块没接好/lr 不适配），排除 bug 再下结论。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>提升在 std 内 → 跑多 seed 确认，或归到“待定”；掉点 → 用 W12 的模块生效验证排查 bug，确认非 bug 再判“无效”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你评估了单个改进的效果。<strong>做了</strong>（改进 1 分析）、<strong>学了</strong>（单改进效果判定、超 std 才算有效）、<strong>会了</strong>（用对照判断一个改进是否有效）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜单改进显著性判定</strong>：改进有效 = Δ（相对 v1）超过 std。提升在噪声内→“待定”（跑多 seed）；掉点→先查 bug（模块接没接进前向、lr 适不适配），排除 bug 再判“无效”。别把波动当有效，也别把 bug 当无效。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d86-noon" data-d="86" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D86 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实现改进 2（独立加在 v1 上）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>改进 2（遮挡感知 label assignment）<strong>同样在 v1 基础上只加改进 2</strong>，与改进 1 互不混合，以便独立评估。<strong>为什么不在改进 1 基础上加</strong>：那样改进 2 的效果就和改进 1 纠缠了，分不清各自贡献；每个改进都从 v1 这个“干净基线”长出来。</p>
+<ul>
+<li><strong>这就是“控制变量”在落地时的样子（再体会一遍）</strong>：你可能觉得“在改进 1 的版本上接着加改进 2 不是更省事吗”——但那样做，如果效果变好，你无法回答“是改进 1 的功劳、改进 2 的功劳、还是两者配合的功劳”；如果效果变差，你也分不清是改进 2 本身不行、还是它和改进 1 冲突。<strong>只有让每个改进都从同一个干净基线(v1)独立长出来、独立测量，你才能得到“改进 1 单独 +X、改进 2 单独 +Y”这样清晰可归因的结论</strong>。有了这些干净的单因结论，你才能在 D88 明智地决定“哪些纳入 v2、它们合在一起会不会冲突”。这种“先隔离测量、再组合验证”的两段式，是严谨方法迭代的标准做法。<strong>省事的代价是说不清，而说不清的工作在科研里是没有价值的</strong>——宁可多跑一组干净的对照，也不要图省事把变量搅在一起。这点纪律，会让你的每一篇论文都经得起追问。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>实现改进 2（只动 label assignment 这一处）,dummy 跑通。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 改进2：遮挡感知的正样本分配（思路示意，只改 assigner 这一处）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">occlusion_aware_assign</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">gt_boxes</span><span class="p">,</span> <span class="n">occ_score</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;对遮挡严重的 gt（occ_score 高）放宽匹配阈值，多给正样本，提升其召回。&quot;&quot;&quot;</span>
+    <span class="n">base_iou_thr</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">thr</span> <span class="o">=</span> <span class="n">base_iou_thr</span> <span class="o">-</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">occ_score</span>          <span class="c1"># 遮挡越重，阈值越松</span>
+    <span class="n">ious</span> <span class="o">=</span> <span class="n">rotated_iou</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">gt_boxes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ious</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                <span class="c1"># 返回正样本 mask</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 2 实现、形状正确、dummy 跑通（与 v1 同接口）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>把改进 2 加在“改进 1 的版本”上 → 两者纠缠；必须各自从 v1 派生。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>遮挡分数从哪来? → 可用 gt 框的重叠度近似(框间 IoU 高=可能遮挡)，先用简单代理把链路打通。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你实现了第二个独立改进。<strong>做了</strong>（改进 2 实现）、<strong>学了</strong>（各改进从 v1 独立派生、不纠缠）、<strong>会了</strong>（保持各改进可独立评估）。</p>
+</div></section></section><section class="slot" id="d86-pm" data-d="86" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D86 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑改进 2 实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>用改进 2 config 启动（设置同 v1 只差改进 2）；多个改进实验错峰跑（单卡显存有限）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>启动改进 2(<code>diff</code> 确认只差改进 2)；监控 loss。错峰：改进 1 跑完腾出 GPU 再上改进 2。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 2 实验启动，设置正确（只差改进 2）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 与改进 1 同时跑显存不够 → 错峰串行;② label assignment 改动导致正样本骤变、loss 异常 → 检查阈值是否放太松（全成正样本）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>loss 异常 → 把遮挡放宽幅度调小(0.1→0.05)，避免正样本爆炸；显存不够 → 错峰 + 用进度看板跟踪谁在跑。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你推进了第二个对照实验。<strong>做了</strong>（改进 2 启动）、<strong>学了</strong>（持续单变量对照、错峰调度）、<strong>会了</strong>（并行管理多个改进实验）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 改进 1 结果（含显著性） ✅ 改进 2 实现 + 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D86</summary><textarea data-note="d86" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d87" data-d="87"><header class="day-head"><span class="dnum">D87</span><h2 class="day-t">周三 · 改进 2 结果分析 + 实现/启动改进 3</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读改进 2、实现启动改进 3——三个改进的独立对照就齐了。提醒：改进 2 针对的是遮挡这个特定弱点，看总指标可能涨得不多，要结合“遮挡类/场景”的 per-class 变化看才公允。</p>
+</blockquote>
+</div><section class="slot" id="d87-am" data-d="87" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D87 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">改进 2 结果分析（结合 per-class 看针对性改进）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>改进 2 是针对“遮挡”的特定改进，<strong>总 mAP 可能涨幅有限，但应在遮挡相关类别/场景上明显改善</strong>。所以评估它要看两层：总指标 + 遮挡场景的针对性指标（回到 W12 的按类分析）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估改进 2 vs v1（总指标），并看遮挡相关类/场景的变化(per-class delta)，写结论（有效？在哪有效?）。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 看改进2 是否在&quot;遮挡相关类&quot;上真涨（总指标可能被大量非遮挡类摊平）</span>
+<span class="n">occ_classes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ship&quot;</span><span class="p">,</span> <span class="s2">&quot;small-vehicle&quot;</span><span class="p">,</span> <span class="s2">&quot;harbor&quot;</span><span class="p">]</span>   <span class="c1"># 易遮挡/密集的类</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">occ_classes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> v1=</span><span class="si">{</span><span class="n">v1_ap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  imp2=</span><span class="si">{</span><span class="n">imp2_ap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  Δ=</span><span class="si">{</span><span class="n">imp2_ap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">-</span><span class="n">v1_ap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># 典型输出：ship Δ=+2.4 / small-vehicle Δ=+1.8 / harbor Δ=+2.0</span>
+<span class="c1"># → 总 mAP 只 +0.2，但遮挡密集类平均 +2.1，说明改进2 针对性有效（方向对）</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这正是 D87 的关键判断</strong>：针对性改进的价值会被“大量不相关类别”在总 mAP 里摊薄，<strong>必须下钻到它针对的那几类</strong>才看得见。看到遮挡类齐刷刷涨，就能放心把改进 2 纳入 v2（且为论文留一句“在遮挡密集场景提升显著”的卖点）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 2 vs v1 总差值 + 遮挡场景的针对性改善 + 结论。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只看总 mAP 就判“改进 2 没用” → 针对性改进要看它针对的那部分；总指标持平但遮挡类涨了，也是有效（且方向对）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>总指标持平、遮挡类也没涨 → 可能 assigner 改动太弱或代理遮挡分数不准，记“待定/需调”；确实在遮挡类有改善 → 纳入候选。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>评估“针对性改进”要看针对的那部分</strong>。<strong>做了</strong>（改进 2 分析 + per-class）、<strong>学了</strong>（针对性改进的评估方式）、<strong>会了</strong>（用 per-class 看出总指标掩盖的局部改善）。</p>
+</div></section></section><section class="slot" id="d87-noon" data-d="87" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D87 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实现改进 3</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>改进 3（换高斯建模旋转 loss，如 GWD/KLD）同样独立加在 v1 上。<strong>为什么这类 loss 适合旋转框</strong>：旋转框角度有周期性，朴素 L1 在边界梯度异常；高斯建模把旋转框看成 2D 高斯分布、用分布距离做 loss，天然规避角度周期性问题（W12 已埋过这个概念）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>models</code> 里把 loss 换成 GWD/KLD（只改 loss 这一处）,dummy 跑通（注意 loss 数值范围，可能要调权重保持稳定）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 3 实现、loss 能正常计算、训练不发散。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>换 loss 后量纲变了、loss 权重不匹配 → 训练发散或不学；按新 loss 的量纲调权重。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>发散 → 先把新 loss 的权重调小、warmup 几个 epoch；数值 NaN → 检查高斯协方差是否退化（框退化成线时），加小 eps。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>三个改进都实现了。<strong>做了</strong>（改进 3 实现）、<strong>学了</strong>（高斯建模旋转 loss 的原理、换 loss 的稳定性处理）、<strong>会了</strong>（完成一组可独立评估的改进）。</p>
+</div></section></section><section class="slot" id="d87-pm" data-d="87" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D87 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑改进 3 实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>用改进 3 config 启动（只差改进 3）；至此三个改进各有一组对照实验，下周可整合。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>启动改进 3(<code>diff</code> 确认只差改进 3)；监控 loss（尤其换 loss 后前几个 epoch 的稳定性）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>改进 3 实验启动、loss 平稳（没发散）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>换 loss 后 loss 曲线尺度和之前不可直接比 → 比的是最终 mAP，不是 loss 绝对值。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>loss 平稳但 mAP 没出来前别急着判断；若前几 epoch 就发散，停下调权重/warmup 再重启。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你跑完了三个改进的独立对照。<strong>做了</strong>（改进 3 启动）、<strong>学了</strong>（完成单变量对照组、换 loss 看 mAP 不看 loss 绝对值）、<strong>会了</strong>（系统评估多个改进）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 改进 2 结果（含 per-class） ✅ 改进 3 实现 + 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D87</summary><textarea data-note="d87" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d88" data-d="88"><header class="day-head"><span class="dnum">D88</span><h2 class="day-t">周四 · 改进 3 分析 → 综合 v2（整合有效改进）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读改进 3，把三个改进的效果汇总，<strong>只把显著有效的整合成 v2</strong>——3 个里可能只有 1-2 个有效，这非常正常。然后启动 v2 完整训练。提醒：单独有效的改进合并后未必都有效（可能冲突），整合版要重新验证。</p>
+</blockquote>
+</div><section class="slot" id="d88-am" data-d="88" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D88 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">改进 3 结果分析 + 选出有效改进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（你计划的金句：不是所有改进都有效）</h4><div class="blk-b"><p><strong>不是所有改进都有效</strong>。若 3 个里只有 1 个有效 → v2 = v1 + 那 1 个改进。<strong>这很正常</strong>——关键是你<strong>系统地试了、有数据支撑决策</strong>，而不是凭感觉塞。审稿人尊重“试了 3 个、诚实保留有效的 1 个”，不尊重“塞了 3 个说不清谁有用”。</p>
+<ul>
+<li><strong>“舍得砍掉自己花功夫做的无效改进”，是一种重要的科研品格</strong>：这里有个微妙的心理陷阱要提醒你。改进 3 是你花了时间设计、实现、跑实验做出来的——<strong>当它的结果显示“没显著效果”时，你会本能地舍不得砍</strong>（沉没成本：“我都做了，不放进去多可惜”）。但要清醒：<strong>论文里放一个无效甚至有害的改进，不是“显得你做得多”，而是会拖累你方法的可信度和简洁性</strong>——审稿人看到一个说不清作用的模块，会怀疑你对自己方法的理解。<strong>真正成熟的做法是：按数据说话，有效的留、无效的果断砍，哪怕它花了你不少功夫</strong>。这种“不被沉没成本绑架、只认证据”的克制，恰恰是研究者的品格——它和你做消融时“诚实报告组件贡献”、写论文时“诚实写 Limitation”是同一种东西：<strong>对真相的尊重高于对自己付出的维护</strong>。而且从结果看，一个“v1 + 1-2 个被验证有效的改进”的简洁方法，比“v1 + 3 个来路不明的模块”更有竞争力（更小、更可信、更符合你高效简洁的卖点）。所以砍掉无效改进不是损失，是提纯。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估改进 3；把 3 个改进的效果汇成一张表（各自 Δ vs v1 + 显著性），选出“显著有效”的组成 v2。</p>
+<figure class="code" data-lang="markdown"><pre><code>| 改进 | 针对 | Δ vs v1 | 显著? | 是否纳入 v2 |
+|---|---|---|---|---|
+| 改进1 多尺度融合 | 加强最有用组件 | +0.8 | 是 | ✅ 纳入 |
+| 改进2 遮挡assign | 遮挡弱点 | 总+0.2/遮挡类+2.1 | 针对性显著 | ✅ 纳入 |
+| 改进3 GWD loss | 角度更准 | +0.3 | 否(噪声内) | ❌ 不纳入 |
+→ v2 = v1 + 改进1 + 改进2（互补：一个提小目标、一个救遮挡）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 个改进的效果汇总表 + “v2 = v1 + 哪些有效改进”的决定（带理由）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 把没效甚至掉点的改进也塞进 v2（舍不得花的功夫）→ 只整合有效的;② 只看总指标漏掉针对性有效的改进 2 → 结合 per-class 判。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>3 个都不显著 → v2 暂等于 v1，在 D88 下午起想新改进或调整（别硬塞无效的）；拿不准某个 → 标“待定”，这周先不纳入，W14 再验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>基于数据筛选改进、组成 v2</strong>。<strong>做了</strong>（改进 3 分析 + v2 组成决定）、<strong>学了</strong>（&quot;不是所有改进都有效&quot;、按数据决策、针对性改进结合 per-class 判）、<strong>会了</strong>（只整合有效改进）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜按数据筛选改进组成 v2</strong>：把每个改进的“Δ vs v1 + 显著性（总指标+针对性 per-class）”列表，<strong>只纳入显著有效的</strong>。3 个里留 1-2 个很正常。诚实保留有效的，胜过硬塞一堆说不清的——审稿人尊重前者。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d88-noon" data-d="88" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D88 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 v2 完整训练（所有有效改进合并）+ 验证不冲突</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把选中的有效改进合并成 v2 config，启动完整训练。<strong>关键：单独有效的改进合并后未必都有效</strong>——它们可能冲突（如两个都改特征融合，互相干扰）或冗余（解决同一问题）。所以整合版必须重新验证，不能假设“1+1=2”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>合并有效改进成 v2 config，启动完整训练（固定 seed）；并准备好“如果合并掉点，怎么排查冲突”的预案。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 完整训练启动（config 正确合并了选中的改进）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 默认“单独有效合起来一定更好” → 必须验证;② 多个改进改了同一模块导致代码冲突 → 检查合并后的代码逻辑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>合并后掉点 → 做“留一法”小验证（v1+改进1、v1+改进2、v1+改进1+改进2 对比），看是不是某两个冲突；确实冲突 → 保留更强的那个，或想办法让它们解耦。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你启动了整合版 v2 并理解了“合并要重新验证”。<strong>做了</strong>（v2 训练启动）、<strong>学了</strong>(整合有效改进、合并未必 1+1=2、冲突排查思路)、<strong>会了</strong>（把多个有效改进合并训练并准备验证）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜改进合并冲突检验</strong>：单独有效 ≠ 合并有效。整合版必须重训验证；若掉点，用“留一法”（逐个加/减）定位是哪两个冲突或冗余。冲突时保留更强者或设法解耦，别盲目堆叠。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d88-pm" data-d="88" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D88 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">监控 v2 训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>监控 v2 的 loss/指标曲线是否健康；整合了多个改动，更要盯紧（任一改动的副作用都可能在这里暴露）。<strong>为什么整合版尤其要早盯</strong>：单改进实验你已分别验证过健康，但合并后是“新组合”，可能出现单独跑不会有的问题——比如改进 1 的多尺度特征和改进 2 的遮挡 assigner 在某些 batch 上交互出异常梯度。把前 2-3 个 epoch 的 loss 曲线和“v1+imp1”“v1+imp2”各自的曲线叠一起看，若 v2 明显偏离两者的“合理叠加预期”，就是冲突信号，早停比白跑几小时强。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>监控 v2 训练（loss 健康？和各单改进的 loss 趋势对比合理?）；异常及时处理。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 训练健康（loss 正常下降，无发散）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>整合后 loss 异常却没及时发现、白跑几小时 → 前几个 epoch 就要盯。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>loss 异常 → 大概率是改进 3 那类换 loss 的残留或两改进冲突，回到留一法定位；OOM → 整合后显存涨，降 batch。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你确认 v2 训练正常。<strong>做了</strong>（监控 v2）、<strong>学了</strong>（整合后更要早盯）、<strong>会了</strong>（盯整合版训练的健康）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v2 组成决定 + v2 完整训练启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D88</summary><textarea data-note="d88" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d89" data-d="89"><header class="day-head"><span class="dnum">D89</span><h2 class="day-t">周五 · v2 vs v1 vs baseline 对比 + 报告 + 可视化</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天 v2 训完，做三方对比、写改进报告、做可视化。提醒：如果 v2 没比 v1 好，不是失败——先排查整合冲突，实在有限就如实记，W14 还会继续迭代到 v3。</p>
+</blockquote>
+</div><section class="slot" id="d89-am" data-d="89" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D89 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">v2 结果 vs v1 vs baseline 对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>v2 训完，做三方对比(baseline / v1 / v2)，看迭代是否真的把性能推上去了。这条“baseline→v1→v2”的递进曲线，是论文里讲“方法演进故事”的核心证据。</p>
+<ul>
+<li><strong>&quot;演进曲线&quot;为什么是论文里最有说服力的叙事之一</strong>：审稿人（和读者）看一篇方法论文，最想知道的不是&quot;你最终达到了多少分&quot;，而是&quot;<strong>你是怎么一步步把它做上去的、每一步为什么这么做、带来了多少提升</strong>&quot;。一条清晰的 baseline→v1→v2 递进曲线，恰好回答了这个——它把你的方法呈现为一个&quot;有逻辑、有依据、可追溯&quot;的演进过程，而不是一个&quot;从天而降的最终版&quot;。<strong>这种叙事的力量在于：它让读者跟着你的思路走一遍（&quot;先有 baseline 的不足→所以 v1 这样改→v1 还差在哪→所以 v2 那样改&quot;），每一步都有据可循，读者就信服了</strong>。相比之下,&quot;我们提出方法 X，达到了 SOTA&quot;这种没有演进过程的呈现，显得突兀、不可信（读者不知道你怎么想到的、每个设计有没有用）。<strong>所以你这周辛苦做的&quot;一步步迭代+隔离验证&quot;，最终不只是得到一个更好的方法，更是得到了一个有说服力的研究故事</strong>——而会讲这个故事（用数据支撑的演进逻辑），是论文能不能打动审稿人的关键。这也是为什么前面那么强调&quot;控制变量、每步可归因&quot;：正是这些干净的单步结论，拼成了这条可信的演进曲线。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估 v2，做对比表（baseline / v1 / v2，带指标；多 seed 更好），标出提升；用补充包 <code>compare_methods</code> 自动判显著性。</p>
+<figure class="code" data-lang="markdown"><pre><code>| 方法 | mAP(mean±std) | Δ vs baseline | Δ vs 上一版 | 说明 |
+|---|---|---|---|---|
+| Baseline | 75.0±0.3 | — | — | 起点 |
+| v1 (M3)  | 75.9±0.4 | +0.9 | +0.9 | 高分辨率分支+遮挡增强 |
+| v2 (M4)  | 77.2±0.3 | +2.2 | +1.3 | v1 + 多尺度融合 + 遮挡assign |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>怎么读这张“演进表”</strong>:① 看 <code>Δ vs baseline</code> 一路放大(+0.9→+2.2)，说明迭代在持续推进;② <code>Δ vs 上一版</code> 是每轮的“增量贡献”,v2 这轮 +1.3 比 v1 那轮 +0.9 还大，说明 M4 的改进比 M3 更有效;③ 这张表就是论文里“我们的方法分几步演进、每步带来多少”的故事主线——审稿人最爱看“清晰的、有数据的演进逻辑”，而不是“一上来就是最终版”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>三方对比表，能看出 baseline &lt; v1 &lt; v2 的递进（理想情况）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① v2 没比 v1 好就慌 → 先查整合冲突（留一法）;② 只跑 1 seed → 多 seed 才可信。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v2 ≤ v1 → 留一法查冲突；若确认无冲突只是这轮改进有限，如实记，W14 v3 继续（迭代本就是螺旋上升，偶有平台期正常）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你看到了方法迭代的成效。<strong>做了</strong>（v2 三方对比）、<strong>学了</strong>（迭代对比、演进曲线是论文证据）、<strong>会了</strong>（用对比表展示迭代进展）。</p>
+</div></section></section><section class="slot" id="d89-noon" data-d="89" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D89 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写“v2 改进报告”（≥500 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>报告记录：试了哪 3 个改进、各自效果、最终 v2 整合了哪些、为什么。这是你方法演进的“档案”，也是论文 Method/消融的素材——M4 末写论文时直接能用。<strong>更深一层：它在帮你攒“方法演进的故事线”</strong>。顶会论文的 Method 很少是“我们提出 X、Y、Z 三个模块”干巴巴罗列，而是“我们先发现问题 P，于是设计 X;X 还遗留 Q，于是加 Y……”——一条有动机、有递进的逻辑链。你每周老实写改进报告，到 M4 末这条链就自然成形了，不用临到写论文时硬编。<strong>所以报告别只记结果，要记“为什么这么改、它解决了上一步的什么”</strong>——那才是故事线的骨头。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 ≥500 字 v2 改进报告（3 改进效果 + v2 组成 + 理由 + 跨数据集计划）；见补充包范例。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 改进报告（有数据、有决策依据、有下一步）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只写结果不写“为什么这么整合” → 补决策逻辑（为什么纳入这两个、为什么不纳入第三个）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知怎么组织 → 按“试了什么→各自效果→纳入决策→v2 结果→下一步”五段写，套补充包范例。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你为方法演进留了档。<strong>做了</strong>（v2 报告）、<strong>学了</strong>（记录迭代决策、它是论文素材）、<strong>会了</strong>（把迭代过程写成可追溯报告）。</p>
+</div></section></section><section class="slot" id="d89-pm" data-d="89" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D89 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">可视化 v2 结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>对 v2 做定性可视化（v2 vs baseline 预测对比，含正/负案例），直观展示迭代带来的改善。延续 W12 的三类案例原则（含负面，诚实）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>对 v2 做定性可视化（v2 vs baseline，覆盖正/负/部分改进），挑几张存图标注；复用 W12 的三联图代码。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 的定性对比图（含负面案例），能看出相对 baseline 的改善。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只挑 v2 赢的(cherry-pick)→ 含负面案例；最好也对比 v1（展示 v2 比 v1 哪里更好）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>找不到 v2 的负面案例 → 看 v2 仍掉点的类（可能就是没纳入的改进 3 本想解决的）；对比 v1 → 选 v1 错而 v2 对的案例最能说明迭代价值。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你为 v2 准备了定性证据。<strong>做了</strong>（v2 可视化）、<strong>学了</strong>（定性证据、延续三类案例原则）、<strong>会了</strong>（诚实展示 v2 的迭代改善）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v2 三方对比表 ✅ v2 改进报告（≥500 字） ✅ v2 定性可视化。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D89</summary><textarea data-note="d89" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d90" data-d="90"><header class="day-head"><span class="dnum">D90</span><h2 class="day-t">周六 · （集中日）· 第二个数据集验证 v2（跨数据集泛化）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把 v2 搬到第二个数据集上验证泛化。提醒：换数据集时只做“适度”调参（别为单数据集疯狂调），目标是公平验证“v2 的优势能不能迁移”，不是刷某个数据集的榜。</p>
+</blockquote>
+</div><section class="slot" id="d90-am" data-d="90" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D90 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">在第二个数据集上验证 v2</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（你计划的金句：为什么跨数据集验证）</h4><div class="blk-b"><p><strong>在一个数据集上有效可能是&quot;过拟合&quot;了那个数据集的特性；在多个数据集上都有效才能说明泛化性</strong>，这是 reviewer 一定关注的点（&quot;你这方法换个数据集还行吗?&quot;）。今天把 v2（和 baseline）在第二个数据集（如 DIOR-R）上跑。</p>
+<ul>
+<li><strong>★ 跨域泛化是你这条研究路线的战略发力点（不只是补一张表）</strong>：别把跨数据集验证只当成“应付审稿人的一张泛化表”——它触及的是你整个差异化定位里很有分量的一条线。回想你的处境：你不跟 RingMo/RingMoE 拼“用海量数据预训练更大的基础模型”（算力不允许），而是走差异化路线（下游特化/高效适配/小样本/鲁棒性/<strong>跨域泛化</strong>/SAR 难题）。<strong>“跨域泛化”特别有价值，因为它直击遥感落地的一个真痛点</strong>：遥感数据来源极其多样（不同卫星、传感器、分辨率、地区、成像条件），一个在某数据集训好的模型换个来源往往性能大跌——“训练域和测试域不一致时还能不能保持性能”是遥感实际应用绕不开的难题。如果你的方法跨数据集泛化好，这不只是论文里的一张表，而是触及了一个有实用价值的核心问题。<strong>而这又和你的单卡/高效定位天然契合</strong>：你做不了“堆海量多域数据预训练”那条路，但你可以做“如何让一个高效的小模型更好地跨域泛化”——用巧妙的设计（而非堆数据堆算力）解决泛化，正是你这种条件下最该发力、最能做出差异化贡献的方向。所以今天这一步，是在为你“跨域泛化”这条战略线积累第一块实证；到后面的第二课题（光学→SAR 的跨传感器泛化），这条线会更深、更对接空天院。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在第二个数据集上跑 v2 和 baseline（同设置），评估；数据层复用 W11 的统一接口(只需为新数据集写一个 <code>_load_anno</code>)。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 第二数据集只换 dataset 配置，方法/训练/评估代码一行不改</span>
+python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/v2_diorr.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>&gt;<span class="w"> </span>exp/v2_B_s0.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/baseline_diorr.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>&gt;<span class="w"> </span>exp/base_B_s0.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="c1"># 跑前先可视化确认新数据集读对了（最容易翻车的地方）</span>
+python<span class="w"> </span>scripts/vis_dataset.py<span class="w"> </span>--cfg<span class="w"> </span>configs/v2_diorr.yaml<span class="w"> </span>--num<span class="w"> </span><span class="m">5</span><span class="w">   </span><span class="c1"># 看框是否在目标上</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>跑前必做的一步自检</strong>：换数据集后，先可视化 5 张图+标注，确认“框落在目标上、角度对、类别对”——新数据集的标注格式坑最多（坐标系、角度单位、类别 id 偏移），这一步能在训练几小时前抓住 loader bug。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二个数据集上 v2 vs baseline 的结果（初步），且可视化确认数据读取无误。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 第二数据集 loader/标注格式没适配好 → 复用 W11 统一接口，只改解析;② 直接套第一数据集的所有超参可能不最优 → 允许适度调（下午做）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>第二数据集上 v2 没优势 → 先确认不是 loader/标注 bug（可视化几张确认读对了），再分析是数据特性还是方法泛化问题；如实记。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>跨数据集验证泛化性</strong>。<strong>做了</strong>（第二数据集验证）、<strong>学了</strong>(单数据集=可能过拟合、多数据集=泛化、reviewer 关注点)、<strong>会了</strong>（在新数据集上验证方法）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜跨数据集验证泛化</strong>：单数据集有效可能是过拟合，<strong>多数据集都有效才是泛化</strong>（reviewer 必查）。换数据集复用统一数据接口（只改解析），只做适度调参（别刷单榜），目的是公平检验“优势能否迁移”。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d90-noon" data-d="90" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D90 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">调参（适度适配第二数据集）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>不同数据集的目标尺度/密度/类别不同，v2 在第二数据集上可能需要微调超参（lr、anchor 尺度等）。<strong>关键是“适度”</strong>——只做合理适配，不为单数据集过度调参（否则又是一种过拟合，且对 baseline 不公平）。<strong>具体该优先看哪几个超参</strong>:① 学习率（数据集大小/batch 不同，lr 常需重设）;② 与目标尺度相关的（新数据集目标更小，就调 anchor 尺度/输入分辨率/FPN 层级）;③ 训练轮数（数据量不同，收敛所需 epoch 不同）。其余（优化器、增强策略）尽量沿用，改得越少越能说明“v2 本身泛化好，而非靠调参硬凑”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>若需要，适度调第二数据集的关键超参（记录改了什么、为什么）;baseline 同等对待（公平）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二数据集上的合理超参 + 结果（v2 与 baseline 同等调参）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 为 v2 狂调、baseline 不调 → 不公平，提升存疑;② 调参和方法改动混在一起 → 这步只调参。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定调哪些 → 优先调 lr 和与尺度相关的（新数据集目标更小就调 anchor/分辨率）；拿捏不准“适度” → 调到“baseline 也合理收敛”即可，别再往上抠。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你练了“换数据集时的适度调参”。<strong>做了</strong>（适度调参）、<strong>学了</strong>（适度而非过度、对 baseline 公平）、<strong>会了</strong>（在新数据集上合理且公平地配置）。</p>
+</div></section></section><section class="slot" id="d90-pm" data-d="90" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D90 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑 3 个 seed 取平均</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>第二数据集上 v2/baseline 各跑 3 seed，取 mean±std——跨数据集结论尤其要稳（单 seed 的跨数据集结果很容易被质疑）。</p>
+<ul>
+<li><strong>为什么跨数据集结论“尤其”要多 seed</strong>：在主数据集上，你已经有很多实验积累、对结果有把握；但到一个新数据集，一切都是新的，<strong>单次结果的偶然性更大</strong>（可能某个 seed 恰好在新数据集上表现好或差）。如果你只跑 1 个 seed 就宣称“我的方法在第二数据集也更好”，审稿人很容易质疑“会不会只是这一次运气好？”。<strong>跑 3 个 seed 取 mean±std，用统计的稳健性堵住这个质疑</strong>——当你能说“在第二数据集上，3 个 seed 平均下来 v2 仍稳定优于 baseline(+2.1±0.3)”，这个泛化结论才扎实可信。这点小投入（多跑两个 seed）换来的是结论的可信度，非常值得，尤其泛化性是你的重要卖点，更不能让它栽在“样本太少不可信”上。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>第二数据集上 v2/baseline 各跑 3 seed，汇成 mean±std；错峰跑满。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二数据集 3-seed mean±std 结果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只 1 seed 就下“泛化”结论 → 跨数据集更需多 seed；时间不够 → 至少 2 seed，并注明。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>GPU 时间紧 → 白天 baseline 三 seed、晚上 v2 三 seed 错峰；实在不够先 2 seed,W14 补齐。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用多 seed 巩固了跨数据集结论。<strong>做了</strong>(3-seed)、<strong>学了</strong>（跨数据集结论更需多 seed）、<strong>会了</strong>（跨数据集也做多 seed）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 第二数据集 v2 vs baseline(3-seed)结果。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D90</summary><textarea data-note="d90" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d91" data-d="91"><header class="day-head"><span class="dnum">D91</span><h2 class="day-t">周日 · （复盘日）· 整合两数据集结果 + W13 复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把两个数据集的结果汇成一张表、复盘本周、规划 W14。提醒：两数据集表现若不完全一致很正常，W14 加第三个数据集会让泛化结论更清楚——本周得到“初步泛化证据”就达标。</p>
+</blockquote>
+</div><section class="slot" id="d91-am" data-d="91" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D91 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整合两个数据集的结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把两个数据集 × (baseline/v1/v2) 的结果整合成一张表，看 v2 是否在两个数据集上都稳定优于 baseline（泛化的初步证据）。这张“跨数据集表”是论文里证明泛化性的关键证据之一。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>整合两数据集结果表（带 mean±std），标出 v2 的提升；见补充包范例。</p>
+<figure class="code" data-lang="markdown"><pre><code>| 方法 | 数据集A(DOTA) | 数据集B(DIOR-R) | A 提升 | B 提升 |
+|---|---|---|---|---|
+| Baseline | 75.0±0.3 | 67.0±0.4 | — | — |
+| v2       | 77.2±0.3 | 69.1±0.4 | +2.2 | +2.1 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>怎么读“不完全一致”</strong>：两个数据集上 v2 都稳定优于 baseline(+2.2 / +2.1)→ 这就是合格的“初步泛化证据”。即便提升幅度不同也正常，要会解释：数据集 A(DOTA)小目标更密集，正好吃你“多尺度融合”的改进，所以提升略大；数据集 B 大目标比例高，改进的收益空间小一些。<strong>能把“为什么 A 涨得多一点”讲清楚，比“两个数完全一样”更显功力</strong>——它说明你理解方法的作用机制，而不是碰运气。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>两数据集结果表，能看出 v2 的跨数据集表现（是否都优于 baseline）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>两数据集表现不一致就慌 → 分析原因（数据集 A 小目标多、B 大目标多，v2 的多尺度改进自然在 A 上收益更大），如实记；W14 第三数据集会更清楚。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某数据集上 v2 优势小 → 看是不是该数据集的目标特性不吃 v2 的改进（合理），还是有 bug；前者如实分析，后者排查。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你形成了跨数据集的对比证据。<strong>做了</strong>（两数据集结果表）、<strong>学了</strong>（跨数据集汇总、不一致要分析原因）、<strong>会了</strong>（整合多数据集结果）。</p>
+</div></section></section><section class="slot" id="d91-noon" data-d="91" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D91 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">W13 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>复盘本周迭代——重点不是“做了多少实验”，而是“v2 相对 v1 进展如何、迭代方法论上学到了什么”。这些经验 W14 的 v3 还会用。</p>
+<ul>
+<li><strong>为什么迭代周复盘要&quot;抓方法论&quot;而非&quot;记流水账&quot;</strong>：本周你做了很多实验（改进 1/2/3 各自的、整合 v2 的、两个数据集的），如果复盘只是把这些罗列一遍（&quot;周一跑了 X、周二跑了 Y&quot;），那等于白复盘。<strong>真正有价值的复盘，是从这一周的具体操作里，提炼出可复用的方法论经验</strong>——比如:&quot;一次只改一处，虽然多跑了几组对照，但当某个改进掉点时，我能立刻定位是哪里的问题，反而省了大量排查时间&quot;;&quot;改进 1 和改进 2 合并时没冲突，因为它们作用在不同模块（一个在 backbone、一个在 assigner），这提示我以后选改进时可以优先选作用点不重叠的&quot;;&quot;改进 3 单独看 +0.3 在噪声内，我没硬塞进 v2，保持了方法简洁&quot;。<strong>这些经验是跨周、跨课题可复用的财富</strong>——W14 做 v3、乃至后面第二课题做迭代，你都能直接套用，不用重新踩坑。<strong>复盘的本质，是把&quot;这一次的具体经历&quot;转化为&quot;下一次更快的能力&quot;</strong>，这正是你能力复利的来源（还记得吗，第二篇比第一篇快，靠的就是这些内化的方法论）。所以花点心思，把本周迭代里&quot;学到的怎么做&quot;写下来，比记&quot;做了什么&quot;值钱得多。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>W13 周报（卡点+对策，重点记迭代中的发现与方法论经验）；记“v2 相对 v1 的进展 + 跨数据集初步结论”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W13 周报（有 v2 进展数据 + 迭代经验 + 遗留问题）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>写成实验流水账 → 突出“v2 进展 + 学到的迭代方法 + 下周怎么改”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知记什么经验 → 记“一次只改一处省了多少排查时间”“哪个改进合并时冲突了怎么解”这类可复用的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了方法迭代第一周。<strong>做了</strong>（W13 周报）、<strong>学了</strong>（迭代复盘抓进展与方法论）、<strong>会了</strong>（总结迭代经验）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复盘=经验转能力（复利来源）</strong>：迭代周复盘抓“可复用的方法论”而非流水账——把“这次怎么做的”（一次只改一处的好处/改进合并冲突怎么解/无效改进果断砍）提炼成下次能直接套用的经验。复盘的本质是把“一次的经历”变成“下次更快的能力”，这正是能力复利（第二篇快于第一篇）的来源。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜迭代周复盘</strong>：复盘迭代周抓两点——<strong>进展</strong>（v2 相对 v1 涨了多少、跨数据集是否都优）和<strong>方法论经验</strong>（一次只改一处省了多少排查、哪两个改进合并冲突怎么解）。经验比“做了多少实验”更值钱，下一轮 v3 直接复用。遗留问题列清单，W14 第一天先清。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d91-pm" data-d="91" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D91 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">计划 W14</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>W14 = 方法 v3 + 第三个数据集。基于 v2 暴露的问题（哪些场景还弱、没纳入的改进 3 要不要换思路重做）排 W14。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定 W14 计划：基于 v2 的不足设计 v3 改进 + 第三数据集验证 + 3 数据集大表 + v3 消融。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W14 计划（承接 v2 不足，首日从 v3 改进设计开始）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>计划太满没缓冲 → 留缓冲（实验常超时）;v3 改进又想做大 → 单卡可做。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v2 已经不错、想不出 v3 改进 → 看 v2 的定性负面案例 + 两数据集中表现弱的那个，从那里找 v3 方向。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规划了 v3 周。<strong>做了</strong>（W14 计划）、<strong>学了</strong>（承接 v2 不足排计划）、<strong>会了</strong>（规划下一轮迭代）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 两数据集结果表 ✅ W13 周报 ✅ W14 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W13 累计交付</h2><p>v2 设计文档（3 改进挂证据）、3 个改进的独立实现+实验+分析、整合版 v2（含冲突检验）+ v2 改进报告（≥500 字）+ 三方对比表、v2 定性可视化、跨数据集（2 个）验证(3-seed)、两数据集结果表、W13 周报、W14 计划。</p>
+</section><section class="wtail"><h2>🎓 W13 你“长出来”的能力清单</h2><ul>
+<li>基于消融/反馈/per-class/定性负面<strong>有依据地设计改进点</strong>（对应问题、单卡可做）</li>
+<li>“一次只改一处”的迭代节奏 + 单改进独立评估（显著性判定）</li>
+<li>针对性改进结合 per-class 评估；按数据筛选有效改进整合成 v2</li>
+<li>改进合并的冲突检验（留一法）；跨数据集验证泛化（防过拟合）+ 多 seed</li>
+<li><strong>战略校准贯穿</strong>：每个改进单卡可做；跨数据集泛化是对“下游特化/鲁棒”卖点的正面支撑</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D91</summary><textarea data-note="d91" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W13 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — v2 改进报告 + 跨数据集结果表</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># v2 改进报告（节选，≥500 字版骨架）</span>
+<span class="gu">## 一、试了哪些（均基于 M3 消融/分析）</span>
+改进1 高分辨率分支加多尺度融合（针对 A1 证明的最有用组件，加强它）；
+改进2 遮挡感知 label assignment（针对定性负面案例集中于遮挡）；
+改进3 换 GWD 旋转 loss（针对 A3 我的 loss 仅临界有效）。
+<span class="gu">## 二、各自效果（相对 v1，3 seeds）</span>
+改进1：+0.8（&gt;std，有效，小目标类提升最明显）→ 纳入；
+改进2：总+0.2、遮挡相关类+2.1（针对性显著）→ 纳入；
+改进3：+0.3（在 std 内，不显著）→ 不纳入（W14 可换思路重做）。
+<span class="gu">## 三、v2 组成与理由</span>
+v2 = v1 + 改进1 + 改进2。二者互补：一个提小目标召回、一个救遮挡场景，
+不冲突（改不同模块）。整合后重训验证：未掉点，确认无冲突。
+<span class="gu">## 四、v2 结果（数据集A，3 seeds）</span>
+Baseline 75.0±0.3 → v1 75.9±0.4 → v2 77.2±0.3，递进清晰。
+<span class="gu">## 五、下一步</span>
+跨数据集验证 v2 是否泛化；W14 设计 v3（从 v2 仍弱的场景切入）。
+
+<span class="gh"># 跨数据集结果（2 数据集 × 方法，mean±std/3 seeds）</span>
+| 方法 | 数据集A(DOTA) | 数据集B(DIOR-R) |
+|---|---|---|
+| Baseline | 75.0±0.3 | 67.0±0.4 |
+| v1       | 75.9±0.4 | 67.6±0.5 |
+| <span class="gs">**v2**</span>   | <span class="gs">**77.2±0.3**</span> | <span class="gs">**69.1±0.4**</span> |
+观察：v2 在两个数据集上都稳定优于 baseline（+2.2 / +2.1）→ 初步泛化证据；
+A 上提升略大（A 小目标更多，吃多尺度改进），合理。W14 加第三数据集更稳。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — 三方对比表自动生成 + 显著性粗判</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># 收集 baseline/v1/v2 各 3 seed 的指标，输出 mean±std 对比表 + 是否显著(超过 std 视为显著)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_methods</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">base_key</span><span class="o">=</span><span class="s2">&quot;baseline&quot;</span><span class="p">):</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">base_key</span><span class="p">]);</span> <span class="n">bm</span><span class="p">,</span> <span class="n">bs</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">base</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;方法&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="s1">&#39;mean±std&#39;</span><span class="si">:</span><span class="s2">&lt;16</span><span class="si">}{</span><span class="s1">&#39;Δ vs base&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}{</span><span class="s1">&#39;显著?&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vals</span><span class="p">);</span> <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">bm</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">base_key</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;是&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="k">else</span> <span class="s2">&quot;否(噪声内)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">±</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">      </span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">        </span><span class="si">{</span><span class="n">sig</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 留一法：定位整合时哪两个改进冲突（v1 / v1+1 / v1+2 / v1+1+2 对比）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">leave_one_out</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">留一法（看合并是否 &gt;= 各单项，判断冲突/冗余）：&quot;</span><span class="p">)</span>
+    <span class="n">compare_methods</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">base_key</span><span class="o">=</span><span class="s2">&quot;v1&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">compare_methods</span><span class="p">({</span><span class="s2">&quot;baseline&quot;</span><span class="p">:[</span><span class="mf">75.0</span><span class="p">,</span><span class="mf">74.7</span><span class="p">,</span><span class="mf">75.3</span><span class="p">],</span><span class="s2">&quot;v1&quot;</span><span class="p">:[</span><span class="mf">75.9</span><span class="p">,</span><span class="mf">75.5</span><span class="p">,</span><span class="mf">76.2</span><span class="p">],</span><span class="s2">&quot;v2&quot;</span><span class="p">:[</span><span class="mf">77.2</span><span class="p">,</span><span class="mf">76.9</span><span class="p">,</span><span class="mf">77.4</span><span class="p">]})</span>
+    <span class="n">leave_one_out</span><span class="p">({</span><span class="s2">&quot;v1&quot;</span><span class="p">:[</span><span class="mf">75.9</span><span class="p">,</span><span class="mf">75.5</span><span class="p">,</span><span class="mf">76.2</span><span class="p">],</span><span class="s2">&quot;v1+imp1&quot;</span><span class="p">:[</span><span class="mf">76.7</span><span class="p">,</span><span class="mf">76.4</span><span class="p">,</span><span class="mf">77.0</span><span class="p">],</span>
+                   <span class="s2">&quot;v1+imp2&quot;</span><span class="p">:[</span><span class="mf">76.1</span><span class="p">,</span><span class="mf">75.8</span><span class="p">,</span><span class="mf">76.4</span><span class="p">],</span><span class="s2">&quot;v2(1+2)&quot;</span><span class="p">:[</span><span class="mf">77.2</span><span class="p">,</span><span class="mf">76.9</span><span class="p">,</span><span class="mf">77.4</span><span class="p">]})</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出（示意）</strong>：三方表显示 baseline&lt;v1&lt;v2 且 v2 显著；留一法显示 v1+1+2 ≥ 各单项 → 无冲突（若 v2 反低于某单项，即提示冲突）。</p>
+<h2>三、v2 配置合并 + 针对性改进的 per-class 验证（完整代码）</h2>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ① v2 config 合并：把选中的有效改进合并成一份 config（继承 v1，叠加选中项）</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span><span class="o">,</span><span class="w"> </span><span class="nn">copy</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_v2_config</span><span class="p">(</span><span class="n">v1_cfg_path</span><span class="p">,</span> <span class="n">picked</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;picked: [&#39;imp1&#39;,&#39;imp2&#39;] —— 只合并被选中的有效改进。&quot;&quot;&quot;</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">v1_cfg_path</span><span class="p">))</span>
+    <span class="n">patches</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;imp1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;hr_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;multiscale&quot;</span><span class="p">}},</span>      <span class="c1"># 改进1：多尺度融合</span>
+        <span class="s2">&quot;imp2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;assigner&quot;</span><span class="p">:</span> <span class="s2">&quot;occlusion_aware&quot;</span><span class="p">}},</span>  <span class="c1"># 改进2：遮挡感知分配</span>
+        <span class="s2">&quot;imp3&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="s2">&quot;gwd&quot;</span><span class="p">}},</span>                  <span class="c1"># 改进3（未选中则不合并）</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">picked</span><span class="p">:</span>                                         <span class="c1"># 逐个叠加选中改进</span>
+        <span class="n">deep_update</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">patches</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;configs/v2.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cfg</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">deep_update</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>                                       <span class="c1"># 递归合并字典</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">deep_update</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">d</span>
+
+<span class="c1"># ② 针对性改进（改进2 遮挡）的 per-class 验证：总指标可能持平，但遮挡类应涨</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_targeted</span><span class="p">(</span><span class="n">v1_per_class</span><span class="p">,</span> <span class="n">imp2_per_class</span><span class="p">,</span> <span class="n">occ_classes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;occ_classes: 遮挡相关的类别名列表。看改进2 是否在这些类上确有提升。&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;遮挡相关类别的改善（改进2 vs v1）：&quot;</span><span class="p">)</span>
+    <span class="n">gains</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">occ_classes</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">imp2_per_class</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">v1_per_class</span><span class="p">[</span><span class="n">c</span><span class="p">];</span> <span class="n">gains</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">&lt;14</span><span class="si">}</span><span class="s2"> Δ=</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;遮挡类平均提升 </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> → &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;针对性有效&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">sum</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;改进有限&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>用法</strong>:① 决定纳入哪些改进后,<code>build_v2_config</code> 一键生成 v2 配置;② 改进 2 这种“针对性改进”，用 <code>verify_targeted</code> 看它针对的遮挡类有没有真涨——这是 D87 判断“总指标持平但局部有效”的依据。</p>
+<h2>四、跨数据集 loader 适配（复用 W11 统一接口，只写解析）</h2>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 第二/第三数据集只需继承统一基类、实现 _load_anno —— 数据层零重写</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">RSDetDataset</span>    <span class="c1"># W11 写的统一基类</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DIORRDataset</span><span class="p">(</span><span class="n">RSDetDataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;DIOR-R：标注是 xml，只需实现解析；其余（接口/增强/单测）全复用。&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_scan_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">scan_pairs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">img_dir</span><span class="o">=</span><span class="s2">&quot;JPEGImages&quot;</span><span class="p">,</span> <span class="n">anno_dir</span><span class="o">=</span><span class="s2">&quot;Annotations-xml&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_anno</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_path</span><span class="p">):</span>
+        <span class="n">boxes</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">parse_dior_xml</span><span class="p">(</span><span class="n">xml_path</span><span class="p">)</span>   <span class="c1"># 解析 xml → (xc,yc,w,h,θ), label</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;boxes&quot;</span><span class="p">:</span> <span class="n">boxes</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">}</span>
+<span class="c1"># configs 里把 dataset.type 换成 DIORRDataset，train/eval/metric 一行不改即可跑</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么省事</strong>:W11 把数据层做成了“统一接口 + 各自解析”，所以换数据集只写一个 <code>_load_anno</code>(几十行)，不用重写 DataLoader/增强/单测——这就是当初“搭可复用框架”的回报。<strong>自检</strong>：新数据集先可视化几张图+标注，确认读对了（框在目标上），再跑训练。</p>
+<h2>五、三改进迭代进度看板（一次只改一处，别乱）</h2>
+<figure class="code" data-lang="markdown"><pre><code>| 改进 | 来源(M3发现) | config | seed0 | seed1 | seed2 | Δ vs v1 | 显著? | 决策 |
+|---|---|---|---|---|---|---|---|---|
+| imp1 多尺度融合 | A1 最有用 | v2_imp1.yaml | ✅76.7 | ✅76.4 | ✅77.0 | +0.8 | 是 | ✅纳入 |
+| imp2 遮挡assign | 定性负面 | v2_imp2.yaml | ✅76.1 | 🔄 | ⬜ | 总+0.2/遮挡+2.1 | 针对性 | ✅纳入 |
+| imp3 GWD loss | A3 临界 | v2_imp3.yaml | ✅76.2 | ⬜ | ⬜ | +0.3 | 否 | ❌不纳入 |
+| v2(1+2) 整合 | — | v2.yaml | 🔄 | ⬜ | ⬜ | — | — | 验证中 |
+图例：✅完成 🔄进行中 ⬜待跑。纪律：每个 impX 都从 v1 派生、只差一处；整合后留一法验证不冲突。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么需要</strong>：三个改进 × 多 seed × 整合 + 跨数据集，实验一多极易记混“谁从谁派生、谁跑到第几 seed”。看板让你① 守住“每个只差一处”;② 不漏跑/重跑;③ 一眼看出整合该用哪几个。</p>
+<h2>六、每日“今日自测”</h2>
+<ul>
+<li><strong>D85</strong>:① 方法迭代为什么“一次只改一个点”?② 改进点该从哪来（凭空想 vs 基于消融），怎么用 config 继承只改一处？</li>
+<li><strong>D86</strong>:① 怎么判断单个改进是否“真有效”（和什么比、看什么）？提升在 std 内算有效吗？</li>
+<li><strong>D87</strong>:① 针对“遮挡”的改进 2，为什么不能只看总 mAP 判断有没有用?② 为什么旋转框适合用高斯建模 loss?</li>
+<li><strong>D88</strong>:① 3 个改进只有 1 个有效，v2 该怎么组？这正常吗?② 单独有效的改进合并后一定都有效吗？怎么查冲突？</li>
+<li><strong>D89</strong>:① v2 没比 v1 好，先排查什么?② baseline→v1→v2 的递进曲线在论文里有什么用？</li>
+<li><strong>D90</strong>:① 为什么必须跨数据集验证？换数据集调参为什么要“适度”且对 baseline 公平？</li>
+<li><strong>D91</strong>:① v2 在两数据集表现不一致一定是方法有问题吗？怎么分析？</li>
+</ul>
+<h2>七、本周报错速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不知道哪个改进有效</td>
+<td>一次改了多个</td>
+<td>一次只改一处，各从 v1 派生跑一组</td>
+</tr>
+<tr>
+<td>改进“有效”实为波动</td>
+<td>单 seed/没和 std 比</td>
+<td>多 seed,Δ 超过 std 才算</td>
+</tr>
+<tr>
+<td>针对性改进被误判没用</td>
+<td>只看总 mAP</td>
+<td>结合 per-class 看针对的那部分</td>
+</tr>
+<tr>
+<td>改进合并后反而掉点</td>
+<td>改进间冲突/冗余</td>
+<td>留一法定位；保留更强者或解耦</td>
+</tr>
+<tr>
+<td>换 loss 后训练发散/NaN</td>
+<td>量纲不匹配/协方差退化</td>
+<td>调权重+warmup；加 eps 防退化</td>
+</tr>
+<tr>
+<td>第二数据集上没优势</td>
+<td>过拟合第一数据集/数据特性不同/loader bug</td>
+<td>先排 bug（可视化确认读对），再分析数据特性；适度调参；W14 加第三数据集</td>
+</tr>
+<tr>
+<td>把无效改进也塞进 v2</td>
+<td>舍不得</td>
+<td>只整合显著有效的，留 1-2 个很正常</td>
+</tr>
+<tr>
+<td>跨数据集换 loader 出错</td>
+<td>标注格式不同</td>
+<td>复用 W11 统一接口，只写新数据集的解析</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w12.html"><span class="dir">← 上一篇</span><span class="nm">W12 第一波消融 + M3 月复盘</span></a><a class="next" href="m4-full.html"><span class="dir">下一篇 →</span><span class="nm">M4 详注版（W13–W16）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d85">D85 周一</a><a class="sub" href="#d85-am">上午 基于 M3 消融设计 3 个 v</a><a class="sub" href="#d85-noon">中午 实现改进 1（只加这一个，最小改</a><a class="sub" href="#d85-pm">晚上 跑改进 1 实验（与 v1 只差</a><a href="#d86">D86 周二</a><a class="sub" href="#d86-am">上午 改进 1 结果分析</a><a class="sub" href="#d86-noon">中午 实现改进 2（独立加在 v1 上</a><a class="sub" href="#d86-pm">晚上 跑改进 2 实验</a><a href="#d87">D87 周三</a><a class="sub" href="#d87-am">上午 改进 2 结果分析（结合 per</a><a class="sub" href="#d87-noon">中午 实现改进 3</a><a class="sub" href="#d87-pm">晚上 跑改进 3 实验</a><a href="#d88">D88 周四</a><a class="sub" href="#d88-am">上午 改进 3 结果分析 + 选出有效</a><a class="sub" href="#d88-noon">中午 启动 v2 完整训练（所有有效改</a><a class="sub" href="#d88-pm">晚上 监控 v2 训练</a><a href="#d89">D89 周五</a><a class="sub" href="#d89-am">上午 v2 结果 vs v1 vs b</a><a class="sub" href="#d89-noon">中午 写“v2 改进报告”（≥500 </a><a class="sub" href="#d89-pm">晚上 可视化 v2 结果</a><a href="#d90">D90 周六</a><a class="sub" href="#d90-am">上午 在第二个数据集上验证 v2</a><a class="sub" href="#d90-noon">中午 调参（适度适配第二数据集）</a><a class="sub" href="#d90-pm">晚上 跑 3 个 seed 取平均</a><a href="#d91">D91 周日</a><a class="sub" href="#d91-am">上午 整合两个数据集的结果</a><a class="sub" href="#d91-noon">中午 W13 周复盘</a><a class="sub" href="#d91-pm">晚上 计划 W14</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>M0 必备前置知识 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">M0 · 先修</span></div><h1 class="title">M0 · 必备前置知识（CV / 深度学习 / 数学 / 工具）·「教-学-做」带教版</h1><p class="subtitle">进 M1 之前，把“看懂并跟着做”所需的最小底子一次垫齐</p></div><div class="note"><b>第二篇先修</b>　CV / 深度学习 / 数学 / 工具的最小够用底子。读完就可以进 <a href="../week/w1.html">W1</a> 了。</div><blockquote class="quote">
+<p><strong>定位</strong>：这<strong>不是</strong>要你先学完一整套 DL 课程再开始（那样永远开始不了），而是把计划里<strong>马上会用到、且不懂会卡住</strong>的概念，用最短篇幅讲清，并<strong>标注“它在计划哪天出现”</strong>，方便你到时回查。<strong>够用即可，深的伴随做</strong>。
+<strong>前提</strong>：假设你<strong>会一点 Python</strong>(变量、函数、循环、列表/字典、能跑 <code>.py</code>)。不会 PyTorch/深度学习也没关系，本篇就是补这块。
+<strong>结构</strong>:1 工具与环境 → 2 深度学习最小概念 → 3 CNN 基础 → 4 CV 三大任务范式 → 5 评价指标 → 6 PyTorch 最小够用 → 7 数学够用部分 → 8 常用库 → 9 自测。</p>
+</blockquote>
+<hr />
+<h2 id="h-1-工具与环境-命令行-conda-git-GPU">1. 工具与环境（命令行 / conda / git / GPU）</h2>
+<p><strong>① conda + 虚拟环境 + PyTorch</strong>：这块计划 <strong>W1-D1 会手把手带你装</strong>（并讲清 conda/CUDA/PyTorch 各是什么）。这里只记结论：<strong>每个项目开一个隔离环境，装对应 CUDA 版本的 PyTorch,<code>torch.cuda.is_available()</code> 为 True 才算开机成功</strong>。</p>
+<p><strong>② Linux / 命令行最小集</strong>（做实验天天用）：</p>
+<ul>
+<li><code>cd 路径</code>(进目录)、<code>ls</code>(列文件)、<code>pwd</code>(看当前路径)、相对路径 <code>./</code> 与绝对路径。</li>
+<li><strong>后台跑训练</strong>:<code>nohup python train.py &gt; log.txt 2&gt;&amp;1 &amp;</code>(关掉终端也继续跑，日志进 log.txt)。</li>
+<li><strong>看 GPU</strong>:<code>nvidia-smi</code>(显存占用、是哪块卡、驱动版本)——训练前后都会看。</li>
+<li><code>tmux</code> / <code>screen</code>(可选)：让远程会话断了训练也不停。</li>
+</ul>
+<p><strong>③ git / GitHub 最小集</strong>（计划 M3-W11 正式用，这里先有概念）：</p>
+<ul>
+<li><code>git clone 网址</code>(把别人仓库下下来)、<code>git add .</code> → <code>git commit -m &quot;说明&quot;</code> → <code>git push</code>(提交你的改动)。</li>
+<li><code>.gitignore</code>：写明“哪些文件不纳入版本管理”（数据/权重/日志这些大文件别进仓库）。</li>
+<li><strong>类比</strong>:git 是代码的“存档+时光机”,GitHub 是云端存档点。</li>
+</ul>
+<p><strong>④ 一句话记牢</strong>：能在命令行进目录、后台跑训练、看 GPU、用 git 存代码——这四样够你起步。</p>
+<hr />
+<h2 id="h-2-深度学习最小概念-看懂训练在干嘛">2. 深度学习最小概念（看懂训练在干嘛）</h2>
+<p><strong>① 神经网络是什么</strong>：一个<strong>带大量可调参数的函数</strong> <code>y = f(x; W)</code>。给它输入 x（图像），它输出预测 y;<strong>训练 = 自动调参数 W，让预测越来越准</strong>。类比：一个有几百万个旋钮的机器，训练就是自动拧旋钮。</p>
+<p><strong>② 张量(tensor)</strong>：就是<strong>多维数组</strong>。一张 RGB 图 = <code>(3, H, W)</code> 的张量；一批(batch)图 = <code>(N, 3, H, W)</code>。PyTorch 里的数据都是张量（和 numpy 数组几乎一样，但能放 GPU、能自动求导）。</p>
+<p><strong>③ 训练的核心循环（记住这五步，计划 M1-W3 会让你亲手写）</strong>：</p>
+<ol>
+<li><strong>取一批数据</strong>(batch)；</li>
+<li><strong>前向</strong>:<code>pred = model(x)</code>(算出预测)；</li>
+<li><strong>算 loss</strong>:<code>loss = 损失函数(pred, 真值)</code>(预测离真值多远)；</li>
+<li><strong>反向传播</strong>:<code>loss.backward()</code>(自动算每个参数该往哪调=梯度)；</li>
+<li><strong>更新参数</strong>:<code>optimizer.step()</code>(按梯度拧旋钮)；每步前 <code>optimizer.zero_grad()</code>(清空上一轮梯度)。</li>
+</ol>
+<p><strong>④ 几个必懂词</strong>：</p>
+<ul>
+<li><strong>loss（损失）</strong>：衡量“预测有多差”，训练就是让 loss 变小。分类常用<strong>交叉熵 CrossEntropy</strong>。</li>
+<li><strong>optimizer（优化器）</strong>：决定“怎么根据梯度调参数”，常用 <strong>SGD / Adam</strong>。</li>
+<li><strong>learning rate（学习率 lr）</strong>：每步调多大。<strong>太大→震荡/NaN，太小→学不动</strong>（最关键的超参）。</li>
+<li><strong>batch / batch_size</strong>：一次喂多少张图。受<strong>显存</strong>限制(4090 上旋转检测常 bs=2)。</li>
+<li><strong>epoch</strong>：把整个训练集过一遍叫一个 epoch；通常训多个 epoch。</li>
+<li><strong>过拟合(overfitting)</strong>：在训练集很好、在没见过的数据上差（死记硬背了）。</li>
+<li><strong>train / val / test 划分</strong>：训练集学、验证集调参选模型、测试集只在最后评估——<strong>不能用测试集调参</strong>（作弊）。</li>
+</ul>
+<p><strong>⑤ 一句话记牢</strong>：训练 = 反复“前向→算 loss→反向→更新”，目标是 loss 下降且<strong>在验证/测试集</strong>上也好（不只训练集）。</p>
+<hr />
+<h2 id="h-3-CNN-基础-遥感-CV-的主力网络">3. CNN 基础（遥感 CV 的主力网络）</h2>
+<p><strong>① 卷积(convolution)</strong>：用一个小窗口（卷积核）在图上滑动、做加权求和，<strong>提取局部特征</strong>（边缘、纹理…）。多层卷积叠起来，从低级特征（边）到高级特征（物体部件）。</p>
+<p><strong>② 池化 / 下采样(pooling/downsample)</strong>：把特征图变小（如尺寸减半），扩大“视野”、减计算。<strong>副作用：小目标特征会丢</strong>——这正是遥感小目标难检的原因之一（差异表第 2 条）。</p>
+<p><strong>③ 特征图(feature map)/ 感受野(receptive field)</strong>：卷积输出的中间结果叫特征图；一个输出像素“看得到”的输入区域大小叫感受野（越深越大）。</p>
+<p><strong>④ 一个检测/分割网络的三段式（计划 W2 会反复见）</strong>：</p>
+<ul>
+<li><strong>backbone（主干）</strong>：负责“从图像提特征”。常用 <strong>ResNet</strong>（经典 CNN）、<strong>Swin Transformer</strong>（更强但更重）、ConvNeXt。</li>
+<li><strong>neck（颈）</strong>：融合不同尺度的特征，最常见是 <strong>FPN（特征金字塔）</strong>——让大目标小目标都能被检到。</li>
+<li><strong>head（头）</strong>：在特征上输出最终结果（框/类别/掩膜）。</li>
+</ul>
+<p><strong>⑤ 一句话记牢</strong>:<code>图 →[backbone 提特征]→[neck 多尺度融合]→[head 出结果]</code>。换 backbone/neck/head 的某一块来看效果，就是<strong>消融实验</strong>（计划 W2 起反复做）。</p>
+<hr />
+<h2 id="h-4-CV-三大任务范式-把-做什么-搞清">4. CV 三大任务范式（把“做什么”搞清）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>输出</th>
+<th>关键概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>分类(classification)</strong></td>
+<td>一张图一个类别</td>
+<td>softmax、交叉熵</td>
+</tr>
+<tr>
+<td><strong>目标检测(detection)</strong></td>
+<td>每个目标：一个<strong>框</strong> + 类别</td>
+<td>框、anchor、NMS、IoU</td>
+</tr>
+<tr>
+<td><strong>语义分割(segmentation)</strong></td>
+<td><strong>每个像素</strong>一个类别（掩膜）</td>
+<td>逐像素分类、上采样还原细节</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>检测必懂的几个词</strong>：</p>
+<ul>
+<li><strong>框(bounding box)</strong>：框住目标的矩形。通用 CV 用<strong>水平框</strong>（左上+右下）；遥感目标斜着，用<strong>旋转框</strong>（计划 W2 详讲）。</li>
+<li><strong>anchor（锚框）</strong>：预设的一堆候选框，网络在其上微调（两阶段/部分一阶段检测器用）；<strong>anchor-free</strong> 则不用预设框。</li>
+<li><strong>两阶段 vs 一阶段</strong>：两阶段（如 Faster/Oriented R-CNN）先选候选区再分类回归，准但慢；一阶段（如 RetinaNet/YOLO 系）直接出框，快。</li>
+<li><strong>IoU（交并比）</strong>：两个框“交集/并集”，衡量预测框和真值框重叠度(0–1)。<strong>判断“检测对不对”的尺子</strong>。</li>
+<li><strong>NMS（非极大值抑制）</strong>：同一目标常出多个重叠框，NMS 只保留最高分的、删掉其余（计划竞赛周会见到更优的 WBF）。</li>
+</ul>
+<p><strong>一句话记牢</strong>：分类=整图一个标签；检测=框+类别（看 IoU、用 NMS）；分割=逐像素标签。</p>
+<hr />
+<h2 id="h-5-评价指标-看懂论文的数字-知道何时用哪个">5. 评价指标（看懂论文的数字 + 知道何时用哪个）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th>用于</th>
+<th>含义（直觉）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>accuracy（准确率）</strong></td>
+<td>分类（类别均衡时）</td>
+<td>预测对的比例</td>
+</tr>
+<tr>
+<td><strong>precision（精确率）</strong></td>
+<td>检测/分类</td>
+<td>“我说是的里，有多少真是”</td>
+</tr>
+<tr>
+<td><strong>recall（召回率）</strong></td>
+<td>检测/分类</td>
+<td>“真有的里，我找到多少”</td>
+</tr>
+<tr>
+<td><strong>F1</strong></td>
+<td><strong>类别不平衡</strong>（如变化检测）</td>
+<td>precision 与 recall 的调和平均</td>
+</tr>
+<tr>
+<td><strong>mAP</strong></td>
+<td><strong>目标检测</strong></td>
+<td>各类 AP（平均精度）的平均；越高越好</td>
+</tr>
+<tr>
+<td><strong>mIoU</strong></td>
+<td><strong>语义分割</strong></td>
+<td>各类 IoU 的平均</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>为什么不同任务用不同指标</strong>：类别极不平衡时（如变化检测里“变”的像素很少），光看 accuracy 会骗人（全猜“没变”也高）→ 用 F1。<strong>记住对照：检测=mAP，分割=mIoU，变化检测=F1，均衡分类=accuracy。</strong>（计划 M2-W5 会让你亲手体会。）</p>
+<hr />
+<h2 id="h-6-PyTorch-最小够用-能读懂-能改别人代码">6. PyTorch 最小够用（能读懂、能改别人代码）</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="c1"># ① 张量 &amp; 放 GPU</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>     <span class="c1"># 一批8张3通道224图</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>                    <span class="c1"># 放到 GPU；模型也要 .to(&quot;cuda&quot;)，两者必须一致</span>
+
+<span class="c1"># ② 自定义模型：继承 nn.Module，写 __init__(定义层) 和 forward(定义前向)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Net</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_cls</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span>   <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">n_cls</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># ③ 数据：Dataset 定义&quot;怎么取一条&quot;，DataLoader 负责&quot;成批+打乱&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchvision</span><span class="w"> </span><span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="n">tf</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span><span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">)),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()])</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s2">&quot;data/train&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">tf</span><span class="p">)</span>   <span class="c1"># 每类一个文件夹</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># ④ 训练循环五步（=第2节的五步）</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Net</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">classes</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">crit</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>                  <span class="c1"># 清梯度</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">crit</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>         <span class="c1"># 前向+算loss</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>                  <span class="c1"># 反向</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>                       <span class="c1"># 更新</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>必懂三件事</strong>:① 数据和模型要在同一设备(都 <code>.to(&quot;cuda&quot;)</code>);② <code>Dataset</code> 定义“怎么取一条”、<code>DataLoader</code> 负责“成批+打乱”;③ 训练就是那五步。<strong>这些计划 M1-W3 会带你亲手写，这里先混个眼熟。</strong></p>
+<hr />
+<h2 id="h-7-数学够用部分-只取看懂方法所需-不深究">7. 数学够用部分（只取看懂方法所需，不深究）</h2>
+<ul>
+<li><strong>线性代数</strong>：向量、矩阵、<strong>矩阵乘法</strong>（神经网络的全连接层就是矩阵乘 + 偏置）。知道“特征 = 一个高维向量”即可。</li>
+<li><strong>概率</strong>：<strong>分布、期望、方差</strong>；<strong>高斯（正态）分布</strong>（很多噪声/初始化用它）;softmax 把分数变成“概率”。</li>
+<li><strong>梯度与链式法则（直觉即可）</strong>：梯度 = &quot;loss 对每个参数的偏导 = 该参数往哪调能让 loss 变小&quot;；反向传播就是用<strong>链式法则</strong>自动把梯度从输出层一层层传回去。<strong>PyTorch 自动求导，你不用手算</strong>，但要知道&quot;<code>loss.backward()</code> 在算梯度&quot;。</li>
+<li><strong>够用原则</strong>：看不懂论文里的某个公式时，先抓“它想表达什么直觉”，细节做实验/用到时再补。<strong>不要因为数学没学透就不敢开始</strong>。</li>
+</ul>
+<hr />
+<h2 id="h-8-常用库速记">8. 常用库速记</h2>
+<ul>
+<li><strong>numpy</strong>：数值数组（图像坐标、矩阵运算）。</li>
+<li><strong>OpenCV(cv2)</strong>：读图/画框/图像处理（计划 W1-D6 写第一个脚本就用它）。</li>
+<li><strong>matplotlib</strong>：画曲线/柱状图（画 loss、per-class AP）。</li>
+<li><strong>PyTorch / torchvision</strong>：深度学习主框架 + 现成模型/数据工具。</li>
+<li><strong>wandb / TensorBoard</strong>：实验追踪（自动记录超参/loss 曲线/指标；计划 M3-W11 起用）。</li>
+<li><strong>rasterio / GDAL</strong>：读写遥感 GeoTIFF（用到地理信息时）。</li>
+</ul>
+<hr />
+<h2 id="h-9-读完自测-能答出-能跟着计划做了">9. 读完自测(能答出=能跟着计划做了)</h2>
+<ol>
+<li>训练的五步循环按顺序说出来;<code>optimizer.zero_grad()</code> 不写会怎样？</li>
+<li>backbone / neck / head 各干嘛？换其中一块看效果叫什么实验？</li>
+<li>检测里 IoU 和 NMS 各是什么？</li>
+<li>检测、分割、变化检测分别用什么指标？为什么类别不平衡要用 F1 而非 accuracy?</li>
+<li>batch_size 受什么限制？学习率太大/太小各会怎样？</li>
+<li>过拟合是什么？为什么不能用测试集调参？</li>
+<li>数据在 GPU、模型在 CPU 会怎样？怎么解决？</li>
+<li>你不用手算梯度，是因为 PyTorch 的什么机制在帮你？</li>
+</ol>
+<blockquote class="quote">
+<p>答不全的回对应小节再看。<strong>全部能答 = 你已经能看懂计划里的代码和概念</strong>；不懂的细节，后面每天的“①先垫概念”会在用到时进一步讲清。</p>
+<p><strong>两份 M0 读完，就正式从 <code>M1-W1</code> 开始。</strong> 祝开工顺利——记住三条铁律：第一次看不懂正常、每天只对今天负责、记下的“不懂”是任务不是失败。</p>
+</blockquote>
+<div class="pager"><a class="prev" href="learning-resources.html"><span class="dir">← 上一篇</span><span class="nm">M0 补充 · 学习资料地图</span></a><a class="next" href="../week/w1.html"><span class="dir">下一篇 →</span><span class="nm">W1 环境搭建 + 概念扫盲</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#h-1-工具与环境-命令行-conda-git-GPU">1. 工具与环境（命令行 / conda / git / GPU）</a><a href="#h-2-深度学习最小概念-看懂训练在干嘛">2. 深度学习最小概念（看懂训练在干嘛）</a><a href="#h-3-CNN-基础-遥感-CV-的主力网络">3. CNN 基础（遥感 CV 的主力网络）</a><a href="#h-4-CV-三大任务范式-把-做什么-搞清">4. CV 三大任务范式（把“做什么”搞清）</a><a href="#h-5-评价指标-看懂论文的数字-知道何时用哪个">5. 评价指标（看懂论文的数字 + 知道何时用哪个）</a><a href="#h-6-PyTorch-最小够用-能读懂-能改别人代码">6. PyTorch 最小够用（能读懂、能改别人代码）</a><a href="#h-7-数学够用部分-只取看懂方法所需-不深究">7. 数学够用部分（只取看懂方法所需，不深究）</a><a href="#h-8-常用库速记">8. 常用库速记</a><a href="#h-9-读完自测-能答出-能跟着计划做了">9. 读完自测(能答出=能跟着计划做了)</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

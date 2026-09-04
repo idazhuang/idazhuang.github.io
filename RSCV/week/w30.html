@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="30">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W30 · 第二课题立项 —— 从第一篇的“没做完”里，长出 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M8 竞赛收口 + 第二课题立项</span><span>·</span><span>Week 30</span><span>·</span><span>D197–D203</span></div><h1 class="title">第二课题立项 —— 从第一篇的“没做完”里，长出第二篇</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="197" data-k="am" title="D197 上午段"></i><i data-d="197" data-k="noon" title="D197 中午段"></i><i data-d="197" data-k="pm" title="D197 晚上段"></i></span><span class="sday"><i data-d="198" data-k="am" title="D198 上午段"></i><i data-d="198" data-k="noon" title="D198 中午段"></i><i data-d="198" data-k="pm" title="D198 晚上段"></i></span><span class="sday"><i data-d="199" data-k="am" title="D199 上午段"></i><i data-d="199" data-k="noon" title="D199 中午段"></i><i data-d="199" data-k="pm" title="D199 晚上段"></i></span><span class="sday"><i data-d="200" data-k="am" title="D200 上午段"></i><i data-d="200" data-k="noon" title="D200 中午段"></i><i data-d="200" data-k="pm" title="D200 晚上段"></i></span><span class="sday"><i data-d="201" data-k="am" title="D201 上午段"></i><i data-d="201" data-k="noon" title="D201 中午段"></i><i data-d="201" data-k="pm" title="D201 晚上段"></i></span><span class="sday"><i data-d="202" data-k="am" title="D202 上午段"></i><i data-d="202" data-k="noon" title="D202 中午段"></i><i data-d="202" data-k="pm" title="D202 晚上段"></i></span><span class="sday"><i data-d="203" data-k="am" title="D203 上午段"></i><i data-d="203" data-k="noon" title="D203 中午段"></i><i data-d="203" data-k="pm" title="D203 晚上段"></i></span></div></div>
+<div class="note"><b>★ 第二课题从哪来</b>　按质量排：你第一篇的 Limitation 段 &gt; 审稿意见里的建议 &gt; 消融里的反常现象。<a href="stage2b-full.html">《M8+连接期详注版》</a> 还算了复用红利：第一篇约 5 周的工程工作，第二篇应该压到 1 周。</div>
+<div class="note"><b>编者注 · 日号</b>　本模块（M8）各周的 D 编号相对「周号 × 7」的标准映射整体前移了 7 天（W29 标注为 D190–D196，按周号推算应为 D197–D203），因此 D218–D224 在正文中没有对应内容。原文照录未改，按顺序做即可，不影响内容衔接。详见<a href="../errata.html">校订说明</a>。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：第一篇已投(M7)、竞赛已收口(M8-W29)，现在立<strong>第二个课题</strong>。核心新技能：<strong>从第一篇论文的 Limitation 里挖第二课题</strong>，让两篇形成“系列”（展示你在一个方向的持续深耕——这对申请空天院很有说服力）。本周走完一个完整的立项流程：挖候选 → 调研评估 → 评分矩阵决策 → toy 实验验证 → 写 Proposal → 搭实验矩阵。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会从第一篇论文的 Limitation 中挖掘第二个课题。
+<strong>★ 诚实校准（务必记牢）</strong>：第二课题同样要是“<strong>小而硬、单卡可做</strong>”的。最自然且最稳的方向，往往是把第一篇的方法<strong>迁到一个新场景/新模态/新难题</strong>——比如第一篇做光学旋转检测 → 第二篇做 <strong>SAR 上的旋转检测</strong>（跨模态迁移），这正好用上你的 SAR 技能和“跨传感器泛化”发力线，也贴合空天院关注的 SAR 难题。<strong>别跳到一个全新的大方向（如“做个基础模型”）</strong>——那会浪费第一篇积累的框架/知识，且可能超出单卡。
+<strong>先给你打个预防针</strong>:① <strong>第二课题的价值在“接得准、做得动”，不在“听起来宏大”</strong>——一个能复用你积累、单卡能跑、接第一篇口子的小而硬课题，远胜于一个宏大但做不动的方向;② <strong>toy 实验是立项的安全阀</strong>——别一上来就投入大实验，先用 toy 实验（小成本）验证方向有没有正信号，有信号再投入;③ <strong>第二次做同样的事（Proposal/实验矩阵）会快很多</strong>——这是技能内化的红利，本周你会亲身体会。
+<strong>本周精力怎么分配</strong>：前半周(D197-198)挖候选 + 调研评估 + 决策（选题是关键，值得花心思）;D199-201 toy 实验 + Proposal + 实验矩阵（复用第一篇资产，快速推进）;D202 读核心文献；D203 复盘 + 开源维护。教学按“立项流程”组织。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d197" data-d="197"><header class="day-head"><span class="dnum">D197</span><h2 class="day-t">周一 · 从第一篇 Limitation 挖第二课题候选</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午回顾第一篇的 Limitation &amp; Future Work、整理候选来源清单；中午挑 3 个最有潜力的方向；晚上每个写 1 段 mini-proposal。</p>
+<p><strong>预期管理</strong>:M8 第二课题立项周开始。今天从第一篇 Limitation 挖第二课题候选。提醒：<strong>最自然的来源=第一篇做不完的事</strong>（你写的 Limitation + mock reviewer 指出的不足），挖出来形成“系列”展示持续深耕;★校准——优先选<strong>能复用第一篇资产的、小而硬的延伸</strong>（如光学旋转检测→SAR旋转检测，用上你的SAR技能），别跳到全新大方向（浪费积累、超单卡）；挑3个候选，每个写200字mini-proposal说清“接第一篇哪个口子、为什么小而硬”。</p>
+</blockquote>
+</div><section class="slot" id="d197-am" data-d="197" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D197 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">回顾第一篇 Limitation &amp; Future Work，整理候选来源</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（第二课题最自然的来源：第一篇的“没做完”）</h4><div class="blk-b"><ul>
+<li><strong>第二课题最自然、最稳的来源，就是第一篇做不完的事</strong>。你第一篇论文的 Limitation（局限性）和 Future Work（未来工作）——既有你自己写的，也有 mock reviewer 指出的不足——<strong>就是第二课题的金矿</strong>。</li>
+<li><strong>为什么从 Limitation 挖第二课题（三重好处）</strong>:① <strong>自然延续</strong>——Limitation 是你的工作“还差什么”，顺着它做就是自然的下一步;② <strong>形成系列</strong>——第一篇解决 X、第二篇解决 X 的某个局限或延伸到新场景，两篇形成连贯的“系列”，展示你在一个方向的持续深耕;③ <strong>复用积累</strong>——延伸第一篇，你的代码框架、领域知识、实验经验都能复用，做得又快又稳。<strong>这是高产研究者的常用打法</strong>：不是每篇都从零开始找全新方向，而是顺着已有工作不断延伸、深挖。</li>
+<li><strong>“系列工作”对你的战略价值（对接空天院）</strong>：想象你将来联系空天院——“我在遥感旋转检测/SAR 这个方向做了两篇连续的工作（第一篇做光学旋转检测，第二篇延伸到 SAR 跨模态）”——这传递的是“我在这个领域有持续的积累和产出能力”。<strong>一个连贯的研究故事（系列），远胜于一堆不相关的零散尝试</strong>——它塑造的是你在特定方向的学术身份和深度，正是顶尖机构看重的。所以第二课题选“第一篇的自然延伸”，不只是为了快，更是在构建你的长期定位。</li>
+<li><strong>候选来源清单怎么整理</strong>：把第一篇所有的“没做完/做不好/可延伸”的点列出来——① 你写的 Limitation（方法在什么情况下还不够好）;② Future Work（你提到的未来方向）;③ mock reviewer 指出的不足（他们说“你没做 X”“你在 Y 上不够好”）;④ 你做实验时发现但没深入的现象。<strong>穷举这些，就是第二课题的候选来源池</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>回顾第一篇的 Limitation &amp; Future Work（你写的 + mock reviewer 指出的）。</li>
+<li>整理成“第二课题候选来源”清单（穷举所有可延伸的点）。</li>
+<li>标注每个候选接第一篇的哪个口子。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份“第二课题候选来源”清单，穷举了第一篇可延伸的点（Limitation/Future Work/reviewer 意见/未深入的现象）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★校准）</h4><div class="blk-b"><ul>
+<li><strong>跳到一个全新的大方向（如“做个基础模型”）</strong> → 浪费第一篇积累的框架/知识，且可能超单卡。优先选能复用第一篇资产的、小而硬的延伸。</li>
+<li><strong>候选来源没穷举，凭印象想一两个</strong> → 系统回顾 Limitation/Future Work/reviewer 意见，穷举候选池。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>Limitation 里挖不出好候选?→ 重点看 mock reviewer 提的“你没做的”“你做不好的”那些点（外部视角往往指向真实的可延伸方向）；第一篇 Limitation 写得太简略?→ 回想实验中发现的、方法表现差的场景/数据，那些就是可延伸的口子。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从第一篇 Limitation 系统挖掘第二课题候选</strong>。<strong>做了</strong>（回顾 Limitation + 整理候选来源清单）、<strong>学了</strong>（第二课题从第一篇延伸最自然、形成系列、复用积累）、<strong>会了</strong>（从已有工作中识别可延伸的研究方向）。</p>
+</div></section></section><section class="slot" id="d197-noon" data-d="197" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D197 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">从清单中挑 3 个最有潜力的方向</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>候选来源池里可能有不少点，<strong>挑出 3 个最有潜力的</strong>——按“① 延伸性（接第一篇）② 可行性（数据/代码可复用、单卡可做）③ 价值/兴趣”初步筛选。<strong>先挑 3 个（而非 1 个），给决策留余地</strong>（D198 详细评估再从 3 个里选 1 个）。</p>
+<ul>
+<li><strong>为什么挑 3 个（而非直接定 1 个）</strong>：选题是关键决策，不该凭第一感觉定。<strong>先挑 3 个最有潜力的候选，D198 详细调研评估后再从中选 1 个</strong>——给决策留比较的空间，避免冲动选了个其实不可行的。3 个是个好数字：够比较，又不至于评估不过来。</li>
+<li><strong>挑选的三个维度</strong>:① <strong>延伸性</strong>——是第一篇的自然延伸吗（形成系列、复用积累）;② <strong>可行性</strong>——数据拿得到吗？代码能复用吗？单卡 4090 跑得动吗？（避免选做不动的）;③ <strong>价值/兴趣</strong>——有研究价值吗？你感兴趣能坚持吗？<strong>初步用这三维从候选池筛出 3 个</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从候选来源清单里，按延伸性/可行性/价值初步筛。</li>
+<li>挑出 3 个最有潜力的方向。</li>
+<li>确认这 3 个都是“小而硬、能复用第一篇资产”的。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>从候选池挑出 3 个最有潜力的方向（都小而硬、能复用第一篇资产）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>挑的候选复用度低（和第一篇差异大）→ 优先选能复用框架的（否则失去“快”的优势）；只挑 1 个没留比较余地 → 挑 3 个，D198 评估后再选。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>候选太多难取舍?→ 优先“第一篇自然延伸 + 代码可复用 + 单卡可做”的；不确定哪个有潜力?→ 都先留着进 3 个候选，D198 详细评估。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>初步筛出了 3 个候选方向</strong>。<strong>做了</strong>（从候选池挑 3 个）、<strong>学了</strong>（挑 3 个留决策余地、三维度初筛）、<strong>会了</strong>（从候选中识别最有潜力的方向）。</p>
+</div></section></section><section class="slot" id="d197-pm" data-d="197" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D197 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">每个候选写 1 段 mini-proposal（200字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>给 3 个候选各写一段 ~200 字的 <strong>mini-proposal</strong>——简述这个方向“做什么、接第一篇的哪个口子、为什么是小而硬的、怎么复用第一篇资产”。<strong>mini-proposal 是候选的“快速画像”</strong>，帮你（和 D198 的评估）看清每个候选的轮廓。</p>
+<ul>
+<li><strong>mini-proposal 写什么（200字够说清）</strong>:① <strong>做什么</strong>——这个课题要解决什么问题;② <strong>接第一篇哪个口子</strong>——它对应第一篇的哪个 Limitation/延伸;③ <strong>为什么小而硬</strong>——为什么它是个聚焦、可做、有价值的课题（而非宽泛或做不动的）;④ <strong>怎么复用第一篇资产</strong>——能复用哪些代码/知识/经验。<strong>200 字精炼地说清这四点，就是一个候选的清晰画像</strong>。</li>
+<li><strong>为什么要写 mini-proposal（而非只在脑子里想）</strong>：写下来，能逼你把每个候选想清楚（模糊的想法写成文字时，漏洞和优势都会显现）；也方便 D198 评估时比较 3 个候选。<strong>写 mini-proposal 是“快速验证想法清晰度”的方式</strong>——写得出清晰 mini-proposal 的候选，说明你想透了；写不出的，说明还模糊（可能不够成熟）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>给 3 个候选各写一段 ~200 字 mini-proposal（做什么/接哪个口子/为什么小而硬/怎么复用）。</li>
+<li>写清楚每个候选的轮廓。</li>
+<li>写不出清晰 mini-proposal 的候选，标记（可能还不成熟）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 段 mini-proposal，每个能说清“它接第一篇的哪个口子、为什么是小而硬、怎么复用第一篇资产”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>mini-proposal 写得空泛（没说清接哪个口子）→ 明确对应第一篇的哪个 Limitation；只写“做什么”不写“为什么小而硬/怎么复用” → 四点都要写清。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某候选写不出清晰 mini-proposal?→ 说明它还模糊/不够成熟，要么再想清楚、要么换一个更清晰的候选；不知怎么写?→ 套“做什么+接哪个口子+为什么小而硬+怎么复用”四点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>给候选写了 mini-proposal</strong>。<strong>做了</strong>（3 段 mini-proposal）、<strong>学了</strong>（mini-proposal 是候选快速画像、写下来验证清晰度）、<strong>会了</strong>（精炼地刻画一个研究方向）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜从 Limitation 挖第二课题</strong>：最自然来源=第一篇做不完的事（你的Limitation+reviewer指出的不足）。延伸成“系列”（持续深耕，对接空天院有说服力）+复用积累（快）。★校准：优先小而硬、单卡可做、能复用第一篇资产的延伸（如光学→SAR跨模态），别跳全新大方向。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜mini-proposal</strong>：给每个候选写~200字快速画像：做什么+接第一篇哪个口子+为什么小而硬+怎么复用第一篇资产。写下来逼自己想清楚，写不出清晰mini-proposal的候选=还不成熟。给决策(D198)提供比较依据。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 3 个候选方向 ✅ mini-proposal ×3。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D197</summary><textarea data-note="d197" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d198" data-d="198"><header class="day-head"><span class="dnum">D198</span><h2 class="day-t">周二 · 候选调研 + 评分矩阵选定第二课题</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午调研 3 个候选的文献（每个搜 5 篇泛读摘要）；中午评估可行性（数据/代码复用/时间）；晚上用评分矩阵决策选定第二课题。</p>
+<p><strong>预期管理</strong>：今天调研3候选+评分矩阵决策选定第二课题。提醒：每个候选搜5篇相关论文泛读摘要（看这方向有没有人做、做到什么程度、有没有空间）；评估可行性时<strong>把“复用度/算力”作为重要权重</strong>（复用度低的候选会失去第二课题“快”的优势，本该4个月做完）；用评分矩阵（复用M3那张：创新/可行/匹配/算力/9月内完成）给3候选打分，选最优——决策要客观（评分），别凭一时偏好。</p>
+</blockquote>
+</div><section class="slot" id="d198-am" data-d="198" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D198 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">调研 3 个候选的文献（每个 5 篇泛读）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（候选调研：看方向的“竞争态势”）</h4><div class="blk-b"><ul>
+<li>对 3 个候选，各搜 5 篇相关论文、<strong>快速泛读摘要</strong>——目的是了解这个方向的“竞争态势”：有没有人做？做到什么程度？还有没有你的空间（尤其单卡能做的空间）？</li>
+<li><strong>为什么调研（避免选错方向）</strong>:① <strong>看有没有空间</strong>——如果某方向已经被做烂了（大量论文、SOTA 很高很卷），你单卡难有空间；如果是个较新、较少人做的口子，机会更大;② <strong>看可行性</strong>——看别人怎么做的（用什么数据、什么方法），判断你能不能复用第一篇资产做;③ <strong>避免重复造轮子</strong>——确认你的想法没被完全做过（否则白做）。<strong>调研是选题前的“侦察”，避免选个没空间或做不动的方向</strong>。</li>
+<li><strong>泛读摘要即可（快速侦察）</strong>：这一步不用精读（精读是定方向后 D202 的事），<strong>每个候选搜 5 篇、快速泛读摘要</strong>，把握“这方向有人做吗、做到什么程度、有没有空间”即可。3 个候选 × 5 篇 = 15 篇摘要，快速过一遍。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>对 3 个候选各搜 5 篇相关论文。</li>
+<li>快速泛读摘要（看方向的竞争态势：有人做吗、做到什么程度、有空间吗）。</li>
+<li>记录每个候选的调研发现（空间大小、可行性线索）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 个候选各完成 5 篇文献泛读，了解了每个方向的竞争态势和你的空间。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>调研时精读每篇（太慢）→ 这一步泛读摘要即可，快速侦察；只看有没有人做不看有没有空间 → 重点判断“单卡还有没有你的空间”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某方向论文太多太卷?→ 可能空间小，优先选较新、较少人做的口子；某方向几乎没人做?→ 确认是“有价值但少人做”（机会）还是“没价值所以没人做”（陷阱）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>调研候选方向的竞争态势</strong>。<strong>做了</strong>（3 候选各 5 篇泛读 + 记录发现）、<strong>学了</strong>（调研是选题侦察、看空间和可行性、泛读快速）、<strong>会了</strong>（评估一个研究方向的机会和可行性）。</p>
+</div></section></section><section class="slot" id="d198-noon" data-d="198" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D198 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">评估可行性（数据 / 代码复用度 / 时间成本）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>对 3 个候选，具体评估<strong>可行性</strong>——① 数据集拿得到吗?② 代码复用度多高（能复用第一篇多少）?③ 时间成本（单卡多久能做完）？<strong>复用度和算力是关键权重</strong>——第二课题的优势就是“快”（复用第一篇），如果选个复用度低的，就失去了这个优势。</p>
+<ul>
+<li><strong>为什么“复用度”是第二课题的核心考量</strong>：第二课题预期 4 个月做完（远快于第一篇 8 个月），靠的就是复用第一篇的代码框架、领域知识、实验经验。<strong>如果某候选和第一篇差异太大（代码要大改、领域要重学），就失去了“快”的优势，变回“几乎从零”</strong>——那不如不选它。所以评估时，<strong>把“代码复用度”作为重要权重</strong>：优先选能大量复用第一篇资产的候选。</li>
+<li><strong>算力可行性（单卡约束）</strong>：评估每个候选在你单张 4090 上做得动吗——数据量多大？模型多大？训练要多久？<strong>确认单卡能在合理时间内做完</strong>（别选个需要多卡/超大算力的）。这呼应你一贯的“小而硬、单卡可做”原则。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>对 3 个候选评估：数据可得性、代码复用度、时间成本、算力可行性。</li>
+<li>重点看复用度和算力（第二课题要“快且单卡可做”）。</li>
+<li>记录评估结果。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 个候选的可行性评估完成（数据/复用度/时间/算力），复用度和算力作为重点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只看创新不看可行性 → 复用度/算力是第二课题的关键；选了复用度低的候选 → 失去第二课题“快”的优势（本该 4 个月做完变回从零）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定复用度?→ 想“用第一篇的代码做这个候选，要改多少”(改得少=复用度高)；不确定算力?→ 估算数据量和模型大小，对比第一篇(类似规模=单卡可做)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>评估候选的可行性（重点复用度/算力）</strong>。<strong>做了</strong>（3 候选可行性评估）、<strong>学了</strong>（复用度是第二课题核心、算力可行性、第二课题要快且单卡）、<strong>会了</strong>（从可行性角度评估候选）。</p>
+</div></section></section><section class="slot" id="d198-pm" data-d="198" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D198 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">用评分矩阵决策，选定第二课题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（评分矩阵决策：客观选题）</h4><div class="blk-b"><p>用一个<strong>评分矩阵</strong>给 3 个候选打分，客观地选出最优的——<strong>复用 M3 你做选题时那张矩阵的思路</strong>（创新性/可行性/与方向匹配/算力可行/9 个月内可完成），给每个候选每个维度打分，加权求和，选总分最高的。</p>
+<ul>
+<li><strong>为什么用评分矩阵（而非凭感觉）</strong>：选题是影响未来 4 个月的重要决策，<strong>不该凭一时偏好或直觉</strong>。评分矩阵把决策<strong>结构化、客观化</strong>——把你看重的维度（创新/可行/匹配/算力/能否按期完成）列出来，每个候选每个维度打分，加权求和。<strong>总分最高的就是综合最优的选择</strong>。这避免了“被某个候选的某个亮点冲昏头、忽略了它的硬伤”。你 M3 选第一个课题时用过这个方法，现在选第二个课题再用一次（更熟练）。</li>
+<li><strong>第二课题矩阵的权重调整</strong>：相比 M3，第二课题的矩阵要<strong>给“复用度/算力”更高权重</strong>——因为第二课题的核心优势是“快”（复用第一篇）。复用度高、单卡好做的候选，应该得分更高。<strong>权重体现你对“第二课题要快且稳”的要求</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列评分矩阵（创新/可行/与方向匹配/算力可行/能否9月内完成，复用度/算力权重高）。</li>
+<li>给 3 个候选每个维度打分，加权求和。</li>
+<li>选总分最高的，作为第二课题（决策）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><strong>第二课题决策</strong>——评分矩阵选出总分最高的候选（评分最高、复用度高、单卡可做）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>选了复用度低的候选</strong> → 第二课题失去“快”的优势（本该 4 个月做完）；评分矩阵给复用度高权重避免这点。</li>
+<li><strong>凭感觉选不用矩阵</strong> → 评分矩阵客观决策，避免被单个亮点误导。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>两个候选评分接近?→ 看复用度/算力（第二课题要快），或选你更感兴趣能坚持的；不确定权重?→ 第二课题给复用度/算力更高权重（快是核心优势）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用评分矩阵客观选定第二课题</strong>。<strong>做了</strong>（评分矩阵 + 决策）、<strong>学了</strong>（结构化客观决策、第二课题给复用度/算力高权重）、<strong>会了</strong>（用矩阵从多个候选中选最优）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜评分矩阵选题（第二课题版）</strong>：复用M3的矩阵（创新/可行/匹配/算力/9月内完成），给3候选每维度打分加权求和选最优。第二课题<strong>给“复用度/算力”更高权重</strong>——核心优势是快（复用第一篇），复用度低的候选会失去这优势。结构化决策避免被单个亮点误导。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 文献调研（3 候选各 5 篇） ✅ <strong>第二课题决策</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D198</summary><textarea data-note="d198" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d199" data-d="199"><header class="day-head"><span class="dnum">D199</span><h2 class="day-t">周三 · 第二课题 toy 实验（复用框架，改动很小）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午搭第二课题的 toy 实验（复用第一课题代码框架，改动应很小）；中午数据准备；晚上启动 toy 实验。</p>
+<p><strong>预期管理</strong>：今天搭第二课题toy实验。提醒：<strong>toy实验是立项的安全阀</strong>——别一上来投入大实验，先用小成本的toy实验验证方向有没有正信号，有信号再投入；第二课题toy实验应<strong>复用第一课题代码框架、改动很小</strong>（这正是第二课题“快”的体现）；如果改动比预想大，说明第二课题和第一篇差异较大，要评估是否值得（或换更近的候选）；数据准备好、启动toy，明天看信号。</p>
+</blockquote>
+</div><section class="slot" id="d199-am" data-d="199" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D199 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">搭 toy 实验（复用第一课题代码框架）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（toy 实验：立项的安全阀 + 第二课题为什么快）</h4><div class="blk-b"><ul>
+<li><strong>toy 实验 = 用小成本快速验证方向有没有“正信号”</strong>。立项后别一上来就投入大实验（几周的实验战役），<strong>先搭一个 toy 实验（小数据/简化设置/快速跑），看这个方向有没有希望</strong>——有正信号（初步结果合理、方向 work）再投入大实验，没信号就及时止损（换候选）。toy 实验是立项的“安全阀”，避免在没希望的方向上浪费几周。</li>
+<li><strong>第二课题为什么能更快（复用三件套）</strong>：第二课题预期只需 4 个月(M8-M12)，远快于第一篇的 8 个月(M1-M8)——因为你已经有了:① <strong>代码框架</strong>（直接复用，toy 实验改动应很小）;② <strong>领域知识</strong>（不用重学遥感/检测的基础）;③ <strong>实验经验</strong>（知道怎么高效做实验、避哪些坑）。<strong>第一篇你是“从零搭建一切”，第二篇是“在成熟基础上推进”</strong>，所以快得多。这是第一篇打下基础的复利——你前 8 个月的投入，现在开始持续“付息”。</li>
+<li><strong>toy 实验“改动应很小”（检验复用度）</strong>：第二课题的 toy 实验，应该是在第一篇代码框架上做<strong>很小的改动</strong>（换数据集、改几处方法）就能跑起来。<strong>如果改动很小就跑通，说明复用度高、第二课题选对了（能快）；如果改动很大，说明第二课题和第一篇差异较大</strong>——要重新评估是否值得（或换个更近的候选）。所以 toy 实验也是对“复用度”的实测检验。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在第一课题代码框架上，搭第二课题的 toy 实验（换数据集、改少量方法）。</li>
+<li>改动应很小（复用度高的体现）。</li>
+<li>确认能跑起来（toy 规模，快速）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题 toy 实验搭好（基于复用框架，几处小改），准备跑。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>toy 实验改动比预想大很多</strong> → 说明第二课题和第一篇差异较大，评估是否值得（或换更近的候选）。</li>
+<li><strong>一上来就搭大实验</strong> → 先 toy 验证信号，有希望再投入大实验（安全阀）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>改动很大跑不起来?→ 重新评估第二课题的复用度，可能要换个更近第一篇的候选；不知 toy 怎么搭?→ 用第一篇框架 + 小数据 + 简化设置，快速跑出初步结果。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>搭 toy 实验验证方向（复用框架）</strong>。<strong>做了</strong>（基于第一篇框架搭第二课题 toy）、<strong>学了</strong>（toy 是立项安全阀、第二课题复用三件套更快、toy 检验复用度）、<strong>会了</strong>（用小成本快速验证新方向）。</p>
+</div></section></section><section class="slot" id="d199-noon" data-d="199" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D199 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">数据准备</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>为第二课题的 toy 实验准备数据——下载/整理第二课题的数据集（如第二课题是 SAR 旋转检测，准备 SAR 数据）。<strong>复用第一篇的统一数据层</strong>，加个解析分支适配第二课题的数据格式即可。</p>
+<ul>
+<li><strong>复用统一数据层（又一次复利）</strong>：你 W11 建的统一数据层，加个解析分支就能适配新数据集——第二课题的数据接入，几乎零成本。这又是第一篇良好工程设计的复利：接新数据集不用重写 pipeline，加个适配分支即可。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>下载/整理第二课题的数据集。</li>
+<li>用统一数据层 + 加解析分支适配第二课题数据格式。</li>
+<li>准备好 toy 实验用的小数据子集。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题数据准备好（统一数据层适配）,toy 实验用的小数据子集就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>为新数据重写数据 pipeline → 复用统一数据层加分支即可；直接用全量数据跑 toy → toy 用小子集快速跑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>新数据格式怪?→ 看数据集的官方读取示例，加对应解析分支；数据下载慢?→ 后台下，先用小样本搭起 toy。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>为第二课题准备了数据（复用数据层）</strong>。<strong>做了</strong>（数据准备 + 统一数据层适配）、<strong>学了</strong>（复用数据层接新数据零成本、toy 用小子集）、<strong>会了</strong>（快速接入新课题的数据）。</p>
+</div></section></section><section class="slot" id="d199-pm" data-d="199" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D199 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 toy 实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>启动第二课题的 toy 实验（小数据/简化设置/快速跑），明天(D200)看结果有没有正信号。<strong>toy 实验跑得快（小规模），今晚启动、明天看信号</strong>——快速验证、快速决策。</p>
+<ul>
+<li><strong>toy 实验看什么信号</strong>:toy 实验不追求好结果，只看<strong>有没有“正信号”</strong>——loss 正常下降吗？初步指标合理吗？方法在新场景上 work 吗（哪怕初步）？<strong>有这些正信号，说明方向有希望，值得投入大实验；没有（loss 不降、结果异常），说明方向可能有问题，要排查或换候选</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动第二课题 toy 实验（小规模、快速）。</li>
+<li>监控启动是否正常（loss 下降、无报错）。</li>
+<li>明天看 toy 结果的正信号。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题 toy 实验启动（基于复用框架），运行正常，等明天看信号。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>toy 实验规模太大跑太久 → toy 用小规模快速跑（几小时出初步信号）；启动了不监控 → 看 loss 是否正常下降。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>toy 启动就报错?→ 多半是数据适配/接口问题，排查改动处；loss 不降?→ 明天结合结果判断（可能要调或换候选）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了第二课题 toy 实验</strong>。<strong>做了</strong>（启动 toy + 监控）、<strong>学了</strong>（toy 快速跑看正信号、快速验证决策）、<strong>会了</strong>（低成本启动新方向的验证）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜toy 实验（立项安全阀）</strong>：立项后别直接投大实验，先搭toy（小数据/简化/快速跑）看有没有正信号（loss降、初步结果合理、方法work）——有信号再投入，没信号及时止损/换候选。第二课题toy复用第一篇框架、改动应很小（也检验复用度）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 第二课题 toy 实验启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D199</summary><textarea data-note="d199" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d200" data-d="200"><header class="day-head"><span class="dnum">D200</span><h2 class="day-t">周四 · toy 信号判断 + 写第二课题 Proposal v1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午看 toy 实验的正信号、决定继续还是换候选；中午晚上写第二课题 Proposal v1（复用第一篇结构，又快又熟）。</p>
+<p><strong>预期管理</strong>：今天做toy信号判断 + 写第二课题Proposal v1。提醒：toy实验看“有没有正信号”（loss降/初步结果合理/方法work）——有信号则方向有希望、继续投入，没信号则及时换候选（这正是toy作为“立项安全阀”的价值，避免在死方向上耗几个月）；写Proposal可<strong>复用第一篇的结构</strong>（背景→Gap→方法设想→实验计划→预期贡献），你写过一次又熟又快，这就是“第一篇基础的复利”。</p>
+</blockquote>
+</div><section class="slot" id="d200-am" data-d="200" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D200 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">判断 toy 信号：继续 or 换候选</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（toy 实验是立项的“安全阀”）</h4><div class="blk-b"><ul>
+<li>昨天启动的 toy 实验今天出初步结果——<strong>关键看有没有“正信号”</strong>:loss 正常下降吗？初步指标合理吗？你的方法设想在新场景上 work 吗（哪怕粗糙）？</li>
+<li><strong>toy 实验为什么是“安全阀”</strong>：第二课题是一次新的投入（接下来 M8-M12 约 4 个月）。如果方向其实有问题（数据不行、方法设想不 work），<strong>越早发现越好</strong>——toy 实验就是用最小成本（一两天）先探一探，<strong>有正信号再投入大实验，没信号及时止损/换候选</strong>。这避免了“埋头干了两个月才发现方向死了”的最坏情况。<strong>立项不是拍脑袋定下来就猛冲，而是 toy 验证有希望了再投入</strong>。</li>
+<li><strong>怎么判断“正信号”vs“该换”</strong>:① <strong>有正信号</strong>（loss 降、初步结果合理、方法初步 work）→ 方向有希望，继续，今天就开始写 Proposal;② <strong>无正信号</strong>（loss 不降、结果异常、方法明显不 work）→ 先排查是不是 bug/数据问题（toy 的问题常是工程问题而非方向问题）；排查后确实是方向问题 → 换 D198 评分矩阵里排第二的候选，重新 toy。<strong>别因为“已经选了”就硬上一个没信号的方向</strong>。</li>
+<li><strong>和你定位的呼应（★校准：小而硬、单卡可做）</strong>：第二课题方向（如光学旋转检测→SAR 旋转检测的跨模态迁移）要<strong>校准到“小而硬、单卡可做”</strong>——不贪大（不做需要大算力的方向），选一个具体、有挑战、但你单张 4090 能推进的问题。toy 实验也在帮你确认这一点：如果 toy 在单卡上都跑得很吃力，说明方向的算力需求可能超出你的条件，要调整。<strong>始终把“单卡可持续推进”作为方向可行性的硬约束。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>看 toy 实验结果，判断有没有正信号（loss/初步指标/方法是否 work）。</li>
+<li>有信号 → 继续，进入写 Proposal；无信号 → 先排查工程问题，确实是方向问题就换候选重 toy。</li>
+<li>记录判断依据。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>对 toy 信号有明确判断（&quot;有正信号，继续&quot;或&quot;无信号，换候选 X&quot;）；有判断依据记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>把工程 bug 当成方向问题</strong> → toy 不 work 先排查是不是数据适配/接口的 bug（常是工程问题），别急着否定方向。</li>
+<li><strong>没信号还硬上</strong> → 没正信号要敢于换候选（toy 的意义就是及时止损）。</li>
+<li><strong>toy 结果好就过度乐观</strong> → toy 只是初步信号，不代表最终能成，继续保持验证。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>toy 信号模糊（不好不坏）?→ 再多跑一点（toy 稍微加点数据/epoch）看趋势；排查后还是不 work → 换候选；候选都试过没信号 → 回到 D197 重新挖更多候选，或调整方向定义。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用 toy 信号决策（继续 or 换）</strong>。<strong>做了</strong>（判断 toy 信号 + 决策）、<strong>学了</strong>（toy 是立项安全阀、有信号再投入、工程问题vs方向问题、单卡可行性硬约束）、<strong>会了</strong>（用最小成本验证方向再决定投入）。</p>
+</div></section></section><section class="slot" id="d200-noon" data-d="200" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D200 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写第二课题 Proposal v1（复用第一篇结构）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(复用第一篇结构=复利)</h4><div class="blk-b"><p>有了正信号，开始写第二课题的 Proposal v1——<strong>直接复用你第一篇的 Proposal/论文结构</strong>（背景 → Gap → 方法设想 → 实验计划 → 预期贡献）。你第一篇已经完整走过一遍，这个结构你又熟又会写。</p>
+<ul>
+<li><strong>为什么“复用结构”是巨大的复利</strong>：回想你第一篇——光是搞清楚“一个研究该怎么立项、Proposal 怎么写、实验怎么规划”就花了很多功夫（M3 立项时摸索）。<strong>现在第二课题，这套方法论你已经内化了</strong>：你知道 Proposal 该有哪些部分、每部分写什么、怎么把方向落成可执行的计划。<strong>所以第二篇的 Proposal 又快又顺</strong>——不用再摸索流程，直接套用第一篇的结构，填入第二课题的内容。这就是“第一篇基础的复利”：第一篇的经验让第二篇的每个环节都省力。</li>
+<li><strong>第二课题为什么整体更快</strong>：不只是 Proposal——第二课题（M8-M12 约 4 个月）比第一篇（约 8 个月）快得多，因为你能复用:① <strong>代码框架</strong>（第一篇的训练/评测/数据 pipeline,toy 已验证复用度高）;② <strong>领域知识</strong>（遥感背景、相关工作你已熟）;③ <strong>实验经验</strong>（怎么设计实验矩阵、怎么调试、怎么分析）。<strong>这些复用让第二篇站在第一篇的肩膀上，事半功倍。</strong></li>
+<li><strong>“技能内化第二次成本骤降”（深层的复利）</strong>：第一篇时，很多事你是“第一次做”——第一次写 Method、第一次设计消融、第一次画效率曲线、第一次投稿……每件事都要从头摸索，慢且费力。<strong>但做过一次之后，这些技能就内化成了你的能力</strong>：第二次做时，你已经知道“该怎么做、容易踩什么坑、做到什么程度算好”。所以第二篇的每个环节，成本都比第一篇骤降——不是因为第二篇更简单，而是<strong>因为你已经会了</strong>。这就是为什么“第一篇最难、之后越来越快”：第一篇你同时在“做研究”和“学怎么做研究”，第二篇开始你主要是“做研究”（怎么做已经会了）。<strong>这种能力的内化，是这一整套带教手册想帮你达成的核心目标——不是教你做完一篇论文，而是让你成为一个能独立、高效产出研究的人。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复用第一篇的 Proposal 结构，新建第二课题 Proposal v1。</li>
+<li>填入第二课题内容：背景、要解决的 Gap（从第一篇 Limitation 延伸）、方法设想、实验计划、预期贡献。</li>
+<li>结合 toy 的正信号，论证方向可行。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题 Proposal v1（复用第一篇结构，内容完整：背景/Gap/方法设想/实验计划/预期贡献）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>从零设计 Proposal 结构 → 复用第一篇的，又快又熟；Proposal 和 toy 信号脱节 → 用 toy 的正信号支撑方向可行性论证。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某部分不知怎么写?→ 翻第一篇对应部分照葫芦画瓢；方法设想还不清晰 → 没关系，Proposal v1 是初稿，后续（D201 实验、调研）会逐步清晰。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复用第一篇结构快速写出 Proposal v1</strong>。<strong>做了</strong>（复用结构 + 写 Proposal v1）、<strong>学了</strong>（复用结构是复利、第二课题整体更快的原因）、<strong>会了</strong>（高效立项第二课题）。</p>
+</div></section></section><section class="slot" id="d200-pm" data-d="200" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D200 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">完善 Proposal + 监控 toy</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>完善 Proposal v1（把方法设想、实验计划写得更具体），并继续监控 toy 实验（看正信号是否持续）。Proposal 此时是初稿，重点是把方向和计划讲清楚，不求完美。</p>
+<ul>
+<li><strong>Proposal 此刻的作用</strong>：它是你第二课题的“行动蓝图”——指导接下来 D201 的实验设计、调研重点。写清楚“我要解决什么、打算怎么做、怎么验证、预期什么贡献”，后续工作就有方向。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>完善 Proposal v1（方法设想、实验计划更具体）。</li>
+<li>继续监控 toy 实验（正信号是否持续）。</li>
+<li>确认 Proposal 能指导后续工作。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Proposal v1 完善（方向和计划清晰）;toy 实验信号持续。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Proposal 追求完美卡住 → v1 是初稿，讲清方向和计划即可，后续迭代；只写不顾 toy → 持续监控 toy 确认方向。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>实验计划不知怎么定?→ 参考第一篇的实验矩阵思路（baseline→你的方法→消融→跨数据集）；方向还有不确定 → Proposal 里诚实标注待验证的点，后续解决。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了第二课题的行动蓝图</strong>。<strong>做了</strong>（完善 Proposal + 监控 toy）、<strong>学了</strong>（Proposal 是行动蓝图、初稿讲清方向即可）、<strong>会了</strong>（为第二课题制定可执行的计划）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜toy实验决策（立项安全阀）</strong>:toy出初步结果后判断——有正信号（loss降/初步合理/方法work）则继续投入，无信号先排查工程bug、确是方向问题则换候选。别因“已选”就硬上死方向。单卡可持续推进是方向可行性的硬约束。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复用结构写Proposal（复利）</strong>：第二课题Proposal直接复用第一篇结构（背景→Gap→方法设想→实验计划→预期贡献），又快又熟。第二课题整体更快（约4个月vs第一篇8个月），因复用代码框架+领域知识+实验经验——站在第一篇肩膀上。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ toy 信号判断（继续/换候选） ✅ 第二课题 Proposal v1。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D200</summary><textarea data-note="d200" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d201" data-d="201"><header class="day-head"><span class="dnum">D201</span><h2 class="day-t">周五 · 第二课题实验矩阵 + 启动 baseline</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午设计第二课题的实验矩阵（复用 M5 矩阵结构，改数据集/方法）；中午晚上修改代码、启动 baseline。</p>
+<p><strong>预期管理</strong>：今天设计第二课题实验矩阵 + 启动baseline。提醒：<strong>复用你M5的实验矩阵结构</strong>（baseline→你的方法→消融→跨数据集），只改成第二课题的数据集/方法——又是一次复利；代码也复用第一篇框架，改动应集中在“换数据/换方法模块”上（toy已验证复用度）；先把baseline（第二课题场景下的对照基线）跑起来，有了基线后续才能衡量你的方法提升。</p>
+</blockquote>
+</div><section class="slot" id="d201-am" data-d="201" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D201 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计第二课题实验矩阵（复用 M5 结构）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（复用实验矩阵结构）</h4><div class="blk-b"><p>第二课题也要系统地做实验——<strong>复用你 M5 时建的实验矩阵结构</strong>:baseline（对照基线）→ 你的方法 → 消融（验证每个组件）→ 跨数据集验证（泛化性）。只把内容换成第二课题的（新数据集、新方法模块）。</p>
+<ul>
+<li><strong>为什么复用实验矩阵</strong>:M5 你摸索出了“怎么系统设计一组实验来证明方法有效”（主实验+消融+泛化）。<strong>这套实验设计的方法论，第二课题完全适用</strong>——同样要 baseline 对照、同样要消融证明组件有用、同样要跨数据集证明泛化。直接复用这个矩阵结构，把“实验该怎么设计”这个难题一次性解决，只需填入第二课题的具体内容。<strong>又是一次复利。</strong></li>
+<li><strong>第二课题实验矩阵的内容</strong>:① <strong>baseline</strong>——第二课题场景下的对照基线（如 SAR 旋转检测上，直接用第一篇方法/通用检测器的效果）;② <strong>你的方法</strong>——你针对第二课题的创新（如跨模态迁移模块）;③ <strong>消融</strong>——你的创新模块各部分的贡献;④ <strong>跨数据集</strong>——在多个相关数据集上验证泛化。</li>
+<li><strong>实验矩阵让“做实验”变得有章法</strong>：有了这个矩阵，你接下来几周的实验就不是“想到哪做到哪”，而是<strong>照着矩阵系统推进</strong>——先把 baseline 跑出来（对照基准）、再跑你的方法（看提升）、再消融（证明每个组件有用）、再跨数据集（证明泛化）。<strong>每一组实验都对应论文里的一个论点</strong>（主表证明有效、消融表证明组件有用、泛化表证明通用）。这种“实验矩阵 ↔ 论文论点”的对应，是你 M5 时学到的核心方法论，现在第二课题直接复用——你已经知道“要证明什么、就设计什么实验”，不用再摸索。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复用 M5 实验矩阵结构，设计第二课题的实验矩阵（baseline/你的方法/消融/跨数据集）。</li>
+<li>明确每组实验的目的和配置。</li>
+<li>先聚焦把 baseline 定义清楚（下一步先跑 baseline）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题实验矩阵（复用 M5 结构，含 baseline/你的方法/消融/跨数据集，各组目的明确）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>从零设计实验 → 复用 M5 矩阵结构；baseline 没定义清楚就跑 → 先明确 baseline 是什么（对照的基准）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知设哪些实验?→ 照 M5 矩阵的四类（主/消融/泛化）套；baseline 选什么?→ 第二课题场景下最直接的基准（如直接迁移第一篇方法、或通用方法）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复用 M5 结构设计第二课题实验矩阵</strong>。<strong>做了</strong>（设计实验矩阵）、<strong>学了</strong>（复用实验设计方法论、矩阵四类实验）、<strong>会了</strong>（系统规划第二课题的实验）。</p>
+</div></section></section><section class="slot" id="d201-noon" data-d="201" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D201 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修改代码（复用框架，改数据/方法模块）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>实现第二课题的 baseline——<strong>复用第一篇的代码框架，改动集中在“换数据/换方法模块”</strong>。toy 已经验证了复用度高（改动小），现在正式实现 baseline，改动也应集中、可控。</p>
+<ul>
+<li><strong>复用框架的改动应该“小而集中”</strong>：第一篇的训练循环、评测、日志、配置系统都能直接用，你只需:① 接入第二课题的数据（D199 已复用数据层加分支）;② 替换/增加方法模块（第二课题的创新部分）。<strong>如果发现要大改框架，说明复用度没想象中高，要反思方向（或框架设计）</strong>——但通常领域相近（都是遥感检测），复用度应该高。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复用第一篇代码框架，实现第二课题 baseline。</li>
+<li>改动集中在数据接入 + 方法模块替换。</li>
+<li>确认 baseline 代码能跑通（小规模先验证）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题 baseline 代码实现（复用框架，改动集中），能跑通。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>重写整个框架 → 复用，只改数据/方法模块；改动太散难维护 → 集中改动、用配置区分第一/第二课题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>复用时框架某处不适配?→ 加分支/配置选项适配（别推倒重写）；改动比预期大 → 反思是不是方向跨度太大，或框架可以重构得更通用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复用框架实现了第二课题 baseline</strong>。<strong>做了</strong>（改代码实现 baseline）、<strong>学了</strong>（复用框架改动应小而集中、复用度反映方向相近度）、<strong>会了</strong>（高效搭建第二课题的代码）。</p>
+</div></section></section><section class="slot" id="d201-pm" data-d="201" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D201 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动 baseline 训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>启动第二课题 baseline 的正式训练（比 toy 规模大、更完整）。baseline 是后续衡量你方法提升的“对照基准”——有了 baseline 的结果，你的方法好多少才有参照。</p>
+<ul>
+<li><strong>baseline 的意义</strong>：就像第一篇——你的方法的价值，体现在“比 baseline 提升了多少”。所以第二课题也要先有一个可靠的 baseline（在第二课题场景下，对照方法的效果），作为你创新的对照基准。先跑 baseline，后续再跑你的方法对比。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动第二课题 baseline 的正式训练。</li>
+<li>用实验矩阵管理（配置/seed/日志，复用第一篇的实验管理习惯）。</li>
+<li>监控训练正常。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题 baseline 训练启动（正式规模），实验管理就位。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不设 baseline 直接跑自己方法 → 先有 baseline 对照才能衡量提升；实验不规范管理 → 复用第一篇的实验管理(config/seed/wandb)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>baseline 训练异常?→ 检查数据接入/配置；单卡跑得慢 → 用你熟练的单卡省显存技巧，合理排期。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了第二课题 baseline</strong>。<strong>做了</strong>（启动 baseline 训练 + 实验管理）、<strong>学了</strong>（baseline 是对照基准、复用实验管理）、<strong>会了</strong>（规范地推进第二课题实验）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复用实验矩阵（复利）</strong>：第二课题复用M5实验矩阵结构（baseline→你的方法→消融→跨数据集），只换数据集/方法。代码复用第一篇框架，改动集中在数据接入+方法模块。复用度高反映方向相近（领域相近应高），把“实验怎么设计/代码怎么搭”一次性解决。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 第二课题实验矩阵 ✅ baseline 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D201</summary><textarea data-note="d201" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d202" data-d="202"><header class="day-head"><span class="dnum">D202</span><h2 class="day-t">周六 · （集中日）· 读第二课题 5 篇核心论文 + 监控实验</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>集中日：精读第二课题方向的 5 篇核心论文（成熟精读法+5段式，领域相近读得快）；监控 baseline。</p>
+<p><strong>预期管理</strong>：今天精读第二课题5篇核心论文。提醒：用你已练熟的精读法（5段式笔记：问题/方法/实验/结论/对我的启发），领域相近（都是遥感检测/迁移）读得比第一篇时快得多——又是领域知识的复利；读这5篇是为了摸清第二课题方向的现状（别人做到哪、有什么方法可借鉴、你的Gap是否真的没被解决），边读边监控baseline训练。</p>
+</blockquote>
+</div><section class="slot" id="d202-am" data-d="202" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D202 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读第二课题核心论文 1-2 篇</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（精读法复用 + 领域相近读得快）</h4><div class="blk-b"><p>第二课题方向（如 SAR 旋转检测/跨模态迁移）有它的核心论文——精读 5 篇摸清现状。<strong>用你已经练熟的精读法</strong>（M2/M3 练的 5 段式：问题/方法/实验/结论/对我的启发），系统读。</p>
+<ul>
+<li><strong>为什么“领域相近读得快”（复利）</strong>：第二课题是从第一篇 Limitation 延伸的（如光学旋转检测→SAR 旋转检测），<strong>和第一篇领域相近</strong>——很多背景、基础方法、评测协议你已经熟（第一篇读过大量旋转检测/遥感论文）。所以读第二课题的论文时，<strong>你能快速抓住重点</strong>（已知的背景跳过、聚焦新东西），比第一篇刚入门时读得快得多。<strong>这是领域知识的复利：第一篇积累的领域基础，让你读第二课题的论文事半功倍。</strong></li>
+<li><strong>读这 5 篇的目的</strong>:① 摸清第二课题方向的<strong>现状</strong>（别人做到哪一步）;② 看有什么<strong>方法可借鉴</strong>（别人怎么解决相关问题）;③ 确认你的 <strong>Gap 是否真的没被解决</strong>（避免重复别人的工作）;④ 为你的方法设想找<strong>参照和差异点</strong>（你的创新相对他们是什么）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>精读第二课题核心论文 1-2 篇（5 段式笔记：问题/方法/实验/结论/启发）。</li>
+<li>重点记：别人做到哪、有什么可借鉴、你的 Gap 是否被解决。</li>
+<li>领域相近，已知背景快速过，聚焦新东西。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>1-2 篇核心论文的 5 段式精读笔记，记录了现状/可借鉴方法/你的差异点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>从头细读已知背景 → 领域相近，已知的快速过，聚焦新方法/新发现；只读不记启发 → 5 段式必有“对我的启发”（对你方法的参照）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>论文太多不知读哪 5 篇?→ 选第二课题方向最核心/最新/被引最多的；某篇方法看不懂 → 领域相近应该不难，卡住的多是新方法细节，查清楚。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用熟练的精读法读第二课题论文</strong>。<strong>做了</strong>（精读 1-2 篇 + 5 段式笔记）、<strong>学了</strong>(精读法复用、领域相近读得快=领域知识复利)、<strong>会了</strong>（快速摸清新课题方向的现状）。</p>
+</div></section></section><section class="slot" id="d202-noon" data-d="202" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D202 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">继续精读 + 整理笔记</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续精读剩余核心论文，整理 5 篇的综合笔记——把第二课题方向的“现状地图”画出来：别人的方法分几类、各自优缺点、还有什么没解决（你的 Gap）。</p>
+<ul>
+<li><strong>综合笔记的价值</strong>:5 篇读完，不是 5 份孤立笔记，而要<strong>综合成对第二课题方向的整体认识</strong>——这个方向现在的主流方法是什么、各有什么局限、你的工作填补哪个空白。这帮你确认方向价值、完善方法设想（D200 的 Proposal 可据此更新）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>继续精读剩余论文（凑齐 5 篇）。</li>
+<li>整理综合笔记（方向现状地图：方法分类/优缺点/未解决的 Gap）。</li>
+<li>据综合认识，看是否要更新 Proposal 的方法设想。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 篇精读完成，综合笔记画出第二课题方向的现状地图。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>笔记孤立不综合 → 综合成方向的整体认识；读完不回看 Proposal → 据新认识更新 Proposal 方法设想。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>综合不出整体图景?→ 按“主流方法有哪几类、各自局限、我的 Gap”三问梳理；发现 Gap 已被解决 → 调整方向定义或换角度（早发现早调整）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>综合 5 篇形成方向认识</strong>。<strong>做了</strong>（读完 5 篇 + 综合笔记）、<strong>学了</strong>（综合成现状地图、据此完善方向）、<strong>会了</strong>（系统建立对新课题方向的认识）。</p>
+</div></section></section><section class="slot" id="d202-pm" data-d="202" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D202 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">监控 baseline + 记录进展</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>监控第二课题 baseline 训练（看是否正常、初步结果），记录 W30 的进展（立项 + Proposal + 实验启动 + 文献调研）。baseline 出结果后，你就有了第二课题的对照基准，下周(W31)可以开始跑你的方法对比。</p>
+<ul>
+<li><strong>W30 进展回顾</strong>：本周你完成了第二课题的<strong>立项闭环</strong>——从第一篇 Limitation 挖候选(D197)、调研评分选定方向(D198)、toy 验证(D199-200)、写 Proposal(D200)、设计实验+启动 baseline(D201)、文献调研(D202)。第二课题已经“立起来”并启动了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>监控 baseline 训练（正常？初步结果?）。</li>
+<li>记录 W30 进展（立项闭环 + Proposal + baseline + 调研）。</li>
+<li>baseline 出结果后，准备下周跑你的方法。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 训练监控记录；W30 进展记录（第二课题立项闭环完成）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>baseline 跑完不记结果 → 记录（作为后续对照基准）；进展不记录 → 记 W30 的立项成果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>baseline 结果异常?→ 检查数据/配置/方法实现；单卡训练慢拖进度 → 合理排期，baseline 不急于一天出。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进 baseline 并记录立项进展</strong>。<strong>做了</strong>（监控 baseline + 记进展）、<strong>学了</strong>（baseline 作为对照基准、立项闭环的回顾）、<strong>会了</strong>（跟踪第二课题的推进）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜精读法复用（领域知识复利）</strong>：第二课题论文用熟练的5段式精读法（问题/方法/实验/结论/启发），领域相近读得快（已知背景快速过、聚焦新东西）。5篇综合成方向“现状地图”（方法分类/局限/你的Gap），确认方向价值、完善方法设想。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 第二课题 5 篇核心论文精读 ✅ baseline 监控。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D202</summary><textarea data-note="d202" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d203" data-d="203"><header class="day-head"><span class="dnum">D203</span><h2 class="day-t">周日 · （复盘日）· W30 复盘 + GitHub 维护 + 计划 W31</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾：复盘第二课题立项周；维护第一篇的开源 GitHub（副线，几十分钟）；计划 W31。</p>
+<p><strong>预期管理</strong>:W30收尾：复盘 + GitHub维护 + 计划W31。提醒：本周完成了第二课题立项闭环（挖候选→选定→toy→Proposal→baseline→调研），核心经验是“复用第一篇的一切（代码/领域/方法论）让第二篇又快又顺”——这是系列工作的复利；GitHub维护是副线（看star/回issue几十分钟，你的开源仓库被动引流+作为能力证据），别喧宾夺主；计划W31推进第二课题实验（跑你的方法对比baseline）。</p>
+</blockquote>
+</div><section class="slot" id="d203-am" data-d="203" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D203 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W30 复盘（第二课题立项）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“第二课题立项”的经验（怎么从 Limitation 挖候选、怎么靠 toy 决策、复用让第二篇多快）。本周是 M8 的重头戏——<strong>第二课题立项</strong>，经验值得沉淀:① 从第一篇 Limitation 延伸找方向（形成“系列”）;② 评分矩阵决策选方向;③ toy 实验作为立项安全阀;④ 复用第一篇的一切（代码/领域知识/方法论）让第二篇又快又顺。</p>
+<ul>
+<li><strong>本周的战略意义（形成“系列”对接空天院）</strong>：第二课题从第一篇 Limitation 延伸（如光学旋转检测→SAR 旋转检测的跨模态迁移），<strong>和第一篇形成一个“系列”</strong>——这不是零散的两个工作，而是一条连贯的研究线（围绕旋转检测/跨传感器泛化/SAR 难题深入）。<strong>一个有主线的研究系列，比零散的工作更能体现你的研究深度和方向定力</strong>，也更能对接空天院（孙显/付琨/王超组）的方向。你在用第二课题，把自己的研究从“一篇论文”升级为“一条有积累的研究线”。</li>
+<li><strong>为什么“系列”对你的目标（空天院）格外重要</strong>：空天院的孙显/付琨/王超组，在旋转检测、SAR、遥感大模型等方向有深厚积累。<strong>他们看一个潜在的学生/合作者，看的不是“会不会做实验”，而是“有没有自己的研究方向和持续产出的能力”</strong>。如果你能展示“我围绕旋转检测/跨传感器泛化做了一个系列（第一篇打基础、第二篇深入 SAR），并且都是单卡高效完成的”，这比“我发了两篇不相关的论文”有说服力得多——它证明你<strong>有方向、能深入、可持续</strong>，正是做研究最需要的特质。<strong>而 SAR 方向（speckle 噪声、复数/极化、方位角敏感）恰恰是王超组的强项、也是公认的难题</strong>，你从光学延伸到 SAR，既接上了你第一篇的积累，又切入了空天院关心的硬骨头——这条系列线是你对接他们最自然的桥梁。<strong>所以第二课题立项不只是“再做一篇”，而是在战略上构建你对接空天院的研究身份。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（第二课题立项进展）。</li>
+<li>重点记立项经验（挖候选/toy 决策/复用的复利）。</li>
+<li>记第二课题已立项 + Proposal + baseline 启动。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W30 周报（第二课题立项闭环 + 经验沉淀）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账 → 记立项的关键经验和决策；不记复用的体会 → 记“复用让第二篇多快”的具体体会（为后续更多课题积累）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>经验梳理不出?→ 回看本周哪步最有收获（多半是 toy 决策、或复用框架的高效）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了第二课题立项周</strong>。<strong>做了</strong>（W30 周报）、<strong>学了</strong>（立项经验沉淀、形成系列的战略意义）、<strong>会了</strong>（总结第二课题的立项过程）。</p>
+</div></section></section><section class="slot" id="d203-noon" data-d="203" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D203 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">GitHub 维护（副线，几十分钟）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（开源维护是副线，别喧宾夺主）</h4><div class="blk-b"><p>你第一篇的代码开源在 GitHub（M8 早些时候做的）——花几十分钟维护一下：看有没有人 star、有没有 issue（别人复现时的问题）需要回复。<strong>这是副线，几十分钟即可，别喧宾夺主</strong>（主线是第二课题）。</p>
+<ul>
+<li><strong>为什么花点时间维护 GitHub（被动引流 + 能力证据）</strong>:① <strong>被动引流</strong>——一个有人用、维护良好的开源仓库，会持续被人发现、star、引用，是你工作的“被动传播”;② <strong>能力证据</strong>——干净、可复现、有人用的代码仓库，是你工程能力的直接证据（对申请/求职是加分项）;③ <strong>回 issue 体现负责</strong>——别人复现遇到问题你及时回复，体现你工作的可信和你的负责态度。<strong>但这些都是“锦上添花”的副线</strong>，你的核心是推进第二课题，GitHub 维护几十分钟点到为止。</li>
+<li><strong>怎么维护（轻量）</strong>：看 star/fork 数（了解关注度）、回复 issue（解答复现问题）、必要时修小 bug/补文档。不需要大投入，保持仓库“活着、可用”即可。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>看第一篇 GitHub 仓库的 star/issue。</li>
+<li>回复 issue（解答复现问题）、必要时修小 bug/补文档。</li>
+<li>控制在几十分钟，别影响主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>GitHub 仓库维护（回了 issue/看了关注度），控制在几十分钟。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>GitHub 维护花太多时间影响主线 → 几十分钟点到为止，主线是第二课题；issue 不回复 → 及时回复体现负责（也帮别人用上你的工作）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>issue 太多回不过来?→ 优先回复高频/影响复现的问题；没有 issue/star → 正常，持续产出更重要，仓库保持可用即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>轻量维护开源（副线）</strong>。<strong>做了</strong>（GitHub 维护 + 回 issue）、<strong>学了</strong>（开源是被动引流+能力证据、但是副线别喧宾夺主）、<strong>会了</strong>（平衡主线与开源维护）。</p>
+</div></section></section><section class="slot" id="d203-pm" data-d="203" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D203 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W31</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>计划下周(W31)——第二课题快速推进：把第一篇的创新模块迁到新场景、跑你的方法对比 baseline、消融、跨数据集验证、写第二篇 Method 骨架。<strong>全程复用，节奏比第一篇快</strong>。</p>
+<ul>
+<li><strong>W31 预告</strong>：你会复用第一篇的创新思路，迁移到第二课题场景，跑出你的方法 vs baseline 的对比（看提升），做消融、跨数据集验证，并开始写第二篇的 Method 骨架。因为全程复用（代码/经验/方法论）,W31 的节奏会比第一篇对应阶段快很多。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>梳理 W31 待办（迁移创新模块、跑你的方法、消融、跨数据集、写 Method 骨架）。</li>
+<li>确认 baseline 结果就绪（作为对照）。</li>
+<li>规划下周节奏（复用让进度更快）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W31 计划（第二课题快速推进的待办 + 节奏规划）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>计划太满不现实 → 按第二课题“复用更快”的实际节奏定；没确认 baseline 就计划对比 → 确保 baseline 结果就绪。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知 W31 先做什么?→ 先跑你的方法对比 baseline（核心），再消融/泛化；baseline 还没出 → W31 先补出 baseline 再对比。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划了第二课题的推进</strong>。<strong>做了</strong>（W31 计划）、<strong>学了</strong>（第二课题复用更快的节奏、对比需 baseline 就绪）、<strong>会了</strong>（规划第二课题的快速推进）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜形成研究系列（对接空天院）</strong>：第二课题从第一篇Limitation延伸（如光学旋转检测→SAR旋转检测），与第一篇形成连贯“系列”（围绕旋转检测/跨传感器泛化/SAR难题深入）。有主线的系列比零散工作更体现研究深度与方向定力，更能对接空天院方向。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜开源维护（副线）</strong>：第一篇GitHub仓库花几十分钟维护（看star/回issue/修小bug）——被动引流+工程能力证据+体现负责。但是副线，点到为止，核心是推进第二课题，别喧宾夺主。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W30 ✅ GitHub 维护 ✅ W31 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W30 累计交付</h2><p>第二课题<strong>立项闭环</strong>：从第一篇 Limitation 挖候选（整理候选来源+挑3方向+mini-proposal×3）→ 候选调研+评分矩阵决策选定方向 → toy 实验验证（复用框架，改动很小）→ toy 信号判断 + 写 Proposal v1（复用第一篇结构）→ 设计实验矩阵（复用 M5 结构）+ 启动 baseline → 精读第二课题 5 篇核心论文（综合成现状地图）、GitHub 维护（副线）、W30 周报 + W31 计划。本周你完成了第二课题的立项——核心是学会了<strong>从第一篇 Limitation 延伸找方向（形成“系列”对接空天院）</strong>、用 <strong>toy 实验作为立项安全阀</strong>（有信号再投入、没信号及时换）、以及<strong>复用第一篇的一切（代码框架/领域知识/实验方法论）让第二篇又快又顺</strong>（第二课题约 4 个月 vs 第一篇 8 个月，这是第一篇基础的复利）。</p>
+</section><section class="wtail"><h2>🎓 W30 你“长出来”的能力清单</h2><ul>
+<li>从第一篇 <strong>Limitation 延伸</strong>找第二课题（形成研究“系列”，对接空天院方向）</li>
+<li>候选<strong>评分矩阵决策</strong>（复用 M3 矩阵）选定第二课题（复用度+算力高权重）</li>
+<li><strong>toy 实验作为立项安全阀</strong>（有正信号再投入、没信号及时换候选，单卡可行性硬约束）</li>
+<li><strong>复用第一篇结构写 Proposal</strong>、复用 M5 结构设计实验矩阵、复用框架搭 baseline（复利）</li>
+<li>第二课题论文<strong>精读法复用</strong>（领域相近读得快，综合成现状地图）</li>
+<li>开源 <strong>GitHub 维护</strong>（副线：被动引流+能力证据，点到为止别喧宾夺主）</li>
+<li><strong>核心认知</strong>：第二课题更快是因复用代码框架+领域知识+实验经验（第一篇基础的复利）、toy 是立项安全阀避免死方向上耗几个月、从 Limitation 延伸形成系列比零散工作更体现深度、★方向要校准到小而硬单卡可做</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D203</summary><textarea data-note="d203" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W30 加厚补充包（范例 / 实用工具+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 第二课题候选来源 + 评分矩阵 + Proposal 结构</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 第二课题候选来源清单（从第一篇延伸）</span>
+来源1:第一篇的Limitation（如&quot;方法在SAR上未验证&quot;→SAR旋转检测）
+来源2:第一篇审稿/mock review提的&quot;未来工作&quot;
+来源3:领域趋势 × 你的发力线（跨传感器泛化/小样本/SAR难题）
+→ 挑3个方向，各写200字mini-proposal（要解决什么/怎么做/为何可行）
+
+<span class="gh"># 候选评分矩阵（复用M3，复用度+算力高权重）</span>
+| 候选 | 数据可得 | 代码复用度★ | 时间 | 算力(单卡)★ | 创新性 | 加权分 |
+|---|---|---|---|---|---|---|
+| 光学→SAR旋转检测 | 4 | 5 | 4 | 4 | 4 | 4.3 ←选 |
+| 小样本旋转检测 | 3 | 4 | 3 | 4 | 4 | 3.6 |
+| 多模态融合检测 | 3 | 3 | 2 | 3 | 4 | 3.0 |
+（★复用度、算力权重高：复用度高=第二篇更快；单卡可做=可持续）
+
+<span class="gh"># 第二课题Proposal结构（复用第一篇）</span>
+<span class="k">1.</span> 背景与动机（第二课题场景的重要性）
+<span class="k">2.</span> Gap（从第一篇Limitation延伸，别人未解决的问题）
+<span class="k">3.</span> 方法设想（你的创新，复用+针对新场景）
+<span class="k">4.</span> 实验计划（复用M5矩阵：baseline/你的方法/消融/跨数据集）
+<span class="k">5.</span> 预期贡献（形成系列、效率/小样本卖点）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 候选评分 + 复用框架 toy</h2>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ① 候选评分（复用度/算力高权重，选第二课题）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">score_candidate</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="mf">0.15</span><span class="p">,</span><span class="s2">&quot;reuse&quot;</span><span class="p">:</span><span class="mf">0.25</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="mf">0.15</span><span class="p">,</span><span class="s2">&quot;compute&quot;</span><span class="p">:</span><span class="mf">0.25</span><span class="p">,</span><span class="s2">&quot;novelty&quot;</span><span class="p">:</span><span class="mf">0.20</span><span class="p">}):</span>
+    <span class="c1"># reuse=代码复用度, compute=单卡可行性，权重最高（第二篇更快+可持续）</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">w</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">cands</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;光学→SAR旋转检测&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;reuse&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;compute&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;novelty&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+    <span class="s2">&quot;小样本旋转检测&quot;</span><span class="p">:</span>   <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;reuse&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;compute&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;novelty&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cands</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">score_candidate</span><span class="p">(</span><span class="n">cands</span><span class="p">[</span><span class="n">c</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">cands</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">score_candidate</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;→ 选定第二课题: </span><span class="si">{</span><span class="n">best</span><span class="si">}</span><span class="s2">（复用度+单卡可行性权重最高）&quot;</span><span class="p">)</span>
+
+<span class="c1"># ② 复用第一篇框架跑 toy（改动应很小=检验复用度）</span>
+<span class="c1"># from first_project.train import Trainer       # 直接复用训练框架</span>
+<span class="c1"># from first_project.data import build_loader   # 复用数据层（加新数据分支）</span>
+<span class="c1"># 第二课题 toy：只改 ①数据集 ②方法模块，其余复用</span>
+<span class="c1"># trainer = Trainer(cfg_second_task_toy)         # toy=小数据/简化/快速跑</span>
+<span class="c1"># trainer.fit()  # 看正信号：loss降?初步结果合理?方法work?→ 有则继续，无则换候选</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 评分矩阵把“复用度+单卡可行性”权重设高，选出又快又可持续的第二课题;② 复用第一篇框架跑 toy，改动小（只换数据/方法）既快又检验复用度，toy 看正信号决定继续/换。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D197</strong>：① 第二课题为什么从第一篇 Limitation 挖（形成系列）？② mini-proposal 要写哪几点？③ 为什么第二课题整体比第一篇快？</li>
+<li><strong>D198</strong>：① 候选评分矩阵为什么给“复用度+算力”高权重？② 为什么从 3 个候选里选（而非只看 1 个）？</li>
+<li><strong>D199</strong>：① toy 实验为什么改动应很小（检验什么）？② 数据准备为什么复用数据层加分支？</li>
+<li><strong>D200</strong>：① toy 看什么“正信号”？没信号怎么办？② 为什么 toy 是“立项安全阀”？③ 为什么 Proposal 复用第一篇结构又快又熟？</li>
+<li><strong>D201</strong>：① 实验矩阵复用 M5 的哪四类实验？② 为什么先跑 baseline？③ 复用框架改动应集中在哪？</li>
+<li><strong>D202</strong>：① 为什么第二课题论文读得比第一篇快（领域知识复利）？② 5 篇综合成什么（现状地图看哪三点）？③ 读这 5 篇的四个目的是什么？</li>
+<li><strong>D203</strong>：① 第二课题形成“系列”对接空天院的意义（为什么系列比零散工作更有说服力）？② 为什么 SAR 方向是对接空天院最自然的桥梁？③ GitHub 维护为什么是副线、价值是什么？④ 第二课题为什么约 4 个月就能完成（技能内化）？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第二课题方向找不到</td>
+<td>没从第一篇延伸</td>
+<td>从Limitation/未来工作/发力线挖候选，形成系列</td>
+</tr>
+<tr>
+<td>选方向纠结</td>
+<td>没量化标准</td>
+<td>评分矩阵（复用度+单卡可行性高权重）决策</td>
+</tr>
+<tr>
+<td>toy实验改动很大</td>
+<td>复用度低/方向跨度大</td>
+<td>反思方向是否太远；框架可重构得更通用</td>
+</tr>
+<tr>
+<td>toy无信号还硬上</td>
+<td>舍不得换</td>
+<td>toy是安全阀，先排查bug、确是方向问题则换候选</td>
+</tr>
+<tr>
+<td>把toy的bug当方向问题</td>
+<td>没排查工程问题</td>
+<td>toy不work先查数据适配/接口bug（常是工程问题）</td>
+</tr>
+<tr>
+<td>第二篇又从零摸索</td>
+<td>没复用</td>
+<td>复用代码框架/领域知识/实验方法论=复利，又快又顺</td>
+</tr>
+<tr>
+<td>方向贪大单卡跑不动</td>
+<td>没校准算力</td>
+<td>方向校准到小而硬、单卡可做（可持续性硬约束）</td>
+</tr>
+<tr>
+<td>GitHub维护占太多时间</td>
+<td>喧宾夺主</td>
+<td>副线几十分钟点到为止，核心是推进第二课题</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="stage2b-full.html"><span class="dir">← 上一篇</span><span class="nm">M8+连接期详注版（W29–W48）</span></a><a class="next" href="w31.html"><span class="dir">下一篇 →</span><span class="nm">W31 第二课题快速推进</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d197">D197 周一</a><a class="sub" href="#d197-am">上午 回顾第一篇 Limitation</a><a class="sub" href="#d197-noon">中午 从清单中挑 3 个最有潜力的方向</a><a class="sub" href="#d197-pm">晚上 每个候选写 1 段 mini-p</a><a href="#d198">D198 周二</a><a class="sub" href="#d198-am">上午 调研 3 个候选的文献（每个 5</a><a class="sub" href="#d198-noon">中午 评估可行性（数据 / 代码复用度</a><a class="sub" href="#d198-pm">晚上 用评分矩阵决策，选定第二课题</a><a href="#d199">D199 周三</a><a class="sub" href="#d199-am">上午 搭 toy 实验（复用第一课题代</a><a class="sub" href="#d199-noon">中午 数据准备</a><a class="sub" href="#d199-pm">晚上 启动 toy 实验</a><a href="#d200">D200 周四</a><a class="sub" href="#d200-am">上午 判断 toy 信号：继续 or </a><a class="sub" href="#d200-noon">中午 写第二课题 Proposal v</a><a class="sub" href="#d200-pm">晚上 完善 Proposal + 监控</a><a href="#d201">D201 周五</a><a class="sub" href="#d201-am">上午 设计第二课题实验矩阵（复用 M5</a><a class="sub" href="#d201-noon">中午 修改代码（复用框架，改数据/方法</a><a class="sub" href="#d201-pm">晚上 启动 baseline 训练</a><a href="#d202">D202 周六</a><a class="sub" href="#d202-am">上午 精读第二课题核心论文 1-2 篇</a><a class="sub" href="#d202-noon">中午 继续精读 + 整理笔记</a><a class="sub" href="#d202-pm">晚上 监控 baseline + 记录</a><a href="#d203">D203 周日</a><a class="sub" href="#d203-am">上午 W30 复盘（第二课题立项）</a><a class="sub" href="#d203-noon">中午 GitHub 维护（副线，几十分</a><a class="sub" href="#d203-pm">晚上 计划 W31</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

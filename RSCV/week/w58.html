@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="3" data-week="58">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W58 · 论文冲刺（下）—— 第三篇论文 v1.0 定稿  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段三 · 深化期</span><span>M15 访问 / 远程合作</span><span>·</span><span>Week 58</span><span>·</span><span>D400–D406</span></div><h1 class="title">论文冲刺（下）—— 第三篇论文 v1.0 定稿 + ★ 访问确认最终判断 + 投稿准备</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆 · 单周文件）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="400" data-k="am" title="D400 上午段"></i><i data-d="400" data-k="noon" title="D400 中午段"></i><i data-d="400" data-k="pm" title="D400 晚上段"></i></span><span class="sday"><i data-d="401" data-k="am" title="D401 上午段"></i><i data-d="401" data-k="noon" title="D401 中午段"></i><i data-d="401" data-k="pm" title="D401 晚上段"></i></span><span class="sday"><i data-d="402" data-k="am" title="D402 上午段"></i><i data-d="402" data-k="noon" title="D402 中午段"></i><i data-d="402" data-k="pm" title="D402 晚上段"></i></span><span class="sday"><i data-d="403" data-k="am" title="D403 上午段"></i><i data-d="403" data-k="noon" title="D403 中午段"></i><i data-d="403" data-k="pm" title="D403 晚上段"></i></span><span class="sday"><i data-d="404" data-k="am" title="D404 上午段"></i><i data-d="404" data-k="noon" title="D404 中午段"></i><i data-d="404" data-k="pm" title="D404 晚上段"></i></span><span class="sday"><i data-d="405" data-k="am" title="D405 上午段"></i><i data-d="405" data-k="noon" title="D405 中午段"></i><i data-d="405" data-k="pm" title="D405 晚上段"></i></span><span class="sday"><i data-d="406" data-k="am" title="D406 上午段"></i><i data-d="406" data-k="noon" title="D406 中午段"></i><i data-d="406" data-k="pm" title="D406 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：欢迎进入 <strong>W58（M15 第二周，论文冲刺 + 等待访问确认·下半）</strong>！上一周（W57）你把论文从 v0.5 打磨到接近 v1.0、做了 mock review 自审。这一周做三件事：① ★ <strong>第三篇论文 v1.0 定稿</strong>（英文润色 + 图表定稿 + supplementary，到真正的投稿级）；② ★ <strong>访问确认最终判断</strong>（W58 周四——确认则准备出行、通知导师；被拒/无回复则不纠结、启动 Plan B：其他遥感团队 或 线上远程合作）；③ <strong>选第三篇投稿目标 + 投稿准备</strong>（Cover Letter + 格式调整 + 投稿决策）。★ W58 的主线：“把第三篇论文定稿到投稿级，对访问做最终判断（确认或 Plan B），并完成投稿准备——给 M15 前半画上句号。”
+<strong>本周科研能力目标</strong>（你原计划，保留）：论文 v1.0 定稿（投稿级）+ 访问确认最终判断（确认或 Plan B）+ 选第三篇投稿目标 + 投稿准备。
+<strong>承上</strong>：W57 你把论文打磨到接近 v1.0、做了 mock review。<strong>本周把论文定稿到投稿级、对访问做最终判断、完成投稿准备，给 M15 前半收官。</strong></p>
+<p><strong>🧩 贯穿线索</strong>：论文定稿复用前两篇的润色/定稿经验。★ <strong>英文润色对非母语的你尤其重要</strong>（“writing needs improvement”是常见审稿意见——工具辅助 + 人工通读，地道的语言不加分但糟糕的语言会减分）。★ <strong>访问确认判断的核心认知：访问只是手段、合作才是目的</strong>——现场去不了还能线上远程合作写论文，路从来不止一条，绝不因一个结果就停摆。★ 投稿决策据是否有合作署名：有空天院老师署名→和老师商量（可能推迟到访问期间合作后投）；没有→自己投（建议选不同于前两篇的期刊）。守核心延后、单卡高效照旧。下一程（W59-60）访问准备 / 第三篇投稿 + M15 月复盘。</p>
+<p><strong>📌 本周结构</strong>：D400 论文英文润色 + 访问跟进；D401 图表定稿 + supplementary；D402 论文整体定稿 + 投稿目标初选；D403 ★ 访问确认最终判断 + 据判断行动；D404 选第三篇投稿目标 + Cover Letter；D405 投稿准备（格式调整 + 材料齐全 + 投稿决策）；D406 W58 复盘 + M15 前半收官 + 计划 W59-60。</p>
+</blockquote>
+<hr />
+<h2>🧭 W58 总览：论文 v1.0 定稿 → 访问确认判断 → 投稿准备</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这一周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>★ 论文 v1.0 定稿（润色 + 图表 + supplementary）</td>
+<td>投稿级论文</td>
+<td>第三篇论文磨到能投</td>
+</tr>
+<tr>
+<td>★ 访问确认最终判断（确认 / Plan B）</td>
+<td>访问方向明确</td>
+<td>连接落定、绝不停摆</td>
+</tr>
+<tr>
+<td>选第三篇投稿目标 + Cover Letter</td>
+<td>投稿目标 + 投稿信</td>
+<td>投稿就绪</td>
+</tr>
+<tr>
+<td>投稿准备 + 投稿决策（投/推迟）</td>
+<td>投稿材料 + 决策</td>
+<td>第三篇投出或定方案</td>
+</tr>
+<tr>
+<td>W58 复盘 + 计划 W59-60</td>
+<td>复盘 + 计划</td>
+<td>M15 前半收官、衔接后半</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D400 英文润色 + 访问跟进；D401 图表定稿 + supplementary；D402 整体定稿 + 投稿目标初选；D403 ★ 访问确认最终判断；D404 选投稿目标 + Cover Letter；D405 投稿准备 + 投稿决策；D406 复盘 + 计划 W59-60。<strong>核心心态：这一周是“定稿 + 落定”——论文从接近 v1.0 定稿到真正的投稿级（语言地道、图表精良、补充材料齐全），其中 ★ 英文润色值得花时间（对非母语的你，语言是容易被诟病的点，工具辅助但一定人工通读）。而 W58 周四的 ★ 访问确认判断，是 M15 前半连接这条线的关键决策点——确认了就高兴地准备出行，没确认也绝不纠结、绝不停摆：立即启动 Plan B（联系其他遥感团队，或者★线上远程合作写论文）。这背后是一个让你不被任何单一结果卡住的认知：访问只是手段，合作才是目的；现场去不了还能远程，这个团队不行还有其他。而且，即便这次没促成访问，你这一路积累的东西（三篇论文、和老师的交流、执行力展示的好印象）一个都没丢——它们是你下一轮联系/申请/找工作的硬资产。★ 走到这里，你的第三篇论文就要投出去了——这个完全属于你、不依赖任何人的硬产出，是 M15 前半最实在的胜利。把论文定稿投出、把访问方向定下，给 M15 前半画上一个扎实的句号。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d400" data-d="400"><header class="day-head"><span class="dnum">D400</span><h2 class="day-t">周一 · 论文 v1.0 定稿——英文润色 + 访问申请跟进</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 第一天，论文定稿启动——① 上午英文润色（语法/表达/学术性，工具辅助 + 人工通读）；② 中午访问申请跟进（临近最终判断，确认状态）；③ 晚上英文润色继续 + 据 W57 mock review 的修改清单完成修改。提醒：英文润色对非母语的你尤其重要——地道的语言不会让好论文加分，但糟糕的语言会让好论文减分；工具能辅助，但一定要人工通读（工具改不出地道的学术表达和篇章逻辑）。</p>
+</blockquote>
+</div><section class="slot" id="d400-am" data-d="400" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D400 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">英文润色（语法/表达/学术性，工具辅助 + 人工通读）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（英文润色怎么做、为什么重要）</h4><div class="blk-b"><ul>
+<li>★ <strong>英文润色</strong>是论文定稿的关键一环，对非英语母语的你尤其重要：① <strong>语法</strong>（消除语法错误——主谓一致、时态、冠词等）；② <strong>表达</strong>（地道的学术表达——避免中式英语、用学术圈惯用的措辞）；③ <strong>学术性</strong>（正式、客观、严谨的学术语气）。<strong>做法</strong>：① <strong>工具辅助</strong>（语法检查工具做初步检查，找出明显错误）；② ★ <strong>人工通读</strong>（一定要人工逐段读——工具改不出地道的学术表达和篇章逻辑），或请英语好的同行/朋友帮看。★ <strong>为什么润色值得花时间</strong>：“writing needs improvement”是非母语作者常见的审稿意见——地道的语言不会让一篇好论文加分，但糟糕的语言会让好论文减分。</li>
+<li><strong>从哪些地方入手</strong>：先用工具扫一遍语法错误，再人工通读重点段落（Abstract/Intro/方法描述/结论），打磨表达和逻辑。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 用语法工具做初步检查（找明显错误）；② ★ 人工通读（逐段打磨表达和逻辑，尤其 Abstract/Intro/方法/结论）；③ 消除中式英语、用学术惯用表达；④ 确保语气正式客观严谨；⑤ 如可能请英语好的同行/朋友帮看。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>英文润色推进——工具查了语法、人工通读打磨了表达和逻辑，语言地道、学术、无明显错误。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>只用工具不人工通读（改不出地道表达）→ ★ 人工通读打磨。</li>
+<li>中式英语（不地道）→ 用学术圈惯用表达。</li>
+<li>不重视润色（语言失分）→ 润色值得花时间（语言会影响评价）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>英文不够好怎么办？→ 工具辅助 + 人工通读 + 请英语好的同行帮看；哪些先润色？→ Abstract/Intro/方法/结论（审稿人最先看的）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了论文的英文润色</strong>。<strong>做了</strong>（工具查语法 + 人工通读打磨 + 消除中式英语 + 确保学术语气 + 请人帮看）、<strong>学了</strong>（英文润色工具辅助 + 人工通读、语言会影响评价、重点章节先润色）、<strong>会了</strong>（把论文语言打磨到地道学术的水平）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜英文润色（投稿级语言·人工通读）</strong>：论文定稿的语言打磨，对非母语作者尤其重要——①语法（主谓/时态/冠词等错误）②表达（地道学术表达，避免中式英语）③学术性（正式客观严谨）。做法:★ 工具辅助（初步查语法）+ ★ 人工通读（工具改不出地道表达和篇章逻辑，一定逐段读，尤其 Abstract/Intro/方法/结论）+ 请英语好的同行帮看。★ 为什么值得花时间：“writing needs improvement”是非母语常见审稿意见——地道语言不加分，但糟糕语言会让好论文减分。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d400-noon" data-d="400" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D400 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问申请跟进（临近最终判断）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>本周四（D403）要对访问做最终判断，今天中午<strong>跟进访问申请状态</strong>——① 检查各渠道（老师/师兄）的回复状态（已确认/被拒/无回复）；② 对无回复且满 1 周的，确认是否已追问（如还没追问到位，可发追问）；③ 整理出各渠道的最新状态（为周四判断做准备）。<strong>临近最终判断，把访问申请的状态摸清——周四好做决策。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查各渠道回复状态（确认/被拒/无回复）；② 对满 1 周无回复的，确认是否已追问（用追问模板，可追 1-2 次）；③ 整理各渠道最新状态；④ 为周四最终判断做准备；⑤ 不焦虑（精力主要在论文定稿）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问申请状态摸清——各渠道回复状态明确、该追问的追问了，周四判断的信息就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 临近判断还没摸清状态 → 整理各渠道状态；② 该追问的没追问 → 满 1 周礼貌追问；③ 因等待焦虑 → 精力放论文定稿。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>状态怎么整理？→ 列各渠道（老师/师兄）的状态（确认/被拒/无回复 + 天数）；要不要再追问？→ 满 1 周无回复可礼貌追问 1-2 次。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跟进了访问申请、摸清了状态</strong>。<strong>做了</strong>（检查各渠道状态 + 确认追问 + 整理状态 + 为判断准备）、<strong>学了</strong>（临近判断摸清状态、该追问的追问、不焦虑）、<strong>会了</strong>（为关键决策梳理信息）。</p>
+</div></section></section><section class="slot" id="d400-pm" data-d="400" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D400 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">英文润色继续 + 据 mock review 修改清单完成修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>继续英文润色 + 据 W57 mock review 的修改清单完成修改</strong>——① 继续人工通读润色（覆盖更多章节）；② ★ 据 D398 mock review 列的修改清单，逐项完成修改（创新性表述/有效性补充/清晰性改进——把审稿人会挑的刺修复掉）；③ 标记还没改完的（明后天继续）。<strong>润色 + 修改 mock review 发现的问题，是把论文从“接近 v1.0”推向“投稿级 v1.0”的核心工作。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 继续人工通读润色（更多章节）；② ★ 据 mock review 修改清单逐项改（创新性/有效性/清晰性）；③ 把审稿人会挑的刺修复掉；④ 标记未改完的；⑤ 向 v1.0 投稿级推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>英文润色继续推进 + mock review 修改清单逐项完成——审稿人会挑的刺在修复，论文向投稿级 v1.0 推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 润色和修改脱节 → 润色同时改 mock review 问题；② mock review 列了不改（白审）→ 逐项修复；③ 改一半不标记 → 标未改完的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>先改哪些 mock review 问题？→ 必改的（影响接受的：有效性/创新性表述）先改；改不完怎么办？→ 标记，明后天继续。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>润色 + 修复了 mock review 的问题</strong>。<strong>做了</strong>（继续润色 + 据修改清单逐项改 + 修复审稿人会挑的刺 + 标未改完）、<strong>学了</strong>（润色 + 改 mock review 问题推向投稿级、必改先改）、<strong>会了</strong>（把自审发现的问题逐项修复到位）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 英文润色推进（工具 + 人工通读）✅ 访问申请跟进（摸清状态）✅ 据 mock review 修改清单完成修改（修复审稿人会挑的刺）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D400</summary><textarea data-note="d400" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d401" data-d="401"><header class="day-head"><span class="dnum">D401</span><h2 class="day-t">周二 · 论文 v1.0 定稿——图表定稿 + supplementary（补充材料）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 第二天，定稿继续——① 上午图表定稿（所有图表清晰、专业、风格统一、caption 完整）；② 中午访问跟进；③ 晚上 supplementary 补充材料（如有：额外实验、细节、可视化）。提醒：图表是论文的“门面”，精良的图表大大提升专业度和说服力；supplementary 放正文容不下但有价值的额外内容（让正文聚焦、补充材料详尽）。</p>
+</blockquote>
+</div><section class="slot" id="d401-am" data-d="401" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D401 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">图表定稿（清晰、专业、风格统一、caption 完整）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（图表定稿要做到什么）</h4><div class="blk-b"><ul>
+<li><strong>图表定稿</strong>——把论文里所有图表打磨到投稿级：① <strong>清晰</strong>（分辨率高、文字可读、不模糊）；② <strong>专业</strong>（美观、规范——坐标轴/图例/标注齐全）；③ ★ <strong>风格统一</strong>（所有图配色/字体/线宽一致，看起来是一套）；④ <strong>caption 完整</strong>（每个图表的标题说清画的什么、说明什么）；⑤ <strong>位置和引用正确</strong>（图表放在合适位置、正文都引用了）。★ <strong>结果图突出单卡高效卖点</strong>（Params/FPS 对比、性能-效率权衡——你的差异化优势）。<strong>精良的图表是论文专业度的直接体现</strong>——审稿人翻论文，图表的质量直接影响第一印象。</li>
+<li><strong>为什么图表重要</strong>：很多审稿人会先看图表（快速了解你的方法和结果）——清晰专业的图表让人一眼看懂、印象好；粗糙的图表则减分。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查所有图表清晰（分辨率/可读）；② 规范专业（坐标轴/图例/标注）；③ ★ 统一风格（配色/字体/线宽）；④ 完善 caption（说清画的什么/说明什么）；⑤ ★ 结果图突出单卡高效卖点 + 确认位置和引用。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>图表定稿——清晰专业、风格统一、caption 完整、位置引用正确，结果图突出单卡高效卖点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 图模糊/文字不可读 → 高分辨率、文字可读；② 风格不统一（东拼西凑）→ ★ 统一配色/字体/线宽；③ caption 缺失/不清 → 完善 caption；④ 不突出卖点 → 结果图突出 Params/FPS。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>图怎么统一？→ 定一套配色/字体/线宽，所有图套用；caption 写啥？→ 画的什么 + 说明什么。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>定稿了论文图表</strong>。<strong>做了</strong>（检查清晰 + 规范专业 + 统一风格 + 完善 caption + 突出卖点）、<strong>学了</strong>（图表是门面、风格统一、caption 完整、结果图突出卖点）、<strong>会了</strong>（把论文图表打磨到投稿级）。</p>
+</div></section></section><section class="slot" id="d401-noon" data-d="401" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D401 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问申请跟进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>访问申请跟进</strong>（同昨天，临近周四判断）——① 检查回复状态；② 该追问的追问；③ 更新各渠道状态。<strong>保持对访问状态的掌握，周四好决策。</strong>（简短处理，精力在论文。）</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查访问回复；② 该追问的追问；③ 更新各渠道状态；④ 为周四判断准备；⑤ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进到位——状态更新、该追问的追问了。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不更新状态 → 更新；② 频繁催 → 适度（满 1 周追 1-2 次）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>还没回怎么办？→ 正常，周四按决策树判断；有确认了？→ 准备进入出行准备。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跟进了访问申请</strong>。<strong>做了</strong>（检查回复 + 追问 + 更新状态 + 为判断准备）、<strong>学了</strong>（保持状态掌握、为周四决策准备）、<strong>会了</strong>（持续跟进关键决策的信息）。</p>
+</div></section></section><section class="slot" id="d401-pm" data-d="401" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D401 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">supplementary 补充材料</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（supplementary 放什么）</h4><div class="blk-b"><ul>
+<li><strong>supplementary（补充材料）</strong>——放正文容不下但有价值的额外内容：① <strong>额外实验</strong>（正文放不下的补充实验/更多对比/更多数据集结果）；② <strong>实现细节</strong>（详细的超参数、训练细节——方便复现）；③ <strong>额外可视化</strong>（更多可视化样例、失败案例分析）；④ <strong>数学推导</strong>（如有：详细的推导过程）。★ <strong>supplementary 让正文聚焦核心、补充材料详尽</strong>——既保持正文精炼，又给审稿人/读者完整的信息。<strong>如果论文内容已经完整、没有需要额外放的，supplementary 可以简略或省略。</strong></li>
+<li><strong>为什么用 supplementary</strong>：正文篇幅有限，但有些细节（复现细节、额外实验、可视化）对完整性有价值——放 supplementary 既不挤占正文，又让有需要的读者能查到。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 看有哪些有价值但正文放不下的内容（额外实验/细节/可视化/推导）；② 整理成 supplementary；③ 让正文聚焦核心、补充材料详尽；④ 如内容已完整则简略/省略；⑤ 确认 supplementary 和正文呼应（正文提及“详见补充材料”）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>supplementary 整理好（如有）——额外实验/细节/可视化整理成补充材料，正文聚焦、补充详尽（或确认无需 supplementary）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 该放 supplementary 的塞正文（正文臃肿）→ 移到 supplementary；② supplementary 和正文不呼应 → 正文提及“详见补充材料”；③ 为凑 supplementary 硬塞 → 有价值才放，无则省略。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>哪些放 supplementary？→ 复现细节/额外实验/更多可视化；没有额外内容？→ supplementary 可简略/省略。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了 supplementary 补充材料</strong>。<strong>做了</strong>（看有价值的额外内容 + 整理成 supplementary + 正文聚焦 + 呼应）、<strong>学了</strong>（supplementary 放正文容不下的有价值内容、正文聚焦补充详尽）、<strong>会了</strong>（用补充材料增强论文完整性而不臃肿正文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜图表定稿 + supplementary</strong>：论文定稿的两块——【图表定稿】①清晰（高分辨率/文字可读）②专业（坐标轴/图例/标注规范）③★ 风格统一（配色/字体/线宽一套）④caption 完整（画的什么/说明什么）⑤★ 结果图突出单卡高效卖点（Params/FPS）。审稿人常先看图表，精良图表=好第一印象。【supplementary】放正文容不下但有价值的内容（额外实验/复现细节/更多可视化/推导）,★ 正文聚焦核心、补充材料详尽；无额外内容则简略/省略；正文提及“详见补充材料”。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 图表定稿（清晰/专业/统一/caption/卖点）✅ 访问申请跟进 ✅ supplementary 补充材料（如有）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D401</summary><textarea data-note="d401" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d402" data-d="402"><header class="day-head"><span class="dnum">D402</span><h2 class="day-t">周三 · 论文 v1.0 整体定稿 + 投稿目标初选</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 第三天，论文定稿收尾——① 上午论文整体定稿（通读确认 v1.0 投稿级：语言/图表/内容/逻辑都到位）；② 中午访问跟进 + 投稿目标初步考虑；③ 晚上论文 v1.0 定稿确认 + 准备明天访问确认判断的信息。提醒：今天给论文 v1.0 定稿收尾、确认达到投稿级，并初步考虑投稿目标，为明天的访问判断和后续投稿做准备。</p>
+</blockquote>
+</div><section class="slot" id="d402-am" data-d="402" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D402 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文整体定稿（通读确认 v1.0 投稿级）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（整体定稿确认什么）</h4><div class="blk-b"><ul>
+<li>论文经过润色、图表定稿、supplementary 整理后，上午<strong>整体定稿</strong>——通读全文，确认达到 v1.0 投稿级：① <strong>语言</strong>（润色到地道、无明显语法错误）；② <strong>图表</strong>（精良、统一、caption 完整）；③ <strong>内容完整</strong>（各章齐全、逻辑严谨、贡献清晰、实验充分）；④ ★ <strong>mock review 问题已修复</strong>（W57 自审挑的刺都改了）；⑤ <strong>格式基本规范</strong>（待按目标期刊微调）。★ <strong>v1.0 = 投稿级</strong>——语言地道、图表精良、内容完整、逻辑严谨，可以投稿了。<strong>整体定稿是论文从“接近 v1.0”到“投稿级 v1.0”的最终确认。</strong></li>
+<li><strong>为什么要通读整体定稿</strong>：各部分分别打磨后，要通读一遍确认整体没问题（语言一致、逻辑连贯、没有遗漏）——这是投稿前的最后整体把关。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 通读全文（确认语言/图表/内容/逻辑）；② 确认 mock review 问题已修复；③ 确认内容完整、贡献清晰、实验充分；④ 确认格式基本规范（待微调）；⑤ 给 v1.0 一个“投稿级”的确认。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文 v1.0 整体定稿——通读确认语言/图表/内容/逻辑都到位、mock review 问题已修复，达到投稿级。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不通读整体（局部好整体有漏）→ 通读把关；② mock review 问题没全改 → 确认都修复了；③ 自认为好但实际有硬伤 → 对照投稿级标准（语言/图表/内容/逻辑）确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么确认投稿级？→ 语言地道 + 图表精良 + 内容完整 + 逻辑严谨 + mock review 问题修复；还有硬伤？→ 列出、今天/明天修复。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整体定稿了论文 v1.0</strong>。<strong>做了</strong>（通读确认语言/图表/内容/逻辑 + 确认 mock review 修复 + 确认投稿级）、<strong>学了</strong>（整体定稿通读把关、对照投稿级标准、最后整体确认）、<strong>会了</strong>（确认论文达到投稿级 v1.0）。</p>
+</div></section></section><section class="slot" id="d402-noon" data-d="402" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D402 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问跟进 + 投稿目标初步考虑</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午——① <strong>访问跟进</strong>（为明天判断做最后的状态确认）；② ★ <strong>投稿目标初步考虑</strong>：论文要投哪？取决于是否有空天院老师同意署名——【有老师署名】合作论文，要和老师商量投哪（可能推迟到访问期间合作后投）；【没有】你独立的第三篇，自己选（建议选不同于前两篇的期刊）。今天先初步考虑，周五（D404）正式选定。<strong>投稿目标初步考虑，让明天的访问判断和后续投稿决策有衔接。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 访问跟进（最后确认状态，为明天判断准备）；② 初步考虑投稿目标（有/无空天院老师署名两种情形）；③ 想想合作署名对投稿的影响（可能推迟到合作后投）；④ 为周五选定投稿目标做准备；⑤ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进 + 投稿目标初步考虑——访问状态确认（为明天判断准备）、投稿目标的两种情形想清楚。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不考虑投稿目标（后续抓瞎）→ 初步考虑两种情形；② 不想合作署名对投稿的影响 → 考虑（有署名可能推迟到合作后投）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>投哪还没定？→ 周五正式选（今天先想两种情形）；有合作署名怎么办？→ 和老师商量、可能推迟到访问期间合作后投。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跟进了访问、初步考虑了投稿目标</strong>。<strong>做了</strong>（访问跟进 + 初步考虑投稿目标 + 想合作署名影响 + 为周五准备）、<strong>学了</strong>（投稿目标取决于合作署名、有署名可能推迟到合作后投）、<strong>会了</strong>（把论文投稿和访问/合作情况联系起来考虑）。</p>
+</div></section></section><section class="slot" id="d402-pm" data-d="402" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D402 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文 v1.0 定稿确认 + 准备访问确认判断的信息</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上——① <strong>论文 v1.0 定稿确认</strong>（确认论文达到投稿级、可以进入投稿准备阶段，存档 v1.0）；② ★ <strong>准备明天访问确认判断的信息</strong>：整理各渠道的访问申请状态（哪些确认、哪些被拒、哪些无回复及天数），明天好按决策树判断。<strong>论文定稿确认 + 准备访问判断信息，为明天的关键决策和后续投稿铺路。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 确认论文 v1.0 达到投稿级、存档；② 整理各渠道访问申请状态（确认/被拒/无回复 + 天数）；③ 回顾访问确认判断决策树（明天用）；④ 心态准备（无论确认与否都有方案）；⑤ 为明天判断就绪。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文 v1.0 定稿确认（存档）+ 访问判断信息就绪——各渠道状态整理好、决策树在手，明天判断就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 论文定稿不存档 → 存档 v1.0；② 访问状态没整理（明天判断乱）→ 整理各渠道状态；③ 没心态准备（怕被拒）→ 无论确认与否都有方案（Plan B）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么准备判断？→ 整理各渠道状态 + 回顾决策树；怕被拒焦虑？→ 记住“访问是手段、合作是目的”，有 Plan B。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确认了论文定稿、准备了访问判断信息</strong>。<strong>做了</strong>（确认论文投稿级 + 存档 + 整理访问状态 + 回顾决策树 + 心态准备）、<strong>学了</strong>（论文定稿存档、准备判断信息、无论结果都有方案）、<strong>会了</strong>（为关键决策做充分的信息和心态准备）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 v1.0 整体定稿（投稿级确认）✅ 访问跟进 + 投稿目标初步考虑 ✅ 论文 v1.0 存档 + 访问判断信息就绪。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D402</summary><textarea data-note="d402" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d403" data-d="403"><header class="day-head"><span class="dnum">D403</span><h2 class="day-t">周四 · ★ 访问确认最终判断 + 据判断行动</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 第四天，M15 前半连接这条线的关键决策点——① 上午 ★ 访问确认最终判断（用决策器/决策树：确认/被拒/无回复）；② 中午据判断行动（情形 A 确认→准备出行启动 + 通知导师 / 情形 B→最后追问 + 启动 Plan B）；③ 晚上据判断推进（A 访问准备初步 / B Plan B 落实：其他团队或远程合作）。提醒：这是关键决策点——确认了就高兴地准备出行，没确认也绝不纠结、绝不停摆，立即启动 Plan B。★ 核心认知：访问只是手段、合作才是目的；路从来不止一条。</p>
+</blockquote>
+</div><section class="slot" id="d403-am" data-d="403" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D403 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">★ 访问确认最终判断（决策树）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么做最终判断）</h4><div class="blk-b"><ul>
+<li>★ <strong>W58 周四上午，对访问申请做最终判断</strong>——用决策树（见补充包代码“访问确认决策器”）：① 整理各渠道（老师/师兄）的最新状态（已确认/被拒/无回复 + 天数）；② <strong>判断情形</strong>：【情形 A】有渠道已确认（老师/团队同意你来访问）；【情形 B】全部被拒 或 长期无回复。③ <strong>据情形决定行动方向</strong>（A→准备出行；B→启动 Plan B）。★ <strong>这是关键决策点</strong>——明确了访问这条线的结果，才能决定 M15 后半（W59-60）是“访问准备”还是“远程合作 / 争取其他机会”。</li>
+<li><strong>为什么要在 W58 周四做判断</strong>：访问申请发出已有一段时间（M14 提交 + W57 追问），到 W58 该有个明确的判断了——不能无限期等待，要在一个时间点上落定、据结果推进。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理各渠道最新状态（确认/被拒/无回复 + 天数）；② 用决策树判断情形（A 有确认 / B 全被拒或长期无回复）；③ 明确访问这条线的结果；④ 决定行动方向（A 准备出行 / B 启动 Plan B）；⑤ 不纠结、果断判断。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问确认最终判断完成——各渠道状态整理、按决策树判断情形（A/B）、明确了访问结果和行动方向。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>无限期等待不判断（节奏拖死）→ W58 周四果断判断。</li>
+<li>被拒/无回复就消沉纠结 → 不纠结（很正常）、立即转 Plan B。</li>
+<li>判断了不据情形行动 → 明确行动方向（A 出行 / B Plan B）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>怎么判断 A 还是 B？→ 有任一渠道确认=A；全被拒或长期（2 周+）无回复=B；判断后犹豫？→ 据情形果断行动，记住有 Plan B。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>对访问做了最终判断</strong>。<strong>做了</strong>（整理各渠道状态 + 按决策树判断情形 + 明确结果 + 决定行动方向 + 不纠结）、<strong>学了</strong>（在时间点上果断判断、不无限期等、据情形行动）、<strong>会了</strong>（对一个关键的不确定决策做果断判断）。</p>
+</div></section></section><section class="slot" id="d403-noon" data-d="403" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D403 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">据判断行动（A 准备出行 / B 启动 Plan B）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（两种情形的行动）</h4><div class="blk-b"><ul>
+<li>据上午的判断，中午<strong>开始行动</strong>：</li>
+<li><strong>情形 A：访问已确认</strong>——① <strong>开始准备出行</strong>：住宿（租房空天院附近，如北京中关村/奥运村 或 西安高新区）、交通（购票）、物资（笔记本/硬盘拷代码和数据）；② <strong>通知博士导师具体日期</strong>（用之前沟通好的说辞，告知具体访问时间）；③ 进入访问准备模式（W59-60 详细准备）。</li>
+<li><strong>情形 B：访问被拒 或 无回复</strong>——① <strong>不纠结、不自我否定</strong>（被拒/无回复很正常：名额满/时间不合/对方在忙）；② <strong>发最后一次追问</strong>（如还没追问到位）；③ ★ <strong>启动 Plan B</strong>：1) <strong>其他遥感团队</strong>（联系自动化所/武大/西电等遥感强的团队）；2) ★ <strong>线上远程合作</strong>（即使不能现场访问，也能线上远程和老师/师兄合作写论文——同样建立实质的学术连接和合作成果）。</li>
+<li>★ <strong>核心认知</strong>：访问只是手段，合作才是目的。现场去不了还能远程，这个团队不行还有其他。路从来不止一条，绝不因一个结果就停摆。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>（A）① 启动出行准备（住宿/交通/物资初步）；② 通知博士导师具体日期；③ 进入访问准备。（B）① 不纠结，发最后追问（如需）；② ★ 启动 Plan B（其他遥感团队 / 线上远程合作）；③ 落实 Plan B 的具体下一步。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>据判断行动——情形 A 出行准备启动 + 通知导师；情形 B 不纠结 + 启动 Plan B（其他团队/远程合作），行动方向落地。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① A 确认了不及时准备 → 立即启动出行准备；② B 被拒就消沉停摆 → ★ 不纠结、立即 Plan B；③ B 没想到远程合作 → ★ 远程也能合作（访问是手段、合作是目的）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>A 怎么准备出行？→ 住宿/交通/物资 + 通知导师；B 的 Plan B 怎么落实？→ 联系其他遥感团队 或 找愿意远程合作的老师/师兄。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>据判断采取了行动</strong>。<strong>做了</strong>（A 启动出行准备 + 通知导师 / B 不纠结 + 启动 Plan B）、<strong>学了</strong>（A 及时准备出行、B 不纠结立即 Plan B、★ 访问是手段合作是目的）、<strong>会了</strong>（据关键判断果断采取对应行动）。</p>
+</div></section></section><section class="slot" id="d403-pm" data-d="403" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D403 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">据判断推进（A 访问准备初步 / B Plan B 落实）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上据情形<strong>进一步推进</strong>：</p>
+<ul>
+<li><strong>情形 A</strong>：访问准备初步推进（列访问行前准备清单：住宿/交通/物资/博士交接/自我介绍——W59-60 详细做）。</li>
+<li><strong>情形 B</strong>：Plan B 落实（如选了“其他遥感团队”→ 准备联系材料；如选了“线上远程合作”→ 联系愿意合作的老师/师兄、商定合作方向）。</li>
+<li><strong>无论 A 还是 B，都把连接这条线继续向前推进</strong>——不停摆，让 M15 后半有明确的方向。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>（A）① 列访问行前准备清单（住宿/交通/物资/博士交接/自我介绍）；② 初步推进；③ 为 W59-60 详细准备做准备。（B）① 落实 Plan B（联系其他团队 / 商定远程合作）；② 推进具体下一步；③ 为 W59-60 做准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>据判断推进——情形 A 访问准备初步启动（清单列好）；情形 B Plan B 落实（联系/商定），连接这条线继续向前。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① A 不列清单（准备无序）→ 列行前准备清单；② B Plan B 停在想法（不落实）→ 落实具体下一步；③ 任一情形停摆 → 继续推进连接。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>A 准备啥？→ 住宿/交通/物资/博士交接/自我介绍（W59-60 详细）；B 远程合作怎么开始？→ 联系老师/师兄、商定一个能合作的课题。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>据判断推进了连接</strong>。<strong>做了</strong>（A 列访问准备清单初步推进 / B 落实 Plan B）、<strong>学了</strong>（A 准备清单、B 落实下一步、无论如何不停摆）、<strong>会了</strong>（据判断把连接这条线继续推进）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 访问确认最终判断 + Plan B（多层备选·绝不停摆）</strong>：W58 周四对访问做最终判断——【确认】准备出行（租房空天院附近中关村/奥运村或西安高新区 + 交通票 + 笔记本/硬盘拷代码数据）+ 通知博士导师具体日期 + 进入访问准备。【被拒/无回复】不纠结（很正常：名额满/时间不合/在忙）+ 最后追问 + ★ 启动 Plan B:①其他遥感团队（自动化所/武大/西电等）②★ 线上远程合作（不去现场也能合作写论文，同样建立实质连接和成果）。★ 核心认知：访问只是手段、合作才是目的；现场去不了还能远程、这个团队不行还有其他。绝不因一个结果停摆。即便没促成，你这一路积累的（三篇论文/交流/好印象）一个没丢，是下一轮的硬资产。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ ★ 访问确认最终判断（决策树：A 确认 / B 被拒或无回复）✅ 据判断行动（A 准备出行 + 通知导师 / B 不纠结 + 启动 Plan B）✅ 据判断推进（A 访问准备初步 / B Plan B 落实）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D403</summary><textarea data-note="d403" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d404" data-d="404"><header class="day-head"><span class="dnum">D404</span><h2 class="day-t">周五 · 选第三篇投稿目标 + Cover Letter</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 第五天，投稿准备启动——① 上午选第三篇投稿目标（有空天院老师署名→和老师商量 / 没有→自己选不同刊）；② 中午访问后续（A 行前规划 / B 合作推进）；③ 晚上 Cover Letter 撰写（复用前两篇）。提醒：投稿目标取决于是否有合作署名——有署名要尊重合作者、和老师商量（可能推迟到访问期间合作后投）；没有则自己选（建议选不同于前两篇的期刊，覆盖更多审稿人、分散风险）。</p>
+</blockquote>
+</div><section class="slot" id="d404-am" data-d="404" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D404 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">选第三篇投稿目标（据合作署名情况）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么选投稿目标）</h4><div class="blk-b"><ul>
+<li><strong>选第三篇论文的投稿目标</strong>——取决于是否有空天院老师同意署名：① <strong>有空天院老师同意署名</strong>（合作论文）→ ★ <strong>和老师商量投哪里</strong>（尊重合作者意见，投目标组常投/认可的期刊）。这种情况下，投稿目标和时机都要和老师协商（可能推迟到访问期间合作完善后再投）。② <strong>没有</strong>（你独立的第三篇）→ <strong>自己选</strong>，★ <strong>建议选不同于前两篇的期刊</strong>（延续“每篇投不同刊”的策略——覆盖更多期刊和审稿人群体，也分散风险）。结合论文的方向、质量、目标期刊的范围和影响力选。</li>
+<li><strong>为什么有署名要和老师商量</strong>：合作论文的投稿涉及合作者的意见和利益——尊重合作者、和老师商量投哪/何时投，是合作的基本规矩，也关系到合作关系的维护。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 判断是否有空天院老师同意署名；②【有署名】和老师商量投哪/何时投（尊重合作者，可能推迟到合作后投）；③【无署名】自己选（★ 建议选不同于前两篇的期刊）；④ 结合论文方向/质量/期刊范围影响力选；⑤ 初步确定投稿目标。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第三篇投稿目标选定——据合作署名情况（有→和老师商量 / 无→自己选不同刊），结合论文和期刊选，投稿目标初步确定。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>有合作署名却自己定投哪（不尊重合作者）→ ★ 和空天院老师商量。</li>
+<li>第三篇投和前两篇同刊（不分散）→ ★ 投不同刊（覆盖更多审稿人 + 分散风险）。</li>
+<li>不结合论文和期刊匹配 → 据方向/质量/期刊范围选。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>有老师署名吗？→ 有→和老师商量（可能推迟到合作后投）；无→自己选不同于前两篇的刊；选哪个刊？→ 据论文方向/质量 + 期刊范围影响力（参考改投阶梯）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>选定了第三篇投稿目标</strong>。<strong>做了</strong>（判断署名情况 + 有则和老师商量/无则自己选不同刊 + 结合论文期刊选）、<strong>学了</strong>（有署名尊重合作者商量、无署名投不同刊分散风险）、<strong>会了</strong>（据合作情况和论文匹配选择投稿目标）。</p>
+</div></section></section><section class="slot" id="d404-noon" data-d="404" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D404 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问后续（A 行前规划 / B 合作推进）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午据周四的访问判断推进后续——① <strong>情形 A（访问确认）</strong>：行前规划（细化住宿/交通/物资/博士交接的安排，W59-60 详细做）；② <strong>情形 B（Plan B）</strong>：合作推进（推进远程合作的商定 / 其他团队的联系）。<strong>访问这条线据判断继续推进，和论文投稿并行。</strong>（简短处理。）</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>（A）① 细化行前规划；② 推进出行准备。（B）① 推进远程合作商定 / 其他团队联系；② 落实下一步。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问后续推进——A 行前规划细化 / B 合作推进落实。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① A 准备拖延 → 推进行前规划；② B 合作停在想法 → 落实下一步。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>A 行前规划啥？→ 住宿/交通/物资/博士交接细化；B 远程合作怎么推进？→ 和老师/师兄商定课题和分工。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了访问后续</strong>。<strong>做了</strong>（A 行前规划 / B 合作推进）、<strong>学了</strong>（访问这条线据判断持续推进、和论文并行）、<strong>会了</strong>（并行推进连接和论文投稿）。</p>
+</div></section></section><section class="slot" id="d404-pm" data-d="404" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D404 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Cover Letter 撰写（复用前两篇）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Cover Letter 怎么写）</h4><div class="blk-b"><ul>
+<li><strong>Cover Letter（投稿信）</strong>——投稿时给编辑的信，★ 复用前两篇的 Cover Letter 经验：① <strong>致编辑</strong>（简述论文标题 + 核心贡献，1-2 句）；② <strong>为什么适合该期刊</strong>（方向契合 + 创新性——说明你的论文为什么适合投这个刊）；③ <strong>声明</strong>（原创、未一稿多投、所有作者同意投稿）；④ <strong>简洁专业</strong>（半页内，正式礼貌）。★ <strong>Cover Letter 复用前两篇经验</strong>——你投过两次稿，第三次驾轻就熟。<strong>（如果是合作论文且决定推迟投稿，Cover Letter 可以先准备框架、待合作完善后定稿。）</strong></li>
+<li><strong>为什么需要 Cover Letter</strong>：Cover Letter 是给编辑的第一印象——简明地告诉编辑你的论文做了什么、为什么适合这个期刊，帮助编辑快速判断。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 用前两篇 Cover Letter 经验/模板；② 写致编辑（标题 + 核心贡献 1-2 句）；③ 写为什么适合该期刊（方向契合 + 创新性）；④ 写声明（原创/未一稿多投/作者同意）；⑤ 简洁专业（半页内）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Cover Letter 撰写好——致编辑 + 为什么适合该刊 + 声明，简洁专业（半页内），复用前两篇经验。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① Cover Letter 从零写（慢）→ 复用前两篇模板；② 冗长（编辑没耐心）→ 简洁（半页内）；③ 不说为什么适合该刊 → 点方向契合 + 创新性。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Cover Letter 写啥？→ 标题 + 贡献 + 为什么适合该刊 + 声明；合作论文推迟投？→ Cover Letter 先准备框架、待合作后定稿。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>撰写了 Cover Letter</strong>。<strong>做了</strong>（复用前两篇 + 写致编辑/贡献 + 为什么适合该刊 + 声明 + 简洁）、<strong>学了</strong>（Cover Letter 简述贡献和适合性、复用经验、简洁专业）、<strong>会了</strong>（写出专业的投稿信）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜第三篇投稿目标 + Cover Letter（复用前两篇）</strong>：选投稿目标——【有空天院老师署名】合作论文，和老师商量投哪（尊重合作者，投目标组认可的刊，可能推迟到访问期间合作后投）；【没有】自己选,★ 建议选不同于前两篇的期刊（延续“每篇投不同刊”策略：覆盖更多期刊/审稿人 + 分散风险，参考改投阶梯）。Cover Letter：致编辑（标题 + 核心贡献 1-2 句）+ 为什么适合该刊（方向契合 + 创新性）+ 声明（原创/未一稿多投/作者同意）+ 简洁专业（半页内）。复用前两篇投稿经验，第三次驾轻就熟。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 选第三篇投稿目标（据署名情况）✅ 访问后续（A 行前规划 / B 合作推进）✅ Cover Letter 撰写（复用前两篇）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D404</summary><textarea data-note="d404" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d405" data-d="405"><header class="day-head"><span class="dnum">D405</span><h2 class="day-t">周六 · 投稿准备——格式调整 + 材料齐全 + 投稿决策</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 第六天，投稿准备收尾——① 上午格式调整（按目标期刊模板/字数/参考文献格式/图表要求）；② 中午确认投稿材料齐全（论文 + Cover Letter + supplementary + 其他要求）；③ 晚上 ★ 投稿决策（投 or 推迟到访问期间合作后投——取决于是否有合作署名）。提醒：投稿准备复用前两篇经验（你投过两次稿，驾轻就熟）；投稿决策据合作署名情况——独立论文可直接投，合作论文可能推迟到合作完善后投。</p>
+</blockquote>
+</div><section class="slot" id="d405-am" data-d="405" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D405 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">格式调整（按目标期刊要求）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（格式调整做什么）</h4><div class="blk-b"><ul>
+<li><strong>格式调整</strong>——按目标期刊的格式要求调整论文：① <strong>模板</strong>（用期刊的 LaTeX/Word 模板）；② <strong>字数/页数</strong>（符合期刊的篇幅要求）；③ <strong>参考文献格式</strong>（按期刊要求的引用格式——不同期刊格式不同）；④ <strong>图表要求</strong>（分辨率、位置、格式符合期刊要求）；⑤ <strong>其他</strong>（如作者信息、关键词、伦理声明等）。★ <strong>格式调整复用前两篇经验</strong>——你投过两次，知道怎么按期刊要求调格式。<strong>格式规范是投稿的基本要求——格式不规范可能被直接退回。</strong></li>
+<li><strong>为什么格式重要</strong>：期刊对格式有明确要求，格式不符可能在初审就被退回（desk reject）——按要求调好格式，是论文进入评审的前提。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 用目标期刊的模板；② 调整字数/页数符合要求；③ 调参考文献格式（按期刊要求）；④ 调图表（分辨率/位置/格式）；⑤ 补其他要求（作者信息/关键词/声明）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>格式调整完成——模板/字数/参考文献/图表/其他都按目标期刊要求调好，格式规范。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不按期刊模板（格式乱）→ 用期刊模板；② 参考文献格式不对 → 按期刊要求调；③ 超篇幅 → 精简到符合要求。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>格式要求哪看？→ 期刊官网的 author guidelines；参考文献格式怎么调？→ 用文献管理工具切换到期刊要求的格式。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>调整了论文格式</strong>。<strong>做了</strong>（用模板 + 调字数/参考文献/图表/其他）、<strong>学了</strong>（格式按期刊要求、格式规范是投稿前提、复用前两篇经验）、<strong>会了</strong>（按目标期刊要求规范论文格式）。</p>
+</div></section></section><section class="slot" id="d405-noon" data-d="405" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D405 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">确认投稿材料齐全</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>确认投稿材料齐全</strong>——按目标期刊要求，确认所有投稿材料都准备好：① <strong>论文</strong>（定稿、格式规范的 PDF/源文件）；② <strong>Cover Letter</strong>（投稿信）；③ <strong>supplementary</strong>（补充材料，如有）；④ <strong>其他要求的材料</strong>（如 highlights、graphical abstract、作者贡献声明、利益冲突声明、推荐审稿人等——不同期刊要求不同）。★ <strong>对照期刊的投稿要求逐项确认</strong>，确保材料齐全，避免投稿时缺东西。<strong>材料齐全是顺利投稿的保证。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 对照期刊投稿要求列材料清单；② 确认论文（定稿/格式规范）；③ 确认 Cover Letter；④ 确认 supplementary（如有）；⑤ 确认其他要求材料（highlights/声明/推荐审稿人等）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>投稿材料齐全确认——论文/Cover Letter/supplementary/其他要求材料对照清单逐项确认，齐全。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不对照要求（缺材料）→ 对照期刊要求列清单确认；② 漏 highlights/声明等 → 逐项确认；③ 论文格式没最终确认 → 确认定稿格式规范。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>要哪些材料？→ 对照期刊 submission guidelines；缺什么？→ 列清单逐项补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确认了投稿材料齐全</strong>。<strong>做了</strong>（对照要求列清单 + 确认论文/Cover Letter/supplementary/其他材料）、<strong>学了</strong>（对照期刊要求确认材料齐全、避免投稿缺东西）、<strong>会了</strong>（系统确认投稿材料的完整性）。</p>
+</div></section></section><section class="slot" id="d405-pm" data-d="405" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D405 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">★ 投稿决策（投 or 推迟到访问期间合作后投）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（投稿决策怎么做）</h4><div class="blk-b"><ul>
+<li>★ <strong>投稿决策</strong>——决定现在投 还是 推迟，取决于是否有合作署名（呼应 D404）：① <strong>独立的第三篇（无空天院老师署名）</strong>→ ★ <strong>材料齐全、格式规范后，可以直接投稿</strong>（投出去！第三篇论文正式投出）；② <strong>合作论文（有空天院老师同意署名）</strong>→ ★ <strong>可能推迟到访问期间合作完善后再投</strong>（和老师商量时机——合作完善论文后投，质量更高、署名更顺）。<strong>投稿决策要据合作情况理性判断</strong>——独立论文趁热投出（你完全掌控），合作论文则尊重合作节奏（可能推迟到合作后投）。</li>
+<li><strong>为什么合作论文可能推迟</strong>：合作论文涉及合作者的投入和意见——推迟到访问期间和老师合作完善后投，既能提升论文质量（老师的指导/团队的资源），也让署名和合作更顺（合作者实际参与了）。这是“访问/合作为强作品服务”的体现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 据合作署名情况判断（独立 / 合作）；②【独立】材料齐全格式规范→ ★ 直接投稿（投出第三篇！）；③【合作】和老师商量时机→ 可能推迟到访问期间合作后投；④ 据判断行动（投出 或 定推迟方案）；⑤ 记录投稿决策。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>投稿决策完成——据合作情况判断（独立→投出 / 合作→推迟到合作后投），决策清晰、据此行动。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 独立论文准备好了不投（拖延）→ ★ 趁热投出；② 合作论文不商量就自己投（不尊重）→ 和老师商量时机（可能推迟到合作后投）；③ 投稿决策犹豫不决 → 据合作情况理性判断。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>独立论文该投吗？→ 材料齐全格式规范就投出；合作论文何时投？→ 和老师商量，可能推迟到访问期间合作完善后投。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了投稿决策</strong>。<strong>做了</strong>（据署名判断 + 独立则投出/合作则推迟到合作后投 + 据此行动 + 记录）、<strong>学了</strong>（独立论文趁热投、合作论文尊重合作节奏推迟、访问/合作为强作品服务）、<strong>会了</strong>（据合作情况做理性的投稿决策）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜投稿决策（投/推迟·据合作署名）</strong>：第三篇论文投稿决策据是否有合作署名——【独立第三篇（无空天院老师署名）】材料齐全 + 格式规范后,★ 直接投稿（趁热投出，你完全掌控的硬产出）。【合作论文（有空天院老师同意署名）】★ 可能推迟到访问期间合作完善后再投（和老师商量时机：合作完善提升质量 + 署名更顺）。★ 独立论文趁热投出、合作论文尊重合作节奏——这是“访问/合作为强作品服务”的体现。投稿准备：格式调整（期刊模板/字数/参考文献/图表）+ 材料齐全（对照期刊要求：论文/Cover Letter/supplementary/声明等）。复用前两篇经验。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 格式调整（按目标期刊要求）✅ 投稿材料齐全确认 ✅ ★ 投稿决策（独立→投出 / 合作→推迟到合作后投）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D405</summary><textarea data-note="d405" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d406" data-d="406"><header class="day-head"><span class="dnum">D406</span><h2 class="day-t">周日 · W58 复盘 + M15 前半收官 + 计划 W59-60</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W58 最后一天，也是 M15 前半收官——① 上午 W58 复盘（论文 v1.0 定稿 + 访问确认判断 + 投稿准备）；② 中午 M15 前半盘点（论文冲到 v1.0 + 访问有方向）；③ 晚上计划 W59-60（访问准备 / 第三篇投稿 + M15 月复盘）。提醒：W58 复盘给 M15 前半的论文冲刺和访问判断画句号；计划 W59-60 则衔接 M15 后半（访问准备/投稿 + 月复盘）。</p>
+</blockquote>
+</div><section class="slot" id="d406-am" data-d="406" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D406 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W58 复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W58 复盘什么）</h4><div class="blk-b"><ul>
+<li>W58 复盘重点：① <strong>论文 v1.0 定稿</strong>（英文润色 + 图表定稿 + supplementary，达到投稿级）；② ★ <strong>访问确认判断</strong>（W58 周四的判断结果——确认了进入出行准备 / 被拒或无回复启动了 Plan B）；③ <strong>投稿准备</strong>（选了投稿目标、写了 Cover Letter、调了格式、做了投稿决策——投出或定推迟方案）；④ 对照 W57-58 交付。<strong>W58 是 M15 前半的收官——论文磨到投稿级、访问做了最终判断、投稿准备就绪。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 W58 周报——① 论文 v1.0 定稿（投稿级）；② ★ 访问确认判断（结果 + 行动：出行准备 / Plan B）；③ 投稿准备（目标 + Cover Letter + 格式 + 投稿决策）；④ 对照 W57-58 交付；⑤ 提炼收获。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W58 周报——论文定稿 + 访问判断 + 投稿准备都盘点，M15 前半收官情况清楚。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只盘论文忘了访问判断 → 都盘（论文 + 访问 + 投稿）；② 不记录访问判断结果 → 明确记录（确认/Plan B）；③ 不对照交付 → 逐项确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>访问判断什么结果？→ 客观记录（确认→准备出行 / Plan B→远程合作或其他团队）；论文投了吗？→ 记录（投出 / 推迟到合作后投）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了 W58</strong>。<strong>做了</strong>（W58 周报 + 论文定稿 + 访问判断 + 投稿准备 + 对照交付 + 提炼收获）、<strong>学了</strong>（W58=论文投稿级 + 访问判断 + 投稿准备、M15 前半收官）、<strong>会了</strong>（复盘论文冲刺和关键决策周）。</p>
+</div></section></section><section class="slot" id="d406-noon" data-d="406" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D406 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">M15 前半盘点（论文冲到 v1.0 + 访问有方向）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>M15 前半盘点</strong>（W57-58 总结）——① <strong>论文</strong>（第三篇从 v0.5 冲刺到 v1.0 投稿级，投出或定推迟方案——你完全掌控的硬产出取得实质进展）；② ★ <strong>访问</strong>（做了最终判断、有了明确方向：确认→准备访问 / Plan B→远程合作或其他团队——连接这条线落定，绝不停摆）；③ <strong>整体</strong>（M15 前半既守住了研究核心产出，又给连接争取到了灵活出路）。<strong>M15 前半盘点让你看清：论文和连接两条线都有了实质进展和明确方向。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 盘点论文（v0.5→v1.0、投出/推迟方案）；② ★ 盘点访问（最终判断结果 + 方向）；③ 盘点整体（研究产出 + 连接出路）；④ 看 M15 后半（W59-60）的衔接；⑤ 立信心。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M15 前半盘点完成——论文冲到 v1.0、访问有明确方向、整体（产出 + 连接）清楚，承上启下。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只盘论文不盘访问方向 → 都盘；② 访问 Plan B 就觉得失败 → ★ Plan B（远程合作）也是实质连接，绝不停摆；③ 不看后半衔接 → 看 W59-60 衔接。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么盘 M15 前半？→ 论文（v1.0/投出）+ 访问（判断结果/方向）+ 整体；访问没确认怎么看？→ Plan B 远程合作同样推进连接，论文是你的硬资产。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>盘点了 M15 前半</strong>。<strong>做了</strong>（盘点论文 + 访问方向 + 整体 + 看后半衔接 + 立信心）、<strong>学了</strong>（M15 前半守住产出 + 争取连接出路、Plan B 也是实质连接）、<strong>会了</strong>（从阶段视角盘点论文和连接的进展）。</p>
+</div></section></section><section class="slot" id="d406-pm" data-d="406" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D406 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W59-60（访问准备 / 第三篇投稿 + M15 月复盘）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W59-60 做什么）</h4><div class="blk-b"><ul>
+<li><strong>计划 W59-60（M15 后半）</strong>——基于 W58 的访问判断和投稿决策：① <strong>如访问确认</strong>→ W59-60 详细的访问行前准备（住宿/交通/物资/博士交接/自我介绍/给团队礼物等）；② <strong>论文</strong>→ 第三篇投稿（如独立论文已投/将投）或推迟到访问期间合作后投；③ <strong>M15 月复盘</strong>（W60：用附录 E 复盘 M15，对照硬交付，计划 M16）；④ <strong>如 Plan B</strong>→ W59-60 推进远程合作 / 其他团队联系。★ <strong>W59-60 的主线据 W58 判断而定</strong>：访问成→准备访问 + 投稿；Plan B→远程合作 + 投稿。今晚把 W59-60 计划列好。</li>
+<li><strong>为什么这样衔接</strong>：W58 做了访问判断和投稿决策，W59-60 要据此推进（访问准备/远程合作 + 投稿 + 月复盘）——这是 M15 从前半（冲刺 + 判断）到后半（准备 + 投稿 + 收官）的过渡。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 列 W59-60 计划（据 W58 判断）；②【访问确认】访问行前准备要点；②【Plan B】远程合作 / 其他团队推进；③ 论文（投稿 / 推迟方案）；④ M15 月复盘（W60，附录 E）；⑤ 排好 W59-60 节奏。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W59-60 计划列好——据 W58 判断（访问准备/远程合作）+ 论文投稿 + M15 月复盘，节奏排好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不计划 W59-60（衔接断）→ 列好计划；② 不据 W58 判断（脱节）→ 据访问判断和投稿决策规划；③ 忘了 M15 月复盘 → W60 排进月复盘。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>W59-60 怎么排？→ 据 W58 判断（访问准备/远程合作）+ 论文投稿 + W60 月复盘；访问 Plan B 怎么排？→ 远程合作推进 + 投稿 + 月复盘。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>计划好了 W59-60</strong>。<strong>做了</strong>（列 W59-60 计划 + 据 W58 判断 + 论文投稿 + M15 月复盘 + 排节奏）、<strong>学了</strong>（W59-60 据 W58 判断推进、M15 从前半到后半过渡）、<strong>会了</strong>（据关键判断规划后续阶段）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜W58/M15 前半复盘 + 衔接 W59-60</strong>：M15 前半（W57-58）收官复盘——①论文 v1.0 定稿（润色 + 图表 + supplementary，投稿级，投出/推迟方案）②★ 访问确认判断（结果 + 行动：出行准备 / Plan B 远程合作或其他团队）③投稿准备（目标 + Cover Letter + 格式 + 投稿决策）。M15 前半盘点：既守住研究核心产出（论文 v1.0），又给连接争取灵活出路（访问确认或 Plan B，绝不停摆）。★ 衔接 W59-60（据 W58 判断）：【访问确认】行前准备 + 投稿 + M15 月复盘；【Plan B】远程合作 + 投稿 + 月复盘。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ W58 复盘（论文定稿 + 访问判断 + 投稿准备）✅ M15 前半盘点（论文 v1.0 + 访问有方向）✅ 计划 W59-60（访问准备/远程合作 + 投稿 + M15 月复盘）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D406</summary><textarea data-note="d406" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W58 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>论文冲刺（下），补充包给你四样可直接照用的：① 三个范例（论文 v1.0 定稿清单 · 访问确认判断决策树 + 访问追问邮件模板 · 第三篇投稿目标选择 + Cover Letter 要点）；② 一个完整可运行的“访问确认决策器”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 论文 v1.0 定稿清单</h3>
+<figure class="code" data-lang="text"><pre><code>【论文 v1.0 定稿清单（投稿级）】
+□ 英文润色(语法/表达/学术性,工具辅助+★人工通读,或请同行帮看)
+□ 据 mock review 修改清单逐项修复(创新性/有效性/清晰性)
+□ 图表定稿(清晰/专业/★风格统一/caption完整/位置引用正确/★结果图突出单卡高效)
+□ supplementary(额外实验/复现细节/更多可视化/推导,如有;正文提及&quot;详见补充材料&quot;)
+□ 整体定稿通读(语言/图表/内容/逻辑都到位)
+□ 格式调整(目标期刊:模板/字数/参考文献格式/图表要求)
+□ 投稿材料齐全(论文/Cover Letter/supplementary/highlights/声明/推荐审稿人等)
+→ v1.0=投稿级:语言地道、图表精良、内容完整、逻辑严谨。复用前两篇定稿经验。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · 访问确认判断决策树 + 访问追问邮件模板</h3>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">【访问确认判断决策树（W58周四）】</span>
+<span class="l l-Scalar l-Scalar-Plain">访问申请（发出+追问）</span>
+<span class="l l-Scalar l-Scalar-Plain">├─ 已确认 → ①准备出行(租房空天院附近中关村/奥运村或西安高新区+交通票+</span>
+<span class="l l-Scalar l-Scalar-Plain">│           笔记本/硬盘拷代码数据) ②通知博士导师具体日期 ③进入访问准备(W59-60)</span>
+<span class="l l-Scalar l-Scalar-Plain">└─ 被拒/无回复 → ①不纠结(很正常:名额满/时间不合/在忙) ②最后追问</span>
+<span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">③★Plan B</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1)其他遥感团队(自动化所/武大/西电)</span>
+<span class="w">                            </span><span class="l l-Scalar l-Scalar-Plain">2)★线上远程合作(不去现场也能合作写论文)</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">★核心认知</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">访问只是手段、合作才是目的;路不止一条,绝不停摆。</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【访问追问邮件模板（1周未回复,可追问1-2次）】</span>
+<span class="nt">X老师您好</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">冒昧再次打扰。不知您是否看到我上周的暑期访问申请——理解您工作繁忙,</span>
+<span class="l l-Scalar l-Scalar-Plain">邮件可能被淹没。我对到贵团队访问交流很期待,研究计划书见附件(基于您之前</span>
+<span class="l l-Scalar l-Scalar-Plain">的建议做了调整)。无论如何,感谢您的时间和考虑!  [签名]</span>
+<span class="l l-Scalar l-Scalar-Plain">→ 礼貌+给台阶+重申意愿+附材料+不施压。访问申请可比冷邮件稍多追问1-2次。</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · 第三篇投稿目标选择 + Cover Letter 要点</h3>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">【第三篇投稿目标选择】</span>
+<span class="l l-Scalar l-Scalar-Plain">有空天院老师同意署名(合作论文) → 和老师商量投哪(尊重合作者,投目标组认可的刊,</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">★可能推迟到访问期间合作完善后投)</span>
+<span class="l l-Scalar l-Scalar-Plain">没有(独立第三篇) → 自己选,★建议选不同于前两篇的期刊</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">(延续&quot;每篇投不同刊&quot;策略:覆盖更多期刊/审稿人+分散风险)</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">改投阶梯参考</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GRSL→JSTARS/RS/ISPRS-JPRS(按weight和方向选)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【Cover Letter 要点（复用前两篇经验）】</span>
+<span class="nt">· 致编辑</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">简述论文标题+核心贡献(1-2句)</span>
+<span class="l l-Scalar l-Scalar-Plain">· 为什么适合该期刊(方向契合+创新性)</span>
+<span class="nt">· 声明</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">原创/未一稿多投/所有作者同意</span>
+<span class="l l-Scalar l-Scalar-Plain">· 简洁专业(半页内)</span>
+<span class="l l-Scalar l-Scalar-Plain">【投稿决策】独立论文→材料齐全格式规范后直接投出;合作论文→和老师商量,可能推迟到合作后投。</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · 访问确认决策器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本根据访问申请发出的天数和各渠道的回复状态，帮你判断当前该做什么——继续等、该追问、准备出行、还是启动 Plan B。把“访问确认判断”这个关键决策系统化。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># visit_decision.py —— 访问确认决策器</span>
+<span class="c1"># 各渠道（老师/师兄）的访问申请状态</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;孙显老师&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;days_since&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;无回复&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;王超老师&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;days_since&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;已确认&quot;</span><span class="p">},</span>   <span class="c1"># 同意访问</span>
+    <span class="s2">&quot;李师兄&quot;</span><span class="p">:</span>   <span class="p">{</span><span class="s2">&quot;days_since&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;无回复&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">decide</span><span class="p">(</span><span class="n">channels</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 访问确认决策（W58 周四最终判断）===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">confirmed</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">channels</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;已确认&quot;</span><span class="p">]</span>
+    <span class="n">pending</span>   <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">channels</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;无回复&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">channels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">（发出 </span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;days_since&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> 天）&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">confirmed</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🎉 情形 A — 已确认：</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">confirmed</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   → 行动：①准备出行(租房空天院附近/交通票/笔记本+硬盘拷代码数据)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;           ②通知博士导师具体日期 ③进入访问准备(W59-60)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">to_followup</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pending</span> <span class="k">if</span> <span class="n">channels</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s2">&quot;days_since&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">to_followup</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   📨 该追问（满7天无回复）：</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to_followup</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># 到最终判断点（W58周四）：长期无回复/被拒 → 启动 Plan B</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">channels</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s2">&quot;days_since&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">14</span> <span class="ow">or</span> <span class="n">channels</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;被拒&quot;</span>
+               <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔀 情形 B — 启动 Plan B（绝不停摆）：&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   1) 其他遥感团队（自动化所/武大/西电等）&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   2) ★ 线上远程合作（不去现场也能合作写论文,同样建立实质连接）&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   → 继续等 + 追问；最迟本周四做最终判断&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">★ 访问只是手段、合作才是目的；路不止一条，绝不停摆。&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;★ 即便没促成,这一路积累的(三篇论文/交流/好印象)是下一轮的硬资产。&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">decide</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">=== 访问确认决策（W58 周四最终判断）===</span>
+
+<span class="l l-Scalar l-Scalar-Plain">孙显老师</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">无回复（发出 16 天）</span>
+<span class="nt">王超老师</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">已确认（发出 16 天）</span>
+<span class="nt">李师兄</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">无回复（发出 14 天）</span>
+
+<span class="l l-Scalar l-Scalar-Plain">🎉 情形 A — 已确认：王超老师</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">→ 行动：①准备出行(租房空天院附近/交通票/笔记本+硬盘拷代码数据)</span>
+<span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">②通知博士导师具体日期 ③进入访问准备(W59-60)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">★ 访问只是手段、合作才是目的；路不止一条，绝不停摆。</span>
+<span class="l l-Scalar l-Scalar-Plain">★ 即便没促成,这一路积累的(三篇论文/交流/好印象)是下一轮的硬资产。</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把各渠道的访问申请状态填进 channels，脚本在 W58 周四这个最终判断点给出决策——有确认（情形 A）就准备出行，全部长期无回复/被拒（情形 B）就启动 Plan B。示例里王超老师已确认，进入出行准备。这把“访问确认判断”从凭感觉变成有依据的决策——尤其帮你在“该不该启动 Plan B”上不犹豫、不停摆。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D400（英文润色 + 修改）</strong></p>
+<ol>
+<li>英文润色怎么做（工具 + 人工通读）？为什么对非母语作者尤其重要？</li>
+<li>据 mock review 修改清单先改哪些（必改的）？</li>
+</ol>
+<p><strong>D401（图表定稿 + supplementary）</strong></p>
+<ol>
+<li>图表定稿要做到什么（清晰/专业/统一/caption/卖点）？为什么审稿人常先看图表？</li>
+<li>supplementary 放什么？为什么“正文聚焦、补充详尽”？</li>
+</ol>
+<p><strong>D402（整体定稿 + 投稿目标初选）</strong></p>
+<ol>
+<li>v1.0 投稿级怎么确认（语言/图表/内容/逻辑/mock review 修复）？</li>
+<li>投稿目标取决于什么（合作署名）？有署名可能怎么办（推迟到合作后投）？</li>
+</ol>
+<p><strong>D403（★ 访问确认最终判断）</strong></p>
+<ol>
+<li>★ 访问判断的两种情形（A 确认 / B 被拒或无回复）怎么处理？</li>
+<li>★ Plan B 是什么（其他团队 / 远程合作）？“访问只是手段、合作才是目的”什么意思？</li>
+</ol>
+<p><strong>D404（投稿目标 + Cover Letter）</strong></p>
+<ol>
+<li>有合作署名为什么要和老师商量投哪？为什么独立第三篇投不同刊？</li>
+<li>Cover Letter 写哪几部分（致编辑/为何适合/声明）？</li>
+</ol>
+<p><strong>D405（投稿准备 + 投稿决策）</strong></p>
+<ol>
+<li>格式调整按什么（期刊模板/字数/参考文献/图表）？为什么格式不符可能被退回？</li>
+<li>★ 投稿决策怎么做（独立→投出 / 合作→推迟到合作后投）？</li>
+</ol>
+<p><strong>D406（W58 复盘 + 计划 W59-60）</strong></p>
+<ol>
+<li>W58 完成了哪三件（论文定稿/访问判断/投稿准备）？</li>
+<li>W59-60 据 W58 判断怎么排（访问准备/远程合作 + 投稿 + M15 月复盘）？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>投稿前不润色英文</td>
+<td>语言失分</td>
+<td>★ 英文润色（工具+人工通读）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>只用工具不人工通读</td>
+<td>改不出地道表达</td>
+<td>★ 人工通读打磨</td>
+</tr>
+<tr>
+<td>3</td>
+<td>mock review 列了不改</td>
+<td>白审</td>
+<td>据修改清单逐项修复</td>
+</tr>
+<tr>
+<td>4</td>
+<td>图模糊/风格不统一</td>
+<td>不专业</td>
+<td>清晰专业+统一风格+caption</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图不突出单卡高效卖点</td>
+<td>埋没优势</td>
+<td>★ 结果图突出 Params/FPS</td>
+</tr>
+<tr>
+<td>6</td>
+<td>该放 supplementary 塞正文</td>
+<td>正文臃肿</td>
+<td>移到补充材料、正文聚焦</td>
+</tr>
+<tr>
+<td>7</td>
+<td>不通读整体就定稿</td>
+<td>局部好整体有漏</td>
+<td>通读整体把关</td>
+</tr>
+<tr>
+<td>8</td>
+<td>无限期等访问不判断</td>
+<td>节奏拖死</td>
+<td>★ W58 周四果断判断</td>
+</tr>
+<tr>
+<td>9</td>
+<td>访问被拒就消沉停摆</td>
+<td>心态</td>
+<td>★ 不纠结、立即 Plan B</td>
+</tr>
+<tr>
+<td>10</td>
+<td>认为访问去不了就没戏</td>
+<td>想窄了</td>
+<td>★ 访问是手段、合作是目的；远程也行</td>
+</tr>
+<tr>
+<td>11</td>
+<td>有合作署名却自己定投哪</td>
+<td>不尊重合作者</td>
+<td>和空天院老师商量</td>
+</tr>
+<tr>
+<td>12</td>
+<td>第三篇投和前两篇同刊</td>
+<td>不分散</td>
+<td>★ 投不同刊（覆盖更多审稿人）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>不按期刊模板调格式</td>
+<td>可能被退回</td>
+<td>按期刊 author guidelines 调</td>
+</tr>
+<tr>
+<td>14</td>
+<td>投稿材料不齐</td>
+<td>投稿缺东西</td>
+<td>对照期刊要求逐项确认</td>
+</tr>
+<tr>
+<td>15</td>
+<td>独立论文准备好不投</td>
+<td>拖延</td>
+<td>★ 趁热投出（你掌控的产出）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>🎉 W58 收尾 · M15 前半（论文冲刺 + 等待确认）圆满收官！</strong> 你完成了 M15 的第二周，给整个 M15 前半画上了句号——这一周，你做了两件分量很重的事：① ★ <strong>把第三篇论文从接近 v1.0 定稿到了真正的投稿级 v1.0</strong>——做了英文润色（工具辅助 + 人工通读，让语言地道）、图表定稿（清晰专业、风格统一、突出单卡高效卖点）、整理了 supplementary，修复了 mock review 挑出的所有问题，选了投稿目标、写了 Cover Letter、调了格式、做了投稿决策（独立论文趁热投出 / 合作论文推迟到访问期间合作后投）。第三篇论文，正式投出去了（或定下了清晰的投稿方案）。② ★ <strong>在 W58 周四给访问申请做了一个明确的最终判断</strong>——确认了就高兴地准备出行、通知导师；没确认也绝不纠结、绝不停摆，立即启动了 Plan B（联系其他遥感团队，或者线上远程合作写论文）。</p>
+</blockquote>
+<blockquote class="quote">
+<p>★ <strong>这一周（也是 M15 前半）最重要的认知，是关于“访问”的：访问只是手段，合作才是目的。</strong> 如果能现场访问当然好，但即使去不了，你也有线上远程合作这条路——和老师/师兄远程协作、合作写论文，同样能建立实质的学术连接。这种“路不止一条”的灵活和韧性，让你不会被任何单一的结果卡住。而且，即便这次没能促成访问，你这一路积累的东西（三篇论文、和老师的交流、执行力展示留下的好印象）一个都没丢——它们是你下一轮联系、申请、甚至毕业找工作时的硬资产。一次申请的成败，从来不是终点，只是漫长积累中的一个节点。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>M15 前半（论文冲刺 + 等待确认）圆满收官</strong> ✅ —— 你把第三篇论文冲到了 v1.0 投稿级、投出（或定方案），给访问申请做了最终判断（确认或 Plan B）。M15 前半，你既守住了研究的核心产出（第三篇论文这个完全属于你的硬资产），又给连接争取到了灵活的出路（访问确认或远程合作，绝不停摆）。<strong>下一程：W59–60（访问准备 / 第三篇投稿 + M15 月复盘）——据这次的访问判断，推进访问准备或远程合作，把论文投出，并给 M15 收官。</strong> 带着这份扎实和韧性，继续走完阶段三。</p>
+</blockquote>
+</section>
+<div class="pager"><a class="prev" href="w57.html"><span class="dir">← 上一篇</span><span class="nm">W57 论文冲刺（上）</span></a><a class="next" href="w59.html"><span class="dir">下一篇 →</span><span class="nm">W59 访问准备 / 第三篇投稿</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d400">D400 周一</a><a class="sub" href="#d400-am">上午 英文润色（语法/表达/学术性，工</a><a class="sub" href="#d400-noon">中午 访问申请跟进（临近最终判断）</a><a class="sub" href="#d400-pm">晚上 英文润色继续 + 据 mock </a><a href="#d401">D401 周二</a><a class="sub" href="#d401-am">上午 图表定稿（清晰、专业、风格统一、</a><a class="sub" href="#d401-noon">中午 访问申请跟进</a><a class="sub" href="#d401-pm">晚上 supplementary 补充</a><a href="#d402">D402 周三</a><a class="sub" href="#d402-am">上午 论文整体定稿（通读确认 v1.0</a><a class="sub" href="#d402-noon">中午 访问跟进 + 投稿目标初步考虑</a><a class="sub" href="#d402-pm">晚上 论文 v1.0 定稿确认 + 准</a><a href="#d403">D403 周四</a><a class="sub" href="#d403-am">上午 ★ 访问确认最终判断（决策树）</a><a class="sub" href="#d403-noon">中午 据判断行动（A 准备出行 / B</a><a class="sub" href="#d403-pm">晚上 据判断推进（A 访问准备初步 /</a><a href="#d404">D404 周五</a><a class="sub" href="#d404-am">上午 选第三篇投稿目标（据合作署名情况</a><a class="sub" href="#d404-noon">中午 访问后续（A 行前规划 / B </a><a class="sub" href="#d404-pm">晚上 Cover Letter 撰写（</a><a href="#d405">D405 周六</a><a class="sub" href="#d405-am">上午 格式调整（按目标期刊要求）</a><a class="sub" href="#d405-noon">中午 确认投稿材料齐全</a><a class="sub" href="#d405-pm">晚上 ★ 投稿决策（投 or 推迟到访</a><a href="#d406">D406 周日</a><a class="sub" href="#d406-am">上午 W58 复盘</a><a class="sub" href="#d406-noon">中午 M15 前半盘点（论文冲到 v1</a><a class="sub" href="#d406-pm">晚上 计划 W59-60（访问准备 /</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

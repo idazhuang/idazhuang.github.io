@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="22">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W22 · 论文自审 + Mock Review + 竞赛启 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M6 论文 v1 + 竞赛启动</span><span>·</span><span>Week 22</span><span>·</span><span>D148–D154</span></div><h1 class="title">论文自审 + Mock Review + 竞赛启动 —— 学会用“审稿人视角”看自己的论文</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="148" data-k="am" title="D148 上午段"></i><i data-d="148" data-k="noon" title="D148 中午段"></i><i data-d="148" data-k="pm" title="D148 晚上段"></i></span><span class="sday"><i data-d="149" data-k="am" title="D149 上午段"></i><i data-d="149" data-k="noon" title="D149 中午段"></i><i data-d="149" data-k="pm" title="D149 晚上段"></i></span><span class="sday"><i data-d="150" data-k="am" title="D150 上午段"></i><i data-d="150" data-k="noon" title="D150 中午段"></i><i data-d="150" data-k="pm" title="D150 晚上段"></i></span><span class="sday"><i data-d="151" data-k="am" title="D151 上午段"></i><i data-d="151" data-k="noon" title="D151 中午段"></i><i data-d="151" data-k="pm" title="D151 晚上段"></i></span><span class="sday"><i data-d="152" data-k="am" title="D152 上午段"></i><i data-d="152" data-k="noon" title="D152 中午段"></i><i data-d="152" data-k="pm" title="D152 晚上段"></i></span><span class="sday"><i data-d="153" data-k="am" title="D153 上午段"></i><i data-d="153" data-k="noon" title="D153 中午段"></i><i data-d="153" data-k="pm" title="D153 晚上段"></i></span><span class="sday"><i data-d="154" data-k="am" title="D154 上午段"></i><i data-d="154" data-k="noon" title="D154 中午段"></i><i data-d="154" data-k="pm" title="D154 晚上段"></i></span></div></div>
+<div class="note"><b>★ Mock review 的"5 个维度"是哪 5 个</b>　原文说要打分没说打什么。<a href="stage2-full.html">《阶段二详注版》</a> 给了五个维度、审稿人最常提的 8 个问题，以及 rebuttal 的三种标准写法（改 / 澄清 / 反驳）。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：论文 v1 出来了。本周用<strong>审稿人视角</strong>自审、找朋友做 mock review、按问题分级修改，并<strong>启动一个竞赛</strong>（练手 + 作品）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会以审稿人视角审视自己的论文；学会写 rebuttal。
+<strong>先给你打个预防针</strong>：自审时最大的障碍是“<strong>对自己手下留情</strong>”——你太爱自己的论文，会下意识给高分、回避硬伤。本周要刻意<strong>当一个挑剔的审稿人</strong>：越狠越值钱。另外，竞赛<strong>第一次提交别追求完美</strong>——哪怕排名垫底，“进场拿到基准分”本身就是胜利，后面每次改进都以它为尺子。
+<strong>★校准（竞赛选择，务必记牢）</strong>：优先选<strong>公开有排行榜</strong>的竞赛（Kaggle / 天池 / 各 Workshop）；<strong>天智杯由军委装备发展部指导、军事航天部队装备部主办，并非空天院主办</strong>——含金量高、适合练手，但<strong>不宜</strong>当作“联系空天院”的破冰理由。真正能当破冰话题的，是你围绕空天院“空天·灵眸 / RingMo”方向做出的工作本身。
+<strong>本周精力怎么分配</strong>：烧脑的是<strong>自审打分（5 维）、问题分级、处理审稿意见 + 写 rebuttal、竞赛 EDA</strong>；竞赛跑分是体力活（复用你的框架）。教学重头放前者。</p>
+</blockquote>
+<hr />
+<h2>🧭 W22 总览</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自己做 mock review（5 维打分）</td>
+<td>审稿意见 + 问题清单（A/B/C 分级）</td>
+</tr>
+<tr>
+<td>按分级修改</td>
+<td>论文 v1.2</td>
+</tr>
+<tr>
+<td>找 2 位朋友 mock review</td>
+<td>外部审稿意见</td>
+</tr>
+<tr>
+<td>处理意见 + 写 rebuttal</td>
+<td>应对真实审稿的预演</td>
+</tr>
+<tr>
+<td>启动竞赛 + 首次提交</td>
+<td>起点分数</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：本周你第一次“换上审稿人的眼睛”看自己——这双眼睛你以后投每篇论文、审每篇论文都要用。</p>
+<hr />
+</section>
+<article class="day" id="d148" data-d="148"><header class="day-head"><span class="dnum">D148</span><h2 class="day-t">周一 · 自己做 mock review（5 维打分）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天你既是作者也是审稿人。狠一点给自己挑刺，挑得越全，后面被真审稿人挑的就越少。</p>
+<p><strong>预期管理</strong>:M6 续，本周用审稿人视角自审、找朋友 mock review、按问题分级修改，并启动竞赛。今天自己当审稿人（5维打分+≥500字意见+问题分级）。提醒：自审最大障碍是“对自己手下留情”——你太爱自己的论文，会下意识给高分、回避硬伤；要刻意当一个挑剔的审稿人，<strong>越狠越值钱</strong>（你自己挑出的，就是真审稿人挑不到的）。意见要具体到某节某句，别泛泛说“写作可以更好”。</p>
+</blockquote>
+</div><section class="slot" id="d148-am" data-d="148" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D148 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">假装审稿人给论文打分（5 维度,≥500 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（审稿人通常看什么）</h4><div class="blk-b"><p>核心关注四点——① <strong>创新性</strong>（是 incremental 小改进还是 novel 新东西）② <strong>实验是否 fair</strong>（baseline 够不够新、消融够不够充分）③ <strong>写作是否清晰</strong> ④ <strong>是否 overclaim</strong>（夸大结论）。提前用这视角审自己，等于“自己先当一次审稿人”。按 5 个维度（创新 / 技术完善 / 实验充分 / 写作 / 展示）各打 1–5 分，并写 ≥500 字意见。</p>
+<ul>
+<li><strong>为什么“提前自审”能大幅提高中稿率</strong>：真实审稿时，审稿人会用上面四个视角挑你的毛病——挑到的硬伤可能直接导致拒稿。<strong>如果你提前用同样的视角审自己，把硬伤先挑出来、先修掉，等论文到真审稿人手里时，这些问题已经不存在了</strong>。本质上，自审是“把审稿人会做的事提前自己做一遍”，你挑出并修复的每个问题，都是真审稿人少了一个拒你的理由。<strong>自审越狠、越全，中稿率越高</strong>——这是性价比极高的一步。</li>
+<li><strong>为什么“对自己手下留情”是最大的障碍</strong>：你花了几个月做这个工作、写这篇论文，<strong>你太爱它了</strong>——自审时会下意识给自己高分、把硬伤看成小问题、回避那些“改起来麻烦”的地方。这是人之常情，但对提高论文质量有害。<strong>破解办法：刻意切换身份，假装你是一个“想拒掉这篇论文”的挑剔审稿人</strong>，带着“我要挑出这篇的毛病”的心态去读。越狠越好——你现在对自己狠一点，真审稿人就对你狠不起来（因为问题你都先修了）。</li>
+<li><strong>5 维打分要诚实（别放水）</strong>：按创新性/技术完善度/实验充分性/写作/展示五个维度，各打1-5分，<strong>诚实打分</strong>——如果某维度确实弱（如创新性只是incremental），就打低分并指出来，而非自我安慰打高分。低分维度正是你要重点改进的地方。<strong>打分的意义不是“给自己评级”，而是定位哪个维度最弱、最需要加强</strong>。</li>
+<li><strong>审稿意见要“先优点后问题、且具体”</strong>：写≥500字审稿意见时，像真审稿那样<strong>先简述优点（这工作的价值），再逐条挑问题</strong>。关键是<strong>问题要具体</strong>——不是“写作可以更好”（这等于没说），而是“4.2第二段只报了数字没解释为什么提升、Table 1缺少最新的某baseline、Abstract里'显著优于'缺数字支撑”。<strong>具体到某节、某句、某个缺失，才能据此修改</strong>。泛泛的意见无法行动。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把自己当陌生审稿人，对论文 5 维度各打分（诚实，别放水）。</li>
+<li>写 ≥500 字“审稿意见”，像真审稿那样<strong>先说优点、再逐条挑问题</strong>。</li>
+<li>每个问题尽量具体（指到某节某句）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 维打分 + ≥500 字审稿意见（具体指出创新性/实验/写作/overclaim 的问题）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>给自己放水</strong>（全打 5 分、只夸不挑）→ 自审越严越值钱；假装“想拒掉这篇”地挑。</li>
+<li><strong>意见太泛</strong>（&quot;写作可以更好&quot;）→ 指到具体处（&quot;4.2 第二段只报数字没解释&quot;）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>挑不出问题?→ 用四问逐条审：创新够吗？baseline 最新吗？消融全吗？有没有 overclaim？还挑不出 → 把论文给“假想的最严审稿人”读，他会先骂哪句。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用审稿人视角自审</strong>。<strong>做了</strong>（自审报告：5 维打分 + ≥500 字意见）、<strong>学了</strong>（审稿四关注点、自审要狠）、<strong>会了</strong>（像审稿人一样评自己的论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜审稿人四关注</strong>:① 创新性(novel vs incremental)② 实验 fair（baseline 新、消融全）③ 写作清晰 ④ 有无 overclaim。自审、互审、将来审别人，都用这四条。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d148-noon" data-d="148" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D148 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">列出自审发现的所有问题（10–20 个）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把自审发现的问题<strong>全列出来</strong>（预计 10–20 个），先穷举不漏，后面再分级。<strong>为什么“先穷举、后分级”分两步</strong>：如果你边发现边判断“这个重要那个不重要”，容易边想边漏（注意力分散）。<strong>正确做法是分两步：第一步只管“穷举”——把所有发现的问题全列出来（大到缺对比、小到错别字），不评判、不遗漏；第二步再“分级”（D148晚上的A/B/C）</strong>。先穷举保证不漏，后分级保证抓重点。这和很多任务的“先发散、后收敛”是一个道理。列的时候，<strong>大小问题都记</strong>——别觉得“这个小问题不值得记”，小问题攒多了也影响观感，而且分级时你会决定哪些值得现在改、哪些留到最后。列不全时，逐章过一遍（Abstract/Intro/RW/Method/Experiment/Conclusion各挑几个潜在问题），确保每章都审到。每条记一个<strong>具体</strong>问题（不是“实验部分有问题”，而是“4.2缺少和X方法的对比”），具体才能据此修改。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把审稿意见里的问题逐条拆成清单（10–20 条）。</li>
+<li>大小问题都记（小到错别字、大到缺对比）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>问题清单（10–20 条，大小都有）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只记大问题 → 小问题也记（分级时再排）；记得太笼统 → 一条一个具体问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>列不全?→ 逐章过（Abstract/Intro/RW/Method/Exp/Conclusion 各挑几个）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你系统列出了论文问题。<strong>做了</strong>（问题清单）、<strong>学了</strong>（穷举不漏）、<strong>会了</strong>（全面列出论文待改点）。</p>
+</div></section></section><section class="slot" id="d148-pm" data-d="148" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D148 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">按严重程度分级(A/B/C)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>A 级</strong>（必须修，不修可能被拒，如 baseline 不够新 / overclaim）/ <strong>B 级</strong>（应该修，如某处表述不清）/ <strong>C 级</strong>（可以改，如个别用词）。先分级，<strong>集中火力先修 A</strong>。</p>
+<ul>
+<li><strong>为什么要给问题分级（而非按列表顺序改）</strong>：你自审挑出了10-20个问题，如果不分级、按列表顺序一个个改，可能把大量时间花在无关录用的小问题（错别字、用词）上，而真正决定录用的硬伤（缺关键对比、overclaim）却没时间改透。<strong>分级让你集中火力先解决“影响录用”的问题</strong>——A级是会导致拒稿的硬伤，必须优先修复；B级影响阅读体验但不致命；C级是锦上添花。<strong>有限的时间要优先投给A级</strong>，这是修改策略的核心。</li>
+<li><strong>A/B/C 各是什么（判断标准）</strong>:① <strong>A级=不修可能被拒</strong>——典型如“baseline不够新（审稿人会说你没和最新方法比）”“缺关键消融/对比”“overclaim（结论夸大，实验不支撑）”“方法描述不清导致无法复现”。这些是审稿人拒稿的常见理由。② <strong>B级=应该修但不致命</strong>——如“某段表述不清（加个图/解释就好）”“某处逻辑过渡生硬”。影响阅读但不会直接导致拒稿。③ <strong>C级=可以改的细节</strong>——个别用词、错别字、格式小问题。<strong>一句话判断标准：“审稿人会因为这个拒我吗？会→A；不会但影响理解→B；只是小瑕疵→C”</strong>。</li>
+<li><strong>C级留到最后统一处理（别现在纠结）</strong>:C级问题（错别字、格式、个别用词）虽然也要改，但<strong>不该现在花时间</strong>——它们不影响录用，而且在后续反复修改中还会产生新的、或被连带改掉。<strong>正确做法：C级留到最终proofreading（W24临投稿前）统一扫一遍处理</strong>。现在(W22)的重心是A级（攻坚硬伤）和B级（提升清晰度）。别在自审阶段就抠错别字，那是本末倒置。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>给每个问题标 A/B/C。</li>
+<li>A 级单独列（优先修）。</li>
+<li>判断标准：“审稿人会因为这个拒我吗？会→A”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>问题清单分级(A/B/C),A 级明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>全标 A（分不清轻重）→ 区分“影响录用 vs 锦上添花”；难判 → 问“会因此被拒吗”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>拿不准 A 还是 B?→ 涉及实验缺失/夸大结论=A；表述/美化=B/C。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>给论文问题分级</strong>。<strong>做了</strong>（问题分级）、<strong>学了</strong>（A/B/C 分级标准）、<strong>会了</strong>（按严重度排修改优先级）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 自审报告 ✅ 问题清单（分级）。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜问题分级 A/B/C</strong>：<strong>A级</strong>（必须修，不修可能被拒：baseline不够新/缺关键对比/overclaim夸大结论）→ <strong>B级</strong>（应该修：某处表述不清，加图/加解释）→ <strong>C级</strong>（可以改：个别用词/错别字/格式）。判断标准一句话：“审稿人会因为这个拒我吗？会=A”。<strong>集中火力先清A级</strong>,C级留到最终proofreading统一处理。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D148</summary><textarea data-note="d148" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d149" data-d="149"><header class="day-head"><span class="dnum">D149</span><h2 class="day-t">周二 · 修改 A 级问题</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天集中攻坚 A 级——那些“不改可能被拒”的硬伤。</p>
+<p><strong>预期管理</strong>：今天集中修 A 级问题（不改可能被拒的硬伤）。提醒：A 级常涉及补实验、改方法描述、修表格——先动这些（它们决定录用），需补实验的边改边启动补跑（并行）；<strong>overclaim 必须改</strong>（别舍不得“显著超越”，改成有数字支撑的客观表述——夸大结论是被拒的常见原因）;A 级要先啃硬的，别拖着先改小的。改完局部再通读那一段，避免改一个引入新问题。</p>
+</blockquote>
+</div><section class="slot" id="d149-am" data-d="149" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D149 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">修改 A 级问题（第一批）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>A 级常涉及<strong>补实验、改方法描述、修表格</strong>。先动这些（它们决定录用）。若需补实验，边改边启动补跑（并行）。</p>
+<ul>
+<li><strong>A级问题为什么要“边改边并行补跑”</strong>：有些A级问题需要补实验（如审稿人/你自己发现“缺了某个关键对比”），而训练要花时间。<strong>聪明的做法是：一启动补跑，就同时去改其他不需要等实验的A级问题（改表格、改方法描述、改措辞）</strong>——让GPU在后台跑实验，你在前台改别的，并行推进。别干等实验跑完才改别的，那样浪费时间。这是你M5练过的“实验挂机时推进可做工作”的习惯，在改论文时同样适用。</li>
+<li><strong>overclaim是最常见也最该优先改的A级问题</strong>:overclaim（夸大结论）是审稿人最反感、也最容易导致拒稿的问题之一——比如你写“我们的方法显著超越所有现有方法”，但实际只是小幅提升、或只在某些设置下更好。<strong>审稿人一旦发现你overclaim，会对你整篇论文的可信度打折扣</strong>。所以overclaim必须改。</li>
+<li><strong>怎么把overclaim改成客观表述（具体）</strong>:① <strong>“显著超越”→给数字</strong>——把“significantly outperforms”改成“achieves X mAP, surpassing the previous best by Y”（用数字说话，让读者自己判断）;② <strong>绝对化的词→限定</strong>——“我们的方法解决了X问题”改成“我们的方法在X方面取得了改进”;③ <strong>删掉无证据的吹捧</strong>——“novel and powerful”这类没数据撑的形容词，删掉或换成有数据支撑的客观陈述。<strong>核心原则：让数据说话，而非用形容词吹</strong>。客观、有数字、有限定的表述，反而比夸大的表述更可信、更经得起审稿。</li>
+<li><strong>别舍不得“显著超越”（克服心理）</strong>：你可能舍不得把“显著超越SOTA”改成平实的“提升了X点”——觉得后者“不够亮眼”。<strong>但overclaim的风险远大于“听起来不够强”的代价</strong>：夸大被审稿人识破=可信度崩塌=可能被拒；客观表述=可信=审稿人信任你。<strong>宁可平实可信，不要夸大冒险</strong>。而且如果你的提升确实有限，正确的做法是把卖点转到“高效”维度（你单卡的小参数/高FPS），而非在精度上勉强夸大。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>挑 A 级里最关键的几个开修（如 overclaim 措辞、表格错误、缺的对比）。</li>
+<li>需补实验的，启动补跑。</li>
+<li>记录改了什么。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第一批 A 级问题已修（或补跑已启动）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>overclaim 不改（舍不得“显著超越”）→ 改成有数字支撑的客观表述；A 级拖着先改小的 → 先啃硬的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>A 级要补大实验来不及?→ 评估能否用已有结果换种说法，或补一个小实验 + 在 Limitation 说明。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始攻坚 A 级。<strong>做了</strong>（A 级第一批）、<strong>学了</strong>（优先修致命问题、overclaim 改客观）、<strong>会了</strong>（修改影响录用的问题）。</p>
+</div></section></section><section class="slot" id="d149-noon" data-d="149" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D149 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修改 A 级问题（续）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续修剩余 A 级，直到 A 级清零。<strong>为什么要“A级清零”才算这一步完成</strong>:A级问题是“不修可能被拒”的硬伤——只要还有一个A级没修，论文就还带着一个可能致命的弱点。所以这一步的目标明确：<strong>把所有A级问题修完、清零</strong>，让论文不再有“会导致拒稿”的硬伤。剩余的A级要逐个攻坚，补跑完成的把新结果填进论文。<strong>改A级时要注意：改一个地方可能影响相邻内容</strong>，改完局部后通读那一段，确认没引入新的矛盾或不一致（比如改了某个数字，要检查所有引用这个数字的地方都同步改了）。某个A级实在难搞（如需要大量补实验），标记下来，留作找朋友/导师讨论的重点，或评估能否用已有结果换种说法+在Limitation说明来化解。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐个修剩余 A 级。</li>
+<li>补跑完成的，把新结果填进论文。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>A 级问题基本修完。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>改一个引入新问题 → 改完局部再通读那一段。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某 A 级实在难?→ 标记，找朋友/导师讨论（也可作为 mock review 重点请教）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你推进了 A 级修改。<strong>做了</strong>（A 级续）、<strong>学了</strong>（持续攻坚）、<strong>会了</strong>（系统清理 A 级）。</p>
+</div></section></section><section class="slot" id="d149-pm" data-d="149" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D149 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">修改 B 级问题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>开始修 B 级（表述不清→加图/加解释）。<strong>B级问题的核心是&quot;清晰度&quot;</strong>——某处读者可能看不懂、某个概念表述含糊、某段逻辑跳跃。修B级就是<strong>把这些&quot;不够清楚&quot;的地方改清楚</strong>。最有效的三种手段:① <strong>加图</strong>——对方法/流程/概念，一张示意图往往胜过一大段文字（&quot;表述不清怎么改都不顺时，加张小图最有效&quot;）;② <strong>加解释</strong>——补一两句话说清楚读者可能卡住的地方;③ <strong>加公式/例子</strong>——用更精确的公式或具体的例子澄清。<strong>A级（D149已清零）决定录用，B级决定阅读体验</strong>——B级改好了，审稿人读起来顺畅，对论文印象更好。B级问题如果很多，先修影响理解最大的几个，余下的留到D150继续。改的时候始终记住B级的目标：<strong>让一个第一次读的人也能看懂</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>修 B 级（重点改“表述不清”的）。</li>
+<li>加图/公式/解释让其清楚。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>部分 B 级已修。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>B 级太多一次想修完 → 先修影响理解的，余下 D150。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某处怎么改都不清?→ 加一张小图往往最有效。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你进入 B 级修改。<strong>做了</strong>（B 级）、<strong>学了</strong>（改清晰度、加图最有效）、<strong>会了</strong>（提升表述清晰度）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ A 级问题全部修复。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D149</summary><textarea data-note="d149" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d150" data-d="150"><header class="day-head"><span class="dnum">D150</span><h2 class="day-t">周三 · 修完 B/C + 发出 mock review</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天收尾 B/C 级，出 v1.2，并把论文发给两位朋友做外部 mock review。</p>
+<p><strong>预期管理</strong>：今天修完 B/C 级 + 出 v1.2 + 发出外部 mock review。提醒：C 级（用词/格式/错别字）快速过，重心在 A/B，别在 C 级花太多时间；找 mock reviewer 要找两类人——<strong>同方向同学</strong>（挑技术问题）+ <strong>不同方向同学</strong>（挑写作：他读不懂你 Intro，说明你写得不够清晰）；给明确维度、给3天、请越严越好，别只找会夸你的人。论文版本用 git 管理（v1.1/v1.2 各 commit）。</p>
+</blockquote>
+</div><section class="slot" id="d150-am" data-d="150" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D150 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">修改 B 级（续）+ C 级</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>修完剩余 B 级 + C 级（用词/格式/小错）。<strong>B级和C级的处理重点不同</strong>:B级是“应该修的清晰度问题”——某处表述不清、逻辑过渡生硬，这些影响阅读体验，要认真改（加图、加解释、补过渡句往往最有效）;C级是“可以改的小瑕疵”——个别用词、错别字、格式不统一，这些<strong>快速扫一遍即可，别花太多时间</strong>（C级甚至可以留到W24最终proofreading统一处理）。<strong>重心始终在A/B</strong>:A级决定录用（已在D149清零）、B级影响清晰度（本步重点）,C级是收尾。别本末倒置在C级的错别字上花大量时间，而忽略了更重要的B级清晰度提升。对某处“怎么改都说不清”的B级，记住：<strong>加一张小图往往比加一堆文字更有效</strong>——一图胜千言，尤其对方法/流程的说明。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>修完 B 级。</li>
+<li>扫一遍 C 级（用词/错别字/格式）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>B/C 级基本修完。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>在 C 级上花太多时间 → C 级快速过，重心在 A/B。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>C 级太多?→ 留到最终 proofreading(W24)统一处理。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你清理了次要问题。<strong>做了</strong>（B/C 级）、<strong>学了</strong>（分清主次）、<strong>会了</strong>（收尾次要问题）。</p>
+</div></section></section><section class="slot" id="d150-noon" data-d="150" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D150 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">更新论文到 v1.2</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>整合所有修改 → 论文 v1.2；通读确认改动没引入新矛盾。<strong>为什么改完要“通读确认没引入新矛盾”</strong>：你这几天改了很多地方（A级、B级、C级），每个改动都是局部的，但<strong>改了一处可能和别处产生新矛盾</strong>——比如你改了某个数字，但别处引用这个数字的地方没同步改；或你删了某句，导致上下文衔接断了。<strong>所以整合成v1.2后，要快速通读一遍，确认所有改动协调一致、没有新矛盾</strong>。这是修改后的必要检查。论文版本建议用git管理（v1.1、v1.2各commit），这样你能清晰追踪每个版本改了什么、随时可以回退，版本不会乱。<strong>养成“改完整合→通读检查→commit版本”的迭代节奏</strong>，论文打磨就有条不紊。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合修改成 v1.2。</li>
+<li>快读确认一致。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文 v1.2（自审问题已修）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>改完不通读 → 快读一遍。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>版本乱?→ 用 git 管理论文版本（v1.1/v1.2 各 commit）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你迭代到 v1.2。<strong>做了</strong>(v1.2)、<strong>学了</strong>（版本迭代）、<strong>会了</strong>（整合自审修改）。</p>
+</div></section></section><section class="slot" id="d150-pm" data-d="150" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D150 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">发给 2 位朋友做 mock review</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（找谁做 mock review）</h4><div class="blk-b"><p>① <strong>同方向同学</strong>（能看出技术问题）② <strong>不同方向同学</strong>（能看出写作问题——他读不懂你 Intro，说明你写得不够清晰）。给 3 天，请按“CVPR/审稿 guidelines”严格提意见，越严越好。</p>
+<ul>
+<li><strong>为什么要找“两类”reviewer（各有用处）</strong>:① <strong>同方向的同学</strong>懂你的领域，能看出<strong>技术问题</strong>——baseline选得对不对、实验设计有没有漏洞、方法和相关工作的区别清不清楚。这是领域内的专业把关。② <strong>不同方向的同学</strong>不懂你的具体领域，但正因如此，能看出<strong>写作和表达问题</strong>——如果他读你的Intro都读不懂、不知道你在解决什么问题，<strong>那说明你写得不够清晰</strong>（真审稿人虽是同行，但你写得清楚总没坏处，而且期刊读者背景多样）。<strong>两类人从不同角度挑问题，互补</strong>：一个查技术、一个查清晰度。</li>
+<li><strong>“不同方向的人读不懂=你写得不清楚”这个检验很有价值</strong>：你太熟自己的工作，觉得Intro写得很清楚——但那是因为你脑补了很多背景。<strong>找一个不懂你方向的人读，如果他读完一头雾水，那就是你写得不够清楚的客观信号</strong>（不是他笨，是你没写明白）。好的论文应该让一个有基础但不在你具体方向的研究者也能读懂motivation和贡献。这个“外行视角”是检验写作清晰度的好办法。</li>
+<li><strong>怎么组织mock review（给维度+给时间+请严格）</strong>:① <strong>给明确的review维度</strong>——附上“请从创新性/实验充分性/写作清晰度/有无overclaim这几方面评”，有维度的反馈比“你看看吧”有用得多;② <strong>给充足时间</strong>——给3天，让人能认真读（别指望人家几小时给你高质量反馈）;③ <strong>请他们严格、越严越好</strong>——明确说“请像挑剔的审稿人一样挑刺，别客气”，否则朋友碍于情面只夸不挑，那mock review就白做了。<strong>你要的是问题，不是表扬</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 v1.2 发 2 位朋友（一同方向 + 一不同方向）。</li>
+<li>附 review 维度（创新/实验/写作/清晰度）。</li>
+<li>请 3 天内反馈。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>mock review 发出（2 人，有明确维度）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只找会夸你的人 → 请严格挑刺；不给维度 → 给维度更有效。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>找不到同方向?→ 不同方向也行（至少查写作清晰度）；实在没人 → 用 AI 模拟审稿 + 自己隔天再审。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你发起了外部 mock review。<strong>做了</strong>（mock review 发出）、<strong>学了</strong>（找审稿人两类人原则）、<strong>会了</strong>（组织外部审稿）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜找 mock reviewer</strong>：同方向（挑技术）+ 不同方向（挑写作）各一位；给维度、给 3 天、请越严越好。读不懂你 Intro 的人 = 你 Intro 写得不够清楚。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文 v1.2 ✅ mock review 发出。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D150</summary><textarea data-note="d150" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d151" data-d="151"><header class="day-head"><span class="dnum">D151</span><h2 class="day-t">周四 · 启动竞赛（选赛 + 注册 + 数据）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>等 mock review 的几天，启动一个竞赛练手。<strong>选赛要按校准来</strong>——优先公开有榜的；天智杯只作练手，不作联系空天院的理由。</p>
+<p><strong>预期管理</strong>：今天启动竞赛（选赛+注册+下数据）。提醒：<strong>选赛按校准</strong>——优先选公开有排行榜的（Kaggle/天池/各Workshop），最适合练手+写进作品；<strong>天智杯由军委装备发展部指导、军事航天部队装备部主办，并非空天院主办</strong>，适合练手但<strong>不宜</strong>当“联系空天院”的破冰理由（真正破冰靠你围绕空天院方向做的工作）；选与你方向（检测/分割/变化检测）对口的才能复用代码；先读规则文档搞清评测指标和提交格式，否则白跑。</p>
+</blockquote>
+</div><section class="slot" id="d151-am" data-d="151" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D151 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">调研可参加的遥感竞赛，选 1 个</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★竞赛选择校准）</h4><div class="blk-b"><p>候选——<strong>Kaggle(SpaceNet / xView2)、天池、各 Workshop 挑战赛</strong>（这些<strong>公开有排行榜</strong>，最适合练手 + 写进作品）、全国 AI 大赛遥感赛道、天智杯。<strong>⚠️ 天智杯由军委装备发展部指导、军事航天部队装备部主办，并非空天院主办</strong>，部分科目有门槛；含金量高、适合练手，但<strong>不宜</strong>当“联系空天院”的破冰理由（真正的破冰是你围绕空天院“空天·灵眸 / RingMo”方向做的工作）。按“截止时间 × 与方向匹配度 × 是否公开有榜”选 1 个。</p>
+<ul>
+<li><strong>为什么优先选“公开有排行榜”的竞赛</strong>：公开有排行榜的竞赛（Kaggle/天池/Workshop）有几个好处:① <strong>结果可验证、可写进简历/作品</strong>——排行榜是公开的客观证据，你说“我在某赛Top X%”是可查的，有说服力;② <strong>能学到东西</strong>——和全球/全国选手同台，看得到别人的方案、自己的差距;③ <strong>练手价值高</strong>——完整经历“数据→建模→提交→迭代”的竞赛流程。所以选赛时，“是否公开有榜”是重要标准——它决定了这次竞赛能不能成为你简历上一个可信的亮点。</li>
+<li><strong>为什么天智杯“适合练手但不宜当联系空天院的破冰理由”（重要校准）</strong>：这是一个容易误判的点，务必记牢。① <strong>天智杯含金量高、适合练手</strong>——它是高水平的遥感/航天赛事，参加它能锻炼能力、可作为经历;② <strong>但它并非空天院主办</strong>——它由军委装备发展部指导、军事航天部队装备部主办，和中科院空天院没有主办关系。所以<strong>如果你想联系空天院（孙显/付琨/王超组），不能拿“我参加了天智杯”当敲门砖</strong>——这在逻辑上不成立（天智杯不是空天院办的，参加它不代表和空天院有交集）。<strong>真正能当破冰话题的，是你围绕空天院的研究方向（空天·灵眸/RingMo系列）做出的工作本身</strong>——比如你复现/改进了RingMo、在他们关注的任务上做出了成果。这才是和空天院建立联系的正确切入点。</li>
+<li><strong>怎么选（三维度权衡）</strong>：按“① 截止时间（deadline合适，来得及做）× ② 与你方向匹配度（检测/分割/变化检测对口，能复用你的代码和经验）× ③ 是否公开有榜”综合选一个。<strong>匹配度尤其重要</strong>——选个和你方向相关的竞赛，你M1-M5积累的代码、框架、经验都能复用，事半功倍；选个完全不相关的，等于从零开始，浪费。优先在Kaggle/天池里找与你方向对口、有排行榜、deadline合适的。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列候选赛（标主办方 / 截止 / 是否公开有榜 / 与方向匹配）。</li>
+<li>优先选<strong>公开有排行榜、与你方向相关</strong>的。</li>
+<li>选定 1 个，并记清“它适合练手，非联系空天院的理由”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛选定（公开有榜、与方向相关、时间合适）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>把天智杯当联系空天院敲门砖</strong> → 它非空天院主办，别误用；选个和方向无关的 → 选相关的才能复用你的代码。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知选哪?→ 选 Kaggle/天池里与你方向（检测/分割/变化检测）对口、有排行榜、deadline 合适的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>按校准选竞赛</strong>。<strong>做了</strong>（竞赛选定）、<strong>学了</strong>（优先公开有榜、天智杯定位）、<strong>会了</strong>（选一个能练手且可复用的竞赛）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜竞赛选择校准</strong>：优先<strong>公开有排行榜</strong>（Kaggle/天池/Workshop）、与方向对口、deadline 合适；天智杯可练手但<strong>非</strong>联系空天院的破冰理由——破冰靠你围绕空天·灵眸/RingMo 的工作。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d151-noon" data-d="151" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D151 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">注册竞赛账号</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>注册平台账号、报名该赛事（有的需实名/邀请，提前办）。<strong>为什么报名要“提前办”</strong>：有的竞赛报名有门槛——需要实名认证、需要邀请码、需要审核、甚至需要组队，这些都要时间。<strong>如果你拖到deadline临近才报名，可能因为门槛卡住而错过</strong>。所以选定竞赛后，第一时间把报名办妥（注册平台、提交报名、完成认证），确认能进到提交页面。如果某个竞赛报名门槛太高、办不下来（如需要特定资质），果断换一个公开无门槛的（回到选赛校准里的其他选项，如Kaggle/天池的开放赛事）——别在报名环节耗太久，目标是尽快进场练手。确认报名成功、能看到提交入口，这一步才算完成。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>注册平台、报名赛事。</li>
+<li>确认报名成功、能进提交页。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>注册 / 报名完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>报名有门槛没提前看 → 先读规则；deadline 临近才报 → 早报。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>报名受限?→ 换一个公开无门槛的赛（校准里其他选项）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你进场了。<strong>做了</strong>（注册/报名）、<strong>学了</strong>（报名流程）、<strong>会了</strong>（加入一个竞赛）。</p>
+</div></section></section><section class="slot" id="d151-pm" data-d="151" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D151 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">下载竞赛数据 + 读规则文档</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>下载数据；<strong>读规则文档</strong>（任务、评测指标、提交格式、时间线）——评测指标和提交格式必须先搞清，否则白跑。</p>
+<ul>
+<li><strong>为什么“读规则”是开赛的必做功课</strong>：竞赛不是“训个模型交上去”那么简单——每个竞赛有自己的<strong>任务定义、评测指标、提交格式、时间线</strong>，这些必须先搞清。<strong>最关键的是评测指标和提交格式</strong>:① 评测指标决定你优化什么（是mAP?F1？某种自定义指标?——你的训练目标要对齐它）;② 提交格式决定你的输出文件长什么样（不对就提交失败/得0分）。<strong>不读规则就开干，很可能优化错了目标、或提交格式不对，白跑一场</strong>。</li>
+<li><strong>重点搞清四要素</strong>:① <strong>任务</strong>——具体要做什么（检测？分割？变化检测?）;② <strong>评测指标</strong>——用什么算分（这决定你的优化方向和验证标准）;③ <strong>提交格式</strong>——提交文件的确切格式（列、字段、编码、文件名）;④ <strong>时间线</strong>——deadline、提交次数限制（有的竞赛每天限提交几次，要规划好）。<strong>这四要素是开赛前的“游戏规则”，搞清了才能正确地玩</strong>。</li>
+<li><strong>看官方sample submission反推格式</strong>：规则文档有时讲得不够具体，<strong>最可靠的是看官方提供的sample submission（样例提交文件）</strong>——它是“正确格式的实物标准”，你照着它的格式生成你的提交即可。提交格式有疑问时，对照sample submission逐字段核对，比读文字描述更准。这能避免第一次提交栽在格式上。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>下载竞赛数据（后台下）。</li>
+<li>读规则：任务是什么、用什么指标评、提交什么格式、deadline。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据下好 + 规则读懂（知道指标和提交格式）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不读规则就开干 → 指标/格式必须先懂；数据大没后台下 → 后台下。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>规则看不懂?→ 看官方 sample submission（从样例反推格式）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你摸清了竞赛规则。<strong>做了</strong>（数据 + 规则）、<strong>学了</strong>（竞赛规则要素）、<strong>会了</strong>（开赛前读懂规则）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛选定 ✅ 注册完成 ✅ 数据下载。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D151</summary><textarea data-note="d151" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d152" data-d="152"><header class="day-head"><span class="dnum">D152</span><h2 class="day-t">周五 · 竞赛 EDA + 首次提交</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天先摸清数据(EDA)，再跑出第一个分数并提交。<strong>进场最重要</strong>——哪怕分低。</p>
+<p><strong>预期管理</strong>：今天竞赛 EDA + 首次提交。提醒：先 EDA 摸清数据（类别分布/图像大小/标注格式/难点），摸清才好定策略（长尾→重采样，小目标→高分辨率）；<strong>首次提交别追求完美——哪怕排名垫底，“进场拿到基准分”本身就是胜利</strong>，后面每次改进都以它为尺子（很多人卡在不敢交第一次，追求完美反而一直交不出）；提交格式对照官方 sample submission，别因格式错白跑。</p>
+</blockquote>
+</div><section class="slot" id="d152-am" data-d="152" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D152 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">竞赛数据 EDA（探索性分析）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>EDA</strong>= 先摸清数据：类别分布、图像大小、标注格式、难点（长尾？小目标?）。摸清才好定策略（如长尾→重采样，小目标→高分辨率）。</p>
+<ul>
+<li><strong>为什么开赛先做EDA（而非直接训）</strong>：每个竞赛的数据都有自己的特点——类别分布可能长尾（某些类样本极少）、目标可能特别小或特别密集、图像尺寸可能差异大、标注格式可能特殊。<strong>不先摸清这些就直接套用你的方法，可能效果很差（因为你的方法没针对这个数据的特点）</strong>。EDA（探索性数据分析）就是开赛第一步摸清数据，看清它的分布和难点，<strong>然后据此定针对性策略</strong>——这比盲目训练高效得多。</li>
+<li><strong>EDA具体看什么（可操作）</strong>:① <strong>类别分布</strong>——各类样本数量，是否长尾（决定要不要重采样/类别加权）;② <strong>图像尺寸</strong>——大小分布（决定输入分辨率、要不要切图）;③ <strong>标注格式</strong>——什么形式的标注（决定怎么用统一数据层适配）;④ <strong>目标特点</strong>——目标大小（小目标多→高分辨率）、密集程度（密集→关注NMS/小目标检测）;⑤ <strong>难点</strong>——通过看一些样本，发现这个数据的挑战在哪。<strong>统计这些 + 看一批样本图，写成EDA报告（发现+初步策略）</strong>。</li>
+<li><strong>EDA→策略的对应（把发现变成行动）</strong>:EDA不是为了“了解数据”本身，而是为了<strong>定策略</strong>——发现长尾→用重采样或focal loss；发现小目标多→提高输入分辨率、用多尺度；发现某类特别难→针对性增强或后处理。<strong>EDA报告要落到“我打算怎么做”</strong>，而非只罗列统计数字。这呼应你M1养成的“先看数据再动手”的习惯——竞赛数据也一样，先摸清、再定策略、再训练。</li>
+<li><strong>复用你的统一数据层适配竞赛数据</strong>：竞赛数据的格式可能和你之前的数据集不同，但你有W11建的统一数据层——加一个解析分支适配竞赛格式即可，上层训练/评估代码不用改。<strong>这又是良好工程设计的复利</strong>：接竞赛数据几乎零成本，你能把精力放在策略和迭代上，而非重写pipeline。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>统计竞赛数据的类别分布 / 图像尺寸 / 标注格式。</li>
+<li>写 EDA 报告（发现 + 初步策略）。</li>
+<li>复用你的统一数据层适配。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛 EDA 报告（分布/尺寸/格式 + 初步策略）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不看数据直接训 → 先 EDA；格式不熟 → 复用统一数据层。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>格式怪?→ 看官方提供的数据读取示例。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做了竞赛 EDA。<strong>做了</strong>（EDA 报告）、<strong>学了</strong>（数据探索、按发现定策略）、<strong>会了</strong>（开赛先摸清数据）。</p>
+</div></section></section><section class="slot" id="d152-noon" data-d="152" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D152 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">跑竞赛官方 baseline（得首个分数）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若有官方 baseline，跑通得第一个分数；无则用你的实验框架直接跑竞赛数据。</p>
+<ul>
+<li><strong>为什么“用你自己的框架”往往比官方baseline更快</strong>：有的竞赛提供官方baseline代码，但配环境、调通它可能很费劲（依赖、版本、文档不全）。而<strong>你经过M1-M5已经有了一套成熟、熟悉的实验框架</strong>（数据层、训练、评估都跑通过），直接用它跑竞赛数据（加个数据解析分支适配）往往比折腾官方baseline更快——你对自己的框架熟，出问题也好排查。<strong>目标是快速拿到第一个分数，用最顺手的工具即可</strong>，不必拘泥于官方baseline。</li>
+<li><strong>这一步的目标是“快速有个起点”</strong>：中午这一步不追求高分，只追求<strong>快速跑出一个能提交的结果</strong>——用最简单的配置（你框架的默认设置或官方baseline）在竞赛数据上跑一遍，得到一个分数。这个分数就是你的起点基准。<strong>有了它，晚上就能完成首次提交、正式进场</strong>。所以这一步要快，别在这里调优（调优是后面D154开始的事），先有个能交的结果最重要。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>跑官方 baseline（或你的框架）在竞赛数据上。</li>
+<li>得到一个本地/线上分数。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>得到一个 baseline 分数（或你的框架跑通）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>官方 baseline 环境复杂卡住 → 直接用你成熟的框架跑；数据没适配 → 复用统一数据层。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>官方 baseline 跑不起?→ 用你自己的框架（更熟），先有个分数。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你有了竞赛起点。<strong>做了</strong>（baseline 分数）、<strong>学了</strong>（起点基准）、<strong>会了</strong>（快速得到竞赛 baseline）。</p>
+</div></section></section><section class="slot" id="d152-pm" data-d="152" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D152 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">提交第一次结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（首次提交很重要）</h4><div class="blk-b"><p>它给你“起点分数”，后面每次改进以此为基准。<strong>哪怕排名很低也没关系——关键是“进场”</strong>（很多人卡在不敢交第一次，追求完美反而一直交不出）。</p>
+<ul>
+<li><strong>为什么“先进场”比“交个好成绩”重要</strong>：很多新手卡在“我想等方案再好一点、分数再高一点再提交”——结果是<strong>追求完美，迟迟交不出第一次</strong>，竞赛都快结束了还在本地调。<strong>这是大忌</strong>。正确的做法是：<strong>先用最简单的方案（官方baseline或你的现成框架）跑出一个分数、提交、进场</strong>——哪怕排名垫底。为什么？因为① 你需要确认整个流程跑通（数据读取、提交格式都对）;② 你需要一个“起点基准”，后面每个改进才有参照（知道改进了多少）;③ 进场后心理上你就“在这个游戏里了”，会持续迭代。<strong>“进场拿到基准分”本身就是胜利</strong>。</li>
+<li><strong>首次提交的核心价值是“打通流程+建立基准”</strong>：第一次提交，你验证了从“竞赛数据”到“合格提交文件”的全流程没问题（这本身就排除了很多坑：数据格式、提交格式、编码等）；同时拿到了起点分数，成为你后续所有改进的“尺子”——改进1提了多少、改进2提了多少，都和这个基准比。<strong>没有基准，你不知道自己的改进有没有用</strong>。所以首次提交不追求分数，追求的是“流程通了+有基准了”。</li>
+<li><strong>提交格式必须对照官方 sample submission</strong>：第一次提交最容易栽在格式上——列名不对、文件名不对、编码不对、行数不对，导致提交失败或得0分。<strong>解法：严格对照官方提供的sample submission（样例提交文件）</strong>，逐列、逐字段对齐你的输出格式。官方sample就是“正确格式的标准答案”，照着它生成你的提交文件，就不会错。用补充包的格式自检脚本核对一遍再提交，避免白跑。</li>
+<li><strong>别被“排名低”打击</strong>：第一次提交排名垫底是完全正常的（你用的是最简单方案，别人可能已经迭代很多轮了）。<strong>这不代表你不行，只代表你刚进场</strong>。竞赛是个迭代过程——重要的是你进场了、有基准了，接下来每个改进（D154开始）都会往上爬。心态上把第一次提交当“起跑线”而非“成绩单”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>按提交格式生成结果文件（用补充包的格式自检）。</li>
+<li>提交。</li>
+<li>记下起点分数和排名（竞赛日志）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><strong>竞赛首次提交</strong>完成，有起点分数 / 排名。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>追求完美迟迟不交</strong> → 先交后迭代；<strong>提交格式错</strong> → 对照官方 sample submission。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>提交格式报错?→ 逐列对照官方 sample；编码/文件名不符 → 按要求改。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了首次提交（进场）。<strong>做了</strong>（首次提交）、<strong>学了</strong>（&quot;先进场&quot;心态、以基准衡量）、<strong>会了</strong>（按格式提交并记基准）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜竞赛进场</strong>：第一次提交=拿“基准分”，哪怕垫底也是赢；之后每个 Trick 都用它当尺子。别为完美耽误进场。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛 EDA 报告 ✅ <strong>竞赛首次提交</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D152</summary><textarea data-note="d152" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d153" data-d="153"><header class="day-head"><span class="dnum">D153</span><h2 class="day-t">周六 · （集中日）· 处理 mock review + 写 rebuttal 练习</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>朋友的意见回来了。今天学会“分两类处理 + 写 rebuttal”——这正是真实审稿要做的事。</p>
+<p><strong>预期管理</strong>：今天处理 mock review（分两类）+ 写 rebuttal 练习。提醒：把意见分“有道理（要改）”和“不同意（要反驳）”两类，对每条都认真对待、<strong>对事不对人不情绪化</strong>（审稿措辞可能尖锐，但出发点是帮你）；不同意的要给有理有据的反驳——反驳三角度:①用已有数据反驳 ②澄清审稿人误解 ③补一个小实验；别对不同意的避而不谈，每条都要回应。这是真实 rebuttal 的预演。</p>
+</blockquote>
+</div><section class="slot" id="d153-am" data-d="153" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D153 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">收 mock review 反馈 → 整理 → 分两类</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把朋友的意见逐条整理，分“<strong>有道理</strong>（要改）”和“<strong>不同意</strong>（要反驳）”两类。这是真实审稿的预演——<strong>对每条都要认真对待，不情绪化</strong>（审稿措辞可能尖锐，但出发点是帮你）。</p>
+<ul>
+<li><strong>为什么要把意见分“有道理/不同意”两类</strong>：收到一堆审稿意见，不能一股脑全改、也不能一概不理——要<strong>分类处理</strong>：有道理的（指出了真问题）就改；不同意的（你认为审稿人误解了或不成立）就准备反驳。<strong>这个分类是处理审稿意见的第一步</strong>，它让你对每条意见有明确的应对策略，而非混乱地一条条纠结。这正是真实投稿收到审稿意见后要做的事，现在用mock review练。</li>
+<li><strong>怎么判断一条意见“有道理”还是“该反驳”</strong>:① <strong>有道理</strong>——审稿人指出的确实是你论文的真问题（表述不清、缺对比、逻辑漏洞），即使你一开始不爱听，冷静想确实如此;② <strong>该反驳</strong>——审稿人的意见基于误解（误读了你的方法/设置）、或要求不合理（超出论文范围）、或你已有证据反驳。<strong>判断技巧：别凭“爱不爱听”判断，凭“审稿人说的对不对”判断</strong>。一个有用的自问：“审稿人为什么这么说？”——多数情况下，即使审稿人误解了，也说明你那里<strong>表述不够清楚</strong>（否则他不会误解），所以哪怕你要反驳，也往往要顺便改进表述。</li>
+<li><strong>“对事不对人、不情绪化”是关键修养</strong>:mock review（以及真实审稿）的意见可能措辞尖锐——“这个实验设计有缺陷”“写作混乱”——让你下意识想辩护或生气。<strong>但你要训练自己对事不对人、不情绪化</strong>：审稿人（哪怕措辞尖锐）的出发点是帮你把工作做得更好，他指出的问题（哪怕表述刺耳）往往有价值。<strong>把注意力放在“他指出的问题是什么、我该怎么应对”，而非“他的态度让我不爽”</strong>。这种专业心态，是你做研究、写rebuttal、将来自己审别人论文都需要的。现在用mock review练起来。<strong>为什么现在练rebuttal特别值</strong>：真实投稿时，从收到审稿意见到提交rebuttal往往只有有限时间（几天到两周），临时学怎么写rebuttal会手忙脚乱。现在借mock review先把“分类→方案→反驳”的流程和句式练熟，等真投稿时收到意见，你就能从容应对——这是把“未来的紧急任务”提前在不紧急时演练，投资回报很高。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整理 mock review 每条意见。</li>
+<li>标“有道理 / 不同意”。</li>
+<li>心态：对事不对人。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>mock review 意见整理（分两类）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>情绪化对待尖锐意见 → 对事不对人；看不懂意见 → 找朋友确认本意。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某条不知该不该接受?→ 想“审稿人为什么这么说”，多半指向一个真实弱点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会整理审稿意见。<strong>做了</strong>（意见整理）、<strong>学了</strong>（分两类、对事不对人）、<strong>会了</strong>（把反馈分成可行动两类）。</p>
+</div></section></section><section class="slot" id="d153-noon" data-d="153" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D153 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">对“有道理”的逐条定修改方案</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>对每条“有道理”的意见，写<strong>具体修改方案</strong>（改哪、怎么改）。<strong>为什么要写“具体方案”而非笼统说“会改”</strong>：收到一条有道理的意见（如“4.2缺少和最新方法的对比”），如果只在心里记“嗯，会改”，很容易后面忘了、或改得不到位。<strong>正确做法是对每条有道理的意见写出具体的修改方案</strong>：改论文的哪个位置、具体怎么改（补哪个对比实验/加哪句解释/改哪个表）。这样把“意见”转成了“可执行的行动项”，改起来不会漏、不会跑偏。方案多的时候，也按A/B/C（影响录用程度）排优先级，先做最关键的。<strong>意见→具体方案→执行</strong>，是处理审稿反馈的标准流程，这也是真实rebuttal阶段你要做的——审稿人看你的修改，看的就是你有没有针对每条意见做出实际的、到位的修改。把每条方案标到论文的具体位置（改第几节第几段），执行时就不会找不到、不会漏。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>对每条有道理的意见写方案。</li>
+<li>标到论文具体位置。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>修改方案清单（每条：针对哪条意见、怎么改）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>笼统说“会改” → 写具体怎么改。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>方案多?→ 也按 A/B/C 排优先级。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把意见转成了行动。<strong>做了</strong>（修改方案）、<strong>学了</strong>（意见→方案）、<strong>会了</strong>（把审稿意见落成修改计划）。</p>
+</div></section></section><section class="slot" id="d153-pm" data-d="153" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D153 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">对“不同意”的写 rebuttal（反驳）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（处理审稿意见原则）</h4><div class="blk-b"><p>① 每条都认真回应 ② 同意就改 ③ <strong>不同意要给有理有据的反驳</strong>（用数据 / 已有实验 / 澄清误解，不情绪化）。这是为真实 rebuttal 练手。</p>
+<ul>
+<li><strong>为什么 rebuttal 是必备技能</strong>：论文投稿后，审稿人会给意见，你需要写 rebuttal（答辩/回复）来回应——同意的改、不同意的有理有据地反驳。<strong>rebuttal 写得好，能把“borderline（边缘）”的论文救成“accept”</strong>；写得差（情绪化、答非所问、回避问题），可能把本来有机会的论文搞砸。所以现在用 mock review 练 rebuttal，是为真实投稿的关键环节做准备。这是每个研究者都要掌握的硬技能。</li>
+<li><strong>rebuttal 三原则（铁律）</strong>:① <strong>每条意见都要认真回应</strong>——哪怕是你不同意的，也不能避而不谈（审稿人会觉得你心虚或不尊重）;② <strong>同意的就大方改</strong>——审稿人指出的真问题，承认并说明你怎么改（这显得你虚心、有则改之）;③ <strong>不同意的要有理有据地反驳</strong>——不是简单说“我不同意”，而是用证据说明为什么审稿人的担心不成立。<strong>三条的核心是“认真、诚恳、有据”</strong>。</li>
+<li><strong>反驳的三个角度（不同意时这样驳）</strong>:① <strong>用已有数据反驳</strong>——“审稿人担心X，但如Table Y所示，我们的实验已经表明…”（你的实验里可能已经有反驳的证据）;② <strong>澄清审稿人的误解</strong>——有时审稿人是误解了你的方法/设置，礼貌地澄清“我们想说明的是…，可能表述不够清楚，已在修订版改进”;③ <strong>补一个小实验</strong>——如果审稿人的质疑确实需要新证据，补一个针对性的小实验来回应。<strong>这三个角度覆盖了大部分“不同意”的情况</strong>：要么你已有证据、要么是误解、要么补证据。</li>
+<li><strong>永远“对事不对人、不情绪化”（rebuttal 的态度）</strong>：审稿意见有时措辞尖锐、甚至让你觉得“审稿人没认真读”——但<strong>写 rebuttal 时必须保持礼貌、客观、专业，绝不情绪化</strong>。用“We thank the reviewer for the comment. The reviewer is concerned that X. However, as shown in…, Thus…”这样的礼貌句式。<strong>情绪化的反驳（哪怕你有理）会让审稿人反感，反而害了你的论文</strong>。记住：审稿人的出发点是帮你把工作做得更好（即使措辞尖锐），你的回应也要体现这种专业态度。对事不对人，是 rebuttal 的基本修养。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>对“不同意”的意见写 rebuttal（礼貌 + 证据反驳）。</li>
+<li>套句式:&quot;We thank the reviewer. The reviewer is concerned that X. However, as shown in Table Y, …. Thus …&quot;</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>rebuttal 练习（有理有据、礼貌）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>情绪化反驳 → 客观礼貌；对不同意的避而不谈 → 每条都回应。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么驳?→ 用三角度:① 已有数据反驳 ② 澄清审稿人误解 ③ 补一个小实验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写 rebuttal</strong>。<strong>做了</strong>（rebuttal 练习）、<strong>学了</strong>（回应审稿三原则、反驳三角度）、<strong>会了</strong>（有理有据回应每条意见）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜处理审稿意见</strong>：每条都回应；同意→改；不同意→用“数据/澄清误解/补实验”礼貌反驳。永远对事不对人。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ mock review 整理 ✅ 修改方案 ✅ rebuttal 练习。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D153</summary><textarea data-note="d153" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d154" data-d="154"><header class="day-head"><span class="dnum">D154</span><h2 class="day-t">周日 · （复盘日）· W22 复盘 + 竞赛改进 1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾：复盘 + 竞赛迈出第一个提分改进。</p>
+<p><strong>预期管理</strong>:W22 收尾：周复盘（论文+竞赛双线）+ 竞赛改进1。提醒：竞赛提分常从稳妥改进起步（换更强 backbone / 增大输入分辨率，见效快、风险低），<strong>一次只改一处</strong>才知道哪个有用；每个改进记入竞赛 Trick 日志（改了什么/Δ分/是否保留）；线上没涨但本地涨可能是过拟合本地划分，以线上为准；没提升就记录、试下一招，别因一招没用就放弃整个方向。</p>
+</blockquote>
+</div><section class="slot" id="d154-am" data-d="154" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D154 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W22 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“审稿人视角”和“竞赛启动”的收获（自审挑出的硬伤、竞赛起点）。<strong>本周是“双线”周</strong>（论文打磨 + 竞赛启动），复盘也要双线:① 论文线——自审挑出了哪些硬伤、A/B/C修改的经验、mock review和rebuttal的收获;② 竞赛线——竞赛起点分、首次提交的坑、初步策略。<strong>这两条线的经验都值得沉淀</strong>：审稿人视角和rebuttal是你以后每篇论文都要用的（还包括将来你自己审别人论文）；竞赛流程（选赛→EDA→提交→迭代）是你以后参赛能复用的。把这周踩的坑、学的招具体记下来，下次更顺。记录时也记下竞赛当前的起点分和排名，作为后续(W23)迭代的基准参照。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（双线：论文 + 竞赛）。</li>
+<li>记自审/mock review 的收获 + 竞赛起点分。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W22 周报。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周（多半是自审挑刺或竞赛环境）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了自审+竞赛启动周。<strong>做了</strong>（W22 周报）、<strong>学了</strong>（双线复盘）、<strong>会了</strong>（总结审稿与竞赛经验）。</p>
+</div></section></section><section class="slot" id="d154-noon" data-d="154" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D154 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛改进 1（换更强 backbone / 增大分辨率）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>竞赛提分常从“<strong>换更强 backbone / 增大输入分辨率</strong>”这类稳妥改进起步（见效快、风险低）。<strong>一次只改一处</strong>，才知道哪个有用。</p>
+<ul>
+<li><strong>为什么从“换backbone/增大分辨率”起步</strong>：竞赛提分有很多招数（换backbone、调分辨率、数据增强、模型集成、后处理、TTA等），其中<strong>“换更强backbone”和“增大输入分辨率”是最稳妥的起步招</strong>——它们见效快（往往直接涨点）、风险低（不容易搞坏）、实现简单（改个配置）。<strong>先用这些稳妥招把分数往上推一截，建立信心、积累对这个竞赛的感觉</strong>，再尝试更复杂的招数（集成、特殊trick）。这是竞赛迭代的常见路径：先摘低垂的果子。</li>
+<li><strong>“一次只改一处”是竞赛迭代的铁律（和消融同理）</strong>：如果你一次同时换backbone、改分辨率、加增强，分数涨了——<strong>你不知道是哪个改动起的作用</strong>（可能backbone有用、分辨率没用甚至有害，但被backbone的提升掩盖了）。<strong>一次只改一处，提交看分数变化，你才能确定这一处改动的真实效果</strong>(涨了=有用保留，没涨=无用换下一招)。这和你W19做消融“每次只改一个变量”是完全一样的逻辑——竞赛迭代本质也是一连串的“控制变量实验”。</li>
+<li><strong>每个改进记入“竞赛Trick日志”</strong>：就像实验矩阵管理几十组实验，竞赛也要用一个<strong>Trick日志</strong>记录每次尝试：改了什么、Δ分（提升多少）、是否保留。<strong>这样你能清晰地看到“哪些招有用、哪些没用、当前最优组合是什么”</strong>，避免重复尝试、避免忘记。竞赛到后期会试很多招，没有日志会乱成一团。一次一处改 + Trick日志记录，是有条理地爬榜的关键。</li>
+<li><strong>OOM是换大backbone/高分辨率的常见障碍</strong>：换更强（更大）的backbone或增大输入分辨率，会增加显存占用，你单张4090(24GB)可能OOM。<strong>解法：降batch size + 梯度累积（用累积保持等效batch）、混合精度训练（amp，省显存）</strong>。这些都是你前面练过的单卡省显存技巧，在竞赛里继续用。实在跑不动超大配置，就在你显存能承受的范围内选最强的backbone/最高的分辨率。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>做竞赛改进 1（换更强 backbone 或增大分辨率，二选一）。</li>
+<li>训练。</li>
+<li>记入竞赛 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛改进 1 训练完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>大 backbone/高分辨率 OOM → 降 batch + 梯度累积；一次改多处 → 一次一处。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>OOM?→ 降 batch、梯度累积、混合精度；没提升?→ 记录换下一招（W23 有 Trick 清单）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始竞赛迭代。<strong>做了</strong>（竞赛改进 1）、<strong>学了</strong>（稳妥提分起步、一次一处）、<strong>会了</strong>（用更强 backbone/分辨率提分）。</p>
+</div></section></section><section class="slot" id="d154-pm" data-d="154" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D154 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">提交竞赛改进版 → 看排名变化</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>提交改进 1 的结果，看排名/分数变化，以基准衡量改进。</p>
+<ul>
+<li><strong>为什么“以基准衡量”是竞赛迭代的核心方法</strong>：你有了首次提交的基准分数，现在每做一个改进，就提交、看分数相对基准变化了多少——<strong>这个“Δ分”告诉你这个改进到底有没有用、有多大用</strong>。涨了=有用（保留这个改进，作为新基准）；没涨甚至跌了=没用（放弃，换下一招）。<strong>整个竞赛迭代就是“改进→提交→看Δ→决定保留还是放弃”的循环</strong>，每一步都以当前最优为基准衡量。没有基准、不看Δ，你就是在盲目试，不知道自己在进步还是退步。</li>
+<li><strong>Trick日志记三样</strong>：每次提交后，在Trick日志里记<strong>①改了什么 ②Δ分（相对上次/基准） ③是否保留</strong>。例如“换Swin-B backbone: +1.2，保留”；“加TTA: +0.3，保留”；“某增强: -0.5，放弃”。<strong>这个日志是你竞赛进展的完整账本</strong>——它让你清楚当前用了哪些有效trick、当前最优是什么、还有哪些招没试。竞赛后期试的招多了，没日志会乱、会重复试、会忘记。</li>
+<li><strong>“线上没涨但本地涨”要警惕（过拟合本地划分）</strong>：有时你的改进在本地验证集上涨了，但提交到线上排行榜没涨甚至跌了——<strong>这往往是过拟合了你的本地验证划分</strong>（你的改进恰好迎合了本地验证集的特点，但不泛化到线上测试集）。<strong>遇到这种情况，以线上为准</strong>（线上测试集才是真正的评判）。这提醒你：本地验证集要和线上分布尽量一致，别过度依赖本地分数。线上分数是最终的真相。</li>
+<li><strong>没提升就换下一招，别放弃整个方向</strong>：某个改进（如某种增强）提交后没涨，<strong>只说明这一招对这个竞赛没用，不代表你的整体方向不行</strong>——记录下来（日志里标“放弃”），换下一招试（W23会有更系统的Trick清单）。竞赛是个不断试错的过程，大部分招可能没用，但只要持续试、保留有用的，分数就会稳步往上爬。别因一两招没用就气馁或放弃。<strong>竞赛的本质是“持续试错 + 保留有效”</strong>——接受大部分尝试可能无效，但只要有日志记录、一次一处改、保留有用的，分数就会螺旋上升，这也是做研究的常态心态。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>生成提交、提交。</li>
+<li>看排名变化，记入 Trick 日志（改了什么 / Δ分 / 是否保留）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><strong>竞赛第 2 次提交</strong>，排名变化记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>没提升就放弃这个方向 → 记录，试下一招；提升就保留。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>线上没涨但本地涨?→ 可能过拟合本地划分，看线上为准。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成第二次提交并学会以基准衡量。<strong>做了</strong>（竞赛第 2 次提交）、<strong>学了</strong>（以基准衡量、Trick 日志）、<strong>会了</strong>（迭代并跟踪排名）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W22 ✅ 竞赛第 2 次提交。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W22 累计交付</h2><p>自审报告（5 维打分 + ≥500 字意见）、问题清单（A/B/C 分级）、论文 v1.2（A/B/C 已修）、mock review 发出、mock review 整理 + 修改方案 + rebuttal 练习、竞赛选定/注册/EDA/首次提交 + 改进 1 第 2 次提交、W22 周报。本周你学会了一项贯穿整个研究生涯的核心能力——<strong>用审稿人视角看自己的论文</strong>：狠下心当一个挑剔的审稿人，把硬伤先自己挑出来修掉，等真审稿人手里时这些问题已不存在，中稿率大增。同时你练了 rebuttal（回应审稿三原则、反驳三角度、对事不对人），并进场了第一个竞赛（选赛校准、首次提交进场、以基准迭代）。这两条线（论文打磨 + 竞赛练手）都是研究者的硬功夫。</p>
+</section><section class="wtail"><h2>🎓 W22 你“长出来”的能力清单</h2><ul>
+<li>审稿人视角自审（5 维）+ 问题 A/B/C 分级修改</li>
+<li>组织外部 mock review + 处理意见（分两类）+ 写 rebuttal</li>
+<li>按校准选竞赛（公开有榜优先、天智杯定位清醒）+ EDA + 首次提交（进场）</li>
+<li>竞赛稳妥提分（backbone/分辨率）+ 以基准衡量改进</li>
+<li><strong>核心认知</strong>：自审“越狠越值钱”（对自己手下留情是最大障碍）、overclaim必改（让数据说话不夸大）、竞赛“进场拿基准分本身就是胜利”（别为完美耽误进场）、一次只改一处（竞赛迭代如消融）</li>
+<li><strong>关键校准（务必记牢）</strong>：天智杯非空天院主办，练手可以但<strong>不宜</strong>当联系空天院的破冰理由——破冰靠你围绕空天·灵眸/RingMo方向做的工作本身</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D154</summary><textarea data-note="d154" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W22 加厚补充包（范例 / 实用工具 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — mock review 自审 + rebuttal 句式 + 竞赛日志</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 自审(mock review)</span>
+评分(1-5):创新3.5 / 技术4 / 实验4 / 写作3.5 / 展示3
+意见(节选):创新性中等(把通用CV技术迁到遥感,需更强调差异);baseline 缺最新2025方法(A级,补);
+Method 某模块表述不清(B级,加图);Abstract 略 overclaim &quot;significantly&quot;(B级,改客观)。
+
+<span class="gh"># rebuttal 句式(对&quot;不同意&quot;的意见)</span>
+&quot;We thank the reviewer for the comment. The reviewer is concerned that {X}.
+ However, as shown in Table {Y}/Sec {Z}, {证据}. Thus {结论}. We have clarified this in the revision.&quot;
+
+<span class="gh"># 竞赛 Trick 日志</span>
+基准(官方baseline):0.612 (排名 120/300)
+改进1 换Swin-T+分辨率1024:0.641 (↑0.029, 排名 78)  → 保留
+改进2 加TTA(多尺度测试):0.648 (↑0.007, 排名 65)   → 保留
+改进3 某数据增强:0.643 (↓0.005)                    → 放弃,换下一招
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>范例怎么用</strong>：自审评分要诚实（别全打5）；意见标清A/B/C并指到具体处。rebuttal句式三件套——先谢、再点出审稿人的担心、再用证据（表/节）反驳、最后说已在修订版澄清，全程礼貌客观。竞赛Trick日志每行=改了什么+Δ分+保留/放弃，一次一处改，清晰可追溯当前最优组合。</p>
+</blockquote>
+<h2>二、实用工具 — 竞赛 EDA + 提交格式自检</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">collections</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="c1"># ① 竞赛 EDA:类别分布 + 图像尺寸</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">eda</span><span class="p">(</span><span class="n">ann_labels</span><span class="p">,</span> <span class="n">img_dir</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;类别分布:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">(</span><span class="n">ann_labels</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">()))</span>   <span class="c1"># 看长尾</span>
+    <span class="n">sizes</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">Counter</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">img_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">))[:</span><span class="mi">500</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span> <span class="n">sizes</span><span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span><span class="p">:</span> <span class="k">pass</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;常见图像尺寸:&quot;</span><span class="p">,</span> <span class="n">sizes</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>                              <span class="c1"># 定输入分辨率</span>
+<span class="c1"># ② 提交文件自检(对照官方 sample 的列)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_submission</span><span class="p">(</span><span class="n">sub_path</span><span class="p">,</span> <span class="n">required_cols</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sub_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;提交缺列:&quot;</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">required_cols</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;无&quot;</span><span class="p">,</span> <span class="s2">&quot;| 实际列:&quot;</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用法:开赛先 EDA;提交前自检格式&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 打印类别分布（看长尾）+ 常见尺寸（定分辨率）;② 检查提交文件列是否符合官方要求。<strong>用法</strong>：开赛先跑 EDA 摸清数据（据发现定策略：长尾→重采样/类别加权，小目标→提高分辨率）；每次提交前用 check_submission 对照官方 sample 的列核对一遍，避免因格式不符白跑或得 0 分。这两个小工具配合 Trick 日志，让你的竞赛迭代既不踩格式坑、又能有条理地爬榜。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D148</strong>：① 审稿人主要看哪 4 点？② 问题 A/B/C 怎么分？③ 自审最大的障碍是什么、怎么破解（对自己手下留情→当挑剔审稿人）？</li>
+<li><strong>D149</strong>：① A 级问题为什么先修？overclaim 怎么改（让数据说话）？② 为什么宁可平实可信不要夸大冒险？</li>
+<li><strong>D150</strong>：① mock review 该找哪两类人？为什么要不同方向的（读不懂Intro说明什么）？</li>
+<li><strong>D151</strong>：① 竞赛优先选什么样的（公开有榜）？② 天智杯是空天院主办吗？能当联系空天院的敲门砖吗？为什么？</li>
+<li><strong>D152</strong>：① EDA 看哪些、要落到什么（策略）？② 为什么首次提交很重要（打通流程+建基准）、哪怕排名低？</li>
+<li><strong>D153</strong>：① 审稿意见分哪两类处理？rebuttal 的原则与三角度（数据/澄清/补实验）？② 为什么要对事不对人？</li>
+<li><strong>D154</strong>：① 竞赛提分常从哪两个稳妥改进起步？为什么一次只改一处（和消融同理）？② “线上没涨本地涨”说明什么、以哪个为准？③ 竞赛的本质心态是什么（持续试错+保留有效）？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自审给自己放水</td>
+<td>不够狠</td>
+<td>假装严格审稿人，越严越值钱</td>
+</tr>
+<tr>
+<td>把天智杯当联系空天院敲门砖</td>
+<td>误判主办方</td>
+<td>天智杯非空天院主办；练手可以，破冰靠你的工作</td>
+</tr>
+<tr>
+<td>迟迟不敢首次提交</td>
+<td>求完美</td>
+<td>先进场拿基准，再迭代</td>
+</tr>
+<tr>
+<td>提交格式报错</td>
+<td>没对 sample</td>
+<td>对照官方 sample submission</td>
+</tr>
+<tr>
+<td>rebuttal 情绪化</td>
+<td>对人不对事</td>
+<td>客观礼貌 + 证据反驳（数据/澄清/补实验）</td>
+</tr>
+<tr>
+<td>竞赛改进无法归因</td>
+<td>一次改多处</td>
+<td>一次只改一处 + Trick 日志</td>
+</tr>
+<tr>
+<td>overclaim 不舍得改</td>
+<td>怕不够亮眼</td>
+<td>让数据说话；提升有限就转“高效”维度</td>
+</tr>
+<tr>
+<td>问题全标A级分不清轻重</td>
+<td>没按“会被拒吗”判</td>
+<td>A=会被拒；B=影响理解；C=小瑕疵</td>
+</tr>
+<tr>
+<td>线上没涨本地涨</td>
+<td>过拟合本地划分</td>
+<td>以线上为准；本地验证集对齐线上分布</td>
+</tr>
+<tr>
+<td>大backbone/高分辨率OOM</td>
+<td>显存不足</td>
+<td>降batch+梯度累积+混合精度</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w21.html"><span class="dir">← 上一篇</span><span class="nm">W21 Experiment 章打磨 + Int</span></a><a class="next" href="w23.html"><span class="dir">下一篇 →</span><span class="nm">W23 论文修改 + 竞赛迭代</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d148">D148 周一</a><a class="sub" href="#d148-am">上午 假装审稿人给论文打分（5 维度,</a><a class="sub" href="#d148-noon">中午 列出自审发现的所有问题（10–2</a><a class="sub" href="#d148-pm">晚上 按严重程度分级(A/B/C)</a><a href="#d149">D149 周二</a><a class="sub" href="#d149-am">上午 修改 A 级问题（第一批）</a><a class="sub" href="#d149-noon">中午 修改 A 级问题（续）</a><a class="sub" href="#d149-pm">晚上 修改 B 级问题</a><a href="#d150">D150 周三</a><a class="sub" href="#d150-am">上午 修改 B 级（续）+ C 级</a><a class="sub" href="#d150-noon">中午 更新论文到 v1.2</a><a class="sub" href="#d150-pm">晚上 发给 2 位朋友做 mock r</a><a href="#d151">D151 周四</a><a class="sub" href="#d151-am">上午 调研可参加的遥感竞赛，选 1 个</a><a class="sub" href="#d151-noon">中午 注册竞赛账号</a><a class="sub" href="#d151-pm">晚上 下载竞赛数据 + 读规则文档</a><a href="#d152">D152 周五</a><a class="sub" href="#d152-am">上午 竞赛数据 EDA（探索性分析）</a><a class="sub" href="#d152-noon">中午 跑竞赛官方 baseline（得</a><a class="sub" href="#d152-pm">晚上 提交第一次结果</a><a href="#d153">D153 周六</a><a class="sub" href="#d153-am">上午 收 mock review 反馈</a><a class="sub" href="#d153-noon">中午 对“有道理”的逐条定修改方案</a><a class="sub" href="#d153-pm">晚上 对“不同意”的写 rebutta</a><a href="#d154">D154 周日</a><a class="sub" href="#d154-am">上午 W22 周复盘</a><a class="sub" href="#d154-noon">中午 竞赛改进 1（换更强 backb</a><a class="sub" href="#d154-pm">晚上 提交竞赛改进版 → 看排名变化</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

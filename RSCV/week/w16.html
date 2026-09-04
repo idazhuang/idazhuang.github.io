@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="16">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W16 · Pipeline 收尾 + 阶段一总复盘 ——  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M4 方法成形</span><span>·</span><span>Week 16</span><span>·</span><span>D106–D112</span></div><h1 class="title">Pipeline 收尾 + 阶段一总复盘 —— 把成果固化成“可复现、可公开、可写进简历”的资产</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="106" data-k="am" title="D106 上午段"></i><i data-d="106" data-k="noon" title="D106 中午段"></i><i data-d="106" data-k="pm" title="D106 晚上段"></i></span><span class="sday"><i data-d="107" data-k="am" title="D107 上午段"></i><i data-d="107" data-k="noon" title="D107 中午段"></i><i data-d="107" data-k="pm" title="D107 晚上段"></i></span><span class="sday"><i data-d="108" data-k="am" title="D108 上午段"></i><i data-d="108" data-k="noon" title="D108 中午段"></i><i data-d="108" data-k="pm" title="D108 晚上段"></i></span><span class="sday"><i data-d="109" data-k="am" title="D109 上午段"></i><i data-d="109" data-k="noon" title="D109 中午段"></i><i data-d="109" data-k="pm" title="D109 晚上段"></i></span><span class="sday"><i data-d="110" data-k="am" title="D110 上午段"></i><i data-d="110" data-k="noon" title="D110 中午段"></i><i data-d="110" data-k="pm" title="D110 晚上段"></i></span><span class="sday"><i data-d="111" data-k="am" title="D111 上午段"></i><i data-d="111" data-k="noon" title="D111 中午段"></i><i data-d="111" data-k="pm" title="D111 晚上段"></i></span><span class="sday"><i data-d="112" data-k="am" title="D112 上午段"></i><i data-d="112" data-k="noon" title="D112 中午段"></i><i data-d="112" data-k="pm" title="D112 晚上段"></i></span></div></div>
+<div class="note"><b>★ 开源前的四项检查</b>　绝对路径、API 密钥、误提交的大文件、.gitignore。<a href="m4-full.html">《M4 详注版》</a> 给了具体的 grep 命令、<code>reproduce.sh</code> 模板、HuggingFace 上传权重的方法。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：阶段一(M1–M4)最后一周。把方法/实验/论文固化成<strong>可复现的代码 + 可公开的仓库 + 阶段一总结报告</strong>，整理知识库，休息一天，再规划 M5–M8 并做阶段一终极复盘。
+<strong>本周科研能力目标</strong>（你原计划，保留）：让成果可复现、可公开、可沉淀；系统复盘 4 个月的成长。
+<strong>重要</strong>:D111 是<strong>休息日</strong>——你已连续高强度 112 天，M5 起是更紧张的产出期，这一天给自己恢复（本版仍给三段：休息/轻读/轻收尾，但都是低强度）。</p>
+<p><strong>🧩 贯穿示例</strong>：沿用「DOTA 高效旋转检测」。本周要固化的就是你 M1–M4 做的这套：最终方法(v3)的代码仓库 + 一键复现脚本 + HF 权重 + 论文骨架。换方向只需把“方法/数据集/仓库”换成你那套——固化为可复现资产、写阶段总结、做收官复盘的流程完全通用。</p>
+</blockquote>
+<hr />
+<h2>🧭 W16 总览：把四个月的成果“焊死”成可复现、可展示的资产</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周固化</th>
+<th>产物</th>
+<th>它的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最终 pipeline 复现性</td>
+<td>一键可复现、环境锁定</td>
+<td>成果可信的底线</td>
+</tr>
+<tr>
+<td>仓库整理 + reproduce.sh + HF</td>
+<td>可复现的代码资产</td>
+<td>开源/复现的基础</td>
+</tr>
+<tr>
+<td>阶段一总结报告（≥4000 字）</td>
+<td>简历/答辩素材</td>
+<td>把成长写成可展示文档</td>
+</tr>
+<tr>
+<td>方向综述笔记</td>
+<td>把读过的串成一个故事</td>
+<td>整合认知、开题底稿</td>
+</tr>
+<tr>
+<td>GitHub 公开化准备</td>
+<td>可对外展示的作品</td>
+<td>你的“作品名片”</td>
+</tr>
+<tr>
+<td>M5–M8 计划 + 终极复盘</td>
+<td>承接产出期</td>
+<td>为下阶段校准</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>:D106 端到端验证+锁环境；D107 仓库整理+reproduce.sh+HF;D108 阶段总结报告；D109 综述笔记+知识库体检；D110 GitHub 公开化；D111 休息；D112 规划+终极复盘。<strong>收官周的纪律：把“能跑”升级成“别人照着也能跑”（可复现），把“做过”沉淀成“可展示”（报告/综述/仓库）。</strong> 前几周你认真维护的实验目录、Proposal、周报、笔记，本周都是现成素材。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d106" data-d="106"><header class="day-head"><span class="dnum">D106</span><h2 class="day-t">周一 · 完整跑最终 pipeline 做 sanity check + 记录可复现</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天从头完整跑一遍最终 pipeline（数据→训练→评估→可视化），确认整条链路无断点、结果和记录一致，并把“怎么复现”记下来。提醒：可先用小规模快速版验证链路通，再全量；可复现的关键是记全“命令+环境+seed”三样，缺一样半年后就跑不起来。</p>
+</blockquote>
+</div><section class="slot" id="d106-am" data-d="106" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D106 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">完整跑一遍最终 pipeline（数据→训练→评估→可视化）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（端到端 sanity check 是什么、为什么是底线）</h4><div class="blk-b"><ul>
+<li><strong>端到端 sanity check</strong>= 从头完整跑一遍（数据加载 → 训练 → 评估 → 可视化），确认整条链路无断点、结果和你记录的一致。这是“成果可信”的底线。</li>
+<li><strong>为什么收官时必须做</strong>：这几个月你是分阶段做的（数据层 W11、训练评估 W11-12、方法迭代 W13-14），各部分单独跑过，但<strong>很久没有从头到尾完整跑一遍</strong>了——中间改了很多东西，可能某处接口对不上、某个路径失效了。端到端跑一遍，确保“整个项目作为一个整体能跑通”，而不是“各零件分别能跑”。</li>
+<li><strong>和软件交付前的集成测试一个道理</strong>：模块测试通过 ≠ 系统能跑；必须做一次完整的集成验证。<strong>对你尤其重要</strong>：论文要声称“我们的方法达到 X”，这个 X 必须是从干净流程跑出来、可复现的，不能是某次手动东拼西凑的结果。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用最终方法配置，完整跑一遍 pipeline（可用小规模快速版先验证链路通），核对各阶段输出正常。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 先小规模快速验证链路（少量数据/1 epoch），通了再全量</span>
+python<span class="w"> </span>tools/prepare_data.py<span class="w"> </span>--root<span class="w"> </span>./data<span class="w"> </span>--subset<span class="w"> </span><span class="m">50</span><span class="w">      </span><span class="c1"># 先用 50 张验证链路</span>
+python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span>--max_epochs<span class="w"> </span><span class="m">1</span><span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+python<span class="w"> </span>scripts/eval.py<span class="w">   </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span>--ckpt<span class="w"> </span>work_dirs/final/latest.pth
+python<span class="w"> </span>scripts/vis.py<span class="w">    </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span>--num<span class="w"> </span><span class="m">5</span><span class="w">    </span><span class="c1"># 看几张可视化确认正常</span>
+<span class="c1"># 链路通过后再跑全量复现主结果</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>pipeline 端到端跑通（数据→训练→评估→可视化每一环都有正常输出），小规模验证通过后全量结果和你记录的主结果一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 直接全量跑、错在最后一环才发现、白等几小时 → 先小规模（少量数据/1 epoch）验证链路;② 全量结果和记录对不上 → 检查是不是配置/seed/数据版本变了。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>某阶段断? → 定位是数据/训练/评估/可视化哪一环（看在哪一步报错），单独修那一环；结果对不上记录? → 核对配置、seed、数据划分是否和当时一致；链路太慢不好调? → 先用极小子集把“能从头跑到尾”验证通，再谈数值。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>端到端验证整条实验链路</strong>。<strong>做了</strong>（pipeline 完整跑）、<strong>学了</strong>（端到端 sanity check、集成验证、先小后全）、<strong>会了</strong>（从头到尾验证一个项目能跑通）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜端到端 sanity check</strong>：收官/交付前从头完整跑一遍（数据→训练→评估→可视化），确认整条链路无断点、结果与记录一致。<strong>先小规模（少量数据/1 epoch）验证链路通，再全量</strong>——避免错在最后一环白等。模块各自能跑 ≠ 系统能跑，集成验证是成果可信的底线。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d106-noon" data-d="106" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D106 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修复发现的任何问题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>端到端跑一遍往往会暴露一些“平时没注意”的问题（某路径硬编码、某依赖缺失、某小 bug）。把它们修掉、再验证一遍，让 pipeline 真正稳定。<strong>这是收尾的价值</strong>：平时赶进度留下的小毛病，趁现在一次清理干净，别带进产出期（M5 起更忙，没空回头修这些）。<strong>“技术债”现在还不还</strong>：每个临时硬编码、每个没处理的边界情况，都是欠下的技术债；阶段一末是还债的最佳时机——你对代码还熟悉、产出期还没压上来。带着一堆技术债进产出期，会在最忙的时候被这些小问题反复绊倒。<strong>修复也要有取舍</strong>：阻断流程的（pipeline 跑不通）必须现在修；不影响跑通但不优雅的（代码风格、可优化处）记入 backlog，别在收尾时陷入完美主义的无底洞。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>修复 sanity check 暴露的问题（路径/依赖/小 bug）；修完再跑一遍验证。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>问题修复、pipeline 稳定（再跑一遍无报错）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 修了一个没回归测试、引入新问题 → 修完整体再跑一遍;② 把“小毛病”留着说以后再说 → 现在不修，产出期更没空。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>问题太多一时修不完 → 按“阻断链路的优先修、不影响跑通的记 backlog”；不确定改动有没有副作用 → 改完跑小规模验证。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你清理了链路上的遗留问题。<strong>做了</strong>（修复）、<strong>学了</strong>（收尾排错、修完回归验证）、<strong>会了</strong>（让 pipeline 稳定可跑）。</p>
+</div></section></section><section class="slot" id="d106-pm" data-d="106" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D106 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">确保可复现：记录完整运行命令 + 环境版本</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（可复现三要素）</h4><div class="blk-b"><p><strong>可复现</strong>= 别人（或半年后的你）按你记录的命令 + 环境能重现结果。要记三样：<strong>完整运行命令、依赖版本(<code>pip freeze</code>/<code>conda env export</code>)、随机 seed</strong>（外加数据准备步骤）。<strong>为什么这三样缺一不可</strong>：命令缺了→不知道怎么跑；环境缺了→半年后依赖一更新，代码可能就跑不了（版本不兼容是复现的头号杀手）;seed 缺了→每次结果有随机波动，对不上你报的数字。<strong>可复现是科研诚信的底线</strong>，也是审稿人/同行评估你工作的前提（&quot;你的结果能重现吗&quot;）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>docs/复现.md</code> 记录完整命令 + 环境 + 数据准备 + seed。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 一键导出环境（锁版本，可复现的关键）</span>
+pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt<span class="w">                       </span><span class="c1"># 或用 conda:</span>
+conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--no-builds<span class="w"> </span>&gt;<span class="w"> </span>environment.yml
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch;print(&#39;torch&#39;,torch.__version__,&#39;cuda&#39;,torch.version.cuda)&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>docs/env.txt
+<span class="c1"># docs/复现.md 里写清：数据准备命令 + 训练命令(含 --seed) + 评估命令 + 预期主结果</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份“照着就能复现”的记录（命令+环境+seed+数据准备）+ requirements.txt/environment.yml。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不记环境版本 → 半年后依赖更新就跑不了;② 不记 seed → 结果对不上;③ 记了命令但漏了数据准备步骤 → 别人卡在第一步。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>依赖太多记不全 → 用 <code>pip freeze</code>/<code>conda env export</code> 自动导出，别手写；不确定记得全不全 → 想象“一个陌生人只有这份文档，他能跑出我的结果吗”，缺什么补什么。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把成果做成可复现的记录</strong>。<strong>做了</strong>（复现记录+requirements）、<strong>学了</strong>（可复现三要素、环境锁定、复现是诚信底线）、<strong>会了</strong>（锁定环境与命令）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜可复现三要素</strong>：可复现 = 记全“完整命令 + 依赖版本(<code>pip freeze</code>/<code>conda export</code>)+ 随机 seed”（外加数据准备）。环境缺失是复现头号杀手（半年后依赖更新就跑不了）,seed 缺失导致数字对不上。检验标准：陌生人只凭这份记录能跑出你的结果吗？</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ pipeline 端到端验证通过 ✅ 复现记录（命令+环境+seed）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D106</summary><textarea data-note="d106" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d107" data-d="107"><header class="day-head"><span class="dnum">D107</span><h2 class="day-t">周二 · 仓库整理 + reproduce.sh + 上传 checkpoint</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把仓库整理到“别人能上手”（安装文档+demo）、写一键复现脚本 reproduce.sh、把权重传到 HF（先私有）。提醒：reproduce.sh 里别硬编码本机路径（用变量），否则到别人机器就跑不了；checkpoint 先传私有，公开时机等论文进度定。</p>
+</blockquote>
+</div><section class="slot" id="d107-am" data-d="107" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D107 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整理代码仓库（安装文档 + demo notebook）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>一个“可用”的仓库要有：清晰 README、<strong>安装文档</strong>（怎么配环境）、<strong>demo notebook</strong>（让人几分钟跑个示例看到效果）。这决定别人（和未来的你）能否快速上手。<strong>demo notebook 是仓库的“试用装”</strong>：很多人看你仓库会先跑 demo，几分钟内看到效果（加载权重→对一张图推理→可视化出框），就愿意继续深入；如果上手要折腾半天环境数据，大多数人就走了。<strong>好的开源 = 低上手门槛</strong>,demo 越简单越好。<strong>“未来的你”也是受益者</strong>：半年后你想基于这个仓库做新工作，如果当初没整理，你自己都要花半天重新理清“这堆脚本哪个是干嘛的”；整理好的仓库让未来的你几分钟就能重新上手。<strong>整理仓库不是额外负担，而是对自己和他人时间的尊重</strong>——它把“只有我能跑、只有现在能跑”的代码，变成“任何人、任何时候都能跑”的资产。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写安装文档（环境/依赖/数据准备）+ 一个 demo notebook（加载权重→对一张图推理→可视化）。demo 骨架：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># demo.ipynb —— 让人 3 分钟看到效果</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">model</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_final_model</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_final_model</span><span class="p">(</span><span class="s2">&quot;checkpoints/final.pth&quot;</span><span class="p">)</span>   <span class="c1"># 加载最终权重</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;demo/sample.jpg&quot;</span><span class="p">)</span>
+<span class="n">boxes</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>                            <span class="c1"># 推理出旋转框</span>
+<span class="n">vis</span> <span class="o">=</span> <span class="n">draw_oriented_boxes</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">boxes</span><span class="p">)</span>                 <span class="c1"># 画框</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;demo/output.jpg&quot;</span><span class="p">,</span> <span class="n">vis</span><span class="p">)</span>                   <span class="c1"># 看结果</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;检测到 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个目标，可视化已存 demo/output.jpg&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>安装文档 + demo notebook（在干净环境能独立跑通一个示例）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 安装文档漏步骤 → 在干净环境照着走一遍验证（最容易发现漏步骤）;② demo 太复杂（要先训练才能跑）→ 用预训练权重，越简单越好。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定安装文档全不全 → 新建一个 conda 环境照文档走一遍；demo 跑不通 → 先确保权重路径/依赖对，demo 只做“加载+推理+可视化”最小闭环。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把仓库整理到“别人能上手”</strong>。<strong>做了</strong>（安装文档+demo）、<strong>学了</strong>（可用仓库的要素、demo 是试用装、低上手门槛）、<strong>会了</strong>（降低他人上手门槛）。</p>
+</div></section></section><section class="slot" id="d107-noon" data-d="107" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D107 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 reproduce.sh（一键复现脚本）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>reproduce.sh</strong> 把“准备数据→训练→评估”串成一键脚本，别人/你一条命令就能复现主结果——这是高质量开源的标志。<strong>为什么一键脚本这么重要</strong>：把多步流程固化成一个脚本，既消除“我是不是漏了某步”的不确定，也让复现门槛降到最低(<code>bash reproduce.sh</code> 就行)。<strong>关键是别硬编码本机路径</strong>：用变量/相对路径，否则脚本到别人机器（路径不同）就跑不了。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 <code>scripts/reproduce.sh</code>(下载/准备数据 → 训练 → 评估 → 打印主结果)，用变量、注释清楚。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">set</span><span class="w"> </span>-e<span class="w">                                   </span><span class="c1"># 出错即停，避免错误被忽略</span>
+<span class="nv">DATA_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="p">./data</span><span class="si">}</span><span class="w">                    </span><span class="c1"># 数据目录可传参，不硬编码</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; 1/3 准备数据&quot;</span><span class="p">;</span><span class="w">  </span>python<span class="w"> </span>tools/prepare_data.py<span class="w"> </span>--root<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; 2/3 训练(seed=0)&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; 3/3 评估(打印主结果)&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>scripts/eval.py<span class="w"> </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--ckpt<span class="w"> </span>work_dirs/final/best.pth
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>reproduce.sh 能一键跑出主结果（或主流程），无硬编码路径。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 脚本里硬编码本机绝对路径 → 用相对路径/变量;② 数据需手动下载却没说明 → 在脚本里给下载命令或在注释里说明来源;③ 没 <code>set -e</code>，中间出错继续跑 → 加上，出错即停。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>数据集不能自动下（需授权）→ 脚本里打印“请先从 X 下载到 $DATA_DIR”并退出；脚本在别人机器报错 → 多半是路径/数据问题，检查是否都参数化了。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写一键复现脚本</strong>。<strong>做了</strong>(reproduce.sh)、<strong>学了</strong>（一键复现、参数化路径、set -e）、<strong>会了</strong>（把复现流程脚本化）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜一键复现 reproduce.sh</strong>：把“准备数据→训练→评估”固化成一条命令(<code>bash reproduce.sh</code>)。<strong>路径用变量/相对路径（不硬编码本机路径）</strong>，加 <code>set -e</code>(出错即停)，数据需手动下就在脚本里给说明。一键脚本既消除“漏步骤”的不确定，也把复现门槛降到最低——高质量开源的标志。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d107-pm" data-d="107" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D107 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">上传 checkpoint 到 HuggingFace（私有）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把训练好的<strong>权重(checkpoint)上传到 HuggingFace（先设私有）</strong>，既备份又方便日后公开/复现（别人能下载你的权重直接用，不必重训）。<strong>为什么先私有</strong>：论文还没投/没接收前，权重和代码一样属于“未发表成果”，先私有备份，等论文进度允许再公开。<strong>HF 是模型托管的标准平台</strong>：支持大文件(git-lfs)、有版本管理、公开后别人 <code>from_pretrained</code> 就能用，是展示作品的好渠道。<strong>权重托管对你的实际价值</strong>:① 备份——本地硬盘可能坏，云端多一份保险;② 复现友好——审稿人/同行想验证你的结果，直接下你的权重跑，比从头重训快得多（也更能证明你的结果真实）;③ 影响力——公开后别人用你的权重做下游任务，等于你的工作被更多人使用。这些都直接支撑你“做出有人用的工作”这个长期目标。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 HF 建一个私有 repo，上传最终权重 + 简要说明（对应哪个方法/结果）；在 README 给出下载方式。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>权重已上传 HF 私有库，README 有下载说明（对应方法/结果）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 权重太大传不上 → HF 支持大文件(git-lfs)，按其说明传;② 一上来就设公开 → 论文未投先私有;③ 传了权重没说明对应哪个结果 → 加一句“对应论文 Table 1 的 v3”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>git-lfs 不会用 → HF 网页端也能直接上传文件；不确定该不该现在传公开 → 默认私有，最稳。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>托管模型权重(HF)</strong>。<strong>做了</strong>（HF 上传权重）、<strong>学了</strong>（权重托管、先私有、HF 标准平台）、<strong>会了</strong>（备份并分发模型权重）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 仓库整理（安装文档+demo） ✅ reproduce.sh ✅ HF 私有权重。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D107</summary><textarea data-note="d107" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d108" data-d="108"><header class="day-head"><span class="dnum">D108</span><h2 class="day-t">周三 · 写《阶段一总结报告》（≥4000 字）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写阶段一总结报告——它不只给自己看，更是你未来写简历/答辩“遥感转型经历”的素材库。提醒：别写成流水账，要突出“做出了什么、达到什么水平”；用具体成果和统计数字（论文≥100、baseline≥6、代码行数）说话。</p>
+</blockquote>
+</div><section class="slot" id="d108-am" data-d="108" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D108 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写总结报告 上半（回顾 M1–M4 产出）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（你计划的金句：报告不只给自己看）</h4><div class="blk-b"><p><strong>阶段一总结报告不只给自己看</strong>——未来写简历、套磁导师、面试答辩时，这份报告就是你“遥感转型经历”的素材来源。上半：系统回顾 M1（入门+基线）、M2（广谱+选向+白皮书）、M3（找 Gap+Proposal+框架+消融）、M4（方法 v2/v3+3 数据集+论文骨架）的产出。<strong>回顾要“有数有物”</strong>：不是“我学了很多”，而是“我跑通了 6 个 baseline（列出）、做出了一个在 3 数据集上 +X 的方法、写了 6000 字论文骨架”——具体成果才有说服力，也才能直接搬进简历。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写报告第 1 部分（M1–M4 逐月产出回顾，用具体成果：跑了哪些 baseline、做了什么方法、什么结果），可配一张“阶段一成绩单总表”。</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 阶段一成绩单总表（放报告上半，一目了然）</span>
+| 月 | 主线 | 关键产出 | 量化 |
+|---|---|---|---|
+| M1 | 入门+首个baseline | 环境/知识库/Oriented R-CNN 复现 | mAP~75, 笔记~25 |
+| M2 | 广谱+选向+白皮书 | 6 个 baseline / 方向白皮书 | baseline≥6, 笔记~60 |
+| M3 | 找Gap+方法v1+消融 | Proposal v1/统一框架/第一轮消融 | 代码~3k行 |
+| M4 | 方法v2/v3+论文骨架 | 3数据集大表/二轮消融/论文骨架 | +X mAP, 骨架6000字 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>报告上半（M1–M4 产出回顾，具体有数据，配成绩单总表）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 写成流水账（&quot;第一个月我做了…&quot;）→ 突出&quot;做出了什么、达到什么水平&quot;;② 数据散在各处 → 用成绩单总表汇总。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>记不清每月做了啥 → 翻你的周报和阶段交付清单；数字找不到 → 用 D108 中午的统计脚本跑。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>系统回顾一个阶段的产出</strong>。<strong>做了</strong>（报告上半+成绩单）、<strong>学了</strong>（阶段回顾、有数有物、可搬进简历）、<strong>会了</strong>（把四个月成果梳理成文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜阶段总结报告写法</strong>：阶段总结不只自看，是简历/答辩/套磁的素材库。<strong>用具体成果+量化数字</strong>（跑了哪些 baseline、方法提升多少、代码多少行、笔记多少篇）而非“学了很多”。结构：产出回顾（配成绩单总表）→ 统计 → 问题与解决 → 经验 → 能力自评与差距 → 下阶段打算。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d108-noon" data-d="108" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D108 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">统计（论文/实验/代码量）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>量化你的产出——读了多少论文、跑了多少实验、写了多少代码行——既有成就感，也是简历硬数据。<strong>量化的力量</strong>:&quot;我认真学了遥感&quot;很苍白,&quot;我精读 100+ 篇论文、复现 6 个 baseline、写了 5000+ 行代码&quot;很有冲击力。数字让你的努力可被衡量、可被信任。<strong>这些数字的具体用处</strong>:① 简历里&quot;项目&quot;栏的支撑（&quot;独立完成遥感检测研究，精读论文 100+、复现 baseline 6 个、代码 5000+ 行&quot;）;② 套磁导师邮件里证明你的投入和执行力;③ 答辩/面试时回答&quot;你这四个月做了什么&quot;的硬证据。<strong>统计时把数字和&quot;质&quot;结合</strong>：不只说&quot;100 篇论文&quot;，而是&quot;100+ 篇精读笔记（含 A 级深读 X 篇）&quot;；不只说&quot;5000 行代码&quot;，而是&quot;5000+ 行，含完整的训练/评估/消融框架&quot;——量 + 质，才完整。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>统计：论文笔记篇数（应 ≥100）、baseline 数(≥6)、实验次数、代码行数、文档字数。用脚本跑，别手数：</p>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">re</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_md</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>                                  <span class="c1"># 论文笔记篇数</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;**/*.md&quot;</span><span class="p">),</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_code_lines</span><span class="p">(</span><span class="n">exts</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">,</span><span class="s2">&quot;.sh&quot;</span><span class="p">)):</span>         <span class="c1"># 代码行数(粗估)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">exts</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">total</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;论文笔记篇数:&quot;</span><span class="p">,</span> <span class="n">count_md</span><span class="p">(</span><span class="s2">&quot;10-论文笔记&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;代码行数(粗估):&quot;</span><span class="p">,</span> <span class="n">count_code_lines</span><span class="p">())</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一组产出统计数字（填进报告统计部分）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 数字不准纠结 → 粗估即可，体现规模;② 手数论文/代码 → 用脚本(<code>git ls-files | xargs wc -l</code> 也行)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>代码行数含第三方库虚高 → 只统计你自己写的目录；笔记篇数不够 100 → 如实记，差的在 M5 补读。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你量化了自己的产出。<strong>做了</strong>（产出统计）、<strong>学了</strong>（量化成果、数字有冲击力）、<strong>会了</strong>（把工作量化成可展示数据）。</p>
+</div></section></section><section class="slot" id="d108-pm" data-d="108" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D108 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写总结报告 下半 + 完成（≥4000 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>下半：遇到的问题与怎么解决、学到的经验（方法论）、当前能力自评、阶段一与目标（空天院）的距离。整篇定稿 ≥4000 字。<strong>下半比上半更有价值</strong>：上半是“做了什么”（事实），下半是“学到什么、成长在哪、还差什么”（反思与规划）——后者才体现你的判断力和自我认知，也是答辩/面试最常被问的。<strong>能力自评要诚实</strong>：既肯定“从零到能独立做研究”的跨越，也清楚列出“论文还没投、SAR 还没深入”等差距，为产出期校准。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写报告第 2 部分（问题/经验/能力自评/与目标距离）→ 通读定稿（≥4000 字）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>《阶段一总结报告》定稿（≥4000 字，有产出/统计/经验/自评/差距/下阶段）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只写“做了什么”不写“学到什么” → 补经验与反思（下半的核心）;② 能力自评只报喜或只否定 → 两面都要（跨越 + 差距）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>经验提炼不出 → 回想“哪个坑踩得最狠、怎么爬出来的、下次怎么避”（具体的踩坑经历最有价值）；字数不够 → 多半是下半（经验/反思）写太薄，补具体经验；能力自评不知怎么写 → 对照阶段一硬交付清单逐项问“这项我能独立做吗”，能做的就是已获得的能力；与目标的距离说不清 → 对比空天院那几组的工作要求（你 M2/M3 做过技术地图），看自己还差哪些硬指标。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>阶段一总结报告</strong>（简历/答辩素材）。<strong>做了</strong>（总结报告定稿）、<strong>学了</strong>（阶段总结的结构、下半反思最有价值、诚实自评）、<strong>会了</strong>（把成长经历写成可用文档）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 《阶段一总结报告》定稿（≥4000 字）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D108</summary><textarea data-note="d108" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d109" data-d="109"><header class="day-head"><span class="dnum">D109</span><h2 class="day-t">周四 · 综述笔记 + 知识库体检</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把读过的论文串成一篇“方向综述笔记”（有故事线，不是笔记堆叠），并给知识库做个体检。提醒：综述笔记的关键是“问题→解法→新问题”的演进主线，把多篇论文织成一个领域叙事——这也是未来真写综述/开题的底稿。</p>
+</blockquote>
+</div><section class="slot" id="d109-am" data-d="109" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D109 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">把论文笔记整理成“该方向综述笔记”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（你计划的金句：把读过的串成故事）</h4><div class="blk-b"><p>把你读的 A 级论文<strong>串起来讲一个故事</strong>（这个方向怎么演进、谁解决了什么、还缺什么）——这就是一篇&quot;该方向综述笔记&quot;。它整合你的认知，也是未来真写综述/开题的底稿。<strong>综述 ≠ 笔记堆叠</strong>：不是把 10 篇笔记拼在一起，而是用一条主线（&quot;早期方法解决了 X 但遗留 Y → 后续方法针对 Y → 当前 SOTA 到了哪 → 还缺 Z&quot;）把它们织成一个连贯的领域叙事。<strong>写综述笔记的收获</strong>:① 你会发现自己对这个方向的理解从&quot;知道很多篇论文&quot;升级到&quot;理解了这个领域的演进逻辑&quot;;② Z（当前还缺什么）正是你工作的切入点，综述笔记帮你把自己的定位放进领域脉络里。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>基于你的技术演进图谱 + A 级笔记，写一篇方向综述笔记（按“问题→解法→新问题”的故事线组织）。结构：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 方向综述笔记（故事线，非笔记堆叠）</span>
+<span class="gu">## 一、问题的起点</span>
+{这个方向要解决什么核心问题}（如：遥感目标任意朝向→旋转检测）
+<span class="gu">## 二、演进脉络（一条线串起代表作）</span>
+早期：{方法A} 提出 {思路}，解决了 {X}，但遗留 {Y}；
+发展：{方法B} 针对 {Y} 改进，达到 {新水平}，暴露 {Z}；
+近期SOTA：{方法C} 在 {Z} 上突破，但 {仍缺的 W}；
+<span class="gu">## 三、当前仍缺什么（= 我的切入点）</span>
+{W} 仍未很好解决（如单卡高效、密集粘连），这正是本人工作的切入。
+<span class="gu">## 四、我的工作在脉络中的位置</span>
+本人方法针对 {W}，以 {你的方案} 补上这一环。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一篇有故事线的方向综述笔记（把多篇串成演进脉络，末尾落到你的切入点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 写成笔记拼接（A 做了…B 做了…）→ 要有主线和过渡（&quot;但这遗留了…于是…&quot;）;② 太长面面俱到 → 抓主干脉络，次要工作一笔带过。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>串不起主线 → 用“每个方法解决了前一个的什么遗留问题”来连；不知落到哪 → 落到你方法针对的那个“当前还缺的 W”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把多篇论文综合成一篇有故事线的综述</strong>。<strong>做了</strong>（方向综述笔记）、<strong>学了</strong>（综述的故事线组织、从“知道很多篇”到“理解演进逻辑”）、<strong>会了</strong>（把读过的串成一个领域叙事）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜方向综述笔记的故事线</strong>：综述 ≠ 笔记堆叠，而是用一条主线（&quot;早期解决 X 遗留 Y → 后续针对 Y → SOTA 到哪 → 还缺 Z&quot;）把多篇织成领域叙事。用&quot;每个方法解决了前一个的什么遗留&quot;来串接。末尾落到&quot;当前还缺的 Z&quot;=你的切入点，把自己放进脉络。这是开题/真综述的底稿。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d109-noon" data-d="109" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D109 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">检查知识库完整性（体检）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>给知识库做个“体检”——4 个文件夹是否齐整、笔记是否都有标签可检索、有没有“存了没读/读了没记”的半成品。<strong>为什么定期体检</strong>：知识库是你四个月积累的核心资产，但日常赶进度容易留下“下载了没读的 PDF、读了没记笔记的论文、没打标签搜不到的笔记”。体检就是把这些半成品清出来补齐，保证知识库“可检索、无缺漏”，日后查找高效。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>体检知识库：4 个文件夹是否齐整、笔记是否都有标签、有没有“存了没读/没记”的；补缺或列入待办。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>知识库整洁、可检索、无明显缺漏（或缺漏已列待办）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 体检发现一堆没读的就焦虑 → 列入 M5 待读，别现在突击;② 笔记没标签搜不到 → 补关键标签。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>半成品太多 → 按“重要/相关性”排序，重要的补、次要的归档；时间不够 → 体检列清单即可，补齐分批做。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你维护了知识库健康。<strong>做了</strong>（知识库体检）、<strong>学了</strong>（定期体检、清半成品）、<strong>会了</strong>（保持知识库可用）。</p>
+</div></section></section><section class="slot" id="d109-pm" data-d="109" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D109 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">更新论文清单和数据集表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>更新两个核心索引——论文清单（确认 ≥100 篇、分级齐）和数据集总表（本阶段用过的都在），确保它们是“活的最新版”。<strong>为什么维护索引</strong>：论文清单和数据集表是你检索自己积累的“目录”，随着读得越多用得越多，要持续更新，否则就过时失效。保持最新，日后写论文/找数据时一查就有。<strong>索引的复利效应</strong>：维护良好的索引会随时间越来越值钱——读到第 200 篇论文时，一个分好级、打好标签的清单能让你瞬间定位“我之前读过的相关工作有哪些”，而一堆没整理的笔记则等于没读过(找不到=不存在)。数据集表同理：写论文选数据集、做实验找对口数据时，一张标好“规模/目标类型/特点/用在哪”的表能省大量重复调研。<strong>现在花十分钟维护，日后省几小时检索</strong>——这是典型的“磨刀不误砍柴工”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>更新论文清单（≥100 篇、分级齐）和数据集总表（DOTA/DIOR-R/HRSC 等用过的都在，标注特性）；确保是最新版。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文清单、数据集表更新到最新（数量/分级/特性齐）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>索引长期不更新 → 定期（如每阶段）同步；数据集表缺特性列 → 补（目标类型/规模/特点），日后选数据集有用。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>清单不足 100 篇 → 如实记，M5 补读补齐；数据集表信息不全 → 至少记名称/规模/特点/用在哪。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你保持了核心索引最新。<strong>做了</strong>（清单/数据集表更新）、<strong>学了</strong>（索引维护、活的最新版）、<strong>会了</strong>（让核心资产保持最新）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 方向综述笔记 ✅ 知识库体检 + 索引更新。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D109</summary><textarea data-note="d109" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d110" data-d="110"><header class="day-head"><span class="dnum">D110</span><h2 class="day-t">周五 · GitHub 公开化准备</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天为仓库公开做准备——检查敏感信息、完善英文 README、权衡公开时机（双盲/抢先）、写项目介绍。提醒：公开前务必扫一遍有没有把 token/密钥提交进 git 历史（公开即泄露）；论文没投/双盲期可先保持私有，公开时机按投稿计划定。</p>
+</blockquote>
+</div><section class="slot" id="d110-am" data-d="110" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D110 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">检查敏感信息 + 完善英文 README</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>仓库公开前必须<strong>检查敏感信息</strong>（私钥/token/内部路径/未发表的敏感数据），并准备<strong>英文 README</strong>（国际可读）。公开的仓库是你的“作品名片”。<strong>敏感信息检查是安全红线</strong>：最危险的是把 API token/密钥提交进了 git 历史——即使你后来删了文件，历史里还在，仓库一公开就泄露（有人专门扫 GitHub 找泄露的密钥）。<strong>英文 README 决定国际可读性</strong>：你的目标读者（审稿人、国际同行、招聘方）很多看英文，一个清晰的英文 README（简介/安装/用法/结果/引用）是作品名片的门面。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>扫一遍仓库有无敏感信息（token/绝对路径/隐私数据），清理；写/完善英文 README（简介/安装/用法/结果/引用）。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 扫一遍可能的敏感信息（提交前自查）</span>
+grep<span class="w"> </span>-rnI<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(api_key|token|password|secret|ssh-rsa|BEGIN PRIVATE)&quot;</span><span class="w"> </span>.<span class="w"> </span>--exclude-dir<span class="o">=</span>.git
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>-p<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(api_key|token|password)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">    </span><span class="c1"># 查历史里有没有</span>
+<span class="c1"># 若历史里曾提交密钥：立即吊销该密钥，并用 git filter-repo 清理历史</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>无敏感信息（当前文件+git 历史）；英文 README 完整（简介/安装/用法/结果/引用）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 把 token/密钥提交进 git 历史（公开即泄露，删文件没用、历史还在）→ 检查并清理历史 + 立即吊销该密钥;② 只有中文 README → 补英文（国际读者）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>不确定历史里有没有密钥 → 用 git-secrets/手动 <code>git log -p | grep</code> 搜；曾提交过密钥 → 第一时间吊销该密钥（清理历史是补救，吊销才是根治）；英文 README 不会写 → 套用标准检测仓库 README 结构翻译。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>公开仓库前的安全与可读性检查</strong>。<strong>做了</strong>（敏感信息检查+英文 README）、<strong>学了</strong>（公开前必查项、密钥泄露红线、英文门面）、<strong>会了</strong>（把仓库准备成可公开的作品）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜代码公开前的安全检查</strong>：公开前必扫敏感信息（token/密钥/内部路径/隐私数据），<strong>尤其查 git 历史</strong>（删文件没用，历史还在，一公开就泄露）。曾提交过密钥→第一时间吊销（清理历史只是补救）。配英文 README（简介/安装/用法/结果/引用）做国际门面。仓库是你的作品名片。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d110-noon" data-d="110" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D110 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">视情况从“私有”转“公开”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（公开时机权衡）</h4><div class="blk-b"><p><strong>注意时机</strong>——若论文还没投/没接收，代码公开可能被人抢先（idea 被借鉴抢发）或影响双盲评审（实名仓库暴露作者身份）。<strong>可先保持私有</strong>，等投稿后再公开；或公开但不放核心未发表细节。按你的投稿计划决定。<strong>这是科研策略问题</strong>：公开有好处（展示、影响力、复现友好），但时机不当有风险（抢先、违反双盲）。<strong>稳妥默认是“投稿后再公开”</strong>——既保护成果，又在合适时机展示。<strong>双盲为什么是硬约束</strong>：很多会议/期刊要求审稿匿名，如果你的实名 GitHub 仓库能被搜到、且和投稿内容对应，就可能暴露作者身份，违反双盲规则，严重的会被拒稿。所以双盲期内，要么仓库私有，要么确保它无法和你的投稿关联（匿名化）。<strong>抢先的风险则是现实的学术竞争</strong>：热门方向你公开了 idea 和代码，别人可能快速跟进甚至抢先发表，你前几个月的工作就可能被“撞车”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>评估是否现在公开（看论文进度/双盲要求）；若公开，执行；若暂不，在计划里记下“投稿后公开”的触发点。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>做出“现在公开/暂不公开”的明确决定（有依据：论文进度/双盲）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 论文双盲期就公开实名仓库 → 可能违反匿名要求，先别公开或匿名公开;② 未投就公开 → 可能被抢先。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定 → 默认先私有，投稿后再公开最稳；想早点展示又怕抢 → 公开框架代码、核心未发表细节暂留。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>权衡代码公开的时机（双盲/抢先）</strong>。<strong>做了</strong>（公开决定）、<strong>学了</strong>（公开时机权衡、投稿后公开最稳）、<strong>会了</strong>（在保护成果与展示间取舍）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜代码公开时机权衡</strong>：公开有利（展示/影响力/复现），但论文未投/双盲期公开有风险（被抢先、暴露身份违反匿名）。<strong>稳妥默认“投稿后再公开”</strong>；想早展示可公开框架、核心未发表细节暂留。按投稿计划定触发点，别凭一时冲动公开。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d110-pm" data-d="110" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D110 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写一份简短“项目介绍”（用于推广）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>一段简短（几句话）的项目介绍，用于日后在 GitHub/社交/简历推广（说清“做了什么、解决什么、效果”）。<strong>为什么要专门写</strong>：别人（招聘方、同行）了解你工作的时间只有几十秒，一段精炼的介绍（问题+方法一句+亮点结果+你的卖点）能在这几十秒里讲清价值。<strong>把“单卡高效”写进去</strong>：这是你的差异化卖点，一句话点出“在单张消费级 GPU 上实现高精度高效检测”很抓人。<strong>这段介绍是“一稿多用”的资产</strong>：它能直接放进 GitHub 仓库顶部、简历的项目栏、给导师的自我介绍邮件、社交媒体的成果分享——写好这一段，后面很多场合都能复用。<strong>写法的核心是“价值前置”</strong>：先说你解决了什么问题、达到什么效果，而不是先堆技术细节；读者先被“价值”抓住，才有兴趣看技术。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 100–200 字项目介绍（问题+方法一句+亮点结果+单卡高效卖点）。范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 项目介绍（100-200 字，推广/简历用）</span>
+本项目面向遥感旋转目标检测，针对小目标、遮挡、密集排列三大难点，提出多尺度融合、
+遮挡感知分配与旋转 Soft-NMS 三个轻量组件。在 DOTA/DIOR-R/HRSC 三个数据集上平均
+提升 X mAP，且参数仅 +2M、推理 22 FPS——可在单张消费级 GPU(RTX 4090)上高效训练
+与部署。代码与预训练权重开源，一键复现。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一段精炼的项目介绍（价值清晰、含高效卖点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>写太技术/太长 → 一句话讲清价值即可；漏了卖点 → 突出“单卡高效”这个差异点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写不精炼 → 套“问题→方法一句→结果数字→卖点”四句；不知亮点 → 用主表最硬的数字 + 单卡高效。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>为作品写推广短文</strong>。<strong>做了</strong>（项目介绍）、<strong>学了</strong>（精炼表达价值、几十秒讲清、突出卖点）、<strong>会了</strong>（用几句话讲清一个项目）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ GitHub 仓库就绪（安全检查+英文 README+公开决定+项目介绍）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D110</summary><textarea data-note="d110" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d111" data-d="111"><header class="day-head"><span class="dnum">D111</span><h2 class="day-t">周六 · 休息 + 调整（允许自己放松一天）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天是你计划里明确安排的<strong>休息日</strong>——你已连续高强度 112 天，这一天的“任务”就是不安排硬任务。提醒：休息不是偷懒，是可持续的一部分；别内疚地刷论文，真正放下，大脑恢复了才能在产出期持续高产。本版仍给三段，但都是低强度。</p>
+</blockquote>
+</div><section class="slot" id="d111-am" data-d="111" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D111 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">休息（你计划明确要求的恢复日）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（你计划的金句：休息是可持续的一部分）</h4><div class="blk-b"><p>你刚完成 112 天高强度学习，M5 起是更紧张的产出期（写论文、投稿、竞赛）。<strong>在那之前给自己一天恢复</strong>——休息不是偷懒，是可持续的一部分（你计划里写明的减配/可持续原则）。<strong>为什么这天很重要</strong>：长期高强度不留恢复，容易在产出期（更需要状态）透支垮掉；主动安排恢复，是把精力当作需要管理的资源，而非无限消耗。<strong>这是一种成熟的长跑心态</strong>：顶尖研究者也需要 recovery，可持续比短期冲刺更重要。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>今天<strong>主动不安排硬任务</strong>：睡好、运动、见朋友、做与科研无关的事。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>你真的放松了一天（没有内疚地学一整天）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 休息日还焦虑地刷论文/赶进度 → 真正放下，大脑需要恢复才能持续产出;② 把休息和“落后”画等号而内疚 → 休息是计划的一部分，不是偷懒。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>停不下来/内疚 → 提醒自己“这是计划里的恢复日，休息是为了走更远”；闲着难受 → 做点非科研的喜欢的事（运动/朋友/爱好），让大脑换个频道。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把休息当作可持续的一部分</strong>。<strong>做了</strong>（真正休息）、<strong>学了</strong>（恢复的必要、精力是要管理的资源、长跑心态）、<strong>会了</strong>（在长跑中安排恢复）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜把休息当可持续的一部分</strong>：长期高强度必须留恢复，否则在更需要状态的产出期透支垮掉。休息不是偷懒、不等于落后，是把精力当“需管理的资源”。计划里明确排恢复日，当天主动不安排硬任务，真正放下（别内疚刷论文）。可持续 &gt; 短期冲刺。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d111-noon" data-d="111" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D111 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">轻松看点别的（可选，不强求）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若想动脑，可看点<strong>轻松、非任务</strong>的东西（一篇有趣的科普、一个酷的 demo、一个相关领域的趣闻），保持好奇但不施压。<strong>关键是“无目标”</strong>：不记笔记、不设 KPI、不逼自己学会什么，纯粹因为有趣而看——这种低压力的涉猎反而能让你保持对领域的热情和手感，和高强度任务式学习是两种状态。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>随意看点感兴趣的（不记笔记、不设目标），看不下去就不看。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>轻松涉猎，无压力（或干脆不看，完全休息）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>把“轻松看点别的”又变成任务（逼自己看完记笔记）→ 今天就是无目标涉猎，别加压。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>一看又进入“学习模式”焦虑 → 提醒自己今天无 KPI，看着累就停；不想动脑 → 完全不看也没关系，休息优先。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你保持了好奇而不内卷。<strong>做了</strong>（轻松涉猎或完全休息）、<strong>学了</strong>（张弛有度、无目标涉猎）、<strong>会了</strong>（低强度保持手感）。</p>
+</div></section></section><section class="slot" id="d111-pm" data-d="111" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D111 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">轻松收尾（整理心情，准备下阶段）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上做点轻量收尾：整理一下桌面/心情，对即将开始的产出期有个平静的期待（不做硬规划，那是明天 D112）。<strong>给自己一点正向肯定</strong>：你从一个零遥感基础的外行，四个月走到“能独立做研究、有方法有实验有论文骨架”——这是非常不容易的跨越，值得肯定。<strong>为什么要自我肯定</strong>：长期努力容易只盯着“还没做完的”，忽略“已经走了多远”；收官时回看起点，给自己应得的认可，能补充心理能量，以更稳的状态迎接下阶段。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>简单整理工作环境；回看四个月前的自己，想一想“我已经从零走到这，挺不容易”——给自己一点正向肯定。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>心态平稳、为下阶段蓄好力（不焦虑、不排满）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>又开始焦虑地排满计划 → 今天不规划，明天 D112 再说；只盯没做完的否定自己 → 也看走了多远。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>忍不住想规划 → 写一句“明天再排”然后放下；找不到值得肯定的 → 对比四个月前（那时连环境都搭不通），你的成长一目了然。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>收尾与自我肯定</strong>。<strong>做了</strong>（轻松收尾+自我肯定）、<strong>学了</strong>（正向自我肯定、看走了多远）、<strong>会了</strong>（以平稳心态迎接下阶段）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 身心调整（真正休息一天）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D111</summary><textarea data-note="d111" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d112" data-d="112"><header class="day-head"><span class="dnum">D112</span><h2 class="day-t">周日 · （阶段一收官日）· M5–M8 计划 + 阶段一终极复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：阶段一最后一天：把 M5–M8 排到周级、倒排论文投稿时间线、做阶段一终极复盘（我四个月前 vs 现在）。提醒：复盘时既要诚实看差距（论文还没投等），更要看见“从零到能独立做研究”的巨大跨越——阶段一目标本就是“能独立做研究”，你已达到。</p>
+</blockquote>
+</div><section class="slot" id="d112-am" data-d="112" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D112 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">制定 M5–M8 详细计划（周级）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>阶段二(M5–M12)是产出期。先把 M5–M8 排到<strong>周级</strong>（后续每周再细化到日级）:M5 主实验矩阵 + 完善论文实验、M6 论文 v1 + 模拟审稿 + 竞赛、M7 定稿 + 正式投稿、M8 竞赛技术报告 + 第二课题萌芽。<strong>为什么先到周级而非日级</strong>：阶段二还远（几个月后），现在排到日级不现实（变数太多）；排到周级既有方向感，又留调整空间，等临近某月再细化到日。<strong>规划要和投稿节奏对齐</strong>:M5–M8 的主线是“把论文从骨架做到投出去”，所以计划要围绕论文进度组织。<strong>阶段一和阶段二的重心切换要想清楚</strong>：阶段一是“学习+探索”（读论文、试方法、找 Gap），允许走弯路；阶段二是“产出+交付”（完成论文、投稿、参赛），要的是把已有积累转化成可见成果。心态上从“我还要学更多”转向“我要把手上的做成、发出去”——很多人卡在“总觉得还没准备好”，而产出期的关键是“在足够好时果断交付”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定 M5–M8 周级计划（每月目标 + 每周主线），与你的论文/投稿节奏对齐。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M5–M8 周级计划（每月目标清晰、每周有主线）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 计划过细过满（现在就排日级）→ 先到周级、留缓冲;② 不和投稿节奏对齐 → 围绕“论文骨架→初稿→润色→投稿”组织。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>排不清 → 按“M5 补实验、M6 写完整初稿+竞赛、M7 润色投稿、M8 收尾+新课题”的主线粗排；怕变数 → 周级即可，日级临近再细。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规划了产出期路线。<strong>做了</strong>（M5–M8 计划）、<strong>学了</strong>（周级规划、留调整空间、对齐投稿节奏）、<strong>会了</strong>（为下阶段排路线）。</p>
+</div></section></section><section class="slot" id="d112-noon" data-d="112" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D112 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">规划论文投稿时间线</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>倒排投稿时间线——目标期刊/会议、其 deadline、从“骨架→完整初稿→润色→投稿”的时间节点。<strong>为什么倒排</strong>：从投稿目标的 deadline 往回推，能算出“每个里程碑最晚什么时候完成”，避免临近 deadline 手忙脚乱。<strong>目标出口要匹配你的实力和算力</strong>：你是单卡选手、第一篇论文，选<strong>对单卡/增量工作更友好的期刊</strong>（如 GRSL/JSTARS，审稿周期和创新度要求比顶会温和）比硬冲顶会更现实——先发表建立信心，再逐步进阶。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>选定目标投稿出口 + 倒排时间线（何时完整初稿、何时润色、何时投）；记进战略卡。</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 投稿时间线（倒排示例）</span>
+目标出口：IEEE GRSL（对增量+高效工作友好，审稿周期适中）
+M8 末：正式投稿  ← 终点
+M7 末：润色完成、内部终审通过
+M6 末：完整初稿（含实验全部到位）
+M5 末：实验矩阵补齐、论文实验章节完成
+现在(M4末)：论文骨架 v0.6（Intro+RW+Method）已就绪
+→ 每个节点留 1-2 周 buffer 应对意外（实验返工/反复修改）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一条清晰的投稿时间线（到月/周，有 buffer）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 目标定太高（顶会）单卡难支撑、易被拒 → 选匹配的出口（期刊更友好）;② 时间线太紧无 buffer → 每节点留 1–2 周缓冲。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知选哪个出口 → 看你 M2 调研的期刊/会议中“审稿周期适中、对高效/增量工作友好”的；时间线排不下 → 从投稿 deadline 倒推，各里程碑留 buffer。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>倒排投稿时间线</strong>。<strong>做了</strong>（投稿时间线）、<strong>学了</strong>（目标出口匹配实力、倒排、留 buffer）、<strong>会了</strong>（为论文产出定节奏）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜投稿时间线倒排</strong>：从目标出口的 deadline 往回推各里程碑（投稿←润色←完整初稿←实验到位），每节点留 1-2 周 buffer。<strong>第一篇、单卡选手选对增量/高效工作友好的期刊</strong>（如 GRSL/JSTARS）比硬冲顶会现实——先发表建信心再进阶。出口要匹配实力与算力。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d112-pm" data-d="112" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D112 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">阶段一终极复盘（我 4 个月前 vs 现在）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>阶段一终极复盘的核心三问：<strong>我 4 个月前是什么水平？现在是什么水平？差距在哪？</strong> 对照阶段一硬交付清单逐项确认，诚实评估成长与不足，为产出期校准。<strong>复盘要两面看</strong>：一面是巨大的跨越（四个月前连环境都搭不通、不会读论文，现在能独立跑实验、做方法、写论文骨架）；另一面是诚实的差距（论文还没投、SAR 还没深入、某些硬交付未全达标）。<strong>只看一面都不对</strong>：只看跨越会自满，只看差距会气馁；两面都看，才能既有信心又知道往哪使劲。<strong>阶段一的核心目标是“从零到能独立做研究”，你已达到</strong>——这是最重要的判断。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写阶段一终极复盘:① 4 个月前 vs 现在的能力对比 ② 对照硬交付清单（见下）逐项打勾 ③ 还差什么、产出期重点补什么。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>阶段一终极复盘 + 硬交付清单逐项确认；阶段一正式完结。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 只看没做完的、否定自己 → 也要看“从零到能做研究”的巨大跨越;② 清单没逐项核对 → 对照下方清单逐条打勾。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>某些硬交付没全达标（如论文还在骨架）→ 正常，记入 M5 补，阶段一目标是“能独立做研究”已达到；觉得差距太大气馁 → 回看四个月前的自己（那时的起点），成长其实巨大；不知道怎么客观评估自己 → 用三个外部参照:① 对照硬交付清单（完成了多少项）;② 对照空天院那几组的工作（还差哪些硬指标，你 M2/M3 做过技术地图）;③ 问“四个月前的我能不能做现在这些事”（答案显然是不能，这就是成长）；复盘时情绪上头（过度自我否定或过度自满）→ 用数字和清单说话，把“感觉”换成“事实”（完成了 X 项硬交付、跑了 Y 个 baseline、写了 Z 字论文）——客观证据能拉你回到理性评估。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了<strong>阶段一的终极复盘</strong>，清晰看见自己的成长与下一步。<strong>做了</strong>（终极复盘+清单确认）、<strong>学了</strong>（用“前后对比+清单”复盘、两面看、抓核心目标）、<strong>会了</strong>（诚实评估成长并校准下阶段）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜阶段终极复盘（前后对比）</strong>：复盘核心三问——四个月前什么水平？现在什么水平？差距在哪？<strong>两面看</strong>：既看巨大跨越（别自满前先看，别气馁时更要看），也看诚实差距（记入下阶段补）。对照硬交付清单逐项打勾。抓住核心目标(阶段一=能独立做研究)判断是否达成，而非纠结个别未完成项。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ M5–M8 周级计划 + 投稿时间线 ✅ 阶段一终极复盘 ✅ <strong>阶段一正式完结</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ 阶段一(M1–M4)硬交付终极检查清单（对照你原计划）</h2><ul>
+<li>[ ] 论文精读笔记 ≥ 100 篇</li>
+<li>[ ] Baseline ≥ 6 个（旋转检测/SAR 分类/变化检测/语义分割/VLM/自监督 至少 6 个）</li>
+<li>[ ] 原创方法 v1/v2/v3 三版迭代</li>
+<li>[ ] 论文骨架(Intro + Related Work + Method)≥ 6000 字</li>
+<li>[ ] GitHub 私仓代码 ≥ 5000 行</li>
+<li>[ ] Proposal v2（≥3000 字）</li>
+<li>[ ] 阶段一总结报告（≥4000 字）</li>
+<li>[ ] 方向白皮书（≥3000 字）</li>
+<li>[ ] 空天院 3 大组技术地图</li>
+<li>[ ] 消融实验 2 轮(W12 + W14)</li>
+<li>[ ] 可复现资产：reproduce.sh + 环境锁定 + HF 权重</li>
+<li>[ ] 方向综述笔记（故事线）</li>
+<li>[ ] 论文骨架配套图表素材库（主表/消融/定性/架构图，编号归档，各对应论文哪节）</li>
+</ul>
+</section><section class="wtail"><h2>🎓 W16 / 阶段一能力总览</h2><ul>
+<li>端到端 pipeline 复现性 + 环境锁定 + reproduce.sh + HF 权重托管</li>
+<li>阶段一总结报告（简历/答辩素材）+ 方向综述笔记（把读过的串成故事）</li>
+<li>GitHub 公开化（敏感信息检查 + 英文 README + 公开时机权衡）</li>
+<li>把休息当作可持续科研的一部分；收官时做自我肯定，以平稳心态迎接产出期</li>
+<li>阶段二规划 + 投稿时间线倒排 + 终极复盘（前后对比）</li>
+<li><strong>战略校准贯穿</strong>：项目介绍/README 把“单卡高效”立成卖点；投稿出口选对增量/高效友好的期刊（匹配单卡实力）；成果固化为可复现可展示资产，为求职/套磁/答辩备好硬素材</li>
+</ul>
+<blockquote class="quote">
+<p><strong>阶段一寄语</strong>：四个月前，你是一个零遥感基础、单卡、导师不支持的外行；四个月后，你已经能独立搭框架、跑实验、做方法迭代、写论文骨架，并把成果固化成可复现、可公开、可写进简历的资产。这条路你走通了第一段——它证明了“零基础也能靠系统方法做出真东西”。阶段二是产出期，把手上的论文做完、投出去、参赛、萌芽新课题；心态从“我还要学更多”转向“我要把已有积累交付出去”。记住：你不是要和 RingMoE 拼更大的模型，而是在高效特化、鲁棒泛化、评测基准这些更适合单卡选手的方向上，做出有人用、能发表的扎实工作。带着阶段一证明过的执行力，继续走。下一站，把第一篇属于你的论文投出去。</p>
+</blockquote>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D112</summary><textarea data-note="d112" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W16 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — reproduce.sh + 阶段一总结报告提纲 + 综述笔记结构 + 项目介绍</h2>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># scripts/reproduce.sh —— 一键复现主结果（注释清楚、用变量而非硬编码路径）</span>
+<span class="c1">#!/usr/bin/env bash</span>
+<span class="nb">set</span><span class="w"> </span>-e
+<span class="nv">DATA_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="p">./data</span><span class="si">}</span><span class="w">            </span><span class="c1"># 数据目录(可传参)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; 1/3 准备数据&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>tools/prepare_data.py<span class="w"> </span>--root<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA_DIR</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; 2/3 训练(固定 seed)&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt; 3/3 评估(打印主结果)&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>scripts/eval.py<span class="w"> </span>--cfg<span class="w"> </span>configs/final.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>--ckpt<span class="w"> </span>work_dirs/final/best.pth
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 阶段一总结报告提纲（≥4000 字）</span>
+1 背景与目标(我是谁、为什么转遥感CV、目标空天院)
+2 M1–M4 逐月产出(具体:baseline/方法/结果,带数据,配成绩单总表)
+3 产出统计(论文≥100、baseline≥6、代码行数、文档字数)
+4 遇到的问题与解决(环境/算力/方法迭代…)
+5 学到的经验(读论文/做实验/写作/选题的方法论)
+6 能力自评 + 与目标(空天院)的距离
+7 阶段二打算
+
+<span class="gh"># 方向综述笔记结构（把读过的串成故事）</span>
+早期(问题X,方法A) → 突破(方法B解决X但暴露Y) → 近期SOTA(方法C针对Y) → 当前仍缺Z(我的切入)
+
+<span class="gh"># 项目介绍（100-200 字，推广/简历）</span>
+问题(三大难点) + 方法一句(三个轻量组件) + 结果(3数据集+X、参数+2M、22FPS) +
+卖点(单张4090高效训练部署) + 开源一键复现。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — ① 环境锁定 ② 产出统计 ③ 敏感信息自查</h2>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># ① 环境锁定（可复现的关键）</span>
+pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt<span class="w">                       </span><span class="c1"># 或:</span>
+conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--no-builds<span class="w"> </span>&gt;<span class="w"> </span>environment.yml
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch;print(&#39;torch&#39;,torch.__version__,&#39;cuda&#39;,torch.version.cuda)&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>docs/env.txt
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ② 产出统计（论文笔记数 / 代码行数）—— 简历硬数据</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">re</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_md_files</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;**/*.md&quot;</span><span class="p">),</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_code_lines</span><span class="p">(</span><span class="n">exts</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">,</span><span class="s2">&quot;.sh&quot;</span><span class="p">)):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">exts</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">total</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;论文笔记篇数:&quot;</span><span class="p">,</span> <span class="n">count_md_files</span><span class="p">(</span><span class="s2">&quot;10-论文笔记&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;代码行数(粗估):&quot;</span><span class="p">,</span> <span class="n">count_code_lines</span><span class="p">())</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># ③ 公开前敏感信息自查（当前文件 + git 历史）</span>
+grep<span class="w"> </span>-rnI<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(api_key|token|password|secret|BEGIN PRIVATE)&quot;</span><span class="w"> </span>.<span class="w"> </span>--exclude-dir<span class="o">=</span>.git
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>-p<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-iE<span class="w"> </span><span class="s2">&quot;(api_key|token|password)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w">   </span><span class="c1"># 历史里有没有</span>
+<span class="c1"># 若历史曾提交密钥：立即吊销该密钥 + git filter-repo 清理历史</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 导出 requirements/environment（锁环境）;② 打印论文笔记篇数、代码行数（填进总结报告统计）;③ 列出可能的敏感信息（公开前清理）。</p>
+<h2>三、阶段一终极复盘模板（前后对比表 + 硬交付勾选 + 差距→M5 补）</h2>
+<blockquote class="quote">
+<p>复盘别写成感想散文，用结构化的“前后对比 + 清单勾选 + 差距清单”最有用。</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 阶段一终极复盘（M1 起点 vs M4 末现状）</span>
+<span class="gu">## 一、能力前后对比（最直观的成长证据）</span>
+| 维度 | 4 个月前 | 现在 |
+|---|---|---|
+| 环境/工具 | 不会配 CUDA/框架 | 能搭环境、用 MMRotate、写训练脚本 |
+| 读论文 | 读不懂、抓不住重点 | 精读 100+、能差量阅读、做差异分析 |
+| 做实验 | 不会跑 baseline | 独立跑/调/消融、多 seed、跨数据集 |
+| 方法创新 | 没有 idea | 找到 Gap、做出 v1/v2/v3 三版迭代 |
+| 写作 | 没写过论文 | 写出 Intro+RW+Method 6000 字骨架 |
+| 工程 | 不会版本控制/复现 | git/reproduce.sh/HF/环境锁定 |
+→ 一句话：从&quot;零遥感基础的外行&quot;到&quot;能独立完成一个研究项目的研究者&quot;。
+
+<span class="gu">## 二、硬交付逐项勾选（对照原计划，诚实打勾）</span>
+[✅] 论文笔记≥100  [✅] baseline≥6  [✅] 方法v1/v2/v3  [✅] 论文骨架≥6000字
+[✅] 代码≥5000行  [✅] Proposal v2  [✅] 阶段总结报告  [✅] 方向白皮书
+[✅] 空天院3组技术地图  [✅] 消融2轮  [✅] 可复现资产  [✅] 综述笔记
+[△] 论文正式投稿（在 M5–M8 完成）
+
+<span class="gu">## 三、还差什么 → M5 补</span>
+<span class="k">-</span><span class="w"> </span>论文还是骨架（缺完整实验章节/Abstract/Conclusion）→ M5 补全
+<span class="k">-</span><span class="w"> </span>SAR 方向涉猎浅 → 若第二课题做 SAR，M5–M8 深入
+<span class="k">-</span><span class="w"> </span>实验矩阵未完全铺满（部分数据集 seed 不全）→ M5 补齐
+→ 阶段一核心目标&quot;能独立做研究&quot;已达成；上述差距是阶段二的起点，不是阶段一的失败。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>四、M5–M8 周级计划 + 投稿时间线（范例，照改）</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 阶段二前半（M5–M8）周级计划</span>
+<span class="gu">## M5 主实验矩阵 + 论文实验章节</span>
+W17 实验矩阵设计+补齐主表所有格 / W18 与 SOTA 全面对比 / W19 论文 Experiments 章
+/ W20 论文 Ablation 章 + 图表定稿
+<span class="gu">## M6 论文 v1 + 模拟审稿 + 竞赛</span>
+W21 写 Abstract/Conclusion 成完整 v1 / W22 自审+导师/同行模拟审稿 / W23 据审稿改
+/ W24 竞赛打榜（练手，选公开榜）
+<span class="gu">## M7 定稿 + 正式投稿</span>
+W25 全文润色（语言/图表/格式）/ W26 内部终审 / W27 投稿 + 投稿后整理
+<span class="gu">## M8 竞赛技术报告 + 第二课题萌芽</span>
+W29 竞赛技术报告 / W30 第二课题调研 / W31 第二课题 Proposal / W32 阶段中复盘
+
+<span class="gh"># 投稿时间线（倒排）</span>
+M8末 正式投稿 ← M7末 润色完成 ← M6末 完整初稿 ← M5末 实验全到位 ← 现在 骨架v0.6
+目标出口：GRSL/JSTARS（对增量+高效工作友好）；各节点留 1–2 周 buffer。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>五、每日“今日自测”</h2>
+<ul>
+<li><strong>D106</strong>:① 端到端 sanity check 查什么？为什么先小规模再全量?② 可复现要记哪三样？环境为什么是头号杀手？</li>
+<li><strong>D107</strong>:① reproduce.sh 的作用？为什么路径要用变量?② 为什么先把 checkpoint 传私有？</li>
+<li><strong>D108</strong>:① 阶段一总结报告除了自看还有什么用?② 该统计哪些产出数字？报告下半为什么更有价值？</li>
+<li><strong>D109</strong>:① “方向综述笔记”和零散笔记的区别（故事线）？它落到哪（你的切入点）？</li>
+<li><strong>D110</strong>:① 仓库公开前必查什么？为什么尤其要查 git 历史?② 论文没投时该不该公开代码（双盲/抢先）？</li>
+<li><strong>D111</strong>:① 为什么要安排休息日？休息和“落后”是一回事吗？</li>
+<li><strong>D112</strong>:① 阶段一终极复盘的核心三问？为什么要两面看?② 第一篇论文该选什么出口（匹配实力）?③ 阶段一和阶段二的重心切换是什么（学习探索 vs 产出交付）？</li>
+<li><strong>综合</strong>:① 收官周的两条主线是什么（把“能跑”升级成“可复现”、把“做过”沉淀成“可展示”）?② 为什么说休息日、自我肯定也是可持续科研的一部分？</li>
+</ul>
+<h2>六、本周报错速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pipeline 某环节断</td>
+<td>路径/依赖/小 bug</td>
+<td>定位是数据/训练/评估/可视化哪环；小规模先验证链路</td>
+</tr>
+<tr>
+<td>全量结果对不上记录</td>
+<td>配置/seed/数据版本变了</td>
+<td>核对配置、seed、数据划分是否和当时一致</td>
+</tr>
+<tr>
+<td>半年后复现不了</td>
+<td>没锁环境/seed</td>
+<td>pip freeze/conda export；记 seed 与命令</td>
+</tr>
+<tr>
+<td>reproduce.sh 在别人机器跑不了</td>
+<td>硬编码本机路径</td>
+<td>用变量/相对路径；数据给下载说明；加 set -e</td>
+</tr>
+<tr>
+<td>公开仓库泄露密钥</td>
+<td>token 进了 git 历史（删文件没用）</td>
+<td>检查并清理历史；<strong>第一时间吊销该密钥</strong></td>
+</tr>
+<tr>
+<td>双盲期公开实名仓库</td>
+<td>时机不当</td>
+<td>投稿后再公开，或匿名公开；默认先私有</td>
+</tr>
+<tr>
+<td>论文未投就公开被抢先</td>
+<td>公开过早</td>
+<td>投稿后公开，或公开框架、核心细节暂留</td>
+</tr>
+<tr>
+<td>休息日仍焦虑学习</td>
+<td>没真正放下</td>
+<td>提醒“恢复也是计划的一部分”；做非科研的事换频道</td>
+</tr>
+<tr>
+<td>投稿目标定太高被拒</td>
+<td>出口不匹配单卡实力</td>
+<td>选对增量/高效友好的期刊(GRSL/JSTARS)；先发表建信心</td>
+</tr>
+<tr>
+<td>demo notebook 别人跑不通</td>
+<td>依赖/权重路径/数据缺</td>
+<td>demo 只做“加载权重+推理+可视化”最小闭环，权重给下载链接</td>
+</tr>
+<tr>
+<td>HF 权重传不上去</td>
+<td>大文件未用 git-lfs</td>
+<td>用 git-lfs 或 HF 网页端直接上传；先私有</td>
+</tr>
+<tr>
+<td>阶段总结写成流水账</td>
+<td>只记“做了什么”</td>
+<td>突出“做到什么水平+学到什么经验”，配成绩单总表与统计数字</td>
+</tr>
+<tr>
+<td>综述笔记串不起主线</td>
+<td>当成笔记拼接</td>
+<td>用“每个方法解决前一个的什么遗留”连接，末尾落到你的切入点</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w15.html"><span class="dir">← 上一篇</span><span class="nm">W15 论文骨架</span></a><a class="next" href="w17.html"><span class="dir">下一篇 →</span><span class="nm">W17 主实验 Round 1（数据集 1）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d106">D106 周一</a><a class="sub" href="#d106-am">上午 完整跑一遍最终 pipeline</a><a class="sub" href="#d106-noon">中午 修复发现的任何问题</a><a class="sub" href="#d106-pm">晚上 确保可复现：记录完整运行命令 +</a><a href="#d107">D107 周二</a><a class="sub" href="#d107-am">上午 整理代码仓库（安装文档 + de</a><a class="sub" href="#d107-noon">中午 写 reproduce.sh（一</a><a class="sub" href="#d107-pm">晚上 上传 checkpoint 到 </a><a href="#d108">D108 周三</a><a class="sub" href="#d108-am">上午 写总结报告 上半（回顾 M1–M</a><a class="sub" href="#d108-noon">中午 统计（论文/实验/代码量）</a><a class="sub" href="#d108-pm">晚上 写总结报告 下半 + 完成（≥4</a><a href="#d109">D109 周四</a><a class="sub" href="#d109-am">上午 把论文笔记整理成“该方向综述笔记</a><a class="sub" href="#d109-noon">中午 检查知识库完整性（体检）</a><a class="sub" href="#d109-pm">晚上 更新论文清单和数据集表</a><a href="#d110">D110 周五</a><a class="sub" href="#d110-am">上午 检查敏感信息 + 完善英文 RE</a><a class="sub" href="#d110-noon">中午 视情况从“私有”转“公开”</a><a class="sub" href="#d110-pm">晚上 写一份简短“项目介绍”（用于推广</a><a href="#d111">D111 周六</a><a class="sub" href="#d111-am">上午 休息（你计划明确要求的恢复日）</a><a class="sub" href="#d111-noon">中午 轻松看点别的（可选，不强求）</a><a class="sub" href="#d111-pm">晚上 轻松收尾（整理心情，准备下阶段）</a><a href="#d112">D112 周日</a><a class="sub" href="#d112-am">上午 制定 M5–M8 详细计划（周级</a><a class="sub" href="#d112-noon">中午 规划论文投稿时间线</a><a class="sub" href="#d112-pm">晚上 阶段一终极复盘（我 4 个月前 </a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

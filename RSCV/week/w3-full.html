@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W3 详注版 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><a href="w3.html">W3</a><span>›</span><span class="chip">W3 · 详注版</span></div><h1 class="title">W3 详注版</h1><p class="subtitle">SAR 入门 + 第二个 baseline —— 含全书第一次「换数据集要做格式转换」的完整解法</p></div><div class="note"><b>这一周三件事同时变了</b>　换数据集、换标注格式、换训练方式。含 <code>sar_preprocess.py</code>（用数字证明为什么必须做 log）、<code>to_dota.py</code>（COCO/VOC → DOTA 格式转换，全书从没教过）、补全的裸 PyTorch 训练脚本。所有代码实测跑过。</div>
+<h2 id="h-SAR-入门-第二个-baseline-含全书第一次-换数据集要做格式转换-的完整解法">SAR 入门 + 第二个 baseline —— 含全书第一次「换数据集要做格式转换」的完整解法</h2>
+<blockquote class="quote callout callout-expect">
+<p><strong>覆盖</strong>：W3 全周（D15–D21）。</p>
+<p><strong>这一周为什么是新的一道坎</strong>：W2 你是在 MMRotate 铺好的路上走——数据是 DOTA、格式是现成的、config 是官方的。<strong>W3 开始三件事同时变了</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>变的东西</th>
+<th>原文怎么说</th>
+<th>实际缺什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>换数据集</strong></td>
+<td>“下载 OpenSARShip”</td>
+<td><strong>没给地址，而且这个数据集不好拿</strong>（见 §1.2）</td>
+</tr>
+<tr>
+<td><strong>换标注格式</strong></td>
+<td>完全没提</td>
+<td>★ <strong>SAR 数据集的标注是 COCO JSON 或 VOC XML，MMRotate 吃的是 DOTA txt——必须转换。全书没有任何一处教过格式转换</strong></td>
+</tr>
+<tr>
+<td><strong>换训练方式</strong></td>
+<td>“用裸 PyTorch 搭 baseline”</td>
+<td>给的代码缺验证集、缺准确率、缺数据组织那一步</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>这一页把这三样全部补上，所有脚本我实测跑过。</strong></p>
+</blockquote>
+<hr />
+<h1 id="h-D15-SAR-综述-数据集">D15 · SAR 综述 + 数据集</h1>
+<h2 id="h-上午段-精读-Zhu-2021-SAR-综述">上午段 · 精读 Zhu 2021 SAR 综述</h2>
+<h3 id="h-0-拿到论文">0. 拿到论文</h3>
+<p>原文写的是 “Zhu 2021《SAR Image Classification Using Deep Learning: A Survey》”。<strong>这个标题不够精确，直接搜可能搜不到。</strong></p>
+<p><strong>更可靠的做法</strong>：搜 <code>SAR deep learning survey</code> 或 <code>Deep learning meets SAR</code>，在 Google Scholar 里按引用数排，<strong>选近五年、引用高的一篇综述</strong>。Zhu Xiao Xiang（就是 D2 那篇的第一作者）团队在 SAR 深度学习方向有多篇高引综述，任选一篇都能达到今天的目的。</p>
+<blockquote class="quote">
+<p><strong>★ 这是个通用技能</strong>：<strong>当资料给的文献信息不精确时，用“关键词 + survey + 按引用排序”去找，而不是死磕作者名。</strong> 领域内的高引综述是可替换的——你要的是那张地图，不是那一篇论文本身。</p>
+</blockquote>
+<h3 id="h-读-SAR-综述时-重点抓这三样">★ 读 SAR 综述时，重点抓这三样</h3>
+<p>原文说“记牢 SAR 三大特有挑战”，但没说是哪三大。<strong>这里给出对照</strong>（读完你应该能在论文里找到这些）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>挑战</th>
+<th>具体是什么</th>
+<th>在你手册里的位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>① speckle（相干斑）</strong></td>
+<td>乘性噪声，不是设备缺陷，是相干成像的必然产物</td>
+<td><a href="../start/rs-basics-deep.html">《名词逐个讲透》§1</a> 有 3000 字详解 + 动手仿真</td>
+</tr>
+<tr>
+<td><strong>② 数据稀缺 + 标注昂贵</strong></td>
+<td>SAR 图人眼都难判读，标注要专家</td>
+<td>→ 指向自监督、迁移学习、仿真数据</td>
+</tr>
+<tr>
+<td><strong>③ 成像机理特殊</strong></td>
+<td>方位角敏感、几何畸变（layover/shadow）、极化</td>
+<td><a href="../start/rs-basics-deep.html">《名词逐个讲透》§2–§3</a></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 强烈建议的顺序</strong>：<strong>先读 <a href="../start/rs-basics-deep.html">《名词逐个讲透》的 §1–§3</a>，再读这篇综述。</strong> 那一页把 speckle、后向散射、SLC/GRD、极化这些词按六段讲透了，带着它去读综述，你不会被术语淹没。<strong>原手册的 M0 只给了名词表，那是不够读这篇综述的。</strong></p>
+<h2 id="h-中午段-数据集-说实话-并给可行的替代">中午段 · ★ 数据集：说实话，并给可行的替代</h2>
+<h3 id="h-关于-OpenSARShip">关于 OpenSARShip</h3>
+<p>原文让你“下载 OpenSARShip”。<strong>要说清楚一件事</strong>：这个数据集由上海交大团队发布，<strong>通常需要在其官方页面注册/申请</strong>，不是点开就下。国内网络下载也常不稳。</p>
+<p><strong>我不建议你在 W3 的第一天卡在这里。</strong></p>
+<h3 id="h-更容易拿到的三个替代-推荐用这些">★ 更容易拿到的三个替代（推荐用这些）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>任务</th>
+<th>去哪拿</th>
+<th>大小</th>
+<th>标注格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SSDD</strong>（SAR Ship Detection Dataset）</td>
+<td>船舶检测</td>
+<td><strong>GitHub 搜 <code>SSDD dataset SAR</code></strong>，有多个公开镜像仓库</td>
+<td>很小（百 MB 级）</td>
+<td><strong>VOC XML</strong>，部分版本带旋转框</td>
+</tr>
+<tr>
+<td><strong>HRSID</strong>（High-Resolution SAR Images Dataset）</td>
+<td>船舶检测/分割</td>
+<td><strong>GitHub 搜 <code>HRSID</code></strong>，官方仓库公开</td>
+<td>约 1 GB</td>
+<td><strong>COCO JSON</strong></td>
+</tr>
+<tr>
+<td><strong>SAR-Ship-Dataset</strong></td>
+<td>船舶检测</td>
+<td>GitHub 搜数据集名</td>
+<td>中等</td>
+<td>VOC XML</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 用 SSDD 起步最好</strong>：<strong>它小（几分钟下完）、格式简单、船舶目标明显</strong>，非常适合今天“先把 SAR 数据看明白”这个目标。</p>
+<h3 id="h-关于原文的分类任务-vs-检测任务">关于原文的分类任务 vs 检测任务</h3>
+<p>原文 D17 让你做<strong>SAR 船舶分类</strong>（用 OpenSARShip，每类一个文件夹）。如果你拿不到 OpenSARShip，<strong>可以用 SSDD/HRSID 自己切出一个分类数据集</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>把检测框裁出来 → 每个船舶切片存成一张小图 → 按&quot;船/非船&quot;或按尺寸分档 → 就有了分类数据
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>这个做法有额外好处：<strong>你会顺手理解检测标注和分类标注的关系</strong>。具体脚本见 §D17。</p>
+<h3 id="h-下载后的四项体检-沿用你-W1-学的动作">下载后的四项体检（沿用你 W1 学的动作）</h3>
+<figure class="code" data-lang="bash"><pre><code>ls &lt;数据集&gt;/images | wc -l          # 图片数，和论文报的数字对
+ls &lt;数据集&gt;/annotations | wc -l      # 标注数，对得上吗
+head -20 &lt;标注文件&gt;                  # ★ 一定要 head 一下，别信想象
+du -sh &lt;数据集&gt;                      # 占多大
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<hr />
+<h1 id="h-D16-SAR-成像-预处理脚本">D16 · SAR 成像 + 预处理脚本</h1>
+<h2 id="h-中午段-SAR-数据的三种形态">中午段 · SAR 数据的三种形态</h2>
+<p>见 <a href="../start/rs-basics-deep.html">《名词逐个讲透》§3.1–§3.2</a>（SLC/GRD、幅度/强度/dB），那里讲得比原文细。<strong>这里只补一个原文没说清的点。</strong></p>
+<h3 id="h-20log10-还是-10log10-原文写的公式有个隐含前提">★ 20log10 还是 10log10（原文写的公式有个隐含前提）</h3>
+<p>原文给的是 <code>20*log10(amplitude+1)</code>。<strong>这个式子在幅度上是对的，但有两个问题</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>系数取决于你手上是幅度还是强度</strong></td>
+<td>幅度用 <code>20*log10</code>；强度（= 幅度²）用 <code>10*log10</code>。<strong>弄反了整张图的对比度就错了一倍</strong></td>
+<td>先确认你的数据是哪种</td>
+</tr>
+<tr>
+<td><strong><code>+1</code> 是个粗糙的补丁</strong></td>
+<td>它是为了防 <code>log(0)</code>，但会把小值往上抬。SAR 的暗区值常远小于 1，加 1 之后<strong>暗部信息被压平了</strong></td>
+<td>用 <code>np.maximum(amp, eps)</code>，eps 取 <code>1e-6</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-晚上段-完整的-sar-preprocess-py">晚上段 · 完整的 <code>sar_preprocess.py</code></h2>
+<p>原文给了五个步骤，<strong>没给代码</strong>。下面是完整版，<strong>我实测跑过</strong>。</p>
+<p>新建 <code>20-代码实验/utils/sar_preprocess.py</code>：</p>
+<figure class="code" data-lang="python"><pre><code>&quot;&quot;&quot;sar_preprocess.py —— SAR 原始数据 -&gt; 可看可训的 8bit 图。
+
+标准链路：取幅度 -&gt; dB -&gt; 分位裁剪 -&gt; 归一化 -&gt; 8bit
+这是你做任何 SAR 任务的开局动作，每次都要先做。
+&quot;&quot;&quot;
+import numpy as np
+import cv2
+
+
+def to_amplitude(arr):
+    &quot;&quot;&quot;复数 -&gt; 幅度；已是实数则取绝对值。&quot;&quot;&quot;
+    return np.abs(arr).astype(np.float32)
+
+
+def amp_to_db(amp, eps=1e-6):
+    &quot;&quot;&quot;幅度 -&gt; dB。
+
+    ★ 注意系数：幅度用 20*log10，强度（幅度的平方）用 10*log10。
+    ★ 用 maximum(amp, eps) 而不是 amp+1 —— 后者会把暗区抬平。
+    &quot;&quot;&quot;
+    return 20.0 * np.log10(np.maximum(amp, eps))
+
+
+def stretch(db, lo_pct=1.0, hi_pct=99.0):
+    &quot;&quot;&quot;分位裁剪 + 归一化到 0-1。
+
+    为什么要分位裁剪：SAR 上个别超亮点（强散射体）会把整体拉暗，
+    砍掉最亮/最暗的 1% 之后，中间的结构才看得清。
+    &quot;&quot;&quot;
+    lo, hi = np.percentile(db, [lo_pct, hi_pct])
+    if hi - lo &lt; 1e-6:
+        hi = lo + 1e-6
+    return np.clip((db - lo) / (hi - lo), 0, 1)
+
+
+def sar_to_png(arr, out_path, lo_pct=1.0, hi_pct=99.0):
+    &quot;&quot;&quot;一条龙：原始数组 -&gt; 存成可看的 PNG。&quot;&quot;&quot;
+    vis = (stretch(amp_to_db(to_amplitude(arr)), lo_pct, hi_pct) * 255).astype(np.uint8)
+    cv2.imwrite(out_path, vis)
+    return vis
+
+
+if __name__ == '__main__':
+    # 自测：不需要任何数据，用仿真 SAR 验证&quot;为什么必须做 log&quot;
+    rng = np.random.default_rng(0)
+    H = W = 256
+    truth = np.full((H, W), 0.02)        # 暗区：海面
+    truth[60:200, 60:120] = 1.0          # 亮区：船体（是海面的 50 倍）
+    truth[80:180, 150:220] = 0.2         # 中等：海岸
+
+    # 单视 SAR 成像：复高斯 -&gt; 幅度服从 Rayleigh（原理见《名词逐个讲透》§1）
+    z = rng.normal(0, np.sqrt(truth / 2)) + 1j * rng.normal(0, np.sqrt(truth / 2))
+    amp = np.abs(z)
+
+    print(f'原始幅度动态范围: min={amp.min():.5f} max={amp.max():.4f} '
+          f'比值={amp.max() / max(amp.min(), 1e-9):.0f}x')
+
+    lin = ((amp - amp.min()) / (amp.max() - amp.min()) * 255).astype(np.uint8)  # 不做 log
+    log = (stretch(amp_to_db(amp)) * 255).astype(np.uint8)                       # 做 log
+    cv2.imwrite('sar_linear.png', lin)
+    cv2.imwrite('sar_log.png', log)
+
+    print(f'线性显示: 均值={lin.mean():.1f}  低于10灰阶的像素占比={100*(lin&lt;10).mean():.1f}%')
+    print(f'log显示 : 均值={log.mean():.1f}  低于10灰阶的像素占比={100*(log&lt;10).mean():.1f}%')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-合格样例-用数字证明-log-的必要性">③ 合格样例 —— ★ 用数字证明 log 的必要性</h2>
+<p><strong>直接 <code>python sar_preprocess.py</code></strong>（不需要任何数据），实测输出：</p>
+<figure class="code" data-lang="text"><pre><code>原始幅度动态范围: min=0.00043 max=3.0510 比值=7033x
+线性显示: 均值=20.5   低于10灰阶的像素占比=40.2%
+log显示 : 均值=125.6  低于10灰阶的像素占比=1.4%
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>读这三行</strong>：</p>
+<ul>
+<li><strong>动态范围 7033 倍</strong> —— 这就是“SAR 动态范围极大”的量化含义。</li>
+<li><strong>线性显示下 40.2% 的像素低于灰阶 10</strong>（肉眼基本是纯黑）→ <strong>四成信息看不见</strong>。</li>
+<li><strong>做完 log 只剩 1.4%</strong>，平均灰度从 20.5 升到 125.6 → <strong>图像被真正“打开”了</strong>。</li>
+</ul>
+<p>打开 <code>sar_linear.png</code> 和 <code>sar_log.png</code> 对比一眼，比读十遍解释管用。</p>
+<blockquote class="quote">
+<p><strong>★ 这就是原文说的“对比不做 log 的版本，直观感受 log 的作用”</strong> —— 但原文没给你能跑的东西。现在你有了，而且有数字。</p>
+</blockquote>
+<h2 id="h-常踩的坑">④ 常踩的坑</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>症状</th>
+<th>解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用了 <code>+1</code> 而不是 <code>eps</code></td>
+<td>暗部细节丢失</td>
+<td><code>np.maximum(amp, eps)</code></td>
+</tr>
+<tr>
+<td>幅度用了 <code>10*log10</code></td>
+<td>对比度只有正确值的一半</td>
+<td>确认数据是幅度还是强度</td>
+</tr>
+<tr>
+<td>不做分位裁剪</td>
+<td>个别超亮点把整体拉暗</td>
+<td>1%/99% 裁剪</td>
+</tr>
+<tr>
+<td>对整个数据集用同一组 min/max</td>
+<td>不同图之间不可比</td>
+<td><strong>训练时逐图归一化</strong>；若要跨图可比，用全局固定的 dB 范围</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h1 id="h-D17-格式转换-裸-PyTorch-baseline">D17 · 格式转换 + 裸 PyTorch baseline</h1>
+<h2 id="h-中午段增补-格式转换-全书从没教过的一类活">★ 中午段增补：格式转换（全书从没教过的一类活）</h2>
+<h3 id="h-先垫概念-为什么必须转换">① 先垫概念：为什么必须转换</h3>
+<p>你 W2 用的 DOTA，标注是 <code>.txt</code>，一行八个数加类别。<strong>但 SAR 数据集不是这个格式</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>标注格式</th>
+<th>长什么样</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DOTA</td>
+<td><code>.txt</code>，四点 + 类别 + difficult</td>
+<td><code>x1 y1 x2 y2 x3 y3 x4 y4 ship 0</code></td>
+</tr>
+<tr>
+<td><strong>HRSID</strong></td>
+<td><strong>COCO JSON</strong>，一个大 json 装所有图</td>
+<td><code>{"images":[...], "annotations":[{"bbox":[x,y,w,h],"segmentation":[...]}]}</code></td>
+</tr>
+<tr>
+<td><strong>SSDD</strong></td>
+<td><strong>VOC XML</strong>，每张图一个 xml</td>
+<td><code>&lt;bndbox&gt;&lt;xmin&gt;..&lt;/xmin&gt;...&lt;/bndbox&gt;</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>MMRotate 只认 DOTA 格式</strong>（也支持 COCO，但旋转框流程按 DOTA 走最顺）。<strong>所以第一步必须转。</strong></p>
+<h3 id="h-完整转换脚本-实测跑过">② 完整转换脚本（实测跑过）</h3>
+<p>新建 <code>20-代码实验/utils/to_dota.py</code>：</p>
+<figure class="code" data-lang="python"><pre><code>&quot;&quot;&quot;to_dota.py —— 把 SAR 船舶数据集的标注转成 DOTA 格式。
+
+支持两种来源：
+    COCO JSON（HRSID 等）：  python to_dota.py --coco train.json --out labelTxt/
+    VOC  XML （SSDD  等）：  python to_dota.py --voc  Annotations/ --out labelTxt/
+&quot;&quot;&quot;
+import os
+import json
+import argparse
+import xml.etree.ElementTree as ET
+
+import numpy as np
+import cv2
+
+
+def hbb_to_poly(x, y, w, h):
+    &quot;&quot;&quot;水平框 (x,y,w,h) -&gt; 四点，顺时针。&quot;&quot;&quot;
+    return [x, y, x + w, y, x + w, y + h, x, y + h]
+
+
+def seg_to_poly(seg):
+    &quot;&quot;&quot;COCO 分割多边形 -&gt; 最小外接【旋转】框的四点。
+
+    ★ 这一步才用上了旋转框的价值：直接用 bbox 会退化成水平框，
+      白白浪费了 HRSID 提供的分割标注。
+    &quot;&quot;&quot;
+    pts = np.array(seg, dtype=np.float32).reshape(-1, 2)
+    return cv2.boxPoints(cv2.minAreaRect(pts)).reshape(-1).tolist()
+
+
+def write_dota(out_dir, stem, objs):
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, stem + '.txt'), 'w', encoding='utf-8') as f:
+        f.write('imagesource:converted\ngsd:null\n')   # DOTA 的两行元信息，必须有
+        for poly, cls, diff in objs:
+            f.write(' '.join(f'{v:.1f}' for v in poly) + f' {cls} {diff}\n')
+
+
+def from_coco(json_path, out_dir, use_seg=True):
+    d = json.load(open(json_path, encoding='utf-8'))
+    cats = {c['id']: c['name'].replace(' ', '-') for c in d['categories']}
+    imgs = {i['id']: i['file_name'] for i in d['images']}
+    per = {}
+    for a in d['annotations']:
+        seg = None
+        if use_seg and a.get('segmentation') and isinstance(a['segmentation'], list):
+            seg = a['segmentation'][0] if a['segmentation'] else None
+        poly = seg_to_poly(seg) if seg and len(seg) &gt;= 8 else hbb_to_poly(*a['bbox'])
+        per.setdefault(a['image_id'], []).append(
+            (poly, cats.get(a['category_id'], 'ship'), a.get('iscrowd', 0)))
+    for iid, fn in imgs.items():
+        # ★ 没有标注的图也要写一个空文件，否则框架会报&quot;找不到标注&quot;
+        write_dota(out_dir, os.path.splitext(fn)[0], per.get(iid, []))
+    return len(imgs), sum(len(v) for v in per.values())
+
+
+def from_voc(xml_dir, out_dir):
+    n_img = n_obj = 0
+    for fn in sorted(os.listdir(xml_dir)):
+        if not fn.endswith('.xml'):
+            continue
+        root = ET.parse(os.path.join(xml_dir, fn)).getroot()
+        objs = []
+        for o in root.findall('object'):
+            name = (o.findtext('name') or 'ship').replace(' ', '-')
+            diff = int(o.findtext('difficult') or 0)
+            rb = o.find('rotated_bndbox')      # 部分 SSDD 版本自带旋转框
+            if rb is not None:
+                poly = [float(rb.findtext(k)) for k in
+                        ('x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x4', 'y4')]
+            else:
+                b = o.find('bndbox')
+                x1, y1 = float(b.findtext('xmin')), float(b.findtext('ymin'))
+                x2, y2 = float(b.findtext('xmax')), float(b.findtext('ymax'))
+                poly = [x1, y1, x2, y1, x2, y2, x1, y2]
+            objs.append((poly, name, diff))
+            n_obj += 1
+        write_dota(out_dir, os.path.splitext(fn)[0], objs)
+        n_img += 1
+    return n_img, n_obj
+
+
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--coco'); ap.add_argument('--voc')
+    ap.add_argument('--out', required=True)
+    a = ap.parse_args()
+    if a.coco:
+        print('转换完成: %d 张图 / %d 个目标' % from_coco(a.coco, a.out))
+    elif a.voc:
+        print('转换完成: %d 张图 / %d 个目标' % from_voc(a.voc, a.out))
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3 id="h-合格样例">③ 合格样例</h3>
+<figure class="code" data-lang="bash"><pre><code>python to_dota.py --coco HRSID/annotations/train2017.json --out HRSID/labelTxt/
+# 转换完成: 3642 张图 / 11047 个目标   （数字按你的数据集为准）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 转换后必须做的两步验证</strong>（不做的话，错了你半天都发现不了）：</p>
+<p><strong>验证 1：格式对不对</strong></p>
+<figure class="code" data-lang="bash"><pre><code>head -5 HRSID/labelTxt/P0001.txt
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>应该长得和 DOTA 一模一样：</p>
+<figure class="code" data-lang="text"><pre><code>imagesource:converted
+gsd:null
+58.0 50.0 7.5 45.0 10.0 20.0 60.5 25.0 ship 0
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证 2：★ 用你 W1-D6 写的 <code>vis_dota.py</code> 画一张出来</strong></p>
+<figure class="code" data-lang="bash"><pre><code>python vis_dota.py --img HRSID/images/P0001.jpg --label HRSID/labelTxt/P0001.txt --out check.jpg
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>框套在船上就对了。</strong> 这是唯一能发现“坐标转错了”的方法——<strong>转换脚本坐标算错时不会报错</strong>，只会默默生成一堆错标注。</p>
+<blockquote class="quote">
+<p><strong>★ 这就是 W1-D6 写那个脚本的回报。</strong> 当时你可能觉得“画个框有什么用”，现在它成了你验证数据管道的唯一手段。<strong>这是本手册“做了/学了/会了”设计的典型体现。</strong></p>
+</blockquote>
+<h3 id="h-转换的常见坑">④ 转换的常见坑</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>症状</th>
+<th>解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COCO 用了 <code>bbox</code> 而不是 <code>segmentation</code></td>
+<td>框全是水平的，旋转框白做</td>
+<td>优先用 <code>segmentation</code> + <code>minAreaRect</code></td>
+</tr>
+<tr>
+<td>没标注的图没生成 txt</td>
+<td>框架报“找不到标注文件”</td>
+<td>上面的代码已经处理（写空文件）</td>
+</tr>
+<tr>
+<td>类别名里有空格</td>
+<td>DOTA 用空格分隔，会解析错位</td>
+<td>代码里已 <code>replace(' ', '-')</code></td>
+</tr>
+<tr>
+<td>COCO 的 bbox 是 <code>(x,y,w,h)</code> 当成了 <code>(x1,y1,x2,y2)</code></td>
+<td>框大小全错</td>
+<td><strong>COCO 是 xywh，VOC 是 xyxy，两者不同</strong></td>
+</tr>
+<tr>
+<td>图片扩展名不匹配（jpg vs png）</td>
+<td>框架找不到图</td>
+<td>转换只管标注，<strong>图片名的 stem 必须和 txt 一致</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-晚上段-裸-PyTorch-baseline-补全原文缺的三块">晚上段 · 裸 PyTorch baseline（补全原文缺的三块）</h2>
+<p>原文给的代码能跑，<strong>但缺了三样让它成为“实验”而不只是“能跑”的东西</strong>：<strong>没有验证集、没有准确率、没有保存模型</strong>。补全版：</p>
+<h3 id="h-先解决数据组织-原文假设你已经有了-ImageFolder-结构">先解决数据组织（原文假设你已经有了 ImageFolder 结构）</h3>
+<p>原文的 <code>datasets.ImageFolder("OpenSARShip/train")</code> 要求数据长这样：</p>
+<figure class="code" data-lang="text"><pre><code>sar_cls/
+├── train/{ship/, no-ship/}     ← 每类一个文件夹
+└── val/{ship/, no-ship/}
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>如果你用的是 SSDD/HRSID（检测数据集），先切出分类数据</strong>：</p>
+<figure class="code" data-lang="python"><pre><code>&quot;&quot;&quot;make_cls_data.py —— 从检测标注切出分类小图。&quot;&quot;&quot;
+import os, cv2, numpy as np, random
+from to_dota import *          # 复用上面的工具
+
+def crop_patches(img_dir, lbl_dir, out_dir, size=64, neg_per_img=3):
+    for lf in sorted(os.listdir(lbl_dir)):
+        stem = os.path.splitext(lf)[0]
+        img = None
+        for ext in ('.jpg', '.png', '.tif'):
+            p = os.path.join(img_dir, stem + ext)
+            if os.path.exists(p):
+                img = cv2.imread(p); break
+        if img is None: continue
+        H, W = img.shape[:2]
+        boxes = []
+        for line in open(os.path.join(lbl_dir, lf), encoding='utf-8'):
+            p = line.split()
+            if len(p) &lt; 9 or line.startswith(('imagesource', 'gsd')): continue
+            pts = np.array([float(v) for v in p[:8]]).reshape(4, 2)
+            boxes.append(pts)
+        # 正样本：每个目标切一块
+        for i, pts in enumerate(boxes):
+            x, y, w, h = cv2.boundingRect(pts.astype(np.int32))
+            cx, cy = x + w // 2, y + h // 2
+            half = max(w, h, size) // 2
+            x1, y1 = max(cx - half, 0), max(cy - half, 0)
+            patch = img[y1:min(cy + half, H), x1:min(cx + half, W)]
+            if patch.size:
+                os.makedirs(f'{out_dir}/ship', exist_ok=True)
+                cv2.imwrite(f'{out_dir}/ship/{stem}_{i}.png',
+                            cv2.resize(patch, (size, size)))
+        # 负样本：随机切不含目标的区域
+        for k in range(neg_per_img):
+            x1, y1 = random.randint(0, max(W - size, 0)), random.randint(0, max(H - size, 0))
+            if any(cv2.boundingRect(b.astype(np.int32))[0] &lt; x1 + size and
+                   x1 &lt; cv2.boundingRect(b.astype(np.int32))[0] +
+                   cv2.boundingRect(b.astype(np.int32))[2] for b in boxes):
+                continue                       # 和目标重叠就跳过
+            os.makedirs(f'{out_dir}/no-ship', exist_ok=True)
+            cv2.imwrite(f'{out_dir}/no-ship/{stem}_n{k}.png',
+                        cv2.resize(img[y1:y1 + size, x1:x1 + size], (size, size)))
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3 id="h-完整训练脚本">完整训练脚本</h3>
+<p><code>20-代码实验/sar_cls/train.py</code>：</p>
+<figure class="code" data-lang="python"><pre><code>import torch, torch.nn as nn
+from torch.utils.data import DataLoader, random_split
+from torchvision import models, transforms, datasets
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+tf = transforms.Compose([
+    transforms.Grayscale(3),                 # ★ SAR 单通道 -&gt; 复制成 3 通道喂 ResNet
+    transforms.Resize((128, 128)),
+    transforms.ToTensor(),
+])
+
+full = datasets.ImageFolder('sar_cls/train', transform=tf)
+print(f'共 {len(full)} 张，类别 {full.classes}')      # ★ 先确认数据读进来了
+n_val = int(len(full) * 0.2)
+train_set, val_set = random_split(full, [len(full) - n_val, n_val],
+                                  generator=torch.Generator().manual_seed(42))
+train_loader = DataLoader(train_set, batch_size=64, shuffle=True, num_workers=2)
+val_loader   = DataLoader(val_set,   batch_size=64, shuffle=False, num_workers=2)
+
+model = models.resnet18(weights='IMAGENET1K_V1')
+model.fc = nn.Linear(model.fc.in_features, len(full.classes))
+model = model.to(device)
+
+opt  = torch.optim.Adam(model.parameters(), lr=1e-3)
+crit = nn.CrossEntropyLoss()
+
+best = 0.0
+for epoch in range(20):
+    model.train()
+    tot = 0.0
+    for x, y in train_loader:
+        x, y = x.to(device), y.to(device)
+        opt.zero_grad()                 # ① 清梯度
+        out = model(x)                  # ② 前向
+        loss = crit(out, y)             # ③ 算 loss
+        loss.backward()                 # ④ 反向
+        opt.step()                      # ⑤ 更新
+        tot += loss.item() * x.size(0)
+
+    # ★ 验证（原文缺这一整段）
+    model.eval()
+    correct = n = 0
+    with torch.no_grad():
+        for x, y in val_loader:
+            x, y = x.to(device), y.to(device)
+            correct += (model(x).argmax(1) == y).sum().item()
+            n += y.size(0)
+    acc = correct / n
+    print(f'epoch {epoch:2d} | train loss {tot/len(train_set):.4f} | val acc {acc:.4f}')
+
+    if acc &gt; best:                      # ★ 保存最好的（原文缺）
+        best = acc
+        torch.save(model.state_dict(), 'best.pth')
+
+print(f'最好验证准确率 {best:.4f}')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3 id="h-一个必做的健康检查-原文提了一句-这里说清怎么做">★ 一个必做的健康检查（原文提了一句，这里说清怎么做）</h3>
+<p>原文说“在极小子集上过拟合验证模型能学”。<strong>具体怎么做</strong>：</p>
+<figure class="code" data-lang="python"><pre><code># 拿 32 张图，关掉数据增强，训 50 个 epoch
+# 期望：训练准确率应该冲到 100%（模型把这 32 张背下来了）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>如果连 32 张都背不下来</strong>，说明代码有 bug（标签错位、梯度没回传、lr 完全不对），<strong>而不是“数据太难”</strong>。</p>
+<blockquote class="quote">
+<p><strong>★ 这个检查叫 “overfit a tiny batch”，是深度学习调试的第一原则。</strong> 它能在 3 分钟内区分“代码有 bug”和“任务本身难”——<strong>这个区分能省你好几天</strong>。全书只有这一处提到，值得单独记进技能卡。</p>
+</blockquote>
+<hr />
+<h1 id="h-D18-SAR-数据增强-第一次调-lr">D18 · SAR 数据增强 + 第一次调 lr</h1>
+<h2 id="h-中午段-speckle-增强-原文的代码是对的-补两件事">中午段 · speckle 增强（原文的代码是对的，补两件事）</h2>
+<p>原文给的 Gamma 噪声写法正确：</p>
+<figure class="code" data-lang="python"><pre><code>gamma = np.random.gamma(shape=looks, scale=1.0/looks, size=img.shape)
+return img.astype(np.float32) * gamma
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>补充 1：为什么这个写法是对的</strong></p>
+<p><code>Gamma(shape=L, scale=1/L)</code> 的<strong>均值 = L × (1/L) = 1</strong>，方差 = <code>1/L</code>。这正好对应 <a href="../start/rs-basics-deep.html">《名词逐个讲透》§1</a> 说的：<strong>L 视平均后，speckle 的变异系数是 <code>1/√L</code></strong>。<strong>所以 <code>looks</code> 参数有明确的物理含义，不是随便调的旋钮。</strong></p>
+<p><strong>补充 2：★ 一个必须注意的顺序问题（原文没提，但错了效果全反）</strong></p>
+<figure class="code" data-lang="text"><pre><code>❌ 错误顺序：log 变换后的图 × Gamma 噪声
+✅ 正确顺序：原始幅度/强度 × Gamma 噪声 → 再做 log
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>理由</strong>：speckle 在<strong>线性域</strong>是乘性的。你已经做完 log 之后，乘性已经变成加性了（<code>log(R·n) = log R + log n</code>）。<strong>在 log 域上再乘一次 Gamma，物理上说不通。</strong></p>
+<p>如果你的数据已经是 log 后的 PNG（多数公开数据集都是），<strong>有两个选择</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>选择</th>
+<th>做法</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>先 <code>10**(x/20)</code> 反变换回幅度 → 乘噪声 → 再 log</td>
+<td>严谨，但要知道原来的 dB 范围</td>
+</tr>
+<tr>
+<td>B</td>
+<td>直接在 log 域<strong>加</strong>噪声（因为 log 域里 speckle 本来就是加性的）</td>
+<td><strong>更简单且物理上自洽</strong>，推荐</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>这个细节值得写进你的笔记</strong>——它说明“照搬公式”和“理解公式”的区别。</p>
+<h2 id="h-晚上段-第一次超参实验">晚上段 · 第一次超参实验</h2>
+<p>原文让你试 <code>lr ∈ {1e-3, 1e-4}</code>。<strong>补一条记录纪律</strong>：</p>
+<figure class="code" data-lang="markdown"><pre><code>| 实验 | 模型 | lr | bs | epoch | 数据 | val acc | 备注 |
+|------|------|----|----|-------|------|---------|------|
+| sar-1 | ResNet-18 | 1e-3 | 64 | 20 | SSDD切片 | | |
+| sar-2 | ResNet-18 | 1e-4 | 64 | 20 | SSDD切片 | | ← 只改 lr |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>和 W2 的消融是同一套纪律</strong>：只改一处，其余一字不动。<strong>你已经练过一次了（R50→R101），这次是巩固。</strong></p>
+<hr />
+<h1 id="h-D19-D20-数据集论文-可视化适配-五大差异">D19–D20 · 数据集论文 + 可视化适配 + 五大差异</h1>
+<h2 id="h-D20-中午段-把可视化工具适配-SAR">D20 中午段 · 把可视化工具适配 SAR</h2>
+<p>原文说“灰度 + log 显示”。<strong>具体改什么</strong>：你 W1-D6 的 <code>vis_dota.py</code> 是给彩色光学图写的，SAR 是单通道且需要 log。<strong>只要在读图之后加两行</strong>：</p>
+<figure class="code" data-lang="python"><pre><code># 在 vis_dota.py 的 main 里，cv2.imread 之后加：
+if img.ndim == 2 or (img.ndim == 3 and (img[:,:,0] == img[:,:,1]).all()):
+    from sar_preprocess import stretch, amp_to_db      # 复用 D16 写的
+    gray = img if img.ndim == 2 else img[:, :, 0]
+    vis  = (stretch(amp_to_db(gray.astype(np.float32) + 1e-6)) * 255).astype('uint8')
+    img  = cv2.cvtColor(vis, cv2.COLOR_GRAY2BGR)       # 转回 3 通道好画彩色框
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 注意</strong>：如果你的 SAR 图<strong>已经是 log 后的 8bit PNG</strong>（多数公开数据集是），<strong>就不要再 log 一次</strong>，直接做分位拉伸即可。<strong>判断方法</strong>：看直方图，已经 log 过的图分布比较均匀，没 log 过的图会堆在最左边。</p>
+<h2 id="h-D20-晚上段-SAR-vs-光学五大差异">D20 晚上段 · 《SAR vs 光学五大差异》</h2>
+<p><strong>★ 直接用 <a href="../start/rs-basics-deep.html">《名词逐个讲透》</a> 的内容</strong>，那一页 §1–§3 就是这份文档的素材库。骨架：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>差异</th>
+<th>光学</th>
+<th>SAR</th>
+<th>★ 所以呢</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>成像方式</strong></td>
+<td>被动，收太阳光</td>
+<td><strong>主动，自己发微波</strong></td>
+<td>SAR 能夜间/穿云工作</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>噪声</strong></td>
+<td>加性高斯</td>
+<td><strong>乘性 speckle</strong></td>
+<td>通用去噪/增强方法直接搬会失效</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>动态范围</strong></td>
+<td>8bit 够用</td>
+<td><strong>跨好几个数量级</strong></td>
+<td>必须 log 压缩，见 D16 那三行数字</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>几何</strong></td>
+<td>中心投影</td>
+<td><strong>侧视 + 按距离排像素</strong></td>
+<td>layover/shadow/foreshortening 这些畸变光学没有</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>目标外观</strong></td>
+<td>和人眼一致</td>
+<td><strong>方位角敏感，换个角度长相全变</strong></td>
+<td>模型容易过拟合某个方位角</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>每条都写“所以呢”</strong>——差异本身不值钱，差异导致的技术后果才值钱。<strong>这是你 W1-D2 就学过的写法。</strong></p>
+<hr />
+<h1 id="h-D21-Swin-T-重训-周复盘">D21 · Swin-T 重训 + 周复盘</h1>
+<h2 id="h-上午段-换-Swin-Transformer-backbone">上午段 · 换 Swin-Transformer backbone</h2>
+<p>原文说“用 Swin-T 重训 Oriented R-CNN 冲 mAP 77+”。<strong>补三件事</strong>：</p>
+<h3 id="h-预训练权重去哪拿-原文没说-这是最容易卡的一步">① 预训练权重去哪拿（原文没说，这是最容易卡的一步）</h3>
+<p>Swin 的 ImageNet 预训练权重<strong>不在 torchvision 里</strong>，要从 OpenMMLab 的模型库拿。<strong>做法</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>去 github.com/open-mmlab/mmrotate → configs/ 里找带 swin 的配置
+→ 或去 mmdetection 的 configs/swin/README.md，表格里有权重下载链接
+→ 把链接填进 config 的 init_cfg.checkpoint
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>如果 MMRotate 里没有现成的 Swin 配置</strong>（0.3.x 可能没有），<strong>这一天的目标要下调</strong>：改成“读懂怎么换 backbone”而不是“一定跑出 77+”。<strong>别在这里卡一整天</strong>，W4 还有正事。</p>
+<h3 id="h-config-写法">② config 写法</h3>
+<figure class="code" data-lang="python"><pre><code># configs/my/my_orcnn_swint.py
+_base_ = ['./my_orcnn_r50.py']
+
+model = dict(
+    backbone=dict(
+        _delete_=True,                 # ★ 把继承来的 ResNet 整块删掉重写
+        type='SwinTransformer',
+        embed_dims=96, depths=[2, 2, 6, 2], num_heads=[3, 6, 12, 24],
+        window_size=7, out_indices=(1, 2, 3),
+        init_cfg=dict(type='Pretrained', checkpoint='&lt;从上面找到的权重地址&gt;')),
+    neck=dict(in_channels=[192, 384, 768]))   # ★ Swin-T 的输出通道和 ResNet 不同，neck 要跟着改
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ <code>neck=dict(in_channels=...)</code> 这一行是最容易漏的</strong>。换 backbone 就要改 neck 的输入通道，否则报 shape mismatch。<strong>ResNet-50 是 [256,512,1024,2048]，Swin-T 是 [96,192,384,768]</strong>（取 out_indices 决定用哪几个）。</p>
+</blockquote>
+<h3 id="h-这不是一个干净的消融">③ ★ 这不是一个干净的消融</h3>
+<p><strong>注意</strong>：换 Swin 同时改变了 backbone 类型、通道数、预训练数据。<strong>它和 R50/R101 的对比不是“控制单一变量”</strong>，而是“整体方案对比”。<strong>在报告里要说清楚这个区别</strong>——否则审稿人会挑。</p>
+<h2 id="h-晚上段-W3-复盘">晚上段 · W3 复盘</h2>
+<p><strong>W3 复盘要额外填的</strong>：</p>
+<figure class="code" data-lang="markdown"><pre><code>## SAR 方向初判（★ 这段 M2-W7 决定方向时会直接用）
+- 我实际动手之后，对 SAR 的感觉是：（有意思 / 太难 / 数据太难拿 ...）
+- 拿数据的实际难度：______（这是选方向时最容易被低估的因素）
+- 我能想到的 SAR 方向的口子：
+  1.
+  2.
+- 和光学方向比，我更倾向：______，理由：______
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 为什么现在就要写这段</strong>：M2-W7 你要“拍板选方向”。<strong>那时候的判断，靠的不是读了多少论文，而是你现在这种“亲手做过之后的手感”。</strong> 数据难不难拿、图看不看得懂、有没有兴趣——这些只有做过才知道，而且很容易忘。<strong>现在写下来。</strong></p>
+</blockquote>
+<h2 id="h-W3-验收清单">W3 验收清单</h2>
+<ul>
+<li>[ ] SAR 综述笔记，五段填满，三大挑战写清</li>
+<li>[ ] <code>sar_preprocess.py</code> 自测跑出那三行数字，<code>sar_linear.png</code> vs <code>sar_log.png</code> 对比过</li>
+<li>[ ] <strong><code>to_dota.py</code> 转换成功，并用 <code>vis_dota.py</code> 画图验证框套在船上</strong></li>
+<li>[ ] 裸 PyTorch 训练跑通，有 val acc，<code>best.pth</code> 已保存</li>
+<li>[ ] tiny-batch 过拟合检查做过（32 张能背到 100%）</li>
+<li>[ ] speckle 增强脚本可用，且知道“要在线性域乘、不能在 log 域乘”</li>
+<li>[ ] 《SAR vs 光学五大差异》文档，每条有“所以呢”</li>
+<li>[ ] 复盘里写了 SAR 方向初判</li>
+</ul>
+<blockquote class="quote">
+<p><strong>技能卡｜接一个新数据集的五步</strong>
+① <strong>先 <code>head</code> 看标注长什么样</strong>，别信想象 → ② 查框架要什么格式 → ③ <strong>写转换脚本</strong> → ④ <strong>★ 用可视化验证转换对不对</strong>（转错不会报错）→ ⑤ 小子集跑通再上全量。
+<strong>第 ④ 步是全书最容易被跳过、也最容易出事的一步。</strong></p>
+</blockquote>
+<p><strong>下一周（W4）</strong>：跨模态 + idea 头脑风暴 + M1 月复盘。<strong>从“输入”转向“产出”的第一个拐点</strong> —— 你 W1–W3 攒的所有笔记第 4 段、per-class AP 观察、SAR 方向初判，那时候会全部派上用场。</p>
+<div class="pager"><a class="prev" href="w3.html"><span class="dir">← 上一篇</span><span class="nm">W3 SAR 入门 + 第二个 baselin</span></a><a class="next" href="w4.html"><span class="dir">下一篇 →</span><span class="nm">W4 跨模态 + idea 头脑风暴 + M1</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#h-SAR-入门-第二个-baseline-含全书第一次-换数据集要做格式转换-的完整解法">SAR 入门 + 第二个 baseline —— 含全书第一次「换数据集要做格式转换」的完整解法</a><a href="#h-D15-SAR-综述-数据集">D15 · SAR 综述 + 数据集</a><a href="#h-上午段-精读-Zhu-2021-SAR-综述">上午段 · 精读 Zhu 2021 SAR 综述</a><a href="#h-中午段-数据集-说实话-并给可行的替代">中午段 · ★ 数据集：说实话，并给可行的替代</a><a href="#h-D16-SAR-成像-预处理脚本">D16 · SAR 成像 + 预处理脚本</a><a href="#h-中午段-SAR-数据的三种形态">中午段 · SAR 数据的三种形态</a><a href="#h-晚上段-完整的-sar-preprocess-py">晚上段 · 完整的 sar_preprocess.py</a><a href="#h-合格样例-用数字证明-log-的必要性">③ 合格样例 —— ★ 用数字证明 log 的必要性</a><a href="#h-常踩的坑">④ 常踩的坑</a><a href="#h-D17-格式转换-裸-PyTorch-baseline">D17 · 格式转换 + 裸 PyTorch baseline</a><a href="#h-中午段增补-格式转换-全书从没教过的一类活">★ 中午段增补：格式转换（全书从没教过的一类活）</a><a href="#h-晚上段-裸-PyTorch-baseline-补全原文缺的三块">晚上段 · 裸 PyTorch baseline（补全原文缺的三块）</a><a href="#h-D18-SAR-数据增强-第一次调-lr">D18 · SAR 数据增强 + 第一次调 lr</a><a href="#h-中午段-speckle-增强-原文的代码是对的-补两件事">中午段 · speckle 增强（原文的代码是对的，补两件事）</a><a href="#h-晚上段-第一次超参实验">晚上段 · 第一次超参实验</a><a href="#h-D19-D20-数据集论文-可视化适配-五大差异">D19–D20 · 数据集论文 + 可视化适配 + 五大差异</a><a href="#h-D20-中午段-把可视化工具适配-SAR">D20 中午段 · 把可视化工具适配 SAR</a><a href="#h-D20-晚上段-SAR-vs-光学五大差异">D20 晚上段 · 《SAR vs 光学五大差异》</a><a href="#h-D21-Swin-T-重训-周复盘">D21 · Swin-T 重训 + 周复盘</a><a href="#h-上午段-换-Swin-Transformer-backbone">上午段 · 换 Swin-Transformer backbone</a><a href="#h-晚上段-W3-复盘">晚上段 · W3 复盘</a><a href="#h-W3-验收清单">W3 验收清单</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

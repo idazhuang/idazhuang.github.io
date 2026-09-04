@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="5">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W5 · 变化检测 + 语义分割 —— 把遥感 CV 的另 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M2 baseline 铺开</span><span>·</span><span>Week 5</span><span>·</span><span>D29–D35</span></div><h1 class="title">变化检测 + 语义分割 —— 把遥感 CV 的另外两大任务也收进手里</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="29" data-k="am" title="D29 上午段"></i><i data-d="29" data-k="noon" title="D29 中午段"></i><i data-d="29" data-k="pm" title="D29 晚上段"></i></span><span class="sday"><i data-d="30" data-k="am" title="D30 上午段"></i><i data-d="30" data-k="noon" title="D30 中午段"></i><i data-d="30" data-k="pm" title="D30 晚上段"></i></span><span class="sday"><i data-d="31" data-k="am" title="D31 上午段"></i><i data-d="31" data-k="noon" title="D31 中午段"></i><i data-d="31" data-k="pm" title="D31 晚上段"></i></span><span class="sday"><i data-d="32" data-k="am" title="D32 上午段"></i><i data-d="32" data-k="noon" title="D32 中午段"></i><i data-d="32" data-k="pm" title="D32 晚上段"></i></span><span class="sday"><i data-d="33" data-k="am" title="D33 上午段"></i><i data-d="33" data-k="noon" title="D33 中午段"></i><i data-d="33" data-k="pm" title="D33 晚上段"></i></span><span class="sday"><i data-d="34" data-k="am" title="D34 上午段"></i><i data-d="34" data-k="noon" title="D34 中午段"></i><i data-d="34" data-k="pm" title="D34 晚上段"></i></span><span class="sday"><i data-d="35" data-k="am" title="D35 上午段"></i><i data-d="35" data-k="noon" title="D35 中午段"></i><i data-d="35" data-k="pm" title="D35 晚上段"></i></span></div></div>
+<div class="note"><b>★ D32 的指令做不到</b>　"跑 UNetFormer baseline（体验 MMSegmentation）"是两件不兼容的事——<b>UNetFormer 在 GeoSeg（PyTorch Lightning），不在 MMSegmentation 里</b>。<a href="w5-full.html">《W5 详注版》</a> 给了两条路线的取舍、MMSegmentation 完整安装、三个数据集地址，以及实测「F1 两种口径差 8.8 个点」的验证脚本。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>:M1 你把“光学检测 + SAR 分类”做透了。M2 的关键词是<strong>广谱铺开 → 方向收敛</strong>：先把剩下的主流任务（变化检测、分割、VLM、自监督）都<strong>亲手体验</strong>一遍，再在 W7–W8 <strong>收敛锁定一个细分方向</strong>。
+<strong>本周科研能力目标</strong>（你原计划，保留）：掌握变化检测、语义分割两个主流任务；体验不同任务的数据格式与评价指标差异。
+<strong>心态提醒</strong>：这一周你<strong>是在“选方向”、不是“做方向”</strong>——每个任务只要“体验过、懂数据/指标/流程”，不要求精通。读论文、跑 baseline 这些动作你 M1 已学会，本周教学<strong>重点放在“新任务带来的新概念（尤其新指标 F1、mIoU）”</strong>，流程类动作讲得相对快，但每个时段仍给你完整六块。</p>
+</blockquote>
+<hr />
+<h2>🧭 W5 总览：三种任务，三套“语言”</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>任务</th>
+<th>输入</th>
+<th>输出</th>
+<th>评价指标</th>
+<th>你已会的对照</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>旋转目标检测(M1)</td>
+<td>一张图</td>
+<td>旋转框</td>
+<td><strong>mAP</strong></td>
+<td>✅ 已掌握</td>
+</tr>
+<tr>
+<td>变化检测（本周）</td>
+<td><strong>两张图</strong>（同地不同时）</td>
+<td>变化掩膜 mask</td>
+<td><strong>F1 / IoU</strong></td>
+<td>新</td>
+</tr>
+<tr>
+<td>语义分割（本周）</td>
+<td>一张图</td>
+<td>每像素类别 mask</td>
+<td><strong>mIoU</strong></td>
+<td>新</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>本周精读 5 篇</strong>（你的清单）:BIT、ChangeFormer、FCN-PP/SNUNet、UNetFormer、ABCNet。<strong>本周每天三段（上午/中午/晚上）都各是一个完整教学单元。</strong></p>
+<hr />
+</section>
+<article class="day" id="d29" data-d="29"><header class="day-head"><span class="dnum">D29</span><h2 class="day-t">周一 · 变化检测入门(BIT)+ 跑通第三个 baseline</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天进入你的<strong>第三类任务：变化检测</strong>。它和你已会的目标检测“长得很不一样”——输入是两张图、输出是掩膜。今天读它的代表作 BIT、把数据备好、把 baseline 跑起来。读论文/复现这些动作你已熟，所以重点在“建立变化检测的任务观 + 它的新数据形态”。</p>
+<p><strong>预期管理</strong>：今天进入第三类任务，产物是 BIT 笔记+LEVIR-CD 就绪+第三个 baseline 启动。提醒：本周你是在“选方向、不是做方向”——每个任务只要体验过、懂数据/指标/流程即可，不要求精通。变化检测和检测“长得完全不一样”（两张图→掩膜），第一次会有点不适应，这正常；复现流程你 M1 已熟，几乎是同一套动作。</p>
+</blockquote>
+</div><section class="slot" id="d29-am" data-d="29" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D29 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 BIT(Bitemporal Image Transformer, Chen 2022, TGRS)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（假设你第一次接触变化检测）</h4><div class="blk-b"><ul>
+<li><strong>变化检测(change detection, CD)</strong>= 对比同一地点<strong>不同时间</strong>拍的两张图，找出“什么变了”（建筑新增、城市扩张、灾害损毁、植被消失）。</li>
+<li>它和你 M1 做的目标检测<strong>完全不同</strong>：目标检测输入<strong>一张图</strong>、输出<strong>框+类别</strong>；变化检测输入<strong>两张图（双时相）</strong>、输出<strong>变化掩膜（mask，逐像素标“变/没变”）</strong>。</li>
+<li><strong>双时相(bitemporal)</strong> = 两个时间点的图（常记作 T1 前时相、T2 后时相）。BIT 名字里的 “Bitemporal” 就是这个意思。</li>
+<li><strong>和通用 CV 对比</strong>：通用 CV 几乎没有“对比两张图找差异”这种任务设定；变化检测是遥感（对地观测要看“变化”）特有的高价值任务。</li>
+<li><strong>为什么变化检测是高价值任务</strong>：对地观测的核心诉求之一就是“看变化”——城市扩张监测、违建查处、灾害（地震/洪水）损毁评估、森林砍伐/耕地保护、冰川消融。这些都是国家级刚需，且必须靠“前后对比”才能做。<strong>这也是空天院等机构重点投入的方向之一</strong>。</li>
+<li><strong>变化检测特有的难点（也是你未来的选题口子）</strong>:① <strong>伪变化</strong>——光照、季节、传感器差异会造成“看起来变了其实没变”（如同一片地夏天绿冬天黄），模型要学会忽略这些“无关变化”只报“真实变化”;② <strong>配准误差</strong>——两个时相的图如果没精确对齐，会产生大量假变化;③ <strong>类别极不平衡</strong>——一张图里真正变化的像素通常很少（这直接决定了为什么用 F1 而非准确率，明天 D30 细讲）。<strong>“区分真变化和伪变化”本身就是一个很好的小而硬选题方向。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>下载 BIT 论文，按精读 3 遍法（综述/方法各几遍你 M1 学过；这是方法论文，读 3 遍）。</li>
+<li>在 <code>10-论文笔记/2022_Chen_BIT.md</code> 套 5 段式模板，重点回答两问:① BIT 怎么用 <strong>Transformer</strong> 建模“两个时相之间的差异”?② 它把变化检测当成<strong>什么问题</strong>（逐像素二分类：每个像素属于“变”或“没变”）？</li>
+<li>第 4 段记下：BIT 还有什么没解决的（如对小变化、配准误差敏感）——这是你未来选题的素材。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2022_Chen_BIT.md</code> 能用一句话说清“<strong>输入两张图、输出变化 mask，用 Transformer 把两图特征 token 化、用注意力比对差异</strong>”；第 4 段有 ≥1 条“它没解决的”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li>用“检测=画框”的思维理解它 → 变化检测输出的是 <strong>mask（逐像素），不是框</strong>。</li>
+<li>以为“两张图随便拍的” → 必须是<strong>同一地点、配准好</strong>的两个时相（否则“变化”无意义）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>Transformer 那块看不懂 → 抓“它把两图特征变成 token、用注意力机制比对差异”的<strong>直觉</strong>即可，细节后面用到再深究。</li>
+<li>不理解“逐像素二分类” → 类比：把输出图的每个像素当成一个二分类样本(变=1/没变=0)。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了<strong>第三类任务（变化检测）的任务观</strong>，理解了“同样叫'检测'，输入输出可以完全不同”。<strong>做了</strong>（BIT 笔记）、<strong>学了</strong>（变化检测的定义、双时相、逐像素二分类）、<strong>会了</strong>（快速读懂一个新任务的代表论文并抓住其任务设定）。</p>
+</div></section></section><section class="slot" id="d29-noon" data-d="29" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D29 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">下载 LEVIR-CD（变化检测标杆，建筑变化，官方已切 256×256）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>LEVIR-CD</strong> 是变化检测最常用的标杆数据集（聚焦<strong>建筑物变化</strong>，官方已切成 256×256 小块，省去你切图的功夫）。“标杆数据集”= 这个任务上大家都在它上面比，<strong>吃透它=拿到这个赛道的通用语言</strong>（你 M1 在 DOTA 上学过这个道理）。<strong>为什么要用“大家都在用的标杆数据集”而非随便找个数据</strong>:① 可比性——你的结果能和论文报告的数值直接对比（知道自己做对没、做得好不好）;② 通用语言——同行一提“LEVIR-CD F1 90”大家都懂是什么水平，你说自己的方法时也能被理解;③ 已被充分研究——数据质量、评测协议都成熟，不会在数据本身上踩坑。<strong>这和 M1 用 DOTA 是一个道理</strong>：每个任务都有它的“标准考场”，先在标准考场上把 baseline 跑出公认水平，你才算真正进入了这个赛道。<strong>LEVIR-CD 官方已切成 256×256 这点很贴心</strong>——省去了你像 DOTA 那样自己切图的工夫，可以直接训练，降低了上手门槛。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>去官方/镜像下载 LEVIR-CD(train/val/test)；下好后<strong>随手打开一对样本</strong>:T1 图、T2 图、变化标签 mask 三张并排看，直观感受“变化 mask 长什么样”(白=变化区域，黑=未变)。建 <code>30-数据集/LEVIR-CD/README.md</code> 记下目录结构（A/前时相、B/后时相、label/标签）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>LEVIR-CD 下好；你亲眼看过一组“T1 + T2 + 变化 mask”，能说出“标签里白色区域 = 两个时相之间新增/消失的建筑”。</p>
+<figure class="code" data-lang="text"><pre><code># LEVIR-CD 目录结构（双时相数据集的典型组织）
+LEVIR-CD/
+├── train/  A/  ← 前时相(T1)图，文件名与 B、label 一一对应
+│         B/  ← 后时相(T2)图
+│         label/ ← 变化标签 mask(白=变化, 黑=未变；可能是 0/255 需二值化)
+├── val/   (同结构)
+└── test/  (同结构)
+# 关键：A/B/label 三个文件夹里同名文件是一组（T1、T2、变化标签），训练时按文件名配对</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>下完不看一眼数据 → 直接训练时才发现目录结构/标签形式没搞懂。<strong>数据到手先肉眼看一组</strong>（M1 养成的习惯）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>下载慢/失败 → 找学术镜像或网盘转存（变化检测社区常有 LEVIR-CD 镜像）；目录看不懂 → 对照数据集官方说明的 A/B/label 约定。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你拿到了变化检测的“标准考场”并直观理解了它的数据形态。<strong>做了</strong>（LEVIR-CD 就绪 + 看过样本）、<strong>学了</strong>（双时相数据集的目录组织、变化 mask 的样子）、<strong>会了</strong>（快速摸清一个新数据集的结构并肉眼验证）。</p>
+</div></section></section><section class="slot" id="d29-pm" data-d="29" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D29 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑 BIT baseline（复现一个新任务的开源代码）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>复现 = 用别人开源的代码，在标准数据集上重跑出接近其论文报告的结果。你 M1 复现过 Oriented R-CNN/SAR 分类，<strong>这次几乎是同一套动作</strong>:clone 代码 → 配环境 → 改数据路径 → 启动训练。变化检测代码常较轻量（单卡友好）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li><code>git clone</code> BIT 官方仓库；按其 README 配环境（用你 M1 练熟的“查 torch/cuda 版本→对照官方表→指定版本装”套路）。</li>
+<li>改 config/脚本里的 LEVIR-CD 数据路径（用<strong>绝对路径</strong>最稳）。</li>
+<li>启动训练，把命令写进 <code>20-代码实验/实验日志.md</code>(记下日期、数据、超参)。</li>
+</ol>
+<figure class="code" data-lang="bash"><pre><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/justchenhao/BIT_CD.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>BIT_CD
+<span class="c1"># 按 README 装依赖；数据按 A(前时相)/B(后时相)/label 组织，路径填绝对路径</span>
+python<span class="w"> </span>main_cd.py<span class="w"> </span>--project_name<span class="w"> </span>BIT_LEVIR<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data_name<span class="w"> </span>LEVIR<span class="w"> </span>--net_G<span class="w"> </span>base_transformer_pos_s4_dd8<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--batch_size<span class="w"> </span><span class="m">8</span><span class="w"> </span>--lr<span class="w"> </span><span class="m">0</span>.01<span class="w"> </span>--max_epochs<span class="w"> </span><span class="m">200</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu_ids<span class="w"> </span><span class="m">0</span><span class="w">          </span><span class="c1"># 单卡 4090；变化检测代码通常轻量，batch 可开大</span>
+<span class="c1"># 训练日志/权重在 checkpoints/BIT_LEVIR/ 下；loss 在降即健康，结果明天评估</span>
+nvidia-smi<span class="w">              </span><span class="c1"># 确认 4090 在干活</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>BIT 训练已启动、loss 在 log 里正常下降（结果明天评估）。命令已归档（可复现）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li>环境冲突 → 这是复现老代码的常态，别慌，回用 M1 的版本排查套路。</li>
+<li>数据路径用相对路径在不同工作目录下失效 → 用绝对路径。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>① clone 的代码跑不通 → 翻它 GitHub Issues 搜报错原文;② loss 不降 → 先确认数据路径/标签读对（打印一个 batch 的形状和标签值）;③ 折腾过久 → 今晚先跑通“能训”即可，调优明天再说。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把“复现一个新任务的开源代码”又独立走了一遍——<strong>这次几乎不需要我教流程，说明 M1 的复现能力已经内化</strong>。<strong>做了</strong>（BIT 训练启动）、<strong>学了</strong>（变化检测代码的复现流程与它的轻量特性）、<strong>会了</strong>（把已掌握的复现能力零成本迁移到新任务）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ BIT 笔记 ✅ LEVIR-CD 就绪 ✅ BIT 训练启动。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜变化检测任务定义</strong>：输入是<strong>同一地点两个时相</strong>的图，输出是<strong>变化掩膜</strong>（哪变了）。与目标检测（找框）、语义分割（逐像素分类单图）都不同——它本质是“双时相对比”。应用：灾害评估、城市扩张、环境监测。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D29</summary><textarea data-note="d29" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d30" data-d="30"><header class="day-head"><span class="dnum">D30</span><h2 class="day-t">周二 · ChangeFormer 对比 + 第一次接触“F1 指标”</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天读变化检测第二篇(ChangeFormer)做对比，并迎来一个<strong>关键新概念：F1 指标</strong>——变化检测不用 mAP，这背后的“为什么”很重要，务必搞懂。</p>
+<p><strong>预期管理</strong>：今天最重要的是搞懂 F1 指标（为什么变化检测不用 mAP/准确率）。提醒：这是本周的核心新概念，务必吃透“类别极不平衡时，准确率会骗人（全猜没变也有 95%+），所以要用 F1”——这个道理读懂、评价任何不平衡任务都用得上。第二篇 ChangeFormer 用差量阅读（只看和 BIT 的差异），别从零啃。</p>
+</blockquote>
+</div><section class="slot" id="d30-am" data-d="30" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D30 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 ChangeFormer(Bandara 2022)并与 BIT 对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>ChangeFormer 是另一篇用 Transformer 做变化检测的代表作。读<strong>第二篇同任务论文</strong>要用 M1 学的<strong>“差量阅读”</strong>：不从零啃，重点看它<strong>和 BIT 的差异</strong>（都用 Transformer，但在哪不一样：特征提取方式、差异建模方式、是否更轻量）。<strong>差量阅读为什么高效</strong>：同任务的论文有大量共同背景（任务定义、常用数据集、基础方法），第一篇你已经啃透了这些；读第二篇时，这些共同部分可以快速略过，把精力集中在“它比第一篇新/不同的那 20%”。这样读一篇可能只要 30 分钟，而不是从零的两小时。<strong>差量阅读还顺便训练了“对比思维”</strong>：你被迫去想“这两篇到底差在哪、各自的取舍是什么”——这正是写 Related Work（区分流派、说清谁改进了谁）和找选题（看清一个方向的演进、哪还没做）的核心能力。<strong>读同一方向的第 3、4、5 篇会越来越快</strong>，因为你的“背景知识库”越来越厚，每篇的“增量”越来越小——这就是为什么 M1 让你“成族成对地读”，越往后越省力。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>精读 ChangeFormer（差量阅读,~30min），在笔记里专门写<strong>一行 BIT vs ChangeFormer 对比</strong>（各自怎么提特征、怎么建模时相差异、各自卖点）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2022_Bandara_ChangeFormer.md</code> 笔记 + 一行清晰的“BIT vs ChangeFormer”对比（能说出至少一个关键差异）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把第二篇也当第一篇逐字啃 → 用差量阅读，只补“它比 BIT 多/新的”部分。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>两篇差异看不出 → 对比它们的“核心模块图（Figure 2 类）”，差异常在那一眼能看到。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用差量阅读高效读完同任务第二篇，并练了“两篇对比”——这是日后写 Related Work 区分流派的基本功。<strong>做了</strong>（ChangeFormer 笔记+对比）、<strong>学了</strong>（变化检测的另一种 Transformer 思路）、<strong>会了</strong>（对同任务多篇做差量对比）。</p>
+</div></section></section><section class="slot" id="d30-noon" data-d="30" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D30 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">建“变化检测 SOTA 对比草表”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>SOTA 对比表</strong>= 把一个任务上的主流方法的关键指标列成表，一眼看出“谁强、强多少、用什么骨架”。你 M1 在检测/分割上建过类似表；变化检测也要有一张。<strong>提前建好，选题/写论文反复要用</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>30-数据集/变化检测SOTA.md</code> 建表:<code>方法 | 年份 | 骨架 | LEVIR-CD F1 | WHU-CD F1 | 核心创新</code>，先把 BIT、ChangeFormer 两行填上（F1 先留空，今晚/明天补）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张变化检测 SOTA 草表，BIT/ChangeFormer 行的“骨架/核心创新”已填。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>贪多求全凑很多方法 → 先把你读过的两三个填准，后续读到再加（活文档）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某方法的 F1 查不到 → 标“待查”，别卡住。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你为变化检测建立了 SOTA 索引表。<strong>做了</strong>（SOTA 草表）、<strong>学了</strong>（SOTA 表的列设计）、<strong>会了</strong>（把读到的方法系统沉淀成可比较的表）。</p>
+</div></section></section><section class="slot" id="d30-pm" data-d="30" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D30 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">BIT 训练完成 → 评估 → 记录 F1（★第一次接触 F1 指标）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（本周最重要的新概念，务必懂）</h4><div class="blk-b"><ul>
+<li>变化检测<strong>不用 mAP</strong>，用 <strong>F1-score（主）和 IoU</strong>。<strong>为什么换指标</strong>：变化检测是“逐像素二分类（变/没变）”，而且<strong>变化像素通常远少于不变像素</strong>（类别极不平衡）。这时光看“<strong>准确率(accuracy)</strong>”会<strong>严重骗人</strong>——全部猜“没变”也能有 95%+ 的准确率（因为大部分像素本来就没变），但这种模型毫无用处。</li>
+<li><strong>F1 = 精确率(precision)与召回率(recall)的调和平均</strong>：
+<ul>
+<li><strong>precision</strong>（精确率）= &quot;我说'变'的像素里，有多少真的变了&quot;（惩罚<strong>误报</strong>）。</li>
+<li><strong>recall</strong>（召回率）= &quot;真正变了的像素里，我找到了多少&quot;（惩罚<strong>漏报</strong>）。</li>
+<li>F1 同时考虑两者，<strong>只有误报和漏报都低，F1 才高</strong> → 非常适合不平衡的变化检测。</li>
+</ul>
+</li>
+<li><strong>一句话记牢任务↔指标</strong>：检测用 <strong>mAP</strong>，分割用 <strong>mIoU</strong>，变化检测用 <strong>F1</strong>（辅以 IoU）。</li>
+<li><strong>一个具体例子看清“准确率为什么骗人”</strong>：假设一张图 10000 个像素，真正变化的只有 200 个(2%)。一个“全猜没变”的废物模型：它把 9800 个没变的都猜对了，准确率 = 9800/10000 = <strong>98%</strong>，看着很高！但它一个变化都没找到——recall = 0/200 = 0,F1 = 0。<strong>准确率 98% vs F1 = 0</strong>,F1 一下就揭穿了这个废物模型。这就是为什么不平衡任务必须用 F1。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>BIT 训完 → 跑它的评估脚本 → 记录 <strong>F1</strong>（LEVIR-CD 上 BIT 参考 ~89–91%）→ 填进昨天的 SOTA 草表 BIT 那行。如果它还输出 precision/recall/IoU，一并记下。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 评估 BIT（在 LEVIR-CD 测试集上算 F1/IoU）</span>
+python<span class="w"> </span>eval_cd.py<span class="w"> </span>--project_name<span class="w"> </span>BIT_LEVIR<span class="w"> </span>--data_name<span class="w"> </span>LEVIR<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--net_G<span class="w"> </span>base_transformer_pos_s4_dd8<span class="w"> </span>--checkpoint_name<span class="w"> </span>best_ckpt.pt<span class="w"> </span>--gpu_ids<span class="w"> </span><span class="m">0</span>
+<span class="c1"># 输出会打印 F1 / IoU / precision / recall —— BIT 在 LEVIR-CD 上 F1 参考 ~89-91%</span>
+<span class="c1"># 把 F1 填进 变化检测SOTA.md 的 BIT 行</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>BIT 的 F1 落在 ~89–91%;SOTA 表 BIT 行的 F1 填好；你能解释“为什么这里用 F1 不用准确率”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 把检测的 mAP 套到变化检测 → 指标用错，没法和论文比;② 看到“准确率很高”就以为模型好 → 在不平衡任务里准确率会骗人，要看 F1。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>F1 明显偏低（远低于 89%）→ ① 检查标签是否为 0/1 二值（有的数据集标签是 0/255，要先除以 255）;② 是否用了<strong>变化检测专门的 F1 计算</strong>（只在“变化”类上算，不是两类平均）;③ 评估的预测/标签尺寸是否对齐。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你掌握了 <strong>F1 / precision / recall</strong>，并真正理解了“<strong>不同任务为什么要用不同指标</strong>（类别不平衡 → 用 F1 而非准确率）”——这是读懂、评价任何分类/检测/分割工作的根基。<strong>做了</strong>（BIT F1 结果）、<strong>学了</strong>（F1/precision/recall、不平衡下指标的选择）、<strong>会了</strong>（为一个任务选对评价指标并解释原因）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜任务↔指标对照</strong>：检测=mAP｜语义分割=mIoU｜变化检测=F1(+IoU)｜均衡分类=accuracy/混淆矩阵。<strong>换任务先确认换哪个指标。</strong></p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ ChangeFormer 笔记 ✅ SOTA 对比草表 ✅ BIT F1 结果。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜任务 × 指标对照</strong>：目标检测→<strong>mAP</strong>；语义分割→<strong>mIoU</strong>；变化检测→<strong>F1</strong>（精确率/召回率调和平均）。换任务先确认用什么指标，否则数字没法比、也读不懂别人的表。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D30</summary><textarea data-note="d30" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d31" data-d="31"><header class="day-head"><span class="dnum">D31</span><h2 class="day-t">周三 · 两种变化检测范式（FCN vs 孪生网络）+ 体验式跑通</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天搞清变化检测的两大经典范式，并认识一个<strong>会反复出现的结构：孪生网络(Siamese)</strong>。再跑一个 baseline 体验。</p>
+<p><strong>预期管理</strong>：今天的关键概念是孪生网络（共享权重双分支比对）——它在变化检测、跨模态匹配、图像检索、对比学习里反复出现，记牢它一次，处处受用。提醒：孪生的灵魂是“两分支权重完全相同（共享）”，看漏这点就理解错了；晚上跑 ChangeFormer 时间不够就只跑 demo 推理，体验到即可，别在单个方法上耗太久。</p>
+</blockquote>
+</div><section class="slot" id="d31-am" data-d="31" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D31 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 FCN-PP / SNUNet 两篇（两种范式）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li>变化检测有两类经典做法：
+<ul>
+<li><strong>基于 FCN（全卷积网络）</strong>：把两张图（或它们的差/拼接）直接喂一个分割式网络，输出变化 mask。</li>
+<li><strong>基于孪生网络(Siamese network)</strong>：用<strong>两个共享权重的相同分支</strong>分别处理 T1、T2 两张图，再<strong>比较两路特征</strong>找差异。</li>
+</ul>
+</li>
+<li><strong>孪生网络是重点</strong>：它就是“<strong>用同一双眼睛先后看两张图，再比对</strong>”——两个分支权重完全相同（共享），保证两张图被“同样地”理解，差异才有意义。这个结构在<strong>变化检测、跨模态匹配、图像检索、对比学习</strong>里反复出现，务必记牢。</li>
+<li><strong>两类范式的取舍</strong>:FCN 系（早期融合）简单直接——把两张图拼起来当一个多通道输入喂进去，让网络自己学差异；但它没有显式地“对比”两图，差异建模较隐式。孪生系（晚期融合）先各自提特征再显式比对，<strong>更符合“变化=两图之差”的直觉，也更容易解释</strong>，是当前主流。<strong>理解“早期融合 vs 晚期融合”这个区分</strong>很有用——它不只在变化检测，在所有“多输入”任务（多模态、多时相）里都是核心设计选择。</li>
+<li><strong>为什么“共享权重”是孪生的灵魂</strong>：如果两个分支权重不同，它们就会用“两套不同的标准”看两张图，提出的特征不可比，“差异”就混入了“两套标准本身的差异”，失去意义。共享权重保证“两张图用完全相同的方式被理解”，这样特征之差才纯粹反映“图的内容之差”=真实变化。<strong>这个“用同一套参数处理多个输入以保证可比性”的思想，在对比学习、度量学习里都是基石。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>精读 FCN-PP / SNUNet（经典论文抓范式,~25min/篇），笔记答：FCN 系和孪生系各<strong>怎么处理“两张图”</strong>？各自优劣（孪生更能显式比对、FCN 更简单）？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>笔记里能画出“孪生网络 = 共享权重双分支 → 特征比对 → 变化 mask”的示意，并说清它和 FCN 系的区别。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把“共享权重”看漏 → 孪生的关键就是<strong>两分支权重相同</strong>；若两分支独立，就不是孪生了。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>范式细节看不懂 → 抓“孪生=共享权重双分支比对”这一句核心直觉即可，够用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你掌握了<strong>孪生网络</strong>这一在多个子领域反复出现的结构，以及变化检测的两大范式。<strong>做了</strong>（两篇范式笔记）、<strong>学了</strong>（FCN 系 vs 孪生系、孪生的“共享权重”本质）、<strong>会了</strong>（识别并理解一个跨领域通用结构）。</p>
+</div></section></section><section class="slot" id="d31-noon" data-d="31" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D31 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">下载 WHU-CD，对比它与 LEVIR-CD 的差异</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同一任务常有多个数据集(LEVIR-CD、WHU-CD…)，它们在<strong>场景、分辨率、变化类型</strong>上不同。<strong>多数据集意识</strong>很重要：一个方法在多个数据集上都好，才说明它泛化（这是你后面做实验、写论文的标配）。<strong>为什么“单数据集好”不够、必须多数据集验证</strong>：一个方法只在 LEVIR-CD 上好，可能是它恰好“过拟合”了 LEVIR-CD 的特点（某种分辨率、某类建筑）；换个数据集（WHU-CD，不同区域/分辨率）就掉点，说明它没真正学到通用的“变化检测能力”。<strong>审稿人和同行看一个方法，首先问“它在几个数据集上验证了”</strong>——多数据集稳定提升才有说服力。<strong>这也呼应你的研究定位</strong>：你做“跨域泛化/鲁棒性”这类方向，本身就是在研究“如何让方法跨数据集都好”——多数据集不只是验证手段，更可能是你的研究主题（比如系统地测出“现有方法跨数据集会掉多少点”，这本身就是一个评测基准类的贡献）。<strong>现在养成“一个任务备好 2+ 数据集”的习惯</strong>，后面做实验、写论文就水到渠成。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>下载 WHU-CD；对比它和 LEVIR-CD：场景（都偏建筑但区域不同）、分辨率、变化类型、数据量，记一小段对比进数据集表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>WHU-CD 就绪 + 一段“WHU-CD vs LEVIR-CD”差异说明。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>以为“两个数据集差不多” → 它们的分辨率/变化类型差异会影响方法表现，要记清；只在一个数据集上验证就下结论 → 单数据集好可能是过拟合了它的特点，必须多数据集才能说明泛化；下了不对比直接堆着 → 至少记一段“两数据集的关键差异”，否则等于白下。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>下载受阻 → 镜像/网盘；只需先备好，真正用是后面的事。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了变化检测的“第二个考场”并学会对比数据集差异。<strong>做了</strong>（WHU-CD 就绪+对比）、<strong>学了</strong>（多数据集意识）、<strong>会了</strong>（对比两个同任务数据集的关键差异）。</p>
+</div></section></section><section class="slot" id="d31-pm" data-d="31" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D31 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑 ChangeFormer baseline(LEVIR-CD)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>再跑一个变化检测 baseline，目的是<strong>体验不同方法的实现</strong>（不是追求刷高分）。本周你“在选方向、不是做方向”，<strong>体验越多，后面选择越准</strong>。<strong>为什么“体验模式”是对的、不该在单个方法上死磕</strong>：本周的目标是“广谱铺开”——把各类任务都摸一遍，建立“做过的人”的判断力，好在 W7-W8 选方向。如果你在某一个 baseline 上花三天调到 SOTA，看似深入，实则违背了本周“广度优先”的目标（你又没选定这个方向，深调它的性价比很低）。<strong>“跑通/看输出即可”是这周的合格线</strong>：能跑起来、看到它的预测输出、理解它的实现思路，就达到了“体验”的目的。<strong>这是一种重要的时间管理智慧——在不同阶段用不同的深度标准</strong>：选方向阶段（本周）广度优先、浅尝辄止；选定方向后(M3+)再深耕死磕。<strong>用错了深度标准</strong>（选方向时就死磕一个、或该深耕时还在浅尝）都会拖慢你。本周刻意练这种“体验模式”的克制，对你后面合理分配精力很有帮助。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>clone ChangeFormer 代码 → 配环境 → 改 LEVIR-CD 路径 → 启动训练；<strong>时间不够就只跑 demo 推理</strong>（看一张图的变化预测），也算体验到了。</p>
+<figure class="code" data-lang="bash"><pre><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/wgcban/ChangeFormer.git<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>ChangeFormer
+<span class="c1"># 改 run_*.sh 或 config 里的 LEVIR-CD 路径，然后训练或只跑推理体验</span>
+sh<span class="w"> </span>scripts/run_ChangeFormer_LEVIR.sh<span class="w">        </span><span class="c1"># 训练（体验为主，不必训到收敛）</span>
+<span class="c1"># 时间不够 → 用其 demo 脚本对一对 T1/T2 图做推理，看输出的变化 mask 即可</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>ChangeFormer 跑起来（训练或至少 demo 推理），你看过它的变化预测输出。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>非要把每个 baseline 都训到收敛 → 本周是体验，跑通/看输出即可，别在单个方法上耗太久。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>训练太慢/环境难搞 → 退而求其次跑 demo 推理；再不行先跳过，记一句“已读论文、代码待跑”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你体验了变化检测的第二种实现，并强化了“<strong>广谱体验为选方向服务</strong>”的元认知。<strong>做了</strong>（ChangeFormer 结果/推理）、<strong>学了</strong>（同任务不同实现的差异）、<strong>会了</strong>（在“体验模式”下高效跑通而不钻牛角尖）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ FCN-PP 笔记 ✅ SNUNet 笔记 ✅ ChangeFormer 结果。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜孪生网络(Siamese)</strong>：用<strong>两个共享权重的相同分支</strong>分别处理两个输入，再<strong>比较两路特征</strong>。灵魂是“权重共享”（保证两个输入被同样地理解，差异才有意义）；若两分支独立就不是孪生。在<strong>变化检测（比对两时相）、跨模态匹配、图像检索、对比学习</strong>里反复出现——记牢一次，多处复用。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D31</summary><textarea data-note="d31" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d32" data-d="32"><header class="day-head"><span class="dnum">D32</span><h2 class="day-t">周四 · 语义分割入门(UNetFormer)+ 第四个 baseline</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天进入<strong>第四类任务：语义分割</strong>（逐像素分类）。它在遥感里和通用 CV（Cityscapes 那种）有明显差异，今天建立它的任务观并跑一个 baseline。</p>
+<p><strong>预期管理</strong>：今天进入第四类任务（语义分割），并发现一个好消息：MMSegmentation 和你 M1 用的 MMRotate 是同一套 MM 风格，config 读法通用——M1 学的能力几乎零成本迁移。提醒：遥感分割的类别（建筑/道路/农田…）和通用分割（人/车/天空）完全不同，任务范式可迁移但领域类别要重新理解。</p>
+</blockquote>
+</div><section class="slot" id="d32-am" data-d="32" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D32 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 UNetFormer(Wang 2022, ISPRS)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>语义分割(semantic segmentation)</strong>= 给图像<strong>每个像素</strong>分一个类别（建筑/道路/农田/水/植被/裸地/背景）。输出是一张“逐像素类别图(mask)”。</li>
+<li><strong>遥感分割的特殊性</strong>（相对 Cityscapes 等通用分割）:① <strong>鸟瞰视角</strong>（不是街景平视）;② <strong>边界模糊</strong>（田与田、林与草之间常没有清晰边缘）;③ <strong>尺度悬殊</strong>（一栋楼和一片森林同框）。这些是通用分割方法搬到遥感后掉点的原因（又是你 Introduction 的弹药）。</li>
+<li><strong>UNet 思路</strong>：编码器逐步下采样抓“全局语义”，解码器逐步上采样还原“精细边界”;UNetFormer 在此基础上用 Transformer 增强全局上下文。</li>
+<li><strong>为什么“编码器-解码器”是分割的标准骨架</strong>：分割既要“知道这片区域是什么（语义，需要大感受野/下采样）”，又要“精确到每个像素的边界（细节，需要高分辨率/上采样）”。编码器下采样抓语义、解码器上采样还原细节，中间常有跳连(skip connection)把浅层细节传给解码器——这套结构同时满足了“语义”和“细节”两个看似矛盾的需求，所以成了分割的通用骨架。</li>
+<li><strong>遥感分割的特殊难点为什么是选题口子</strong>：边界模糊→可做“边界增强的分割”；尺度悬殊→可做“多尺度特征更好融合”；类别不平衡（背景多、某些地物少）→可做“长尾分割”。这些通用分割也有，但遥感的极端程度（超大图、超悬殊尺度）让它们更突出，也更值得针对性改进。<strong>把一个通用分割的新技巧针对遥感这些特点改造，就是“通用 CV 巧技嫁接”的典型选题。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>精读 UNetFormer 3 遍，笔记答：它怎么<strong>兼顾“全局上下文(Transformer)”和“精细边界（类 UNet 解码）”</strong>？它的卖点是什么（高效、轻量?）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2022_Wang_UNetFormer.md</code> 能说清“编码器抓全局、解码器还原细节，Transformer 增强上下文”；并记下遥感分割的 ≥2 个特殊难点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>用通用分割的直觉看遥感分割 → 注意类别完全不同、边界更模糊、尺度更悬殊。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>UNet/解码器结构不熟 → 抓“下采样抓语义、上采样还原细节”这一对即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了<strong>第四类任务（语义分割）的任务观</strong>，并理解了遥感分割相对通用分割的结构性差异。<strong>做了</strong>（UNetFormer 笔记）、<strong>学了</strong>（语义分割定义、遥感分割三特殊性、UNet 思路）、<strong>会了</strong>（快速建立一个新任务的认知框架）。</p>
+</div></section></section><section class="slot" id="d32-noon" data-d="32" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D32 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">下载 LoveDA（城市/农村 7 类）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>LoveDA</strong> 是常用遥感分割数据集（覆盖城市与农村，7 类）。注意：<strong>遥感分割的类别和通用分割完全不同</strong>——没有“人/车/天空”，而是“建筑/道路/农田/水/植被/裸地/背景”。这提醒你：<strong>任务范式可迁移，但领域类别要重新理解</strong>。<strong>LoveDA 还有一个特别设计：城市域和农村域</strong>。城市和农村的地物分布、外观差异很大（城市多建筑道路、农村多农田）,LoveDA 把它们分开，正好可以用来研究“<strong>跨域泛化</strong>”——在城市域训练、农村域测试，看模型掉多少点。<strong>这正是你研究定位里“跨域泛化”方向的现成实验场</strong>：不需要你自己造数据，LoveDA 的城乡域划分就能支撑“域适应/域泛化”的研究。<strong>记下这点</strong>——以后你想做跨域相关的题，LoveDA 是个好起点。<strong>“任务范式可迁移、领域类别要重学”这个认知很重要</strong>：你 M1 学的分割流程（读 config、训练、评估）完全能用，但每换一个遥感数据集，都要先搞清它的类别体系和标签约定（像素值对应哪个类），否则训练评估全错。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>下载 LoveDA；打开一张图 + 它的标签 mask，看遥感分割标签长什么样(不同颜色 = 不同地物类别)。建 <code>30-数据集/LoveDA/README.md</code> 记类别列表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>LoveDA 就绪 + 你看过一张“图 + 类别 mask”，能列出它的 7 类。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>套用通用分割的类别 → 遥感类别完全不同，要按数据集的类别定义来；不看 LoveDA 的城/乡域划分 → 错过一个现成的跨域泛化实验场；标签像素值和类别索引对不上就直接训 → 先确认“标签里像素值 N 对应第几类”，否则训练评估全错。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>类别颜色对不上 → 看数据集的 colormap/类别映射表。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你拿到遥感分割的标准考场并理解其类别体系。<strong>做了</strong>（LoveDA 就绪）、<strong>学了</strong>（遥感分割的类别与通用分割的不同）、<strong>会了</strong>（快速掌握一个分割数据集的类别与标签形式）。</p>
+</div></section></section><section class="slot" id="d32-pm" data-d="32" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D32 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑 UNetFormer baseline（LoveDA，体验 MMSegmentation）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>分割常用 <strong>MMSegmentation</strong> 框架，它和你 M1 用的 <strong>MMRotate</strong> 是<strong>同一套 MM 风格</strong>——<strong>config 读法通用</strong>！这意味着你 M1 学的“读 config”能力可以<strong>几乎零成本</strong>迁移到分割。<strong>这就是“学一套、通一个家族”的复利</strong>:MM 系列(MMRotate/MMSegmentation/MMDetection/MMClassification……)都用同一套设计哲学——config 分 model/data/schedule 三块、用 <code>_base_</code> 继承、<code>tools/train.py</code> 启动、<code>tools/test.py</code> 评估。你 M1 在 MMRotate 上吃透了这套机制，现在换到 MMSeg，你会发现“咦，几乎一模一样，只是把检测换成了分割”。<strong>真正要改的就那么几处</strong>：数据路径(data_root)、类别数(num_classes)、选哪个分割模型——其余的训练/评估流程几乎照搬。<strong>这种能力迁移正是 M1 打基础的回报</strong>：当时你可能觉得“读 config 好繁琐”，但正因为吃透了它，现在上手任何 MM 库都是几分钟的事。<strong>以后你遇到 MMxx 系列的任何新库，都可以放心“它和我会的那个差不多”</strong>——这种自信和迁移力，比单纯会用某一个库值钱得多。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 MMSegmentation（或 UNetFormer 官方代码）→ 找到对应 config → 改 LoveDA 数据路径和类别数 → 启动训练。重点体会：config 的结构(model/data/schedule)和 MMRotate 几乎一样。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># MMSeg config 和 M1 的 MMRotate config 同构（model/data/schedule 三块）</span>
+<span class="n">_base_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;../_base_/models/upernet_r50.py&#39;</span><span class="p">,</span> <span class="s1">&#39;../_base_/datasets/loveda.py&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;../_base_/default_runtime.py&#39;</span><span class="p">,</span> <span class="s1">&#39;../_base_/schedules/schedule_80k.py&#39;</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">decode_head</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span>      <span class="c1"># ← LoveDA 7 类，改这里</span>
+<span class="n">data_root</span> <span class="o">=</span> <span class="s1">&#39;/abs/path/to/LoveDA/&#39;</span>                 <span class="c1"># ← 改成你的绝对路径</span>
+<span class="c1"># 对比一下：检测 config 改 num_classes/data_root，分割 config 也改这两处——读法完全通用</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 训练（单卡）</span>
+python<span class="w"> </span>tools/train.py<span class="w"> </span>configs/loveda/my_unetformer_loveda.py
+<span class="c1"># 体会：除了 num_classes 和 data_root，启动方式和 M1 的 MMRotate 一模一样</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>分割 baseline 启动；你能指出“这个分割 config 和 M1 的检测 config 在结构上哪里相同”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>以为分割框架要从零学 → 其实 config 读法通用，改 data/类别即可上手。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>MMSeg 版本和你环境冲突 → 用 M1 的版本排查套路；或直接用 UNetFormer 官方仓库。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你发现 <strong>MM 全家桶 config 读法通用</strong>——M1 学的能力直接迁移到新任务、新框架。<strong>做了</strong>（分割 baseline 启动）、<strong>学了</strong>（MMSeg 与 MMRotate 的同构）、<strong>会了</strong>（把“读 config”能力迁移到新框架几乎零成本上手）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ UNetFormer 笔记 ✅ LoveDA 就绪 ✅ 分割 baseline 启动。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜MM 全家桶 config 通用 + 复现能力迁移</strong>:MMRotate（检测）、MMSegmentation（分割）、MMDet 等同属 MM 风格，<strong>config 都是 model/data/schedule 三块结构，读法通用</strong>。换新任务/新框架时，你 M1 练的“读 config→改 data_root/num_classes→dry-run→正式训”四步几乎零成本迁移——大多只需改数据路径和类别数。<strong>学会一个 MM 库，等于会用一整个家族。</strong></p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜遥感分割的特殊性</strong>:① 鸟瞰垂直视角 ② 地物边界模糊（田与田之间无明显边）③ 尺度悬殊（一栋楼和一片森林同图）。这三点是通用分割(Cityscapes)迁到遥感后掉点的根源——也是可改进的切入口。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D32</summary><textarea data-note="d32" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d33" data-d="33"><header class="day-head"><span class="dnum">D33</span><h2 class="day-t">周五 · 注意力分割(ABCNet)+ 第一次接触“mIoU”</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天读注意力分割代表作，并迎来分割的关键指标 <strong>mIoU</strong>。至此你将集齐三大指标(mAP/F1/mIoU)。</p>
+<p><strong>预期管理</strong>：今天集齐第三个指标 mIoU，从此 mAP/F1/mIoU 三大指标你都实操理解了。提醒：mIoU 是“逐类算 IoU 再平均”（对各类一视同仁，避免大类主导），算出来异常低多半是类别索引映射错或 ignore 类没排除。今天写的“分割 vs 检测流程对比”会帮你把三类任务的差异系统化。</p>
+</blockquote>
+</div><section class="slot" id="d33-am" data-d="33" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D33 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 ABCNet(Li 2021)+ 一篇 ViT-based 遥感分割</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>注意力机制(attention)在分割中的作用</strong>——帮模型关注“重要区域/长程关系”，缓解遥感分割里“尺度悬殊、上下文重要”的问题。ABCNet 等用注意力提升分割效果；ViT-based 分割则用 Transformer 做主干。<strong>为什么注意力对遥感分割特别有用</strong>：遥感图大、上下文关系强（判断一个像素是“道路”还是“河流”，往往要看它周围一大片的形态），而 CNN 的局部卷积感受野有限，难以建模这种长程关系。注意力机制能让每个位置“看到”全图任意位置的信息，直接建立长程依赖——这正好补了 CNN 的短板。<strong>ABCNet 这类轻量注意力分割对你尤其有参考价值</strong>：它在用注意力提升效果的同时控制了计算量（轻量），契合你“单卡高效”的定位——不是堆一个超大 Transformer，而是用巧妙的轻量注意力设计达到好效果。<strong>这给你一个选题启示</strong>：“如何用更轻量的注意力/上下文建模，在单卡上达到大模型的分割效果”本身就是一个契合你定位的方向（高效 + 遥感分割难点）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>精读 ABCNet（+一篇 ViT-based 遥感分割，可泛读），笔记答：注意力/Transformer 在这里<strong>解决了什么</strong>（全局上下文、长程依赖）？和纯 CNN 分割比强在哪？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2021_Li_ABCNet.md</code> 能说清“用注意力增强上下文建模”，并和 UNetFormer 对比一句。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>被各种 attention 变体名词淹没 → 抓“attention = 让模型有选择地关注重要区域/建立长程关系”的统一直觉。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>看不懂具体 attention 公式 → 先记直觉，公式后面用到再看。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你理解了注意力在分割中的角色，补全了分割方法的几种主流思路。<strong>做了</strong>（ABCNet 笔记）、<strong>学了</strong>（注意力分割的动机与作用）、<strong>会了</strong>（理解 attention 在不同任务里的通用价值）。</p>
+</div></section></section><section class="slot" id="d33-noon" data-d="33" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D33 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">建“遥感分割 SOTA 排行榜”表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同变化检测，分割也建一张 SOTA 表，后面选题/写论文反复用。<strong>为什么每个任务都要维护一张 SOTA 表</strong>：它是你在这个赛道的“地形图”——一眼看清谁是当前最强、用什么骨架、提升趋势如何。选题时，SOTA 表帮你判断“这个方向还有多少提升空间、最强方法的瓶颈在哪”；写论文时，你的方法必须和表里的 SOTA 比，这张表就是现成的对照清单。<strong>先建草表、边读边填（活文档）</strong>：不用一次填全，把你读过的两三个方法填准，后续读到新的再加——它会随你的阅读自然长大。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>建 <code>30-数据集/分割SOTA.md</code>:<code>方法 | 年份 | LoveDA mIoU | Potsdam mIoU | 骨架</code>，把 UNetFormer/ABCNet 行先填上（mIoU 留待今晚补）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张分割 SOTA 草表，方法/骨架已填。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤ 坑与自救</h4><div class="blk-b"><p>同前——先填准你读过的，查不到的标“待查”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你为分割也建立了 SOTA 索引。<strong>做了</strong>（分割 SOTA 草表）、<strong>学了</strong>（分割常用数据集 LoveDA/Potsdam）、<strong>会了</strong>（为新任务快速建立 SOTA 对比表）。</p>
+</div></section></section><section class="slot" id="d33-pm" data-d="33" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D33 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">分割 baseline 完成 → 记录 mIoU + 写“分割 vs 检测流程对比”(★mIoU)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（分割的关键指标）</h4><div class="blk-b"><ul>
+<li><strong>mIoU（mean Intersection over Union，平均交并比）</strong>= 所有类别 <strong>IoU 的平均</strong>。</li>
+<li><strong>IoU</strong>（你 M1 在检测里学过的概念）= 预测区域与真值区域的“<strong>交集 / 并集</strong>”（0–1，越大越准）。分割里是<strong>逐类、逐像素</strong>地算 IoU，再对所有类别取平均得 mIoU。</li>
+<li><strong>为什么分割用 mIoU</strong>：它<strong>逐类衡量“区域重叠得准不准”</strong>，且对各类一视同仁（避免大类主导）。</li>
+<li><strong>“逐类平均”为什么关键</strong>：遥感分割里类别极不均衡（背景/大片农田占绝大多数像素，而道路/小建筑占很少）。如果只算“总体像素准确率”，模型把大类分对就能拿高分，小类全错也看不出来。<strong>mIoU 对每个类单独算 IoU 再平均，小类和大类权重一样</strong>——这逼着模型每个类都要分好，才能拿高 mIoU。这和变化检测用 F1 是同一个逻辑：<strong>不均衡任务不能看总体准确率，要用对各类/各情况公平的指标。</strong></li>
+<li><strong>三大指标到这就集齐了，串起来记</strong>：检测用 <strong>mAP</strong>（综合各类的检测精度）、变化检测用 <strong>F1</strong>（平衡误报漏报）、分割用 <strong>mIoU</strong>（逐类区域重叠）。<strong>它们的共同思想是“不被多数类/简单情况蒙混过关”</strong>——这正是评价不平衡问题的核心。理解了这层，你看任何新任务都能问对“它该用什么指标、为什么”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 分割 baseline 训完 → 跑评估 → 记录 <strong>LoveDA mIoU</strong>，填进排行榜;② 写一段 <strong>300 字“分割实验流程 vs 检测实验流程”对比</strong>（数据格式：框 vs 逐像素 mask；标签形式；指标：mAP vs mIoU；评估方式）。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 评估分割模型（算 mIoU，MMSeg 风格，和 M1 的 test.py 几乎一样）</span>
+python<span class="w"> </span>tools/test.py<span class="w"> </span>configs/loveda/my_unetformer_loveda.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>work_dirs/my_unetformer_loveda/latest.pth<span class="w"> </span>--eval<span class="w"> </span>mIoU
+<span class="c1"># 输出打印总 mIoU + 每个类别的 IoU；对照 分割SOTA.md 填进 UNetFormer 行</span>
+<span class="c1"># 注意：和 M1 检测评估的区别只是 --eval mIoU（检测是 --eval mAP），其余完全一样</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>LoveDA mIoU 记录在案；300 字流程对比清晰指出检测与分割在“数据/标签/指标/评估”上的不同。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① mIoU 异常低 → 多半类别索引映射错或忽略类没排除;② 把检测流程直接套到分割 → 标签形式、指标、评估都不同。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>mIoU 偏低 → ① 检查类别 id 映射（标签里的像素值是否对应正确类别索引）;② ignore 类（如 background/255）是否在 mIoU 里排除;③ 预测与标签尺寸是否一致。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你集齐了<strong>三大指标(mAP/F1/mIoU)的实操理解</strong>，并通过“流程对比”把三类任务的差异系统化。<strong>做了</strong>（分割 mIoU + 流程对比）、<strong>学了</strong>（mIoU/IoU、分割与检测的流程差异）、<strong>会了</strong>（为不同任务对应正确的指标与评估流程）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ ABCNet 笔记 ✅ 分割排行榜 ✅ 分割 baseline 结果。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D33</summary><textarea data-note="d33" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d34" data-d="34"><header class="day-head"><span class="dnum">D34</span><h2 class="day-t">周六 · （集中日）· 最后两讲 MOOC + 本周性能总表</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天收尾遥感物理 MOOC（此后不必再看），并把至今所有 baseline 汇成一张“总成绩单”。</p>
+<p><strong>预期管理</strong>：今天收官遥感物理 MOOC（10 讲打底完成，此后把时间全给论文/实验），并把至今所有 baseline 汇成总成绩单。提醒：MOOC 够用即止，别再刷更多；成绩单总表把 M1+本周四个任务的结果并到一起，是月复盘和未来简历/作品集的硬料，值得认真整理。</p>
+</blockquote>
+</div><section class="slot" id="d34-am" data-d="34" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D34 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">武大 MOOC 第 9–10 讲（土地利用 / 灾害监测）+ 笔记</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>这是遥感物理 MOOC 的<strong>收官两讲</strong>（累计 10 讲，遥感物理 + 主要应用已覆盖）。土地利用分类、灾害监测是遥感的两大典型应用，知道它们“用遥感做什么”即可。<strong>之后不必再看 MOOC</strong>，把时间全给论文和实验。<strong>为什么物理背景“够用即止”很重要</strong>：遥感物理可以学得很深（辐射传输、电磁散射……能学一整个学位），但你的目标是做遥感 CV 研究，不是做遥感物理学家。<strong>物理背景的作用是“够你读懂论文、理解数据特性”</strong>——知道 SAR 为什么有 speckle、光学为什么怕云、不同波段拍什么，这些足以支撑你的研究；再往深钻物理就是边际收益递减了。<strong>10 讲打底是经过权衡的“够用线”</strong>：它覆盖了遥感成像原理 + 主要应用场景，够你理解你会用到的数据和任务。<strong>这体现了一种重要的学习智慧：分清“主线”和“支撑”</strong>——遥感 CV 方法是你的主线，物理是支撑；支撑够用就好，精力要集中在主线（论文、实验、做方法）上。很多人容易在“打基础”上无限投入（总觉得基础还不够），反而迟迟不进入主线——你要避免这个陷阱，该收手时收手。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>看第 9–10 讲，各记 2–3 句（土地利用分类是什么、灾害监测怎么用遥感），存进 <code>00-基础理论/遥感物理_MOOC.md</code>(收官)。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>MOOC 笔记累计到第 10 讲；能说出“遥感在土地利用/灾害两个场景各解决什么”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>还想继续刷更多 MOOC → 够用即止，物理背景已覆盖，重心转向论文/实验。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某讲没时间细看 → 抓“这个应用用遥感做什么”一句即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了遥感物理背景的系统打底（10 讲收官）。<strong>做了</strong>（MOOC 收官笔记）、<strong>学了</strong>（土地利用/灾害两大应用）、<strong>会了</strong>（判断“背景知识够用即止、把时间投到主线”）。</p>
+</div></section></section><section class="slot" id="d34-noon" data-d="34" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D34 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">韦玉春第 8 章（图像分类与信息提取）选读</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>韦玉春《遥感数字图像处理》第 8 章讲传统的图像分类与信息提取（监督/非监督分类等）。知道“深度学习之前遥感怎么做分类”有助于你理解领域演进（为什么 DL 是进步）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>选读 ~15 页，记 2–3 句“传统遥感分类（如最大似然/SVM）和深度学习分类的区别”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>能用一两句对比传统分类与 DL 分类。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤ 坑与自救</h4><div class="blk-b"><p>公式跳过，只记“传统靠人工特征+经典分类器、DL 自动学特征”的对比。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你补上了“遥感分类的历史脉络”。<strong>做了</strong>（第 8 章笔记）、<strong>学了</strong>（传统 vs DL 分类）、<strong>会了</strong>（从演进视角理解 DL 的价值）。</p>
+</div></section></section><section class="slot" id="d34-pm" data-d="34" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D34 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整合本周所有 baseline 到一张大表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把至今（M1 + 本周）跑过的所有 baseline 汇成一张<strong>“总成绩单”</strong>——它让你对“自己跑通了什么、各值多少”一目了然，是月复盘和未来简历/作品集的硬料。<strong>为什么这张总表价值很高</strong>:① 对你自己——一眼看清“我已经动手做过哪些任务、达到什么水平”，是判断自己实力和选方向的依据;② 对外展示——求职/套磁/读博申请时，“我独立复现了 4 个不同任务（检测/分类/变化检测/分割）的 baseline 并达到公认水平”是非常有说服力的硬证据，这张表就是现成的作品集索引;③ 写论文时——你的方法要和 baseline 比，这张表里的数字就是你随手可取的对照。<strong>它也直观证明了你的“全谱”广度</strong>：四个任务、四套指标(mAP/acc/F1/mIoU)、四种框架（MMRotate/裸PyTorch/BIT/MMSeg）——很少有入门半年的人能拿出这样一张跨任务总表，这本身就是你执行力的证明。<strong>关键是“散落的结果一定要汇总成一张表”</strong>：各任务的结果如果留在各自的复现报告里，你很难有全局视角；汇成一表，全貌、对比、缺口一目了然。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>20-代码实验/成绩单总表.md</code> 建表:<code>任务 | 数据集 | 方法 | 指标 | 结果 | 框架</code>，把 M1 的（DOTA 检测、SAR 分类）+ 本周的（LEVIR-CD 变化检测、LoveDA 分割）都并进来。</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 成绩单总表（跨任务，至 M2-W5）</span>
+| 任务 | 数据集 | 方法 | 指标 | 结果 | 框架 |
+|---|---|---|---|---|---|
+| 旋转目标检测 | DOTA-v1.0 | Oriented R-CNN(R50) | mAP | ~75 | MMRotate |
+| SAR 船舶分类 | OpenSARShip | ResNet-18 | accuracy | ~85% | 裸 PyTorch |
+| 变化检测 | LEVIR-CD | BIT | F1 | ~89-91 | BIT 官方 |
+| 语义分割 | LoveDA | UNetFormer | mIoU | (填你的) | MMSeg |
+注：四个任务、四套指标(mAP/acc/F1/mIoU)、四种框架——这张表本身就证明了你的&quot;全谱&quot;动手广度。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张跨任务总表，行覆盖检测/SAR/变化检测/分割，每行有指标和结果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>各任务结果散落各处不汇总 → 一张总表才能看出全貌、才好月复盘。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某结果记不全 → 回各自的复现报告/实验日志找。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了<strong>贯穿所有任务的成绩单总表</strong>。<strong>做了</strong>（性能总表）、<strong>学了</strong>（把分散成果汇总的价值）、<strong>会了</strong>（维护一张跨任务的成果索引）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ MOOC 第 9–10 讲笔记 ✅ 性能总表。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜多任务性能总表</strong>：用一张表横向记 <code>任务 | 数据集 | 方法 | 指标 | 结果 | 框架</code>。多任务体验期，这张表帮你对比不同任务的数据/指标/流程差异，是“选方向”的判断依据。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D34</summary><textarea data-note="d34" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d35" data-d="35"><header class="day-head"><span class="dnum">D35</span><h2 class="day-t">周日 · （复盘日）· 三任务对比文档 + W5 复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾。今天把三类任务系统对比成文，并做 W5 复盘、为 W6(VLM)做准备。</p>
+<p><strong>预期管理</strong>:W5 收尾，产物是三任务对比文档 + W5 周报。提醒：对比文档的关键是“横向对齐”（同一维度三任务并排），而不是三段各自介绍；周复盘除了卡点+对策，要额外诚实回答“四类任务里我对哪个最不觉得累、最想深挖”——这是 W7–W8 锁定方向的重要依据，别回避这个“体感”问题。</p>
+</blockquote>
+</div><section class="slot" id="d35-am" data-d="35" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D35 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写《变化检测 vs 语义分割 vs 目标检测》三任务对比文档（≥800 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把三类任务在“<strong>输入/输出/标注形式/评价指标/典型数据集/典型难点</strong>”六个维度上<strong>对齐成一张表 + 文字</strong>。这份文档既帮你选方向，也是未来写综述/Related Work 的底料。<strong>关键是横向对齐，而不是三段各自介绍。</strong>为什么“横向对齐”比“各自介绍”强：把三任务放在同一张表里同维度并排，你一眼就能看出“它们任务名都带'检测/分割'但输入/输出/指标/难点全然不同”——这种对比性的认知，比孤立地知道每个任务深刻得多。<strong>这份文档的双重价值</strong>:① 现在帮你选方向（看清每类任务的特点和单卡友好度）;② 未来写论文/综述时，“任务对比”这种横向梳理正是 Related Work 和 Introduction 常用的组织方式，你现在练的就是那个能力。<strong>写的时候特别加一列“单卡(4090)友好度”</strong>——这是你选方向的关键尺子：检测/分割/变化检测对单卡都友好，而 VLM（下周 W6 学）会比较吃算力，这个判断直接影响你 W7-W8 锁定哪个方向。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>做六维度对比表（模板见本周补充包），并为每类写一段“它最适合解决什么问题、对个人（1 张 4090）友好度如何”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>六维度齐全；每类有“个人友好度”判断（如检测/分割对单卡友好，VLM 对单卡较吃力——为下周埋伏笔）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>写成三段各自介绍 → 必须<strong>横向对齐</strong>（同一维度三任务并排）才看得出门道。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某维度填不出 → 回各任务这周的笔记/复现报告找。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了<strong>跨任务的系统综合</strong>，并开始用“单卡友好度”这把尺子为方向收敛做准备。<strong>做了</strong>（三任务对比文档）、<strong>学了</strong>（多任务横向对比法）、<strong>会了</strong>（把多个任务的认知系统化为一份可用文档）。</p>
+</div></section></section><section class="slot" id="d35-noon" data-d="35" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D35 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整理本周笔记 + 更新数据集表/成绩单（沉淀）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>复盘日的“沉淀”动作——把本周新增的论文笔记打标签(<code>#变化检测</code> <code>#分割</code>)、把新数据集(LEVIR-CD/WHU-CD/LoveDA)补进数据集总表、把本周 baseline 补进成绩单。<strong>让本周积累“可被未来的你检索到”</strong>（M1 养成的习惯）。<strong>为什么“沉淀”是复利投资</strong>：每周花十几分钟整理归档，看着不起眼，但几个月累积下来，你会有一个组织良好、随手可查的知识库——选题时翻笔记的“未解决点”、写论文时查数据集/SOTA 表、做实验时找历史结果，都能秒级定位。<strong>反之，攒着不整理</strong>，几周后你就记不清“那篇讲 XX 的论文在哪”“那个数据集的类别是什么”，每次都要重新找，浪费大量时间。<strong>“周末必沉淀”是个值得坚持的纪律</strong>——它把“一次性的学习”变成“可复用的资产”。<strong>标签体系保持简单</strong>：用“任务维（#检测/#变化检测/#分割/#VLM）+ 类型维（#方法/#数据集/#综述）”两维就够，别搞太复杂的分类体系（复杂了反而懒得维护）。<strong>这个习惯到 M3-M4 做自己方法、写论文时会回报巨大</strong>：你需要的任何历史素材都能快速调出。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>给本周 5 篇笔记加标签；数据集总表补 3 个新数据集行；成绩单确认本周结果都已并入。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>本周笔记带标签、数据集表与成绩单已更新、知识库整洁可检索。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>攒着不整理 → 几周后翻不到。坚持“周末必沉淀”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>标签体系乱 → 就用“任务维（#检测/#变化检测/#分割/#VLM）+ 类型维（#方法/#数据集/#综述）”两维。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你维持了“周末沉淀”的节律，让知识库随项目增长始终可用。<strong>做了</strong>（笔记/数据集/成绩单更新）、<strong>学了</strong>（沉淀的复利价值）、<strong>会了</strong>（把一周产出系统归档）。</p>
+</div></section></section><section class="slot" id="d35-pm" data-d="35" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D35 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">W5 周复盘 + W6 计划</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘（你已会）的核心两问仍是“最大卡点 + 对策”；本周额外要回答一个<strong>方向收敛信号问题</strong>：“四类任务里，我对哪个<strong>最不觉得累、最想深挖</strong>？”——这是你 W7–W8 锁定方向的重要依据。<strong>为什么“最不觉得累”是个靠谱的信号</strong>：做研究是长期的、会遇到很多挫折的，能支撑你熬过难关的，往往不是“理性觉得该做”，而是“真的有兴趣、愿意多看几篇多调几次”。一个让你“做的时候不烦、想多了解”的方向，你在上面投入会更持久、更深入，做出东西的概率也更高。<strong>但“体感”不是唯一标准，要和“单卡友好度”“有没有缝隙”一起看</strong>：你最有感觉的方向，如果恰好单卡做不动（如需要训大模型）或已经饱和（没缝隙），也要权衡。<strong>理想的方向 = 你有兴趣 × 单卡能做 × 有未解决的缝隙</strong>——三者交集才是你 W7-W8 要锁定的。今天先记下“体感信号”，它会和你 M1 攒的“能赢的缝隙”判断一起，在 W7-W8 收敛成一个明确的细分方向。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用周报模板逐项填（完成度/卡点/对策/健康）；<strong>重点写</strong>“我对哪类任务最有感觉 + 为什么”；确认下周三件事:① VLM 入门(RemoteCLIP/GeoChat)② 评估 VLM 是否适合我（尤其算力）③ 做方向 SWOT。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W5 周报（卡点+对策具体）+ 一段“我对 X 任务最有感觉”的方向信号记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>复盘写成流水账、回避“我到底喜欢哪个” → 方向收敛需要你诚实面对“体感”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>说不清最喜欢哪个 → 回想这周哪类任务你“做的时候最不烦、最想多看几篇”，那就是信号。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你进入<strong>“方向收敛”模式</strong>——从“广撒网”开始转向“挑一个”，并学会用“体感 + 单卡友好度”双信号筛选。<strong>做了</strong>（W5 周报 + W6 计划）、<strong>学了</strong>（方向收敛的信号判断）、<strong>会了</strong>（把“体感”纳入理性的方向决策）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 三任务对比文档 ✅ 周报 W5。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W5 累计交付</h2><p>5 篇论文笔记(BIT/ChangeFormer/FCN-PP/SNUNet/UNetFormer/ABCNet)、变化检测与分割两类 baseline(LEVIR-CD F1、LoveDA mIoU)、变化检测+分割两张 SOTA 表、MOOC 收官（10 讲）、性能总成绩单、三任务对比文档、W5 周报。至此你已亲手做过<strong>四类任务</strong>（检测/SAR分类/变化检测/分割）、用过<strong>四套指标</strong>(mAP/accuracy/F1/mIoU)、上手<strong>四种框架/方式</strong>（MMRotate/裸PyTorch/变化检测官方/MMSeg）——这种全谱动手广度，正是 M2 方向收敛的判断底座——你是“做过的人”在选方向，不是“看过的人”在猜。</p>
+</section><section class="wtail"><h2>🎓 W5 你“长出来”的能力清单</h2><ul>
+<li>两类新任务的任务观(变化检测=双时相→变化 mask；语义分割=逐像素类别)</li>
+<li>两个新指标 F1 与 mIoU，并理解“为什么不同任务用不同指标”（不平衡→F1）</li>
+<li>孪生网络（共享权重双分支比对）这一跨领域通用结构</li>
+<li>MM 全家桶 config 读法通用、复现能力迁移到新任务/新框架</li>
+<li>跨任务系统综合（三任务六维对比）+ 用“单卡友好度/体感”为方向收敛做准备</li>
+<li>“体验模式”的时间管理（选方向阶段广度优先、浅尝即止；选定后再深耕），以及“背景知识够用即止、把精力投到主线”的取舍意识</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D35</summary><textarea data-note="d35" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W5 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 《三任务对比文档》长这样（D35 对照着写）</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 三任务对比（六维度）</span>
+| 维度 | 目标检测 | 语义分割 | 变化检测 |
+|---|---|---|---|
+| 输入 | 一张图 | 一张图 | 两张图(同地不同时) |
+| 输出 | 旋转框+类别 | 逐像素类别 | 变化掩膜(变/没变) |
+| 标注形式 | 框坐标 | 像素级 mask | 像素级二值 mask |
+| 评价指标 | mAP | mIoU | F1(+IoU) |
+| 典型数据集 | DOTA/DIOR | LoveDA/Potsdam | LEVIR-CD/WHU-CD |
+| 典型难点 | 小目标/密集/朝向 | 边界模糊/尺度悬殊 | 类别极不平衡/配准 |
+| 单卡(4090)友好度 | 高 | 高 | 高 |
+
+结论:三任务里我对 ___ 最有感觉(最不觉得累);单卡都友好,VLM(下周)才吃算力。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么给你这个</strong>：它把三任务<strong>横向对齐</strong>（而不是各写一段），一眼看出“任务名一样但输入/输出/指标/难点全不同”——这正是 M2 方向收敛的判断依据。</p>
+<h2>二、完整可运行代码 — 变化检测 F1 + 语义分割 mIoU（本周新指标的实现）</h2>
+<blockquote class="quote">
+<p>配合 D30(F1)、D33(mIoU)。存 <code>20-代码实验/utils/metrics_seg_cd.py</code>：</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ① 变化检测 F1（二分类：1=变, 0=没变；pred/gt 是同形状 0/1 数组）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">change_f1</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">):</span>
+    <span class="n">pred</span><span class="p">,</span> <span class="n">gt</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span> <span class="p">(</span><span class="n">gt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(((</span><span class="n">pred</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">gt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(((</span><span class="n">pred</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">gt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(((</span><span class="n">pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">gt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="n">recall</span>    <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="n">f1</span>        <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">recall</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">recall</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">f1</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># ② 语义分割 mIoU（pred/gt 是 HxW 的类别索引图，num_classes 类）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">miou</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
+    <span class="n">ious</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">gt</span> <span class="o">!=</span> <span class="n">ignore</span><span class="p">)</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">,</span> <span class="p">(</span><span class="n">gt</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">mask</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p</span> <span class="o">&amp;</span> <span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="n">union</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">p</span> <span class="o">|</span> <span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">union</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>        <span class="c1"># 该类不存在则跳过(不计入平均)</span>
+            <span class="k">continue</span>
+        <span class="n">ious</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inter</span> <span class="o">/</span> <span class="n">union</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ious</span><span class="p">)),</span> <span class="mi">4</span><span class="p">),</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ious</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]);</span> <span class="n">gt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CD:&quot;</span><span class="p">,</span> <span class="n">change_f1</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">gt</span><span class="p">))</span>                 <span class="c1"># 看 precision/recall/f1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]]);</span> <span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mIoU:&quot;</span><span class="p">,</span> <span class="n">miou</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>         <span class="c1"># 看 mIoU + 各类 IoU</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>：打印出 F1（变化检测主指标）和 mIoU（分割主指标）。<strong>为什么手写一遍</strong>：亲手实现一次，你才真懂“为什么类别不平衡要用 F1（全猜没变的准确率虚高）、mIoU 为什么逐类算再平均”。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D29</strong>:① 变化检测的输入/输出和目标检测有何根本不同?② “双时相(bitemporal)”是什么？</li>
+<li><strong>D30</strong>:① 变化检测为什么用 F1 而不用准确率（类别不平衡那句）?② precision 和 recall 分别回答什么问题？</li>
+<li><strong>D31</strong>:① 孪生网络(Siamese)是什么结构、关键是什么（共享权重）？它还在哪些任务出现？</li>
+<li><strong>D32</strong>:① 语义分割的输出是什么？遥感分割相对通用分割(Cityscapes)的三个特殊性？</li>
+<li><strong>D33</strong>:① mIoU 怎么算（逐类 IoU 再平均）?② 任务↔指标对照：检测/分割/变化检测各用什么？</li>
+<li><strong>D34</strong>:① 你的“性能总表”把哪些任务/数据集/指标并进来了?② 为什么物理 MOOC 该“够用即止”、把精力转向主线？</li>
+<li><strong>D35</strong>:① 四类任务里你对哪个“最不觉得累”？这对 M2 方向收敛意味着什么？</li>
+<li><strong>综合</strong>:① mAP/F1/mIoU 三个指标的共同思想是什么（为什么不平衡任务不能只看准确率）?② 孪生网络的“共享权重”为什么是灵魂?③ 为什么本周要“体验模式”而非在单个 baseline 上死磕？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>变化检测 F1 极低</td>
+<td>标签不是 0/1 二值（可能是 0/255）</td>
+<td>先二值化(<code>&gt;0</code> 或 <code>/255</code>)；用变化检测专用 F1</td>
+</tr>
+<tr>
+<td>分割 mIoU 异常低</td>
+<td>类别索引映射错 / ignore 类没排除</td>
+<td>核对类别 id;mIoU 里排除 ignore（如 255）</td>
+</tr>
+<tr>
+<td>把 mAP 套到分割/变化检测</td>
+<td>指标用错</td>
+<td>检测=mAP，分割=mIoU，变化检测=F1</td>
+</tr>
+<tr>
+<td>换 MMSegmentation 后 config 跑不通</td>
+<td>与 MMRotate 是不同库</td>
+<td>config 读法通用，但按 MMSeg 文档改 data/类别</td>
+</tr>
+<tr>
+<td>LEVIR-CD/WHU-CD 两时相对不齐</td>
+<td>数据未按“前/后/标签”组织</td>
+<td>按数据集约定的 A/B/label 目录结构放置</td>
+</tr>
+<tr>
+<td>准确率很高但模型没用</td>
+<td>不平衡任务看错指标</td>
+<td>用 F1（看 precision/recall），别只看 accuracy</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w4-full.html"><span class="dir">← 上一篇</span><span class="nm">W4 详注版 · 含附录 E</span></a><a class="next" href="w5-full.html"><span class="dir">下一篇 →</span><span class="nm">W5 详注版</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d29">D29 周一</a><a class="sub" href="#d29-am">上午 精读 BIT(Bitempora</a><a class="sub" href="#d29-noon">中午 下载 LEVIR-CD（变化检测</a><a class="sub" href="#d29-pm">晚上 跑 BIT baseline（复</a><a href="#d30">D30 周二</a><a class="sub" href="#d30-am">上午 精读 ChangeFormer(</a><a class="sub" href="#d30-noon">中午 建“变化检测 SOTA 对比草表</a><a class="sub" href="#d30-pm">晚上 BIT 训练完成 → 评估 → </a><a href="#d31">D31 周三</a><a class="sub" href="#d31-am">上午 精读 FCN-PP / SNUN</a><a class="sub" href="#d31-noon">中午 下载 WHU-CD，对比它与 L</a><a class="sub" href="#d31-pm">晚上 跑 ChangeFormer b</a><a href="#d32">D32 周四</a><a class="sub" href="#d32-am">上午 精读 UNetFormer(Wa</a><a class="sub" href="#d32-noon">中午 下载 LoveDA（城市/农村 </a><a class="sub" href="#d32-pm">晚上 跑 UNetFormer bas</a><a href="#d33">D33 周五</a><a class="sub" href="#d33-am">上午 精读 ABCNet(Li 202</a><a class="sub" href="#d33-noon">中午 建“遥感分割 SOTA 排行榜”</a><a class="sub" href="#d33-pm">晚上 分割 baseline 完成 →</a><a href="#d34">D34 周六</a><a class="sub" href="#d34-am">上午 武大 MOOC 第 9–10 讲</a><a class="sub" href="#d34-noon">中午 韦玉春第 8 章（图像分类与信息</a><a class="sub" href="#d34-pm">晚上 整合本周所有 baseline </a><a href="#d35">D35 周日</a><a class="sub" href="#d35-am">上午 写《变化检测 vs 语义分割 v</a><a class="sub" href="#d35-noon">中午 整理本周笔记 + 更新数据集表/</a><a class="sub" href="#d35-pm">晚上 W5 周复盘 + W6 计划</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

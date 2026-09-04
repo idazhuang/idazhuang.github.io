@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="11">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W11 · 搭实验框架 + 第一组对比 —— 把“会跑别人的 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M3 选方向读穿</span><span>·</span><span>Week 11</span><span>·</span><span>D71–D77</span></div><h1 class="title">搭实验框架 + 第一组对比 —— 把“会跑别人的代码”升级成“有自己的实验底座”</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="71" data-k="am" title="D71 上午段"></i><i data-d="71" data-k="noon" title="D71 中午段"></i><i data-d="71" data-k="pm" title="D71 晚上段"></i></span><span class="sday"><i data-d="72" data-k="am" title="D72 上午段"></i><i data-d="72" data-k="noon" title="D72 中午段"></i><i data-d="72" data-k="pm" title="D72 晚上段"></i></span><span class="sday"><i data-d="73" data-k="am" title="D73 上午段"></i><i data-d="73" data-k="noon" title="D73 中午段"></i><i data-d="73" data-k="pm" title="D73 晚上段"></i></span><span class="sday"><i data-d="74" data-k="am" title="D74 上午段"></i><i data-d="74" data-k="noon" title="D74 中午段"></i><i data-d="74" data-k="pm" title="D74 晚上段"></i></span><span class="sday"><i data-d="75" data-k="am" title="D75 上午段"></i><i data-d="75" data-k="noon" title="D75 中午段"></i><i data-d="75" data-k="pm" title="D75 晚上段"></i></span><span class="sday"><i data-d="76" data-k="am" title="D76 上午段"></i><i data-d="76" data-k="noon" title="D76 中午段"></i><i data-d="76" data-k="pm" title="D76 晚上段"></i></span><span class="sday"><i data-d="77" data-k="am" title="D77 上午段"></i><i data-d="77" data-k="noon" title="D77 中午段"></i><i data-d="77" data-k="pm" title="D77 晚上段"></i></span></div></div>
+<div class="note"><b>★ 原文给了 --seed，但没给 set_seed() 本身</b>　少一行 <code>cudnn.deterministic</code> 就复现不了。<a href="m3-full.html">《M3 详注版》</a> 补齐了固定随机性的完整函数、wandb 接入（全书提 98 次、0 个地址），以及多 seed 结果的判定工具。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>:W9 你找到 Gap、W10 写了 Proposal。本周把蓝图变成代码：<strong>搭一套可复用的实验框架</strong>(<code>configs/datasets/models/utils/scripts/experiments</code>)，写数据层/模型层并做<strong>单元测试</strong>，然后跑出<strong>第一组正式对比</strong>（你的方法 v1 vs baseline,3 个 seed 取平均±std）。这是你论文 Table 1 的雏形。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会设计可复用的实验代码框架；跑出第一组正式对比实验。
+<strong>承上</strong>：你 M1–M2 复现过别人的代码；本周第一次<strong>搭自己的框架</strong>——从“会用”到“会建”，这是工程能力的分水岭。</p>
+<p><strong>🧩 贯穿示例</strong>：沿用「DOTA 旋转目标检测」。baseline = 你 M2 复现并 sanity-check 过的 Oriented R-CNN；你的方法 v1 = 在它上面插入 W10 选定的创新模块（示例：高分辨率小目标分支）。换方向就把数据集/baseline/模块换成你那一套——搭框架、做对比的流程完全一样。</p>
+</blockquote>
+<hr />
+<h2>🧭 W11 总览：这一周从无到有搭出什么</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周从无到有</th>
+<th>产物</th>
+<th>它的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实验仓库结构 + git</td>
+<td>可复用、可追溯的代码底座</td>
+<td>后面每个实验都在它上面长</td>
+</tr>
+<tr>
+<td>数据层 + 单元测试</td>
+<td>多数据集统一加载、验证正确</td>
+<td>换数据集零成本、bug 早抓</td>
+</tr>
+<tr>
+<td>模型层 + 你的方法 v1</td>
+<td>baseline 与你的方法都能跑</td>
+<td>有了对比的两端</td>
+</tr>
+<tr>
+<td>训练/评估框架 + 日志</td>
+<td>自动记录超参/曲线/指标</td>
+<td>实验可回溯、不黑箱</td>
+</tr>
+<tr>
+<td>第一组 3-seed 对比</td>
+<td>论文 Table 1 的雏形</td>
+<td>第一份“我的方法 vs baseline”的硬证据</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>:D71–D74 是“搭”（写框架代码，容易卡在工程细节）,D75–D77 是“跑 + 比”（等训练、看结果、多 seed）。<strong>搭框架那几天如果卡住，记住目标是“能跑通的最小框架”，不是“完美的框架”——先让数据→模型→训练→评估这条链跑通一个小实验，再逐步完善。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d71" data-d="71"><header class="day-head"><span class="dnum">D71</span><h2 class="day-t">周一 · 设计仓库结构 + git/GitHub 私仓初始化</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天不写算法，而是搭“地基”——仓库目录结构 + 版本管理。这看起来不如写模型激动人心，但<strong>一个清晰的框架会让你后面 6 个月的实验都受益</strong>（找得到、改得动、回溯得了）。今天的产物是“骨架”，后面几天往里填肉。</p>
+</blockquote>
+</div><section class="slot" id="d71-am" data-d="71" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D71 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计代码仓库目录结构</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要自己搭框架，而不是把代码堆一个文件）</h4><div class="blk-b"><ul>
+<li>做研究要有一套<strong>可复用的实验框架</strong>，而不是把所有代码堆在一个 <code>main.py</code> 里。标准目录:<code>configs/</code>(配置)<code>datasets/</code>(数据加载)<code>models/</code>(模型)<code>utils/</code>(工具：日志/指标)<code>scripts/</code>(训练/评估脚本)<code>experiments/</code>(实验记录)<code>docs/</code>(文档)。</li>
+<li><strong>和“直接改别人代码”对比</strong>：改别人的代码快，但你不理解底层、出 bug 难定位、想加自己的模块处处掣肘；<strong>自己搭框架（哪怕只是在 MMRotate 上封一层）能让你对每一行代码负责</strong>——这是工程能力的分水岭，也是你后面快速迭代方法的前提。</li>
+<li><strong>为什么现在需要</strong>：你 W12 要做 5 组消融、M5 要做几十组实验。没有 <code>configs/</code> + <code>experiments/</code> 的组织，几十组实验会乱成一团（&quot;这个结果是哪个配置跑的?&quot;）。框架是为后面的规模化实验铺路。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>画出目录树（标注每个文件夹用途），在工作区 <code>mkdir</code> 建好这套结构；在 <code>docs/结构说明.md</code> 写清每个目录放什么；在 <code>models/</code> 里预留 <code>baseline.py</code> 和 <code>your_method.py</code> 两个空文件，在 <code>configs/</code> 放一个示例 config。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一棵清晰的目录树 + 每个目录的用途说明；空壳文件和示例 config 就位，结构一眼能看懂。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>所有代码堆 <code>main.py</code> → 后面无法复用/扩展，改一处牵动全身。</li>
+<li>目录过度设计（建一堆用不到的空壳、嵌套五层）→ 够用即可，六块起步，按需再加。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知怎么分? → 就按“配置/数据/模型/工具/脚本/实验”六块起步；纠结某个文件放哪? → 按“它属于哪一层职责”放（数据相关进 datasets，通用工具进 utils），实在拿不准先放着，后面重构。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>设计可复用的实验框架结构</strong>——这是规模化实验的前提。<strong>做了</strong>（目录树 + 结构说明）、<strong>学了</strong>（标准实验仓库的组织）、<strong>会了</strong>（为一个研究项目规划工程结构）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜可复用实验框架结构</strong>:<code>configs/</code>(配置)<code>datasets/</code>(数据+transforms)<code>models/</code>(baseline + your_method)<code>utils/</code>(logger + metric)<code>scripts/</code>(train + eval)<code>experiments/</code>(每实验一目录)<code>tests/</code>(单测)<code>docs/</code>。原则：够用即可、按职责分层、为规模化实验（几十组）预留组织方式。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d71-noon" data-d="71" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D71 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">初始化 git + GitHub 私仓 + 写 .gitignore</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（git / 私仓 / .gitignore 各是什么）</h4><div class="blk-b"><ul>
+<li><strong>git</strong> 是代码的“存档 + 时光机”（随时回到任意历史版本）；<strong>GitHub 私仓</strong>是云端存档（私有，别人看不到，防丢）；<strong><code>.gitignore</code></strong> 写明“哪些不纳入版本管理”。</li>
+<li><strong>为什么数据/权重/日志绝不进仓库</strong>：这些是大文件（几个 G），提交进去会<strong>撑爆仓库、push 极慢、还可能泄露数据</strong>。代码进仓库，数据/权重/日志留本地——这是铁律。</li>
+<li><strong>为什么现在就要做</strong>：从框架第一天起就版本管理，后面任何一次“改坏了”都能回滚；等代码多了再补 git，丢失的历史就找不回了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p><code>git init</code> → 建 GitHub 私仓并关联 → 写 <code>.gitignore</code>(排除 <code>data/ checkpoints/ *.log work_dirs/ __pycache__/ *.pth</code>)→ 第一次 <code>git add . &amp;&amp; git commit -m &quot;feat: init repo structure&quot; &amp;&amp; git push</code>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>私仓建好、首次提交成功;<code>.gitignore</code> 正确排除了大文件目录(用 <code>git status</code> 确认 data/checkpoints 不在待提交列表里)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>把数据/权重 commit 进去 → 仓库爆炸，且可能泄露；提交前务必 <code>git status</code> 检查。</li>
+<li>仓库设成 public（未发表代码）→ 设 <strong>private</strong>（你的方法还没发表，公开有被抢跑风险）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>push 报权限错 → 配 SSH key 或用 personal access token；不小心 add 了大文件 → <code>git rm --cached &lt;file&gt;</code> 移除并补进 <code>.gitignore</code>，再 commit。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用 git/GitHub 管理研究代码 + 正确配 .gitignore</strong>。<strong>做了</strong>（私仓 + 首次提交 + .gitignore）、<strong>学了</strong>（git 版本管理、忽略大文件）、<strong>会了</strong>（把研究代码纳入可追溯的版本管理）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜git + .gitignore 规范</strong>：从项目第一天 <code>git init</code> + GitHub <strong>私</strong>仓。<code>.gitignore</code> 必排除 <code>data/ checkpoints/ *.pth *.log work_dirs/ __pycache__/</code>。提交前 <code>git status</code> 确认无大文件。commit message 带 <code>feat:/fix:/exp:</code> 前缀，便于回溯。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d71-pm" data-d="71" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D71 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 README 模板 + 提交规范</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>README</strong> 是仓库门面（项目简介/安装/用法/结果/引用）——未来开源或给老师看，它是第一印象。养成“<strong>每次有意义的改动就 commit（带清晰 message）</strong>”的习惯，日后能精确回溯“哪次改动引入了什么”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 README 模板（项目简介、安装步骤、如何训练/评估、结果表占位、引用格式）；定一个简单的 commit message 规范(<code>feat:</code> 新功能 / <code>fix:</code> 修 bug / <code>exp:</code> 跑实验 / <code>docs:</code> 文档)，写进 <code>docs/</code>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>README 模板成形（有骨架，可边做边填）;commit 规范写进 <code>docs/</code>。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① README 一直空着 → 至少有骨架;② commit message 全写 “update” → 以后无法回溯，用有信息的 message(如 <code>feat: add high-res branch to your_method</code>)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知 README 写什么 → 仿照你 M2 复现过的优秀开源仓库的 README 结构照搬骨架。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了<strong>仓库门面(README)+ 提交规范</strong>。<strong>做了</strong>（README 模板 + commit 规范）、<strong>学了</strong>（README 的作用、有信息的提交）、<strong>会了</strong>（让仓库可读、改动可追溯）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 仓库结构 ✅ git 私仓初始化 ✅ README 模板 + commit 规范。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D71</summary><textarea data-note="d71" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d72" data-d="72"><header class="day-head"><span class="dnum">D72</span><h2 class="day-t">周二 · 写数据层 + 单元测试</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写“数据层”——把磁盘上的图和标注读成模型能吃的张量，还要做单元测试验证它对不对。数据层是最容易藏 bug 的地方（标注解析、增强同步），所以今天的单元测试不是走形式，而是帮你在训练几小时前就抓住错误。</p>
+</blockquote>
+</div><section class="slot" id="d72-am" data-d="72" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D72 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 datasets 模块（支持 ≥2 个数据集的 loader）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（数据层是什么、为什么要统一接口）</h4><div class="blk-b"><ul>
+<li><strong>数据层</strong>负责“把磁盘上的图/标注读成模型能吃的张量 <code>(image, target)</code>”。你 Proposal 里选了 ≥2 个数据集，最好<strong>统一接口</strong>（同一套调用方式加载不同数据集），后面换数据集零成本。</li>
+<li><strong>和通用 CV 对比</strong>：通用 CV 数据集格式统一(COCO json)，一个 loader 走天下；遥感数据集格式五花八门（DOTA 的 8 点旋转框 txt、HRSC 的 xml、不同分辨率），所以你更需要“为每个数据集写解析、但暴露统一接口”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>datasets/</code> 写一个统一的 Dataset 类（或为每个数据集写一个、共享接口），实现“读图 + 读标注 → 返回 <code>(image_tensor, target)</code>”；支持你选的 ≥2 个数据集。复用你 M1 写的旋转框解析逻辑。骨架：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># datasets/base.py —— 统一接口，子类只实现 _load_anno</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RSDetDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;遥感旋转检测统一基类：不同数据集只需各自实现 _load_anno()。&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">transforms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scan_samples</span><span class="p">()</span>          <span class="c1"># [(img_path, anno_path), ...]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_scan_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_anno</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">anno_path</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>   <span class="c1"># → dict(boxes, labels)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">img_path</span><span class="p">,</span> <span class="n">anno_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">))</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_anno</span><span class="p">(</span><span class="n">anno_path</span><span class="p">)</span>          <span class="c1"># {&quot;boxes&quot;: [N,5(xc,yc,w,h,θ)], &quot;labels&quot;:[N]}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>   <span class="c1"># 图与标注同步变换</span>
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span>
+
+<span class="c1"># datasets/dota.py —— 子类只实现解析（复用你 M1 的 8 点→(xc,yc,w,h,θ) 逻辑）</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DOTADataset</span><span class="p">(</span><span class="n">RSDetDataset</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_scan_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>                     <span class="c1"># 扫描 images/ 与 labelTxt/</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_anno</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="n">boxes</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">parse_dota_txt</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>            <span class="c1"># 你 M1 写过的解析</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;boxes&quot;</span><span class="p">:</span> <span class="n">boxes</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">}</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>能用同一套接口加载 ≥2 个数据集，返回正确的 <code>(图, 标注)</code> 张量(<code>HRSCDataset</code> 只需再写一个 <code>_load_anno</code> 解析 xml)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 每个数据集写一套完全不同的调用方式 → 难维护，尽量统一接口;② 标注解析错（回想 M1 的 8 点旋转框解析，顺序/弧度制易错）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>标注格式不熟 → 回用 M1 写的解析逻辑，打印前几条标注核对；接口设计纠结 → <strong>先让一个数据集能跑，再抽象共性</strong>（别一上来就追求完美抽象）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写统一的多数据集数据层</strong>。<strong>做了</strong>（datasets 模块）、<strong>学了</strong>（统一数据接口）、<strong>会了</strong>（把多个数据集封装成可复用 loader）。</p>
+</div></section></section><section class="slot" id="d72-noon" data-d="72" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D72 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 transforms（数据增强）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（数据增强是什么、遥感的特殊之处）</h4><div class="blk-b"><p><strong>数据增强(transforms)</strong>= 训练时对图做随机变换（裁剪/翻转/旋转/颜色抖动），让模型见更多变化、更鲁棒。<strong>遥感的特殊性</strong>：遥感目标<strong>无固定朝向</strong>（俯视拍摄），所以随机 0/90/180/270 旋转特别有用（通用 CV 一般不大角度旋转，因为地面物体有“上下”）；还有多尺度（遥感目标尺度悬殊）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>datasets/transforms.py</code> 写增强：随机裁剪/翻转/旋转/颜色抖动 + 遥感特有（多尺度、90° 倍数旋转）；可视化几张增强后的图 + 标注框，确认效果合理。关键是几何增强要<strong>图和框同步</strong>：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># datasets/transforms.py —— 90° 倍数旋转，图和旋转框同步</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RandomRot90</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;遥感目标无固定朝向：随机转 0/90/180/270°，标注框同步旋转。&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>                 <span class="c1"># 转 90*k 度</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>            <span class="c1"># 图旋转</span>
+        <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>                      <span class="c1"># 旋转后的新尺寸</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>           <span class="c1"># [N,5]: xc,yc,w,h,θ</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>                       <span class="c1"># 每 90° 更新中心坐标和角度</span>
+            <span class="n">xc</span><span class="p">,</span> <span class="n">yc</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">yc</span><span class="p">,</span> <span class="n">W</span> <span class="o">-</span> <span class="n">xc</span> <span class="o">-</span> <span class="mi">1</span>   <span class="c1"># 坐标系随旋转变换</span>
+            <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># 角度 +90°</span>
+            <span class="n">W</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxes</span>
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>可视化自检</strong>：转完把框画回图上，目标应仍被框住(框没“飞走”=同步对了)。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>增强可配置、可视化后效果合理（目标没被增强没了、框跟着转对了）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>增强太猛（把目标裁出画面 / 旋转后标注没同步）→ <strong>几何增强必须同步变换标注</strong>（框/mask 跟着转）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>增强后框对不上 → 检查标注是否跟图做了同样的几何变换；<strong>先关掉几何增强跑通，再逐个加回来</strong>定位是哪个增强出的问题。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写（含遥感特有的）数据增强并验证</strong>。<strong>做了</strong>(transforms)、<strong>学了</strong>（增强的作用、几何增强要同步标注、遥感无固定朝向）、<strong>会了</strong>（配置并可视化检查数据增强）。</p>
+</div></section></section><section class="slot" id="d72-pm" data-d="72" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D72 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写数据层单元测试</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（单元测试是什么、为什么数据层必须测）</h4><div class="blk-b"><p><strong>单元测试</strong>= 用一小段代码验证你写的函数是否正确。例：输入一张 512×512 图，经 DataLoader 输出应是 <code>(batch, 3, 512, 512)</code> 张量；形状不对 = 有 bug。<strong>为什么数据层尤其要测</strong>：数据 bug（标注错位、增强没同步）在训练几小时后才以“指标异常低”的形式暴露，极难倒查；单元测试能在<strong>训练前几秒</strong>就抓住它。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 <code>tests/test_dataset.py</code>：验证 ① DataLoader 输出张量形状正确 ② 标注数量/范围合理（框坐标在图内、角度在合法范围）③ 增强可视化无误；用 pytest 运行确保通过。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>单元测试通过（形状/标注/增强都对）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不写测试直接训 → bug 在训练几小时后才暴露，更难查;② 测试只测“能跑”不测“对不对”（只看不报错，不断言形状/数值）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>测试失败 → <strong>正是它的价值</strong>（早抓 bug）；按报错定位是读图/解析/增强哪一步出的问题。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写单元测试守护数据层</strong>。<strong>做了</strong>（数据层单元测试）、<strong>学了</strong>（单元测试的意义）、<strong>会了</strong>（用测试在早期抓住数据层 bug）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜单元测试守护</strong>：用一小段代码 <code>assert</code> 关键函数的输出（形状/数值/标注范围）。数据层和模型层都要测——bug 在训练前几秒被抓，胜过训练几小时后倒查。测“对不对”（断言），不只测“能跑”（不报错）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 数据层完成 ✅ 增强 ✅ 单元测试通过。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D72</summary><textarea data-note="d72" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d73" data-d="73"><header class="day-head"><span class="dnum">D73</span><h2 class="day-t">周三 · 写模型层 + 你的方法 v1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把 baseline 和“你的方法 v1”都搭进框架。<strong>重点心态：v1 不求完美，只求“能跑、能输出正确形状”</strong>——你第一次把自己的 idea 变成可运行的模型，能跑通就是巨大胜利，性能和美化是后面的事。</p>
+</blockquote>
+</div><section class="slot" id="d73-am" data-d="73" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D73 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 models 模块（先把 baseline 搭起来）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>模型层</strong>先把 baseline 搭起来（可直接调用 MMRotate/torchvision 的现成模型，或封装你 M2 复现的 SOTA）。<strong>先有一个能跑的 baseline</strong>，你的方法才有对比对象；而且用你 M2 sanity-check 过的那个 baseline，可比性和正确性都有保障。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>models/baseline.py</code> 实现/封装 baseline（复用你 M2 复现并 sanity-check 过的 Oriented R-CNN，最稳），保证它能 <code>forward</code> 出正确形状。封装模式（把现成模型包成统一接口）：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># models/baseline.py —— 不重写算法，只把 MMRotate 现成模型包成统一接口</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mmrotate.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_detector</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mmcv</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Baseline</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;封装 Oriented R-CNN：暴露 extract_feat / head / forward 统一接口，</span>
+<span class="sd">    让 your_method 能在同一接口上插模块、用同一套 train/eval 对比。&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">mm_cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;mm_config&quot;</span><span class="p">])</span>     <span class="c1"># 复用你 M2 跑通的官方 config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">det</span> <span class="o">=</span> <span class="n">build_detector</span><span class="p">(</span><span class="n">mm_cfg</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>        <span class="c1"># 现成实现，正确性有保障</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_feat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>                         <span class="c1"># 统一接口①：出多尺度特征</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="o">.</span><span class="n">extract_feat</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feats</span><span class="p">):</span>                             <span class="c1"># 统一接口②：检测头</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="o">.</span><span class="n">bbox_head</span><span class="p">(</span><span class="n">feats</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="o">.</span><span class="n">forward_train</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> \
+               <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extract_feat</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">build_model</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>                       <span class="c1"># models/__init__.py 用它分发</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.your_method</span><span class="w"> </span><span class="kn">import</span> <span class="n">YourMethod</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;baseline&quot;</span><span class="p">:</span> <span class="n">Baseline</span><span class="p">,</span> <span class="s2">&quot;your_method&quot;</span><span class="p">:</span> <span class="n">YourMethod</span><span class="p">}[</span><span class="n">name</span><span class="p">](</span><span class="n">cfg</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>关键</strong>：不重写算法、只封装，既省事又保证 baseline 正确;<code>extract_feat/head</code> 这两个口子就是你 D73 中午给 your_method 插模块的地方。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 能实例化、forward 出正确输出形状。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 从零手写 baseline → 没必要也易错，封装现成的;② forward 形状错 → print 中间张量形状逐层排查。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>封装现成模型时接口不熟 → 先按它原始 demo 跑通，再包一层统一接口；形状对不上 → 在 backbone/neck/head 之间打印张量形状定位。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把 baseline 纳入了自己的框架。<strong>做了</strong>（baseline 模块）、<strong>学了</strong>（复用现成模型作 baseline）、<strong>会了</strong>（把一个 baseline 封进自己的代码结构）。</p>
+</div></section></section><section class="slot" id="d73-noon" data-d="73" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D73 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 your_method.py（你的创新方法 v1）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（v1 的第一目标是“能跑”不是“完美”）</h4><div class="blk-b"><p><strong>你的方法 v1</strong> = 在 baseline 基础上<strong>加入你 Proposal 的创新模块</strong>（最小改动实现）。v1 不求完美——<strong>先保证能跑、能输出正确形状</strong>，性能/美化是后面的事。“能跑”是第一目标。<strong>为什么强调这个</strong>：很多人卡在“想一次写出完美方法”而迟迟跑不起来；正确的姿势是先用最简实现把链路打通，再迭代。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>models/your_method.py</code> 实现方法 v1（在 baseline 上插入你的创新模块，改动尽量集中、用最简实现）；用 dummy 输入跑通；<strong>保持和 baseline 同接口</strong>（同样的输入输出格式，方便后面用同一套 train/eval 对比）。最简实现示例（高分辨率小目标分支）：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># models/your_method.py —— 在 baseline 上&quot;包一层&quot;，只加你的模块</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.baseline</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_baseline</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HighResBranch</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;创新模块 v1：保留浅层高分辨率特征，缓解下采样丢小目标。最简实现先打通链路。&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuse</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_ch</span><span class="p">,</span> <span class="n">out_ch</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># v1 先用一个卷积验证有效性</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low_feat</span><span class="p">,</span> <span class="n">high_feat</span><span class="p">):</span>
+        <span class="n">high</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">low_feat</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">high_feat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:],</span>
+                                         <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fuse</span><span class="p">(</span><span class="n">high</span> <span class="o">+</span> <span class="n">high_feat</span><span class="p">)</span>            <span class="c1"># 把高分辨率细节融回主特征</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">YourMethod</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span> <span class="o">=</span> <span class="n">build_baseline</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>           <span class="c1"># 复用 baseline，保持同接口</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hr</span> <span class="o">=</span> <span class="n">HighResBranch</span><span class="p">(</span><span class="n">in_ch</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">out_ch</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>                             <span class="c1"># 与 baseline.forward 同签名</span>
+        <span class="n">feats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="o">.</span><span class="n">extract_feat</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>         <span class="c1"># 拿到多尺度特征</span>
+        <span class="n">feats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hr</span><span class="p">(</span><span class="n">feats</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">feats</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>        <span class="c1"># 在最高分辨率层注入你的模块</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">feats</span><span class="p">)</span>              <span class="c1"># 走原 head，输出同 baseline 格式</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>先验证“能跑”</strong>:<code>YourMethod(cfg)(torch.randn(2,3,1024,1024))</code> 不报错、输出与 baseline 同格式即可——性能留到 D75 比、W12 调。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>your_method</code> 能实例化、forward 出正确形状（和 baseline 同接口）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 上来追求完美/复杂 → 先 v1 能跑;② 你的模块接错维度 → print 形状对齐。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>forward 报维度错 → 在你模块前后 print 张量形状，逐处对齐；模块写不出 → 先用最简实现（哪怕只是一个额外卷积/一层注意力）验证框架通，确认链路后再换成你真正的设计。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>第一次把自己的 idea 实现成可跑的模型</strong>。<strong>做了</strong>（方法 v1 代码）、<strong>学了</strong>（&quot;先能跑再优化&quot;、最小改动实现）、<strong>会了</strong>（在 baseline 上实现自己的创新模块）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜先能跑再优化</strong>：实现新方法 v1 时，第一目标是“能跑通 + 输出正确形状”，不是“完美/复杂”。先用最简实现打通链路（哪怕一个额外卷积），确认框架通，再换成真正的设计逐步迭代。保持和 baseline 同接口，方便公平对比。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d73-pm" data-d="73" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D73 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">模型层单元测试</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>模型层也要测——<code>model.forward(dummy_input)</code> 能否正常输出正确形状（baseline 和 your_method 都测，且<strong>两者输出接口要一致</strong>，这是后面能用同一套 eval 公平对比的前提）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 <code>tests/test_model.py</code>：对 baseline 和 your_method 各喂 dummy 输入，断言输出形状正确且两者接口一致；pytest 运行通过。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>两个模型的单元测试都通过，接口一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>两个模型输出格式不一致 → 后面没法用同一套评估脚本对比；统一接口。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>形状不一致 → 让 your_method 与 baseline 输出同接口（包一层适配）；测试失败按报错定位是哪个模块输出错。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用单元测试守护了模型层，并确保两个模型可对比。<strong>做了</strong>（模型层单元测试）、<strong>学了</strong>（模型层测试、接口一致性）、<strong>会了</strong>（确保两个模型接口一致、可公平对比）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 模型层完成 ✅ 方法 v1 代码 ✅ 单元测试通过。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D73</summary><textarea data-note="d73" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d74" data-d="74"><header class="day-head"><span class="dnum">D74</span><h2 class="day-t">周四 · 写训练/评估框架 + 日志系统 + 指标</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把“训练循环 + 评估 + 日志 + 指标”补齐，框架就完整了。重点是<strong>让一切可配置、可回溯</strong>——通过 config 驱动、自动记录超参和曲线，这样你后面几十组实验才不会乱、才能复现。</p>
+</blockquote>
+</div><section class="slot" id="d74-am" data-d="74" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D74 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 train.py + eval.py</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>训练脚本</strong> = 把数据层 + 模型 + 优化器 + loss 串成训练循环（M1 学的五步）；<strong>评估脚本</strong> = 在 val/test 上算指标。把它们写成<strong>可配置</strong>（通过 config 指定模型/数据/超参），才能复用——换实验只改 config，不改代码。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 <code>scripts/train.py</code>(读 config → 建数据/模型/优化器 → 训练循环 → 存 checkpoint)和 <code>scripts/eval.py</code>(加载 checkpoint → 评估)；先用小数据/几个 iter 跑通流程。骨架：</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># scripts/train.py —— config 驱动，换实验只改 yaml 不改代码</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">models</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.logger</span><span class="w"> </span><span class="kn">import</span> <span class="n">Logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils.seed</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_seed</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">cfg_path</span><span class="p">):</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">cfg_path</span><span class="p">))</span>
+    <span class="n">set_seed</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">])</span>                              <span class="c1"># 固定 seed（多 seed 只改 cfg）</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">build_dataset</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>                        <span class="c1"># 数据层</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>          <span class="c1"># baseline 或 your_method</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">],</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">amp</span><span class="o">.</span><span class="n">GradScaler</span><span class="p">()</span>              <span class="c1"># 混合精度，省显存（单卡友好）</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>                              <span class="c1"># 自动记超参 + commit hash</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">it</span><span class="p">,</span> <span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">loader</span><span class="p">):</span>
+            <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">amp</span><span class="o">.</span><span class="n">autocast</span><span class="p">():</span>           <span class="c1"># AMP 前向</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">cuda</span><span class="p">(),</span> <span class="n">target</span><span class="p">)</span>
+            <span class="n">scaler</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mi">35</span><span class="p">)</span>  <span class="c1"># 防梯度爆炸</span>
+            <span class="n">scaler</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span> <span class="n">scaler</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">it</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">epoch</span><span class="p">})</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">logger</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2">/epoch_</span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">.pth&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">();</span> <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--cfg&quot;</span><span class="p">);</span> <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--seed&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">parse_args</span><span class="p">();</span> <span class="n">main</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">cfg</span><span class="p">)</span>   <span class="c1"># --seed 可覆盖 cfg，便于多 seed 脚本批量调</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>train.py</code>/<code>eval.py</code> 能通过 config 驱动，跑通一个小实验（几个 iter，不报错、能存/读 checkpoint）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 超参硬编码在代码里 → 改实验要改代码，易出错；放 config;② 一上来跑全量调流程 → 先用小数据/几个 iter 把流程调通。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>跑不通 → 用 5 张图、2 个 iter 先把“数据→模型→loss→反传→存档”链路走通，再上规模。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你搭起了<strong>可配置的训练/评估框架</strong>。<strong>做了</strong>（train/eval 脚本）、<strong>学了</strong>（config 驱动的训练流程）、<strong>会了</strong>（把训练/评估写成可复用脚本）。</p>
+</div></section></section><section class="slot" id="d74-noon" data-d="74" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D74 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写日志系统(TensorBoard + wandb)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(没有日志 = 黑箱实验)</h4><div class="blk-b"><p><strong>没有日志 = 黑箱实验</strong>——你无法回溯“三天前那个实验的超参是什么、loss 长什么样”。好的日志自动记录：<strong>超参、时间戳、loss 曲线、最终指标、git commit hash</strong>。用 <strong>TensorBoard</strong>（本地、轻量）或 <strong>wandb</strong>（云端，多实验横向对比方便）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>utils/logger.py</code> 接入 TensorBoard/wandb，训练时自动记录超参 + loss 曲线 + 指标；<strong>把当前 git commit hash 也记进日志</strong>（这样每个结果都能对应到确切的代码版本）。每个实验一个独立目录（时间戳 + 实验名命名）。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># utils/logger.py —— 每个实验独立目录 + 记超参 + commit hash（可回溯的关键）</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.tensorboard</span><span class="w"> </span><span class="kn">import</span> <span class="n">SummaryWriter</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Logger</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
+        <span class="n">stamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;experiments/</span><span class="si">{</span><span class="n">stamp</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_seed</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">commit</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">getoutput</span><span class="p">(</span><span class="s2">&quot;git rev-parse --short HEAD&quot;</span><span class="p">)</span>  <span class="c1"># 记下代码版本</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">cfg</span><span class="p">,</span> <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="n">commit</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">stamp</span><span class="p">}</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="si">}</span><span class="s2">/meta.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 超参+commit 存盘</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tb</span> <span class="o">=</span> <span class="n">SummaryWriter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">);</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="bp">self</span><span class="o">.</span><span class="n">tb</span><span class="o">.</span><span class="n">add_scalar</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么记 commit</strong>：三个月后看到一个好结果,<code>meta.json</code> 里的 commit 让你能 <code>git checkout</code> 回那一版代码，精确复现。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>训练时自动产生可查看的 loss 曲线和超参记录（TensorBoard/wandb 里能看到），且记录了 commit hash。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不记超参/commit → 实验无法复现（&quot;这个结果怎么来的?&quot;）;② 只 print 不存 → 关掉终端就丢了。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>wandb 要登录/联网不便 → 先用 TensorBoard（本地）；日志太乱 → 每个实验一个独立目录（时间戳 + 实验名）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了<strong>实验日志系统</strong>（可回溯）。<strong>做了</strong>（日志系统）、<strong>学了</strong>（日志为何关键、该记什么）、<strong>会了</strong>（自动记录超参/曲线/指标/commit）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜实验日志该记什么</strong>：每个实验自动记录 ① 超参（全部）② 时间戳 ③ loss/指标曲线 ④ 最终指标 ⑤ <strong>git commit hash</strong>（对应确切代码版本）。每实验独立目录（时间戳+名）。没有这些 = 黑箱，结果无法复现。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d74-pm" data-d="74" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D74 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 metric.py（按任务选指标）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>评价指标</strong>按你的任务选：检测 = mAP、分割 = mIoU、变化检测 = F1（M2 学过）。<strong>对你尤其重要</strong>：除了任务指标，还要算 <strong>参数量 + FPS</strong>（你的“高效”卖点对比维度）。把指标计算封装好，评估时统一调用。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>utils/metric.py</code> 实现你任务对应的指标（复用 M2 写的 F1/mIoU，或检测的 mAP）+ 参数量/FPS 统计；用一个已知答案的小例子验证算得对。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>指标函数算得正确（用已知小例子验证）；含参数量/FPS。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 指标用错（任务↔指标对照）→ 检测 mAP / 分割 mIoU / 变化检测 F1;② 实现错却没核对 → 用手算的小例子核对。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定指标实现对不对 → 构造一个你能手算结果的极小例子（如 2 个框）对照；直接复用成熟库（如 mmrotate 的 mAP）更稳。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你的框架有了<strong>正确的指标模块（含效率维度）</strong>。<strong>做了</strong>（metric 模块）、<strong>学了</strong>（任务↔指标、指标封装、效率维度）、<strong>会了</strong>（为框架接入正确可复用的评价指标）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 训练框架 ✅ 日志系统 ✅ 评价指标（含参数/FPS）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D74</summary><textarea data-note="d74" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d75" data-d="75"><header class="day-head"><span class="dnum">D75</span><h2 class="day-t">周五 · 跑第一组对比（baseline vs 你的方法 v1）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：框架搭好了，今天开始跑第一组正式对比。训练要几小时，所以重点是<strong>正确地启动 + 守住控制变量</strong>（baseline 和 v1 除了方法本身，其余全相同）。结果明天看，今天把两组都正确挂起就算成功。</p>
+</blockquote>
+</div><section class="slot" id="d75-am" data-d="75" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D75 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">跑 baseline 完整训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（对比实验的核心原则：控制变量）</h4><div class="blk-b"><p><strong>对比实验的核心原则</strong>——控制所有变量相同（相同数据、相同超参、相同 seed），只改方法本身，这样对比才公平。今天先跑 baseline 在主数据集上的完整训练。<strong>和通用 CV 一样</strong>：这是所有实证研究的基石，但遥感训练慢、卡少，更要一次跑对，避免返工。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用框架启动 baseline 在主数据集的完整训练（<strong>固定 seed</strong>，记好超参），后台挂(nohup/tmux)、监控 loss。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 后台挂训练（关掉终端也不断）——单卡长训练必备</span>
+tmux<span class="w"> </span>new<span class="w"> </span>-s<span class="w"> </span>base<span class="w">                                    </span><span class="c1"># 开一个会话</span>
+python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/oriented_rcnn_dota.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>experiments/base_seed0.log<span class="w">        </span><span class="c1"># 日志同时打屏+存盘</span>
+<span class="c1"># Ctrl+b d 脱离会话；下次 tmux attach -t base 回来看</span>
+<span class="c1"># 或用 nohup：</span>
+nohup<span class="w"> </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>...<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>&gt;<span class="w"> </span>base.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+
+<span class="c1"># 实时看显存/利用率</span>
+watch<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>nvidia-smi
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>OOM 救命三招（单卡 4090 常用）</strong>:① <code>batch_size</code> 减半;② 输入分辨率 1024→800;③ 开混合精度 AMP（已在 train.py 里）+ 必要时梯度累积(<code>accumulate=2</code> 等效大 batch)。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 训练启动、loss 正常下降，超参/seed 已记录在日志。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① OOM → 降 batch/分辨率/开 AMP;② 没固定 seed → 后面没法多 seed 复现。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>loss 异常（NaN/不降）→ 查数据（脏样本）、查 lr（太大）；先小数据验证框架，再上全量。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你在自己框架上跑出了第一个正式 baseline。<strong>做了</strong>（baseline 训练）、<strong>学了</strong>（对比的控制变量原则）、<strong>会了</strong>（用自己的框架跑完整训练）。</p>
+</div></section></section><section class="slot" id="d75-noon" data-d="75" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D75 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">监控 baseline loss</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>训练中盯三条曲线(train loss 降、val 指标升、两者不要背离 = 过拟合),M1 学过。监控的目的是<strong>尽早发现训练不健康</strong>，而不是训完几小时才发现白跑。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>看 TensorBoard/wandb 的 loss/指标曲线，判断训练是否健康；异常及时停（别让坏实验白占 GPU 几小时）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 训练健康（loss 降、val 指标合理上升）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① loss NaN → lr 太大/脏数据;② 看到过拟合不记 → 后面要加正则/增强，先记下。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>loss 卡住不降 → 查 lr、查数据加载是否正常、查 loss 计算；NaN → 降 lr、加梯度裁剪、查脏标注。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复用了“看训练健不健康”的判断。<strong>做了</strong>（监控 baseline）、<strong>学了</strong>（三曲线诊断）、<strong>会了</strong>（实时判断训练健康度）。</p>
+</div></section></section><section class="slot" id="d75-pm" data-d="75" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D75 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑你的方法 v1（同设置，只换方法）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>跑 your_method v1，<strong>除了方法本身，数据/超参/seed 全和 baseline 相同</strong>——这是公平对比的前提。两组实验同步进行（白天 baseline、晚上 v1，或并行错峰）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用<strong>和 baseline 完全相同的 config</strong>（只把 model 换成 your_method）启动 v1 训练；监控。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v1 训练启动，设置与 baseline 逐项一致（可公平对比）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>跑 v1 时顺手改了别的（lr/增强/epoch）→ 对比不公平，你的“提升”说不清是方法还是别的因素带来的。<strong>务必只换 model 这一处。</strong></p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v1 训练崩 → 回 D73 的模型层 debug（形状/接口）；用 diff 对比 v1 和 baseline 的 config，确认只差 model 一处。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你启动了第一组<strong>公平对比</strong>(v1 vs baseline)。<strong>做了</strong>（v1 训练启动）、<strong>学了</strong>（只换方法的公平对比）、<strong>会了</strong>（在严格控制变量下做对比实验）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜公平对比控制变量</strong>：对比 v1 vs baseline,<strong>只改方法本身</strong>，数据/超参/seed/增强/epoch 全部相同（用同一 config，只换 model 字段）。否则“提升”说不清来源。用 <code>diff</code> 核对两份 config 只差一处。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ baseline + v1 训练启动（同设置）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D75</summary><textarea data-note="d75" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d76" data-d="76"><header class="day-head"><span class="dnum">D76</span><h2 class="day-t">周六 · （集中日）· 多 seed 重复（判断真有效还是运气好）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天集中看第一组结果、排查异常、并启动第二个 seed。<strong>关键认知：单次实验结果可能是随机波动，看到 v1 高一点先别欢呼、低一点也别否定——要多 seed 才能下结论。</strong> 这是学术规范，也是避免自欺。</p>
+</blockquote>
+</div><section class="slot" id="d76-am" data-d="76" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D76 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">看第一组结果(baseline vs v1)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>两组训完，先看 v1 是否比 baseline 好。但<strong>单次结果可能是随机波动</strong>（不同 seed 能差零点几个点），还不能下结论——下午开始多 seed。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用 eval.py 评估两组，记录指标；初步看 v1 vs baseline 的差（记下，但标注“单 seed，待多 seed 确认”）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第一组对比指标记录在案（v1 与 baseline 各一个数）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 看到 v1 高一点就欢呼 → 可能是运气，要多 seed 确认;② v1 差不多/略低就否定 → 也别急，可能这个 seed 不利。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v1 明显低于 baseline → 先去中午段排查是不是 bug（模块没生效），而非直接判 idea 不行。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你得到了第一组对比数，并知道“单次不算数”。<strong>做了</strong>（第一组对比）、<strong>学了</strong>（单次结果不可靠）、<strong>会了</strong>（评估并初步对比两个方法）。</p>
+</div></section></section><section class="slot" id="d76-noon" data-d="76" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D76 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">debug（如果结果异常）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若 v1 远差于 baseline，先排查是不是 bug（你的模块接错/没生效），而非“idea 不行”。<strong>最隐蔽的 bug 是“模块加了等于没加”</strong>——它接进去了但没真正参与前向，或参数没更新。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>若异常，检查 your_method 的模块是否真的生效:① print 模块的输出，看它有没有改变特征;② 对比“有模块 vs 没模块”的中间结果是否不同;③ 检查模块参数 <code>requires_grad=True</code> 且在更新。修正后重跑。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 验证&quot;你的模块到底有没有生效&quot;——最隐蔽 bug 的照妖镜</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="s2">&quot;your_method&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+
+<span class="c1"># (a) 模块参数在不在训练？</span>
+<span class="n">hr_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;hr&quot;</span> <span class="ow">in</span> <span class="n">n</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;模块参数数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hr_params</span><span class="p">),</span>
+      <span class="s2">&quot;| requires_grad:&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">hr_params</span><span class="p">))</span>
+
+<span class="c1"># (b) 把模块权重置零 vs 放大，输出该明显变化；若纹丝不动=没接进前向</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">out1</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">hr_params</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">mul_</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># 置零</span>
+    <span class="n">out0</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">out1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">out0</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">out1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;置零前后输出差异:&quot;</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="s2">&quot;（≈0 说明模块没真正参与前向，需查接线）&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>判读</strong>：差异明显 = 模块生效，结果差是 idea/超参问题；差异≈0 = 模块没接进前向路径，回去查 <code>forward</code> 里有没有真的用上它。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>确认结果不是 bug 造成的（模块确实生效、参数在更新）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>模块“加了等于没加” → 检查它是否真的接进了前向路径、参数是否在 optimizer 里、是否在更新。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定模块生不生效 → 故意把模块权重放大/置零，看输出是否变化：有变化 = 生效；无变化 = 没接进前向。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你练了“区分 idea 效果 vs 代码 bug”。<strong>做了</strong>（结果 debug）、<strong>学了</strong>（排除 bug 再下结论）、<strong>会了</strong>（验证创新模块确实生效）。</p>
+</div></section></section><section class="slot" id="d76-pm" data-d="76" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D76 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑第二组 seed（不同随机种子重复）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要多 seed）</h4><div class="blk-b"><p><strong>单次实验有随机波动</strong>（权重初始化、数据顺序都受 seed 影响），<strong>跑 3 个不同 seed 取平均±标准差</strong>，才能判断“是真有效还是运气好”——这是学术规范，审稿人会看你报没报 std。今晚启动第 2 个 seed（baseline 和 v1 都要）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>换一个随机 seed，重跑 baseline 和 v1（其余设置不变，用补充包的多 seed 运行器），后台挂。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 批量跑多 seed（baseline 与 v1 各 3 个 seed），只改 --seed</span>
+<span class="k">for</span><span class="w"> </span>seed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span>model<span class="w"> </span><span class="k">in</span><span class="w"> </span>baseline<span class="w"> </span>your_method<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>configs/<span class="si">${</span><span class="nv">model</span><span class="si">}</span>_dota.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="nv">$seed</span><span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>&gt;<span class="w"> </span>experiments/<span class="si">${</span><span class="nv">model</span><span class="si">}</span>_seed<span class="si">${</span><span class="nv">seed</span><span class="si">}</span>.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="w">    </span>python<span class="w"> </span>scripts/eval.py<span class="w">  </span>--cfg<span class="w"> </span>configs/<span class="si">${</span><span class="nv">model</span><span class="si">}</span>_dota.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="nv">$seed</span><span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>&gt;&gt;<span class="w"> </span>experiments/<span class="si">${</span><span class="nv">model</span><span class="si">}</span>_seed<span class="si">${</span><span class="nv">seed</span><span class="si">}</span>.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="k">done</span>
+<span class="c1"># GPU 时间紧：白天挂 baseline 三个 seed，晚上挂 v1 三个 seed，错峰跑满</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第 2 个 seed 的两组实验启动（脚本会依次把 3 个 seed 跑完）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只跑一个 seed 就写进论文 → 不可信;② 多 seed 时改了别的变量 → 只换 seed。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>GPU 时间不够跑很多 seed → 至少 3 个；错峰跑（白天一个、晚上一个）；用小一点的 epoch 先看趋势，关键配置再跑足。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始用<strong>多 seed 验证结果可靠性</strong>。<strong>做了</strong>（第 2 seed 启动）、<strong>学了</strong>（多 seed 的学术规范）、<strong>会了</strong>（用重复实验判断结果是否稳健）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 第一份对比结果（含 2 个 seed）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D76</summary><textarea data-note="d76" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d77" data-d="77"><header class="day-head"><span class="dnum">D77</span><h2 class="day-t">周日 · （复盘日）· 3-seed 对比表 + W11 复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：最后一天——补齐第 3 个 seed，整理成规范的 3-seed 对比表（论文 Table 1 雏形），写对比分析，做周复盘。<strong>如果 v1 的提升在 std 之内（不显著）也别灰心：这是 v1,W12 消融和后续迭代会加强它，今天先如实记录。</strong></p>
+</blockquote>
+</div><section class="slot" id="d77-am" data-d="77" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D77 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">跑第三组 seed + 整理 3-seed 对比表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（mean±std 和 Table 1）</h4><div class="blk-b"><p>补齐第 3 个 seed，把 baseline 和 v1 的<strong>3-seed 平均±标准差</strong>整理成对比表——这就是你<strong>论文 Table 1 的雏形</strong>。<code>mean</code> 看平均水平,<code>std</code> 看稳不稳（波动大说明不稳健）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>跑第 3 seed；整理对比表:<code>方法 | 数据集 | 指标(mean±std over 3 seeds) | 参数量 | FPS</code>，用粗体标更好的。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张 3-seed 对比表（v1 vs baseline，带 mean±std），格式接近论文 Table 1。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只报 mean 不报 std → std 才看得出稳不稳、提升显不显著;② 不列参数/FPS → 丢了你“高效”卖点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v1 提升在 std 之内（不显著）→ 正常，这是 v1，后面 W12 消融 + 后续改进会加强；先如实记，别修改数据。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>第一张规范的对比表(3-seed,mean±std)</strong>。<strong>做了</strong>（3-seed 对比表）、<strong>学了</strong>（mean±std、Table 1 格式）、<strong>会了</strong>（把多 seed 结果整理成规范对比表）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜多 seed mean±std</strong>：跑 ≥3 个不同 seed，报 <code>mean±std</code>。mean 看平均、std 看稳健性与显著性(提升 &gt; std 才算初步可信)。对比表列 <code>方法|数据集|指标(mean±std)|参数量|FPS</code>，粗体标最优。这是 Table 1 的规范形态。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d77-noon" data-d="77" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D77 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写第一组对比分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>对比不只看数字，还要<strong>分析</strong>:v1 比 baseline 好/差在哪？在哪类样本上提升明显（如小目标？密集场景?）？这是 W12 找改进方向的起点——数字告诉你“有没有用”，分析告诉你“为什么、下一步往哪改”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 200–400 字分析：v1 vs baseline 的总体差异（带数字）+ 初步观察（哪类样本提升/退步，翻几张预测图看）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一段对比分析，有数字 + 初步规律观察（不只“v1 更好”，而是“v1 在小目标密集区 +X，但在大目标上持平”）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>只写“v1 更好” → 要具体“好多少、好在哪类样本”；没规律也写“暂无明显规律，待 W12 消融揭示”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>看不出规律 → W12 消融和定性可视化会揭示；先记录数字和你能观察到的现象。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>分析对比结果（而非只报数）</strong>。<strong>做了</strong>（对比分析）、<strong>学了</strong>（从结果找规律）、<strong>会了</strong>（把对比数字解读成可行动的观察）。</p>
+</div></section></section><section class="slot" id="d77-pm" data-d="77" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D77 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">W11 复盘 + W12 计划</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘（已会）+ 确认 W12（消融）计划：消融实验要逐一验证你方法每个组件的贡献。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>W11 周报（卡点 + 对策，重点记搭框架时踩的坑，这些坑以后还会遇到）；确认 W12 三件事:① 设计 5 个消融 ② 跑完并分析 ③ 从消融找改进方向 + M3 月复盘。</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># W11 周报模板（卡点+对策，便于回溯）</span>
+<span class="gu">## 本周产出</span>
+<span class="k">-</span><span class="w"> </span>实验框架（configs/datasets/models/utils/scripts/tests）+ git 私仓
+<span class="k">-</span><span class="w"> </span>数据层+增强+单测、模型层(baseline+v1)+单测、训练/评估/日志/指标
+<span class="k">-</span><span class="w"> </span>第一组 3-seed 对比表（Table 1 雏形）+ 对比分析
+<span class="gu">## 踩的坑 → 对策（以后还会遇到，记下来）</span>
+<span class="k">-</span><span class="w"> </span>增强后框飞走 → 几何增强忘了同步标注；先关几何增强跑通再逐个加
+<span class="k">-</span><span class="w"> </span>v1 加了像没加 → 模块没接进前向；用&quot;权重置零看输出变不变&quot;定位
+<span class="k">-</span><span class="w"> </span>实验记不清超参 → logger 自动存 meta.json(超参+commit)
+<span class="gu">## 数据快照</span>
+<span class="k">-</span><span class="w"> </span>baseline 75.5±0.3 / Ours v1 76.3±0.4（+0.8，略&gt;std）；params +1M，FPS 持平
+<span class="gu">## 遗留问题（W12 Day1 先清）</span>
+<span class="k">- [ ]</span> HRSC 数据集 loader 还没接；[ ] 密集区粘连待 v2 处理
+<span class="gu">## 下周（W12）计划：见下方消融清单</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>W12 消融设计清单（先列好，D78 开跑）</strong>:① 去掉高分辨率分支（看它的净贡献）② 换融合方式（相加 vs 拼接 vs 注意力）③ 不同 loss ④ 不同 backbone(R18/R50)⑤ 不同输入分辨率。每个消融对应 Proposal 里的一条 contribution。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W11 周报 + W12 计划（含 5 个消融的明确设计）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 框架还有遗留 bug 不记 → 列入 W12 第一天先清;② 复盘写成流水账 → 写具体卡点 + 对策。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>框架有遗留问题但本周没时间修 → 明确列入 W12 Day1 待办，别让它埋着影响后面实验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成 W11 复盘，框架与第一组对比就绪。<strong>做了</strong>（W11 周报 + W12 计划）、<strong>学了</strong>（阶段性复盘）、<strong>会了</strong>（规划消融周）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 3-seed 对比表 ✅ 对比分析 ✅ 周报 W11。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W11 累计交付</h2><p>可复用实验框架（configs/datasets/models/utils/scripts/tests,git 私仓）、数据层 + 增强 + 单元测试、模型层（baseline + 方法 v1）+ 单元测试、训练/评估框架 + 日志系统 + 指标（含参数/FPS）、第一组 3-seed 对比表（Table 1 雏形）+ 对比分析、W11 周报。</p>
+</section><section class="wtail"><h2>🎓 W11 你“长出来”的能力清单</h2><ul>
+<li>设计可复用实验框架 + git/GitHub 管理 + .gitignore</li>
+<li>写统一数据层、（含遥感特有）增强、单元测试（早抓 bug）</li>
+<li>实现 baseline 与你的方法 v1（最小改动、先能跑、同接口）</li>
+<li>可配置训练/评估 + 日志系统（可回溯，记 commit hash）+ 指标（含效率维度）</li>
+<li>公平对比（只换方法）+ 多 seed(mean±std)+ Table 1 雏形</li>
+<li><strong>战略校准贯穿</strong>：指标含参数/FPS（高效卖点）;baseline 用 M2 sanity-check 过的那个保证可比</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D77</summary><textarea data-note="d77" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W11 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 仓库目录树 + config 示例 + 3-seed 对比表</h2>
+<figure class="code" data-lang="text"><pre><code>rs-project/
+├── configs/          # 实验配置(yaml/py)：模型、数据、超参
+│   └── oriented_rcnn_dota.yaml
+├── datasets/         # 数据加载 + transforms.py
+├── models/           # baseline.py + your_method.py
+├── utils/            # logger.py(TB/wandb) + metric.py(mAP/mIoU/F1 + 参数/FPS)
+├── scripts/          # train.py + eval.py
+├── experiments/      # 每个实验一个子目录(日志/权重链接,时间戳+名命名)
+├── tests/            # test_dataset.py + test_model.py
+├── docs/             # 结构说明、SOP、commit 规范
+├── .gitignore        # 排除 data/ checkpoints/ *.pth *.log work_dirs/
+└── README.md</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="yaml"><pre><code><span class="c1"># configs/oriented_rcnn_dota.yaml —— 一切可配置，换实验只改这里</span>
+<span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">baseline</span><span class="w">           </span><span class="c1"># 或 your_method（公平对比时只改这一行）</span>
+<span class="nt">dataset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dota_v1</span>
+<span class="nt">data_root</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/data/DOTA</span>
+<span class="nt">img_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1024</span>
+<span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">lr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+<span class="nt">epochs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+<span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">                    </span><span class="c1"># 多 seed 时只改这一项</span>
+<span class="nt">metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mAP</span><span class="w">               </span><span class="c1"># 任务指标；同时统计 params/FPS</span>
+<span class="nt">log_backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tensorboard</span><span class="w">  </span><span class="c1"># 或 wandb</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 第一组对比(论文 Table 1 雏形)</span>
+| 方法 | DOTA-v1.0 mAP(mean±std, 3 seeds) | 参数量 | FPS |
+|---|---|---|---|
+| Baseline (Oriented R-CNN) | 75.5 ± 0.3 | 41M | 16 |
+| <span class="gs">**Ours v1 (高分辨率小目标分支)**</span> | <span class="gs">**76.3 ± 0.4**</span> | 42M | 15 |
+观察：v1 平均 +0.8（&gt; std，初步有效）；参数仅 +1M、FPS 基本持平。
+下一步（W12 消融）看是哪个组件的贡献、能否在小目标密集区进一步加强。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — ① 固定 seed ② 多 seed 运行器 ③ 数据层单测 ④ 模型层单测</h2>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ===== ① 固定随机种子（可复现的前提）=====</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># ===== ② 多 seed 运行器：同一配置跑多个 seed，收集 mean±std =====</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_multi_seed</span><span class="p">(</span><span class="n">eval_fn</span><span class="p">,</span> <span class="n">cfg_name</span><span class="p">,</span> <span class="n">seeds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;eval_fn(seed) 应训练+评估并返回该 seed 的指标(float)。&quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">:</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="n">eval_fn</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>            <span class="c1"># 实际项目里调用 train.py/eval.py</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">cfg_name</span><span class="si">}</span><span class="s2">] seed=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">metric</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;→ </span><span class="si">{</span><span class="n">cfg_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  (seeds=</span><span class="si">{</span><span class="n">seeds</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">arr</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">arr</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="c1"># ===== ③ 数据层单元测试（验证形状/标注；pytest 可跑）=====</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_dataloader_shape</span><span class="p">(</span><span class="n">MyDataset</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">MyDataset</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">loader</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">img</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;图像形状错: </span><span class="si">{</span><span class="nb">tuple</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;标注数量与 batch 不符&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;数据层单元测试通过:&quot;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+<span class="c1"># ===== ④ 模型层单元测试（baseline 与 your_method 接口一致）=====</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_model_forward</span><span class="p">(</span><span class="n">build_model</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">,</span> <span class="s2">&quot;your_method&quot;</span><span class="p">]:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> 前向输出为空&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> forward OK&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># 用 mock 演示多 seed 运行器（真实项目替换 eval_fn）</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_r</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mock_eval</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+        <span class="n">_r</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">76.0</span> <span class="o">+</span> <span class="n">_r</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>   <span class="c1"># 模拟不同 seed 的指标波动</span>
+    <span class="n">run_multi_seed</span><span class="p">(</span><span class="n">mock_eval</span><span class="p">,</span> <span class="s2">&quot;Ours v1&quot;</span><span class="p">,</span> <span class="n">seeds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出（示意）</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>  [Ours v1] seed=0: 76.34
+  [Ours v1] seed=1: 75.78
+  [Ours v1] seed=2: 76.21
+→ Ours v1: 76.11 ± 0.24  (seeds=(0, 1, 2))</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>说明:<code>set_seed</code> 后多次运行结果一致；多 seed 运行器自动汇总 mean±std；数据层/模型层单测在训练前几秒抓住形状/接口错误。</p>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ===== ⑤ eval.py + metric：算任务指标 + 参数量/FPS（你的&quot;高效&quot;卖点）=====</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">count_params</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="o">/</span> <span class="mf">1e6</span>      <span class="c1"># 单位 M</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">measure_fps</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">warmup</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">)</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">warmup</span><span class="p">):</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                            <span class="c1"># 预热，避免首跑偏慢</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">synchronize</span><span class="p">();</span> <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">):</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">runs</span> <span class="o">/</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>                            <span class="c1"># 张/秒</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">metric_fn</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">preds</span><span class="p">,</span> <span class="n">gts</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+            <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">cuda</span><span class="p">()));</span> <span class="n">gts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">metric_fn</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">gts</span><span class="p">)</span>                                <span class="c1"># mAP / mIoU / F1</span>
+
+<span class="c1"># 汇报：把任务指标 + 参数 + FPS 一起打印，直接进 Table 1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">metric_fn</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">metric_fn</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: metric=</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> | params=</span><span class="si">{</span><span class="n">count_params</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">M &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;| FPS=</span><span class="si">{</span><span class="n">measure_fps</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>三、读懂 wandb / TensorBoard 的多实验横向对比</h2>
+<p>搭好日志后，<strong>学会“读”比“记”更重要</strong>。多次实验该怎么横向看：</p>
+<ul>
+<li><strong>同图叠多条曲线</strong>：在 wandb 里把 baseline 的 3 个 seed 和 v1 的 3 个 seed 拉到同一张 loss/mAP 图，<strong>看 v1 的曲线带是否整体在 baseline 之上</strong>（而不是只比单条）——带状重叠说明提升在噪声内。</li>
+<li><strong>Parallel coordinates（平行坐标）</strong>:wandb 的这个视图能一眼看出“哪个超参和高 mAP 相关”（为 W12 调参埋伏笔）。</li>
+<li><strong>按 commit 过滤</strong>:<code>meta.json</code> 记了 commit，出现异常结果时按 commit 分组，定位是哪次代码改动引入的。</li>
+<li><strong>TensorBoard 本地版</strong>:<code>tensorboard --logdir experiments/</code> 一次性加载所有实验目录，左侧勾选要对比的 run。
+<strong>判读口诀</strong>：看曲线<strong>带</strong>不看<strong>线</strong>（多 seed 的包络），提升要“带不重叠”才稳。</li>
+</ul>
+<h2>四、每日“今日自测”</h2>
+<ul>
+<li><strong>D71</strong>:① 为什么自己搭框架而不是直接改别人代码?② .gitignore 里为什么必须排除 data/checkpoints，仓库为什么设 private?</li>
+<li><strong>D72</strong>:① 单元测试是什么、为什么数据层尤其要测?② 几何增强为什么必须同步变换标注？遥感增强有什么特殊（无固定朝向）？</li>
+<li><strong>D73</strong>:① 你的方法 v1 的第一目标是什么（完美 vs 能跑）?② 为什么 your_method 要和 baseline 同接口？</li>
+<li><strong>D74</strong>:① 没有日志系统会怎样？好日志该记哪 5 样（含 commit hash）?② 你的任务用什么指标，为什么还要记参数/FPS?</li>
+<li><strong>D75</strong>:① 公平对比的核心原则是什么？跑 v1 时能改 lr/增强吗？怎么核对两份 config 只差一处？</li>
+<li><strong>D76</strong>:① 为什么单次结果不能下结论?② v1 远差于 baseline 时，怎么验证“模块到底生没生效”？</li>
+<li><strong>D77</strong>:① 为什么报 mean±std 而非只报 mean,std 看什么?② 对比分析除了数字还要写什么？</li>
+</ul>
+<h2>五、本周报错速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结果不可复现（每次不同）</td>
+<td>没固定 seed</td>
+<td><code>set_seed</code> + cudnn.deterministic=True</td>
+</tr>
+<tr>
+<td>仓库突然变巨大/push 很慢</td>
+<td>误把 data/权重提交了</td>
+<td><code>git rm --cached</code>，补进 .gitignore；提交前 <code>git status</code> 检查</td>
+</tr>
+<tr>
+<td>增强后框/掩膜对不上目标</td>
+<td>几何增强没同步标注</td>
+<td>图与标注做同一几何变换；先关几何增强跑通再逐个加</td>
+</tr>
+<tr>
+<td>训练几小时后才发现数据 bug</td>
+<td>没写单元测试</td>
+<td>先写 test_dataset/test_model 再训</td>
+</tr>
+<tr>
+<td>v1 “加了等于没加”</td>
+<td>模块没真正接进前向/参数没更新</td>
+<td>print 模块输出；把权重放大/置零看输出变不变；查 requires_grad 与前向路径</td>
+</tr>
+<tr>
+<td>对比不公平/提升说不清来源</td>
+<td>v1 改了方法以外的东西</td>
+<td>同一 config 只换 model;<code>diff</code> 核对只差一处</td>
+</tr>
+<tr>
+<td>实验无法复现/记不清超参</td>
+<td>没记 config/commit</td>
+<td>日志自动记超参 + git commit hash；每实验独立目录</td>
+</tr>
+<tr>
+<td>提升在 std 之内被误判无效/有效</td>
+<td>只看 mean 不看 std</td>
+<td>报 mean±std；提升 &gt; std 才算初步可信；不够就靠后续迭代加强</td>
+</tr>
+<tr>
+<td>训练 OOM</td>
+<td>batch/分辨率过大</td>
+<td>降 batch、降输入分辨率、开混合精度(AMP)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>六、对比分析范例（D77 中午交付物的范本，200–400 字）</h2>
+<blockquote class="quote">
+<p>给你一个“好的对比分析长什么样”的样板——不是只报数，而是有数字、有规律、有下一步。</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 第一组对比分析（Ours v1 vs Baseline，DOTA-v1.0，3 seeds）</span>
+
+总体：v1 mAP 76.3±0.4 vs baseline 75.5±0.3，平均 +0.8。提升幅度
+略大于两者 std，初步判定&quot;方向有效但尚不稳健&quot;——符合 v1 的预期
+（最简实现、未调参）。参数仅 +1M、FPS 16→15 基本持平，说明高分
+辨率分支没有牺牲效率，这点对我们&quot;单卡高效&quot;的定位是好信号。
+
+分类观察（翻了 30 张预测图）：
+<span class="k">-</span><span class="w"> </span>小目标密集区（如港口的密集小船）：v1 召回明显高于 baseline，
+  漏检的小船少了一圈——和我们&quot;高分辨率分支保留小目标特征&quot;的动机吻合。
+<span class="k">-</span><span class="w"> </span>大目标（操场、大型建筑）：两者基本持平，v1 没有额外收益（符合预期，
+  大目标本就不依赖高分辨率细节）。
+<span class="k">-</span><span class="w"> </span>失败案例：密集区相邻小目标仍有粘连/错框，说明仅靠特征融合不够，
+  后续可能需要在 label assignment 或 NMS 上再做文章。
+
+下一步（W12 消融指向）：
+1) 消融&quot;高分辨率分支&quot;确认其贡献是否就来自小目标召回；
+2) 针对相邻粘连，准备 v2 的改进方向（如更细的分配策略）；
+3) 在第二个数据集（HRSC）上验证该规律是否泛化。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这段为什么合格</strong>:① 有数字且和 std 比（判断显著性）;② 带了参数/FPS（扣住高效卖点）;③ 分类找规律（小目标↑、大目标持平）并和动机对应;④ 写了失败案例;⑤ 明确指向 W12 消融和 v2 改进——把“一组数字”变成了“下一步的行动清单”。这正是从“会跑实验”到“会做研究”的关键一跃。</p>
+</section>
+<div class="pager"><a class="prev" href="w10.html"><span class="dir">← 上一篇</span><span class="nm">W10 穷人验证 + Proposal v1 —</span></a><a class="next" href="w12.html"><span class="dir">下一篇 →</span><span class="nm">W12 第一波消融 + M3 月复盘</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d71">D71 周一</a><a class="sub" href="#d71-am">上午 设计代码仓库目录结构</a><a class="sub" href="#d71-noon">中午 初始化 git + GitHub</a><a class="sub" href="#d71-pm">晚上 写 README 模板 + 提交</a><a href="#d72">D72 周二</a><a class="sub" href="#d72-am">上午 写 datasets 模块（支持</a><a class="sub" href="#d72-noon">中午 写 transforms（数据增</a><a class="sub" href="#d72-pm">晚上 写数据层单元测试</a><a href="#d73">D73 周三</a><a class="sub" href="#d73-am">上午 写 models 模块（先把 b</a><a class="sub" href="#d73-noon">中午 写 your_method.py</a><a class="sub" href="#d73-pm">晚上 模型层单元测试</a><a href="#d74">D74 周四</a><a class="sub" href="#d74-am">上午 写 train.py + eva</a><a class="sub" href="#d74-noon">中午 写日志系统(TensorBoar</a><a class="sub" href="#d74-pm">晚上 写 metric.py（按任务选</a><a href="#d75">D75 周五</a><a class="sub" href="#d75-am">上午 跑 baseline 完整训练</a><a class="sub" href="#d75-noon">中午 监控 baseline loss</a><a class="sub" href="#d75-pm">晚上 跑你的方法 v1（同设置，只换方</a><a href="#d76">D76 周六</a><a class="sub" href="#d76-am">上午 看第一组结果(baseline </a><a class="sub" href="#d76-noon">中午 debug（如果结果异常）</a><a class="sub" href="#d76-pm">晚上 跑第二组 seed（不同随机种子</a><a href="#d77">D77 周日</a><a class="sub" href="#d77-am">上午 跑第三组 seed + 整理 3</a><a class="sub" href="#d77-noon">中午 写第一组对比分析</a><a class="sub" href="#d77-pm">晚上 W11 复盘 + W12 计划</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="33">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W33 · 第二课题 baseline 全面铺开 —— 用复 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M9 第二篇推进</span><span>·</span><span>Week 33</span><span>·</span><span>D225–D231</span></div><h1 class="title">第二课题 baseline 全面铺开 —— 用复用红利，把第二篇的实验矩阵一次性搭满</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="225" data-k="am" title="D225 上午段"></i><i data-d="225" data-k="noon" title="D225 中午段"></i><i data-d="225" data-k="pm" title="D225 晚上段"></i></span><span class="sday"><i data-d="226" data-k="am" title="D226 上午段"></i><i data-d="226" data-k="noon" title="D226 中午段"></i><i data-d="226" data-k="pm" title="D226 晚上段"></i></span><span class="sday"><i data-d="227" data-k="am" title="D227 上午段"></i><i data-d="227" data-k="noon" title="D227 中午段"></i><i data-d="227" data-k="pm" title="D227 晚上段"></i></span><span class="sday"><i data-d="228" data-k="am" title="D228 上午段"></i><i data-d="228" data-k="noon" title="D228 中午段"></i><i data-d="228" data-k="pm" title="D228 晚上段"></i></span><span class="sday"><i data-d="229" data-k="am" title="D229 上午段"></i><i data-d="229" data-k="noon" title="D229 中午段"></i><i data-d="229" data-k="pm" title="D229 晚上段"></i></span><span class="sday"><i data-d="230" data-k="am" title="D230 上午段"></i><i data-d="230" data-k="noon" title="D230 中午段"></i><i data-d="230" data-k="pm" title="D230 晚上段"></i></span><span class="sday"><i data-d="231" data-k="am" title="D231 上午段"></i><i data-d="231" data-k="noon" title="D231 中午段"></i><i data-d="231" data-k="pm" title="D231 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：<strong>阶段二后半（M9–M12，产出期收官）的第一周</strong>。M8 你已经把第二课题立项、跑到了初步的 v3 + 三数据集大表；本周进入第二课题的<strong>正式、系统的实验生产</strong>——按一张完整的实验矩阵（2–3 数据集 × 5 个 baseline × your method v1–v3 × 3 seed）把第二篇论文需要的实验<strong>一次性铺开</strong>。本周的主题词是<strong>“加速效应”</strong>：你会亲身体验“第二个课题做得明显更快”——第一课题一周才迭代一个版本，第二课题能“一天一个版本”。
+<strong>本周科研能力目标</strong>（你原计划，保留）：复用第一课题的实验框架快速推进；体验“第二个课题做得更快”的加速效应。
+<strong>先给你打个预防针（这周会快到让你有点不踏实）</strong>：第一课题时，你为“实验矩阵怎么设计、代码框架怎么搭、实验怎么管理”摸索了很久；<strong>本周这些你都有现成的了</strong>——实验矩阵改几个数据集/方法名就能复用、代码框架改 config 就能适配（改动量应在 200 行以内）、实验管理（wandb/矩阵表）流程已熟。所以你会发现实验铺得飞快。<strong>这种快是真实的、是你前 8 个月投入的复利，不是偷工减料</strong>；如果某天快到让你怀疑“是不是漏了什么”，对照第一课题的同类步骤检查质量即可，通常是真的更快了。
+<strong>关键心态（D231 继续）</strong>：第一篇论文可能这阶段有审稿消息——<strong>别频繁刷，过段时间看一次，精力放在第二课题产出上</strong>。
+<strong>本周精力怎么分配</strong>：这是密集的实验生产周。D225 搭矩阵+适配代码+启动 baseline;D226-228 “一天一个版本”快速迭代 v1→v2→v3;D229-230 确定最终版+多数据集验证+整合大表 v1;D231 复盘+计划。单卡可持续推进（第二课题方向已校准到 4090 能做），错峰排满 GPU。教学按“系统实验生产 + 体会加速”组织。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d225" data-d="225"><header class="day-head"><span class="dnum">D225</span><h2 class="day-t">周一 · 第二课题实验矩阵设计 + 代码适配 + 启动 baseline</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午设计第二课题完整实验矩阵（复用第一课题模板）；中午修改代码框架适配(改动应&lt;200行)；晚上启动数据集1上的5个baseline。</p>
+<p><strong>预期管理</strong>：阶段二后半第一天，把第二篇的实验矩阵一次性搭满。提醒：实验矩阵=2-3数据集×5 baseline×your method v1-v3×3 seed,<strong>直接复用第一课题的矩阵模板，改数据集和方法名即可</strong>；代码适配只改config/数据加载器/评估指标，<strong>因为框架已有，改动量应在200行以内</strong>（如果远超，说明方向跨度大或框架可更通用）；今天先把矩阵设计好、代码适配好、启动数据集1的5个baseline。</p>
+</blockquote>
+</div><section class="slot" id="d225-am" data-d="225" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D225 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计第二课题完整实验矩阵（复用模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(实验矩阵 = 第二篇的“作战地图”)</h4><div class="blk-b"><ul>
+<li><strong>实验矩阵</strong>是你这篇论文要做的所有实验的一张总表——本周要搭一张完整的：<strong>2–3 个数据集 × 5 个 baseline × your method v1–v3 × 3 seed</strong>。它定义了“为了证明你的方法，需要跑哪些实验”。</li>
+<li><strong>为什么一上来就搭完整矩阵（系统性 vs 走一步看一步）</strong>:M8 你做第二课题是“快速推进、先拿到初步结果”；<strong>本周是“正式生产”——按论文需要的完整、严谨的标准，把所有实验系统地铺开</strong>。一张完整的矩阵让你:① 心里有数（知道总共要跑多少、进度到哪）;② 不遗漏（论文需要的主对比/多 baseline/多数据集/多 seed 都覆盖到）;③ 可并行管理（矩阵表跟踪每个格子的状态）。<strong>这是从“探索性实验”升级到“生产性实验”的标志。</strong></li>
+<li><strong>★ 复用第一课题矩阵模板（改数据集和方法名即可）</strong>：你第一课题(M5)建过完整的实验矩阵（数据集 × 方法 × seed 的表格结构 + 管理方式）。<strong>第二课题的矩阵，直接复用这个模板——把数据集换成第二课题的、方法换成第二课题的 baseline 和你的 v1-v3，结构和管理方式完全照搬</strong>。这是“实验设计能力”的复利：你不用再想“实验矩阵该长什么样”，直接套用成熟模板，几分钟搭好。</li>
+<li><strong>矩阵的四个维度都为什么需要</strong>:① <strong>2-3 数据集</strong>——证明泛化性（跨域泛化发力线）;② <strong>5 个 baseline</strong>——和足够多的对照方法比，证明你的方法有竞争力（不是只赢一个弱 baseline）;③ <strong>v1-v3</strong>——展示你方法的迭代演进;④ <strong>3 seed</strong>——统计稳健性（结论不是单次运气）。<strong>四个维度共同构成一个有说服力的实验体系。</strong></li>
+<li><strong>为什么“系统性”本身就是论文质量的一部分（不只是堆实验）</strong>：一篇被接收的论文，和一篇被拒的论文，差别往往不在“方法多新”，而在“实验做得够不够系统、够不够严谨”。审稿人评判一篇论文，会问一连串问题：你在几个数据集上验证了？和多少个 baseline 比了？有没有消融证明每个组件有用？结果是单次还是多 seed 平均?——<strong>如果这些问题里有几个答不上来（只跑了 1 个数据集、只比了 1 个 baseline、没有 seed），无论方法多好，论文都立不住、会被质疑</strong>。所以一张完整的实验矩阵，不是“为了显得做得多”，而是<strong>系统地、不留破绽地回答审稿人会问的每一个问题</strong>：多数据集回答泛化、多 baseline 回答竞争力、多版本回答演进逻辑、多 seed 回答稳健性。<strong>把矩阵搭完整，就是把论文的“实验地基”打牢</strong>——这是论文能不能立住的硬条件。对你这个要把每篇论文都做扎实、用成果说话的人，养成“上来就搭完整矩阵”的习惯，意味着你的每篇论文在实验严谨性上都不会有明显短板，这本身就是质量的保证。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复用第一课题的实验矩阵模板。</li>
+<li>填入第二课题的内容：2-3 数据集、5 个 baseline、your method v1-v3、3 seed。</li>
+<li>形成完整矩阵表（每个格子是一个待跑实验，可跟踪状态）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题完整实验矩阵（2-3 数据集 × 5 baseline × v1-v3 × 3 seed，复用模板，可跟踪进度）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>从零设计矩阵</strong> → 复用第一课题模板，改数据集/方法名即可（复利）。</li>
+<li><strong>baseline 选太少（只比 1-2 个）</strong> → 5 个 baseline 才能证明竞争力（覆盖该方向主流方法）。</li>
+<li><strong>漏掉某个维度（如只跑 1 数据集/1 seed）</strong> → 四维度（数据集/baseline/方法版本/seed）都要，缺一则结论不全。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不知选哪 5 个 baseline?→ 选你方向最经典/最新/最常被比较的方法（M8 调研时见过的）；数据集选几个?→ 2-3 个相关但有差异的（体现泛化）；矩阵太大跑不完?→ 优先核心格子（主数据集 × 关键 baseline × 你的方法），次要的（第三数据集/部分 baseline）可后补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>复用模板搭完整实验矩阵</strong>。<strong>做了</strong>（设计第二课题完整矩阵）、<strong>学了</strong>(矩阵是作战地图、四维度的意义、复用模板=实验设计复利)、<strong>会了</strong>（系统规划一篇论文的全部实验）。</p>
+</div></section></section><section class="slot" id="d225-noon" data-d="225" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D225 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修改代码框架适配第二课题(&lt;200行)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(框架复用：改动应&lt;200行)</h4><div class="blk-b"><p>把第一课题的代码框架适配到第二课题——<strong>只改 config / 数据加载器 / 评估指标这几处，因为框架已有，改动量应在 200 行以内</strong>。</p>
+<ul>
+<li><strong>为什么“改动&lt;200行”是个有意义的指标</strong>：这个数字本身就是“框架复用度”的体现。第一课题你从零搭了整套框架（训练循环、实验管理、数据 pipeline、评测、日志……可能几千行）；<strong>第二课题如果框架设计得好（通用、模块化），适配新课题只需改几处：数据加载器（接新数据集）、config（新方法/超参）、评估指标（如有不同）——这些加起来应该很少(&lt;200 行)</strong>。如果你发现要改的远超 200 行（动了框架核心），说明要么第二课题和第一课题差异太大、要么第一课题的框架不够通用（可借机重构得更通用）。<strong>这个指标帮你判断复用是否健康。</strong></li>
+<li><strong>从这件事看“好的工程设计”的长期价值（对你后续所有课题）</strong>：你现在能“改&lt;200 行就把框架迁到新课题”，根源在于你第一课题时把框架设计得足够通用、模块化（数据、模型、训练、评测各司其职，通过 config 解耦）。<strong>这正是好的工程设计的回报：一次认真设计，长期低成本复用</strong>。反过来想，如果第一课题你把代码写得又乱又耦合（数据处理和模型逻辑搅在一起、超参硬编码在各处），那现在迁到第二课题就得大改、甚至重写——复利就没了。<strong>所以这提示你一个长期受益的习惯：每做一个项目，都顺手把可复用的部分抽象成通用、干净的模块</strong>（而不是写一堆一次性的脏代码）。这样你的“代码资产”会越积越厚，第三课题、第四课题的适配成本会越来越低。对你这个要在有限时间内持续产出多项成果的人，一套不断完善的通用框架，是和“领域知识”“写作能力”并列的、能持续复利的核心资产。今天&lt;200 行的适配，就是第一课题良好工程设计在兑现红利。</li>
+<li><strong>改动集中在三处</strong>:① <strong>数据加载器</strong>——为第二课题数据集写/改解析（复用统一数据层，加分支）;② <strong>config</strong>——第二课题的方法配置、超参、数据集路径;③ <strong>评估指标</strong>——如果第二课题用不同指标（通常旋转检测都是 mAP，可能不用改）。<strong>其余（训练、管理、日志）一行不用动，直接复用。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>适配数据加载器（接第二课题数据集，复用统一数据层加分支）。</li>
+<li>写第二课题的 config（方法/超参/数据集）。</li>
+<li>适配评估指标（如需）。确认改动集中、&lt;200 行，代码能跑通。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>代码框架适配完成(改 config/数据加载器/评估指标,&lt;200 行)，能跑通第二课题。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>动了框架核心导致改动巨大 → 适配应只改数据/config/指标三处；改动散乱难维护 → 用 config 区分课题，框架代码不动。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>适配改动远超 200 行?→ 反思是方向跨度大还是框架不够通用（可借机把框架重构得更模块化）；新数据集格式怪 → 复用统一数据层加解析分支（M8 做过）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用&lt;200行适配了第二课题代码</strong>。<strong>做了</strong>（适配数据/config/指标）、<strong>学了</strong>(改动&lt;200行=框架复用度健康的指标、适配集中三处)、<strong>会了</strong>（高效把成熟框架迁到新课题）。</p>
+</div></section></section><section class="slot" id="d225-pm" data-d="225" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D225 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动数据集 1 上的 5 个 baseline</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（baseline 矩阵的起点）</h4><div class="blk-b"><p>启动数据集 1 上的 5 个 baseline 训练——这是填充实验矩阵的第一批。5 个 baseline 是你方法的对照基准（证明你的方法相对它们有优势）。批量启动、用矩阵表管理。</p>
+<ul>
+<li><strong>为什么先跑满 baseline</strong>:baseline 是对照的基准——有了 5 个 baseline 在数据集 1 上的结果，你才能在接下来(D226+)说“我的方法相对这 5 个 baseline 提升了多少”。<strong>先把对照组跑出来，后面你的方法才有参照系</strong>。5 个 baseline 覆盖该方向主流方法，对比才有说服力（不是只赢一个弱基线）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>批量启动数据集 1 上的 5 个 baseline 训练。</li>
+<li>用矩阵表跟踪每个 baseline 的状态（运行中/完成/指标）。</li>
+<li>单卡错峰排队跑（复用第一课题的排期经验）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 1 上的 5 个 baseline 启动，矩阵表跟踪状态。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>baseline 不规范管理 → 用矩阵表+复用实验管理(config/seed/wandb);5 个一起挤爆单卡 → 排队错峰，逐个跑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>5 个 baseline 单卡跑太久?→ 排队 + 用小 backbone 先出初步、或合理分配几天；某 baseline 跑不起来 → 检查其开源代码/config 适配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了 baseline 矩阵</strong>。<strong>做了</strong>（启动 5 个 baseline + 矩阵表管理）、<strong>学了</strong>（先跑满 baseline 建对照基准、5 个覆盖主流方法）、<strong>会了</strong>（批量管理对照实验）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜完整实验矩阵（作战地图）</strong>：一篇论文的全部实验总表=2-3数据集×5 baseline×your method v1-v3×3 seed。四维度：数据集（泛化）/baseline（竞争力）/方法版本（迭代）/seed（稳健）。★复用第一课题模板改数据集和方法名即可（实验设计复利），从“探索性实验”升级到“生产性实验”。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜框架适配&lt;200行（复用度指标）</strong>：第二课题适配第一课题框架，只改数据加载器/config/评估指标三处，改动应&lt;200行——这个数字是“框架复用度健康”的指标。远超则反思方向跨度或框架通用性（可借机重构）。训练/管理/日志一行不动直接复用。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 第二课题实验矩阵 ✅ 代码适配完成(&lt;200行) ✅ baseline 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D225</summary><textarea data-note="d225" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d226" data-d="226"><header class="day-head"><span class="dnum">D226</span><h2 class="day-t">周二 · baseline 结果记录 + 启动 your method v1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把陆续出来的 baseline 结果记录到矩阵表；中午启动 your method v1（从 W31-32 代码继续）；晚上 v1 训练。</p>
+<p><strong>预期管理</strong>：今天填 baseline 结果 + 启动your method v1。提醒：baseline 结果陆续出来，及时记录到矩阵表（对照基准就位）;your method v1 <strong>从你 M8(W31-32)已有的代码继续</strong>（不是从零，v1 你已经实现过，这里是在完整矩阵语境下正式跑）；把 v1 在数据集1上启动，明天看它 vs baseline。</p>
+</blockquote>
+</div><section class="slot" id="d226-am" data-d="226" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D226 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">baseline 结果陆续记录到矩阵表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（及时记录：让矩阵表成为单一事实源）</h4><div class="blk-b"><p>昨晚启动的 baseline 陆续出结果，<strong>及时记录到矩阵表</strong>——让矩阵表成为你实验状态的“单一事实源”(single source of truth)。</p>
+<ul>
+<li><strong>为什么及时记录到矩阵表</strong>：实验多了(5 baseline × 多数据集 × 多 seed = 几十个)，如果不及时、统一地记录，很容易乱（哪个跑完了、结果多少、哪个还在跑）。<strong>把所有结果记到那一张矩阵表里，你随时一眼看清全局进度和已有结果</strong>——这是管理大规模实验的关键。matrix 表既是计划（要跑什么）也是记录（跑出什么），持续更新。</li>
+<li><strong>大规模实验最怕“失控”，矩阵表是防失控的核心工具</strong>：当实验只有几个时，你脑子还能记住；但第二篇要跑几十个（5 baseline × 2-3 数据集 × 多版本 × 3 seed），没有一张统一的表，你很快就会陷入“这个跑完了吗？那个结果是多少？哪个还在队列里？”的混乱——甚至重复跑、漏跑、或用错结果。<strong>一张设计好的矩阵表（每行一个实验配置，列出状态/各 seed 结果/均值），让你随时一眼掌控全局</strong>：哪些完成、哪些在跑、哪些待启动、当前最好的结果是什么。配合“脚本从日志自动汇总到表”（而非手抄，避免抄错），它就成了你这几十个实验的“指挥中心”。养成“所有实验状态和结果都进这一张表”的习惯，是你能从容驾驭论文级大规模实验、而不被它淹没的关键。</li>
+<li><strong>baseline 结果就是对照基准</strong>：这些 baseline 的结果，就是你后续衡量“我的方法好多少”的参照。记录时连同关键信息（数据集、seed、指标）一起记，方便后续对比。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把陆续完成的 baseline 结果记录到矩阵表（数据集/seed/指标）。</li>
+<li>更新矩阵表状态（完成/运行中）。</li>
+<li>确认 baseline 结果合理（对照第一课题或文献的同类基线）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 结果记录到矩阵表，状态清晰，结果合理。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>结果零散记在各处 → 统一记到矩阵表（单一事实源）；只记数字不记配置 → 连数据集/seed 一起记（方便对比）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某 baseline 结果异常低?→ 检查其 config/数据适配是否正确（对照文献报告值）；结果太多记不过来 → 用脚本从 log 自动汇总到表。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>建立了矩阵表作为单一事实源</strong>。<strong>做了</strong>（记录 baseline 到矩阵表）、<strong>学了</strong>（及时统一记录、矩阵表是计划+记录、baseline 是对照基准）、<strong>会了</strong>（管理大规模实验的状态）。</p>
+</div></section></section><section class="slot" id="d226-noon" data-d="226" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D226 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 your method v1（从 W31-32 代码继续）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（v1 不是从零：从已有代码继续）</h4><div class="blk-b"><p>启动 your method v1——<strong>从你 M8(W31-32)已经实现的代码继续</strong>，不是从零。v1 你在 M8 已经做过（迁移第一篇创新模块），这里是在<strong>完整、系统的实验矩阵语境下正式跑 v1</strong>（所有数据集、所有 seed），作为论文的正式结果。</p>
+<ul>
+<li><strong>M8 的 v1 vs 本周的 v1（为什么不重复）</strong>:M8 你跑 v1 是“快速推进、拿初步信号”；本周是“在完整矩阵下正式跑 v1”——同样的 v1 方法，但这次是系统地跑（多数据集、多 seed），结果是论文要用的正式数据。<strong>代码直接复用 M8 的 v1 实现，只是在完整矩阵下重新、规范地跑一遍</strong>。这体现了 M8（探索）到 M9（生产）的衔接：M8 验证了方法可行，M9 把它做成论文级的严谨结果。</li>
+<li><strong>“探索”和“生产”两个阶段的区分，是高效做研究的一个关键心法</strong>：很多人做研究时把两个阶段混在一起——一边探索（试方向、调方法）一边就想着出最终结果，结果是既没充分探索（过早锁定）、又没严谨生产（结果不成体系）。<strong>而清晰地分两阶段则高效得多</strong>:① <strong>探索期（如 M8 立项+初步 v1-v3）</strong>——目标是“快速搞清楚方向行不行、方法大概怎么设计”，可以用小数据、少 seed、快速试错，不追求严谨，只求快速拿到信号、确定方向;② <strong>生产期（如本周 M9）</strong>——方向已确定，目标是“按论文标准把结果做扎实”，这时才上完整矩阵、多数据集、多 seed、严谨对比。<strong>两阶段各有各的标准：探索求快不求严谨，生产求严谨不求新方向</strong>。你现在正处在从探索切到生产的节点：M8 已经探索清楚（方法可行、v3 大概是什么样），所以 M9 可以放心地进入生产模式，系统地把论文结果做出来，不用再纠结“方向对不对”（那是探索期已解决的问题）。理解并刻意运用这个“探索→生产”的两阶段心法，能让你既不在探索期过度严谨（浪费时间）、也不在生产期还在摇摆方向（出不了成体系的结果）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复用 M8(W31-32)的 v1 代码。</li>
+<li>在数据集 1 上启动 v1 训练（规范：多 seed）。</li>
+<li>用矩阵表跟踪 v1 状态。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>your method v1 启动（复用 M8 代码，在完整矩阵下规范跑），矩阵表跟踪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>重新实现 v1 → 复用 M8 已有代码；v1 不按矩阵规范跑（漏 seed）→ 按矩阵（多 seed）正式跑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>M8 的 v1 代码忘了细节?→ 看 M8 的实验记录/config;v1 在新矩阵下报错 → 检查矩阵适配（数据/seed 配置）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>在完整矩阵下正式启动 v1</strong>。<strong>做了</strong>（复用 M8 代码启动 v1）、<strong>学了</strong>（v1 从已有代码继续、M8 探索到 M9 生产的衔接）、<strong>会了</strong>（把探索性方法做成论文级正式结果）。</p>
+</div></section></section><section class="slot" id="d226-pm" data-d="226" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D226 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">v1 训练 + 监控</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>v1 训练并监控，明天(D227)看 v1 vs baseline 对比。v1 是你方法的第一个正式版本，看它相对 5 个 baseline 的表现。复用实验管理。</p>
+<ul>
+<li><strong>v1 在完整矩阵下的意义</strong>：有了 baseline（对照）和 v1（你的方法第一版），明天就能做第一次正式的“你的方法 vs baseline”对比——这是论文主结果的雏形。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>监控 v1 训练（loss 正常、无报错）。</li>
+<li>矩阵表更新 v1 状态。</li>
+<li>明天看 v1 vs baseline。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v1 训练运行正常，矩阵表跟踪，等明天对比。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>v1 不监控 → 看 loss 正常；和 baseline 设置不一致 → 保持一致（公平对比）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v1 训练异常?→ 检查复用代码的矩阵适配；单卡排不开 → 错峰（baseline 白天、v1 晚上）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进 v1 正式训练</strong>。<strong>做了</strong>（监控 v1 + 矩阵管理）、<strong>学了</strong>（v1 是主结果雏形、复用管理）、<strong>会了</strong>（规范推进论文级实验）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜矩阵表=单一事实源</strong>：几十个实验（5 baseline×多数据集×多seed）的状态和结果，统一记到一张矩阵表（既是计划也是记录，持续更新）——随时一眼看清全局进度和已有结果。脚本从log自动汇总更高效。这是管理大规模实验的关键。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ baseline 结果（记录到矩阵表） ✅ v1 训练中。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D226</summary><textarea data-note="d226" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d227" data-d="227"><header class="day-head"><span class="dnum">D227</span><h2 class="day-t">周三 · v1 对比 + 设计/实现 v2</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午 v1 结果与 baseline 对比、分析差距和改进空间；中午设计 v2 改进点；晚上实现 v2+启动训练。</p>
+<p><strong>预期管理</strong>：今天做v1对比 + 设计实现v2。提醒：v1 vs 5个baseline看你的方法是否有优势、还差在哪(差的地方=v2改进方向)；设计v2基于v1结果分析（对症，不盲目）；全程复用第一课题的“对比→分析→改进”流程，你已驾轻就熟；今天实现v2并启动——明天就能看v2，这就是“一天一个版本”的加速节奏。</p>
+</blockquote>
+</div><section class="slot" id="d227-am" data-d="227" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D227 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">v1 vs baseline 对比 + 分析改进空间</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（在完整矩阵下做对比：更有说服力）</h4><div class="blk-b"><p>v1 训练完，和 5 个 baseline 对比——看你的方法 v1 相对这些 baseline 的表现。<strong>因为你有 5 个 baseline 的对照，这个对比比“只比 1 个 baseline”有说服力得多</strong>。</p>
+<ul>
+<li><strong>对比看什么</strong>:① <strong>v1 是否优于 baseline</strong>（相对 5 个 baseline,v1 排在什么位置、提升多少）——验证你的方法方向有效;② <strong>分场景/分类别表现</strong>（v1 在哪些情况好、哪些还差）——差的地方就是 v2 的改进方向;③ <strong>和最强 baseline 的差距</strong>（如果 v1 还没超过最强 baseline，差距在哪）。<strong>在 5 个 baseline 的语境下，你能更清楚地定位 v1 的水平和改进空间。</strong></li>
+<li><strong>为什么“和 5 个 baseline 比”远胜“和 1 个 baseline 比”（说服力的来源）</strong>：设想两种论文——A 说“我的方法比某个 baseline 高了 2 个点”;B 说“我的方法在 5 个有代表性的 baseline（覆盖该方向主流方法）中排第一，比最强的还高 1 个点”。<strong>B 的说服力强得多</strong>，因为:① A 可能只是赢了一个弱 baseline（审稿人会问“和最强的 SOTA 比呢？”）;② B 证明了你的方法在整个方法谱系里是有竞争力的，不是挑软柿子捏。<strong>所以“和足够多、足够强的 baseline 比”是论文可信度的关键</strong>——它堵住了“你是不是只赢了弱对手”这个最常见的质疑。本周你一上来就跑满 5 个 baseline，正是为了让你的方法在一个完整的竞争语境里被检验：如果 v1 现在还没排到最强，你清楚地知道差距在哪、要追谁（这就是 v2/v3 的目标）；如果 v1 已经领先，你的优势也是在强对照下证明的、可信的。这种“在完整方法谱系里定位自己”的严谨，比孤立地报一个提升数字有价值得多。</li>
+<li><strong>复用第一课题的对比/分析流程</strong>：这套“对比 → 分析不足 → 找改进方向”的流程你很熟，直接复用，快速分析。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>v1 vs 5 个 baseline 对比（位置/提升/分场景）。</li>
+<li>分析 v1 的改进空间（还差在哪，尤其相对最强 baseline）。</li>
+<li>据分析，确定 v2 改进方向。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v1 vs baseline 对比（在 5 baseline 语境下）+ v2 改进方向（对症 v1 不足）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只和 1 个 baseline 比 → 和 5 个比（更有说服力、更准定位）；改进方向脱离 v1 实际不足 → 对症 v1 暴露的具体问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v1 没超过 baseline?→ 分析差距来源（方向问题还是实现问题），针对性改 v2；看不出改进方向 → 看 v1 的失败案例/最差场景。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>在完整 baseline 语境下分析了 v1</strong>。<strong>做了</strong>（v1 对比 + 改进空间分析）、<strong>学了</strong>（5 baseline 语境更有说服力、对症找改进）、<strong>会了</strong>（在系统对照下定位方法水平）。</p>
+</div></section></section><section class="slot" id="d227-noon" data-d="227" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D227 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">设计 v2 改进点（基于 v1 分析）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据 v1 的分析，设计 v2 改进点——针对 v1 暴露的不足（尤其相对最强 baseline 还差的地方、新场景难点）。v2 是你方法的改进版，体现针对性的创新。</p>
+<ul>
+<li><strong>v2 改进要对症</strong>：不是盲目加东西，而是针对 v1 对比暴露的具体问题设计改进（如 v1 在某类目标上差 → v2 针对它改）。<strong>对症的改进命中率高（尤其单卡，要把算力押在有把握的改进上）。</strong></li>
+<li><strong>“对症改进”vs“盲目调参”是研究者和调参侠的分水岭</strong>：面对“v1 还不够好”这个问题，有两种做法——一种是“盲目试”：把各种 trick 都加一遍、超参乱调一通，看哪个碰巧涨点（不知道为什么 work）；另一种是“对症改”：先分析 v1 到底差在哪（哪类样本、哪个场景表现差）、为什么差（什么原因导致的），再针对这个具体原因设计改进。<strong>前者是调参侠的做法——低效（命中率靠运气）、不可解释（说不清为什么有用）、不可持续（换个问题又得从头乱试）；后者是研究者的做法——高效（改在刀刃上）、可解释（知道为什么 work，能写进论文）、可迁移（这套“分析→对症”的方法论到哪都适用）</strong>。对你尤其重要的是:① <strong>单卡算力有限，经不起盲目试的低命中率</strong>，必须把每次实验都押在有分析支撑的改进上;② <strong>论文需要“为什么这么改”的逻辑</strong>（审稿人会问你的设计动机），对症的改进天然有动机故事可讲，盲目试出来的“我加了这个碰巧涨了”是讲不出有说服力的故事的。所以每次设计改进，都强迫自己先回答“v1 具体差在哪、为什么、我这个改进怎么对症解决它”——这个习惯，既提升你的实验效率，也让你的工作有研究的深度而非调参的浅薄。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据 v1 分析，设计 v2 改进点（对症 v1 不足）。</li>
+<li>明确 v2 改进针对哪个问题、预期改善什么。</li>
+<li>准备实现 v2。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 改进点设计（对症 v1 暴露的具体不足，有预期）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>盲目加改进 → 对症 v1 的具体问题；一次设计太多改进 → 聚焦 1-2 个主要改进（看清效果）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知 v2 怎么改?→ 回到 v1 的最差场景/失败案例，针对性设计；改进想做大 → 单卡可做的小改进优先。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>设计了对症的 v2 改进</strong>。<strong>做了</strong>（设计 v2 改进点）、<strong>学了</strong>（改进对症 v1 不足、命中率/单卡）、<strong>会了</strong>（针对性设计方法改进）。</p>
+</div></section></section><section class="slot" id="d227-pm" data-d="227" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D227 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">实现 v2 + 启动训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（实现并启动：为“一天一版”铺垫）</h4><div class="blk-b"><p>实现 v2 改进（复用框架，改动集中在改进模块），启动训练。今晚实现并启动 v2，明天(D228)就能看 v2 结果——<strong>这就是第二课题“一天一个版本”加速节奏的体现</strong>。</p>
+<ul>
+<li><strong>为什么能“当天实现+启动”</strong>：因为框架、流程都复用，你实现一个改进、跑起来，行云流水（不用搭环境、不用想流程）。<strong>第一课题时，“设计改进→实现→启动”可能要好几天；第二课题熟练 + 复用，当天就能完成</strong>——这是加速效应。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>实现 v2 改进（复用框架，改动集中）。</li>
+<li>启动 v2 训练（矩阵规范：多 seed）。</li>
+<li>矩阵表跟踪 v2。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 实现并启动（复用框架，改动集中），矩阵跟踪，等明天结果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>v2 改太多难归因 → 聚焦主要改进；v2 不按矩阵规范 → 多 seed 正式跑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v2 当天实现不完?→ 聚焦核心改进先实现启动，细节后调；实现复杂 → 复用第一课题类似模块思路。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>当天实现并启动了 v2</strong>。<strong>做了</strong>（实现 v2 + 启动）、<strong>学了</strong>(当天实现+启动=加速节奏、复用让迭代快)、<strong>会了</strong>（高效推进方法迭代）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜在完整矩阵下对比迭代</strong>:v1/v2/v3 都在“5 baseline×多数据集×多seed”的完整矩阵下跑——对比更有说服力（5 baseline 语境）、定位更准。改进对症 v1 暴露的具体不足（命中率/单卡）。复用对比-分析-改进流程，当天实现+启动=加速节奏。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v1 对比表 ✅ v2 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D227</summary><textarea data-note="d227" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d228" data-d="228"><header class="day-head"><span class="dnum">D228</span><h2 class="day-t">周四 · v2 结果分析 + 设计/实现 v3（体会“一天一个版本”的加速）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午分析 v2 结果；中午设计 v3 改进；晚上实现 v3+启动。</p>
+<p><strong>预期管理</strong>：今天分析v2 + 设计实现v3。提醒：v2 vs v1 vs baseline看改进是否有效；设计v3进一步打磨（据v2不足）；<strong>今天你会清楚体会“一天一个版本”的加速节奏</strong>——v1(D226)→v2(D227)→v3(D228)，这在第一课题时每个版本要一周；速度的提升来自经验积累+代码复用，这是你前8个月投入的复利，真实而非取巧。</p>
+</blockquote>
+</div><section class="slot" id="d228-am" data-d="228" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D228 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">v2 结果分析(v2 vs v1 vs baseline)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>v2 训练完，对比 v2 vs v1 vs baseline——看 v2 的改进是否有效。理想 v2 &gt; v1 且相对 baseline 优势扩大。</p>
+<ul>
+<li><strong>三方对比看什么</strong>:① v2 是否比 v1 提升（改进有效吗）;② v2 相对 5 个 baseline 的位置（是否超过更多 baseline、甚至最强 baseline）;③ 在 v1 暴露的不足上是否改善（对症的改进是否奏效）。<strong>在完整 baseline 语境下，你能清楚看到 v2 的进步。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>分析 v2 vs v1 vs baseline（改进有效吗、相对 baseline 位置）。</li>
+<li>更新矩阵表 + 对比记录。</li>
+<li>判断：是否继续 v3 打磨。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2 三方对比分析（改进有效性 + 相对 baseline 位置），矩阵更新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>v2 没提升不分析原因 → 分析方向/实现，调整；只看 v1 不看 baseline → 在完整语境下看位置。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v2 没比 v1 好?→ 检查改进实现/方向；提升小 → 可能需 v3 更针对性改进。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>分析了 v2 的改进效果</strong>。<strong>做了</strong>（v2 三方对比）、<strong>学了</strong>（改进有效性、完整语境定位）、<strong>会了</strong>（评估方法迭代效果）。</p>
+</div></section></section><section class="slot" id="d228-noon" data-d="228" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D228 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">设计 v3 改进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（v3：打磨到最优）</h4><div class="blk-b"><p>据 v2 的分析，设计 v3 改进——进一步打磨（针对 v2 仍存在的不足），目标是把方法做到有竞争力的最终版。v3 通常是精益求精（不必颠覆）。</p>
+<ul>
+<li><strong>v3 的定位</strong>：到 v3，方法核心已成型（v1 基础 + v2 改进）,v3 是把它打磨到最优——拿到论文的主结果。可以是针对 v2 残留问题的进一步改进，或整合调优。<strong>和第一课题一样，迭代到最优版作主方法。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据 v2 不足设计 v3 改进（精益求精）。</li>
+<li>明确 v3 针对什么、预期。</li>
+<li>准备实现 v3。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v3 改进设计（针对 v2 残留不足，打磨到最优）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>v3 求颠覆大改 → 精益求精打磨；脱离 v2 实际 → 针对 v2 残留问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>想不出 v3?→ 看 v2 最差场景；v2 已很好 → 整合调优、微调超参也是 v3。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>设计了打磨性的 v3</strong>。<strong>做了</strong>（设计 v3）、<strong>学了</strong>（v3 精益求精到最优）、<strong>会了</strong>（把方法迭代到最终版）。</p>
+</div></section></section><section class="slot" id="d228-pm" data-d="228" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D228 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">实现 v3 + 启动 → 体会加速效应</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(★ “一天一个版本”=复利的量化体现)</h4><div class="blk-b"><p>实现 v3 并启动训练。<strong>到今天，你已经清楚体会到第二课题“一天一个版本”的加速节奏了</strong>:v1(D226)→ v2(D227)→ v3(D228)，三天三个版本。</p>
+<ul>
+<li><strong>★ 这种加速在第一课题时是不可能的（对比体会复利）</strong>：回想第一课题(M3-M4)——你迭代一个方法版本（设计改进 → 实现 → 跑 → 分析）往往要<strong>一整周</strong>。而第二课题，你能<strong>一天一个版本</strong>。这个对比鲜明地量化了你的成长：速度提升了约 5-7 倍。<strong>这个提升来自两点:① 经验积累</strong>（你已经知道怎么设计改进、怎么实现、怎么分析，不用摸索）；<strong>② 代码复用</strong>（框架、流程、实验管理都现成，改几行就能跑新版本）。<strong>这正是“复利”最直观的证据——你前 8 个月(M1-M8)的投入，现在以“5-7 倍的迭代速度”在回报你</strong>。</li>
+<li><strong>认识到这一点的意义（对你长期的激励）</strong>：第二课题预计 3 个月(M9-M11)做完，而第一课题用了 8 个月——不是第二课题更简单，而是你更强了。<strong>这种“越往后越快”的复利，会持续累积</strong>：第三课题会比第二课题更快、你的研究产出会越来越高效。对你这个要在有限时间内做出多项成果、对接空天院的人，这种“持续高产的能力”才是真正的核心竞争力。今天的“一天一版”，就是这个能力正在兑现的信号——带着这份对自己成长的确认，继续高效往前。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>实现 v3（复用框架，改动集中）。</li>
+<li>启动 v3 训练（矩阵规范）。</li>
+<li>体会并记录“一天一版”的加速（对比第一课题的一周一版）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v3 实现并启动（当天完成），三天三版的加速节奏达成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>因为快就放松质量 → 加速是真实的，但质量（公平对比/多 seed）不能松；不体会复利 → 记下“一天一版 vs 一周一版”的对比（确认成长）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v3 当天实现不完?→ 聚焦核心先启动；怀疑“是不是太快漏了什么”→ 对照第一课题同类步骤检查质量，通常是真的更快了。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>实现 v3 并体会了加速效应</strong>。<strong>做了</strong>（实现 v3 + 启动 + 体会复利）、<strong>学了</strong>(一天一版=复利量化、越往后越快、持续高产是核心竞争力)、<strong>会了</strong>（高效迭代并认识到自己的成长）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜加速效应（复利量化）</strong>：第二课题“一天一个版本”(v1→v2→v3)，第一课题每版需一周——速度提升5-7倍。来自经验积累（不用摸索）+代码复用（改几行就跑）。这是前8个月投入的复利回报，真实而非取巧。越往后越快，持续高产是你对接空天院的核心竞争力。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v2 结果 ✅ v3 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D228</summary><textarea data-note="d228" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d229" data-d="229"><header class="day-head"><span class="dnum">D229</span><h2 class="day-t">周五 · v3 结果 + 确定最终版 + 数据集 2 验证</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午 v3 结果→确定最终方法版本→在数据集2启动验证；中午读2篇最新arXiv；晚上数据集2实验。</p>
+<p><strong>预期管理</strong>：今天确定最终方法版+启动数据集2验证。提醒：v3 vs v1/v2看是否最优，确定论文的最终主方法版本（v3没比v2好就用v2）；在数据集2上启动验证（泛化性证据）；产出期也读2篇最新arXiv保持前沿（确保对比/定位不落后）；数据集2复用同一套矩阵流程，快速铺开。</p>
+</blockquote>
+</div><section class="slot" id="d229-am" data-d="229" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D229 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">v3 结果 + 确定最终方法版本 + 数据集 2 启动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（确定最终版：数据说话）</h4><div class="blk-b"><p>v3 训练完，做 v1/v2/v3 三版对比，<strong>确定论文的最终主方法版本</strong>——通常是最优的 v3，但如果 v3 没比 v2 好，就用 v2（数据说话，不为有 v3 而硬上）。然后在数据集 2 上启动最终版的验证。</p>
+<ul>
+<li><strong>确定最终版的原则</strong>：看三版在数据集 1 上的表现（相对 baseline、多 seed 稳健性），选最优且稳健的作最终主方法。<strong>之后所有进一步实验（数据集 2/3、消融）都用这个最终版</strong>——锁定最终版，后续实验才有统一的对象。</li>
+<li><strong>为什么“锁定最终版”是一个重要的纪律（避免实验失控）</strong>：做实验时有个常见的坑——方法一直在变。你跑着跑着觉得“再改一点会更好”，于是又出 v4、v5……结果是：数据集 2 上跑的是 v3、数据集 3 上跑的是 v5、消融基于 v4，<strong>各处实验的“你的方法”都不是同一个东西，根本没法整合成一张一致的表</strong>，论文也写不清“我的方法到底是哪个”。<strong>所以到某个点必须果断锁定：这个版本（如 v3）就是论文的最终方法，从此不再改它，所有后续实验（多数据集、消融、可视化）都基于这个锁定的版本</strong>。这样你的所有结果才是一致的、可整合的、可写进论文的。锁定的时机就是现在(D229)：三版迭代下来，方法已经成型，该收敛了。<strong>这种“探索到一定程度就锁定、然后系统地把锁定版本验证充分”的纪律，是把研究从“无止境地调”变成“能产出成体系结果”的关键</strong>——边际的一点提升，不值得让整个实验体系失去一致性。</li>
+<li><strong>启动数据集 2 验证（泛化性）</strong>：最终版确定后，在数据集 2 上跑（最终版 + baseline），验证泛化性。复用同一套矩阵流程，快速铺开。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>v1/v2/v3 三版对比，确定最终主方法版本（最优且稳健）。</li>
+<li>在数据集 2 上启动最终版 + baseline 的验证。</li>
+<li>矩阵表更新。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>最终方法版本确定（数据支撑）+ 数据集 2 验证启动。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>为有 v3 硬用 v3 → 数据说话，v3 没更好就用 v2；不锁定最终版就铺数据集 2 → 先锁定，后续实验统一对象。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>三版接近难定?→ 选最稳健的（多 seed std 小）；数据集 2 启动问题 → 复用统一数据层适配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确定了最终版并启动数据集 2</strong>。<strong>做了</strong>（定最终版 + 数据集 2 启动）、<strong>学了</strong>（数据说话定最终版、锁定后统一实验对象）、<strong>会了</strong>（确定论文主方法并验证泛化）。</p>
+</div></section></section><section class="slot" id="d229-noon" data-d="229" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D229 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">读 2 篇最新 arXiv（保持前沿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（产出期不脱离前沿）</h4><div class="blk-b"><p>即使在密集实验生产期，也读 2 篇你方向的最新 arXiv——保持前沿敏感度，确保你第二篇的对比/定位不落后。</p>
+<ul>
+<li><strong>为什么产出期也读最新论文</strong>:① 确保对比不落后（别人最近有没有做类似的、你要对比/区分）;② 确保定位准确（你的创新是否还新）;③ 可能有可借鉴的新方法。<strong>密集做实验时容易闭门造车，读最新 arXiv 规避“做完发现别人已做/有更好对比”的风险</strong>。领域熟，读得快。</li>
+<li><strong>遥感和 CV 领域更新很快，产出期“断更”的风险很实际</strong>:arXiv 上每天都有新论文，你方向（旋转检测/SAR/跨域）可能这几周就有人发了相关工作。如果你埋头做几周实验完全不看，等论文写完投出去，审稿人很可能指出“你没对比某篇最近的工作”——轻则要求补实验（拖延录用），重则因为“没和最新 SOTA 比”被质疑贡献。<strong>每周花一点时间扫最新 arXiv，就是给你的论文上一道“保险”</strong>：及时发现相关新工作（纳入对比或讨论）、确认你的创新仍然新（没被抢先）、顺便可能借鉴到有用的新方法。对你领域知识已经扎实的人，扫这几篇很快（已知背景跳过、只看新东西）。所以别把“读论文”和“做实验”对立起来——产出期也要留一个小窗口跟前沿，这点投入相对“论文因为没跟上前沿而被拒/拖延”的代价，太划算了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>读 2 篇你方向的最新 arXiv（快速精读）。</li>
+<li>看：有无类似工作（需对比）、你定位是否还新、有无可借鉴。</li>
+<li>记笔记。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>2 篇最新 arXiv 笔记（尤其“和我的关系”）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>产出期不读论文 → 保持前沿；读了不看“和我的关系” → 重点对比/差异/借鉴。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>发现类似工作?→ 找差异点强化定位；没相关 → 方向较新，继续。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>产出期保持了前沿跟进</strong>。<strong>做了</strong>（读 2 篇 arXiv + 笔记）、<strong>学了</strong>（产出期不脱离前沿、规避闭门造车）、<strong>会了</strong>（边产出边跟前沿）。</p>
+</div></section></section><section class="slot" id="d229-pm" data-d="229" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D229 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">数据集 2 实验推进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>推进数据集 2 上的实验（最终版 + baseline），监控进度，记录到矩阵表。数据集 2 的结果是泛化性证据的第二块（数据集 1 已有，数据集 2 加上，泛化更有说服力）。</p>
+<ul>
+<li><strong>多数据集=泛化性证据的累积</strong>：数据集 1 证明方法有效，数据集 2 证明“不是单数据集过拟合”，后面数据集 3(D230)进一步强化。<strong>每加一个数据集，泛化性的证据就更扎实一分</strong>（契合你跨域泛化发力线）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>监控数据集 2 实验（最终版 + baseline）。</li>
+<li>记录结果到矩阵表。</li>
+<li>准备明天数据集 3 + 整合大表。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 实验推进，结果记录，泛化证据累积。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>数据集 2 评测不一致 → 保持一致（公平）；只跑你的方法不跑 baseline → baseline 也要（对照）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>数据集 2 慢?→ 错峰排期；某结果异常 → 检查数据适配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了数据集 2（泛化证据）</strong>。<strong>做了</strong>（数据集 2 实验 + 记录）、<strong>学了</strong>（多数据集累积泛化证据、跨域泛化卖点）、<strong>会了</strong>（系统验证方法泛化性）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜确定最终版+多数据集泛化</strong>:v1/v2/v3三版对比，数据说话定最优且稳健的为最终主方法（没更好就用上一版，别为有v3硬上）。锁定后所有进一步实验（数据集2/3/消融）用统一对象。每加一个数据集，泛化证据更扎实一分（跨域泛化卖点）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v3 结果 + 最终版确定 ✅ 数据集 2 启动 ✅ 2 篇 arXiv 笔记。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D229</summary><textarea data-note="d229" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d230" data-d="230"><header class="day-head"><span class="dnum">D230</span><h2 class="day-t">周六 · （集中日）· 多数据集结果 + 整合大表 v1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午数据集2全部结果；中午数据集3启动（如有）；晚上整合多数据集大表v1。</p>
+<p><strong>预期管理</strong>：今天整合多数据集大表v1。提醒：数据集2结果出齐+数据集3启动（如有第三个）；整合多数据集大表（你的方法vs baseline，在2-3个数据集上）——这是第二篇的核心证据；<strong>第二次产出“多数据集大表”明显比第一篇快</strong>（复用表格式+流程）；大表v1先成形，后续（消融、第三数据集）会继续补充。</p>
+</blockquote>
+</div><section class="slot" id="d230-am" data-d="230" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D230 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 2 全部结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据集 2 上的全部实验（最终版 + baseline + 多 seed）出齐，记录到矩阵表。数据集 2 的完整结果，是泛化性证据的第二块。</p>
+<ul>
+<li><strong>完整意味着</strong>：数据集 2 上，你的最终版和 5 个 baseline 都跑完（多 seed），有完整的对比数据。这样数据集 2 上的“你的方法 vs baseline”对比就完整了（和数据集 1 一样的严谨度）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>确认数据集 2 全部实验完成（最终版 + baseline + 多 seed）。</li>
+<li>结果记录到矩阵表。</li>
+<li>检查数据集 2 结果合理（对照数据集 1 的模式）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 全部结果出齐，记录完整，泛化证据第二块就位。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>数据集 2 实验不全（漏 baseline/seed）→ 补齐（和数据集 1 同严谨度）；结果不记录 → 及时记矩阵表。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某实验还没跑完?→ 等或补跑，大表可先用已有结果搭框架；结果异常 → 检查适配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了数据集 2 的完整实验</strong>。<strong>做了</strong>（数据集 2 全部结果 + 记录）、<strong>学了</strong>（完整对比的严谨度、泛化第二块）、<strong>会了</strong>（系统完成一个数据集的全部实验）。</p>
+</div></section></section><section class="slot" id="d230-noon" data-d="230" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D230 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">数据集 3 启动（如有第三个）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>如果有第三个数据集，启动数据集 3 的实验（最终版 + baseline）——第三块泛化证据。三个数据集的泛化性比两个更强（契合跨域泛化卖点）。复用流程，快速启动。</p>
+<ul>
+<li><strong>第三个数据集的价值（可选但加分）</strong>：两个数据集已证明泛化，第三个进一步强化（&quot;方法在多种数据分布下都稳定有效&quot;）。如果时间/数据允许，加第三个是泛化性的有力加分；如果没有合适的第三数据集，两个也够（诚实即可）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>如有第三个数据集，启动数据集 3 实验（最终版 + baseline）。</li>
+<li>复用流程快速启动，矩阵表跟踪。</li>
+<li>如无第三个，数据集 2 已足够，准备整合大表。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 启动（如有），或确认用两个数据集整合大表。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>为凑数硬找不合适的第三数据集 → 合适才加，不合适用两个也行（诚实）；第三数据集不按矩阵规范 → 同严谨度。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>没有合适的第三数据集?→ 用两个（已证明泛化），论文如实说明；有但跑不动 → 排期或后补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了第三数据集（或确认两个足够）</strong>。<strong>做了</strong>（数据集 3 启动/确认）、<strong>学了</strong>（第三数据集强化泛化、可选加分、诚实）、<strong>会了</strong>（灵活决定泛化验证的范围）。</p>
+</div></section></section><section class="slot" id="d230-pm" data-d="230" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D230 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整合多数据集大表 v1</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(多数据集大表 = 第二篇核心证据)</h4><div class="blk-b"><p>整合多数据集的结果成<strong>大表 v1</strong>——你的方法 vs 5 个 baseline，在 2-3 个数据集上的对比。这是第二篇论文 Experiment 的核心证据（主对比 + 泛化）。</p>
+<ul>
+<li><strong>大表 v1 整合什么</strong>：你的最终方法 vs 5 个 baseline，在 2-3 个数据集上的指标（多 seed mean±std）。清晰展示“你的方法在多个数据集上都优于/媲美 baseline”。复用第一篇的表格式。<strong>这是 v1（初版），后续（消融、可视化）会继续补充完善。</strong></li>
+<li><strong>★ 第二次产出更快（复用红利）</strong>：“多数据集大表”你第一篇做过（三数据集主实验表），格式、整合方式直接复用。<strong>第二次产出明显更快</strong>——又一次复利体现。</li>
+<li><strong>大表是论文的“门面证据”，值得做到既准确又清晰</strong>：读者（尤其审稿人）看你的论文，主结果大表往往是他们最先、最仔细看的东西——它一眼决定了“这个方法到底行不行”。所以大表有两个不可妥协的要求:① <strong>数字绝对准确</strong>——大表里每个数字都要和你的实验日志严格一致，任何一个数字错了（手抄错、版本搞混），都可能让审稿人质疑你整个工作的可靠性（这也是为什么要用脚本从日志自动汇总，而非手抄）;② <strong>呈现清晰</strong>——最优结果加粗、你的方法和 baseline 分组清楚、必要时拆成主表+分数据集表，让读者一眼看懂“你的方法在每个数据集上都最好（或有竞争力）”。<strong>对你这种走“精度持平但更小更快”路线的人，大表里除了精度，记得把 Params/FPS 也放进去</strong>——这样读者一眼看到的不只是“精度相当”，还有“你的更小更快”，效率优势直接呈现在最显眼的地方。本周整合的是 v1（初版，后续消融/可视化会补），但即便是 v1，也按这个“准确+清晰+体现效率卖点”的标准来做，后面只是往上加内容，不用返工。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合多数据集结果成大表 v1（你的方法 vs 5 baseline × 2-3 数据集，多 seed）。</li>
+<li>复用第一篇表格式，数字准确、标注最优。</li>
+<li>大表清晰呈现有效性 + 泛化性。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>多数据集大表 v1（你的方法 vs 5 baseline × 2-3 数据集，规范、数字准确）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>结果散乱不整合 → 整合成大表（核心证据）；大表数字不准 → 数字审计习惯。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>大表太大?→ 拆成主表 + 分数据集表（复用第一篇拆分）；某结果缺 → 标注，后补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整合了第二篇的核心证据（多数据集大表 v1）</strong>。<strong>做了</strong>（整合大表 v1）、<strong>学了</strong>(大表呈现有效性+泛化、第二次更快=复利)、<strong>会了</strong>（整合论文核心实验证据）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜多数据集大表v1（第二篇核心证据）</strong>：你的方法vs 5 baseline×2-3数据集（多seed mean±std），复用第一篇表格式。展示有效性+泛化性。这是初版，后续消融/可视化继续补充。第二次产出明显更快（复利）。第三数据集可选加分，无合适的用两个+诚实说明也行。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 多数据集大表 v1。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D230</summary><textarea data-note="d230" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d231" data-d="231"><header class="day-head"><span class="dnum">D231</span><h2 class="day-t">周日 · （复盘日）· W33 复盘 + 节制查审稿 + 计划 W34</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾：复盘第二课题baseline全面铺开周；节制查第一篇审稿状态；计划W34（消融+GitHub）。</p>
+<p><strong>预期管理</strong>:W33收尾：复盘+节制查审稿+计划W34。提醒：本周核心体会是“加速效应”（一天一版、复用红利的复利回报），第二课题实验矩阵已大面积铺开、多数据集大表v1成形;★第一篇审稿别频繁刷（过段时间看一次，精力放第二课题）；计划W34=消融实验（复用第一课题消融框架）+准备GitHub运营。</p>
+</blockquote>
+</div><section class="slot" id="d231-am" data-d="231" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D231 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W33 复盘（加速效应 + 实验进度）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“加速效应”的体会（一天一版 vs 第一课题一周一版、复用让实验铺得多快）。本周是第二课题的密集实验生产周，核心体会是<strong>加速效应</strong>：复用第一课题的框架/流程/经验，实验矩阵大面积铺开、一天迭代一个版本。</p>
+<ul>
+<li><strong>本周成果回顾</strong>：第二课题完整实验矩阵搭满、5 个 baseline 跑齐、方法 v1→v2→v3 迭代、确定最终版、多数据集验证、多数据集大表 v1。<strong>第二课题的实验主体已大面积铺开，远快于第一课题。</strong></li>
+<li><strong>值得沉淀的体会</strong>:① 加速的来源(经验积累 + 代码复用 = 复利);② “越往后越快”对后续课题的启示;③ 实验矩阵系统化管理的好处。<strong>这些认知，是你“持续高产能力”形成的标志。</strong></li>
+<li><strong>本周值得你郑重记下的一笔：你正在变成一个“高效的研究生产者”</strong>。回看 M1 刚开始时——你零基础、连环境都装不通、读一篇论文要好几天、跑通一个 baseline 要一周。而现在，M9 的你能一周搭满一张完整实验矩阵、一天迭代一个方法版本、系统地生产论文级的结果。<strong>这个对比，是你这大半年成长最有力的证据</strong>。复盘时把它写下来，不是自我表扬，而是建立一个真实的自我认知：你已经不是那个“在门外摸索的新手”，而是“能独立、高效产出研究的人”。这个认知很重要，因为它会支撑你走完后面更难的路（M9-M12 第二篇收官、对接空天院、乃至更长的学术生涯）——当你偶尔怀疑自己、或遇到挫折时，回看这条“从装不通环境到一周一张矩阵”的成长轨迹，你会知道自己确实在变强、确实走在对的路上。把每周复盘里的这种“成长确认”积累起来，它们会成为你长跑路上重要的心理燃料。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>W33 周报（实验进度 + 加速效应体会）。</li>
+<li>重点记复利的体会（一天一版、复用红利）。</li>
+<li>记第二课题实验进展（矩阵铺开到大表 v1）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W33 周报（实验进度 + 加速效应体会）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账 → 记加速体会和关键进展；不总结复利规律 → 记“越往后越快”的认知。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>体会梳理不出?→ 对比第一课题同类阶段，看本周快多少。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了密集实验生产周</strong>。<strong>做了</strong>（W33 周报）、<strong>学了</strong>（加速效应体会、复利规律）、<strong>会了</strong>（总结第二课题的实验进展）。</p>
+</div></section></section><section class="slot" id="d231-noon" data-d="231" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D231 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">节制查第一篇审稿状态</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（继续节制跟进审稿）</h4><div class="blk-b"><p>第一篇论文若已过一段时间，可能有审稿进展——<strong>理性查看一次，别频繁刷</strong>（延续 M8 学的可持续心态）。把精力放在第二课题的产出上。</p>
+<ul>
+<li><strong>延续节制心态</strong>：审稿慢（2-3 个月），前期大概率没实质进展，频繁刷只会焦虑。<strong>过段时间看一次，有实质进展（Revision/结果）再处理（复用 M6 rebuttal 经验）；没进展就继续专注第二课题</strong>。这是可持续科研的心态基础——分清可控（第二课题产出）和不可控（审稿结果），专注可控的。</li>
+<li><strong>把“等审稿”的心理能量，转化成“推进第二篇”的实际产出</strong>：与其把心思花在反复刷一个你左右不了的审稿结果上，不如把这份能量投到你完全能掌控、且直接推进目标的事上——把第二篇的实验做扎实、把论文写好。<strong>这样即便第一篇审稿慢、甚至被拒，你也不慌：因为你手里还有第二篇在稳步成型，你的“成果管线”是满的</strong>。这种“永远有下一个成果在路上”的状态，是抵御单篇论文不确定性的最好方式，也是高产研究者的常态。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>查一次第一篇审稿状态。</li>
+<li>据状态：无进展→继续专注第二课题；有 Revision→认真处理（复用 rebuttal 经验）。</li>
+<li>提醒自己：别频繁刷，专注产出。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>查了一次审稿状态 + 据结果的应对，心态稳定。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★心态）</h4><div class="blk-b"><p>频繁刷审稿系统 → 过段时间看一次，精力放产出；收到 Revision 慌 → 是好消息，认真处理。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>忍不住想刷?→ 提醒“刷不会加快审稿”，转回第二课题；收到结果不知应对 → Revision 复用 rebuttal、Reject 据意见改投。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>延续了节制跟进审稿的心态</strong>。<strong>做了</strong>（查一次状态 + 应对）、<strong>学了</strong>（可持续心态、分清可控/不可控）、<strong>会了</strong>（以稳定心态面对审稿）。</p>
+</div></section></section><section class="slot" id="d231-pm" data-d="231" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D231 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W34（消融 + GitHub）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>计划 W34——第二课题消融实验（复用第一课题消融框架，验证组件贡献）+ 准备 GitHub 运营。本周实验主体铺开后，W34 补上消融（论文的另一核心证据）。</p>
+<ul>
+<li><strong>W34 预告</strong>：你会设计 6 个消融（复用第一课题框架，验证你方法各组件的贡献）、整合消融大表、确定绝对最终版、生成可视化对比图，并开始为 GitHub 运营做准备。<strong>消融是论文的硬证据（证明每个组件有用），复用框架几乎零成本。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>梳理 W34 待办（6 个消融 + 消融大表 + 最终版确认 + 可视化 + GitHub 准备）。</li>
+<li>确认本周实验进度（矩阵铺开、大表 v1）。</li>
+<li>规划 W34 节奏。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W34 计划（消融 + 可视化 + GitHub 准备）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>计划太满 → 按第二课题复用更快的实际节奏；漏消融 → 消融是论文核心证据，W34 重点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知 W34 先做什么?→ 先设计+启动消融（复用框架），再可视化；消融怎么设计 → 复用第一课题框架，验证你方法各组件。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划了消融周</strong>。<strong>做了</strong>（W34 计划）、<strong>学了</strong>（消融是论文核心证据、复用框架）、<strong>会了</strong>（规划第二课题的消融验证）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜节制跟进审稿（延续可持续心态）</strong>：第一篇审稿慢（2-3月），过段时间看一次别频繁刷（徒增焦虑）。把精力放第二课题产出（可控的事）。Revision是好消息（复用M6 rebuttal）、Reject据意见改投。分清可控（产出）/不可控（审稿结果），专注可控的——可持续科研的心态基础。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W33 ✅ 审稿状态跟进 ✅ W34 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W33 累计交付</h2><p>第二课题完整实验矩阵设计（复用模板：2-3 数据集 × 5 baseline × v1-v3 × 3 seed）+ 代码框架适配(&lt;200 行)+ 5 个 baseline 跑齐 + your method v1→v2→v3 快速迭代（一天一版）+ 确定最终方法版本 + 多数据集验证 + 多数据集大表 v1、读 2 篇最新 arXiv、W33 周报 + 节制查审稿 + W34 计划。本周你进入第二课题的正式实验生产，核心是亲身体验了<strong>加速效应</strong>——复用第一课题的框架(适配&lt;200 行)、流程、经验，把实验矩阵大面积铺开、做到“一天一个版本”（第一课题需一周一版，速度提升 5-7 倍），并整合出第二篇的核心证据（多数据集大表 v1）。这种加速是你前 8 个月投入的<strong>复利回报</strong>（经验积累 + 代码复用），真实而非取巧——它标志着你“持续高产的能力”正在形成。</p>
+</section><section class="wtail"><h2>🎓 W33 你“长出来”的能力清单</h2><ul>
+<li><strong>复用模板搭完整实验矩阵</strong>（2-3 数据集 × 5 baseline × v1-v3 × 3 seed，从探索性升级到生产性实验）</li>
+<li><strong>框架适配&lt;200 行</strong>（框架复用度健康的指标，适配集中在数据/config/指标）</li>
+<li><strong>矩阵表作为单一事实源</strong>（管理几十个实验的状态和结果）</li>
+<li>在完整 baseline 语境下<strong>对比迭代</strong>（5 baseline 更有说服力、定位更准）</li>
+<li><strong>体会并量化加速效应</strong>（一天一版 vs 一周一版，复利回报）</li>
+<li>多数据集<strong>大表 v1</strong>（第二篇核心证据，复用表格式更快）</li>
+<li><strong>核心认知</strong>：加速效应=前 8 个月投入的复利（经验+代码复用）、越往后越快、持续高产是对接空天院的核心竞争力、产出期也保持前沿、节制跟进审稿的可持续心态</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D231</summary><textarea data-note="d231" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W33 加厚补充包（范例 / 实用工具+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 实验矩阵 + 加速对比 + 多数据集大表</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 第二课题完整实验矩阵（复用第一课题模板，改数据集/方法名）</span>
+维度：2-3数据集 × 5 baseline × {baseline, v1, v2, v3, final} × 3 seed
+| 数据集 | 方法 | seed0 | seed1 | seed2 | mean±std | 状态 |
+|---|---|---|---|---|---|---|
+| DatasetA | Baseline-1..5 | … | … | … | … | ✅完成 |
+| DatasetA | v1/v2/v3/final | … | … | … | … | 🔄运行 |
+| DatasetB | (同上) | … | … | … | … | ⏳待启动 |
+（矩阵表=单一事实源：既是计划也是记录，持续更新）
+
+<span class="gh"># 加速效应对比（一天一版 vs 第一课题一周一版）</span>
+环节            第一课题      第二课题      提速
+设计改进→实现    2-3天        几小时        ~5x
+实现→启动训练    半天         几分钟        快
+一个完整版本     约1周        约1天         5-7x
+→ 来源：经验积累(不用摸索) + 代码复用(改几行就跑) = 复利
+
+<span class="gh"># 多数据集大表 v1（第二篇核心证据）</span>
+| 方法 | DatasetA mAP | DatasetB mAP | DatasetC mAP | Params | FPS |
+|---|---|---|---|---|---|
+| Baseline-1..5 | … | … | … | … | … |
+| Ours (final) | 最优 | 最优 | 最优 | 更小 | 更快 |
+（多seed mean±std；标注最优；体现有效性+泛化+效率卖点）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 框架适配 + 矩阵批量启动</h2>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ① 框架适配（&lt;200行：只改数据/config/指标三处）</span>
+<span class="c1"># 第一课题框架直接复用，第二课题只需：</span>
+<span class="c1"># configs/second_task.yaml —— 改方法/超参/数据集路径</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SecondTaskDataset</span><span class="p">(</span><span class="n">BaseDataset</span><span class="p">):</span>       <span class="c1"># 复用数据基类</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_anno</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>             <span class="c1"># 只改这个解析（接新数据集）</span>
+        <span class="o">...</span>                                  <span class="c1"># 复用统一数据层，加分支</span>
+<span class="c1"># 训练/管理/评测/日志 —— 一行不动，直接复用</span>
+
+<span class="c1"># ② 矩阵批量启动（复用第一课题的实验管理）</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dsA&quot;</span><span class="p">,</span> <span class="s2">&quot;dsB&quot;</span><span class="p">];</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;base1&quot;</span><span class="p">,</span><span class="s2">&quot;base2&quot;</span><span class="p">,</span><span class="s2">&quot;base3&quot;</span><span class="p">,</span><span class="s2">&quot;base4&quot;</span><span class="p">,</span><span class="s2">&quot;base5&quot;</span><span class="p">,</span><span class="s2">&quot;v1&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">ds</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span> <span class="n">methods</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;python train.py --cfg configs/</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">ds</span><span class="si">}</span><span class="s2">.yaml --seed </span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2"> &quot;</span> \
+              <span class="sa">f</span><span class="s2">&quot;--out exp/</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">ds</span><span class="si">}</span><span class="s2">_s</span><span class="si">{</span><span class="n">seed</span><span class="si">}</span><span class="s2">.log&quot;</span>
+        <span class="c1"># 单卡错峰排队跑；wandb记录；结果自动汇总到矩阵表</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;queue:&quot;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 框架适配只改数据/config/指标三处(&lt;200 行)，训练/管理/评测复用;② 矩阵批量启动+实验管理复用，几十个实验有序跑、自动汇总。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D225</strong>：① 完整实验矩阵的四个维度及各自意义？② 为什么“代码适配&lt;200行”是个有意义的指标？③ 第二课题为什么快（四条）？④ 为什么“系统性”本身就是论文质量的一部分？</li>
+<li><strong>D226</strong>：① 为什么矩阵表是“单一事实源”？② v1 为什么“从已有代码继续”而非从零？③ M8 的 v1 和本周的 v1 区别（探索vs生产）？④ “探索期”和“生产期”各自的标准是什么？</li>
+<li><strong>D227</strong>：① 在 5 个 baseline 语境下对比为什么更有说服力？② v2 改进为什么要“对症”v1 不足？③ “对症改进”和“盲目调参”的分水岭在哪？</li>
+<li><strong>D228</strong>：① “一天一个版本”的加速来自哪两点？② 为什么说这是“复利的量化体现”？③ 第二课题3个月vs第一课题8个月说明什么？</li>
+<li><strong>D229</strong>：① 怎么确定最终方法版本（原则）？v3没比v2好怎么办？② 为什么产出期也读最新 arXiv？</li>
+<li><strong>D230</strong>：① 多数据集大表整合什么？② 第三数据集为什么“可选加分”？③ 为什么第二次产出大表更快？</li>
+<li><strong>D231</strong>：① 为什么审稿要“过段时间看一次”而非频繁刷？② 可持续心态的核心（分清什么）？③ W34 的核心任务（消融）为什么是论文核心证据？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从零设计实验矩阵</td>
+<td>没复用</td>
+<td>复用第一课题模板，改数据集/方法名（实验设计复利）</td>
+</tr>
+<tr>
+<td>代码适配改动远超200行</td>
+<td>动了框架核心</td>
+<td>适配应只改数据/config/指标；远超则反思方向跨度或框架通用性</td>
+</tr>
+<tr>
+<td>几十个实验状态乱</td>
+<td>没统一记录</td>
+<td>矩阵表作单一事实源（既是计划也是记录），脚本从log自动汇总</td>
+</tr>
+<tr>
+<td>只和1个baseline比</td>
+<td>对照不足</td>
+<td>5个baseline覆盖主流方法，对比才有说服力</td>
+</tr>
+<tr>
+<td>重新实现v1</td>
+<td>没复用M8代码</td>
+<td>v1从M8(W31-32)已有代码继续（探索到生产的衔接）</td>
+</tr>
+<tr>
+<td>改进盲目调参</td>
+<td>不对症</td>
+<td>对症v1对比暴露的具体不足（命中率/单卡）</td>
+</tr>
+<tr>
+<td>因为快就放松质量</td>
+<td>误解加速</td>
+<td>加速真实，但公平对比/多seed不能松；对照第一课题查质量</td>
+</tr>
+<tr>
+<td>为有v3硬用v3</td>
+<td>不看数据</td>
+<td>数据说话，v3没更好就用v2</td>
+</tr>
+<tr>
+<td>产出期闭门造车</td>
+<td>不跟前沿</td>
+<td>读2篇最新arXiv，确保对比/定位不落后</td>
+</tr>
+<tr>
+<td>天天刷审稿焦虑</td>
+<td>频繁刷状态</td>
+<td>过段时间看一次，精力放第二课题（可控的事）</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w32.html"><span class="dir">← 上一篇</span><span class="nm">W32 第二课题深化 + GitHub 仓库正式</span></a><a class="next" href="w34.html"><span class="dir">下一篇 →</span><span class="nm">W34 第二课题消融 + 可视化</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d225">D225 周一</a><a class="sub" href="#d225-am">上午 设计第二课题完整实验矩阵（复用模</a><a class="sub" href="#d225-noon">中午 修改代码框架适配第二课题(&lt;20</a><a class="sub" href="#d225-pm">晚上 启动数据集 1 上的 5 个 b</a><a href="#d226">D226 周二</a><a class="sub" href="#d226-am">上午 baseline 结果陆续记录到</a><a class="sub" href="#d226-noon">中午 启动 your method v</a><a class="sub" href="#d226-pm">晚上 v1 训练 + 监控</a><a href="#d227">D227 周三</a><a class="sub" href="#d227-am">上午 v1 vs baseline 对</a><a class="sub" href="#d227-noon">中午 设计 v2 改进点（基于 v1 </a><a class="sub" href="#d227-pm">晚上 实现 v2 + 启动训练</a><a href="#d228">D228 周四</a><a class="sub" href="#d228-am">上午 v2 结果分析(v2 vs v1</a><a class="sub" href="#d228-noon">中午 设计 v3 改进</a><a class="sub" href="#d228-pm">晚上 实现 v3 + 启动 → 体会加</a><a href="#d229">D229 周五</a><a class="sub" href="#d229-am">上午 v3 结果 + 确定最终方法版本</a><a class="sub" href="#d229-noon">中午 读 2 篇最新 arXiv（保持</a><a class="sub" href="#d229-pm">晚上 数据集 2 实验推进</a><a href="#d230">D230 周六</a><a class="sub" href="#d230-am">上午 数据集 2 全部结果</a><a class="sub" href="#d230-noon">中午 数据集 3 启动（如有第三个）</a><a class="sub" href="#d230-pm">晚上 整合多数据集大表 v1</a><a href="#d231">D231 周日</a><a class="sub" href="#d231-am">上午 W33 复盘（加速效应 + 实验</a><a class="sub" href="#d231-noon">中午 节制查第一篇审稿状态</a><a class="sub" href="#d231-pm">晚上 计划 W34（消融 + GitH</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

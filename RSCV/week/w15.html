@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="15">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W15 · 论文骨架 —— 从“研究者”变成“写作者”，写出 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M4 方法成形</span><span>·</span><span>Week 15</span><span>·</span><span>D99–D105</span></div><h1 class="title">论文骨架 —— 从“研究者”变成“写作者”，写出 Intro + Related Work + Method</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="99" data-k="am" title="D99 上午段"></i><i data-d="99" data-k="noon" title="D99 中午段"></i><i data-d="99" data-k="pm" title="D99 晚上段"></i></span><span class="sday"><i data-d="100" data-k="am" title="D100 上午段"></i><i data-d="100" data-k="noon" title="D100 中午段"></i><i data-d="100" data-k="pm" title="D100 晚上段"></i></span><span class="sday"><i data-d="101" data-k="am" title="D101 上午段"></i><i data-d="101" data-k="noon" title="D101 中午段"></i><i data-d="101" data-k="pm" title="D101 晚上段"></i></span><span class="sday"><i data-d="102" data-k="am" title="D102 上午段"></i><i data-d="102" data-k="noon" title="D102 中午段"></i><i data-d="102" data-k="pm" title="D102 晚上段"></i></span><span class="sday"><i data-d="103" data-k="am" title="D103 上午段"></i><i data-d="103" data-k="noon" title="D103 中午段"></i><i data-d="103" data-k="pm" title="D103 晚上段"></i></span><span class="sday"><i data-d="104" data-k="am" title="D104 上午段"></i><i data-d="104" data-k="noon" title="D104 中午段"></i><i data-d="104" data-k="pm" title="D104 晚上段"></i></span><span class="sday"><i data-d="105" data-k="am" title="D105 上午段"></i><i data-d="105" data-k="noon" title="D105 中午段"></i><i data-d="105" data-k="pm" title="D105 晚上段"></i></span></div></div>
+<div class="note"><b>★ 写完这几千字，放在哪里？</b>　全书<b>零字提及 LaTeX / Overleaf / BibTeX</b>。<a href="m4-full.html">《M4 详注版》</a> 补齐了论文基础设施（模板去哪拿、Zotero 导 refs.bib、架构图用什么画）和图表八条规范（含实测可用的出版级绘图脚本）。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：方法和实验都有了（v3 + 3 数据集大表 + 消融）。本周开始<strong>把成果写成论文骨架</strong>：列 outline、写 Introduction（4 段结构）、Related Work（分类总结）、Method（总分 + 组件三件套 + 伪代码 + 架构图）。目标：<strong>论文骨架 v0.6（Intro+RW+Method ≥6000 字）</strong>。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会论文写作——从“研究者”变成“写作者”。
+<strong>本周特点</strong>：这是写作周，代码少、写作多。我把 Intro/RW/Method 的写法<strong>带模板、一段一段</strong>教你（很多人卡在“不会写”，本周专治这个）。每个写作模板都给“填空骨架 + 填好范例”，你照着改成自己的即可。</p>
+<p><strong>🧩 贯穿示例</strong>：本周要写的论文 = 你 M3–M4 做的「DOTA 高效旋转检测」。一句话：<strong>在单卡预算下，通过多尺度融合 + 遮挡感知分配 + 旋转 Soft-NMS，在 3 个遥感数据集上做到高精度且高效的旋转目标检测</strong>。下面所有写作示例都围绕它展开。换方向只需把“方法/数据集/卖点”换成你那套——写作的结构与模板完全通用。</p>
+</blockquote>
+<hr />
+<h2>🧭 W15 总览：把一堆结果“讲成”一篇论文的前三章</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周写出</th>
+<th>要点</th>
+<th>对应技能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>论文 outline（8 节）</td>
+<td>整篇骨架一目了然</td>
+<td>先骨架后血肉</td>
+</tr>
+<tr>
+<td>Introduction（4 段）</td>
+<td>背景→挑战→方法概述→贡献列表</td>
+<td>4 段结构</td>
+</tr>
+<tr>
+<td>Related Work（分类总结）</td>
+<td>分 2–3 子类，每类共性→代表→不足</td>
+<td>分类总结而非流水账</td>
+</tr>
+<tr>
+<td>Method（总分+组件三件套）</td>
+<td>Overview→组件（直觉/公式/图）→伪代码</td>
+<td>写到“别人能复现”</td>
+</tr>
+<tr>
+<td>架构图最终版</td>
+<td>论文 Figure 2</td>
+<td>图文伪代码一致</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>:D99 outline+素材+Intro 起步；D100 Intro 完稿+RW 起步；D101 RW 三子节完稿；D102–D103 Method 全章+架构图；D104 整合通读+自审+外部读者；D105 据反馈修订到 v0.6+复盘。<strong>写作周的纪律：先列骨架再填、每章写完先自己当读者读一遍、所有数字引真实结果。</strong> 你前几周写的 Proposal v2、改进报告、周报，都是本周可直接迁移的素材——写论文不是从零创作，是把半成品组织成文。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d99" data-d="99"><header class="day-head"><span class="dnum">D99</span><h2 class="day-t">周一 · 列论文 outline + 收集图表素材 + Intro 段 1–2</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天进入写作模式——先搭整篇 outline（避免写到一半结构乱），把所有图表素材归齐（写到哪引到哪），再起步写 Intro 的前两段。提醒：写作和做实验是两种肌肉，第一天可能不适应，这很正常；记住“论文是把已有结果讲清楚，不是创造新东西”，你手上素材都齐。</p>
+</blockquote>
+</div><section class="slot" id="d99-am" data-d="99" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D99 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">列论文 outline（8 节，每节 3–5 个 bullet）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（outline 为什么必须先列）</h4><div class="blk-b"><ul>
+<li><strong>outline（提纲）</strong>= 先把整篇论文的骨架列出来（8 个 section，每节 3–5 个 bullet），<strong>让整篇一目了然再动笔</strong>——避免写到一半发现结构乱、推倒重来。参考 A 级论文的标准结构：Abstract / Introduction / Related Work / Method / Experiments / Ablation / Conclusion / References。</li>
+<li><strong>和写代码先设计架构一个道理</strong>：你不会不画模块图就开始写一个大系统；论文也一样，先有骨架，每段才知道“自己该承担什么、和前后怎么衔接”。<strong>对第一次写论文的你尤其重要</strong>：没有 outline，很容易写成“想到哪写到哪”的散文，逻辑链断裂，审稿人读着累。</li>
+<li><strong>outline 不是照抄某篇论文目录</strong>：章节名可以仿 A 级论文，但每节的 bullet 要填<strong>你自己的故事线</strong>（你的 Gap、你的方法、你的结果）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 <code>paper/outline.md</code> 列 8 个 section，每节写 3–5 个 bullet（这节要讲什么）。参照你读过的 A 级论文结构 + 你的 Proposal v2 内容。骨架：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 论文 outline（8 节，每节 3–5 bullet）</span>
+1 Abstract：问题一句 + 方法一句 + 主结果一句（最后写）
+2 Introduction：① 背景 ② 挑战/Gap ③ 方法概述 ④ 贡献列表（4 段）
+3 Related Work：子节1 旋转检测方法 / 子节2 通用检测 / 子节3 借鉴的通用 CV 技巧
+4 Method：Overview / 多尺度融合 / 遮挡感知分配 / Soft-NMS+检测头 / Algorithm 1
+5 Experiments：数据集与设置 / 主表（3 数据集，含参数FPS）/ 与 SOTA 对比
+6 Ablation：消融表（各组件）/ 定性可视化 / 推理超参分析
+7 Conclusion：总结 + 局限 + 未来
+8 References
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>8 节 outline，每节 3–5 个 bullet，整篇逻辑能一眼看懂（从 Gap 到方法到验证一条线）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不列 outline 直接写正文 → 结构散、反复返工;② outline 照抄某篇论文目录 → 要按你的故事线组织（你的组件、你的数据集）;③ bullet 写太笼统（&quot;讲方法&quot;）→ 写具体（&quot;讲多尺度融合怎么解决小目标&quot;）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知每节写啥? → 仿 A 级论文的章节标题 + 用你 Proposal v2 的对应内容填；某节 bullet 想不全? → 回看你的实验产出（主表→Experiments、消融→Ablation、方法报告→Method），素材都在；纠结章节顺序? → 用最通用的 8 节标准结构，别自创。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>先搭 outline 再写论文</strong>。<strong>做了</strong>（论文 outline）、<strong>学了</strong>（论文标准结构、先骨架后血肉、按自己故事线组织）、<strong>会了</strong>（为一篇论文规划章节骨架）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜先 outline 后正文</strong>：动笔前先列 8 节 outline（每节 3–5 bullet），让整篇逻辑一眼可见再填内容。章节仿 A 级论文，bullet 填你自己的故事线（Gap→方法→结果）。这一步省下大量“写到一半推倒重来”的时间——和写代码先设计架构同理。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d99-noon" data-d="99" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D99 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">收集所有图表素材</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>写论文前<strong>先把图表素材凑齐</strong>（主实验表、消融表、定性可视化、架构图、超参曲线）——写到哪引到哪，不用临时找。<strong>为什么素材先行</strong>：写作时思路是连续的，如果写到“如表 1 所示”却发现表还没整理，思路就断了；提前把所有图表归到一个文件夹、编好号，写作时只管引用，行云流水。<strong>这也是前几周认真产出的回报</strong>：你的主表(W14)、消融表(W12/W14)、定性图(W12/W13)、架构图草图(W14)都现成，现在只需归集编号。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把 M3–M4 产出的所有表/图汇到 <code>paper/figures/</code> 和 <code>paper/tables/</code>，列一个“图表清单”（每个图表对应论文哪节、编什么号）。清单示例：</p>
+<figure class="code" data-lang="markdown"><pre><code>| 编号 | 内容 | 用在哪节 | 文件 | 状态 |
+|---|---|---|---|---|
+| Figure 1 | 任务示意（遥感旋转检测难点） | Intro | fig_task.pdf | 待画 |
+| Figure 2 | 方法架构图 | Method | fig_arch.pdf | 草图→本周定稿 |
+| Table 1 | 主实验（3 数据集+参数FPS） | Experiments | tab_main.tex | ✅就绪 |
+| Table 2 | 消融（各组件） | Ablation | tab_abl.tex | ✅就绪 |
+| Figure 3 | 定性对比（含负面） | Ablation | fig_qual.pdf | ✅就绪 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>图表素材齐全 + 图表清单（标注各自用在哪节、编号、状态）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 素材散落各实验目录 → 集中归档到 <code>paper/</code>;② 图分辨率低/字太小 → 重新导出高分辨率矢量图(PDF/SVG);③ 表格还是 markdown → 后续要转 LaTeX，先留好数据源。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>某图表还没有（如任务示意图）→ 标“待画”列入本周；不确定某图用在哪节 → 按“性能→Experiments、组件分析→Ablation、方法结构→Method”归类；图太多 → 主图进正文，次要的留作附录/补充材料。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写作前先备齐图表</strong>。<strong>做了</strong>（图表素材+清单）、<strong>学了</strong>（素材先行、编号归档）、<strong>会了</strong>（把成果整理成论文素材库）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜写作前备齐图表素材</strong>：动笔前把主表/消融/定性/架构图全归到 <code>paper/figures</code>、<code>paper/tables</code> 并编号、列清单（各对应哪节）。写作时只管“如 Table 1 所示”地引用，思路不断。图要高分辨率矢量图，表留好数据源以便转 LaTeX。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d99-pm" data-d="99" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D99 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Introduction 段 1（背景）+ 段 2（挑战/Gap）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Introduction 4 段结构）</h4><div class="blk-b"><p>经典 Intro = <strong>段1 背景（这个领域为什么重要，3–4 句）→ 段2 挑战(现有方法有什么问题=你的 Gap,4–5 句)→ 段3 方法概述（你做了什么，一段）→ 段4 贡献列表（bullet 列 3–4 条）</strong>。今晚写段 1、2。<strong>为什么 Intro 这么重要</strong>：它是审稿人读完摘要后第一个细看的部分，决定第一印象；一个好的 Intro 让审稿人在读方法前就认同“这个问题值得解决、这个思路有道理”。<strong>4 段结构是久经考验的套路</strong>——先讲清楚“问题重要”，再讲清楚“现状不足”（你的机会），自然引出“你的方法”，最后用贡献列表让审稿人一眼看到价值。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写段 1（你方向的重要性，3–4 句，快速收敛）+ 段 2(现有方法的局限=你的 Gap,4–5 句，引出你要解决的问题)。填空骨架 + 范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 段1 背景（3-4 句，快速收敛到你的问题）</span>
+骨架：{方向}在{应用}中很重要 → 遥感图像有{独特性质} → 使{你的任务}既重要又困难。
+范例：遥感图像中的目标检测在国防、测绘、灾害监测中至关重要。与通用图像不同，
+遥感目标常呈任意朝向、尺度小、排列密集，因此旋转目标检测成为关键且具挑战的问题。
+
+<span class="gh"># 段2 挑战/Gap（4-5 句，点出现有方法缺什么 + 根因）</span>
+骨架：现有方法（引 2-3）多采用{做法}；它们在{某方面}有效，但在{你的 Gap}不足；
+      根因是{本质原因}；这在{你关注的场景}尤其突出。
+范例：现有旋转检测方法多依赖更强的骨干网络或更大的预训练（如 RingMo 等），
+在通用基准上表现优异，但往往算力开销大、难以在单卡部署，且在密集相邻小目标
+场景下仍受&quot;框粘连&quot;困扰。其根因在于：多数工作聚焦表示增强，较少针对遥感特有的
+小目标、遮挡与密集排列做轻量而专门的设计。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Intro 段 1–2 成稿，段 1 三四句收敛到问题，段 2 清晰点出“现有方法缺什么 + 根因”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 段 1 背景写太长（整段泛泛讲遥感发展史）→ 3–4 句即收敛到你的问题;② 段 2 只说“现有方法不够好”不说<strong>具体缺什么、为什么</strong>→ 要点到 Gap 和根因（你的方法正是冲着这个根因去的）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>写不出 → 用你 M3 Proposal 的 Motivation 段改写（已经写过类似的）；段 2 的 Gap 提炼不出 → 回看你方法解决的核心问题（密集粘连/单卡高效）,Gap 就是“现有方法在这上面不行”；背景收不住 → 强制自己 3 句话内必须出现“你的任务”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始写 Intro（背景+挑战）。<strong>做了</strong>（Intro 段 1–2）、<strong>学了</strong>（Intro 4 段结构、背景快速收敛、段 2 点 Gap 与根因）、<strong>会了</strong>（写背景并收敛到 Gap）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文 outline（8 节） ✅ 图表素材库 + 清单 ✅ Intro 第 1–2 段。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D99</summary><textarea data-note="d99" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d100" data-d="100"><header class="day-head"><span class="dnum">D100</span><h2 class="day-t">周二 · 写 Intro 段 3–4 + 润色 + 开始 Related Work</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写完 Intro 的方法概述与贡献列表、润色成完整 Intro，并起步 Related Work。提醒：贡献列表（段 4）是审稿人快速判断你工作价值的地方，每条都要用真实数字撑——“提升 X、参数仅 +Y”远胜“我们提出一种有效方法”。</p>
+</blockquote>
+</div><section class="slot" id="d100-am" data-d="100" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D100 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Intro 段 3（方法概述）+ 段 4（贡献列表）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（方法概述 + 贡献列表）</h4><div class="blk-b"><p>段 3 = 一段话说清“你做了什么”（方法概述，3–4 句，承接段 2 的 Gap）；段 4 = <strong>贡献列表</strong>（bullet 列 3–4 条，每条“我们提出了 X，它带来 Y”）——这是审稿人快速判断你工作价值的地方。<strong>贡献列表是 Intro 的“广告位”</strong>：很多审稿人会直接看贡献列表来判断“这篇够不够分量”。所以每条贡献要<strong>具体 + 可验证</strong>：不是“我们提出一个有效的模块”，而是“我们提出 X 模块，在密集场景提升 Y，且几乎不增参数”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写段 3（方法概述，承接 Gap）+ 段 4（3–4 条贡献，用真实结果支撑）。填空骨架 + 范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 段3 方法概述（3-4 句，承接段2 Gap）</span>
+骨架：为此我们提出{方法名}，针对{Gap}设计了{组件1/2/3}；
+      借鉴{通用CV技巧}并适配遥感；在单卡预算下实现{效果}。
+范例：为此，我们提出一种面向单卡预算的高效旋转检测方法。它包含多尺度融合（增强
+小目标）、遮挡感知标签分配（提升密集遮挡召回）与旋转 Soft-NMS（缓解框粘连），
+将通用检测中的若干轻量技巧适配到遥感场景，在不显著增加参数的前提下提升精度。
+
+<span class="gh"># 段4 贡献列表（3-4 条，每条用真实数字）</span>
+• 我们针对遥感小目标/遮挡/密集排列，设计了三个轻量且专门的组件，可即插于
+  Oriented R-CNN 等检测器。
+• 我们的方法在 DOTA/DIOR-R/HRSC 三个数据集上平均提升 X mAP，且参数仅 +2M、
+  推理 22 FPS，契合单卡部署。
+• 我们提供完整消融与跨数据集验证，证明每个组件有效且方法泛化。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Intro 段 3–4 成稿，段 3 承接 Gap、段 4 贡献条具体可验证（带真实数字）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 贡献写空（&quot;我们提出一个有效方法&quot;）→ 要具体（提出什么、解决什么、提升多少）;② 贡献和实验对不上 → 用真实数字;③ 贡献列了五六条 → 3–4 条最有力的即可，贪多反而稀释。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>贡献提炼不出 → 从主表/消融里挑最硬的 2–3 条数字，每条数字配一句“我们做了什么”；方法概述太长 → 只讲“做了什么+为什么”，细节留给 Method；不确定哪些算贡献 → 问“审稿人凭什么觉得这篇有价值”，答案就是你的贡献。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写完了 Intro 的方法概述与贡献。<strong>做了</strong>（Intro 段 3–4）、<strong>学了</strong>（方法概述承接 Gap、贡献列表写法、用真实数字）、<strong>会了</strong>（用真实结果写贡献）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜贡献列表写法（用真实数字）</strong>:Intro 段 4 是审稿人判断分量的&quot;广告位&quot;。每条贡献 = &quot;我们做了 X（具体） + 它带来 Y（真实数字）&quot;,3–4 条最硬的即可。忌空话（&quot;有效的方法&quot;）、忌贪多（稀释）、忌与实验对不上。数字从你的主表/消融里挑。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d100-noon" data-d="100" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D100 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修改润色 Introduction</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>通读 Intro 4 段，润色——确保“背景→挑战→方法→贡献”一条线连贯、删冗余、术语一致。<strong>润色是写作的必要环节</strong>：初稿往往段落间有跳跃、有重复、术语前后不一（一会儿“目标”一会儿“物体”）；润色就是把这些磨平，让读者顺畅读下来。<strong>重点检查过渡</strong>：段与段之间要有逻辑衔接（段 2 末点出 Gap → 段 3 首“为此我们…”自然承接）。<strong>一个高效的润色顺序</strong>:① 先读一遍只看“逻辑流”——四段是不是“重要→不足→我的解法→价值”一条线，有没有哪段突兀;② 再读一遍只看“重复”——同一个意思是不是在两段都说了（背景和挑战常重复），删掉冗余;③ 最后读一遍只看“术语”——同一概念有没有用了不同的词，统一。分三遍各盯一个维度，比一遍想抓全部高效得多。<strong>润色不是改得花哨，而是让逻辑更顺、表达更准</strong>——学术写作崇尚清晰，不崇尚辞藻。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>通读 Intro 4 段，润色（逻辑连贯、删冗余、术语一致、加过渡句）；确保一条线贯穿。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Introduction 完成稿（4 段连贯，术语统一，过渡自然）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 段落跳跃（段 2 讲完 Gap 段 3 突然讲方法没过渡）→ 加“为此/To this end”类过渡;② 术语不统一（目标/物体/object 混用）→ 建术语表统一;③ 背景太长 → 精简。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>看不出问题 → 假装第一次读的人通读一遍；术语乱 → 列一张术语对照表全文替换；不确定连不连贯 → 检查每段第一句是否承接上段最后一句。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成并润色了 Introduction。<strong>做了</strong>（Intro 完成稿）、<strong>学了</strong>（润色与逻辑连贯、过渡句、术语统一）、<strong>会了</strong>（打磨一段学术写作）。</p>
+</div></section></section><section class="slot" id="d100-pm" data-d="100" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D100 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">开始写 Related Work 子节 1</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Related Work 写法）</h4><div class="blk-b"><p><strong>不是流水账</strong>，而是<strong>分类总结</strong>：把前人工作分 2–3 个子类，每类写一小段：<strong>先综述这类的共同思路 → 列代表作 → 指出不足（引出你的工作）</strong>。今晚写子节 1(你方向的前人工作=旋转检测方法)。<strong>为什么不能写流水账</strong>：“A 做了…B 做了…C 做了…”这样罗列，审稿人看不出脉络，也看不出你的位置；分类总结让审稿人看到“这个领域有哪几条技术路线、各自的局限、你站在哪”。<strong>RW 的隐藏功能</strong>：每个子类末尾的“不足”，其实是在为你的方法铺垫（你正是来补这个不足的）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 RW 子节 1（旋转检测方法）。模板 + 范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># RW 子节模板</span>
+{这类方法}通常采用{共同思路}（如 {代表作1, 代表作2}）。它们在{某方面}有效，
+但{共性不足}，尤其在{你关注的 Gap}上表现有限。
+
+<span class="gh"># 子节1 范例（旋转检测方法）</span>
+旋转目标检测方法通常在通用检测器上引入角度表示与旋转框回归（如 Oriented R-CNN、
+ReDet 等），并通过更强的骨干或预训练提升性能。这类方法在标准基准上取得了良好效果，
+但大多算力开销较大、难以单卡部署，且较少针对密集相邻小目标的&quot;框粘连&quot;做专门设计。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>RW 子节 1 成稿，有共性总结 + 代表作 + 不足（末尾引向你的 Gap）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 堆砌“A 做了…B 做了…”不归类不点不足 → 必须分类 + 每类末尾引向“还缺 X”;② 把所有论文塞进一个子节 → 分 2–3 类;③ 只夸前人不点不足 → 不足才是为你铺垫。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救</h4><div class="blk-b"><p>不知怎么分类 → 用你 M2/M3 整理的“技术演进图谱/流派”划分；不足提不出 → 就是你方法解决的那些问题；代表作记不清 → 回看你的精读笔记。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始写 Related Work（分类总结法）。<strong>做了</strong>（RW 子节 1）、<strong>学了</strong>（RW 分类总结而非流水账、子类末尾铺垫）、<strong>会了</strong>（写一个子方向的综述段）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Introduction 完成稿（4 段连贯）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D100</summary><textarea data-note="d100" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d101" data-d="101"><header class="day-head"><span class="dnum">D101</span><h2 class="day-t">周三 · 写完 Related Work（3 个子节）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把 Related Work 三个子节写完。提醒：三个子节是有分工的——子节 1 你的直接方向、子节 2 相关但不同的方向、子节 3 你借鉴的通用 CV 技巧；尤其子节 3 要凸显你“通用 CV 嫁接”的创新来源（这是你的差异化卖点）。</p>
+</blockquote>
+</div><section class="slot" id="d101-am" data-d="101" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D101 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 RW 子节 1（前人工作总结，定稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>完善 RW 子节 1(你方向的前人工作=旋转检测)，确保“共性→代表→不足”齐全、不足精准对应你的 Gap。<strong>定稿的标准</strong>：读完这一段，审稿人能明白“旋转检测这条线大家怎么做、卡在哪、你来补哪个洞”。<strong>为什么“不足”要和你的 Gap 精准对齐</strong>:RW 子节 1 的“不足”和 Intro 段 2 的“Gap”应该是同一回事的两次表述——RW 里说“现有旋转检测在密集场景粘连、难单卡部署”,Intro 里说“我们要解决密集粘连和单卡高效”，两者咬合，审稿人才会觉得“这篇逻辑严密、来龙去脉清楚”。如果 RW 抱怨的不足和你方法解决的问题对不上，审稿人会困惑“你 RW 铺垫了半天那个洞，方法却没去补”。<strong>所以定稿 RW 子节 1 时，回头对一眼 Intro 段 2</strong>，确保两处说的是同一个 Gap。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>打磨 RW 子节 1，确保共性总结准确、代表作引对、不足精准（对应你方法解决的问题：单卡高效 + 密集粘连），并与 Intro 段 2 的 Gap 表述一致。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>RW 子节 1 定稿（共性→代表→不足齐全，不足对应你的 Gap）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>不足写得太泛（&quot;还有提升空间&quot;）→ 写具体（&quot;难以单卡部署、密集场景粘连&quot;）；代表作引用过时 → 补近 1–2 年的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不足提不准 → 对照你 Intro 段 2 的 Gap，保持一致；代表作太多 → 选最有代表性的 2–3 个。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你定稿了第一子节。<strong>做了</strong>（RW 子节 1 定稿）、<strong>学了</strong>（子节定稿标准、不足对齐 Gap）、<strong>会了</strong>（写好一个综述子节）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Related Work 分类总结法</strong>:RW 不是流水账，而是分 2–3 子类、每类“共性思路→代表作→不足”。子类末尾的“不足”为你的方法铺垫（你来补这个洞）。读完每个子节，审稿人应能看出“这条线怎么做、卡在哪、你站哪”。分类依据用你整理的技术流派图谱。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d101-noon" data-d="101" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D101 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 RW 子节 2（相关但不同的方向）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>子节 2 写“和你相关但不完全相同”的方向（你做旋转检测，可写<strong>通用水平框检测 / 其他模态如 SAR 检测</strong>），说明它们和你的关系与差异。<strong>为什么要写相关方向</strong>:① 显示你了解更广的背景（审稿人看你专业度）;② 界定你的工作边界（你不是在做通用检测，而是遥感旋转检测）;③ 有些技巧你从相关方向借鉴而来，这里埋个伏笔。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 RW 子节 2（相关方向的总结 + 与你工作的关系/差异）。范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 子节2 范例（相关但不同的方向）</span>
+通用目标检测（如 Faster R-CNN、YOLO 系列）发展成熟，提供了检测器的基础范式，
+但其水平框表示不适用于任意朝向的遥感目标。SAR 等其他模态的检测则面临成像机理
+差异带来的独特挑战。我们的工作聚焦光学遥感的旋转检测，借鉴通用检测的成熟范式，
+并针对遥感特性做专门适配。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>RW 子节 2 成稿（相关方向总结 + 与你的关系/差异清晰）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 子节 2 写得和子节 1 重复 → 它是“相关但不同”，别再写旋转检测;② 关系/差异说不清 → 一句话点明“我们借鉴 X 但聚焦 Y”;③ 把相关方向写成长篇综述（喧宾夺主）→ 一小段点到为止，重点始终是衬托你的工作边界，不是替别的方向做综述。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知写哪个相关方向 → 选你方法范式来源（通用检测）或你数据涉及的模态；差异提不出 → “他们做通用/其他模态，我们做遥感旋转检测并专门适配”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了相关方向子节。<strong>做了</strong>（RW 子节 2）、<strong>学了</strong>（界定相关但不同的方向、埋借鉴伏笔）、<strong>会了</strong>（说明与邻近方向的关系）。</p>
+</div></section></section><section class="slot" id="d101-pm" data-d="101" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D101 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 RW 子节 3（你借鉴的通用 CV 技术）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>子节 3 写“你方法借鉴的通用 CV 技术”（如多尺度特征融合 / Soft-NMS / 注意力 / 自监督 / LoRA），点明“它们在通用 CV 有效，但在遥感/你的任务上还少被这样用”——这正凸显你“通用 CV 嫁接”的创新来源，是你<strong>差异化卖点的学术依据</strong>。<strong>这个子节对你的战略意义</strong>：你的定位是“把通用 CV 巧技嫁接到遥感”，子节 3 就是把这个定位写进论文——告诉审稿人“我的创新不是凭空的，而是把成熟技巧用对地方”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 RW 子节 3（借鉴的通用 CV 技术 + 为何把它引入遥感是有价值的）。范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 子节3 范例（借鉴的通用 CV 技巧）</span>
+多尺度特征融合与软化非极大值抑制（Soft-NMS）在通用检测中被证明有效，前者增强
+多尺度目标的表达，后者缓解密集场景的重复抑制。然而，这些轻量技巧在遥感旋转检测、
+尤其是密集相邻小目标场景下，尚未被系统地适配与验证。本文将其针对性地引入并改造
+（如旋转化的 Soft-NMS），以低开销提升遥感检测性能。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>RW 子节 3 成稿；Related Work 三子节完整，末尾自然过渡到你的工作。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 子节 3 和你的方法对不上 → 写你真正借鉴的那些技术（多尺度/Soft-NMS）;② 写成通用 CV 综述 → 只写你借鉴的、且点明“遥感上还少被这样用”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知写哪些技术 → 列你方法实际用到的通用技巧；价值说不清 → “它们在通用 CV 有效，但遥感/密集场景还少被这样适配，我们来做”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写完了 Related Work（三子节）。<strong>做了</strong>（RW 完成稿）、<strong>学了</strong>（用子节 3 凸显“通用 CV 嫁接”创新来源、对接战略定位）、<strong>会了</strong>（完成一章分类总结式综述）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Related Work 完成稿（3 子节，末尾过渡到你的工作）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D101</summary><textarea data-note="d101" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d102" data-d="102"><header class="day-head"><span class="dnum">D102</span><h2 class="day-t">周四 · 写 Method（Overview + 组件 1 + 组件 2）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天开始写 Method——全篇最需要“严谨可复现”的一章。提醒：Method 的金标准是“让不认识你的人读完也能实现”；用总分结构（先 Overview 再逐组件），每个组件用“直觉+公式+图”三件套，别只堆公式不讲为什么。</p>
+</blockquote>
+</div><section class="slot" id="d102-am" data-d="102" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D102 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Method Overview（全局 + 架构图引用）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Method 写法：总分结构）</h4><div class="blk-b"><p>核心原则——<strong>让不认识你的人读完也能实现</strong>。用“<strong>总分</strong>”结构：先 Overview（全局，数据怎么从输入流到输出、你的组件在哪，引用架构图），再逐个讲组件。<strong>为什么先 Overview</strong>：读者需要先有“全局地图”才能理解每个组件的位置和作用；上来就讲某个组件的公式，读者不知道它在整个流程的哪一环，会迷失。<strong>Overview 要点</strong>：一段话讲清“输入→backbone→neck（含你的组件）→head→输出”的数据流，并“如 Figure 2 所示”引出架构图。</p>
+<ul>
+<li><strong>“让陌生人读完也能实现”为什么是 Method 不可妥协的金标准</strong>:Method 章和论文其他部分有个本质区别——Intro 是讲故事、RW 是摆背景，而 <strong>Method 是一份“技术契约”：它向读者（和审稿人）承诺“按我写的，你能复现出我的方法和结果”</strong>。可复现性是科学的基石，一个无法被复现的方法，在学术上是没有价值的（别人没法验证、没法在此基础上推进）。所以 Method 写作的标准不是“我自己看得懂”（你当然懂，是你做的），而是“<strong>一个有相关背景、但完全不了解你工作的人，只读这一章，能不能把你的方法实现出来</strong>”——这又是知识的诅咒在作祟：你脑子里有所有实现细节，容易把关键的设定（超参、维度、连接方式、训练细节）当成“显然”而省略，但对复现者那些恰恰是卡点。<strong>所以写每个组件时，要问自己：别人照这段能写出代码吗？有没有哪个数字、哪个连接、哪个细节我没交代清楚？</strong> 这种“为复现者负责”的严谨，既是学术规范，也直接关系到审稿——审稿人如果觉得“这方法描述不清、没法复现”，是会据此拒稿的。把 Method 写到“陌生人能实现”的程度，是你这篇论文能不能立住的关键一章，值得你在这一章上多花心思、反复确认每个细节（超参、维度、连接、训练设定）是否齐全、是否可被复现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Method Overview 段（全局描述 + “如 Figure 2 所示”引用架构图）。范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># Method Overview 范例</span>
+图 2 展示了我们方法的整体架构。给定一张遥感图像，骨干网络提取多层特征，随后
+我们的多尺度融合模块（第 X 节）增强小目标表达；在检测头的标签分配阶段，遮挡感知
+分配（第 Y 节）提升密集遮挡目标的召回；推理阶段，旋转 Soft-NMS（第 Z 节）缓解
+相邻框粘连。整个框架以 Oriented R-CNN 为基线，所有组件均轻量、可即插。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method Overview 成稿，读者能建立全局观（数据流清晰、组件位置明确、引了架构图）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>Overview 写太细（把某组件公式都搬进来）→ 只讲全局，细节留给组件小节；没引架构图 → 必须“如 Figure 2 所示”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Overview 写不出 → 照着你的架构图，用文字把“输入怎么一步步流到输出、你的组件在哪一环介入”描述一遍即可；太长 → 控制在一段，细节后置给组件小节；不知道详略 → Overview 只回答“整体怎么走、我加了哪几块”，具体每块怎么实现一律留到对应组件小节，这样读者先有地图再看细节，不会迷路。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了 Method 的全局总览。<strong>做了</strong>(Method Overview)、<strong>学了</strong>（总分结构、先全局给地图、引架构图）、<strong>会了</strong>（写方法的全局描述）。</p>
+</div></section></section><section class="slot" id="d102-noon" data-d="102" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D102 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Method 组件 1（直觉 + 公式 + 图示）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（组件三件套）</h4><div class="blk-b"><p>每个核心组件要有 <strong>① 直觉（为什么用它、治哪个问题）② 公式（严谨定义、符号说清）③ 图示（在架构图里的位置/内部结构）</strong>。三件套齐全，组件才“既懂又能复现”。<strong>为什么三件套缺一不可</strong>：只有直觉→读者懂思想但没法实现；只有公式→读者能实现但不懂为什么这么设计（也看不出创新点）；加图示→直观。<strong>直觉写在最前面</strong>：先用一两句话讲“这个组件治什么问题、为什么这么设计”，再给公式——读者带着“为什么”去看公式，理解快得多。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写组件 1 小节（多尺度融合）：直觉 + 公式 + 图示。范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 组件1（多尺度融合）三件套范例</span>
+【直觉】遥感小目标在深层特征上易丢失细节。我们融合多个尺度的特征以保留小目标的
+   细粒度信息（治&quot;小目标漏检&quot;）。
+【公式】设第 l 层特征为 F<span class="ge">_l，融合特征 F* = Conv( Σ_</span>l Up(W_l · F_l) )，其中 Up(·)
+   表示上采样到最高分辨率，W_l 为 1×1 卷积对齐通道。（所有符号在此定义）
+【图示】见图 2 左侧&quot;多尺度融合&quot;分支：三层特征经对齐、上采样、相加、卷积后输出。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>组件 1 小节三件套齐全，懂 CV 的人能照着复现。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只写公式不写直觉 → 读者看不出“为什么”;② 符号没定义（F_l 是什么没说）→ 无法复现;③ 没引图 → 加“见图 2”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>公式写不出 → 先用文字 + 伪代码精确描述，公式后补；直觉说不清 → 回“它治哪个 Gap”；符号乱 → 列符号表统一。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会用<strong>组件三件套</strong>写 Method。<strong>做了</strong>（组件 1）、<strong>学了</strong>（直觉+公式+图、直觉先行、符号定义）、<strong>会了</strong>（把一个组件写到可复现）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Method 组件三件套</strong>：每个核心组件写“直觉（治哪个 Gap、为什么这么设计）+ 公式（严谨定义所有符号）+ 图示（架构图位置/内部结构）”。直觉写最前，读者带着“为什么”看公式理解更快。三件套齐 = 既懂又能复现，也让创新点可见。缺直觉=不懂为什么，缺公式=没法实现。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d102-pm" data-d="102" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D102 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Method 组件 2（遮挡感知分配）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>组件 2（遮挡感知标签分配）同样用三件套。<strong>它属于“训练策略”类组件</strong>：不改网络结构，而改训练时正样本怎么分配——对遮挡严重的目标放宽匹配，让它得到更多正样本、提升召回。直觉、公式（分配规则）、图示（可画一个分配示意）都要有。<strong>训练策略类组件对你尤其划算</strong>：它<strong>不增加任何推理开销</strong>（只影响训练时怎么算 loss、分正负样本，推理时网络结构和速度完全不变），却能提升性能——这正契合你“单卡高效”的定位。论文里把这点讲出来是加分项：“我们的遮挡感知分配仅作用于训练，推理零额外开销”。<strong>写这类组件的注意点</strong>：要讲清“改了什么分配规则、为什么这样改能帮到目标类别”，而不是泛泛说“我们改进了标签分配”；公式要把“遮挡程度怎么量化、阈值怎么随它变化”写明白。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写组件 2 小节（三件套），注意和组件 1 的衔接（组件 1 是结构、组件 2 是训练策略，逻辑上互补）。范例：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 组件2（遮挡感知分配）三件套范例</span>
+【直觉】密集遮挡目标常因 IoU 匹配过严而正样本不足、召回低。我们对遮挡严重的目标
+   放宽匹配阈值，给它更多正样本（治&quot;遮挡漏检&quot;）。
+【公式】对 gt 框 g，设其遮挡程度 o(g)∈[0,1]，匹配阈值 τ(g)=τ0 − α·o(g)；
+   anchor a 与 g 的旋转 IoU 超过 τ(g) 即为正样本。（o, τ0, α 在此定义）
+【图示】见图 2 检测头分支：遮挡重的目标匹配范围更宽（示意为更大的接收区域）。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>组件 2 小节三件套齐全，与组件 1 逻辑衔接。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 三件套缺直觉/符号（同组件 1）；② 组件间无衔接（各写各的）→ 一句话点出“结构（组件1）+训练策略（组件2）互补”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>遮挡程度 o(g) 怎么定义说不清 → 用框间重叠度近似，文字说明即可；衔接生硬 → 在组件 2 开头加一句“除结构改进外，我们在训练策略上…”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了第二个组件。<strong>做了</strong>（组件 2）、<strong>学了</strong>（训练策略类组件也用三件套、组件间衔接）、<strong>会了</strong>（写多个组件并衔接）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Method Overview + 组件 1 + 组件 2（约 50%）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D102</summary><textarea data-note="d102" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d103" data-d="103"><header class="day-head"><span class="dnum">D103</span><h2 class="day-t">周五 · 写完 Method（组件 3 + 伪代码 + 架构图）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写完 Method 全章——组件 3（Soft-NMS+检测头）、Algorithm 1 伪代码、画最终架构图、整章统稿。提醒：伪代码和架构图要和正文文字完全一致（同一个流程，三种表达），不一致是审稿人最容易抓的硬伤。</p>
+</blockquote>
+</div><section class="slot" id="d103-am" data-d="103" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D103 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写组件 3（Soft-NMS/检测头）+ Algorithm 1 伪代码</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>组件 3（旋转 Soft-NMS + 检测头微调，属推理/后处理）也用三件套；此外 <strong>Algorithm 1 伪代码</strong>（≤20 行）把训练或推理流程精确写出，极大帮助复现。<strong>为什么要伪代码</strong>：文字描述流程难免有歧义，伪代码用近乎代码的精确度把“输入→各步骤→输出”写清，审稿人/复现者照着就能实现。<strong>伪代码粒度</strong>：写到“看着能实现”——关键步骤、关键变量都在，但不必是可运行代码。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写组件 3（三件套）+ Algorithm 1 伪代码（推理流程：前向→解码框→旋转 Soft-NMS→输出）。伪代码范例：</p>
+<figure class="code" data-lang="text"><pre><code>Algorithm 1: 推理流程（旋转 Soft-NMS）
+输入: 图像 I, 模型 M, 衰减系数 σ, 阈值 t
+输出: 检测框集合 D
+1: F ← M.backbone(I); F* ← MultiScaleFuse(F)      // 组件1
+2: B, S ← M.head(F*)                               // 解码出旋转框 B 与得分 S
+3: D ← ∅
+4: while S 非空:
+5:    i ← argmax(S); D ← D ∪ {B_i}
+6:    for j ≠ i: S_j ← S_j · exp(−RIoU(B_i,B_j)²/σ)  // 旋转 Soft-NMS 衰减
+7:    去掉 S_j &lt; t 的框
+8: return D</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>组件 3 + Algorithm 1 成稿，流程清晰、照着能复现。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 伪代码太笼统（&quot;做 NMS&quot;）→ 写到看着能实现的粒度;② 伪代码和文字不一致 → 对齐。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>伪代码不会写 → 把你真实代码的核心逻辑抽象成 10 行以内；太长 → 只写核心流程，细节进正文。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了组件 3 + 伪代码。<strong>做了</strong>（组件 3 + Algorithm 1）、<strong>学了</strong>（推理组件入 Method、伪代码助复现、粒度把握）、<strong>会了</strong>（用伪代码精确描述流程）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜伪代码与图文一致</strong>:Algorithm 1（≤20 行）把训练/推理流程写到“看着能实现”的粒度（关键步骤+变量齐）。它必须与 Method 正文、架构图描述<strong>同一个流程</strong>——三者不一致是审稿人最爱抓的硬伤。伪代码从你真实代码的核心逻辑抽象而来。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d103-noon" data-d="103" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D103 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">画最终版架构图</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>架构图是论文 Figure 2（最重要的图之一），要清晰展示数据流 + 你的组件位置。用 draw.io / PPT / LaTeX(TikZ)画<strong>最终版</strong>（替换之前的草图）。<strong>一张好架构图的价值</strong>：审稿人不读正文也能大致看懂你的方法；它和摘要、主表一起，构成审稿人对你工作的“快速画像”。<strong>画图要点</strong>（承接 W14 补充包）：主流程从左到右、创新组件用醒目颜色标出、关键处标特征维度、箭头体现真实数据流、核心组件可配放大子图。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>画最终架构图(输入→backbone→你的组件（标出）→head→输出)，美观、清晰、与 Method 文字/伪代码一致。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>最终架构图（论文质量，与 Method 文字、伪代码三者一致）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 图文不一致（图里有的组件文里没写，或反之）→ 对齐图、文、伪代码三者;② 画成积木罗列没有数据流 → 箭头要体现特征怎么流。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不会用画图工具 → draw.io 上手最快，有检测论文模板；图太挤 → 核心组件放大成子图；不确定标哪些维度 → 标你的组件介入处的特征尺寸。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了论文级架构图。<strong>做了</strong>（最终架构图）、<strong>学了</strong>（架构图的论文要求、图文伪代码一致）、<strong>会了</strong>（画清晰一致的方法图）。</p>
+</div></section></section><section class="slot" id="d103-pm" data-d="103" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D103 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">完成 Method 章节（整章统稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>通读 Method（Overview+组件 1/2/3+伪代码+图），补缺、统一符号、定稿。<strong>整章统稿的重点</strong>:① 符号全章一致（F_l 在每处含义相同）;② 每个组件三件套齐全（别漏了某个组件的图示）;③ 图、文、伪代码三者描述同一流程;④ 组件间逻辑衔接顺畅。<strong>为什么统稿这一步不能省</strong>:Method 是分三天（Overview→组件1/2→组件3+伪代码+图）写的，分段写最容易出的问题就是“局部都对、合起来不一致”——比如组件 1 里把某变量叫 F*，组件 3 的伪代码里又叫 F_fused；或组件 2 写了直觉公式却忘了在架构图里标出来。读者是连续读整章的，这些不一致会让人困惑“这俩是同一个东西吗”。<strong>统稿的实操</strong>：列一张“符号定义表”（每个符号一行：符号、含义、首次定义处），全章逐个核对；再对着架构图清点“每个组件是不是都画了、都标了名”。花半小时统稿，省掉审稿人一串“符号 X 未定义/图文不符”的意见。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>通读 Method，统一符号、补全缺失（如某组件没在图里标出）、对齐图文伪代码，定稿。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 完成稿（可复现、符号统一、图文伪代码一致）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 符号前后不一致（一会儿 F 一会儿 X）→ 列符号表统一;② 图里漏了某组件 → 补上;③ 有逻辑跳跃 → 补衔接句。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>符号乱 → 做一张符号定义表，全章核对；不确定可复现性 → 假装“只读 Method 不看代码”的人，问“我能实现吗”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了 Method 全章。<strong>做了</strong>（Method 完成稿+架构图）、<strong>学了</strong>（整章统稿、符号统一、三者一致）、<strong>会了</strong>（写完一章可复现的 Method）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Method 完成稿（Overview+3 组件+伪代码） ✅ 架构图最终版。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D103</summary><textarea data-note="d103" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d104" data-d="104"><header class="day-head"><span class="dnum">D104</span><h2 class="day-t">周六 · （集中日）· 整合通读 + 自审 + 朋友看前 3 章</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把三章拼起来通读、自审逻辑链、请一位朋友帮看。提醒：你太熟内容会“脑补”看不见问题，外部视角能发现你看不到的断点；请朋友时明确说“帮我挑刺、标看不懂的地方”，别只想听夸。</p>
+</blockquote>
+</div><section class="slot" id="d104-am" data-d="104" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D104 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整合 Intro + RW + Method，通读检查逻辑链</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（逻辑链检查）</h4><div class="blk-b"><p>三章写完，<strong>整合通读</strong>，检查<strong>逻辑链是否通顺</strong>:Intro 提的 Gap → Method 是否解决它 → RW 是否为它铺垫。<strong>一条线不断，论文才有说服力</strong>。<strong>最常见的逻辑断裂</strong>:Intro 说要解决“密集粘连”，但 Method 的组件其实没怎么针对它；或 RW 没提“密集粘连”这个洞，Intro 却说这是主要 Gap。整合通读就是揪出这种“说的和做的对不上”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把 Intro+RW+Method 拼成一份文档，通读，标出逻辑断点/重复/术语不一致，列“逻辑问题清单”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>三章整合稿 + 一份“逻辑问题清单”（断点/重复/术语）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>Gap 与 Method 对不上 → 调整使“提的问题=解决的问题”；术语不统一 → 统一表；三章重复内容 → 各司其职（RW 讲别人、Method 讲自己）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>看不出断点 → 画一条“Gap→方法→证据”的线，逐环检查是否接得上；术语乱 → 全文术语对照表。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>从逻辑链整体审视论文</strong>。<strong>做了</strong>（三章整合+逻辑清单）、<strong>学了</strong>(逻辑链检查、说的=做的)、<strong>会了</strong>（把多章串成一条线）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜逻辑链整合自审</strong>：三章拼起来通读，检查“Intro 的 Gap → RW 是否铺垫 → Method 是否解决”一条线不断。最常见硬伤是“说的（Intro 的 Gap）和做的（Method 的组件）对不上”。揪出断点/重复/术语不一致列清单逐条改。画一条 Gap→方法→证据的线逐环验。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d104-noon" data-d="104" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D104 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">自审（有没有跳跃？有没有缺失？）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>逐节自审：有没有<strong>未交代就用的概念</strong>（读者还不知道就出现的术语）？有没有<strong>该有却缺的内容</strong>（如某组件没在图里、某 Gap 没在 RW 提）？<strong>自审的关键是切换视角</strong>——从“作者”（什么都懂）切到“第一次读的人”（只能读到纸面写的）。<strong>具体怎么切视角</strong>：逐句问自己两个问题——“这个词/概念，我在前面定义过吗？”（查未交代）和“如果我只读到这里、不知道后面，我能看懂吗？”（查跳跃）。作者最容易犯的错是“自己脑子里有完整图景，默认读者也有”，于是把关键的过渡、定义、动机省略了，自己读毫无障碍，别人读处处是坑。<strong>一个实用技巧</strong>：把论文里所有专有名词/符号列出来，逐个确认“首次出现处有没有定义”，这能机械地揪出大部分“未交代就用”的问题。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>逐节自审，假装第一次读，标出“未交代的概念”“缺失的内容”，列待补清单。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>自审清单（跳跃点 + 缺失点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 自己看不出问题（太熟）→ 假装外行通读或隔天再读;② 只查错别字不查逻辑 → 错别字是末位，重点查跳跃和缺失这类影响理解的硬问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>切不到读者视角 → 隔一天再读（陌生感回来）；不确定哪算跳跃 → 每出现一个术语，问“前面定义过吗”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你练了论文自审。<strong>做了</strong>（自审清单）、<strong>学了</strong>（查跳跃/缺失、切读者视角）、<strong>会了</strong>（以读者视角审稿）。</p>
+</div></section></section><section class="slot" id="d104-pm" data-d="104" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D104 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">找 1 位朋友帮看前 3 章</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>外部视角</strong>能发现你“自己看不见”的问题（你太熟内容，会脑补缺失的逻辑）。找一位朋友（同领域更好，外行也行）读前 3 章，问“哪里看不懂/逻辑哪里断”。<strong>为什么外部读者重要</strong>：你写的时候脑子里有完整的图景，会不自觉地把没写出来的部分“脑补”上，自己读不出缺漏；别人没有你的脑内图景，卡住的地方就是真的写得不清楚的地方。</p>
+<ul>
+<li><strong>这个现象有个名字叫“知识的诅咒”(The Curse of Knowledge)</strong>：一旦你掌握了某个知识，就很难再想象“不知道它的人是什么感受”了——你会默认别人也有你脑子里的背景、也能补上你省略的过渡。<strong>这正是几乎所有论文“自己读很顺、别人读看不懂”的根源</strong>：不是作者写得不努力，而是作者被自己的知识“诅咒”了，看不见对新读者来说的断点。<strong>对你这个转型者还有一层特别的意义</strong>：你为了搞懂这个课题，自学、踩坑、想了很久——你对它的熟悉程度，比你想象的还要深，所以“知识的诅咒”对你可能更强，你更容易默认读者懂那些你费了好大劲才搞懂的东西。<strong>唯一可靠的解药就是“真的找一个不在你脑子里的人来读”</strong>——外部读者卡住的每一个地方，都是知识的诅咒让你自己看不见的盲点。这也是为什么这一步不能省、不能用“我自己再读一遍”代替（你再读还是带着诅咒）。把朋友的每个“这里没看懂”都当成宝贵的盲点定位，认真去补——补完之后，你的论文才是“对没有你背景的审稿人也清楚”的，而审稿人恰恰就是这样的人。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把前 3 章发给朋友，明确请他标“看不懂的地方、逻辑断的地方”；收集反馈。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>朋友的反馈记录（看不懂/有疑问的点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只想听夸 → 明确请挑刺（&quot;帮我标看不懂的地方&quot;）;② 没人看 → 自己隔一天再读（陌生感也能发现问题）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>朋友不懂专业 → 外行能指出“哪段读不通顺/逻辑跳”，也有价值；找不到人 → 隔天自读 + 用 TTS 朗读（听出拗口处）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用外部读者检验论文可读性</strong>。<strong>做了</strong>（朋友反馈）、<strong>学了</strong>（外部视角的价值、脑补盲区）、<strong>会了</strong>（请人帮审论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜外部读者检验</strong>：你太熟内容会“脑补”看不见缺漏，外部读者卡住处=真的写不清处。请人（同行最好，外行也行）读前 3 章，明确“帮我挑刺、标看不懂/逻辑断的地方”。没人看就隔天自读或 TTS 朗读（听出拗口）。别只想听夸。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文骨架 v0.5（三章整合 + 自审清单 + 朋友反馈）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D104</summary><textarea data-note="d104" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d105" data-d="105"><header class="day-head"><span class="dnum">D105</span><h2 class="day-t">周日 · （复盘日）· 据反馈修订 + W15 复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：收官日：据自审+朋友反馈把三章修订到 v0.6、复盘写作周、规划 W16（阶段一收官）。提醒：字数不够时不要“凑字”，而是补该有却缺的内容（直觉/不足/衔接）；真正的“详细”是信息密度高，不是话多。</p>
+</blockquote>
+</div><section class="slot" id="d105-am" data-d="105" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D105 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">根据反馈修订</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>根据自审 + 朋友反馈修订三章（补逻辑、改不清楚处、统一术语）→ 论文骨架 v0.6。<strong>修订的优先级</strong>：先改“看不懂/逻辑断”（影响理解的硬问题），再改“不够顺/有重复”（润色）。<strong>字数说明</strong>:Intro+RW+Method 目标 ≥6000 字，但字数是结果不是目标——把该写的（每个组件三件套、每个 Gap 的铺垫、衔接）写全，字数自然够；不够就是有内容缺了，补内容而非灌水。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>据清单逐条修订（先硬问题后润色），统一术语 → v0.6；统计字数（用补充包工具，确认 Intro+RW+Method ≥6000 字）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文骨架 v0.6（Intro+RW+Method ≥6000 字，逻辑通顺，反馈问题已改）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 字数不够去凑字（注水）→ 补该有内容（直觉/不足/衔接）;② 太长 → 精简背景/删重复;③ 反馈只改一半 → 逐条过清单，改完打勾确认无遗漏。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知补什么 → 回自审/朋友清单逐条对；字数仍不够 → 检查是否每个组件三件套都齐、每个子节不足都点了；太长 → 背景和重复是最该砍的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你据反馈打磨出论文骨架 v0.6。<strong>做了</strong>（论文骨架 v0.6）、<strong>学了</strong>（据反馈修订、先硬问题后润色、字数是结果）、<strong>会了</strong>（把初稿改进成可用骨架）。</p>
+</div></section></section><section class="slot" id="d105-noon" data-d="105" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D105 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">W15 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>复盘写作周——记写作中的卡点+对策（如“Method 哪段最难写、怎么突破的”），这些经验 M5 写完整论文还会用。<strong>写作复盘的重点</strong>和实验复盘不同：记的是“写作方法论”（哪种结构好用、哪类内容难写、怎么突破），而非实验数据。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>W15 周报（写作卡点+对策，如“贡献列表一开始写空了，后来用真实数字重写”）；记“论文骨架进度（v0.6，各章字数）”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W15 周报（写作经验 + 骨架进度）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>写成“今天写了 Intro 明天写 RW”的流水账 → 记“写作中学到的方法、踩的坑、怎么解决”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知记什么经验 → 记“哪个写作模板最有用”“哪段最难写、怎么突破”“下次怎么更快”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了写作周。<strong>做了</strong>（W15 周报）、<strong>学了</strong>（写作复盘抓方法论）、<strong>会了</strong>（总结写作经验）。</p>
+</div></section></section><section class="slot" id="d105-pm" data-d="105" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D105 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">计划 W16（阶段一收官周）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>W16 = pipeline 复现性收尾 + 阶段一总复盘（收官周）。<strong>这是阶段一的最后一周</strong>，重点是“把前四个月的成果固化”——让 pipeline 能一键复现、代码仓库整洁可公开、写一份阶段总结。排好 W16（任务较多，要留休息日）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定 W16 计划：pipeline 复现性验证(reproduce.sh)+ 代码仓库整理 + 阶段一总结报告（≥4000 字）+ 综述笔记 + GitHub 公开化 + 休息日(D111)+ M5–M8 计划。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W16 计划（任务排序合理，含休息日）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>W16 任务多 → 排好顺序、留休息日(D111)别排满；复现性验证耗时 → 预留充足时间。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>任务排不下 → 区分“必做（复现性+阶段总结）”和“可延后（GitHub 公开可放 M5 初）”；怕累垮 → D111 真正休息。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规划了阶段一收官周。<strong>做了</strong>（W16 计划）、<strong>学了</strong>（收官规划、固化成果、留休息）、<strong>会了</strong>（安排收尾与复盘）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文骨架 v0.6（≥6000 字） ✅ W15 周报 ✅ W16 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W15 累计交付</h2><p>论文 outline（8 节）、图表素材库 + 清单、Introduction 完成稿（4 段）、Related Work 完成稿（3 子节）、Method 完成稿（Overview+3 组件+伪代码）+ 最终架构图、论文骨架 v0.5→v0.6（Intro+RW+Method ≥6000 字）、三章整合稿 + 自审清单 + 朋友反馈、W15 周报、W16（收官周）计划。</p>
+</section><section class="wtail"><h2>🎓 W15 你“长出来”的能力清单</h2><ul>
+<li>先 outline 后正文、写作前备齐图表素材</li>
+<li>Introduction 4 段结构（背景→挑战→方法→贡献）+ 贡献列表用真实数字</li>
+<li>Related Work 分类总结法（共性→代表→不足），用子节 3 凸显“通用 CV 嫁接”创新来源</li>
+<li>Method 总分结构 + 组件三件套（直觉/公式/图）+ 伪代码 + 论文级架构图（图文伪代码一致）</li>
+<li>逻辑链整合自审 + 借外部读者检验可读性</li>
+<li>写作周方法论：先骨架后填、分维度润色（逻辑/重复/术语三遍）、字数是结果不是目标、英文先中文骨架再逐段译</li>
+<li><strong>战略校准贯穿</strong>:Intro 把“单卡高效”写成卖点、RW 子节 3 把“通用 CV 嫁接”立成创新来源、贡献列表用参数/FPS 数字凸显效率优势</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D105</summary><textarea data-note="d105" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W15 加厚补充包（范例 / 实用工具 / 每日自测 / 写作坑速查）</h2><h2>一、合格范例 — 论文 outline + Intro 4 段填好范例 + Method 组件三件套</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># Introduction 4 段（填好的完整范例）</span>
+段1 背景：遥感图像目标检测在国防、测绘、灾害监测中至关重要。与通用图像不同，
+遥感目标常呈任意朝向、尺度小、排列密集，使旋转目标检测成为关键且具挑战的问题。
+段2 挑战：现有旋转检测方法多依赖更强骨干或更大预训练（如 RingMo 等），在标准
+基准上表现优异，但算力开销大、难以单卡部署，且在密集相邻小目标场景仍受&quot;框粘连&quot;
+困扰。根因在于多数工作聚焦表示增强，较少针对遥感特有的小目标、遮挡、密集排列做
+轻量而专门的设计。
+段3 方法概述：为此我们提出面向单卡预算的高效旋转检测方法，包含多尺度融合、遮挡
+感知分配与旋转 Soft-NMS，将通用检测的轻量技巧适配遥感，在不显著增参下提升精度。
+段4 贡献：• 针对遥感小目标/遮挡/密集，设计三个轻量可即插组件 • 在 DOTA/DIOR-R/
+HRSC 平均 +X mAP，参数仅 +2M、22 FPS • 完整消融与跨数据集验证组件有效且泛化。
+
+<span class="gh"># Related Work 三子节（每子节&quot;共性→代表→不足&quot;）</span>
+子节1 旋转检测：通常引入角度表示与旋转框回归（Oriented R-CNN、ReDet 等），靠更强
+骨干/预训练提升；标准基准好，但算力大、密集场景粘连，未专门优化。
+子节2 通用检测：Faster R-CNN/YOLO 提供基础范式，但水平框不适用任意朝向遥感目标；
+我们借鉴其范式并针对遥感适配。
+子节3 借鉴的通用 CV：多尺度融合、Soft-NMS 在通用检测有效；但在遥感密集旋转场景
+尚未被系统适配，我们针对性引入并旋转化改造。
+
+<span class="gh"># Method 组件三件套（模板）</span>
+每个组件：【直觉】治哪个 Gap、为什么这么设计 →【公式】严谨定义所有符号 →
+【图示】架构图位置/内部结构。直觉写最前，让读者带着&quot;为什么&quot;看公式。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 统计各章字数（盯 ≥6000）+ 图表引用完整性检查</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="c1"># ① 统计各 section 字数（中文按字符计；盯 Intro+RW+Method ≥6000）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_words_by_section</span><span class="p">(</span><span class="n">md_path</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">md_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^#{1,3}\s+(.*)$&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">title</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">parts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">body</span><span class="p">))</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;32</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> 字&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- 合计 </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> 字 ---&quot;</span><span class="p">)</span>
+
+<span class="c1"># ② 检查正文引用的图表是否都存在（避免&quot;如图3&quot;但没有图3）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_figure_refs</span><span class="p">(</span><span class="n">md_path</span><span class="p">,</span> <span class="n">figure_ids</span><span class="p">):</span>   <span class="c1"># figure_ids = {&quot;Figure 1&quot;,&quot;Figure 2&quot;,&quot;Table 1&quot;,...}</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">md_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?:Figure|Table|图|表)\s*\d+&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">))</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="n">refs</span> <span class="o">-</span> <span class="n">figure_ids</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;引用但可能缺失的图表:&quot;</span><span class="p">,</span> <span class="n">missing</span> <span class="ow">or</span> <span class="s2">&quot;无&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用法：统计各章字数确认 Intro+RW+Method≥6000；检查图表引用完整性&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 打印每节字数 + 合计（确认 Intro+RW+Method≥6000）;② 列出“正文引用了但素材里没有的图表”。</p>
+<h2>三、Introduction / Related Work / Method 填空骨架（直接抄改）</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># Intro 填空骨架</span>
+段1：{方向}在{应用}重要；遥感{独特性质}使{任务}更难。（3-4句）
+段2：现有方法（{引2-3}）采用{做法}，在{某方面}好，但{Gap}不足，根因{本质}。（4-5句）
+段3：为此我们提出{方法}，含{组件1/2/3}，借鉴{通用CV}并适配，单卡下{效果}。（3-4句）
+段4：• 提出{X}解决{Y} • {数据集}上+{数字}、参数/FPS{效率} • 完整{消融/泛化}验证。
+
+<span class="gh"># Related Work 填空骨架（每子节）</span>
+{这类}通常{共同思路}（{代表作}）；在{某方面}有效，但{共性不足}，尤其{你的Gap}。
+
+<span class="gh"># Method 填空骨架（每组件）</span>
+【直觉】{治哪个Gap、为什么}。【公式】{定义+符号说明}。【图示】见图2{位置}。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>四、Method 单组件“四件联动”完整范例（直觉/公式/图示/伪代码一致）</h2>
+<blockquote class="quote">
+<p>把一个组件写到“图、文、公式、伪代码四者说同一件事”——这是 Method 可复现的关键。以旋转 Soft-NMS 为例完整演示一遍。</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gu">### 正文（直觉 + 公式 + 图示，三件套）</span>
+【直觉】密集相邻目标经标准 NMS 易被误并（&quot;框粘连&quot;）。我们用旋转 Soft-NMS：不直接
+删除与最高分框重叠的相邻框，而是按其旋转 IoU 衰减得分，从而在密集场景保留更多
+正确框（治&quot;密集粘连&quot;）。
+【公式】设当前最高分框为 b<span class="ge">_i、其余框 b_</span>j，得分 s_j 更新为
+        s<span class="ge">_j ← s_</span>j · exp( − RIoU(b_i, b_j)² / σ )，
+其中 RIoU 为旋转框 IoU，σ 为衰减系数；衰减后 s_j &lt; t 的框被丢弃。
+【图示】见图 2 推理分支&quot;Rotated Soft-NMS&quot;模块：相邻框得分被衰减而非删除。
+
+<span class="gu">### 伪代码（Algorithm 1 节选，与上面公式同一逻辑）</span>
+while S 非空:
+    i ← argmax(S); D ← D ∪ {B_i}
+    for j ≠ i: S<span class="ge">_j ← S_</span>j · exp(−RIoU(B_i,B_j)²/σ)   # ← 与正文公式完全一致
+    去掉 S_j &lt; t 的框
+
+<span class="gu">### 一致性自检（四者对同一件事）</span>
+[✓] 直觉里的&quot;衰减而非删除&quot; = 公式的乘 exp 衰减 = 伪代码第3行 = 图里&quot;得分衰减&quot;标注
+[✓] 符号 σ, t, RIoU 在正文公式处定义，伪代码沿用同名
+[✓] 图 2 有&quot;Rotated Soft-NMS&quot;模块且位置在推理分支（与 Overview 描述一致）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这套“四件联动 + 一致性自检”用在每个组件上</strong>：写完一个组件，就对一遍“直觉/公式/图示/伪代码是不是在说同一件事、符号是否同名同义”。四者一致的 Method，审稿人挑不出“图文不符”的硬伤，复现者照着就能实现。</p>
+<h2>五、中文骨架 → 英文初稿 的衔接贴士（英文吃力时的稳妥路径）</h2>
+<blockquote class="quote">
+<p>你不必一上来用英文流畅写作。稳妥路径：先用中文把逻辑骨架写顺，再逐段译英，最后润色。</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="k">1.</span> 先中文搭骨架：用本包的填空骨架，把每段逻辑、每个组件三件套用中文写顺、写全。
+   （这一步解决&quot;想清楚&quot;，不被英文卡住思路）
+<span class="k">2.</span> 逐段译英：一段一段译，别整篇硬翻；保留你已理顺的逻辑结构。
+<span class="k">3.</span> 句式套模板：学术英文有固定句式，套用即可——
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>引出 Gap: &quot;However, existing methods ... still suffer from ...&quot;
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>提出方法: &quot;To this end, we propose ...&quot;
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>贡献: &quot;We ... ; Extensive experiments show that ...&quot;
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>组件直觉: &quot;Motivated by ..., we introduce ... to address ...&quot;
+<span class="k">4.</span> 润色：用工具检查语法，统一术语（建术语对照表：目标=object、旋转框=oriented box…）。
+<span class="k">5.</span> 别追求一步到位的&quot;母语级&quot;英文——逻辑清晰 + 术语准确 + 句式规范，就是合格的论文英文。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>心态</strong>：论文英文不是文学创作，是“用规范句式把清晰逻辑表达出来”。你逻辑理顺了（中文骨架），英文只是换一套规范句式装上去。M5 写完整论文时这套流程还会反复用。</p>
+<h2>六、每日“今日自测”</h2>
+<ul>
+<li><strong>D99</strong>:① 为什么先列 outline 再写?② 论文标准 8 节是哪些?③ 为什么写作前先备图表？</li>
+<li><strong>D100</strong>:① Introduction 4 段各写什么?② 贡献列表为什么不能写空话、要用什么？</li>
+<li><strong>D101</strong>:① Related Work 为什么不能写流水账？分类总结怎么写?② 子节 3（借鉴的通用CV）对你的卖点有什么用？</li>
+<li><strong>D102</strong>:① Method 的“组件三件套”是哪三件?② 为什么只写公式不行、直觉为什么写最前？</li>
+<li><strong>D103</strong>:① Algorithm 1 伪代码的作用与粒度?② 架构图要和哪两样保持一致？</li>
+<li><strong>D104</strong>:① 整合通读主要查什么（逻辑链）？最常见硬伤是什么?② 为什么要找外部读者（脑补盲区）？</li>
+<li><strong>D105</strong>:① 字数不够该“凑字”还是补什么?② 写作复盘记什么（方法论 vs 流水账）？</li>
+</ul>
+<h2>七、本周写作坑速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intro 背景写一大段</td>
+<td>没快速收敛到 Gap</td>
+<td>背景 3-4 句即收敛到你的问题</td>
+</tr>
+<tr>
+<td>段2 只说“不够好”不说缺啥</td>
+<td>没点 Gap 和根因</td>
+<td>写具体缺什么+为什么（你方法正冲它去）</td>
+</tr>
+<tr>
+<td>贡献写成“提出有效方法”</td>
+<td>太空</td>
+<td>具体：提出什么/解决什么/提升多少（真实数字）</td>
+</tr>
+<tr>
+<td>贡献列了五六条</td>
+<td>贪多稀释</td>
+<td>留 3-4 条最硬的</td>
+</tr>
+<tr>
+<td>RW 像流水账</td>
+<td>没分类、没点不足</td>
+<td>分 2-3 子类，每类“共性→代表→不足”</td>
+</tr>
+<tr>
+<td>三章内容重复</td>
+<td>各章定位不清</td>
+<td>RW 讲别人、Method 讲自己，各司其职</td>
+</tr>
+<tr>
+<td>Method 别人无法复现</td>
+<td>只公式无直觉/符号没定义/无图</td>
+<td>组件三件套：直觉+公式（定义符号）+图；加伪代码</td>
+</tr>
+<tr>
+<td>图/文/伪代码不一致</td>
+<td>各写各的</td>
+<td>统一架构图、Method 文字、Algorithm 三者</td>
+</tr>
+<tr>
+<td>字数不够去凑字</td>
+<td>误解“详细”</td>
+<td>补该有内容（直觉/不足/衔接），非灌水</td>
+</tr>
+<tr>
+<td>自己看不出问题</td>
+<td>太熟脑补</td>
+<td>切读者视角/隔天再读/找外部读者/TTS 朗读</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w14.html"><span class="dir">← 上一篇</span><span class="nm">W14 方法 v3 + 第三个数据集</span></a><a class="next" href="w16.html"><span class="dir">下一篇 →</span><span class="nm">W16 Pipeline 收尾 + 阶段一总复盘</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d99">D99 周一</a><a class="sub" href="#d99-am">上午 列论文 outline（8 节，</a><a class="sub" href="#d99-noon">中午 收集所有图表素材</a><a class="sub" href="#d99-pm">晚上 写 Introduction 段</a><a href="#d100">D100 周二</a><a class="sub" href="#d100-am">上午 写 Intro 段 3（方法概述</a><a class="sub" href="#d100-noon">中午 修改润色 Introductio</a><a class="sub" href="#d100-pm">晚上 开始写 Related Work</a><a href="#d101">D101 周三</a><a class="sub" href="#d101-am">上午 写 RW 子节 1（前人工作总结</a><a class="sub" href="#d101-noon">中午 写 RW 子节 2（相关但不同的</a><a class="sub" href="#d101-pm">晚上 写 RW 子节 3（你借鉴的通用</a><a href="#d102">D102 周四</a><a class="sub" href="#d102-am">上午 写 Method Overvie</a><a class="sub" href="#d102-noon">中午 写 Method 组件 1（直觉</a><a class="sub" href="#d102-pm">晚上 写 Method 组件 2（遮挡</a><a href="#d103">D103 周五</a><a class="sub" href="#d103-am">上午 写组件 3（Soft-NMS/检</a><a class="sub" href="#d103-noon">中午 画最终版架构图</a><a class="sub" href="#d103-pm">晚上 完成 Method 章节（整章统</a><a href="#d104">D104 周六</a><a class="sub" href="#d104-am">上午 整合 Intro + RW + </a><a class="sub" href="#d104-noon">中午 自审（有没有跳跃？有没有缺失？）</a><a class="sub" href="#d104-pm">晚上 找 1 位朋友帮看前 3 章</a><a href="#d105">D105 周日</a><a class="sub" href="#d105-am">上午 根据反馈修订</a><a class="sub" href="#d105-noon">中午 W15 周复盘</a><a class="sub" href="#d105-pm">晚上 计划 W16（阶段一收官周）</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="23">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W23 · 论文修改 + 竞赛迭代 —— 双线并行：上午改论 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M6 论文 v1 + 竞赛启动</span><span>·</span><span>Week 23</span><span>·</span><span>D155–D161</span></div><h1 class="title">论文修改 + 竞赛迭代 —— 双线并行：上午改论文（慢思考）、中午晚上刷竞赛（快迭代）</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="155" data-k="am" title="D155 上午段"></i><i data-d="155" data-k="noon" title="D155 中午段"></i><i data-d="155" data-k="pm" title="D155 晚上段"></i></span><span class="sday"><i data-d="156" data-k="am" title="D156 上午段"></i><i data-d="156" data-k="noon" title="D156 中午段"></i><i data-d="156" data-k="pm" title="D156 晚上段"></i></span><span class="sday"><i data-d="157" data-k="am" title="D157 上午段"></i><i data-d="157" data-k="noon" title="D157 中午段"></i><i data-d="157" data-k="pm" title="D157 晚上段"></i></span><span class="sday"><i data-d="158" data-k="am" title="D158 上午段"></i><i data-d="158" data-k="noon" title="D158 中午段"></i><i data-d="158" data-k="pm" title="D158 晚上段"></i></span><span class="sday"><i data-d="159" data-k="am" title="D159 上午段"></i><i data-d="159" data-k="noon" title="D159 中午段"></i><i data-d="159" data-k="pm" title="D159 晚上段"></i></span><span class="sday"><i data-d="160" data-k="am" title="D160 上午段"></i><i data-d="160" data-k="noon" title="D160 中午段"></i><i data-d="160" data-k="pm" title="D160 晚上段"></i></span><span class="sday"><i data-d="161" data-k="am" title="D161 上午段"></i><i data-d="161" data-k="noon" title="D161 中午段"></i><i data-d="161" data-k="pm" title="D161 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：据 mock review 把论文改到 v1.4，同时用一串竞赛 Trick 提分。
+<strong>本周科研能力目标</strong>（你原计划，保留）：双线并行——论文修改 + 竞赛提分。
+<strong>先给你打个预防针</strong>：论文和竞赛<strong>节奏完全不同</strong>——论文要安静、深入地改（放上午），竞赛要快试、快交、快看排名（放中午+晚上）。<strong>别混在一起做</strong>，否则两边都做不好（改论文时被竞赛打断，思路就断了）。
+<strong>竞赛 Trick 速览（本周逐个用，详解在补充包）</strong>：<strong>TTA</strong>（测试时增强）、<strong>多尺度训练</strong>、<strong>Ensemble</strong>（模型集成）、<strong>伪标签</strong>、（下周）<strong>WBF</strong>。这些是竞赛通用提分套路，也能写进 M8 的竞赛技术报告。
+<strong>本周精力怎么分配</strong>：论文侧烧脑的是“据审稿意见改 Intro/Method/Experiment”；竞赛侧是“理解每个 Trick 的原理 + 一次一招看效果”。教学按“双线”组织，每天上午讲论文修改、中午晚上讲一个竞赛 Trick。</p>
+</blockquote>
+<hr />
+<h2>🧭 W23 总览（双线）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>双线</th>
+<th>这周做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>论文（上午，慢）</td>
+<td>据 mock review 改 Intro/Method/Experiment → v1.3 → 快审微调 → v1.4（润色+参考文献）</td>
+</tr>
+<tr>
+<td>竞赛（中午+晚上，快）</td>
+<td>TTA → 多尺度 → 更多epoch+lr → Ensemble → 伪标签，逐个提分 + Trick 日志</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：本周练的是“<strong>双线时间管理 + 据审稿改论文 + 竞赛提分套路</strong>”——把一周过成两条并行的线。</p>
+<hr />
+</section>
+<article class="day" id="d155" data-d="155"><header class="day-head"><span class="dnum">D155</span><h2 class="day-t">周一 · 改论文 Intro + 竞赛 TTA</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把 Intro 的 motivation 改强（审稿常见意见）；中午晚上上第一个竞赛 Trick——TTA。</p>
+<p><strong>预期管理</strong>:M6 收官周，本周双线并行——上午改论文（慢思考）、中午晚上刷竞赛（快迭代）。今天改 Intro motivation + 上 TTA。提醒：论文和竞赛节奏完全不同（论文要安静深入、竞赛要快试快交），<strong>别混在一起做</strong>否则两边都做不好；强化motivation要用具体场景/数据/后果说话，别只堆“非常重要”这类形容词；TTA无需重训，但翻转的预测要翻回原图坐标再融合。</p>
+</blockquote>
+</div><section class="slot" id="d155-am" data-d="155" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D155 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">据 mock review 改 Intro（强化 motivation）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若审稿说“<strong>motivation 不够强</strong>”——要<strong>加强问题的重要性论述</strong>：为什么这个 Gap 值得解决？不解决有什么后果（漏检会怎样、误判会怎样）？用具体场景/数据/后果说话。这是录用的关键（审稿人要先认同“问题值得做”）。</p>
+<ul>
+<li><strong>为什么“motivation不够强”是常见且致命的审稿意见</strong>：审稿人评判一篇论文，首先要被说服“<strong>这个问题值得解决</strong>”——如果他读完Intro觉得“这问题没什么意义/不重要/已经解决得差不多了”，那后面你方法再好他也提不起兴趣，可能直接拒。<strong>motivation（动机）就是论证“为什么这个问题重要、值得做”</strong>。很多论文方法不错但被拒，就是因为motivation没讲透，审稿人没被说服问题的价值。所以“motivation不够强”是必须认真对待的A级意见。</li>
+<li><strong>怎么把motivation改强（三个抓手）</strong>:① <strong>具体应用场景</strong>——这个问题在什么真实场景中重要（如“遥感小目标检测在灾害评估、军事侦察、城市规划中至关重要”）;② <strong>不解决的后果</strong>——如果这个问题解决不好会怎样（如“漏检密集小目标会导致灾情评估遗漏受灾区域，延误救援”）;③ <strong>量化的影响</strong>——用数据说明问题的规模/严重性（如“现有方法在小目标上漏检率高达X%”）。<strong>用“具体场景+严重后果+量化数据”三管齐下，让审稿人认同问题确实重要、确实该解决</strong>。</li>
+<li><strong>最忌讳“只堆形容词”</strong>：改motivation时，新手常犯的错是堆砌空洞的强调词——“这是一个非常重要、极具挑战性、意义重大的问题”。<strong>这些形容词不传递任何实质信息，审稿人不会被说服</strong>。真正有说服力的是具体的东西：一个真实的应用场景、一个具体的失败后果、一个量化的数据。<strong>用事实和场景说话，而非用形容词喊口号</strong>。比如不说“小目标检测极其重要”，而说“在洪涝灾害评估中，漏检一片被淹的车辆和房屋，会导致该区域的受灾程度被严重低估”——后者让人真切感到问题的分量。</li>
+<li><strong>改motivation别偏离主线</strong>：强化motivation时要<strong>紧扣你论文实际解决的那个Gap</strong>——别为了“显得重要”扯太远（泛讲整个遥感领域多重要），那样反而稀释了焦点。motivation要精准地论证“你解决的这个具体问题”的价值，和你的方法、贡献形成一条线。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据 mock review，在 Intro 强化“问题重要性”（加具体应用场景、量化数据、不解决的后果）。</li>
+<li>让读者读完认同“这个问题该解决”，且紧扣你实际解决的那个Gap（别扯太远）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Intro 的 motivation 更有力（读者认同问题价值，有具体场景/后果）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>只堆形容词</strong>（&quot;非常重要、极具挑战&quot;）→ 用具体场景/数据；改过头偏离主线 → 紧扣你的 Gap。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么强化?→ 举一个具体应用（如灾害评估漏检的代价）+ 一个数据（该问题影响多少）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>强化 motivation</strong>。<strong>做了</strong>（Intro 修改）、<strong>学了</strong>（论证问题重要性用场景/后果）、<strong>会了</strong>（让 motivation 更有说服力）。</p>
+</div></section></section><section class="slot" id="d155-noon" data-d="155" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D155 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛改进 2:TTA（测试时增强）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(TTA)</h4><div class="blk-b"><p><strong>TTA = 测试时对同一张图做多种变换（翻转/多尺度/旋转），分别预测再融合</strong>（平均/投票）。<strong>类比</strong>：同一道题让几个“略有不同视角的自己”各做一遍再综合，通常更稳、更准。<strong>最大优点：无需重训</strong>（只在推理时做）。</p>
+<ul>
+<li><strong>为什么TTA能稳定提分（原理）</strong>：模型对同一目标的不同视角（原图、翻转、不同尺度）的预测，各自可能有些误差，但<strong>误差方向不完全一致</strong>——把多个视角的预测融合（平均/投票），随机误差会相互抵消，系统性的正确信号会被强化，结果更稳更准。这就像“多个略有不同视角的自己各做一遍题再综合答案”，比单次判断可靠。<strong>TTA是竞赛里性价比极高的一招</strong>：不用重新训练（只在推理时多做几次变换），就能稳定提升一点分数。</li>
+<li><strong>TTA的关键：翻转预测要“翻回原图坐标”再融合</strong>：这是TTA最容易出错、也最关键的一点。对于检测/分割任务，如果你对图做了水平翻转再预测，<strong>得到的框/掩膜是在翻转后的图上的坐标——必须把它翻转回原图坐标，才能和原图的预测对齐融合</strong>。如果忘了翻回去就直接融合，框/掩膜的位置就全错了，结果反而变差。<strong>做TTA时，每做一种变换，预测后都要做对应的逆变换把坐标还原</strong>，再融合。这一步务必小心。</li>
+<li><strong>TTA变换怎么选（别太多）</strong>：常用的TTA变换有水平翻转、垂直翻转、多尺度（几个不同输入尺寸）、旋转等。<strong>别一次上太多变换</strong>——变换越多，推理越慢（每种变换都要前向一次）。<strong>先用2-3种最有效的（如水平翻转+多尺度）</strong>，看效果。检测任务的多个框融合，简单平均不够好，要用WBF（Weighted Box Fusion，下周详解）正确合并。</li>
+<li><strong>TTA和训练阶段的改进互补</strong>:TTA是推理阶段的提分招（不改训练），它和训练阶段的改进（多尺度训练、更强backbone等）是<strong>互补</strong>的——可以叠加使用（训练时多尺度训练 + 推理时多尺度TTA，效果往往更好）。所以TTA是个“几乎总能加一点、且不影响其他改进”的稳妥招，竞赛冲刺常用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>推理时加 TTA（先做水平翻转 + 多尺度两种，代码见补充包）。</li>
+<li><strong>关键</strong>：翻转的预测要<strong>翻回原图坐标</strong>再融合（检测/分割尤其要对齐）。</li>
+<li>本地验证有无提升。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>TTA 推理跑通，本地有提升（或持平）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>翻转预测没翻回</strong>就融合 → 结果错乱；TTA 太多变换 → 推理太慢，先用 2-3 种。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>TTA 后反而变差?→ 检查融合方式（检测要正确合并框，见下周 WBF）；太慢 → 减少变换数。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会 <strong>TTA 提分</strong>。<strong>做了</strong>(TTA)、<strong>学了</strong>(测试时增强=多视角综合、无需重训、要对齐坐标)、<strong>会了</strong>（用 TTA 免重训提分）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜TTA</strong>：推理时多变换（翻转/多尺度）分别预测→对齐回原图→融合。无需重训、通常稳定提分；检测的框融合用 WBF。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d155-pm" data-d="155" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D155 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">跑竞赛 TTA 版本 → 提交</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>用 TTA 生成提交，看线上排名变化（本地涨不等于线上涨，以线上为准）。<strong>为什么强调“以线上为准”</strong>：你的TTA改进可能在本地验证集上涨了，但提交到线上排行榜——这才是真正的评判。<strong>本地涨不等于线上涨</strong>：有时本地的提升是过拟合了你的本地验证划分（改进恰好迎合本地验证集的特点，不泛化到线上测试集）。所以<strong>每个Trick都要实际提交、看线上分数变化来判断它真有用没</strong>，别只看本地。这也是为什么竞赛要“快试快交快看排名”——线上反馈才是真相。把TTA的线上Δ分记入Trick日志（改了什么/Δ分/是否保留）；明显涨就保留TTA，线上没涨就记录、可能和别的Trick组合才显效（先留着或标记，组合阶段再试）。<strong>用线上分数作为每个Trick去留的依据</strong>，这是竞赛迭代的基本准则。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用 TTA 生成提交文件（翻转的预测先翻回原图坐标再融合）。</li>
+<li>提交，看线上排名（本地涨不等于线上涨，以线上为准）。</li>
+<li>记入 Trick 日志（Δ分 / 是否保留）；线上没涨先留着，组合阶段再试。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛 TTA 提交，排名变化记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>本地涨就以为线上涨 → 看线上；线上没涨就删 TTA → 记录，可能和别的 Trick 组合才显效。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>线上没涨?→ 记录，试下一招；明显涨 → 保留 TTA。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你提交并验证了 TTA。<strong>做了</strong>（TTA 提交）、<strong>学了</strong>（线上验证为准）、<strong>会了</strong>（以排名衡量 Trick）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Intro 修改版 ✅ 竞赛 TTA 提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D155</summary><textarea data-note="d155" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d156" data-d="156"><header class="day-head"><span class="dnum">D156</span><h2 class="day-t">周二 · 改论文 Method + 竞赛多尺度</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把 Method 看不清的地方用图/公式讲清；中午晚上上多尺度训练。</p>
+<p><strong>预期管理</strong>：今天改 Method（加图/公式讲清）+ 上多尺度训练。提醒：读者卡住的地方往往一张小示意图就解决（图/公式常比纯文字更清楚），重点改朋友“看不懂”的几处，图要直指卡点；多尺度训练（随机用512/768/1024等不同尺度）让模型对尺度更鲁棒，<strong>遥感目标尺度悬殊（同图有巨型建筑和小车），多尺度尤其有效</strong>;OOM就限制最大尺度或降batch。</p>
+</blockquote>
+</div><section class="slot" id="d156-am" data-d="156" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D156 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">改论文 Method（表述不清→加图/公式）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若审稿说“<strong>某处表述不清</strong>”——<strong>加图或加公式</strong>把它讲清（图/公式常比纯文字更清楚）。读者卡住的地方，往往一张小示意图就解决。</p>
+<ul>
+<li><strong>为什么&quot;加图/公式&quot;比&quot;改文字&quot;更能解决表述不清</strong>：有些概念（尤其方法的结构、数据流、模块如何工作）用纯文字描述很难讲清楚——读者要在脑子里重建你说的结构，容易卡住。<strong>而一张示意图能直接把结构展示出来，一眼就懂（&quot;一图胜千言&quot;）</strong>；一个公式能精确地定义操作（消除文字的歧义）。所以审稿人说&quot;某处看不懂&quot;时，<strong>与其反复改文字，不如加一张针对那个难点的小示意图或一个精确的公式</strong>，往往立刻就讲清了。</li>
+<li><strong>加图/公式的要点</strong>:① <strong>图要直指卡点</strong>——加的图必须针对读者卡住的那个具体地方（如某模块的内部结构、某个数据流的走向），别加一张泛泛的总览图（那不解决具体的卡点）;② <strong>公式要定义清楚符号</strong>——加公式时，公式里的每个符号都要在首次出现时定义，否则公式本身也成了新的&quot;看不懂&quot;;③ <strong>图文配合</strong>——图旁边配文字说明它展示了什么，文字里引用图（&quot;如图X所示&quot;），图和文相互支撑。</li>
+<li><strong>重点改朋友“看不懂”的那几处</strong>:mock review里朋友指出“看不懂”的地方，就是你Method表述不清的客观信号（尤其不同方向的朋友看不懂，说明真的不够清楚）。<strong>针对这些具体的卡点，逐一加图/加公式/加直觉解释</strong>。判断方法有效没有：想“读者到底卡在哪一步”，针对那一步精准地补充。改完让朋友再看一眼那几处，确认卡点消除。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据 mock review，对 Method 不清楚处加示意图 / 补公式 / 加直觉解释。</li>
+<li>重点改朋友“看不懂”的那几处。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 表述更清晰（加了图/公式，卡点消除）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>加的图没指向那个难点 → 图要直指卡点；符号没定义 → 补。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>加图没帮助?→ 想“读者到底卡在哪一步”，针对那一步画。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你提升了 Method 清晰度。<strong>做了</strong>（Method 修改）、<strong>学了</strong>（用图/公式讲清、针对卡点）、<strong>会了</strong>（消除表述歧义）。</p>
+</div></section></section><section class="slot" id="d156-noon" data-d="156" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D156 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛改进 3：多尺度训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（多尺度训练）</h4><div class="blk-b"><p>训练时<strong>随机用不同输入尺度</strong>（如 512/768/1024），让模型对尺度更鲁棒。<strong>遥感目标尺度悬殊</strong>（同图里有巨型建筑和小车），多尺度训练尤其有效。</p>
+<ul>
+<li><strong>为什么多尺度训练能提升鲁棒性</strong>：如果训练时模型只见过固定尺度（如都是1024）的图，它对其他尺度的目标可能不够鲁棒。<strong>训练时随机用不同输入尺度，相当于让模型见过同一目标在不同大小下的样子，学到尺度不变的特征</strong>——测试时无论目标多大多小，模型都能较好地识别。这是一种“通过数据多样性提升泛化”的技巧，简单有效。</li>
+<li><strong>为什么多尺度对遥感“尤其”有效</strong>：遥感图像有个突出特点——<strong>同一张图里目标的尺度差异巨大</strong>：可能同时有占据大片像素的巨型建筑/机场，和只有几个像素的小车/小船。这种悬殊的尺度跨度，对检测/分割是很大的挑战（模型要同时handle大目标和小目标）。<strong>多尺度训练正好针对这个痛点</strong>：通过在不同尺度上训练，模型对大小目标都更鲁棒。所以多尺度训练在遥感任务里特别值得用，提分往往明显。这也呼应你方法可能就是冲着“多尺度/小目标”这个遥感痛点设计的。</li>
+<li><strong>多尺度训练的注意点</strong>:① <strong>显存波动/OOM</strong>——不同尺度输入的显存占用不同，大尺度(1024)可能OOM。应对：限制最大尺度，或大尺度时降batch;② <strong>一次只加这一招</strong>——别在加多尺度的同时改别的（否则不知道是多尺度起的作用），保持“一次一处改”的纪律，看清多尺度的真实效果。训练时随机采样尺度（每个batch或每隔几个iter随机选一个尺度），实现简单。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>给竞赛训练加多尺度（每个batch/隔几个iter随机选一个尺度，如512/768/1024）。</li>
+<li>重训（只加这一招，别同时改别的）。</li>
+<li>记录，与其他Trick区分开看效果。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>多尺度训练完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>显存随尺度波动/OOM → 限制最大尺度或降 batch；改多尺度时连带改别的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>OOM?→ 限制最大尺度；没提升 → 记录换下一招。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会多尺度训练。<strong>做了</strong>（多尺度训练）、<strong>学了</strong>（多尺度鲁棒性、对遥感尤有效）、<strong>会了</strong>（用多尺度提分）。</p>
+</div></section></section><section class="slot" id="d156-pm" data-d="156" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D156 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛提交 + 看排名</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>多尺度版生成提交，看排名，记录。<strong>和TTA提交一样，多尺度训练的效果也要靠实际提交、看线上排名来验证</strong>——本地涨不代表线上涨。生成多尺度版的提交、提交、看排名，记入Trick日志（改了什么/Δ分/是否保留）。<strong>记录每招的效果不只是为了决定去留，也是为M8竞赛技术报告攒料</strong>——每个Trick提了多少分，日志里都有，到时候直接用。如果多尺度没涨，记录下来（可能和别的Trick组合才显效，组合阶段再试）；明显涨就保留。<strong>坚持“每招都记、用线上分判去留”的纪律，你的竞赛迭代就清晰可控</strong>，不会乱成一团、也不会忘了哪招有用。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>生成提交、提交。</li>
+<li>看排名，记 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛多尺度提交，排名记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不记效果 → 记 Trick 日志（为 M8 报告攒料）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>没涨?→ 记录；可能与 TTA 组合更好（后面试）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你迭代了竞赛。<strong>做了</strong>（多尺度提交）、<strong>学了</strong>（持续迭代）、<strong>会了</strong>（跟踪每招效果）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Method 修改 ✅ 竞赛多尺度提交。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜多尺度训练</strong>：训练时<strong>随机用不同输入尺度</strong>（如512/768/1024），让模型对尺度变化更鲁棒。遥感目标尺度悬殊（巨型建筑↔小车），多尺度尤其有效；推理时配合多尺度TTA更佳。OOM就限制最大尺度/降batch。一次只加这一招，看清它的效果再叠下一招。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D156</summary><textarea data-note="d156" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d157" data-d="157"><header class="day-head"><span class="dnum">D157</span><h2 class="day-t">周三 · 改论文 Experiment + 竞赛 epoch/lr</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午据审稿补最新对比；中午晚上用更多 epoch + lr 调度榨分。</p>
+<p><strong>预期管理</strong>：今天改 Experiment（补最新方法对比）+ 调 epoch/lr 榨分。提醒：审稿说“对比不够新”就补1-2个最新方法（主数据集补跑，或引用其报告值并注明设置差异），让对比既全又新；cosine学习率衰减像“先大步快走、后小步精修”（前期快速逼近、后期细调收敛）常能再榨一点分；训太久val反降是过拟合，加增强/早停。论文补跑和竞赛抢GPU就错峰。</p>
+</blockquote>
+</div><section class="slot" id="d157-am" data-d="157" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D157 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">改论文 Experiment（对比不够新→补最新方法）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若审稿说“<strong>对比方法不够新</strong>”——补 1–2 个最新方法的对比（主数据集补跑，或引用其报告值并注明设置）。让对比既全又新。</p>
+<ul>
+<li><strong>为什么“对比不够新”是常见A级意见</strong>：审稿人是领域专家，知道最新进展。如果你的对比表里缺了最近的重要方法，审稿人会觉得“你没和最新的SOTA比，凭什么说你好”——这直接质疑你对比的有效性，是可能导致拒稿的A级问题。<strong>尤其在快速发展的方向，半年就有新SOTA，你做实验+写论文这几个月，可能又出了更强的方法，必须补上对比</strong>，否则审稿人不认。</li>
+<li><strong>补对比的两种方式（按情况）</strong>:① <strong>新方法开源</strong>——在你的主数据集上复现它、跑出结果，作为新baseline加入对比表（同等条件下的公平对比，最有说服力）;② <strong>新方法没开源</strong>——引用它论文报告的数值，但<strong>注明“在其报告设置下”</strong>（它的数据划分/协议可能和你不完全一致，要诚实标注这个差异）。两种方式都能让对比跟上最新进展。</li>
+<li><strong>时间紧的应对</strong>：补对比（尤其复现）要花时间，如果deadline临近来不及复现新方法——<strong>至少在论文里讨论它</strong>（在Related Work或Experiment里提到这个最新方法，说明你了解它、并分析你和它的差异），比完全不提要好。<strong>让审稿人看到你知道这个方法的存在、并有自己的定位</strong>，即使没跑对比，也能缓解“不够新”的质疑。当然，能补跑对比是最好的。补跑的设置要和你的主实验一致（公平）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据 mock review，在 Experiment 补 1–2 个最新方法对比（同等设置下公平对比）。</li>
+<li>更新对比表（以及所有引用这些数字的地方）。</li>
+<li>没开源的引用报告值 + 注明设置差异；来不及补跑的至少文中讨论。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Experiment 对比含最新方法。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>最新方法没开源硬复现失败 → 引用报告值；补跑来不及 → 至少文中讨论。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>没时间补跑?→ 引用其结果并讨论与你的差异。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你让对比更新更全。<strong>做了</strong>（Experiment 修改）、<strong>学了</strong>（补最新对比的两种方式）、<strong>会了</strong>（回应“对比不够新”）。</p>
+</div></section></section><section class="slot" id="d157-noon" data-d="157" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D157 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛改进 4：更多 epoch + lr 衰减策略</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>训练更充分（更多 epoch）+ 更好的学习率衰减（如 <strong>cosine</strong>）常能再榨出一点分。<strong>类比</strong>:cosine 衰减像“先大步快走、后小步精修”——前期快速逼近、后期细调收敛。</p>
+<ul>
+<li><strong>为什么“训练充分性 + lr调度”能榨分</strong>:① <strong>更多epoch</strong>——有时模型还没训到最优就停了，适当增加epoch让它训得更充分，可能再提升一点（但要警惕过拟合，见下）;② <strong>学习率衰减策略</strong>——学习率怎么随训练变化，影响模型收敛的好坏。好的衰减策略能让模型既快速逼近好的区域、又在后期精细收敛到更优的点。这两个都是“不改模型结构、只调训练过程”的提分招，简单且常有效。</li>
+<li><strong>cosine衰减为什么好（原理直觉）</strong>:cosine（余弦）学习率衰减，让学习率按余弦曲线从大平滑地降到小——<strong>前期学习率大，模型大步快走、快速逼近好的区域；后期学习率小，模型小步精修、细致收敛到更优的点</strong>。相比step衰减（阶梯式突降）,cosine的平滑下降往往收敛更好、更稳。这就像“先大步快走接近目标、再小步精修到位”。cosine是目前很常用的lr调度策略，值得试。</li>
+<li><strong>警惕过拟合（更多epoch的副作用）</strong>：增加epoch不是越多越好——<strong>训太久，模型可能开始过拟合训练集（train loss还在降，但val指标反而下降）</strong>。这时增加epoch有害无益。应对:① 监控val指标，<strong>val开始下降就早停(early stopping)</strong>;② 加更强的数据增强抑制过拟合。<strong>找到“训练充分但不过拟合”的平衡点</strong>。竞赛里可以试几个不同的epoch数，看哪个val/线上最好。</li>
+<li><strong>这招的定位：稳妥的“微调”提分</strong>:epoch/lr调整属于“稳妥但收益有限”的提分招——它通常能榨出一点分，但不会有质的飞跃（质的飞跃靠Ensemble、伪标签这类）。它的好处是简单、风险低、几乎总能试。<strong>作为竞赛迭代的常规一招，一次只调这一处（epoch或lr），看清效果再叠其他</strong>——这和“一次只改一处”的迭代纪律一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>竞赛模型增大 epoch + 换/调 lr 衰减（cosine 优先，先快后精）。</li>
+<li>重训，监控 val（开始下降就早停，防过拟合）。</li>
+<li>提交看线上排名，记 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>更多 epoch + lr 衰减版提交，排名记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>过拟合（训太久 val 反降）→ 加增强/早停；时间长 → 错峰跑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>过拟合?→ 早停 + 加增强；没提升 → 记录换下一招。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会用训练充分性 + lr 调度提分。<strong>做了</strong>（epoch/lr 改进）、<strong>学了</strong>(cosine 衰减=先快后精)、<strong>会了</strong>（调 epoch/lr 榨分）。</p>
+</div></section></section><section class="slot" id="d157-pm" data-d="157" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D157 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">补跑实验（论文侧，如需要）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若上午改 Experiment 需补跑（新 baseline/新设置），今晚启动（论文侧的并行任务）。</p>
+<ul>
+<li><strong>为什么补跑要“保持设置一致”</strong>：你补跑新baseline（回应“对比不够新”），是为了把它加入你的对比表。<strong>这个补跑的设置（数据划分、评测协议、训练配置等）必须和你主实验完全一致</strong>——否则补跑出的数字和你已有的对比数字不可比，放进同一张表就不公平、不可信。<strong>公平对比的纪律，在补跑时同样要守</strong>：新baseline和你的方法、其他baseline，都在统一的设置下评测，数字才能直接比较。</li>
+<li><strong>论文补跑和竞赛抢GPU的错峰</strong>：本周是双线并行——竞赛在跑、论文补跑也要跑，<strong>两者会抢GPU</strong>。应对：<strong>错峰安排</strong>（如竞赛实验白天跑、论文补跑晚上跑，或反之），用你的实验矩阵/调度习惯管理好。单卡资源有限，要把GPU时间合理分配给两条线，别让它们互相堵死。补跑完成后，把新baseline的结果填进论文对比表（同步更新引用这个对比的地方），论文的“对比不够新”问题就解决了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>若需要，启动论文侧的补跑（新baseline用与你主实验完全一致的设置，只换方法）。</li>
+<li>完成后把结果填进论文对比表（同步更新所有引用这个对比的地方，如Abstract/Intro的数字）。</li>
+<li>与竞赛实验错峰，合理分配单卡GPU时间。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文补充实验启动/完成，结果入表。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>补跑设置和主实验不一致 → 保持一致（公平）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>补跑和竞赛抢 GPU?→ 错峰（竞赛白天、论文补跑晚上，或反之）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你补齐了论文实验。<strong>做了</strong>（补跑）、<strong>学了</strong>（按审稿补实验、保持设置一致）、<strong>会了</strong>（为修改提供数据支撑）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Experiment 修改 ✅ 补充实验结果。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜竞赛提分招速览（本周逐个用）</strong>:① <strong>TTA</strong>（测试时增强，无需重训）② <strong>多尺度训练</strong>（尺度鲁棒）③ <strong>更多epoch+cosine lr</strong>（训练充分，先快后精）④ <strong>Ensemble</strong>（不同模型集成，最稳）⑤ <strong>伪标签</strong>（高置信扩数据，阈值是命门）⑥（下周）<strong>WBF</strong>（检测框融合）。原则：<strong>一次一招、看清Δ分、有效的保留、组合最优</strong>。每招都记进Trick日志，也是M8竞赛技术报告的素材。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D157</summary><textarea data-note="d157" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d158" data-d="158"><header class="day-head"><span class="dnum">D158</span><h2 class="day-t">周四 · 论文 v1.3 定稿 + 竞赛 Ensemble</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午整合修改成 v1.3；中午晚上上最稳的提分招——Ensemble。</p>
+<p><strong>预期管理</strong>：今天论文整合成v1.3 + 上Ensemble（模型集成）。提醒：整合所有修改后做一致性检查（数字/术语没引入矛盾，数字以最新实验为准）；<strong>Ensemble是竞赛最常用最稳的提分手段</strong>（几个不同专长专家会诊，综合比单个准）——关键是用<strong>不同</strong>backbone/seed的模型（太相似集成收益小），代价是推理慢但冲刺值得；检测的框融合用WBF（下周详解）。</p>
+</blockquote>
+</div><section class="slot" id="d158-am" data-d="158" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D158 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文 v1.3 定稿（整合所有修改）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>整合 Intro/Method/Experiment 的所有修改 → 论文 v1.3；确保改动间一致（数字、术语）。</p>
+<ul>
+<li><strong>为什么“整合”后要专门做一致性检查</strong>：这几天你分别改了Intro(motivation)、Method（加图）、Experiment（补对比）——<strong>每处都是局部改动，但它们之间可能产生不一致</strong>：比如你在Experiment补了新对比、更新了某个数字，但Intro的贡献列表里引用的还是旧数字；或你改了某个模块的名字，但别处没同步。<strong>整合成v1.3时，要通查这些跨章节的一致性</strong>：同一个数字在所有出现的地方是否一致、术语是否统一、Intro声称的和Experiment验证的是否对应。这是多处修改后的必要检查。</li>
+<li><strong>数字以最新实验为准（统一基准）</strong>：论文里同一个指标可能在多处出现（Abstract、Intro贡献、Experiment表、Conclusion）——<strong>这些地方的数字必须完全一致，且都以最新实验结果为准</strong>。如果你补跑了实验、更新了某个数，要把所有引用这个数的地方都同步更新。<strong>不一致的数字是审稿人一眼能抓的硬伤</strong>（显得你不严谨、甚至怀疑你的结果）。用实验日志（W19归档的）作为数字的唯一来源，据它统一全文。</li>
+<li><strong>用git管理版本（清晰可追溯）</strong>：论文从v1到v1.4反复迭代，建议用git管理——每个版本(v1.1/v1.2/v1.3/v1.4)各commit，这样你能清晰追踪每版改了什么、随时可以对比/回退、版本不会乱。<strong>养成“改完整合→一致性检查→commit版本”的节奏</strong>，论文打磨就有条不紊，也不怕改坏了找不回。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合所有修改成 v1.3。</li>
+<li>一致性检查（改动有没有引入矛盾）。</li>
+<li>数字以最新实验为准。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文 v1.3（mock review 修改已整合、内部一致）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>改动间不一致 → 一致性检查；版本乱 → git 管理。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定数字以哪个为准?→ 以最新实验/实验日志为准。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你迭代到 v1.3。<strong>做了</strong>(v1.3)、<strong>学了</strong>（整合修改 + 一致性）、<strong>会了</strong>（把多处修改合成新版）。</p>
+</div></section></section><section class="slot" id="d158-noon" data-d="158" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D158 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">竞赛改进 5:Ensemble（两模型集成）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(Ensemble)</h4><div class="blk-b"><p><strong>集成 = 用多个不同模型（不同 backbone / 不同 seed）的预测取平均/融合</strong>。<strong>类比</strong>：几个不同专长的专家会诊，综合判断通常比单个准。<strong>竞赛最常用、最稳的提分手段</strong>，代价是推理更慢。</p>
+<ul>
+<li><strong>为什么Ensemble是“竞赛最稳的提分手段”</strong>：不同的模型（不同backbone、不同训练设置、不同seed）会犯<strong>不同的错误</strong>——模型A在某些样本上错、模型B在另一些样本上错。把它们的预测融合，<strong>每个模型的错误被其他模型纠正，共同的正确判断被强化</strong>，综合结果几乎总是比任何单个模型更准更稳。这就是“多个专家会诊优于单个专家”。<strong>在竞赛排行榜上，几乎所有top方案都用了Ensemble</strong>——它是冲刺阶段最可靠的提分招（代价是推理慢，但竞赛只看最终分数，慢点无妨）。</li>
+<li><strong>Ensemble的关键：模型要“不同”(diversity)</strong>：集成的提分效果，取决于被集成的模型有多“不同”(diverse)。<strong>如果两个模型几乎一样（同backbone、同设置、同数据），它们犯的错误也一样，集成起来没什么收益</strong>（相当于把同一个判断重复了一遍）。<strong>要用真正不同的模型</strong>：不同的backbone(Swin + ConvNeXt + ResNet)、不同的训练设置、甚至不同的数据增强——差异越大，集成收益往往越大（因为它们的错误更互补）。这是用好Ensemble的核心。</li>
+<li><strong>怎么融合（按任务）</strong>:① <strong>分类/分割</strong>——可以直接对多个模型的输出概率取平均;② <strong>检测</strong>——框的融合更复杂，不能简单平均（框的位置、数量都不同），要用<strong>WBF(Weighted Box Fusion)</strong>正确合并多个模型的框（下周详解）。融合方式要对，否则集成反而变差。</li>
+<li><strong>只有一个模型怎么办</strong>：如果时间/资源有限只训了一个模型，<strong>用不同seed训的两三个模型也能集成</strong>（虽然diversity不如不同backbone，但仍有收益）；或者用同一个模型的不同checkpoint（训练后期的几个epoch）。<strong>总之尽量凑出几个有差异的模型来集成</strong>。当然，Ensemble推理慢，要权衡——竞赛冲刺值得，但如果论文要讲“高效”，主结果还是用单模型（Ensemble可作为竞赛/附加结果）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>训练/选两个<strong>不同 backbone</strong> 的模型（如 Swin + ConvNeXt，差异越大集成收益往往越大）。</li>
+<li>融合预测（分类/分割可平均概率；检测用框融合 WBF，见下周）。</li>
+<li>提交看线上排名，记入 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Ensemble 提交，排名记录（通常提升）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>两模型太相似（同 backbone 同设置）→ 集成收益小，用<strong>不同</strong> backbone；融合方式错。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>只有一个模型?→ 用不同 seed 训的两个模型也行；融合变差 → 检查融合方式（检测用 WBF）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会 <strong>Ensemble 提分</strong>。<strong>做了</strong>(Ensemble)、<strong>学了</strong>(集成=多专家会诊、要用不同模型、最稳提分)、<strong>会了</strong>（融合多模型提分）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Ensemble</strong>：用<strong>不同</strong> backbone/seed 的多个模型，预测融合（平均/WBF）。几乎总提分，代价是推理慢——竞赛冲刺值得。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d158-pm" data-d="158" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D158 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">再次通读全文（论文侧）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>v1.3 整合后通读一遍，确认逻辑/数字/术语一致，标残留小问题。</p>
+<ul>
+<li><strong>为什么每次整合后都要“通读校验”</strong>：你上午整合了所有修改成v1.3——但局部改动拼起来后，可能有残留问题（改动间的小矛盾、新引入的不通顺、数字遗漏没同步）。<strong>整合不等于完成，要通读一遍才能确认整体协调</strong>。这和你W21、W22反复做的“改完通读”是一个道理：多处局部修改后，必须有一次整体的通读校验，把接缝和残留问题揪出来。</li>
+<li><strong>通读重点查三样</strong>:① <strong>逻辑</strong>——四章一条线是否还连贯（改动有没有破坏逻辑链）;② <strong>数字</strong>——同一指标在各处是否一致（以最新实验为准）;③ <strong>术语</strong>——同一概念是否用统一的名字（没有一处叫A、另一处叫B）。<strong>这三样是整合后最容易出问题的地方</strong>，重点查。标出残留问题，快速修明显的，记下需要进一步处理的。</li>
+<li><strong>“太熟读不出”的破解</strong>：你对论文太熟，通读时容易自动脑补、跳过问题。<strong>破解办法：隔一天再读（让自己对内容陌生一点），或出声朗读（强迫逐字过）</strong>。这能帮你以更接近“陌生读者”的状态发现问题。v1.3通读+残留问题清单，为后续（第二轮快审、最终润色）做好准备。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>通读 v1.3（隔天或出声读，以更接近陌生读者视角）。</li>
+<li>标残留问题（逻辑/数字/术语）。</li>
+<li>快速修明显的，其余记清单。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v1.3 通读 + 残留问题清单。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>整合后不通读 → 通读；残留问题不记 → 列清单。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>太熟读不出?→ 隔天读或出声读。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你校验了 v1.3。<strong>做了</strong>（通读）、<strong>学了</strong>（整合后再通读）、<strong>会了</strong>（全文校验）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文 v1.3 ✅ 竞赛 Ensemble 提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D158</summary><textarea data-note="d158" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d159" data-d="159"><header class="day-head"><span class="dnum">D159</span><h2 class="day-t">周五 · 第二轮快审 + 竞赛伪标签</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午找第二位朋友快审、据反馈微调；中午晚上上伪标签（注意控阈值）。</p>
+<p><strong>预期管理</strong>：今天第二轮快审v1.3 + 上伪标签。提醒：换个朋友做30min快审（只看大问题：逻辑/清晰/硬伤），补第一轮没发现的盲点；<strong>伪标签的命门是置信度阈值</strong>——用最好模型给无标注/测试数据打标，<strong>只取高置信度的(如conf&gt;0.9)</strong>并入训练，阈值低了带噪反而掉分；伪标签过拟合测试分布，竞赛可用但论文需谨慎（注意规范）。掉分就提高阈值，仍掉就放弃这招。</p>
+</blockquote>
+</div><section class="slot" id="d159-am" data-d="159" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D159 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">找第二轮 reviewer 快审 v1.3(30min)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>换一个朋友做 <strong>30min 快审</strong>（只看大问题：逻辑/清晰/有没有硬伤），补充第一轮没发现的盲点。</p>
+<ul>
+<li><strong>为什么要“第二轮、换人”快审</strong>:① <strong>换人能补盲点</strong>——第一轮的reviewer有他的视角和盲区，换一个新读者（尤其不同背景的），能发现第一轮没注意到的问题。多一双眼睛，多一层把关;② <strong>v1.3是改过的版本</strong>——你据第一轮反馈改了不少，改动可能引入新问题，或第一轮的修改是否真的改好了，需要新的眼睛验证。<strong>多轮、换人的外部审视，是论文打磨的有效方式</strong>——每一轮都能往上提一个台阶。</li>
+<li><strong>为什么是“30min快审”而非详细审</strong>：这一轮的目的是<strong>快速抓大问题</strong>（逻辑硬伤、明显不清楚的地方），不是逐字细抠。给朋友30min，请他重点看“有没有逻辑问题、有没有看不懂的地方、有没有明显硬伤”。<strong>快审聚焦于“会影响录用的大问题”，细节（措辞、格式）不在这一轮</strong>（那是最终proofreading的事）。快审高效，朋友也不会因为任务太重而拖延或敷衍。</li>
+<li><strong>找不到人怎么办</strong>：如果实在找不到第二个人快审——<strong>自己隔天以“陌生读者”身份快读一遍</strong>（隔一天让自己对内容“陌生”一点，更容易发现问题），或用AI模拟审稿（让AI从审稿人角度提意见）。虽然不如真人，但总比不审好。<strong>多一轮审视，论文质量多一分保障</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 v1.3 发另一位朋友（尤其换个背景的），请 30min 快审（重点大问题：逻辑/清晰/硬伤）。</li>
+<li>记反馈，补第一轮没发现的盲点。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二轮快审反馈。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>找不到人?→ 自己隔天快读；只听夸 → 请挑硬伤。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>没人?→ 用 AI 模拟审稿 + 自己以陌生读者读一遍。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做了第二轮外审。<strong>做了</strong>（快审）、<strong>学了</strong>（多轮外审补盲点）、<strong>会了</strong>（用新读者查盲点）。</p>
+</div></section></section><section class="slot" id="d159-noon" data-d="159" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D159 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">根据快审反馈微调</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据快审反馈微调论文（改大问题）。<strong>为什么“改大问题优先”</strong>：第二轮快审聚焦的是大问题（逻辑/清晰/硬伤），据反馈微调时也要<strong>优先改这些影响录用的大问题</strong>，而非纠结小措辞。如果reviewer指出某处逻辑还不顺、某个硬伤没解决，这些要优先处理。<strong>读者(reviewer)卡住的地方就是客观事实</strong>——即使你觉得“我写得挺清楚啊”，但他卡住了，说明对读者就是不够清楚，要改（别不服气）。两位reviewer意见矛盾时（一个说这样好、一个说那样好），自己判断哪个更有道理，或问第三人。据快审微调后，论文又往前打磨了一步，为后续（最终润色、投稿）做好准备。<strong>多轮外审+据反馈微调，是论文逼近投稿质量的有效路径</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据快审反馈微调。</li>
+<li>改大问题优先。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文据快审微调。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不服气不改 → 读者卡住就是事实。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>反馈矛盾（两人意见相反）?→ 自己判断、或问第三人。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你据反馈再打磨。<strong>做了</strong>（微调）、<strong>学了</strong>（据反馈改）、<strong>会了</strong>（快速吸收外审意见）。</p>
+</div></section></section><section class="slot" id="d159-pm" data-d="159" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D159 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛改进 6：伪标签(Pseudo Labeling)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（伪标签）</h4><div class="blk-b"><p><strong>用当前最好模型给无标注（或测试）数据打“伪标签”，再把高置信度的加入训练</strong>，扩充训练数据。<strong>类比</strong>：老师（强模型）先给没批改的卷子打分，只把“很有把握”的当标准答案教学生。<strong>关键：控制置信度阈值</strong>（低质伪标签会带噪、反而掉分）。</p>
+<ul>
+<li><strong>伪标签为什么能提分（原理）</strong>：深度学习的性能很大程度受训练数据量限制。如果你有大量<strong>无标注数据</strong>（或竞赛的测试集），可以用当前最好的模型给它们打上“伪标签”（模型的预测当作标签），再把这些伪标注数据加入训练——<strong>相当于扩充了训练集</strong>，模型见到更多样本，泛化能力可能提升。这是半监督学习的经典思路，在竞赛里常用来榨取额外的分数。</li>
+<li><strong>伪标签的命门：置信度阈值（必须控好）</strong>：伪标签是模型自己打的，<strong>不一定对</strong>——模型预测错的伪标签，会把错误信息“教”给模型，反而带噪掉分。<strong>所以关键是只用模型“很有把握”的伪标签</strong>：设一个置信度阈值(如conf &gt; 0.9)，<strong>只把高置信度的预测当伪标签并入训练</strong>，低置信度的（模型自己都不确定的）丢弃。阈值是命门：阈值太低→带噪掉分；阈值合适→只用可靠的伪标签，提分。这就像老师只把“很有把握”的批改当标准答案，模棱两可的不教给学生。</li>
+<li><strong>伪标签掉分的应对</strong>：如果加了伪标签反而掉分，首先<strong>提高置信度阈值</strong>（只保留最有把握的）；如果提高阈值后还掉，说明这个数据/任务可能不适合伪标签（或伪标签质量太差），<strong>果断放弃这招</strong>，换别的。伪标签不是万能的，要看效果决定用不用。</li>
+<li><strong>伪标签的规范问题（论文 vs 竞赛）</strong>：伪标签用测试集打标会<strong>过拟合测试分布</strong>——在竞赛里这通常允许（竞赛就是要在测试集上得高分），但<strong>在论文里要谨慎</strong>：如果你的论文方法用了测试集的伪标签，可能违反“测试集不可见”的学术规范（审稿人会质疑）。<strong>所以伪标签更适合用在竞赛冲刺，论文的主结果要避免用测试集信息</strong>。如果论文要用伪标签，应该用额外的无标注数据（而非测试集），并说明清楚。竞赛和论文的规范不同，要分清。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用当前最好模型对无标注/测试集打伪标签。</li>
+<li><strong>只选高置信度的</strong>(如 conf &gt; 0.9)并入训练——阈值是命门，低了带噪掉分。</li>
+<li>重训，提交看线上分；掉分就提高阈值，仍掉就放弃这招。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>伪标签版提交，排名记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>伪标签带噪掉分</strong> → 提高置信度阈值、只用高置信；过拟合测试分布 → 竞赛可、论文需谨慎（注意规范）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>掉分?→ 提高阈值（只要最有把握的）；仍掉 → 该数据/任务可能不适合伪标签，放弃这招。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会 <strong>伪标签提分</strong>。<strong>做了</strong>（伪标签）、<strong>学了</strong>(伪标签=强模型给高置信样本打标 + 阈值控噪)、<strong>会了</strong>（用伪标签扩数据提分）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜伪标签</strong>：强模型给无标注数据打标→<strong>只取高置信度</strong>（阈值如 0.9）→并入训练。阈值是命门，低了带噪掉分。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ v1.3 微调 ✅ 竞赛伪标签提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D159</summary><textarea data-note="d159" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d160" data-d="160"><header class="day-head"><span class="dnum">D160</span><h2 class="day-t">周六 · （集中日）· 论文最终润色 + 竞赛继续</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午逐句润色论文语言；中午查参考文献；晚上组合 Trick 继续冲分。</p>
+<p><strong>预期管理</strong>：今天论文最终润色（逐句英文）+ 查参考文献 + 组合Trick冲分。提醒：逻辑已在前面定了，本周重点是语言——逐句过语法/表达，中式英语改地道，好句式存句式库；参考文献跑cite↔bib一致性检查，补漏引、统一格式；<strong>组合已验证有效的Trick（如多尺度+TTA+Ensemble）常比单个更强</strong>,Trick日志记每个组合的分，挑最好的组合提交，论文到v1.4。</p>
+</blockquote>
+</div><section class="slot" id="d160-am" data-d="160" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D160 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文最终润色（逐句英文语法）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>逐句过英文语法/表达（工具辅助），把不自然处改地道，更新句式库。<strong>先逻辑后语法</strong>（逻辑已在前面定了，本周重点是语言）。</p>
+<ul>
+<li><strong>为什么“逻辑已定，本周放心润色语言”</strong>：润色有顺序——先逻辑、再结构、最后语法（W21讲过）。前面几天你已经据mock review把逻辑、结构、内容都改好了（到v1.3/v1.4），<strong>论文的“硬伤”层面已经解决</strong>。所以现在(D160)可以放心地集中精力打磨<strong>语言层面</strong>：逐句过语法、把生硬的中式英语改地道、让表达更专业流畅。<strong>这一步是“锦上添花”的语言精修，建立在前面逻辑已定的基础上</strong>——如果逻辑还没定就猛润色，是本末倒置；现在逻辑定了，语言精修正当时。</li>
+<li><strong>逐句润色怎么做（工具+人工）</strong>:① <strong>工具辅助</strong>——用Grammarly/Claude过一遍，改语法错误、提升表达地道度（机械的语言工作交给工具）;② <strong>重点改中式英语</strong>——你写的英文如果是“先想中文再翻译”出来的，会有生硬的中式表达，逐句检查、改成地道的学术英语句式;③ <strong>存句式库</strong>——遇到好的、地道的表达方式，收进你的句式库（W21建的），下次写作复用。<strong>工具改语法、你把关地道度，逐句过一遍，语言质量就上去了</strong>。</li>
+<li><strong>润色的“度”——别改坏意思</strong>：用工具润色时要注意，<strong>AI有时会为了“地道”而改变你原意，或改掉专业术语</strong>——要逐句确认改动没有歪曲你想表达的意思、没有改错专业词。<strong>语言润色是让表达更好，不是改变内容</strong>。改完通读一遍，确认意思没变、术语没错、读起来更流畅自然。某句不会写地道，就找A级论文里的同类句子仿写（并存进句式库）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐句过语法/表达（Grammarly/Claude 辅助，但确认改动没歪曲原意/术语）。</li>
+<li>中式英语改地道。</li>
+<li>好句式存句式库，下次复用。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文语言润色完成（语法/表达更地道）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>逻辑没定就猛润色 → 逻辑已定，放心润；中式英语 → 用句式库/A 级论文句式。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某句不会写?→ 找 A 级论文同类句仿写。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了语言润色。<strong>做了</strong>（润色）、<strong>学了</strong>（逐句打磨）、<strong>会了</strong>（提升语言质量）。</p>
+</div></section></section><section class="slot" id="d160-noon" data-d="160" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D160 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">检查参考文献完整性</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>核对所有引用格式正确、reference list 完整（用补充包的 cite↔bib 检查）。</p>
+<ul>
+<li><strong>为什么投稿前要专门核对参考文献</strong>：参考文献的漏引、格式错虽是低级问题，但<strong>会给审稿人留下“不严谨”的坏印象，也可能导致编译错误</strong>(LaTeX里cite了但bib没有，会显示<code>??</code>)。投稿前（临近正式投稿）做一次彻底核对，确保①正文每个<code>\cite</code>都在reference list里有对应、②没有列表里有但正文没引用的多余条目、③所有文献格式统一。<strong>这是投稿前的必查项</strong>，低级错误不该出现在正式投稿的论文里。</li>
+<li><strong>用脚本自动查（高效）</strong>：文献多时（几十篇），人工核对cite↔bib的对应容易漏。<strong>用补充包的脚本自动找“引了但列表没有”和“列表有但没引”的</strong>，快速定位问题。然后补漏引、删多余、统一格式（BibTeX让格式自动统一，只要bib条目本身规范）。从Google Scholar/DBLP导出BibTeX条目（别手敲），核对关键信息（会议/期刊名、年份）正确。<strong>自动化核对+规范的bib管理，让参考文献这一环干净利落，不在低级问题上失分</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>跑 cite↔bib 一致性检查。</li>
+<li>补漏引、统一格式。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>参考文献完整、格式统一。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>漏引（正文引了 bib 没有）→ 补；格式乱 → 统一。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>量大?→ 用脚本自动找漏。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规范了参考文献。<strong>做了</strong>（参考文献检查）、<strong>学了</strong>（引用规范）、<strong>会了</strong>（确保引用无漏无错）。</p>
+</div></section></section><section class="slot" id="d160-pm" data-d="160" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D160 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛继续迭代（组合多个改进）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>并行/组合跑几个改进（如 TTA + Ensemble），挑最好的提交。组合 Trick 常比单个更强。</p>
+<ul>
+<li><strong>为什么“组合Trick”常比单个更强</strong>：你这周验证了一串有效的Trick（多尺度训练、TTA、Ensemble、伪标签…），它们<strong>各自从不同角度提分，作用往往可以叠加</strong>——多尺度训练让模型更鲁棒、TTA在推理时多视角融合、Ensemble综合多个模型、伪标签扩充数据。把这些“保留”的有效招组合起来用，<strong>总提升常常大于单个招的提升之和的一部分</strong>（虽然不完全线性叠加，但组合通常优于单招）。所以竞赛冲刺的最终方案，往往是多个有效Trick的组合。</li>
+<li><strong>怎么组合（用Trick日志指导）</strong>：<strong>把Trick日志里标“保留”的那几招组合起来</strong>（那些单独验证过有效的），生成组合方案的提交，看分数。<strong>别盲目组合所有招</strong>（有些招组合可能冲突或冗余），从日志里挑确认有效的来组合。组合方案多时，Trick日志也要记每个组合的分（如“多尺度+TTA: X分”“多尺度+TTA+Ensemble: Y分”），看哪个组合最优。</li>
+<li><strong>组合的成本权衡</strong>：组合Trick（尤其加上Ensemble、TTA）会让推理变慢、流程变复杂。<strong>竞赛只看最终分数，慢点无妨，值得为冲刺用满</strong>。但要注意GPU/时间管理：组合方案的训练/推理更重，要错峰跑、用Trick日志管理好各个组合，别乱。挑出最好的组合提交，论文同步到v1.4（论文侧的修改整合）。<strong>竞赛冲刺到这里，你已经走完了“进场→单招迭代→组合冲刺”的完整路径</strong>，这套竞赛方法论以后参赛都能复用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>组合 Trick 日志里标“保留”的有效招（如 多尺度训练 + TTA + Ensemble）。</li>
+<li>提交最好的组合，组合方案多时日志记每个组合的分。</li>
+<li>更新 Trick 日志 → 论文同步到 v1.4。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文 v1.4 + 竞赛进度更新（组合 Trick 的结果）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>组合太多管不过来 → Trick 日志记每个组合的分；GPU 不够 → 错峰。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知组合哪些?→ 把日志里“保留”的那几招组合起来。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你组合 Trick 继续提分。<strong>做了</strong>（v1.4 + 竞赛迭代）、<strong>学了</strong>（组合 Trick）、<strong>会了</strong>（并行试多个改进）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文 v1.4 ✅ 竞赛进度更新。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜双线节奏管理</strong>：论文和竞赛节奏完全不同——<strong>论文要安静、深入地改（慢思考，放上午整块时间）</strong>；<strong>竞赛要快试、快交、快看排名（快迭代，放中午+晚上碎片时间）</strong>。两者<strong>别混在一起做</strong>：改论文时被竞赛打断，深度思考的思路就断了。分时段、分模式，两边都能做好。这种“区分需要专注的深度工作和可碎片化的迭代工作”的时间管理，适用于任何并行任务。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D160</summary><textarea data-note="d160" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d161" data-d="161"><header class="day-head"><span class="dnum">D161</span><h2 class="day-t">周日 · （月复盘日）· W23 复盘 + M6 月复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周 + M6 整月收官：复盘双线、整理竞赛 Trick（为 M8 报告攒料）、做“能否进 M7 正式投稿”的决策。</p>
+<p><strong>预期管理</strong>:M6 月收官：W23双线复盘 + 整理竞赛Trick（为M8竞赛技术报告攒料）+ M6月复盘做“能否进M7正式投稿”决策。提醒：把竞赛用过的所有Trick（TTA/多尺度/Ensemble/伪标签…）和各自Δ分整理成表——这是M8写竞赛技术报告的现成素材；月复盘核心三问：论文到v1.4了吗？竞赛进场提分了吗（目标Top 50%）？可进M7（定稿+正式投稿）吗？论文v1+竞赛进场达成即可进M7。</p>
+</blockquote>
+</div><section class="slot" id="d161-am" data-d="161" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D161 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W23 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“双线并行”的经验（怎么分时间、哪个 Trick 最有效）。本周是“双线”周（论文修改 + 竞赛迭代），复盘也要双线沉淀:① <strong>论文线</strong>——据mock review改了哪些（motivation/Method/对比）、多轮审稿打磨的经验、当前到v1.4的质量;② <strong>竞赛线</strong>——哪个Trick最有效、排名进展、双线时间怎么分配的。<strong>重点记“双线并行”这个本周特有的经验</strong>：论文和竞赛节奏完全不同，你这周是怎么安排的（论文放上午整块时间、竞赛放中午晚上碎片时间），哪些做法有效、哪些可以改进——这种“区分深度工作和碎片迭代”的时间管理，以后并行多个任务时都用得上。记下论文到v1.4 + 竞赛排名进展，作为M6成果的双线记录。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（双线：论文 + 竞赛），重点记“双线并行怎么分时间”。</li>
+<li>记论文到 v1.4 + 竞赛排名进展 + 哪招最有效。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W23 周报。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周双线哪边最折腾。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了双线周。<strong>做了</strong>（W23 周报）、<strong>学了</strong>（双线复盘）、<strong>会了</strong>（总结论文+竞赛进展）。</p>
+</div></section></section><section class="slot" id="d161-noon" data-d="161" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D161 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">记录竞赛当前排名和用过的 Trick</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把竞赛用过的 Trick（TTA/多尺度/Ensemble/伪标签…）和各自的分数变化记成表——这是 M8 写<strong>竞赛技术报告</strong>的素材。</p>
+<ul>
+<li><strong>为什么现在整理Trick日志（为未来攒料）</strong>：你这周用了一串竞赛Trick，每招提了多少分、是否保留，如果不及时记录，<strong>过段时间就忘了</strong>（哪招有用、提了多少、当时怎么调的）。而M8你要写一份<strong>竞赛技术报告</strong>（把竞赛经验系统总结成一份可展示的成果），那时需要这些Trick的完整记录。<strong>现在花点时间把Trick日志整理成表（每招+Δ分+是否保留+关键参数），就是给M8攒现成的素材</strong>——到时候直接用，不用回忆、不用翻历史。这是“为未来的自己省时间”的好习惯。</li>
+<li><strong>Trick日志的价值（不只为报告）</strong>：一份完整的Trick日志，还能帮你① <strong>看清当前最优组合</strong>（哪些招保留了、组合起来是什么）;② <strong>避免重复试</strong>（记了的就不用再试）;③ <strong>复盘哪类招对这个任务有效</strong>（积累竞赛经验，下次参赛能复用）。<strong>它是你竞赛过程的完整账本</strong>，价值贯穿整个竞赛和之后的总结。</li>
+<li><strong>记录要素 + 当前排名</strong>:Trick日志每一项记：<strong>改了什么（哪个Trick）+ Δ分（相对基准/上次）+ 是否保留 + 关键参数/设置</strong>。同时记下<strong>竞赛当前排名</strong>（目标Top 50%，理想更高）——这是衡量你竞赛成果的关键指标，也是M8报告和简历上可写的成绩。忘了某招的分，就翻提交历史或wandb记录补上。把这些整理齐全，M6竞赛线就有了清晰的成果沉淀。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整理竞赛 Trick 日志（每招 + Δ分 + 是否保留 + 关键参数/设置）。</li>
+<li>记当前排名（目标 Top 50%，理想更高），并标出最有效的几招。</li>
+<li>把这份表存好——M8 写竞赛技术报告时直接用。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛 Trick 日志 + 当前排名。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>没记每招效果 → 现在补；为 M8 报告留全。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>忘了某招的分?→ 看提交历史/wandb。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你沉淀了竞赛 Trick 记录。<strong>做了</strong>（Trick 日志）、<strong>学了</strong>（记录每招效果）、<strong>会了</strong>（为技术报告攒素材）。</p>
+</div></section></section><section class="slot" id="d161-pm" data-d="161" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D161 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">M6 月复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>M6 月复盘核心：论文 v1 完整草稿成了吗（到 v1.4）？竞赛进场并提分了吗（目标 Top 50%）？可进入 M7（定稿 + 正式投稿）吗？</p>
+<ul>
+<li><strong>M6整月你完成了什么（回顾）</strong>：经过M6，你① 把M5的实验成果<strong>写成了一篇完整论文</strong>（从v1到v1.4，经过自审、mock review、多轮修改）;② <strong>进场了一个竞赛并用一串Trick提分</strong>（TTA/多尺度/Ensemble/伪标签…）。<strong>这是从“有实验”到“有论文+有竞赛成绩”的关键阶段</strong>——你的工作开始有了可以拿出去的成果（一篇待投的论文 + 一个竞赛排名）。M6月复盘就是确认这两条线都到位了，可以进入M7（论文定稿+正式投稿+竞赛冲刺）。</li>
+<li><strong>月复盘的三个核心问题（go/no-go决策）</strong>:① <strong>论文成了吗</strong>——v1完整草稿经过修改到了v1.4，逻辑通、各部分齐、经过外部审视，是否达到“可以准备正式投稿”的程度?② <strong>竞赛进场提分了吗</strong>——是否进场、用Trick提了分、当前排名如何（目标Top 50%，理想更高）?③ <strong>可进M7吗</strong>——基于前两条，是否可以进入M7（正式投稿+继续冲竞赛）？<strong>论文v1到位 + 竞赛进场提分，就可以进M7</strong>；如果论文还有大问题或竞赛还没进场，M7优先补上。</li>
+<li><strong>为什么要做这个阶段决策（而非自然滑入M7）</strong>：和M5月末“实验→写作”的决策类似，M6→M7是“成稿→投稿”的关键转折。<strong>正式投稿是个重要动作（投出去就进入审稿流程），要确认论文确实准备好了再投</strong>——别在论文还有明显硬伤时仓促投稿（被拒的风险高、也浪费审稿周期）。月复盘就是这个“确认准备好了”的检查点：对照M6硬交付清单，确认论文质量到位、竞赛进场，然后制定M7计划（论文最后打磨+正式投稿+竞赛冲刺）。<strong>有条理地推进，每个阶段末做决策，是高效科研的节奏</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>M6 月报（对照 M6 硬交付清单：论文v1完整草稿→v1.4、自审+多轮mock review、竞赛进场+一串Trick提分+排名）。</li>
+<li>回答上面三问（论文成了吗、竞赛进场提分了吗、可进M7吗）。</li>
+<li>制定 M7 计划（论文最后打磨 + 正式投稿 + 竞赛冲刺）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M6 月报 + M7 计划。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>竞赛没 Top 50% → M7 继续冲；论文还有大问题 → M7 优先解决。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某硬交付缺?→ 决定补还是 M7 处理；论文 v1 + 竞赛进场达成即可进 M7。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做了 M6 收官决策。<strong>做了</strong>（M6 月报 + M7 计划）、<strong>学了</strong>（月度决策）、<strong>会了</strong>（规划投稿月）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W23 ✅ <strong>M6 月报</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W23 累计交付</h2><p>论文据 mock review 改 Intro/Method/Experiment → v1.3 → 快审微调 → v1.4（语言润色 + 参考文献完整）、竞赛 TTA/多尺度/epoch-lr/Ensemble/伪标签逐个提分 + Trick 日志 + 排名进展、W23 周报 + M6 月报。本周你完成了 M6 收官——把论文据多轮审稿意见打磨到 v1.4（可准备投稿的质量），并在竞赛里走完“进场→单招迭代→组合冲刺”的完整路径。你掌握了<strong>双线并行的时间管理</strong>（论文慢思考放整块时间、竞赛快迭代放碎片时间，两者不混）和<strong>一整套竞赛通用提分技巧</strong>（TTA/多尺度/Ensemble/伪标签等，各懂原理），这些既能提升竞赛排名，也是 M8 写竞赛技术报告的素材。经过整个 M6，你从“有实验”走到了“有一篇待投论文 + 一个竞赛成绩”，可以进入 M7 正式投稿。</p>
+</section><section class="wtail"><h2>🎓 W23 你“长出来”的能力清单</h2><ul>
+<li>双线并行（上午改论文慢思考、中午晚上刷竞赛快迭代）</li>
+<li>据 mock review 改 Intro（强 motivation）/Method（加图公式）/Experiment（补最新对比）</li>
+<li>竞赛 5 大 Trick:TTA / 多尺度 / epoch-lr / Ensemble / 伪标签（各懂原理）</li>
+<li>竞赛 Trick 日志（为技术报告攒素材）+ 多轮快审</li>
+<li><strong>核心认知</strong>：论文与竞赛节奏完全不同要分时段做（深度工作vs碎片迭代）、强motivation用场景+后果不堆形容词、Ensemble要diversity才有收益、伪标签阈值是命门（且测试集伪标签论文需谨慎）、组合有效Trick常优于单招</li>
+<li><strong>元方法</strong>：多轮换人外审补盲点、改完必通读查一致性（数字/术语/逻辑）、每招记Trick日志（可追溯+攒料）</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D161</summary><textarea data-note="d161" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W23 加厚补充包（范例 / 竞赛 Trick 详解+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 竞赛 Trick 日志</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 竞赛 Trick 日志（每招 + Δ分 + 是否保留）</span>
+| Trick | 线上分 | Δ | 保留 |
+|---|---|---|---|
+| 官方baseline | 0.612 | — | — |
+| 换Swin-T+分辨率1024 | 0.641 | +0.029 | ✓ |
+| TTA(翻转+多尺度) | 0.655 | +0.014 | ✓ |
+| 多尺度训练 | 0.662 | +0.007 | ✓ |
+| 更多epoch+cosine | 0.667 | +0.005 | ✓ |
+| Ensemble(Swin+ConvNeXt) | 0.681 | +0.014 | ✓ |
+| 伪标签(阈值0.9) | 0.686 | +0.005 | ✓ |
+当前排名:32/300(Top 11%)。最有效:换骨架 + Ensemble。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>范例怎么用</strong>：这张 Trick 日志是你整个竞赛的“账本”，有三重价值——① <strong>指导去留</strong>：每招用线上分判断（涨了保留、没涨放弃），一次只加一招才能看清单招效果;② <strong>看清最优组合</strong>：标“✓”的有效招组合起来就是你的最终方案（本例换骨架+TTA+多尺度+Ensemble+伪标签逐步叠到 0.686）;③ <strong>为 M8 攒料</strong>:M8 写竞赛技术报告时，这张表直接用，每招提了多少分、当前排名 Top 11%，都是现成素材。记录要素=Trick名+线上分+Δ+是否保留；别忘了记当前排名（目标 Top 50%，本例已到 Top 11%）。忘了某招的分就翻提交历史/wandb 补上。</p>
+</blockquote>
+<h2>二、竞赛 Trick 详解 + 代码骨架</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="c1"># ① TTA：多变换预测后融合（推理时，无需重训）；关键是翻转预测要翻回原图坐标</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tta_predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">(</span><span class="n">img</span><span class="p">)]</span>
+    <span class="n">flipped</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>          <span class="c1"># 水平翻转</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">flipped</span><span class="p">)</span>
+    <span class="c1"># p 要翻回原图坐标后再融合(分割:翻回特征图;检测:翻回框坐标)</span>
+    <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unflip</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>                        <span class="c1"># unflip 按任务实现</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+
+<span class="c1"># ② Ensemble：多模型(不同 backbone)预测平均</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ensemble_predict</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">models</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+
+<span class="c1"># ③ 伪标签：只取高置信度</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_pseudo</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">unlabeled_loader</span><span class="p">,</span> <span class="n">conf_thr</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+    <span class="n">pseudo</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">unlabeled_loader</span><span class="p">:</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">conf</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">keep</span> <span class="o">=</span> <span class="n">conf</span> <span class="o">&gt;</span> <span class="n">conf_thr</span>                     <span class="c1"># 命门:阈值</span>
+        <span class="n">pseudo</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">img</span><span class="p">[</span><span class="n">keep</span><span class="p">],</span> <span class="bp">cls</span><span class="p">[</span><span class="n">keep</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">pseudo</span>                                  <span class="c1"># 并入训练集重训</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:TTA/Ensemble 通常稳定提分（注意 TTA 对齐坐标、Ensemble 用不同模型）；伪标签靠 conf_thr 控噪。检测框融合见下周 WBF。</p>
+<blockquote class="quote">
+<p><strong>三招怎么配合用</strong>:① 先各自单独验证（一次一招、看线上Δ分、有效的保留）;② 再把保留的有效招组合（如多尺度训练的模型 + 推理时TTA + 多模型Ensemble），组合常比单招更强;③ 每招/每组合都记进Trick日志（改了什么+Δ分+是否保留），既指导下一步、又是M8竞赛技术报告的现成素材。注意：伪标签用测试集会过拟合测试分布，竞赛可用但论文需谨慎（论文应用额外无标注数据并说明）。</p>
+</blockquote>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D155</strong>：① 审稿说“motivation 不够强”怎么改？② TTA 是什么、为什么无需重训、要注意什么（对齐）？</li>
+<li><strong>D156</strong>：① 多尺度训练为什么对遥感有效（尺度悬殊）？② 为什么论文/竞赛要分时段做（深度vs碎片）？</li>
+<li><strong>D157</strong>：① “对比不够新”怎么回应（两方式）？② cosine 衰减的直觉（先快后精）？③ 增加epoch要警惕什么（过拟合）？</li>
+<li><strong>D158</strong>：① Ensemble 为什么几乎总提分？为什么要用不同模型(diversity)？代价是什么？</li>
+<li><strong>D159</strong>：① 伪标签怎么用？命门是什么（阈值）？② 伪标签在论文里为什么需谨慎（测试集规范）？</li>
+<li><strong>D160</strong>：① 润色为什么先逻辑后语法？② 用AI润色要注意什么（别改坏意思/术语）？</li>
+<li><strong>D161</strong>：① 为什么记竞赛 Trick 日志（去留+攒料）？M6 月复盘看哪三问？② 为什么M6→M7要做go/no-go决策？</li>
+<li><strong>综合</strong>：① 本周5大竞赛Trick各是什么、各自原理一句话？② 为什么组合有效Trick常优于单招？③ 双线并行的时间管理原则是什么？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>论文/竞赛混着做效率低</td>
+<td>节奏不分</td>
+<td>上午论文（慢）、中午晚上竞赛（快），分开</td>
+</tr>
+<tr>
+<td>TTA 后变差</td>
+<td>翻转预测没翻回/融合错</td>
+<td>预测对齐回原图坐标再融合；检测用 WBF</td>
+</tr>
+<tr>
+<td>Ensemble 没提升</td>
+<td>模型太相似/融合错</td>
+<td>用不同 backbone；检查融合方式</td>
+</tr>
+<tr>
+<td>伪标签掉分</td>
+<td>伪标签带噪</td>
+<td>提高 conf 阈值；只用高置信</td>
+</tr>
+<tr>
+<td>改论文越改越乱</td>
+<td>缺一致性检查</td>
+<td>整合后通读；数字以最新实验为准</td>
+</tr>
+<tr>
+<td>竞赛改进无法归因</td>
+<td>一次改多处</td>
+<td>一次只改一处 + Trick 日志</td>
+</tr>
+<tr>
+<td>本地涨线上不涨</td>
+<td>过拟合本地划分</td>
+<td>以线上为准；每招实际提交看排名</td>
+</tr>
+<tr>
+<td>motivation堆形容词无力</td>
+<td>没用具体事实</td>
+<td>用应用场景+不解决的后果+量化数据</td>
+</tr>
+<tr>
+<td>多尺度/大模型OOM</td>
+<td>显存不足</td>
+<td>限制最大尺度+降batch+梯度累积+混合精度</td>
+</tr>
+<tr>
+<td>伪标签用测试集进论文</td>
+<td>违反测试集规范</td>
+<td>论文用额外无标注数据；测试集伪标签限竞赛</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w22.html"><span class="dir">← 上一篇</span><span class="nm">W22 论文自审 + Mock Review +</span></a><a class="next" href="w24.html"><span class="dir">下一篇 →</span><span class="nm">W24 论文 v1 定稿 + 竞赛中期</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d155">D155 周一</a><a class="sub" href="#d155-am">上午 据 mock review 改 </a><a class="sub" href="#d155-noon">中午 竞赛改进 2:TTA（测试时增强</a><a class="sub" href="#d155-pm">晚上 跑竞赛 TTA 版本 → 提交</a><a href="#d156">D156 周二</a><a class="sub" href="#d156-am">上午 改论文 Method（表述不清→</a><a class="sub" href="#d156-noon">中午 竞赛改进 3：多尺度训练</a><a class="sub" href="#d156-pm">晚上 竞赛提交 + 看排名</a><a href="#d157">D157 周三</a><a class="sub" href="#d157-am">上午 改论文 Experiment（对</a><a class="sub" href="#d157-noon">中午 竞赛改进 4：更多 epoch </a><a class="sub" href="#d157-pm">晚上 补跑实验（论文侧，如需要）</a><a href="#d158">D158 周四</a><a class="sub" href="#d158-am">上午 论文 v1.3 定稿（整合所有修</a><a class="sub" href="#d158-noon">中午 竞赛改进 5:Ensemble（</a><a class="sub" href="#d158-pm">晚上 再次通读全文（论文侧）</a><a href="#d159">D159 周五</a><a class="sub" href="#d159-am">上午 找第二轮 reviewer 快审</a><a class="sub" href="#d159-noon">中午 根据快审反馈微调</a><a class="sub" href="#d159-pm">晚上 竞赛改进 6：伪标签(Pseud</a><a href="#d160">D160 周六</a><a class="sub" href="#d160-am">上午 论文最终润色（逐句英文语法）</a><a class="sub" href="#d160-noon">中午 检查参考文献完整性</a><a class="sub" href="#d160-pm">晚上 竞赛继续迭代（组合多个改进）</a><a href="#d161">D161 周日</a><a class="sub" href="#d161-am">上午 W23 周复盘</a><a class="sub" href="#d161-noon">中午 记录竞赛当前排名和用过的 Tri</a><a class="sub" href="#d161-pm">晚上 M6 月复盘</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W2-D8 详注版 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><a href="w2.html">W2</a><span>›</span><span class="chip">W2 · D8 详注版</span></div><h1 class="title">W2-D8 详注版</h1><p class="subtitle">Oriented R-CNN 完整导读 + config 逐行读透</p></div><div class="note"><b>这一天决定你 baseline 的质量</b>　含论文完整导读与自检、config 继承链怎么展开、五大块逐行讲解，并纠正了原文 lr=0.0025 与 0.005 的自相矛盾。</div>
+<h2 id="h-Oriented-R-CNN-完整导读-config-逐行读透">Oriented R-CNN 完整导读 + config 逐行读透</h2>
+<blockquote class="quote callout callout-expect">
+<p><strong>覆盖</strong>：W2-D8 全天（上午读论文 / 中午读 config / 晚上改 config + dry-run）。</p>
+<p><strong>这一天为什么关键</strong>：<strong>Oriented R-CNN 是你要复现的 baseline，也是你整个 M3–M4 的对照组。</strong> 后面所有“我的方法比 baseline 高多少”，baseline 都是它。读不透它，你后面所有改进都是盲改。</p>
+<p><strong>★ 顺手指出原文一处自相矛盾</strong>：D8 中午段的 config 示意里写 <code>lr=0.0025</code>，但同一段的③合格样例里说“lr=0.005”。<strong>真实值是 0.005</strong>，原因见 §2.4。</p>
+</blockquote>
+<hr />
+<h1 id="h-1-上午段-精读-Oriented-R-CNN">1. 上午段 · 精读 Oriented R-CNN</h1>
+<h2 id="h-0-先拿到论文">0. 先拿到论文</h2>
+<figure class="code" data-lang="text"><pre><code>Xie, X., Cheng, G., Wang, J., Yao, X., Han, J.
+&quot;Oriented R-CNN for Object Detection&quot;
+ICCV 2021, pp. 3520-3529
+arXiv:2108.05699
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>arXiv 直接可下，无付费墙。</strong> 官方代码就在 MMRotate 里（<code>configs/oriented_rcnn/</code>），<strong>论文和你手上的代码是同一套东西</strong>——这是它适合当第一篇方法论文的重要原因。</p>
+<h2 id="h-先垫概念-读方法论文和读综述有什么不同">① 先垫概念：读方法论文和读综述有什么不同</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>综述（D2 读的）</th>
+<th><strong>方法论文（今天）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读几遍</td>
+<td>5 遍</td>
+<td><strong>3 遍</strong></td>
+</tr>
+<tr>
+<td>核心问题</td>
+<td>这个领域被切成几块</td>
+<td><strong>它比前人多做了什么、为什么这么做有效</strong></td>
+</tr>
+<tr>
+<td>最该看的图</td>
+<td>分类框架图</td>
+<td><strong>网络结构图（通常是 Figure 2 或 3）</strong></td>
+</tr>
+<tr>
+<td>最该看的表</td>
+<td>方法对比表</td>
+<td><strong>消融表（Ablation）</strong></td>
+</tr>
+<tr>
+<td>笔记第 2 段</td>
+<td>写它的分类框架</td>
+<td><strong>用自己的话复述它的关键招数</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>方法论文的三遍怎么分</strong>：</p>
+<ol>
+<li><strong>第 1 遍（5 min）</strong>：标题 + 摘要 + <strong>网络结构图</strong> + 主结果表。</li>
+<li><strong>第 2 遍（25 min）</strong>：Introduction（<strong>它说前人差在哪</strong>）+ Method 的核心小节。</li>
+<li><strong>第 3 遍（30 min）</strong>：Experiment，<strong>重点是消融表</strong>。</li>
+</ol>
+<h2 id="h-手把手带做-对答案">② 手把手带做 + ★ 对答案</h2>
+<h3 id="h-第-1-遍-先搞清-它要解决什么">第 1 遍：先搞清“它要解决什么”</h3>
+<p><strong>★ 对答案 · 摘要的逻辑链</strong>（读完你应该能复述出这条链）：</p>
+<figure class="code" data-lang="text"><pre><code>现有的两阶段旋转检测器（比如 RoI Transformer）
+    要生成旋转候选框（oriented proposal）
+    → 但它们生成的方式很费时
+    → 成为整个系统的速度瓶颈
+        ↓
+本文：设计一个 oriented RPN，几乎零额外代价地直接产生高质量旋转候选框
+        ↓
+结果：ResNet-50 在 DOTA 上 75.87% mAP，HRSC2016 上 96.50%，
+      速度 15.1 FPS（1024×1024）—— 又快又准
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 记住 75.87 这个数字</strong>，它是你 W2 复现的对照。<strong>但你在 val 上单卡跑出 68–75 就正常</strong>，原因见 <a href="w2-baseline.html">W2 实操 §6.3</a>。</p>
+<h3 id="h-第-2-遍-它比前人多做了什么">第 2 遍：它比前人多做了什么</h3>
+<p><strong>★ 对答案 · 这篇的核心创新（一句话）</strong>：</p>
+<blockquote class="quote">
+<p><strong>把“生成旋转候选框”这件事，从一个昂贵的独立步骤，变成 RPN 里几乎免费的一步。</strong></p>
+</blockquote>
+<p><strong>具体怎么做的</strong>（这是你笔记第 2 段该写的，用自己的话）：</p>
+<p>传统 RPN 输出的是<strong>水平框</strong>（4 个数：x, y, w, h）。Oriented RPN 的做法是：<strong>在水平框的基础上，再多回归两个偏移量</strong>，用这两个数把水平框“掰”成一个平行四边形，再规整成旋转框。</p>
+<p><strong>这个设计的巧妙之处</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>别人的做法</th>
+<th>代价</th>
+<th>Oriented R-CNN 的做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用<strong>旋转 anchor</strong>（每个位置放多个不同角度的锚框）</td>
+<td>anchor 数量翻好几倍，计算量爆炸</td>
+<td><strong>仍用水平 anchor</strong>，只多回归 2 个数</td>
+</tr>
+<tr>
+<td>先出水平 RoI，再用一个模块<strong>学着转成旋转 RoI</strong>（RoI Transformer 的做法）</td>
+<td>多一个模块，多一段计算</td>
+<td><strong>一步到位</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>所以它的卖点是“几乎零成本”</strong> —— 这就是摘要里 “nearly cost-free” 的含义。</p>
+<h3 id="h-自检三问-答不出就回去重读">★ 自检三问（答不出就回去重读）</h3>
+<ol>
+<li><strong>它说前人的瓶颈是什么？</strong>（答：生成旋转候选框太慢）</li>
+<li><strong>它的 oriented RPN 和普通 RPN 差在哪？</strong>（答：多回归两个偏移量，把水平框掰成旋转框）</li>
+<li><strong>为什么不用旋转 anchor？</strong>（答：anchor 数量爆炸，计算量吃不消）</li>
+</ol>
+<h3 id="h-第-3-遍-消融表怎么读">第 3 遍：消融表怎么读</h3>
+<p><strong>★ 读消融表的通用方法</strong>（这一招你后面每篇方法论文都用）：</p>
+<figure class="code" data-lang="text"><pre><code>① 先找 baseline 那一行（通常是第一行，所有组件都关掉）
+② 再找 full model 那一行（通常是最后一行，全开）
+③ 中间每一行 = 只开一个组件
+④ ★ 关键动作：算每个组件的增量（这一行 − baseline 行）
+   → 增量大的组件 = 论文真正的贡献
+   → 增量小于 0.5 的组件 = 可能只是凑数（这是你未来找 Gap 的线索）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>带着这个方法去读它的消融表</strong>，你会发现：<strong>它的性能提升主要来自 oriented RPN 本身，而不是一堆小 trick 堆出来的</strong>。这是一篇“干净”的论文——<strong>干净的论文才值得当 baseline</strong>，因为你改动之后能清楚归因。</p>
+<h2 id="h-合格样例">③ 合格样例</h2>
+<p><code>10-论文笔记/2021_Xie_Oriented-RCNN.md</code>，5 段填满。<strong>第 4 段（启发）至少一条</strong>，可以套 <a href="w1-d2-full.html">D2 给的四个模板</a>：</p>
+<figure class="code" data-lang="markdown"><pre><code>## 4. 启发 / 可借鉴 / 没解决的
+- 模板A（它自己承认的局限）：它主要在优化&quot;怎么高效生成旋转 proposal&quot;，
+  但对&quot;密集小目标&quot;和&quot;极端长宽比目标&quot;（如桥、港口）没有专门设计。
+  → 我在 D11 看 per-class AP 时可以验证：bridge / harbor 这几类是不是明显偏低？
+- 模板C（跨格子迁移）：它的 oriented RPN 是为光学航拍设计的。
+  SAR 图上目标外观完全不同（speckle、方位角敏感），这套设计还成立吗？
+  → 这可能是我 W3 做 SAR baseline 时的观察点。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>注意第一条的写法</strong>：它不是空泛的“启发很大”，而是<strong>给出了一个可以在 D11 用数据验证的猜想</strong>。这才是有效的第 4 段。</p>
+</blockquote>
+<hr />
+<h1 id="h-2-中午段-逐行读-config-原文给了五大块地图-这里补真实文件长什么样">2. 中午段 · 逐行读 config（原文给了五大块地图，这里补真实文件长什么样）</h1>
+<h2 id="h-先垫概念-config-为什么要继承">① 先垫概念：config 为什么要继承</h2>
+<p>原文给了一个“简化示意”，<strong>但真实文件长得完全不一样</strong>——因为它是继承来的。新手打开真实文件的第一反应是“怎么就这么几行？我要找的东西呢？”</p>
+<p><strong>真实的 <code>configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py</code> 开头是</strong>：</p>
+<figure class="code" data-lang="python"><pre><code>_base_ = ['../rotated_faster_rcnn/rotated_faster_rcnn_r50_fpn_1x_dota_le90.py']
+
+model = dict(
+    rpn_head=dict(
+        _delete_=True,
+        type='OrientedRPNHead',
+        ...),
+    roi_head=dict(
+        bbox_head=dict(type='RotatedShared2FCBBoxHead', ...)))
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>读法</strong>：这个文件只写“我和被继承的那个有什么不同”。<strong>要看完整配置，必须顺着 <code>_base_</code> 往上追。</strong></p>
+<p><strong>追踪链条长这样</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>oriented_rcnn_r50_fpn_1x_dota_le90.py
+  └─ _base_: rotated_faster_rcnn_r50_fpn_1x_dota_le90.py
+       └─ _base_: ../_base_/datasets/dotav1.py        ← 数据在这
+       └─ _base_: ../_base_/schedules/schedule_1x.py  ← 学习率、epoch 在这
+       └─ _base_: ../_base_/default_runtime.py        ← 日志、存盘在这
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-不要手动追-用一条命令展开-原文没教-但这是正确姿势">② ★ 不要手动追，用一条命令展开（原文没教，但这是正确姿势）</h2>
+<figure class="code" data-lang="bash"><pre><code>python tools/misc/print_config.py configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这条命令把继承链全部展开，打印出最终生效的完整配置。</strong> 你要读的是它的输出，不是原文件。</p>
+<p><strong>存下来慢慢读</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python tools/misc/print_config.py configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py \
+    &gt; ~/RS-CV/20-代码实验/config_orcnn_展开版.py
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-2-3-五大块-在展开版里各自长什么样">2.3 五大块，在展开版里各自长什么样</h2>
+<p><strong>① backbone（主干：提特征）</strong></p>
+<figure class="code" data-lang="python"><pre><code>backbone=dict(
+    type='ResNet',
+    depth=50,                    # ResNet-50
+    num_stages=4,                # 4 个阶段，输出 4 个尺度的特征
+    out_indices=(0, 1, 2, 3),    # 这 4 个阶段都往外输出（给 FPN 用）
+    frozen_stages=1,             # ★ 冻结第 1 阶段不训练（低层特征很通用，省显存也更稳）
+    norm_cfg=dict(type='BN', requires_grad=True),
+    norm_eval=True,              # ★ BN 层用推理模式（batch 小的时候必须这样，否则统计量不稳）
+    style='pytorch',
+    init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50'))
+                                 # ★ 用 ImageNet 预训练权重初始化，不是从零训
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong><code>frozen_stages=1</code> 和 <code>norm_eval=True</code> 这两行原文完全没提，但它们解释了一个你会问的问题</strong>：为什么 batch size 只有 2 也能训得动？<strong>因为 BN 层根本没在更新统计量</strong>（<code>norm_eval=True</code>），所以不受小 batch 影响。这是检测框架的标准做法。</p>
+</blockquote>
+<p><strong>② neck（脖子：多尺度融合）</strong></p>
+<figure class="code" data-lang="python"><pre><code>neck=dict(
+    type='FPN',
+    in_channels=[256, 512, 1024, 2048],   # 对应 ResNet 四个阶段的输出通道
+    out_channels=256,                      # 统一压到 256 通道
+    num_outs=5)                            # 输出 5 个尺度（多一个是下采样出来的）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>FPN 是什么、为什么需要它，见 <a href="../start/cv-concepts.html">《检测与训练概念详解》§2.3</a>——<strong>全书正文出现 49 次，没有一句解释。</strong></p>
+<p><strong>③ head（头：出预测）</strong></p>
+<figure class="code" data-lang="python"><pre><code>rpn_head=dict(
+    type='OrientedRPNHead',        # ★ 就是论文的核心创新
+    anchor_generator=dict(
+        type='AnchorGenerator',
+        scales=[8], ratios=[0.5, 1.0, 2.0],   # 水平 anchor，3 种长宽比
+        strides=[4, 8, 16, 32, 64]),           # 对应 FPN 五个尺度
+    bbox_coder=dict(type='MidpointOffsetCoder', angle_range='le90'),
+                                   # ★ &quot;多回归两个偏移量&quot; 就编码在这里
+    ...)
+roi_head=dict(
+    type='OrientedStandardRoIHead',
+    bbox_head=dict(num_classes=15, ...))   # ★ DOTA 的 15 类
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 把论文和 config 对上</strong>：你上午读到的“多回归两个偏移量把水平框掰成旋转框”，落到代码里就是 <code>MidpointOffsetCoder</code> 这一行。<strong>能把论文的一句话指到 config 的一行，说明你真读懂了。</strong></p>
+</blockquote>
+<p><strong>④ 数据块</strong></p>
+<figure class="code" data-lang="python"><pre><code>dataset_type = 'DOTADataset'
+data_root = 'data/split_1024_dota1_0/'    # ★ 要改成你切好图的路径
+data = dict(
+    samples_per_gpu=2,        # ★ 这就是 batch_size
+    workers_per_gpu=2,
+    train=dict(ann_file=data_root + 'trainval/annfiles/',
+               img_prefix=data_root + 'trainval/images/'), ...)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>⑤ schedule 块</strong></p>
+<figure class="code" data-lang="python"><pre><code>optimizer = dict(type='SGD', lr=0.005, momentum=0.9, weight_decay=0.0001)
+lr_config = dict(policy='step', warmup='linear', warmup_iters=500,
+                 warmup_ratio=1.0/3, step=[8, 11])   # 第 8、11 个 epoch 各降 10 倍
+runner = dict(type='EpochBasedRunner', max_epochs=12)   # 1× = 12 epochs
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-2-4-纠正原文的自相矛盾-lr-到底是-0-0025-还是-0-005">2.4 ★ 纠正原文的自相矛盾：lr 到底是 0.0025 还是 0.005</h2>
+<p>原文中午段的示意代码写 <code>lr=0.0025</code>，但同一段的合格样例里说“lr=0.005”。<strong>两个数不一样，新手会懵。</strong></p>
+<p><strong>正确答案：MMRotate 的 DOTA config 里是 <code>lr=0.005</code>。</strong></p>
+<p><strong>它对应的是“单卡 × 每卡 2 张 = 总 batch 2”。</strong> 这一点和 MMDetection 的 COCO config 不同（那边默认 8 卡 × 2 张 = 16）。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>你的设置</th>
+<th>总 batch</th>
+<th>lr 应该是</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单卡，<code>samples_per_gpu=2</code></td>
+<td>2</td>
+<td><strong>0.005（默认值，不用改）</strong></td>
+</tr>
+<tr>
+<td>单卡，<code>samples_per_gpu=1</code></td>
+<td>1</td>
+<td><strong>0.0025</strong></td>
+</tr>
+<tr>
+<td>单卡，<code>samples_per_gpu=4</code></td>
+<td>4</td>
+<td>0.01</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>所以原文那个 0.0025，其实是 batch=1 时的值。</strong> 完整说明见 <a href="w2-baseline.html">W2 实操 §4.3</a>。</p>
+<h2 id="h-合格样例-2">③ 合格样例</h2>
+<p><code>20-代码实验/config注释_OrientedRCNN.md</code>，能填出这张表：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backbone</td>
+<td>ResNet-50，冻结 stage1，ImageNet 预训练</td>
+</tr>
+<tr>
+<td>neck</td>
+<td>FPN，输出 256 通道 × 5 尺度</td>
+</tr>
+<tr>
+<td>rpn_head</td>
+<td>OrientedRPNHead + MidpointOffsetCoder（le90）</td>
+</tr>
+<tr>
+<td>类别数</td>
+<td>15</td>
+</tr>
+<tr>
+<td>batch / lr</td>
+<td>2 / 0.005</td>
+</tr>
+<tr>
+<td>epoch / 降 lr 时机</td>
+<td>12 / 第 8、11 epoch</td>
+</tr>
+<tr>
+<td>输入尺寸</td>
+<td>1024×1024</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-坑与自救">④⑤ 坑与自救</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打开真实 config 只有十几行，找不到参数</td>
+<td><strong>用 <code>print_config.py</code> 展开</strong>，别手动追 <code>_base_</code></td>
+</tr>
+<tr>
+<td>看到 <code>_delete_=True</code> 不知什么意思</td>
+<td>它表示“把继承来的这一整块删掉重写”，而不是合并</td>
+</tr>
+<tr>
+<td>想改参数，直接改了官方文件</td>
+<td><strong>新建自己的 config 继承它</strong>（见 §3）</td>
+</tr>
+<tr>
+<td>参数太多不知道该看哪些</td>
+<td>只看上面那张表的 7 项，其余 D9–D11 跑起来后自然懂</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h1 id="h-3-晚上段-写自己的-config-dry-run">3. 晚上段 · 写自己的 config + dry-run</h1>
+<h2 id="h-手把手带做">② 手把手带做</h2>
+<h3 id="h-第-1-步-新建继承式-config-不要-cp-官方文件">第 1 步：新建继承式 config（不要 cp 官方文件）</h3>
+<p>原文说 <code>cp configs/oriented_rcnn/... configs/my_orcnn_r50.py</code>。<strong>能用，但不是最佳实践</strong>——复制出来的是完整副本，以后官方更新了你看不出差异。</p>
+<p><strong>更好的做法</strong>：新建 <code>configs/my/my_orcnn_r50.py</code>，只写你要改的：</p>
+<figure class="code" data-lang="python"><pre><code># configs/my/my_orcnn_r50.py
+_base_ = ['../oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py']
+
+data_root = 'data/split_ss_dota/'
+
+data = dict(
+    samples_per_gpu=2,      # 4090 够用；显存不足改 1，★ 同时把 lr 改成 0.0025
+    workers_per_gpu=2,
+    train=dict(ann_file=data_root + 'trainval/annfiles/',
+               img_prefix=data_root + 'trainval/images/'),
+    val=dict(ann_file=data_root + 'trainval/annfiles/',
+             img_prefix=data_root + 'trainval/images/'),
+    test=dict(ann_file=data_root + 'trainval/annfiles/',
+              img_prefix=data_root + 'trainval/images/'))
+
+checkpoint_config = dict(interval=4, max_keep_ckpts=2)   # 省磁盘
+evaluation = dict(interval=4, metric='mAP')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>只有 12 行。</strong> 半年后你回来看，一眼就知道自己改了什么。</p>
+<blockquote class="quote">
+<p><strong>注意</strong>：这个 config 依赖 D9 切好的图。<strong>今天 D8 晚上还没切图</strong>，所以 dry-run 要用别的办法，见下一步。</p>
+</blockquote>
+<h3 id="h-第-2-步-今晚怎么-dry-run-原文没解决这个时序问题">第 2 步：★ 今晚怎么 dry-run（原文没解决这个时序问题）</h3>
+<p><strong>原文让你 D8 晚上 dry-run，但切图是 D9 中午的事</strong>——<strong>今晚你手上根本没有训练数据。</strong> 这是原计划的一个时序漏洞。</p>
+<p><strong>两个选择</strong>：</p>
+<p><strong>选择 A（推荐）：今晚只做“配置层面的 dry-run”</strong></p>
+<figure class="code" data-lang="bash"><pre><code># 验证 config 语法正确、能被解析、关键值对
+python tools/misc/print_config.py configs/my/my_orcnn_r50.py | \
+    grep -E &quot;ann_file|img_prefix|samples_per_gpu|lr=|num_classes|max_epochs&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>里应该看到你改的路径、<code>samples_per_gpu=2</code>、<code>lr=0.005</code>、<code>num_classes=15</code>、<code>max_epochs=12</code>。</p>
+<p><strong>这一步能抓出 80% 的 config 错误，而且不需要数据。</strong></p>
+<p><strong>选择 B：把切图提前到今晚</strong></p>
+<p>如果你 D5 下的 val 已经解压好，<strong>今晚就可以切</strong>（<a href="w2-baseline.html">W2 实操 §3</a>），切完立刻能真 dry-run。<strong>这样 D9 中午就腾出来了</strong>，可以提前启动正式训练——<strong>整周节奏会宽松很多</strong>，推荐这么干。</p>
+<h3 id="h-第-3-步-真-dry-run-有数据之后">第 3 步：真 dry-run（有数据之后）</h3>
+<figure class="code" data-lang="bash"><pre><code>python tools/train.py configs/my/my_orcnn_r50.py \
+    --work-dir work_dirs/dryrun \
+    --cfg-options runner.max_epochs=1 log_config.interval=50
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 盯前 200 个 iter，对照这张表</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>判断</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>total loss 从 ~2 稳步下降</td>
+<td>✅ 健康</td>
+<td>Ctrl+C，去跑正式的</td>
+</tr>
+<tr>
+<td>loss 是 <code>nan</code></td>
+<td>❌ lr 太高</td>
+<td>减半</td>
+</tr>
+<tr>
+<td>loss 卡住不动</td>
+<td>❌ 数据/标注有问题</td>
+<td>用 <code>vis_dota.py</code> 抽查切图结果</td>
+</tr>
+<tr>
+<td><code>acc</code> 一直 100 但 loss 不降</td>
+<td>❌ 标注是空的</td>
+<td><code>ann_file</code> 路径错</td>
+</tr>
+<tr>
+<td>显存占用接近 0</td>
+<td>❌ 在用 CPU</td>
+<td>检查 <code>torch.cuda.is_available()</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-合格样例-3">③ 合格样例</h2>
+<ul>
+<li><code>configs/my/my_orcnn_r50.py</code> 存在，<code>print_config.py</code> 检查 7 项全对</li>
+<li>（若已切图）dry-run 前 200 iter loss 稳步下降</li>
+<li>实验日志里记了：完整命令 + work_dir + 启动时间</li>
+</ul>
+<h2 id="h-你同时学会了什么">⑥ 你同时学会了什么</h2>
+<p><strong>做了</strong>：一份自己的 config + 一份 config 注释文档。
+<strong>学了</strong>：config 的继承机制、五大块各是什么、<code>frozen_stages</code> 和 <code>norm_eval</code> 为什么让小 batch 也能训、lr 与 batch 的配比。
+<strong>会了</strong>：<strong>用 <code>print_config.py</code> 展开继承链</strong>、<strong>把论文的一句话指到 config 的一行</strong>。</p>
+<blockquote class="quote">
+<p><strong>技能卡｜读懂任何 MM 系 config 的四步</strong>
+① <code>print_config.py</code> 展开继承链，别手动追 → ② 按五大块（backbone/neck/head/data/schedule）分区读 → ③ 只抓 7 个关键值（backbone、类别数、batch、lr、epoch、输入尺寸、数据路径）→ ④ <strong>把论文的核心创新指到 config 的具体某一行</strong>，指得出来才算读懂。</p>
+</blockquote>
+<div class="pager"><a class="prev" href="w2.html"><span class="dir">← 上一篇</span><span class="nm">W2 DOTA + 旋转检测 baseline</span></a><a class="next" href="w2-baseline.html"><span class="dir">下一篇 →</span><span class="nm">W2 · DOTA baseline 实操</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#h-Oriented-R-CNN-完整导读-config-逐行读透">Oriented R-CNN 完整导读 + config 逐行读透</a><a href="#h-1-上午段-精读-Oriented-R-CNN">1. 上午段 · 精读 Oriented R-CNN</a><a href="#h-0-先拿到论文">0. 先拿到论文</a><a href="#h-先垫概念-读方法论文和读综述有什么不同">① 先垫概念：读方法论文和读综述有什么不同</a><a href="#h-手把手带做-对答案">② 手把手带做 + ★ 对答案</a><a href="#h-合格样例">③ 合格样例</a><a href="#h-2-中午段-逐行读-config-原文给了五大块地图-这里补真实文件长什么样">2. 中午段 · 逐行读 config（原文给了五大块地图，这里补真实文件长什么样）</a><a href="#h-先垫概念-config-为什么要继承">① 先垫概念：config 为什么要继承</a><a href="#h-不要手动追-用一条命令展开-原文没教-但这是正确姿势">② ★ 不要手动追，用一条命令展开（原文没教，但这是正确姿势）</a><a href="#h-2-3-五大块-在展开版里各自长什么样">2.3 五大块，在展开版里各自长什么样</a><a href="#h-2-4-纠正原文的自相矛盾-lr-到底是-0-0025-还是-0-005">2.4 ★ 纠正原文的自相矛盾：lr 到底是 0.0025 还是 0.005</a><a href="#h-合格样例-2">③ 合格样例</a><a href="#h-坑与自救">④⑤ 坑与自救</a><a href="#h-3-晚上段-写自己的-config-dry-run">3. 晚上段 · 写自己的 config + dry-run</a><a href="#h-手把手带做">② 手把手带做</a><a href="#h-合格样例-3">③ 合格样例</a><a href="#h-你同时学会了什么">⑥ 你同时学会了什么</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

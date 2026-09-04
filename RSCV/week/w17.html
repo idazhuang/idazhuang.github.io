@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="17">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W17 · 主实验 Round 1（数据集 1）—— 学会设 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M5 主实验全面铺开</span><span>·</span><span>Week 17</span><span>·</span><span>D113–D119</span></div><h1 class="title">主实验 Round 1（数据集 1）—— 学会设计与管理大规模对比实验</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="113" data-k="am" title="D113 上午段"></i><i data-d="113" data-k="noon" title="D113 中午段"></i><i data-d="113" data-k="pm" title="D113 晚上段"></i></span><span class="sday"><i data-d="114" data-k="am" title="D114 上午段"></i><i data-d="114" data-k="noon" title="D114 中午段"></i><i data-d="114" data-k="pm" title="D114 晚上段"></i></span><span class="sday"><i data-d="115" data-k="am" title="D115 上午段"></i><i data-d="115" data-k="noon" title="D115 中午段"></i><i data-d="115" data-k="pm" title="D115 晚上段"></i></span><span class="sday"><i data-d="116" data-k="am" title="D116 上午段"></i><i data-d="116" data-k="noon" title="D116 中午段"></i><i data-d="116" data-k="pm" title="D116 晚上段"></i></span><span class="sday"><i data-d="117" data-k="am" title="D117 上午段"></i><i data-d="117" data-k="noon" title="D117 中午段"></i><i data-d="117" data-k="pm" title="D117 晚上段"></i></span><span class="sday"><i data-d="118" data-k="am" title="D118 上午段"></i><i data-d="118" data-k="noon" title="D118 中午段"></i><i data-d="118" data-k="pm" title="D118 晚上段"></i></span><span class="sday"><i data-d="119" data-k="am" title="D119 上午段"></i><i data-d="119" data-k="noon" title="D119 中午段"></i><i data-d="119" data-k="pm" title="D119 晚上段"></i></span></div></div>
+<div class="note"><b>★ 先算 GPU 的账再动手</b>　3 数据集 × 6 baseline × 3 seed ≈ <b>27 次训练 ≈ 9–16 天连续满负荷</b>，而 W17+W18 只有 14 天。<a href="stage2-full.html">《阶段二详注版》</a> 给了学术界通行的解法（baseline 数字可引用，只自训关键的那个），把 27 次砍到 15 次。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：阶段二（产出期）开始。前面 M3/M4 你做的是“几组小对比”；从本周起，你要把实验<strong>成建制地铺开</strong>——<code>3 数据集 ×(6 个 baseline + 你的方法)× 3 个 seed ≈ 63 组实验</code>，并用专业工具(wandb)把它们管起来。本周先把<strong>数据集 1</strong> 彻底跑完：6 个 baseline + 你的方法(3 seed)、做出第一张论文级大表、配好可视化，并顺手启动数据集 2。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会设计和管理大规模对比实验（≥6 baseline × 3 数据集 × 3 seed）；学会用实验管理工具追踪所有实验。
+<strong>先给你打个预防针</strong>：这一周真正的敌人<strong>不是算法，是混乱</strong>。63 组实验如果不登记、不追踪，两天后你就会对着一个 <code>0.783</code> 发呆——“这是哪个数据集、哪个方法、哪个 seed 跑出来的？” 90% 的人不是输在方法上，是输在<strong>管理跟不上</strong>。所以本周的“及格线”不是“跑了多少”，而是“<strong>每一组实验都能被追溯</strong>”。把矩阵和 wandb 配好，你就赢了一大半。
+<strong>本周精力怎么分配</strong>：跑实验本身是“启动→挂机→监控→评估”的体力活，真正烧脑、也最值钱的是三件事——<strong>实验矩阵设计、结果分析（per-class / 在哪好在哪差）、可视化选案例</strong>。教学的重头戏放在这三件上，体力活给你工具和套路、别让它吃时间。</p>
+</blockquote>
+<hr />
+<h2>🧭 W17 总览：从“学生式跑实验”升级到“研究者式做实验”</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>M3/M4 时的你</th>
+<th>M5 起的你</th>
+<th>为什么要变</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实验规模</td>
+<td>几组对比</td>
+<td>63 组(3×7×3)</td>
+<td>论文需要多 baseline × 多数据集 × 多 seed</td>
+</tr>
+<tr>
+<td>记录方式</td>
+<td>手记实验日志</td>
+<td>实验矩阵 + wandb 自动追踪</td>
+<td>几十组靠记忆必崩</td>
+</tr>
+<tr>
+<td>结果产物</td>
+<td>一张小对比表</td>
+<td>多数据集大表 + 可视化 + 报告</td>
+<td>论文的 Table 1 / 配图 / Experiment 章</td>
+</tr>
+<tr>
+<td>对照纪律</td>
+<td>控制变量</td>
+<td>严格控制变量 + 3 seed + 统一协议</td>
+<td>否则结果不可信、审稿人不认</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：本周你学的不是“怎么训一个模型”，而是“<strong>怎么有条不紊地训几十个模型并让结果可信、可追溯、可写进论文</strong>”。这套能力，你后面每个月都在用。</p>
+<hr />
+</section>
+<article class="day" id="d113" data-d="113"><header class="day-head"><span class="dnum">D113</span><h2 class="day-t">周一 · 设计实验矩阵 + wandb + 启动 baseline 1–3</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天先把“要跑什么”想清楚并管起来（<strong>矩阵</strong>），再把“怎么自动记”配好(<strong>wandb</strong>)，最后把第一批 baseline 推上 GPU。<strong>今天一行代码都不急着调模型</strong>——把“地图”和“记录仪”准备好，后面六天才不会乱。</p>
+<p><strong>预期管理</strong>：今天产物不是“模型变好”，而是“实验管得住”——63 组实验矩阵 + wandb + 第一批 baseline 启动。提醒：本周真正的敌人不是算法是混乱，及格线是“每组实验都能被追溯”。今天把矩阵和 wandb 配好，你就赢了一大半；别急着调模型，先把“地图”和“记录仪”准备好。这套实验工程能力可迁移到任何领域，值得认真练。</p>
+</blockquote>
+</div><section class="slot" id="d113-am" data-d="113" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D113 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计完整实验矩阵文档</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（假设你从没管理过大规模实验）</h4><div class="blk-b"><ul>
+<li><strong>实验矩阵</strong>：把所有要跑的实验列成<strong>一张表</strong>（每行一组实验，带编号 / 配置 / 状态），它就是你的<strong>“作战地图”</strong>。规模哪来的?<code>3 个数据集 ×(6 个 baseline + 你的方法 = 7 个方法)× 3 个 seed = 63 组</code>。</li>
+<li><strong>为什么非管不可</strong>：想象你两天后看到日志里一个 <code>mAP=0.783</code>——没有矩阵，你根本说不出它是“数据集 2 上 baseline 4 的 seed 1”，还是“数据集 1 上你的方法 seed 3”。<strong>矩阵给每组一个唯一 ID，让任何一个数字都能反查到它的来历</strong>；每完成一组就在表里打勾，进度一眼可见。这跟 M3 时你凭记忆管几组实验是两个世界——规模一上来，记忆就崩，必须靠“表”。</li>
+<li><strong>和通用 CV 的关系</strong>：这不是遥感特有的，是所有做实证研究(CV/NLP/RL)的人都要会的工程素养。你现在练的是可迁移到任何领域的“实验工程”能力。</li>
+<li><strong>为什么“混乱”是大规模实验的头号杀手（本周反复强调）</strong>:90% 的人不是输在方法不好，而是输在“管理跟不上”——跑了几十组，结果和配置对不上、checkpoint 互相覆盖、忘了某次的超参，最后对着一堆数字无法复盘、无法写论文。<strong>算法再好，如果结果不可追溯，就等于没做</strong>。所以本周的及格线不是“跑了多少组”，而是“每一组都能被追溯到它的来历”。这是一种纪律，一旦养成，你后面每个研究项目都受益。</li>
+<li><strong>矩阵 + 独立 config + 独立输出目录，三位一体</strong>：光有矩阵还不够——每组实验要有<strong>独立的 config 文件</strong>(文件名=实验 ID，跑哪组指哪个文件，杜绝“改了 config 忘了改回来”的串味)和<strong>独立的输出目录</strong>（以 ID 命名，杜绝 checkpoint/日志互相覆盖）。三者配套，几十组实验才真正可控、可复现、可追溯。这套“工程脚手架”看着繁琐，但它是大规模实验不崩盘的地基。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在 <code>experiments/experiment_matrix.md</code> 建一张表，至少这些列：<figure class="code" data-lang="markdown"><pre><code>| 实验ID | 数据集 | 方法 | seed | config文件 | 状态 | 主指标 | 备注 |
+|--------|--------|------|------|-----------|------|--------|------|
+| D1-base1-s0 | D1 | baseline1 | 0 | cfg/d1_base1.yaml | 待跑 |  |  |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li><strong>ID 命名要可读</strong>:<code>{数据集}-{方法}-s{seed}</code>(如 <code>D1-ours-s2</code>)，一眼知道是谁——别用 <code>exp1/exp2</code> 这种过两天就忘的名字。</li>
+<li>用 W8 的 <strong>SOTA 性能榜</strong>确定那 6 个 baseline：挑“<strong>开源 + 被论文反复当基准对比</strong>”的（这才是“公认 baseline”，审稿人才认）。</li>
+<li>把 63 组<strong>全部列出来</strong>（哪怕暂时只跑得动一部分），状态先全填“待跑”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张 63 行的实验矩阵——每组有唯一可读 ID、对应一个 config 文件、有状态列；那 6 个 baseline 是你方向公认的（能说出每个为什么选它）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>不建矩阵直接乱跑</strong>：跑得很爽，但一周后结果和配置对不上，根本无法复盘、无法写论文。<strong>先有地图再行军</strong>。</li>
+<li><strong>baseline 选得随意</strong>（顺手挑几个不知名的）→ 审稿人会说“你没和主流方法比”，直接质疑你的对比有效性。回 SOTA 榜挑公认的。</li>
+<li><strong>ID 无规律</strong>(<code>run_final_v2_real</code>)→ 几十组里你自己都分不清，务必含“数据集+方法+seed”。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>不确定选哪 6 个 baseline?→ 回 W8 SOTA 榜，挑“开源 + 在多篇论文实验表里反复出现当基准行”的；还拿不准 → 选最经典的那个（公认 baseline）+ 最强的 2-3 个最新 SOTA。</li>
+<li>63 组吓人、不知从哪下手?→ <strong>矩阵就是来治这个的</strong>：先把表建全（只是列出来，不是现在全跑），再一格格推进。</li>
+<li>config 太多管不过来?→ <strong>一组一个 config 文件，文件名就等于实验 ID</strong>，以后跑哪组就指哪个文件。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>用实验矩阵管理大规模实验</strong>——这是从“学生式跑实验”迈向“研究者式做实验”的分水岭。<strong>做了</strong>（63 组实验矩阵）、<strong>学了</strong>(矩阵=作战地图、为何必须管理、ID 可读命名、公认 baseline 的选取)、<strong>会了</strong>（把几十组实验组织成一张可追溯、可打勾的表）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜大规模实验管理三件套</strong>:① <strong>矩阵</strong>（每组唯一 ID + 状态）→ ② <strong>每组独立 config</strong>(文件名=ID)→ ③ <strong>每组独立输出目录</strong>（以 ID 命名）。三者齐全，几十组实验才不会互相覆盖、才追溯得回去。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d113-noon" data-d="113" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D113 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">配置 wandb（给实验装“自动飞行记录仪”）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>wandb(Weights &amp; Biases)</strong>：一个实验追踪工具。把它想成<strong>飞机的“黑匣子/自动飞行记录仪”</strong>——你训练时它<strong>自动</strong>记下这一架次的全部数据：超参、loss 曲线、各项指标、运行时长、用了哪台机器。事后还能在网页里把<strong>多架次并排对比</strong>。</li>
+<li><strong>它解决你什么痛</strong>:63 组实验，手记超参必然出错、必然漏。wandb 让你<strong>再也不会“忘了那次的学习率是多少”</strong>，也能一眼看出“哪组配置的曲线最好”。</li>
+<li><strong>为什么“自动记录”比“手动记”可靠太多</strong>：手动记超参/结果，在 63 组规模下必然出错——你会忘记记某次、会记错某个数、会漏掉某个细节。而 wandb 在你训练时<strong>自动</strong>抓取并上传全部信息（超参、每个 epoch 的 loss/指标、运行时长、硬件、甚至代码版本），一条不漏、一字不错。<strong>把“记录”这件易错的体力活交给工具，你只管分析</strong>——这是大规模实验不出错的关键。<strong>尤其要把 git commit hash 也记上</strong>：日后想精确复现“那次”的结果，你需要知道当时用的是哪个版本的代码，光有超参不够。</li>
+<li><strong>wandb 最强的是“横向对比”</strong>：你有 63 条实验，wandb 网页能把它们<strong>并排画在一张图上</strong>（如所有方法的 val 曲线叠在一起），你一眼就能看出“哪条最高、哪条最稳、哪条崩了”。还能按超参分组、排序、筛选(如“只看 lr=0.01 的”)，快速定位规律。<strong>这种多实验的可视化对比，是手动记录和 print 完全做不到的</strong>，也正是你 63 组实验最需要的。</li>
+<li><strong>和 TensorBoard 的区别</strong>:TensorBoard 在本地、看<strong>单次</strong>曲线很方便；wandb 在云端、<strong>多实验横向对比</strong>更强（你正好有 63 组要横向比）。<strong>二选一即可</strong>——重隐私/不方便联网就用 TensorBoard，否则推荐 wandb。今天别纠结，选一个 5 分钟配好。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>装并登录：<figure class="code" data-lang="bash"><pre><code>pip<span class="w"> </span>install<span class="w"> </span>wandb
+wandb<span class="w"> </span>login<span class="w">        </span><span class="c1"># 粘贴官网给你的 API key</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>在 <code>train.py</code> 里接入（开头初始化、训练中 log）：<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">wandb</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;rs-main-exp&quot;</span><span class="p">,</span>
+           <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">-s</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># name 用实验 ID!</span>
+           <span class="n">config</span><span class="o">=</span><span class="n">cfg</span><span class="p">)</span>                       <span class="c1"># 把超参字典传进去,网页才看得到</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]):</span>
+    <span class="c1"># ... 训练 + 验证,得到 loss / val_metric ...</span>
+    <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">epoch</span><span class="p">,</span> <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;val_metric&quot;</span><span class="p">:</span> <span class="n">val_metric</span><span class="p">})</span>
+<span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li><strong>先跑一个最小实验</strong>（几个 iter）验证能上报，再正式开跑——别等大实验跑完才发现没记上。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>wandb 里建好了 <code>rs-main-exp</code> 这个 project；跑完那个最小实验后，网页上能看到这次的 <strong>loss 曲线</strong> + <strong>超参表</strong>（lr / batch / epoch 等都在 config 里显示出来了）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只 <code>print</code> 不接 wandb</strong>：终端一关日志就丢了，63 组根本记不住。</li>
+<li><strong>接了 wandb 但没把超参传进 <code>config</code></strong>：网页上看得到曲线、却不知道这条是什么配置——<strong>务必把超参字典传给 <code>config</code></strong>。</li>
+<li><strong>每次 <code>name</code> 都一样</strong>：网页里几十条线分不清谁是谁。<strong>name 用实验 ID</strong>（数据集-方法-seed）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>不方便联网 / 重隐私?→ 改用 <strong>TensorBoard 本地</strong>(<code>from torch.utils.tensorboard import SummaryWriter</code>)，记一样的东西。</li>
+<li>wandb 接入报错?→ 先单独跑官方最小示例确认环境/登录没问题，再把它接进你的 <code>train.py</code>。</li>
+<li>网页上看不到指标?→ 检查是不是漏了 <code>wandb.log(...)</code>，或 key 名写错。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你给实验装上了“自动记录仪”，从此超参/曲线/指标<strong>自动留痕、可横向对比</strong>。<strong>做了</strong>（wandb 配置 + 最小验证）、<strong>学了</strong>（实验追踪工具是什么、wandb vs TensorBoard、为何必须自动记录）、<strong>会了</strong>（让每组实验自动记录并可在网页对比）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜每个实验必记五样</strong>：超参(config)、loss 曲线、验证指标、运行时间、<strong>当前 git commit hash</strong>（把代码版本也记上，日后才能精确复现“那次”的结果）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d113-pm" data-d="113" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D113 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">数据集 1 启动 baseline 1–3</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>对比实验的铁律</strong>：要让“我的方法比 baseline 好”这句话成立，必须<strong>控制所有其它变量都相同</strong>（同数据、同评测协议、同 seed、同训练轮数），<strong>只改“方法”这一项</strong>。否则别人会说“你是不是只是训得更久/分辨率更大才赢的？”——对比就废了。</li>
+<li><strong>为什么“公平对比”是论文可信度的根基</strong>：审稿人评判一个方法，核心问的是“你的提升真的来自你的方法，还是来自别的因素（训得久、数据多、调参好）？”。<strong>如果你跑自己方法时顺手改了 lr、用了更大分辨率、训了更多 epoch，那你的提升就说不清是方法的功劳还是这些改动的功劳</strong>——对比失去意义，审稿人直接质疑。所以铁律是：你的方法 vs baseline,<strong>除了“方法”本身，数据/评测协议/seed/训练轮数/增强全部相同</strong>。这个纪律要贯彻到每一组实验的每一个细节。</li>
+<li><strong>这条纪律为什么对你尤其重要</strong>：你是单人单卡，没有大组的资源去“暴力调参刷点”。<strong>你的论文要靠“方法本身的有效性”说话，而严格的公平对比正是证明这一点的唯一方式</strong>。一旦对比不公平，你那点来之不易的提升就不可信了。所以与其花心思在各种“小动作”上刷点，不如把对比做得干干净净——只换方法、其余全同——这样你的提升才站得住、才发表得了。</li>
+<li><strong>为什么先跑 baseline</strong>：先把“标杆线”立起来。你的方法出结果时，得有个参照才知道自己是“刚过线”还是“遥遥领先”。</li>
+<li><strong>seed 是什么</strong>：随机种子，决定权重初始化、数据打乱顺序等“随机起手”。<strong>固定 seed = 让随机过程可复现</strong>；不同 seed 多跑几次 = 看结果稳不稳（下周三起做多 seed）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在数据集 1 上，用统一框架启动 <strong>baseline 1、2、3</strong> 的训练：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d1_base1.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="c1"># 固定 seed=0</span>
+<span class="c1"># base2、base3 同理,各自的 cfg</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>每启动一个，矩阵对应行状态改成“<strong>进行中</strong>”。</li>
+<li>打开 wandb 盯三条 loss 曲线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 1–3 已在跑，wandb 里三条 loss 正常下降；矩阵里这三行状态已是“进行中”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>三组同时跑显存爆</strong>:4090 是 24GB，三个检测模型一起训大概率 OOM。<strong>错峰</strong>（跑完一个起下一个）或都用小 batch 并行。</li>
+<li><strong>某 baseline 复现远低于 SOTA 榜</strong>：不是你的方法问题，是<strong>复现没对齐</strong>（评测协议/超参/数据切分）——回 M2 复现经验核对。</li>
+<li><strong>忘记固定 seed</strong>：后面多 seed 对比时基准对不齐，从一开始就固定。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>某 baseline 跑不起来?→ 翻它 GitHub Issues 搜报错原文；多半是版本/依赖问题（用 M1 的版本排查套路）。</li>
+<li>OOM?→ 降 batch → 降分辨率 → 减少并行的组数（错峰）。</li>
+<li>loss 不降?→ 先确认数据路径和标签读对了（打印一个 batch 的形状和标签值），再看 lr。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把第一批“标杆”推上了 GPU，并复习了“先标杆、严格控制变量”的对比纪律。<strong>做了</strong>（baseline 1–3 启动 + 矩阵更新）、<strong>学了</strong>（对比铁律、为何先跑 baseline、seed 的作用）、<strong>会了</strong>（按矩阵把第一批实验有序推上去）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜公平对比铁律</strong>:<code>你的方法 vs baseline</code>，除了“方法”本身，<strong>数据 / 评测协议 / seed / 训练轮数 / 增强 全部相同</strong>。任何额外改动都会让“我更好”这句话失去说服力。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 实验矩阵文档（63 组） ✅ wandb 配置完成 ✅ baseline 1–3 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D113</summary><textarea data-note="d113" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d114" data-d="114"><header class="day-head"><span class="dnum">D114</span><h2 class="day-t">周二 · 监控 baseline 1–3 + 启动 4–6</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天是“边盯边推”：上午盯昨晚那三组健不健康（<strong>早看早救</strong>，别等跑完几小时才发现废了），中午把剩下三个 baseline 推上去，晚上把跑完的评估、登记。</p>
+<p><strong>预期管理</strong>：今天边监控边推进（盯 1-3 健康、起 4-6、评估登记 1-3）。提醒：大规模实验里 GPU 时间就是命，启动后别不管、跑完才看——前几个 epoch 的下降速度基本决定走势，发现异常（loss 不降/NaN）几分钟内就能止损。NaN 不会自愈，立即停、降 lr 或查数据。每组用独立输出目录，否则会互相覆盖丢结果。</p>
+</blockquote>
+</div><section class="slot" id="d114-am" data-d="114" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D114 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">监控 baseline 1–3 训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么判断训练正不正常）</h4><div class="blk-b"><ul>
+<li><strong>loss 应稳步下降</strong>——注意是“稳步”，<strong>有上下波动是正常的</strong>，不必单调下降。</li>
+<li><strong>两种典型异常</strong>:① loss 一直不降（几乎水平）→ 学习率可能太小，或数据加载有问题（模型没真正在学）;② loss 突然变成 <strong>NaN</strong>（爆炸）→ 学习率太大，或数据里有脏值/坐标越界的标注。</li>
+<li><strong>关键经验</strong>：<strong>前几个 epoch 的下降速度，基本决定整体走势</strong>。所以要早看——发现不对，几分钟内就能止损，而不是等它白跑一晚上。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>打开 wandb，看 baseline 1–3 的 <strong>loss 曲线</strong>和 <strong>val 指标曲线</strong>。</li>
+<li>对照“稳步下降”判断：健康的让它继续；异常的<strong>立即停掉</strong>排查。</li>
+<li>把观察（谁正常、谁异常、怎么处理的）记一句到实验日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>三条 loss 都在稳步下降（或你已识别出异常那条、并定位到原因开始修）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>启动后不管、跑完才看</strong>：白白浪费几小时 GPU——大规模实验，GPU 时间就是命。</li>
+<li><strong>看到波动就以为坏了</strong>：波动正常，看<strong>总体趋势</strong>。</li>
+<li><strong>NaN 了还傻等</strong>:NaN 不会自愈，<strong>立即停</strong>，降 lr / 查数据。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>loss 变 NaN?→ 降学习率（先砍一半）→ 还 NaN 就查数据（切图后有没有空标注、坐标有没有越界、有没有除零）。</li>
+<li>loss 一直不降?→ 升学习率试试 → 还不降就确认 DataLoader 真的喂进了数据（打印一个 batch 的形状和标签，别是空的/全 0）。</li>
+<li>不确定算不算正常?→ 和你 M3/M4 跑过的同类实验的曲线形状对比一下。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你练了<strong>大规模实验的健康监控与早期止损</strong>——这能帮你省下大量被浪费的 GPU 时间。<strong>做了</strong>（监控 1–3）、<strong>学了</strong>（loss 正常/异常的判断、“前几个 epoch 定走势”）、<strong>会了</strong>（用 wandb 实时判断训练健康度并及时止损）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜训练健康三看</strong>:① loss 是否<strong>稳步</strong>下降（不是单调，是趋势向下）② val 指标是否<strong>上升</strong>（别只看 train loss，要看验证）③ train 和 val 是否<strong>背离</strong>(train 降 val 不升 = 过拟合)。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d114-noon" data-d="114" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D114 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 baseline 4–6</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把剩下 3 个 baseline 也推上去。<strong>批量管理的关键</strong>：每组用<strong>独立的输出目录</strong>（以实验 ID 命名），否则不同实验会互相覆盖对方的 checkpoint 和日志，你会丢结果。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动数据集 1 的 <strong>baseline 4、5、6</strong>：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d1_base4.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/D1-base4-s0
+<span class="c1"># 5、6 同理,work_dir 各不相同</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>矩阵状态改“进行中”。</li>
+<li><strong>错峰</strong>：避免和上午还在跑的 1–3 抢显存。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 4–6 启动，各自有独立的 <code>work_dir</code>(输出目录)，矩阵已更新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>多组共用一个输出目录</strong>：后跑的覆盖先跑的 checkpoint/日志 → 结果丢失。<strong>每组独立目录</strong>。</li>
+<li><strong>一次塞满 GPU</strong>：三个一起上必 OOM，错峰或小 batch。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>显存不够?→ 错峰（等 1–3 跑完再起 4–6）→ 还不够就降 batch。不知道先跑哪个?→ 按矩阵顺序来，别纠结。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>批量管理多组实验（独立目录/配置 + 错峰调度）</strong>。<strong>做了</strong>（4–6 启动）、<strong>学了</strong>（独立输出目录的重要性、错峰调度）、<strong>会了</strong>（按矩阵并行推进多组而不互相干扰）。</p>
+</div></section></section><section class="slot" id="d114-pm" data-d="114" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D114 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">baseline 1–3 完成 → 评估 → 记录矩阵</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>训练完不评估、不登记 = <strong>白跑</strong>。评估时，<strong>评测协议必须和 SOTA 榜/论文一致</strong>（同 metric、同数据划分、同 IoU 阈值等），结果才可比。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>baseline 1–3 训完，跑评估：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/eval.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d1_base1.yaml<span class="w"> </span>--ckpt<span class="w"> </span>work_dirs/D1-base1-s0/best.pth
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>把主指标（及参数量 / FPS）填进矩阵对应行，状态改“<strong>完成</strong>”。</li>
+<li>对照 SOTA 榜：复现值和报告值差 <strong>&lt;2%</strong> 算“对齐”；差很多说明协议没对齐。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>baseline 1–3 的结果填入矩阵；和 SOTA 榜对比无明显偏差(&lt;2%)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>评测协议和论文不一致</strong>（如 VOC07 vs VOC12 的 mAP 算法）→ 数字没法比。</li>
+<li><strong>跑完不登记</strong>：过两天就忘了是哪组，矩阵形同虚设。</li>
+<li><strong>复现差很多却当真用</strong>：没对齐的复现不能当 baseline，否则你的对比从根上不公平。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>复现远低于报告?→ ① 核对 metric(07/12)② 数据切分/预处理是否一致 ③ 是否用了官方 config/权重 ④ 先用官方权重验证你的评测脚本对不对。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>评估 → 登记 → 用 SOTA 榜校验复现</strong>这一闭环。<strong>做了</strong>（1–3 评估 + 登记）、<strong>学了</strong>(评测协议一致、复现对齐判定 &lt;2%)、<strong>会了</strong>（评估、登记、校验三连）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ baseline 4–6 启动 ✅ baseline 1–3 结果（如完成）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D114</summary><textarea data-note="d114" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d115" data-d="115"><header class="day-head"><span class="dnum">D115</span><h2 class="day-t">周三 · baseline 全部完成 + 启动你的方法</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天 6 个 baseline 全部收口、汇总出“标杆线”，然后<strong>正式让你的方法登场</strong>——这是你这几个月工作的“主角”第一次在完整 baseline 阵列前亮相。</p>
+<p><strong>预期管理</strong>：今天 6 个 baseline 收口出“标杆线”，你的方法首次登场（起 seed 1/2）。提醒：先知标杆，你的方法出结果才有参照（高 0.1% 可能在噪声内不算赢，高 2%+ 才好）；跑你的方法时<strong>只换 model 一处</strong>,lr/增强/epoch/分辨率全不动，否则对比不公平。单次结果可能是运气，所以要跑 3 个 seed。</p>
+</blockquote>
+</div><section class="slot" id="d115-am" data-d="115" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D115 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">baseline 4–6 完成 → 评估 → 6 个 baseline 汇总</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>6 个 baseline 全跑完后<strong>先汇总</strong>——你要明确“<strong>标杆在哪、最强 baseline 是多少</strong>”，这是判断你方法好坏的参照系。没有这条线，你的方法报个 78.1 你都不知道是高是低。</p>
+<ul>
+<li><strong>为什么“先建标杆参照系”是判断方法的前提</strong>：一个孤立的数字（如你的方法 78.1）毫无意义——它好不好，完全取决于“和谁比”。如果最强 baseline 是 76.3，那 78.1 是个不错的提升；如果最强 baseline 是 79.0，那 78.1 其实是落后的。<strong>所以必须先把 6 个 baseline 跑完、汇总、标出最强的那个，你才有了判断自己方法的“尺子”</strong>。这也是为什么本周安排“先跑完所有 baseline、再让你的方法登场”——没有参照系，你的方法出了结果也无从判断。</li>
+<li><strong>汇总时要“留全 + 标最强”</strong>:① 6 个 baseline 的结果都要留（论文对比表要列全，不能只留一个）;② 明确标出最强的那个（它是你方法主要的对标对象）。<strong>而且每个 baseline 都要复现对齐(和它论文报告值差 &lt;2%)</strong>——没对齐的 baseline 会让你的“标杆线”失真，进而让你方法的“提升幅度”也不可信。所以汇总前先确认 6 个都对齐了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 baseline 4–6，填矩阵。</li>
+<li>把 6 个 baseline 在数据集 1 上的结果汇成一小表，<strong>标出最强的那个</strong>（记住它的数字）。</li>
+<li>确认 6 个都复现对齐(每个都 &lt;2% 偏差)。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 1 上 6 个 baseline 结果汇总，最强 baseline 明确(有具体数字，如“最强 baseline = 76.3 mAP”)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>某 baseline 没对齐就汇总</strong> → 标杆线失真，你方法的“提升幅度”也就不可信。</li>
+<li><strong>只记最强、丢了其余</strong> → 论文对比表要列全 6 个，别只留一个。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某 baseline 结果异常 → 单独排查（协议/超参/数据），别让它污染你对“标杆线”的判断。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你建立了数据集 1 的<strong>标杆参照系</strong>。<strong>做了</strong>（6 baseline 汇总）、<strong>学了</strong>（先知标杆才有判断基准）、<strong>会了</strong>（汇总一组对比方法并定位最强）。</p>
+</div></section></section><section class="slot" id="d115-noon" data-d="115" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D115 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动你的方法 seed 1</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么先跑完 baseline 再跑你的方法）</h4><div class="blk-b"><p>先知标杆，你的方法出结果时才好判断——比最强 baseline 只高 0.1% → 可能需要加强方法（或它在 std 噪声内，不算赢）；高 2%+ → 结果很好。今天起跑你的方法，而且要跑 <strong>3 个 seed</strong>（单次结果可能只是运气）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用与 baseline <strong>完全一致的设置</strong>(只把 <code>model</code> 换成你的方法)，启动 seed 1：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d1_ours.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/D1-ours-s0
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>矩阵状态更新。</li>
+<li>wandb 盯着。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>你的方法 seed 1 已启动，设置与 baseline 可比（<strong>只差 model 这一处</strong>）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>跑你的方法时顺手改了 lr / 增强 / epoch / 分辨率</strong> → 对比就不公平了。务必只换 model，其余原封不动。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>你的方法训练崩?→ 回 M3/M4 的模型层 debug（打印你模块前后的张量形状，看是不是接错维度）→ 确认你只改了 model 一处，没动别的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你在标杆参照下启动了自己的方法，并再次落实“公平对比只换方法”。<strong>做了</strong>（seed 1 启动）、<strong>学了</strong>（先标杆后方法的判断逻辑、提升要超过 std 才算赢）、<strong>会了</strong>（在严格对齐的设置下跑自己的方法）。</p>
+</div></section></section><section class="slot" id="d115-pm" data-d="115" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D115 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">启动你的方法 seed 2</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要多 seed）</h4><div class="blk-b"><p>单次实验有随机波动（初始化、数据打乱都随机）。<strong>跑 3 个不同 seed 取平均 ± 标准差</strong>，才能区分“是真有效”还是“这次 seed 运气好”。这是学术规范，也是审稿人必查的——只报单 seed 的结果会被认为不可信。</p>
+<ul>
+<li><strong>为什么单次结果可能骗人</strong>：深度学习训练有很多随机性（权重随机初始化、数据每轮随机打乱、某些操作的随机性）。同一个方法、同样的设置，换个随机种子，结果可能差零点几甚至一两个点。<strong>所以你单跑一次得到“+1.5”，很可能只是这次 seed 运气好——换个 seed 可能就只剩 +0.3 甚至持平</strong>。靠单次结果下“我的方法更好”的结论，是不可靠的，审稿人也不会信。</li>
+<li><strong>3 个 seed + mean±std 怎么解读</strong>：跑 3 个不同 seed，得到 3 个结果，算<strong>平均值(mean)±标准差(std)</strong>。mean 是你方法的“真实平均水平”（消除了单次运气）;std 反映“稳定性”(std 小=每次都差不多、稳定；std 大=时好时坏、不稳定)。<strong>报“78.1±0.3”远比报“78.4”可信</strong>——前者说明你跑了多次、结果稳定可复现。</li>
+<li><strong>“提升要超过 std 才算赢”这条铁律</strong>：如果你的方法比 baseline 高 0.2，但两者的 std 都有 0.5——那这 0.2 完全在随机噪声范围内，<strong>不能算“显著提升”</strong>（可能只是这几次 seed 的运气）。只有当“你的 mean − baseline 的 mean”明显大于它们的 std（如高 1.5 而 std 只有 0.3），才能理直气壮说“显著更好”。<strong>这是判断“真赢”还是“噪声内”的硬标准</strong>，别拿噪声内的微弱优势 overclaim。</li>
+<li><strong>公平的关键：baseline 和你的方法同等对待</strong>：多 seed 的纪律必须对所有方法一视同仁——不能只给自己的方法跑 3 个 seed 取最好的，而 baseline 只跑 1 个。<strong>那是作弊式的不公平</strong>。要么都跑多 seed 取 mean±std，要么都单 seed（但单 seed 不可信）。审稿人会查这个。这也呼应本周反复强调的“公平对比”——对照纪律体现在每一个细节。</li>
+<li><strong>GPU 不够时的取舍</strong>:3 个 seed 是学术下限。如果算力实在紧张，优先保证<strong>主数据集</strong>的 3 seed（那是你的核心结果），次要数据集可以少跑一些（但要在论文里注明）。错峰跑（白天一个 seed、晚上一个）能在单卡上凑齐多 seed。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>换一个随机 seed(如 <code>--seed 1</code>)，重跑你的方法，<strong>其余设置不变</strong>：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d1_ours.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">1</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/D1-ours-s1
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>矩阵更新。</li>
+<li>错峰避免显存冲突。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>seed 2 已启动（<strong>只换了 seed</strong>,config 没动）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>多 seed 时改了别的变量</strong> → 不可比（多 seed 的全部意义就是“只有 seed 不同”）；<strong>只跑 1 个 seed 就写进论文</strong> → 不可信。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>GPU 时间紧、跑不了很多?→ 至少凑齐 <strong>3 个</strong>（学术下限）；错峰跑（白天一个、晚上一个）；实在紧 → 优先保证<strong>主数据集</strong>的 3 seed，次要数据集可少一些（但要注明）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你开始用<strong>多 seed 验证结果可靠性</strong>。<strong>做了</strong>（seed 2 启动）、<strong>学了</strong>（多 seed 的学术规范与意义）、<strong>会了</strong>（只换 seed 做重复实验）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜结果可信三件套</strong>:① <strong>3 个 seed</strong> 取 mean±std ② 提升要<strong>超过 std</strong>（否则在噪声内，不算显著）③ baseline 和你的方法<strong>同等对待</strong>（都多 seed，别只给自己多跑）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 6 baseline 结果汇总 ✅ 你的方法 seed 1–2 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D115</summary><textarea data-note="d115" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d116" data-d="116"><header class="day-head"><span class="dnum">D116</span><h2 class="day-t">周四 · 你的方法结果 + 数据集 1 大表 v1</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天你的方法出第一份结果，重点不是“赢没赢”，而是学会<strong>两件分析功夫</strong>:per-class 看在哪类强/弱，以及把结果整理成<strong>论文级大表</strong>（含参数/FPS——你单卡的卖点）。</p>
+<p><strong>预期管理</strong>：今天你的方法出首份结果，但重点不是&quot;赢没赢&quot;而是学两件分析功夫：per-class 分析 + 论文级大表。提醒：别只看总分，per-class（&quot;小目标 +5.3、大目标 +0.8&quot;）才是 Discussion 最值钱的素材；大表必列参数量和 FPS——精度持平但更小更快本身就是你单卡路线的核心贡献。结果没优势先排除 bug（你的模块真生效了吗），别急着否定。</p>
+</blockquote>
+</div><section class="slot" id="d116-am" data-d="116" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D116 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">seed 1 结果 → per-class 分析 → 与 6 baseline 对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>你的方法 seed 1 出结果后，不能只看一个总分，要做 <strong>per-class（逐类别）分析</strong>——看在哪些类别/场景上特别好或差。<strong>为什么这么重要</strong>：这是论文 <strong>Discussion 的核心素材</strong>。“在小目标上 +5.3 AP、在大目标上 +0.8 AP” 这种细分洞察，远比“总分 +1.8”有学术价值——它告诉读者你的方法<strong>到底在解决什么</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 seed 1，<strong>导出 per-class 指标</strong>（评测脚本里按类别分别累计）。</li>
+<li>和<strong>最强 baseline</strong> 比：总分超多少？哪些类超得多、哪些类反而差？</li>
+<li>把“在哪类好 / 在哪类差”的初步观察记下来（这是 Discussion 的草稿）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>seed 1 的 per-class 结果表 + 与最强 baseline 的对比（含一句“在 X 类提升最明显、在 Y 类几乎持平/略降”）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只看总分不看 per-class</strong> → 丢了最值钱的 Discussion 素材。</li>
+<li><strong>看到总分高就庆祝</strong> → 还要等 3 seed 确认（单 seed 可能运气好）。</li>
+<li><strong>比 baseline 没优势就断定方法不行</strong> → 先确认不是 bug（你的模块真的生效了吗?）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>你的方法没优势?→ ① 先排除 bug（在小数据上能不能过拟合？print 你模块的输出，看它真的接进前向了吗、参数在更新吗）② 确认评测协议和 baseline 一致。per-class 导不出来?→ 在评测脚本里按 GT 类别把 TP/FP/FN 分别累计。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会 <strong>per-class 对比分析</strong>（细粒度看方法到底强在哪、弱在哪）。<strong>做了</strong>（seed 1 分析）、<strong>学了</strong>（per-class 视角、它是 Discussion 素材）、<strong>会了</strong>（细粒度对比并提炼出可写进论文的观察）。</p>
+</div></section></section><section class="slot" id="d116-noon" data-d="116" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D116 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 seed 3</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>补齐第 3 个 seed，凑齐“3-seed 平均 ± std”所需的三次重复——三次同设置、只换 seed 的实验，才能算出可信的均值和标准差。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>换第 3 个 seed 启动你的方法(<code>--seed 2</code>，独立 work_dir)。</li>
+<li>矩阵更新。</li>
+<li>错峰。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>seed 3 已启动（只换 seed）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只跑 2 个 seed 就算够 → 规范是 3 个；改了别的 → 只换 seed。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>GPU 不够 → 错峰跑；时间极紧 → 至少保证主数据集 3 seed。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把多 seed 凑齐。<strong>做了</strong>（seed 3 启动）、<strong>学了</strong>（3 seed 的必要性）、<strong>会了</strong>（完成一组完整的多 seed 重复）。</p>
+</div></section></section><section class="slot" id="d116-pm" data-d="116" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D116 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整理数据集 1 完整结果表 v1</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（论文主表的格式）</h4><div class="blk-b"><p>遥感 CV 论文主指标用 <strong>mAP（检测）/ mIoU（分割）/ F1（变化检测）</strong>，并且<strong>必列参数量(Params)和 FPS（速度）</strong>——它们说明“效率”，审稿人很关注，<strong>更是你单张 4090 路线的核心卖点</strong>（你可能精度持平但更小更快，这就是贡献）。最优结果用 <strong>bold</strong> 标。</p>
+<ul>
+<li><strong>为什么&quot;参数量/FPS&quot;对你这条单卡路线至关重要</strong>：你不可能在&quot;精度绝对值&quot;上碾压有几十张卡的大组（他们能训更大模型、调更久）。但<strong>&quot;效率&quot;是另一个完全合法、且审稿人认可的竞争维度</strong>——如果你的方法精度和最强 baseline 持平（甚至略低一点点），但参数量只有一半、速度快一倍，这本身就是一个有力的贡献（&quot;在显著更低的计算成本下达到可比精度&quot;）。<strong>把&quot;高效&quot;做成你论文的卖点，你就跳出了&quot;和大组拼精度绝对值&quot;的死局</strong>，转到了你能赢的赛道。这正是你整体定位（单卡高效）在论文里的落地。</li>
+<li><strong>怎么把“高效”写成卖点（而非示弱）</strong>：不要写“我们的方法精度略低但更快”（听起来像认输）；要写“我们的方法在仅 X 参数量/Y FPS 下，达到了与 SOTA 可比的精度，在效率-精度权衡上更优”——<strong>把它框成“权衡优势”而非“精度劣势”</strong>。配一张“精度 vs 参数量”或“精度 vs FPS”的散点图(你的点在左上角=又准又快/又准又小)，视觉上极有说服力。</li>
+<li><strong>主表的专业细节</strong>:① 最优值加粗(bold)，次优可加下划线，读者一眼看出排名;② 所有方法在你统一环境下复现的值才是公平基准（不同来源的数字协议可能不同，要注明）;③ 列要齐（6 baseline + 你的方法都在，别只留对你有利的）;④ 数字带 mean±std（明天补）才可信。这张表就是论文的 Table 1，审稿人看论文先看它。</li>
+<li><strong>为什么“持平但更高效”是真贡献而非自我安慰</strong>：学术界明确认可“效率”作为贡献维度——轻量化、实时性是遥感落地（星上计算、边缘部署、大范围快速处理）的真实需求。一个又小又快又够准的方法，在实际部署中可能比一个又大又慢但精度高 0.5 点的方法更有用。<strong>所以你的单卡高效路线不是“没办法的退路”，而是一个有真实价值、被认可的研究方向</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整理数据集 1 大表 v1：列 = <code>方法 | 主指标 |(次指标)| 参数量 | FPS</code>。</li>
+<li>6 个 baseline + 你的方法都列上。</li>
+<li><strong>bold 标最优</strong>（3-seed 平均待明天补，先用 seed 1 填，标注“v1”）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>（直接照这个排）：</p>
+<figure class="code" data-lang="markdown"><pre><code>| 方法 | mAP | 参数量 | FPS |
+|---|---|---|---|
+| baseline1 | 75.0 | 36M | 25 |
+| ...(共6个) | ... | ... | ... |
+| <span class="gs">**Ours**</span> | <span class="gs">**78.1**</span> | 39M | 21 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>能看出你的方法相对最强 baseline 的位置，且参数/FPS 在表里（哪怕略慢也要写，效率维度本身就是讨论点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>不列参数/FPS</strong> → 丢了“高效”这个对比维度，也丢了你单卡路线最大的卖点。</li>
+<li><strong>最优没加粗</strong> → 读者一眼看不出谁最强。</li>
+<li><strong>不同 baseline 用了不同协议/划分</strong> → 注明，并以“你统一环境下的复现值”为公平基准。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某格数据缺?→ 标“待补”别卡。格式拿不准?→ 直接仿你读过的 A 级论文的主表(Table 1)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>第一张论文级数据集大表（含效率维度）</strong>。<strong>做了</strong>（数据集 1 大表 v1）、<strong>学了</strong>（主表格式、为何必列参数/FPS）、<strong>会了</strong>（把对比结果做成可直接进论文的表）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜遥感主表必备列</strong>：主指标(mAP/mIoU/F1)+ <strong>参数量</strong> + <strong>FPS</strong>，最优加粗。精度持平但更小更快，本身就是一个有力的贡献点。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>数据集 1 大表 v1</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D116</summary><textarea data-note="d116" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d117" data-d="117"><header class="day-head"><span class="dnum">D117</span><h2 class="day-t">周五 · 数据集 1 完整表(3-seed)+ 启动数据集 2</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把数据集 1 的结果“钉死”成可信版本(3-seed mean±std)，产出 Discussion 素材，并把战线推向数据集 2。</p>
+<p><strong>预期管理</strong>：今天把数据集 1 结果钉成可信版(3-seed mean±std)+ 产出“在哪好在哪差”分析 + 推进数据集 2。提醒：只报 mean 不报 std 不符合规范、也看不出稳定性；提升若落在 std 之内就别宣称“显著”（如实说，靠后续消融加强，别 overclaim）；“在哪好在哪差”的原因要联系你的方法设计和数据特性，这才是学术深度。</p>
+</blockquote>
+</div><section class="slot" id="d117-am" data-d="117" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D117 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">seed 2–3 结果 → 3-seed 平均±std → 更新大表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>3-seed 平均 ± 标准差</strong>才是可信结果。std 还有额外价值——它<strong>反映稳定性</strong>:std 很大说明你的方法时好时坏、不稳定（这本身也是要在论文里讨论/改进的）。</p>
+<ul>
+<li><strong>把数据集 1 的结果“钉死”是什么意思</strong>：经过 3 个 seed 跑完、算出 mean±std，你的方法在数据集 1 上的成绩就<strong>定下来、不再变了</strong>——它从“单次的、可能有运气成分的数字”变成了“可信的、可复现的、可写进论文的最终结果”。<strong>这个“钉死”很重要</strong>：它是你后续所有讨论、可视化、写作的基准，定下来后就不要再反复重跑（除非发现 bug）。</li>
+<li><strong>std 大是信号不是噪音</strong>：如果你的方法 std 很大（如 78.1±2.5，三次分别是 75.6/78.1/80.6），说明它<strong>不稳定、对随机性敏感</strong>——这是个需要正视的问题。可能原因：训练不够充分、某个设计对初始化敏感、数据太少。<strong>std 大本身就值得在论文里讨论</strong>（诚实说明稳定性，或分析原因并改进）。反之 std 小(78.1±0.3)说明方法稳健、可靠，这是优点。<strong>所以 std 不只是个误差棒，它携带了“方法稳不稳”的重要信息</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估 seed 2、3。</li>
+<li>算你的方法的 3-seed <strong>mean±std</strong>，更新数据集 1 完整表（baseline 若也跑了多 seed 一并更新）。</li>
+<li>看 std 大小判断稳定性(std 小 = 稳；std 大 = 要查为什么)。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 1 完整表，你的方法呈现为 <code>78.1±0.3</code> 这样的 mean±std。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只报 mean 不报 std</strong> → 看不出稳定性，也不符合规范。</li>
+<li><strong>提升落在 std 之内还宣称“显著”</strong> → 不显著就如实说（靠后续消融/迭代加强，别 overclaim）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>提升不显著?→ 正常，记下，这是 v 阶段，后续消融和迭代会加强。std 异常大?→ 检查是不是某个 seed 训练异常（单独看那条曲线）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>可信的数据集 1 最终结果(mean±std)</strong>并理解了 std 的稳定性含义。<strong>做了</strong>（数据集 1 完整表）、<strong>学了</strong>（mean±std 的可信度与稳定性解读）、<strong>会了</strong>（把多 seed 结果汇成最终可信表）。</p>
+</div></section></section><section class="slot" id="d117-noon" data-d="117" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D117 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">分析“在哪好、在哪差”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么花专门时间做这个）</h4><div class="blk-b"><p>这是论文 <strong>Discussion 的核心</strong>。一句“在小目标上显著提升(+5.3 AP)，在大目标上提升有限(+0.8)，原因可能是我们的多尺度模块对小尺度更友好”——<strong>有数字、有原因的分析，远比单报一个总分有价值</strong>，它直接体现你的学术深度。</p>
+<ul>
+<li><strong>为什么“总分”远不如“细分+原因”值钱</strong>：总分（如“+1.8 mAP”）只告诉读者“你的方法好一点”，但不解释“好在哪、为什么好”——这是流水账式的结果汇报，学术价值低。而“在小目标上 +5.3、在大目标上 +0.8，因为我的多尺度模块对小尺度更友好”<strong>讲清了你的方法到底在解决什么问题、机理是什么</strong>——这是洞察，是审稿人判断你“是否真懂自己方法”的关键。<strong>一篇论文的深度，很大程度体现在 Discussion 的细分分析上</strong>。</li>
+<li><strong>“细分分析”怎么做（可操作）</strong>:① 拿到 per-class 结果，找出你的方法相对 baseline <strong>提升最大的几类</strong>和<strong>几乎没提升甚至下降的几类</strong>;② 对每一类，问“这类样本有什么特点（小/密集/某种场景）”;③ 把“该类特点”和“你的方法设计（你的组件治什么）”对起来——<strong>差异往往就出在这个对应关系里</strong>（你的组件正好治了某类的痛点，所以那类提升大；某类的痛点你没碰，所以没提升）。这个“数据特性×方法设计”的对应，就是你 Discussion 的逻辑骨架。</li>
+<li><strong>细分分析还能反过来指导你改进方法（M4 会用到）</strong>：你发现“大目标上几乎没提升”，这不只是 Discussion 素材，更是改进方向——下一轮迭代(M4)你可以针对“大目标”加强，或在论文里把这写成 Future Work。<strong>结果分析不是终点，而是下一轮研究的起点</strong>。养成“每出一份结果就深挖在哪好在哪差”的习惯，你的研究会持续进步、论文会持续变厚。</li>
+<li><strong>原因要&quot;有据&quot;而非&quot;牵强&quot;</strong>：最忌讳的是给个泛泛的原因（&quot;因为我们的方法更好&quot;&quot;因为更鲁棒&quot;）——这等于没说。原因必须具体到机理（你的哪个组件、怎么作用、为什么对这类有效），且最好能用可视化或额外小实验佐证。<strong>说不清机理的&quot;提升&quot;，审稿人会怀疑是调参/运气而非方法真有效</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>综合 per-class + 可视化观察，找出你的方法<strong>明显好 / 差</strong>的类别或场景。</li>
+<li>写一段（带数字 + 初步原因）。</li>
+<li>原因要<strong>联系你的方法设计</strong>（你的组件解决了什么）和<strong>数据特性</strong>（该类样本有什么特点）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一段“在哪好 / 在哪差 + 原因”分析，具体到类别/场景，且原因有据（不是泛泛“因为我们的方法更好”）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>只说“整体更好”</strong>（没细分）→ 要具体到类别/场景；<strong>不给原因或原因牵强</strong>（不联系数据/方法）→ 原因才是学术深度所在。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>原因说不清?→ 把“你的组件治什么问题”和“该类样本难在哪”对起来，差异往往就出在这。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了 <strong>Discussion 素材（有数字、有原因的细分分析）</strong>。<strong>做了</strong>（好/差分析）、<strong>学了</strong>（细分分析的价值、原因要联系方法与数据）、<strong>会了</strong>（把结果解读成有深度的讨论）。</p>
+</div></section></section><section class="slot" id="d117-pm" data-d="117" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D117 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">数据集 2 准备 + 启动 baseline 1–3</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>扩到数据集 2，验证泛化（单数据集好可能是过拟合，多数据集好才说明方法真行）。<strong>关键</strong>：复用 W11 的<strong>统一数据层</strong>，换数据集几乎零成本——主要就是改 config 的数据路径/类别数。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>检查数据集 2 格式（标注形式、类别），改 config 的路径/类别数（用统一数据层；格式不同就在数据层加一个解析分支）。</li>
+<li><strong>肉眼看一组数据集 2 样本</strong>（图 + 标注画出来）确认读对——这是 M1 养成的习惯。</li>
+<li>启动数据集 2 的 baseline 1–3。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 baseline 1–3 启动，且你看过样本确认数据读取正确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>格式差异大没适配</strong> → 报错或读错（标注解析错最隐蔽）。</li>
+<li><strong>类别数没改</strong> → 输出维度不匹配，直接报错或学歪。</li>
+<li><strong>不看样本直接训</strong> → 读错了也不知道，跑半天白费。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>格式不同?→ 在统一数据层加一个该数据集的解析分支（复用 M1 写的解析逻辑）。路径报错?→ 用绝对路径。读出来的框/mask 对不上?→ 检查标注解析（回想 M1 的 8 点旋转框解析坑）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把实验扩到第二数据集，并复用了统一数据层。<strong>做了</strong>（数据集 2 baseline 启动 + 看样本）、<strong>学了</strong>（跨数据集复用框架、看样本验证）、<strong>会了</strong>（低成本接入新数据集并启动实验）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 数据集 1 完整表(3-seed) ✅ 数据集 2 baseline 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D117</summary><textarea data-note="d117" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d118" data-d="118"><header class="day-head"><span class="dnum">D118</span><h2 class="day-t">周六 · （集中日）· 数据集 2 推进 + 数据集 1 可视化</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>集中日时间足，上午把数据集 2 的 baseline 一次推满、中午让你的方法在数据集 2 上跑起来，晚上专门做<strong>可视化选案例</strong>——这是本周三大烧脑活之一，要认真选、含负面。</p>
+<p><strong>预期管理</strong>：集中日：数据集 2 baseline 推满 + 你的方法在数据集 2 启动 + 数据集 1 可视化选案例。提醒：可视化绝对不要只选“最好的”（审稿人一眼看出报喜不报忧，反而降低信任）——要含三类：你赢（5张证明有效）、你输（3张诚实暴露局限）、都难但你稍好（2张）。颜色区分 GT/你/baseline，每张配一句“它说明了什么”。</p>
+</blockquote>
+</div><section class="slot" id="d118-am" data-d="118" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D118 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 2 baseline 4–6 启动 + 监控 1–3</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>集中日时间多，把数据集 2 的 baseline 一次推满（4–6 启动 + 监控 1–3），为下周的整合腾出时间。这是“把能并行的尽量并行起来”的调度思维。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动数据集 2 baseline 4–6（独立 work_dir）。</li>
+<li>监控 1–3 的健康（loss 曲线）。</li>
+<li>矩阵更新。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 的 6 个 baseline 都在跑且健康。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>并行太多 OOM；某组异常没及时发现。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>显存不够 → 错峰；异常 → 立即停查（同 D114 的健康监控套路）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你并行推进了第二数据集的全部 baseline。<strong>做了</strong>（数据集 2 baseline 推进）、<strong>学了</strong>（集中日批量并行调度）、<strong>会了</strong>（按矩阵高效推进多组）。</p>
+</div></section></section><section class="slot" id="d118-noon" data-d="118" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D118 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">数据集 2 你的方法启动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据集 2 上也要跑你的方法（3 seed），与 baseline 同设置，才能做数据集 2 的公平对比。先 seed 1 跑通再铺开。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在数据集 2 启动你的方法 seed 1（设置与 baseline 一致，只改 model）。</li>
+<li>确认无误后续补 seed 2/3。</li>
+<li>矩阵更新。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 你的方法启动（设置可比）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>跨数据集时偷偷调了设置 → 不可比（除非是必要的、且记录在案的适配，如类别数）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>数据集 2 上你的方法报错 → 多半是数据维度/类别数，查 config。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>数据集 2 进入你的方法阶段。<strong>做了</strong>（数据集 2 方法启动）、<strong>学了</strong>（跨数据集保持可比）、<strong>会了</strong>（在新数据集上启动自己的方法）。</p>
+</div></section></section><section class="slot" id="d118-pm" data-d="118" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D118 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">生成数据集 1 可视化对比图（8–10 张）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（可视化怎么选案例——这是有讲究的）</h4><div class="blk-b"><p><strong>绝对不要只选“最好的”</strong>——审稿人一眼就看出你在“报喜不报忧”，反而降低信任。要展示<strong>三类</strong>:① 你对、baseline 错（5 张，证明方法有效）② 你错（3 张，诚实暴露局限）③ 极难案例（2 张，大家都差但你稍好）。用<strong>不同颜色</strong>标 GT / 你的预测 / baseline 预测。</p>
+<ul>
+<li><strong>为什么“只放赢的”反而有害（反直觉但重要）</strong>：新手以为定性图就该展示自己最好的结果——错。<strong>审稿人见过无数论文，一眼就能看出你在 cherry-pick（精挑细选只放对你有利的）</strong>。一旦他觉得你在挑，他会怀疑你<strong>所有</strong>的结论（连定量表都不信了）。相反，<strong>主动放几张你失败的案例，反而让审稿人觉得你诚实、了解自己方法的局限、是个靠谱的研究者</strong>——信任度不降反升。这是一个深刻的反直觉：示弱（展示局限）反而增强可信度。</li>
+<li><strong>三类案例各自的作用</strong>:① <strong>你赢的（5张）</strong>——直接证明方法有效，是主体;② <strong>你输的（3张）</strong>——诚实暴露局限，且<strong>这些失败案例正是你 Discussion 和 Future Work 的素材</strong>（你可以分析“为什么这类会失败、未来怎么改”）;③ <strong>都难但你稍好（2张）</strong>——展示在极端困难场景下你的方法依然有相对优势，体现鲁棒性。三类齐全，定性部分既有说服力又显成熟。</li>
+<li><strong>失败案例不是污点，是金矿</strong>：很多人怕放失败案例显得方法不行——恰恰相反。<strong>一篇好论文一定有“局限性分析”，而失败案例就是局限性最直观的证据</strong>。你分析“我的方法在 X 情况下会失败，因为 Y”，这显示你深刻理解自己的方法（而非碰运气调出来的）；同时它给后续工作（你自己 M4 的迭代、或别人的跟进）指明了方向。<strong>敢于、善于展示和分析失败，是成熟研究者的标志</strong>。</li>
+<li><strong>可视化的技术细节</strong>：用不同颜色清晰区分 GT（真值）、你的预测、baseline 预测(如绿=GT、红=你、蓝=baseline)，并在图例里标明；每张图配一句话点出“它说明了什么”（如“baseline 把相邻两栋楼合成一个框，Ours 正确分开”），别让读者自己猜。一张图别放太多案例（挤），宁可多几张图。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从数据集 1 结果里，按上述配比挑 8–10 个典型案例。</li>
+<li>用可视化工具画三方对比图（GT / 你 / baseline，颜色区分）。</li>
+<li>每张配一句标注“它说明了什么”（如“baseline 漏检密集小车，Ours 全检出”）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>8–10 张可视化对比图（含 3 张负面），标注清晰、颜色/图例明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只挑你赢的(cherry-pick)</strong> → 审稿人不信你其它结论。</li>
+<li><strong>没有负面案例</strong> → 显得不诚实、不了解自己方法的局限。</li>
+<li><strong>颜色/图例不清</strong> → 读者看不懂哪个是 GT、哪个是你。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>找不到负面案例?→ 看 per-class 最差的那类、或你掉点的样本，那里准有。图太挤?→ 一张图少放几个案例，宁可多几张。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>有说服力的可视化（含负面，反 cherry-pick）</strong>。<strong>做了</strong>（可视化对比图 v1）、<strong>学了</strong>（三类案例配比、诚实展示的重要性）、<strong>会了</strong>（做出让审稿人信服的定性图）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜定性可视化三类案例</strong>:① 你赢（证明有效）② 你输（诚实+暴露局限）③ 都难但你稍好。只放第①类 = cherry-pick，会被质疑；三类齐全 = 可信且成熟。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>可视化对比图 v1</strong>（8–10 张）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D118</summary><textarea data-note="d118" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d119" data-d="119"><header class="day-head"><span class="dnum">D119</span><h2 class="day-t">周日 · （复盘日）· 数据集 2 整理 + W17 复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾。整理数据集 2 结果、做周复盘（重点沉淀“大规模实验管理”的经验），并规划好下周（数据集 3 + 整合 + 迁移）。</p>
+<p><strong>预期管理</strong>:W17 收尾：整理数据集 2 结果（格式与数据集1统一）+ 周复盘（重点沉淀实验管理的坑）+ 规划 W18。提醒：周复盘别写成流水账，要具体记本周实验管理踩的坑和解法（矩阵/wandb/显存/错峰）——这些经验你后面每个月都要用，现在记下就是给未来的自己省时间。W18 数据集 3 实验量大，要提前在矩阵列好、错峰排程。</p>
+</blockquote>
+</div><section class="slot" id="d119-am" data-d="119" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D119 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 2 全部结果整理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据集 2 实验陆续完成，整理成数据集 2 大表（尽量 3-seed；未完的标进度），<strong>格式与数据集 1 一致</strong>，为 W18 整合做准备。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估已完成的数据集 2 实验。</li>
+<li>整理数据集 2 大表（列结构与数据集 1 相同）。</li>
+<li>未完成的在矩阵标“进行中”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 大表（完成或注明进度），格式与数据集 1 统一。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>格式与数据集 1 不一致 → 下周整合困难；漏登记。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>数据集 2 还没跑完 → 先整理已有的，W18 补齐。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你整理了第二数据集结果并保持格式统一。<strong>做了</strong>（数据集 2 大表）、<strong>学了</strong>（跨数据集统一格式）、<strong>会了</strong>（管理并整理多数据集结果）。</p>
+</div></section></section><section class="slot" id="d119-noon" data-d="119" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D119 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">W17 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘（你已会）+ 本周<strong>重点沉淀“大规模实验管理”的坑</strong>（矩阵/wandb/显存/错峰）——这些经验你后面每个月都要用，现在记下来就是给未来的自己省时间。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（完成度/卡点/对策/健康）。</li>
+<li>重点记本周实验管理踩过的坑和解法。</li>
+<li>记“数据集 1 你的方法相对最强 baseline 的位置”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W17 周报（卡点+对策具体）+ 你的方法当前位置记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>写成流水账 → 写<strong>具体</strong>卡点与对策（“wandb 没传 config 导致看不出配置，已修”这种）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周哪天最折腾。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了主实验第一周并沉淀了管理经验。<strong>做了</strong>（W17 周报）、<strong>学了</strong>（实验周复盘）、<strong>会了</strong>（把实验管理经验系统沉淀）。</p>
+</div></section></section><section class="slot" id="d119-pm" data-d="119" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D119 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">计划 W18（数据集 3 + 整合 + 迁移）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>W18 = 数据集 2 收尾 + 数据集 3 + 三数据集整合大表 + 主实验报告 + 跨数据集迁移实验（加分）。提前排好任务顺序和 GPU 错峰（数据集 3 实验量大）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制定 W18 计划（每天主线）。</li>
+<li>把 GPU 时间错峰排好（数据集 3 的 baseline+方法是大头）。</li>
+<li>标注“迁移实验为加分项，时间不够可延后”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W18 计划（任务 + 排程 + 弹性项）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>计划排满无缓冲；GPU 时间没错峰导致互相堵。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>时间紧 → 迁移实验作为弹性项；数据集 3 量大 → 提前在矩阵列好、错峰跑。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规划了 W18。<strong>做了</strong>（W18 计划）、<strong>学了</strong>（承接排程、设弹性项）、<strong>会了</strong>（规划多数据集收尾周）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 数据集 2 大表 ✅ 周报 W17。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W17 累计交付</h2><p>实验矩阵（63 组）+ wandb 配置、数据集 1 完整大表（3-seed，含参数/FPS）、数据集 2 大表（进行中/完成）、per-class 与“在哪好/差”分析、可视化对比图 v1（8–10 张，含负面）、W17 周报。本周你完成了一次身份升级——从“会训一个模型的学生”变成“能有条不紊地训几十个模型、并让结果可信可追溯可写进论文的研究者”。这套大规模实验工程能力（矩阵管理、自动追踪、多 seed 规范、公平对比、细分分析、诚实可视化），是你后面每个月做实验、写论文都要反复用的硬功夫，也是审稿人判断你“是否专业”的核心依据。</p>
+</section><section class="wtail"><h2>🎓 W17 你“长出来”的能力清单</h2><ul>
+<li>设计/管理大规模实验矩阵（63 组）+ wandb 自动追踪与横向对比</li>
+<li>先标杆后方法、严格控制变量、3-seed mean±std、主表含参数/FPS</li>
+<li>per-class 与“在哪好/差”分析（Discussion 素材）</li>
+<li>三类案例可视化（含负面，反 cherry-pick）+ 跨数据集复用统一数据层</li>
+<li>大规模实验的健康监控与早期止损</li>
+<li><strong>把“高效（参数量/FPS）”写成论文卖点</strong>——跳出“和大组拼精度绝对值”的死局，转到单卡能赢的效率赛道(精度持平但更小更快=有力贡献)</li>
+<li><strong>科研诚实的两处落地</strong>：多 seed 报 mean±std（提升不超 std 不 overclaim）、可视化含失败案例（反 cherry-pick，示弱反增信任）——这两条比任何技巧都更决定论文可信度</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D119</summary><textarea data-note="d119" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W17 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例</h2>
+<h3>范例 A — 实验矩阵（节选）</h3>
+<figure class="code" data-lang="markdown"><pre><code>| 实验ID | 数据集 | 方法 | seed | config | 状态 | 主指标 | 备注 |
+|--------|------|------|------|--------|------|------|------|
+| D1-base1-s0 | D1 | baseline1 | 0 | cfg/d1_base1.yaml | ✓完成 | 75.0 | 公认baseline |
+| D1-base2-s0 | D1 | baseline2 | 0 | cfg/d1_base2.yaml | ✓完成 | 76.3 | 最强baseline |
+| D1-ours-s0  | D1 | ours | 0 | cfg/d1_ours.yaml | ✓完成 | 78.1 |  |
+| D1-ours-s1  | D1 | ours | 1 | cfg/d1_ours.yaml | ▣进行 | - |  |
+| D2-base1-s0 | D2 | baseline1 | 0 | cfg/d2_base1.yaml | □待跑 | - |  |
+| ... | ... | ... | ... | ... | ... | ... | （共 63 组） |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 B — 数据集 1 完整大表（3-seed）</h3>
+<figure class="code" data-lang="markdown"><pre><code>| 方法 | mAP(mean±std) | 参数量 | FPS |
+|---|---|---|---|
+| baseline1 | 75.0±0.3 | 36M | 25 |
+| baseline2（最强） | 76.3±0.2 | 41M | 19 |
+| ...（共6个） | ... | ... | ... |
+| <span class="gs">**Ours**</span> | <span class="gs">**78.1±0.3**</span> | 39M | 21 |
+分析：Ours 超最强 baseline +1.8（&gt;std，显著）；per-class 看小目标 +5.3、大目标 +0.8；参数仅 39M、FPS 21（兼顾精度与效率）。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — 固定 seed + wandb 接入 + 多 seed 聚合</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">torch</span><span class="o">,</span><span class="w"> </span><span class="nn">wandb</span>
+
+<span class="c1"># ① 固定随机种子（可复现 + 多 seed 公平的前提）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_seed</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># ② 训练里接入 wandb（name 用实验 ID，超参传 config）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">train_one</span><span class="p">(</span><span class="n">cfg</span><span class="p">):</span>
+    <span class="n">set_seed</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">])</span>
+    <span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;rs-main-exp&quot;</span><span class="p">,</span>
+               <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">-s</span><span class="si">{</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;seed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+               <span class="n">config</span><span class="o">=</span><span class="n">cfg</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]):</span>
+        <span class="c1"># ... 训练一个 epoch，得到 loss / val_metric ...</span>
+        <span class="n">wandb</span><span class="o">.</span><span class="n">log</span><span class="p">({</span><span class="s2">&quot;epoch&quot;</span><span class="p">:</span> <span class="n">ep</span><span class="p">,</span> <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;val_metric&quot;</span><span class="p">:</span> <span class="n">val_metric</span><span class="p">})</span>
+    <span class="n">wandb</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># ③ 从 3 seed 聚合成 mean±std（填进大表），并粗判是否显著</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">agg_and_compare</span><span class="p">(</span><span class="n">method_seeds</span><span class="p">,</span> <span class="n">baseline_seeds</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">method_seeds</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">baseline_seeds</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="s2">&quot;显著&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="k">else</span> <span class="s2">&quot;在噪声内(不显著)&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ours </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">±</span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> vs baseline </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">±</span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;→ Δ=</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">sig</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">agg_and_compare</span><span class="p">([</span><span class="mf">78.1</span><span class="p">,</span><span class="mf">77.9</span><span class="p">,</span><span class="mf">78.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">76.3</span><span class="p">,</span><span class="mf">76.1</span><span class="p">,</span><span class="mf">76.5</span><span class="p">])</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>：set_seed 后结果可复现；wandb 网页可见每组曲线/超参；聚合函数打印 mean±std 并粗判提升是否超过 std（显著性）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D113</strong>：① 为什么要做实验矩阵？63 组不管理会怎样？② wandb 帮你省了什么？它和 TensorBoard 区别？③ 大规模实验管理“三件套”是什么？</li>
+<li><strong>D114</strong>：① loss 不降 / NaN 分别可能是什么原因？② 为什么“前几个 epoch 定走势”、要早看早救？</li>
+<li><strong>D115</strong>：① 为什么先跑完所有 baseline 再跑你的方法？② 为什么要 3 个 seed？③ 公平对比铁律是什么？</li>
+<li><strong>D116</strong>：① 主表为什么要列参数量和 FPS（对你单卡路线尤其重要）？② per-class 分析有什么用？</li>
+<li><strong>D117</strong>：① 为什么报 3-seed mean±std？std 还能看出什么？② “在哪好/在哪差”进论文哪部分、原因要联系什么？</li>
+<li><strong>D118</strong>：① 可视化为什么必须含负面/困难案例？三类配比是什么？</li>
+<li><strong>D119</strong>：① 跨数据集复用框架靠的是 W11 的什么？② 为什么说本周真正的敌人是“混乱”而非“算法”？及格线是什么？（提示：每组实验都能被追溯）</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结果对不上配置/混乱</td>
+<td>没用矩阵/没记超参</td>
+<td>矩阵 + wandb，每组唯一 ID + 记录；commit hash 也记</td>
+</tr>
+<tr>
+<td>baseline 远低于 SOTA 榜</td>
+<td>复现没对齐</td>
+<td>用官方 config/协议；核对 metric(07/12)/切图/划分</td>
+</tr>
+<tr>
+<td>多组实验显存爆</td>
+<td>并行太多</td>
+<td>错峰；降 batch；每组独立 work_dir</td>
+</tr>
+<tr>
+<td>loss NaN</td>
+<td>lr 太大/脏数据</td>
+<td>降 lr；查切图后空标注/坐标越界/除零</td>
+</tr>
+<tr>
+<td>数据集 2/3 跑不起</td>
+<td>格式/类别数不同</td>
+<td>复用统一数据层加解析分支；改类别数；先看样本</td>
+</tr>
+<tr>
+<td>只报 mean 被质疑</td>
+<td>缺 std/单 seed</td>
+<td>3-seed mean±std；baseline 同等多 seed</td>
+</tr>
+<tr>
+<td>结果不可复现</td>
+<td>没固定 seed</td>
+<td>set_seed + cudnn.deterministic</td>
+</tr>
+<tr>
+<td>可视化被质疑 cherry-pick</td>
+<td>只放赢的</td>
+<td>三类案例齐全（赢/输/都难但稍好）</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w16.html"><span class="dir">← 上一篇</span><span class="nm">W16 Pipeline 收尾 + 阶段一总复盘</span></a><a class="next" href="stage2-full.html"><span class="dir">下一篇 →</span><span class="nm">阶段二详注版（W17–W27）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d113">D113 周一</a><a class="sub" href="#d113-am">上午 设计完整实验矩阵文档</a><a class="sub" href="#d113-noon">中午 配置 wandb（给实验装“自动</a><a class="sub" href="#d113-pm">晚上 数据集 1 启动 baselin</a><a href="#d114">D114 周二</a><a class="sub" href="#d114-am">上午 监控 baseline 1–3 </a><a class="sub" href="#d114-noon">中午 启动 baseline 4–6</a><a class="sub" href="#d114-pm">晚上 baseline 1–3 完成 </a><a href="#d115">D115 周三</a><a class="sub" href="#d115-am">上午 baseline 4–6 完成 </a><a class="sub" href="#d115-noon">中午 启动你的方法 seed 1</a><a class="sub" href="#d115-pm">晚上 启动你的方法 seed 2</a><a href="#d116">D116 周四</a><a class="sub" href="#d116-am">上午 seed 1 结果 → per-</a><a class="sub" href="#d116-noon">中午 启动 seed 3</a><a class="sub" href="#d116-pm">晚上 整理数据集 1 完整结果表 v1</a><a href="#d117">D117 周五</a><a class="sub" href="#d117-am">上午 seed 2–3 结果 → 3-</a><a class="sub" href="#d117-noon">中午 分析“在哪好、在哪差”</a><a class="sub" href="#d117-pm">晚上 数据集 2 准备 + 启动 ba</a><a href="#d118">D118 周六</a><a class="sub" href="#d118-am">上午 数据集 2 baseline 4</a><a class="sub" href="#d118-noon">中午 数据集 2 你的方法启动</a><a class="sub" href="#d118-pm">晚上 生成数据集 1 可视化对比图（8</a><a href="#d119">D119 周日</a><a class="sub" href="#d119-am">上午 数据集 2 全部结果整理</a><a class="sub" href="#d119-noon">中午 W17 周复盘</a><a class="sub" href="#d119-pm">晚上 计划 W18（数据集 3 + 整</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

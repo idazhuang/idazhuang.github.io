@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="20">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W20 · Method 章定稿 + Experiment  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M5 主实验全面铺开</span><span>·</span><span>Week 20</span><span>·</span><span>D134–D140</span></div><h1 class="title">Method 章定稿 + Experiment 章骨架 —— 学会把“一堆实验结果”翻译成“论文文字”</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="134" data-k="am" title="D134 上午段"></i><i data-d="134" data-k="noon" title="D134 中午段"></i><i data-d="134" data-k="pm" title="D134 晚上段"></i></span><span class="sday"><i data-d="135" data-k="am" title="D135 上午段"></i><i data-d="135" data-k="noon" title="D135 中午段"></i><i data-d="135" data-k="pm" title="D135 晚上段"></i></span><span class="sday"><i data-d="136" data-k="am" title="D136 上午段"></i><i data-d="136" data-k="noon" title="D136 中午段"></i><i data-d="136" data-k="pm" title="D136 晚上段"></i></span><span class="sday"><i data-d="137" data-k="am" title="D137 上午段"></i><i data-d="137" data-k="noon" title="D137 中午段"></i><i data-d="137" data-k="pm" title="D137 晚上段"></i></span><span class="sday"><i data-d="138" data-k="am" title="D138 上午段"></i><i data-d="138" data-k="noon" title="D138 中午段"></i><i data-d="138" data-k="pm" title="D138 晚上段"></i></span><span class="sday"><i data-d="139" data-k="am" title="D139 上午段"></i><i data-d="139" data-k="noon" title="D139 中午段"></i><i data-d="139" data-k="pm" title="D139 晚上段"></i></span><span class="sday"><i data-d="140" data-k="am" title="D140 上午段"></i><i data-d="140" data-k="noon" title="D140 中午段"></i><i data-d="140" data-k="pm" title="D140 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>:M5 收官。前面你跑完了主实验 + 8 类消融、定了最终方法；本周把成果<strong>写成论文的两大主干章</strong>——把阶段一写的 Method 骨架据最终方法<strong>定稿</strong>（公式/步骤/图/伪代码与代码一致），并把全部实验<strong>写成 Experiment 章</strong>（4.1 数据集与实现细节 → 4.2 与 SOTA 对比 → 4.3 消融 → 4.4 可视化 → 4.5 讨论）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会把实验结果转化为论文文字；掌握 Method 章的最终打磨。
+<strong>先给你打个预防针</strong>：很多人卡在“会做实验但不会写”。写作的第一关不是英语，是<strong>让一个没见过你工作的人，读完能复现你的方法、能信你的结论</strong>。本周我把 Method/Experiment <strong>一节一节、带模板、带检查清单</strong>教你，你照着填就能成稿。<strong>记住两条</strong>:① Method 要“既说是什么、更说为什么”(只有公式没有直觉=读者看不懂);② Experiment 要“既报数字、更给原因”(只报数字=流水账)。
+<strong>本周精力怎么分配</strong>：本周是写作周，代码少、写作多。烧脑的是<strong>把结果讲成有逻辑的文字</strong>——教学重头放在 Method 检查清单、结果描述句式、Discussion（含 Limitation）、一致性检查这几件上。</p>
+</blockquote>
+<hr />
+<h2>🧭 W20 总览</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周写出</th>
+<th>要点</th>
+<th>论文位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method 章最终稿</td>
+<td>与最终方法/代码/图/伪代码一致</td>
+<td>Sec 3</td>
+</tr>
+<tr>
+<td>Algorithm 1</td>
+<td>≤20 行，流程清晰</td>
+<td>Method 内</td>
+</tr>
+<tr>
+<td>Experiment 章(4.1–4.5)</td>
+<td>设置/对比/消融/可视化/讨论</td>
+<td>Sec 4</td>
+</tr>
+<tr>
+<td>LaTeX 主表</td>
+<td>三数据集大表转 LaTeX</td>
+<td>Table 1</td>
+</tr>
+<tr>
+<td>一致性检查</td>
+<td>Method 与 Experiment 完全对应</td>
+<td>全章</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：本周你从“研究者”变“写作者”——把矩阵里的数字、消融表、可视化图，<strong>翻译成审稿人能读懂、能信服的两章论文</strong>。</p>
+<hr />
+</section>
+<article class="day" id="d134" data-d="134"><header class="day-head"><span class="dnum">D134</span><h2 class="day-t">周一 · Method 章定稿（基于最终方法）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把 Method 据“删/调之后的最终方法”对齐——确保论文里写的方法，和你代码里跑的方法，<strong>一个字都不差</strong>。</p>
+<p><strong>预期管理</strong>:M5 收官周开始，本周把实验成果写成论文两大主干章。今天先让 Method 与最终代码严格对齐。提醒：写作的第一关不是英语，是“让没见过你工作的人读完能复现你的方法、能信你的结论”;Method 要“既说是什么、更说为什么”(只有公式没有直觉=读者看不懂)；以<strong>最终 config/代码为事实来源</strong>，代码里没有的组件论文里也不能有（否则审稿人对照代码会抓不一致）。</p>
+</blockquote>
+</div><section class="slot" id="d134-am" data-d="134" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D134 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">更新 Method 章骨架（基于最终方法）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>阶段一(M4-W15)写的 Method 骨架基于的是<strong>早期方法</strong>；经过 M5 的迭代和消融，你的方法<strong>变了</strong>（删了无效组件、可能换了 loss/结构）。所以要<strong>据最终方法逐节更新</strong>——把“代码里已经没有的组件”从 Method 删掉，把“新增/保留的组件”写准。<strong>类比</strong>：这就像产品发布前最后核对说明书——说明书必须描述<strong>实际发货的那台机器</strong>，不能还写着已砍掉的功能。</p>
+<ul>
+<li><strong>为什么“文码不一致”是必须清除的隐患</strong>：你的方法从M4到M5经历了大改（W19删了无效组件、可能调了loss）——如果Method还停留在早期版本（描述着已删的组件），就出现了“论文说的方法”和“代码跑的方法”不一致。<strong>审稿人（尤其会复现的）对照你的代码/补充材料，一眼就能发现“论文写了组件C但代码里没有”——这是硬伤，直接质疑你论文的可信度</strong>（连自己的方法都没描述对?）。所以M5收官第一件事，就是让Method和最终代码字字对应。</li>
+<li><strong>“config是事实来源”这个原则（操作铁律）</strong>：更新Method时，<strong>以最终方法的config/代码为唯一的“事实来源(single source of truth)”</strong>——config里有的组件，才写进Method;Method里写了但config里没有的，删掉。不要凭记忆或凭“我当初是这么设计的”来写，因为方法经过消融已经变了。<strong>打开最终config，逐个组件对照Method，核对每一项</strong>:config有这个组件吗？Method写对了吗？超参一致吗？这种“以代码为准、逐项核对”是保证文码一致最可靠的方法。</li>
+<li><strong>“产品说明书”类比为什么贴切</strong>：产品发布前，说明书必须描述<strong>实际发货的那台机器</strong>——如果工程上砍掉了某个功能，说明书也必须删掉对应描述，否则用户照着说明书操作会发现“咦，没有这个功能？”。你的Method就是方法的“说明书”，必须描述<strong>最终实际跑的那个方法</strong>。消融砍掉了某组件，Method也要砍掉对应描述。读者（用户）照着Method复现，得到的应该就是你最终方法的结果。<strong>说明书与实物一致，是基本的诚信和严谨</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>打开最终方法的代码，逐个组件对照 Method 骨架。</li>
+<li>标出要改的：删掉已删组件的描述、补上新组件、修正公式/步骤。</li>
+<li>列一个“Method↔代码 对照清单”（每个组件：代码里有吗？Method 里写对了吗?）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 骨架与最终方法一致——没有“代码里不存在的组件”，也没有“代码里有但 Method 漏写的”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>Method 还描述着已删组件</strong> → 审稿人对照代码会发现不一致，直接质疑。<strong>逐个核对删掉</strong>。</li>
+<li><strong>新组件没写进 Method</strong> → 读者无法复现。</li>
+<li><strong>改了方法没同步公式</strong> → 公式和文字打架。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不确定哪些要改?→ 拿最终 config 当“事实来源”,config 里有的组件才写进 Method;Method 写了 config 没有的 → 删。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>让 Method 与最终代码严格对齐</strong>。<strong>做了</strong>（Method 骨架更新 + 对照清单）、<strong>学了</strong>（文与码一致、config 是事实来源）、<strong>会了</strong>（据最终方法更新论文描述）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜文码一致</strong>：以“最终 config / 代码”为事实来源——Method 里写的每个组件、每个超参，都要能在代码里找到对应；代码里没有的，论文里也不能有。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d134-noon" data-d="134" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D134 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">更新架构图</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>架构图（论文 Figure 2）要和最终方法一致。方法删了组件，架构图也要把那个模块<strong>从图里拿掉</strong>；否则图、文、码三者打架。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>打开架构图源文件(draw.io/PPT)。</li>
+<li>删掉已删组件的模块、调整数据流。</li>
+<li>确保图与 Method 文字、伪代码一致（三者说的是同一个方法）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>架构图 = 最终方法（图里每个模块在文字里都有，反之亦然）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>图还画着已删模块 → 同步删；图与文字用词不一致（图叫 “MSF” 文叫 “多尺度融合”）→ 统一命名。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>图源文件丢了?→ 重画（也是检查的好机会）；不确定数据流?→ 对着代码的 forward 画。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你保持了图文一致。<strong>做了</strong>（架构图更新）、<strong>学了</strong>（图随方法更新、图文码三者一致）、<strong>会了</strong>（同步架构图与最终方法）。</p>
+</div></section></section><section class="slot" id="d134-pm" data-d="134" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D134 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Method 章最终版（过检查清单）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Method 检查清单——背下来）</h4><div class="blk-b"><p>① 所有符号在<strong>首次出现时定义</strong>;② 公式与文字描述一致;③ 架构图与文字一致;④ 伪代码与实际代码逻辑一致;⑤ <strong>每个设计都有“为什么这么做”的直觉解释</strong>（不只是“是什么”）。第⑤条是最常缺、也最致命的——只有公式没有直觉，读者看不出你的洞察。</p>
+<ul>
+<li><strong>为什么&quot;只有公式没有直觉&quot;是 Method 章最致命的毛病</strong>：很多新手写 Method 就是堆公式和模块描述——&quot;我们用了一个注意力模块，公式如下…我们又加了一个融合层，公式如下…&quot;。读者读完只知道&quot;你做了什么操作&quot;，但<strong>完全不知道&quot;你为什么这么做、它解决了什么问题、你的洞察是什么&quot;</strong>。这样的 Method 读起来像一份操作手册，显不出研究价值。审稿人会想&quot;这就是随便堆了些模块吧?&quot;。<strong>真正好的 Method，每个设计都先讲直觉（&quot;现有方法在密集小目标上漏检，是因为下采样丢了小目标特征，所以我们设计了一个保留高分辨率特征的分支&quot;），再给公式（严谨化）</strong>——直觉让读者理解你的洞察，公式让方法可复现。两者缺一不可，而新手最常缺直觉。</li>
+<li><strong>“直觉+公式+图里位置”三件套（每个组件都要齐）</strong>：写每个组件时，确保三样都有——① <strong>直觉</strong>（为什么需要它、它治什么问题，用大白话讲清）;② <strong>公式</strong>（精确的数学表达，让人能实现）;③ <strong>在架构图里的位置</strong>（读者能在 Figure 2 里找到它）。三者配合：直觉给理解、公式给严谨、图给定位。检查 Method 时，逐个组件问“这三样齐了吗？”——尤其别漏了直觉。</li>
+<li><strong>“符号首次出现就定义”为什么重要</strong>：读者读到一个符号（如 F、α、L_aux）却不知道它是什么，就读不下去、也无法复现。<strong>每个符号第一次出现时就要定义</strong>(如“记输入特征为 F∈ℝ^{C×H×W}，其中 C/H/W 分别为通道数/高/宽”)。这是数学写作的基本规范，缺了它论文就不严谨、不可复现。检查时过一遍所有符号，确保每个都在首次出现处有定义。</li>
+<li><strong>检验 Method 的终极标准：“陌生读者能复现吗”</strong>：写完/检查 Method 时，假装自己是“一个懂 CV 但完全没见过你这个工作的人”在读——<strong>他能照着你的 Method 把方法实现出来吗？</strong>能，说明 Method 写得清楚完整；如果他会卡在某处（某个细节没说清、某个符号没定义、某个设计不知道为什么），那里就是要补的。这个“陌生读者复现”标准，贯穿你以后写的所有方法描述。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>通读/打磨 Method 最终版，<strong>逐条</strong>过上面 5 项检查。</li>
+<li>每个组件确保有“直觉（为什么）+ 公式（严谨）+ 在图里的位置”。</li>
+<li>符号第一次出现就定义(如 “记输入特征为 F∈ℝ^{C×H×W}”)。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 章最终稿，5 项检查全过——尤其每个组件都说清了“为什么用它”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只写“是什么”不写“为什么”</strong> → 读者看不出洞察，显得像堆模块。<strong>每个组件补一句“它解决了 XX 问题”</strong>。</li>
+<li><strong>符号没定义就用</strong> → 无法复现。</li>
+<li><strong>公式和文字不一致</strong> → 审稿人扣分。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某处吃不准?→ 假装“一个懂 CV 但不懂你工作的人”在读，他能照着实现吗？不能就补细节。直觉说不清?→ 回到“这个组件治哪个 Gap/哪类失败案例”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>定稿了 Method 章并过了检查清单</strong>。<strong>做了</strong>（Method 最终稿）、<strong>学了</strong>（Method 5 项检查清单、直觉+公式+图三件套）、<strong>会了</strong>（把一章打磨到“读者能复现”）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Method 检查清单</strong>:①符号首次定义 ②公式↔文字一致 ③图↔文字一致 ④伪代码↔代码一致 ⑤每个设计有“为什么”。逐条过，缺一补一。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Method 章最终稿。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D134</summary><textarea data-note="d134" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d135" data-d="135"><header class="day-head"><span class="dnum">D135</span><h2 class="day-t">周二 · Algorithm 1 最终版 + Method 互审</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天写清训练/推理的伪代码，并请人用“读完能实现吗”来检验你的 Method。</p>
+<p><strong>预期管理</strong>：今天写 Algorithm 1（伪代码）+ 请人互审 Method。提醒：互审的灵魂问题只有一个——“读完你能实现我的方法吗？”能=合格，不能=他卡在哪就是你要补的；外部视角能发现你“太熟而脑补”的盲点（你觉得显然的细节，陌生读者未必懂）。朋友“看不懂”的地方基本就是审稿人也会卡的地方，重点改那里。伪代码≤20行抓主流程，别把代码抄一遍。</p>
+</blockquote>
+</div><section class="slot" id="d135-am" data-d="135" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D135 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Algorithm 1 伪代码最终版</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>Algorithm 1</strong>（伪代码）把训练/推理流程<strong>精确而简洁</strong>地写出来（≤20 行），让读者快速理解整体流程、也极大帮助复现。<strong>类比</strong>：它是方法的“菜谱步骤”——食材（输入）、步骤（各步）、成品（输出），照着能做出来。要和实际代码逻辑一致。</p>
+<ul>
+<li><strong>为什么伪代码对复现极有帮助</strong>：正文的文字描述方法，容易分散在各处、读者拼不出完整流程；而Algorithm 1把“输入→各步骤→输出”的<strong>完整流程浓缩在一个框里</strong>，读者一眼看清“先做什么、再做什么、怎么算loss、怎么更新”。<strong>对想复现你工作的人，伪代码是最直接的指南</strong>——他照着伪代码的步骤，配合正文的细节，就能实现。所以好的论文几乎都有Algorithm 1，它是Method的“流程图”。</li>
+<li><strong>“菜谱步骤”类比为什么贴切</strong>：菜谱不会把每个动作的细节都写（如“手腕以45度角翻炒”），而是写<strong>关键步骤</strong>：“① 热油 ② 下葱姜爆香 ③ 下主料翻炒 ④ 加调料 ⑤ 收汁出锅”——照着能做出菜。伪代码也一样：写<strong>主流程的关键步骤</strong>（前向→算loss→反向→更新），而非把每个张量操作都写进去。读者照着伪代码的步骤，就能实现你的方法，就像照菜谱能做出菜。</li>
+<li><strong>“≤20行、抓主流程”的分寸（易踩坑）</strong>：伪代码最常见的毛病是<strong>太长太细</strong>——把代码几乎抄了一遍（每个层、每个操作都写）。这就失去了伪代码“简洁概览”的意义，读者反而被淹没在细节里。<strong>正确的粒度是“懂CV的人看着能实现”</strong>：写主流程骨架（数据→前向→loss→反向→更新），把繁琐的细节（具体的张量维度变换、辅助操作）留给正文文字或代码。控制在≤20行，逼自己只留主干。如果发现写不下，就是塞了太多细节，该把细节移到正文。</li>
+<li><strong>伪代码要和代码逻辑一致（别对不上）</strong>:Algorithm 1描述的流程必须和你实际代码的逻辑一致——写完伪代码，对照代码的训练循环核对：步骤顺序对吗？算loss的方式对吗？有没有漏掉关键步骤或多写了不存在的步骤？<strong>伪代码和代码不一致，会误导复现者</strong>。这也是M5收官“文码一致”的一部分：不只Method文字、伪代码也要和最终代码对齐。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 Algorithm 1:Input（数据/超参）→ 各步（前向/算 loss/反向/更新）→ Output（训练好的模型）。</li>
+<li>控制在 ≤20 行，抓主流程（别把每个细节都塞进去）。</li>
+<li>对照代码核对逻辑一致。</li>
+</ol>
+<figure class="code" data-lang="latex"><pre><code><span class="c">% Algorithm 1 骨架（LaTeX algorithm2e/algorithmic 包），抓主流程、≤20行</span>
+<span class="k">\begin</span><span class="nb">{</span>algorithm<span class="nb">}</span>
+<span class="k">\caption</span><span class="nb">{</span>Training of Our Method<span class="nb">}</span>
+<span class="k">\KwIn</span><span class="nb">{</span>训练集 <span class="s">$</span><span class="nv">\mathcal</span><span class="nb">{D}</span><span class="s">$</span>, 学习率 <span class="s">$</span><span class="nv">\eta</span><span class="s">$</span>, 轮数 <span class="s">$</span><span class="nb">E</span><span class="s">$</span><span class="nb">}</span>
+<span class="k">\KwOut</span><span class="nb">{</span>训练好的模型参数 <span class="s">$</span><span class="nv">\theta</span><span class="s">$</span><span class="nb">}</span>
+初始化 <span class="s">$</span><span class="nv">\theta</span><span class="s">$</span>（backbone 用预训练权重）<span class="k">\;</span>
+<span class="k">\For</span><span class="nb">{</span><span class="s">$</span><span class="nb">e </span><span class="o">=</span><span class="nb"> </span><span class="m">1</span><span class="s">$</span> <span class="k">\KwTo</span> <span class="s">$</span><span class="nb">E</span><span class="s">$</span><span class="nb">}{</span>
+  <span class="k">\ForEach</span><span class="nb">{</span>batch <span class="s">$</span><span class="o">(</span><span class="nb">x, y</span><span class="o">)</span><span class="nb"> </span><span class="nv">\in</span><span class="nb"> </span><span class="nv">\mathcal</span><span class="nb">{D}</span><span class="s">$</span><span class="nb">}{</span>
+    <span class="s">$</span><span class="nb">F </span><span class="nv">\leftarrow</span><span class="nb"> </span><span class="nv">\text</span><span class="nb">{Backbone}</span><span class="o">(</span><span class="nb">x</span><span class="o">)</span><span class="s">$</span><span class="k">\;</span>          <span class="c">% 提特征</span>
+    <span class="s">$</span><span class="nb">F&#39; </span><span class="nv">\leftarrow</span><span class="nb"> </span><span class="nv">\text</span><span class="nb">{OurModule}</span><span class="o">(</span><span class="nb">F</span><span class="o">)</span><span class="s">$</span><span class="k">\;</span>          <span class="c">% 你的创新组件（标红/重点）</span>
+    <span class="s">$</span><span class="nv">\hat</span><span class="nb">{y} </span><span class="nv">\leftarrow</span><span class="nb"> </span><span class="nv">\text</span><span class="nb">{Head}</span><span class="o">(</span><span class="nb">F&#39;</span><span class="o">)</span><span class="s">$</span><span class="k">\;</span>
+    <span class="s">$</span><span class="nv">\mathcal</span><span class="nb">{L} </span><span class="nv">\leftarrow</span><span class="nb"> </span><span class="nv">\mathcal</span><span class="nb">{L}_{</span><span class="nv">\text</span><span class="nb">{our}}</span><span class="o">(</span><span class="nv">\hat</span><span class="nb">{y}, y</span><span class="o">)</span><span class="s">$</span><span class="k">\;</span>  <span class="c">% 你的损失</span>
+    <span class="s">$</span><span class="nv">\theta</span><span class="nb"> </span><span class="nv">\leftarrow</span><span class="nb"> </span><span class="nv">\theta</span><span class="nb"> </span><span class="o">-</span><span class="nb"> </span><span class="nv">\eta</span><span class="nb"> </span><span class="nv">\nabla</span><span class="nb">_</span><span class="nv">\theta</span><span class="nb"> </span><span class="nv">\mathcal</span><span class="nb">{L}</span><span class="s">$</span><span class="k">\;</span>    <span class="c">% 反向+更新</span>
+  <span class="nb">}</span>
+<span class="nb">}</span>
+<span class="k">\Return</span> <span class="s">$</span><span class="nv">\theta</span><span class="s">$</span><span class="k">\;</span>
+<span class="k">\end</span><span class="nb">{</span>algorithm<span class="nb">}</span>
+<span class="c">% 要点：只留主流程（前向→loss→反向→更新），细节移到正文文字；与代码 forward 一致</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Algorithm 1（≤20 行，输入/步骤/输出清晰，与代码一致）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>伪代码太长太细（像把代码抄一遍）→ 抓主流程；和代码逻辑不符 → 对齐。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知写多细?→ 写到“懂 CV 的人看着能实现”的粒度；太长?→ 把细节移到正文文字，伪代码只留骨架。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了最终伪代码。<strong>做了</strong>(Algorithm 1)、<strong>学了</strong>(简洁伪代码=菜谱步骤、≤20 行)、<strong>会了</strong>（用伪代码精确表达流程）。</p>
+</div></section></section><section class="slot" id="d135-noon" data-d="135" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D135 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">找朋友互审 Method 章</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Method 互审的<strong>灵魂问题</strong>只有一个——“<strong>读完你能实现我的方法吗？</strong>” 能→Method 合格；不能→他卡在哪、哪里缺细节，那就是你要补的地方。<strong>外部视角</strong>能发现你“太熟而脑补”的盲点。</p>
+<ul>
+<li><strong>为什么“自己读不出问题、别人一读就卡”</strong>：你对自己的方法太熟了，读Method时会<strong>不自觉地脑补缺失的细节</strong>——某个步骤你没写清，但你心里知道怎么做，读的时候自动补上了，所以觉得“写得挺清楚”。<strong>但陌生读者没有你脑子里的背景，你没写的他就不知道，立刻卡住</strong>。这就是“当局者迷”——你是最不适合检验自己Method清晰度的人。所以必须找外部视角（朋友/同行）来读，他卡住的地方，就是你“以为写了其实没写清”的盲点。</li>
+<li><strong>“能否实现”是检验Method的唯一标准</strong>:Method写得好不好，不看辞藻、不看长短，只看<strong>一个懂CV但没见过你工作的人，读完能不能照着实现</strong>。能，说明信息完整、表述清楚；不能（他在某处卡住、不知道怎么做），那里就缺了关键信息。所以互审时，明确请朋友以“我要照着实现”的心态读，并问他“哪里看不懂、哪里缺细节、能实现吗”——他的卡点就是你的待补清单。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 Method 章 + Algorithm 1 发给朋友（同领域更佳）。</li>
+<li>明确问：“能照着实现吗？哪里看不懂/缺细节？”</li>
+<li>记录他卡住的每一处。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>朋友的反馈（可实现性判断 + 具体卡点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只想听夸 → 明确请他“挑看不懂的”；没人审 → 隔一天自己以“陌生读者”身份读。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>找不到同领域的人?→ 不同方向的也行（至少能查“表述清不清楚”）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用“可实现性”检验了 Method。<strong>做了</strong>（Method 互审）、<strong>学了</strong>（以“读完能否实现”为标准、外部视角的价值）、<strong>会了</strong>（请人检验方法可复现性）。</p>
+</div></section></section><section class="slot" id="d135-pm" data-d="135" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D135 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">根据反馈修改 Method</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据反馈补缺/改清楚处——<strong>尤其朋友“看不懂”的地方</strong>（那基本就是审稿人也会卡的地方）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐条处理朋友的卡点（补细节/加图/加解释）。</li>
+<li>重点改“看不懂”的。</li>
+<li>改完让他再扫一眼（或自己再读）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 章据反馈改进（卡点已消除）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>对反馈挑着改/不服气 → 读者卡住就是事实，先改清楚；改了不复查 → 再读一遍。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>反馈太多?→ 先改“影响理解/复现”的，措辞类后改。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你据反馈打磨了 Method。<strong>做了</strong>（Method 修改）、<strong>学了</strong>（据反馈改、先改影响理解的）、<strong>会了</strong>（让方法更可读可复现）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Algorithm 1 ✅ Method 互审完成。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D135</summary><textarea data-note="d135" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d136" data-d="136"><header class="day-head"><span class="dnum">D136</span><h2 class="day-t">周三 · Experiment 章框架 + Sec 4.1 + 4.2 引入</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天搭 Experiment 章骨架，写“数据集与实现细节”（可复现的基础）和对比方法的引入。</p>
+<p><strong>预期管理</strong>：今天搭 Experiment 章骨架 + 写 4.1（数据集与实现细节）+ 4.2 对比方法引入。提醒：实现细节（数据集规模/类别/划分 + backbone/lr/batch/epoch/优化器/硬件）是别人复现你实验的基础，不写=硬伤，越详细越好（正文写关键、其余进附录）；<strong>一定写上“单张 RTX 4090”</strong>——这是你高效路线的卖点，大方写出来。先搭框架（每节标放什么、对应哪张表图）再填血肉。</p>
+</blockquote>
+</div><section class="slot" id="d136-am" data-d="136" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D136 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Experiment 章框架</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Experiment 章标准结构：<strong>4.1 数据集与实现细节 → 4.2 与 SOTA 对比 → 4.3 消融 → 4.4 可视化分析 → 4.5 讨论</strong>。先搭框架（每节标“放什么、对应你哪些结果/图表”），再填血肉——和写代码“先搭结构再实现”一个道理。</p>
+<ul>
+<li><strong>为什么“先搭框架再填血肉”</strong>：面对一堆实验结果（三数据集大表、消融表、可视化、迁移），如果上来就埋头写，容易写得杂乱、缺漏或重复。<strong>先搭框架——列出4.1-4.5五节，每节标清“放什么内容、对应哪张表/图”——你就有了一张“写作地图”</strong>：知道每个素材该放哪节、每节该写什么。然后逐节填充。这和写代码先设计结构（函数/模块划分）再实现一个道理：先有清晰的组织，再填具体内容，成稿又快又有条理。</li>
+<li><strong>5节结构为什么是这个顺序（逻辑递进）</strong>:4.1（数据集与设置）→ 4.2（主对比，证明整体好）→ 4.3（消融，证明每个组件有用）→ 4.4（可视化，直观展示）→ 4.5（讨论，诚实分析局限）——这是一条<strong>层层递进的论证链</strong>：先交代实验在什么条件下做的(4.1)，再证明方法整体有效(4.2)，再深入证明方法的每个设计都有贡献(4.3)，再用图直观佐证(4.4)，最后诚实讨论边界(4.5)。读者顺着这条链，从“设置”到“整体效果”到“细节机理”到“直观印象”到“局限”，对你的工作建立完整、可信的理解。</li>
+<li><strong>把素材对应到节（搭框架的关键动作）</strong>：搭框架时，把你M5积累的所有素材“认领”到各节——三数据集整合大表→4.2、8类消融表+柱状图→4.3、可视化对比图→4.4、跨数据集分析/迁移/per-class→分散到4.2的解读和4.5的讨论。<strong>每个素材都有归属，每节都有素材支撑</strong>。这样填充时不会“这个数据不知道放哪”或“这节没东西写”。框架搭好，后面四天逐节填充就顺畅了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在 <code>paper/experiment.md</code> 列 4.1–4.5，每节写“放什么内容（对应哪张表/图）”。</li>
+<li>把你的素材对应到各节（三数据集大表→4.2、消融表→4.3、可视化→4.4）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Experiment 章框架（5 节，各标内容与对应素材）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>结构乱/缺节 → 用标准 5 节；素材没对应到节 → 先把“哪张表放哪节”标清。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定结构?→ 仿你读过的 A 级论文的 Experiment 章。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你搭了 Experiment 章骨架。<strong>做了</strong>（Experiment 框架）、<strong>学了</strong>（Experiment 标准 5 节、先骨架后血肉）、<strong>会了</strong>（规划实验章节并对应素材）。</p>
+</div></section></section><section class="slot" id="d136-noon" data-d="136" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D136 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Section 4.1（数据集与实现细节,≥400 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（实现细节为何重要）</h4><div class="blk-b"><p>审稿人和读者<strong>需要这些才能复现</strong>你的实验。要写全：数据集（图像数/类别/分辨率/划分方式）+ 实现细节（backbone/lr/batch_size/epoch/优化器/硬件）。<strong>越详细越好</strong>（正文写关键，其余进 supplementary）。<strong>特别地</strong>：写上“<strong>单张 RTX 4090</strong>”——这是你高效路线的卖点，大方写出来。</p>
+<ul>
+<li><strong>为什么“实现细节缺失”是论文硬伤</strong>：科学的核心是可复现——别人应该能照着你的论文重现你的结果。如果你不写清超参(lr/batch/epoch)、不写数据划分方式、不写硬件，<strong>别人根本没法复现你的实验</strong>，你的结果就成了“无法验证的声称”。审稿人会直接质疑“实验不可复现”。所以实现细节不是可有可无的附属，而是论文严谨性的基础。<strong>宁可写得啰嗦，也不要漏关键细节</strong>——正文写最关键的（backbone/lr/epoch/硬件），其余详细参数放 supplementary（附录），既不漏又不挤占正文。</li>
+<li><strong>为什么“单张 RTX 4090”要大方写出来（而非藏着）</strong>：你可能觉得“只有一张卡”是劣势、不好意思写——<strong>恰恰相反，要主动、显眼地写出来</strong>。因为这正是你整篇论文的核心卖点：你在极有限的算力（单张消费级显卡）下，达到了和大组（几十张专业卡）可比的效果。<strong>写明“单张RTX 4090”，再配上你的参数量/FPS数据，审稿人就会意识到“这个方法又高效又能在普通硬件上跑”，这是真实的实用价值</strong>（不是每个实验室都有几十张A100）。把“单卡”从“不好意思说的劣势”转变为“主动强调的高效卖点”——这是你整体定位在论文实现细节里的落地。</li>
+<li><strong>数据集描述要写清“划分方式”（易漏）</strong>：写数据集时，新手常只写“我们用了DOTA数据集”，但漏了关键的<strong>划分方式</strong>（train/val/test怎么分的、用的是哪个标准划分）。不同的划分会导致结果不可比——所以必须写清“我们遵循[某标准]的train/val/test划分”或“我们按X:Y:Z划分”。这个细节看似小，但对复现和公平比较至关重要，审稿人也会查。</li>
+<li><strong>实现细节也是“防质疑”的一环</strong>：写全实现细节（尤其训练设置）还能堵住一类质疑——审稿人不会怀疑“你是不是用了什么特殊的、没说的trick才赢的”。<strong>透明、完整的实现细节传递的信号是：我的结果光明正大、可复现、经得起检验</strong>。这种透明本身就增强论文的可信度。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 4.1（≥400 字）:3 个数据集逐一描述（规模/类别/分辨率/train-val-test 划分）。</li>
+<li>实现细节：backbone、lr、batch、epoch、优化器、数据增强、<strong>硬件（单张 4090）</strong>。</li>
+<li>数据放 supplementary 的就注明“详见附录”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.1 初稿（数据集 + 完整实现细节，含硬件），别人据此能复现。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>不写超参/硬件</strong> → 别人无法复现，这是硬伤；数据集描述含糊（不写划分方式）→ 写清。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>细节太多正文放不下?→ 正文写关键（backbone/lr/epoch/硬件），其余进 supplementary。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了实现细节（可复现的基础）。<strong>做了</strong>（4.1 初稿）、<strong>学了</strong>（实现细节的重要性、单卡是卖点）、<strong>会了</strong>（写清数据集与实现细节到可复现）。</p>
+</div></section></section><section class="slot" id="d136-pm" data-d="136" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D136 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Section 4.2 第一段（对比方法列表）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>4.2 开头要<strong>引入对比方法</strong>——列 6 个 baseline 的名称 + 一句简短描述 + 引用。让读者知道你在和谁比、它们是什么。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 4.2 引入段：6 个 baseline 各一句（是什么 + 引用）。</li>
+<li>强调它们是公认/最新方法（对比的公平性）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.2 引入段（6 个 baseline 介绍 + 引用）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>baseline 没引用 → 补；选的不是公认方法 → 用 SOTA 榜里的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么一句话概括某 baseline?→ 用它论文标题/核心 idea 提炼。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你引入了对比方法。<strong>做了</strong>（4.2 引入）、<strong>学了</strong>（介绍 baseline + 引用）、<strong>会了</strong>（为对比章铺垫）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Experiment 章框架 ✅ Sec 4.1 初稿。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Experiment 章标准 5 节结构</strong>：<strong>4.1 数据集与实现细节</strong>（可复现基础，含硬件单卡卖点）→ <strong>4.2 与 SOTA 对比</strong>（引入baseline → 逐数据集分析 → 主表Table 1）→ <strong>4.3 消融</strong>（消融表Table 2 + 8类分析，复用W19段落）→ <strong>4.4 可视化分析</strong>（4-6图，各配2-3句，含负面）→ <strong>4.5 Discussion</strong>（局限+失败场景+改进方向）。先搭骨架（每节标放什么、对应哪张表图）再填血肉，和写代码“先结构后实现”一个道理。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D136</summary><textarea data-note="d136" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d137" data-d="137"><header class="day-head"><span class="dnum">D137</span><h2 class="day-t">周四 · Sec 4.2 主体 + LaTeX 表格 + Sec 4.3</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天写主对比分析、把大表转成 LaTeX、写消融部分——Experiment 章的核心血肉。</p>
+<p><strong>预期管理</strong>：今天写 4.2 主对比（≥800字）+ 大表转 LaTeX + 4.3 消融。提醒：结果描述要“既报数字、更给原因”（套句式：在X数据集达Y、超SOTA Z；尤其在某类提升W，说明原因）——只报数字是流水账，原因从你 W18 的跨数据集分析和 per-class 来；消融部分直接复用 W19 写好的消融段落，别重复劳动。LaTeX 表用补充包脚本从数据自动生成，避免手写语法错。</p>
+</blockquote>
+</div><section class="slot" id="d137-am" data-d="137" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D137 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Section 4.2 主体（≥800 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（结果描述的句式模式——套用）</h4><div class="blk-b"><p>“我们的方法在 <strong>[数据集]</strong> 上达到 <strong>[指标值]</strong>，比之前 SOTA <strong>[方法名]</strong> 提升 <strong>[数值]%</strong>。特别是在 <strong>[某类别/场景]</strong> 上，提升幅度达 <strong>[数值]%</strong>，说明 <strong>[原因解释]</strong>。” 逐数据集分析，<strong>既报数字、更给原因</strong>。</p>
+<ul>
+<li><strong>为什么“只报数字”是流水账、要“给原因”</strong>：如果你的4.2只是“我们在D1上达78.1,D2上达69.4,D3上达72.6，都超过baseline”——这是把表念了一遍，毫无增值，读者自己看表就知道了。<strong>真正的对比分析要解释“为什么”</strong>：为什么你的方法更好？提升主要来自哪里？在哪类样本上优势最明显、为什么?——“特别是在密集小目标上提升5.3%，说明我们的多尺度模块有效缓解了下采样的特征丢失”。<strong>这种有数字、有归因的描述，才体现你对结果的理解，才是论文该有的分析</strong>。审稿人通过这些解读判断你是否真懂自己的方法。</li>
+<li><strong>套用句式的好处（降低写作门槛）</strong>：写作卡壳时，套这个固定句式能让你快速成文:<code>在[数据集]上达[指标],比SOTA[方法]提升[Δ];尤其在[某类/场景]提升[Δ],说明[原因]</code>。把你三个数据集的结果逐一填进这个模板，再把“原因”部分用你W18的跨数据集分析和per-class分析填充——一段有理有据的4.2就出来了。<strong>新手不必从零想怎么写，套模板填内容即可</strong>，熟练后自然能灵活变化。</li>
+<li><strong>“原因”从哪里来（你早就准备好了）</strong>：写4.2时不必现想原因——你在W17的per-class分析、W18的跨数据集差异归因、W19的消融里，已经积累了大量“为什么”的素材。<strong>写作阶段就是把这些已有的分析“翻译”成论文文字</strong>。比如W18你分析过“D1提升大因为小目标多、我的多尺度模块强项”，这句话稍加润色就是4.2里的原因解释。所以前面认真做分析，现在写作就有话可说、有据可写——这也是为什么前几周反复强调“做完实验要深挖在哪好在哪差”。</li>
+<li><strong>逐数据集 vs 综合（组织方式）</strong>:4.2主体通常<strong>逐数据集分析</strong>（D1上怎样、D2上怎样、D3上怎样），每个数据集套上面的句式；最后可以再加一句综合（如“综合三个数据集，我们的方法平均排名第一，且参数更少”）。逐数据集让分析具体、有针对性（每个数据集的特点不同、提升原因不同）；综合句点出整体优势（呼应整合大表的平均排名）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 4.2 主体（≥800 字）：逐数据集报结果 + 与 SOTA 对比 + 关键提升 + 原因。</li>
+<li>用上面的句式模式。</li>
+<li>引用主表（&quot;如 Table 1 所示&quot;）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.2 主体（≥800 字，逐数据集分析，带原因，引用主表）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>只报数字不解读</strong> → 加&quot;为什么提升&quot;；空泛（&quot;效果很好&quot;）→ 用真实数字 + 具体原因。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么解释提升?→ 用 D116/W18 的 per-class 和跨数据集分析（那里有原因）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了主对比分析。<strong>做了</strong>（4.2 主体）、<strong>学了</strong>（结果描述句式、既报数字更给原因）、<strong>会了</strong>（把对比结果写成有解读的文字）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜结果描述句式</strong>:<code>在[数据集]达[指标],超SOTA[方法][Δ];尤其在[某类/场景]提升[Δ],说明[原因]</code>。报数字+给原因，拒绝流水账。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d137-noon" data-d="137" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D137 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">制作论文 LaTeX 表格</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>论文用 LaTeX，要把三数据集整合大表转成 LaTeX <code>tabular</code> 代码(<strong>最优用 <code>\textbf{}</code> 加粗</strong>)。这是把“markdown 表”变成“论文表”。</p>
+<ul>
+<li><strong>为什么用脚本自动生成LaTeX表（而非手写）</strong>:LaTeX表格语法繁琐(每行末尾要<code>\\</code>、单元格间要<code>&amp;</code>、对齐要在<code>\begin{tabular}{...}</code>里指定)，<strong>手写极易出错</strong>(漏个<code>&amp;</code>、少个<code>\\</code>，编译就报错或排版错乱)，且数据多时手敲既慢又容易抄错数字。<strong>用补充包的Python脚本，把你的结果数据喂进去，自动生成LaTeX代码（还能自动给每列最优值加粗）</strong>——既快又准，改数据时重新生成即可。这是“能自动化就别手动”的工程思维在论文写作里的应用。</li>
+<li><strong>“最优加粗”为什么重要</strong>：论文表格里，每个数据集（每列）的最优结果要用<code>\textbf{}</code>加粗——这样读者扫一眼就知道“哪个方法在哪个数据集上最好”。如果你的方法在多列都加粗（都最优），视觉上极有冲击力（读者一眼看出你综合最强）。<strong>加粗是引导读者注意力的关键</strong>，脚本自动判断每列最大值并加粗，避免手动加粗时的遗漏或错误。</li>
+<li><strong>markdown表→LaTeX表是“格式转换”</strong>：你前面用markdown表整理结果（方便编辑和查看），但论文（尤其投顶刊顶会）通常用LaTeX排版，所以最终要把markdown表转成LaTeX的<code>tabular</code>格式。<strong>内容不变，只是换一种排版语言</strong>。转换时注意：对齐方式(<code>l|ccc</code>表示第一列左对齐、后面居中，中间加竖线)、加<code>\caption</code>(表标题)、<code>\toprule/\midrule/\bottomrule</code>(三线表，论文标准)。生成后编译一下确认无语法错。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把整合大表转 LaTeX tabular(对齐、加粗最优、加 <code>\caption</code>)。</li>
+<li>存 <code>paper/tables/main.tex</code>。</li>
+<li>编译确认无报错（用补充包的代码自动生成）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>主表的 LaTeX 代码（可直接编译，最优加粗）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>LaTeX 语法错(少 <code>&amp;</code>/<code>\\</code>)→ 用模板/工具；对齐乱 → 用 <code>\begin{tabular}{l|ccc}</code>。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>手写易错?→ 用补充包的 Python 脚本从数据自动生成 LaTeX。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你做了论文 LaTeX 表格。<strong>做了</strong>（LaTeX 主表）、<strong>学了</strong>（表转 LaTeX、加粗最优）、<strong>会了</strong>（产出论文级表格代码）。</p>
+</div></section></section><section class="slot" id="d137-pm" data-d="137" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D137 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Section 4.3 消融部分（≥500 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把 W19 的消融表 + 消融段落整合进论文格式（4.3,≥500 字）。复用 W19 写好的消融段落，补上表/图引用。</p>
+<ul>
+<li><strong>为什么“复用W19写好的段落”省力又应该</strong>：你在W19已经写过消融分析段落（逐组件说贡献+故事）——4.3不必从零重写，<strong>直接把W19的段落搬过来，调整成论文格式（补上“如Table 2所示”“Fig X展示了”的表图引用）即可</strong>。这是“前期成果复用”的好处：W19认真写的消融段落，现在直接成为论文4.3的主体。别重复劳动重写一遍——前面写好的东西就是为现在用的。</li>
+<li><strong>4.3要“表+文字”配合</strong>：消融部分不能只贴消融表(Table 2)了事，要有文字解读（复用W19段落）——表给精确数字，文字给解读（哪个组件贡献最大、有什么发现、方法是否无冗余）。再配上柱状图(Fig X)的引用。<strong>表、图、文字三者配合</strong>：文字引导读者看表和图，表图支撑文字的论断。突出“贡献最大的组件”和“方法无明显冗余”的结论，让4.3既有数据又有洞察。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 W19 消融段落 + 完整消融表 + 柱状图整进 4.3。</li>
+<li>≥500 字，逐关键消融解读 + 引用 Table 2 / Fig X。</li>
+<li>突出贡献最大的组件 + “方法无冗余”的结论。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.3 消融部分（≥500 字，表 + 文字解读）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只贴表不解读 → 加文字；和 W19 段落重复劳动 → 直接复用 W19 写好的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>篇幅不够?→ 把每个关键消融都“现象+解释”写一句。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了消融章节。<strong>做了</strong>（4.3 初稿）、<strong>学了</strong>（消融入论文、复用已写段落）、<strong>会了</strong>（把消融写进 Experiment）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Sec 4.2 初稿 ✅ 表格 LaTeX ✅ Sec 4.3 初稿。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D137</summary><textarea data-note="d137" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d138" data-d="138"><header class="day-head"><span class="dnum">D138</span><h2 class="day-t">周五 · Sec 4.4 可视化 + Sec 4.5 讨论 + 整合</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天写可视化分析和 Discussion（含 Limitation——主动认怂比被审稿人挑强 100 倍），整合 Experiment 全章。</p>
+<p><strong>预期管理</strong>：今天写 4.4 可视化分析 + 4.5 Discussion（含 Limitation）+ 整合 Experiment 全章。提醒：可视化不是“贴图就完事”，每张图配 2-3 句分析（展示了什么、说明你方法什么特点）；<strong>主动写 Limitation 比让审稿人来挑强 100 倍</strong>——审稿人看到你主动讨论局限，通常更信任你其它结论；Limitation 要具体到场景/类别（从per-class最差类/迁移掉点/负面案例来），别泛泛说“还有提升空间”。</p>
+</blockquote>
+</div><section class="slot" id="d138-am" data-d="138" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D138 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Section 4.4 可视化分析（≥400 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>可视化不是“贴图就完事”——<strong>每张图要配 2–3 句分析</strong>（它展示了什么、说明你的方法什么特点）。选 4–6 张（含负面案例），写成 4.4（≥400 字）。</p>
+<ul>
+<li><strong>为什么“只贴图不分析”是常见错误</strong>：新手以为可视化部分就是把图放上去就行了——错。<strong>一张没有文字解读的图，读者不知道你想让他看什么、它说明了什么</strong>。你心里清楚“这张图展示了baseline漏检而我的方法检出”，但读者未必能一眼看出区别、更不知道这意味着什么。<strong>所以每张图都要配2-3句分析</strong>:① 这张图展示了什么对比（baseline怎样、你的方法怎样）;② 它说明你的方法什么特点/优势（印证了哪个组件的作用）。文字引导读者看图、并把图的含义点出来。</li>
+<li><strong>可视化分析的标准写法（套用）</strong>：每张图写类似“如Fig X所示，baseline[某问题](如漏检密集小目标)，而我们的方法[某改善](全部检出)，这印证了[某组件](多尺度模块)对[某情况](小目标)的有效性”。<strong>把“图里看到的现象”和“你方法的机理”联系起来</strong>——这才是分析，而非单纯描述图。含负面案例时，如实写“在[某困难场景]下，我们的方法也出现[某失败]，反映了[局限]”，诚实呈现。</li>
+<li><strong>为什么可视化要含负面（再次强调）</strong>:4.4选图时，仍要遵循W17/W18的原则——<strong>不只放你赢的，要含负面案例</strong>。审稿人见多了“精选最佳结果”的论文，你只放赢的会被怀疑cherry-pick；放几张失败案例并分析，反而显得诚实、可信，也为4.5的Limitation提供了直观证据。<strong>定性图的诚实和定量表的诚实同等重要</strong>。</li>
+<li><strong>可视化分析和Discussion的呼应</strong>:4.4的可视化（尤其负面案例）和4.5的Discussion(Limitation)是呼应的——你在4.4展示“这张图里我的方法失败了”，在4.5分析“为什么会失败、什么场景下、怎么改进”。<strong>图给直观证据，Discussion给深入分析</strong>，两者配合让论文的“诚实面对局限”既有图为证、又有理有据。写4.4时可以为4.5的Limitation埋下伏笔（选的负面案例正好对应你要讨论的局限）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从 W17/W18 的可视化里选 4–6 张代表（含负面）。</li>
+<li>每张写 2–3 句分析（如“baseline 漏检密集小目标，Ours 全检出，印证多尺度模块的作用”）。</li>
+<li>写成 4.4（≥400 字），引用 Fig。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.4（≥400 字，图 + 每图 2-3 句分析，含负面）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只放图不分析 → 每张配解读；只放赢的 → 含负面（诚实）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知分析啥?→ 对比“你 vs baseline 在这张图上差在哪、为什么”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写了可视化分析。<strong>做了</strong>（4.4 初稿）、<strong>学了</strong>（可视化入论文、每图配解读）、<strong>会了</strong>（用图+文讲清方法特点）。</p>
+</div></section></section><section class="slot" id="d138-noon" data-d="138" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D138 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Section 4.5 Discussion（≥300 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么写 Limitation——重要）</h4><div class="blk-b"><p><strong>主动指出自己方法的不足，比让审稿人来挑强 100 倍</strong>——这展示学术诚实和成熟度，审稿人看到你主动讨论 limitation，通常会<strong>更信任你的其它结论</strong>。Discussion 写：局限 + 在什么场景表现不好 + 可能的改进方向。</p>
+<ul>
+<li><strong>为什么“主动认怂”反而是高明策略（反直觉但重要）</strong>：新手怕写Limitation，觉得“暴露缺点会让审稿人觉得方法不行、容易被拒”。<strong>恰恰相反</strong>:① 每个方法都有局限，审稿人是专家，你不写他也能看出来——你不写，他会觉得“作者要么没意识到、要么想隐瞒”，两者都减分;② 你主动、准确地写出局限，审稿人会觉得“作者很清楚自己方法的边界、很客观诚实”，反而<strong>更信任你的其它结论</strong>（你连缺点都如实说，优点应该也是真的）。所以主动写Limitation不是示弱，是展示成熟和自信——<strong>敢于直面缺点的人，才让人信服</strong>。</li>
+<li><strong>Limitation要“具体”而非“套话”</strong>：最差的Limitation是泛泛的套话——“我们的方法还有提升空间”“未来可以进一步研究”。这等于没写，审稿人一眼看出你在敷衍。<strong>好的Limitation是具体的</strong>：“我们的方法在[某类样本/某种场景]上表现不佳，例如[具体情况]，这是因为[具体原因]；在跨域迁移设置下优势减弱[具体数据]”。具体的局限显示你真的深入分析过自己的方法，而非应付。</li>
+<li><strong>Limitation从哪里找（你手里全是素材）</strong>：不必凭空想——你的实验里到处是局限的证据:① <strong>per-class最差的那几类</strong>（你的方法在哪类上提升最小甚至不如baseline）;② <strong>迁移实验掉点处</strong>（跨域时优势减弱）;③ <strong>可视化的负面案例</strong>（你失败的那些图）。<strong>把这些“不好看”的结果拿出来，分析“为什么不好、什么场景会失败”，就是扎实的Limitation</strong>。前面诚实做的负面分析（没cherry-pick的可视化、如实记的迁移结果），现在都成了Limitation的素材。</li>
+<li><strong>Limitation配“改进方向”更显成熟</strong>：写完局限，再加一句“可能的改进方向”（如“未来可结合域适应技术缓解跨域掉点”）——这显示你不只发现了问题，还思考了怎么解决，体现研究的延续性和你的思考深度。<strong>局限+改进方向，把“缺点”转化为“未来工作的起点”</strong>，既诚实又积极。注意：诚实但不自贬，客观陈述局限即可，不必过度贬低自己的工作。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 4.5（≥300 字）：方法局限（从 per-class 最差类/迁移掉点/负面案例来）+ 失败场景 + 未来改进。</li>
+<li>诚实但不自贬（客观陈述）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.5 Discussion（≥300 字，含具体 Limitation 与改进方向）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>回避 Limitation</strong> → 必写(诚实=加分);Limitation 太泛（&quot;还有提升空间&quot;）→ 具体到场景/类别。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知写啥局限?→ 看 per-class 最差的类、迁移实验掉点处、可视化的负面案例。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>主动写 Limitation</strong>。<strong>做了</strong>（4.5 初稿）、<strong>学了</strong>（Limitation 的价值、要具体）、<strong>会了</strong>（诚实讨论方法不足）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Discussion 三件</strong>:① 局限（具体到场景/类别）② 失败案例（从负面可视化来）③ 未来方向。主动认怂 = 学术成熟，审稿人更信你。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d138-pm" data-d="138" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D138 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整合 Experiment 全章 + 通读检查逻辑链</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把 4.1–4.5 整合，通读检查逻辑链：设置(4.1)→ 对比(4.2)→ 消融(4.3)→ 可视化(4.4)→ 讨论(4.5)是否连贯、数字是否前后一致。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把五节拼成完整 Experiment 章。</li>
+<li>通读，查节间过渡、数字一致、术语统一。</li>
+<li>标残留问题并修。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Experiment 全章 v1（连贯、数字一致）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>节间跳跃 → 加过渡句；同一指标前后数字不一致 → 以最终实验为准统一。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>数字对不上?→ 回实验日志归档(W19)核对。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你整合了 Experiment 全章。<strong>做了</strong>（Experiment 全章 v1）、<strong>学了</strong>（整章统稿、逻辑链检查）、<strong>会了</strong>（把实验写成连贯一章）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Sec 4.4–4.5 初稿 ✅ Experiment 全章 v1。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D138</summary><textarea data-note="d138" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d139" data-d="139"><header class="day-head"><span class="dnum">D139</span><h2 class="day-t">周六 · （集中日）· Method + Experiment 一致性检查</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天专做一件高价值的事：让 Method 和 Experiment <strong>完全对应</strong>（审稿人最爱挑两章打架），并请人评实验充分性。</p>
+<p><strong>预期管理</strong>：今天做 Method↔Experiment 一致性检查 + 请人评实验充分性。提醒：两章打架是审稿人最容易抓的扣分点（Method说用loss X,Experiment就得是X;Method说有组件A，消融里要有“去掉A”）；逐项核对方法名/超参/组件/数字，数字以最终实验为准统一。被指“缺某实验”别慌——评估必要性，M6或supplementary补。</p>
+</blockquote>
+</div><section class="slot" id="d139-am" data-d="139" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D139 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">通读两章，检查一致性</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Method 描述的方法和 Experiment 的设置必须<strong>完全对应</strong>——Method 说用 loss X,Experiment 的设置/消融里也得是 X;Method 说有组件 A，消融里要有“去掉 A”。<strong>两章打架是审稿人最容易抓的扣分点</strong>。</p>
+<ul>
+<li><strong>为什么“两章打架”是审稿人最爱挑的扣分点</strong>：审稿人审论文时，会<strong>交叉对照Method和Experiment</strong>——你Method里说“我们设计了组件A、B、C”，他就到消融里找“是不是有去掉A、去掉B、去掉C的实验”；你Method里说“用我们设计的loss”，他就看实验设置里是不是真用了那个loss。<strong>一旦发现Method说的和Experiment做的对不上（Method写了组件C但消融里没有，或Method说用loss X但实验用了loss Y），审稿人立刻抓住——这是“内部不一致”，是论文严谨性的硬伤</strong>，而且很容易发现（不需要深入理解，对照一下就看出来）。所以这是审稿人最爱、也最容易挑的扣分点。</li>
+<li><strong>为什么消融阶段删组件后特别容易出现不一致</strong>：你在W19删了某个无效组件，如果只改了代码和消融、忘了同步Method，就会出现“Method还描述着已删的组件，但消融里没有它”的矛盾。或者反过来，Method更新了但某处实验设置没改。<strong>M5是方法剧烈变动的阶段（删组件、调loss），最容易留下两章不一致的隐患</strong>——所以D139专门花一天做一致性检查，把这些隐患清掉。</li>
+<li><strong>怎么做一致性检查（可操作）</strong>：<strong>并排读Method和Experiment</strong>，逐项核对:① <strong>方法名/组件</strong>（Method提的每个组件，消融里有对应的“去掉它”吗？反之消融里的每个对象，Method里都描述了吗?）;② <strong>超参/设置</strong>（Method/实现细节里的lr、batch、epoch、loss，和实验设置一致吗?）;③ <strong>数字</strong>（同一个指标在不同地方出现时，数值一致吗?）。列一份“不一致清单”，然后逐条修正，<strong>数字统一以最终实验为准</strong>。量大时可用脚本把两章的关键设置词(lr=、loss名等)抽出来人工比对。</li>
+<li><strong>改完一定要再扫一遍（避免改了东墙漏西墙）</strong>：修正不一致时，容易“改了一处忘了另一处”（比如把Method里的组件名改了，但忘了Experiment里也有同样的名字）。<strong>所以修正后要把整篇再通读一遍，确认所有相关处都改了、没有新的矛盾</strong>。一致性是个全局属性，局部改动可能影响别处，必须整体复查。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>并排读 Method + Experiment。</li>
+<li>逐项核对：方法名、超参、组件、数字在两章是否一致。</li>
+<li>列“不一致清单”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份“不一致清单”（方法名/超参/组件/数字的出入）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>两章各写各的 → 逐项核对；数字对不上 → 以最终实验为准。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>量大?→ 用补充包的关键词抽取脚本，把两章的超参/loss 名抽出来人工比对。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>跨章一致性检查</strong>。<strong>做了</strong>（一致性检查）、<strong>学了</strong>（Method↔Experiment 必须对应）、<strong>会了</strong>（查并列出两章不一致）。</p>
+</div></section></section><section class="slot" id="d139-noon" data-d="139" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D139 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修改不一致之处</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据清单把所有不一致修正（方法/设置/数字统一）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐条修不一致。</li>
+<li>数字统一以最终实验为准。</li>
+<li>复查一遍。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>两章一致（无矛盾）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>改了一处忘了另一处 → 改完整章再扫一遍。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定以哪个为准?→ 以最终方法/最终实验为准，反推改另一处。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你消除了两章矛盾。<strong>做了</strong>（修改一致性）、<strong>学了</strong>（统一全文）、<strong>会了</strong>（保持论文内部一致）。</p>
+</div></section></section><section class="slot" id="d139-pm" data-d="139" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D139 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">让朋友帮看 Experiment 章</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>问朋友“<strong>你觉得实验够充分吗？还需补什么？</strong>”——外部视角能发现你漏的对比/分析（如“少了某个常见 baseline”“没有效率对比”）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 Experiment 章发朋友。</li>
+<li>问充分性 + 待补。</li>
+<li>记反馈，评估是否在 M6 补。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>朋友反馈（充分性判断 + 补充建议）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>被指缺某实验就慌 → 评估必要性，M6 或 supplementary 补；只听夸 → 请挑“还缺什么”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>被指缺重要对比?→ 记下，M6 补跑或引用讨论。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用外部视角检验了实验充分性。<strong>做了</strong>（Experiment 互审）、<strong>学了</strong>（充分性检验）、<strong>会了</strong>（请人评估实验完整度）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Method + Experiment 一致性检查。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D139</summary><textarea data-note="d139" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d140" data-d="140"><header class="day-head"><span class="dnum">D140</span><h2 class="day-t">周日 · （复盘日）· W20 复盘 + 竞赛准备规划 + M5 总结</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周 + M5 整月收官：复盘、规划下月竞赛（校准选赛）、确认进入 M6。</p>
+<p><strong>预期管理</strong>:M5 月收官：W20 复盘 + 规划 M6 竞赛（校准选赛）+ 确认进入 M6。提醒：竞赛优先选<strong>公开有排行榜</strong>的（Kaggle/天池/Workshop）、与你方向对口、deadline合适；<strong>天智杯由军委装备发展部指导、军事航天部队装备部主办，并非空天院主办</strong>——练手可以，但不宜当“联系空天院”的破冰理由（真正破冰靠你围绕空天院方向做的工作）。主实验+消融+两章齐了即可进 M6。</p>
+</blockquote>
+</div><section class="slot" id="d140-am" data-d="140" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D140 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W20 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“把实验写成文字”的经验（哪节最难写、结果描述的句式）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填。</li>
+<li>记写作卡点 + 对策。</li>
+<li>记 Method/Experiment 定稿进度。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W20 周报。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周哪节最难产（多半是 Discussion 或一致性）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了写作周。<strong>做了</strong>（W20 周报）、<strong>学了</strong>（写作复盘）、<strong>会了</strong>（沉淀写作经验）。</p>
+</div></section></section><section class="slot" id="d140-noon" data-d="140" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D140 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">规划竞赛启动(W23)需要的准备</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>M6 会启动一个竞赛(W23)作为练手/作品。<strong>★校准</strong>：优先选<strong>公开有排行榜</strong>的（Kaggle/天池/Workshop）；<strong>天智杯由军委装备发展部指导、军事航天部队装备部主办，并非空天院主办</strong>——含金量高、适合练手，但<strong>不宜</strong>当“联系空天院”的破冰理由（真正的破冰是你围绕空天院“空天·灵眸/RingMo”方向做的工作）。今天先规划要准备什么。</p>
+<ul>
+<li><strong>为什么优先选“公开有排行榜”的竞赛</strong>:① <strong>结果可信、可写进简历</strong>——公开排行榜是第三方客观排名，你的名次别人能验证（不像没有公开榜的比赛，你说排名多少别人无从核实）;② <strong>有明确的对标和反馈</strong>——榜上能看到别人的分数，你知道自己的水平、努力方向;③ <strong>Kaggle/天池/Workshop竞赛</strong>通常数据公开、规则透明、社区活跃，适合学习和练手。所以选竞赛时，“是否公开有排行榜”是首要标准，而非单看名气。</li>
+<li><strong>天智杯的准确定位（必须记对，别误用）</strong>：天智杯<strong>由军委装备发展部指导、军事航天部队装备部主办</strong>——这是一个高含金量的赛事，适合练手、也能体现实力。但要记住两点:① 它<strong>不是空天院主办的</strong>（不要在套磁/报考材料里把“参加天智杯”当成“和空天院有联系”的理由——这是事实错误，会显得你没搞清楚）;② <strong>真正能打动空天院的，是你围绕他们的研究方向（空天·灵眸平台、RingMo基础模型等）实实在在做的工作</strong>（读他们的论文、在他们的方向上做出成果、复现/改进他们的方法），而非参加了某个比赛。<strong>破冰靠的是“我懂你们在做什么、我在这个方向有积累”，而非“我参加过某赛事”</strong>。</li>
+<li><strong>为什么“选与方向对口的竞赛”很重要</strong>：你的竞赛应该和你的研究方向（遥感检测/分割/变化检测）对口，这样:① 你能<strong>复用已有的代码和baseline</strong>（M5积累的实验框架直接用，不必从零搭），省时省力;② 竞赛经验能<strong>反哺你的研究</strong>（竞赛里学的技巧可能用到论文里，竞赛成绩也能佐证你方法的实用性）;③ 方向一致让你的简历呈现一个<strong>聚焦、连贯的形象</strong>（而非东一个西一个的杂乱）。选个和方向无关的热门赛，看似风光，但既不能复用积累、也不能强化你的方向定位，性价比低。</li>
+<li><strong>竞赛在你整体规划里的定位</strong>：竞赛是“练手 + 作品 + 实力证明”，是你研究工作的补充而非主线。它能给你一个<strong>可量化、可展示的成果</strong>（排行榜名次），丰富你的履历；也是检验你方法在真实竞赛数据上表现的机会。但别本末倒置——你的核心是论文和研究方向的积累，竞赛是锦上添花。今天规划竞赛准备（选候选赛、列可复用代码）时，把它放在“服务于整体目标”的位置上考量。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列竞赛候选（标主办方/截止/<strong>是否公开有榜</strong>/与方向匹配）。</li>
+<li>优先选公开有榜、与你方向相关的。</li>
+<li>列可复用的已有代码/baseline。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛准备清单（候选赛 + 准备项），并记清“天智杯只作练手、不作联系空天院理由”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>把天智杯当联系空天院敲门砖</strong> → 它非空天院主办，别误用；选个和方向无关的赛 → 选相关的才能复用代码。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知选哪个?→ 选 Kaggle/天池里与你方向（检测/分割/变化检测）对口、有排行榜、deadline 合适的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规划了竞赛准备（且校准了选赛）。<strong>做了</strong>（竞赛准备清单）、<strong>学了</strong>（优先公开有榜、天智杯定位）、<strong>会了</strong>（为竞赛练手做规划）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜竞赛选择校准</strong>：优先<strong>公开有排行榜</strong>（Kaggle/天池/Workshop）、与你方向对口、deadline 合适；天智杯可练手但<strong>非</strong>联系空天院的破冰理由——破冰靠你围绕空天·灵眸/RingMo 的工作。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d140-pm" data-d="140" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D140 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">M5 总结</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>M5 总结：所有主实验 + 消融完成、Method + Experiment 章定稿——确认进入 M6（论文 v1 + 竞赛）的条件已满足。<strong>判断能否进入M6的核心</strong>：对照M5硬交付清单——主实验（三数据集3-seed）、消融（8类）、Method章、Experiment章这四样是否到位。这四样齐了，你就有了一篇论文的完整骨架和实验支撑，可以进入M6把它扩写润色成完整论文。某些次要项（如可视化数量没凑够15张）可以标注“M6补”，不阻塞进度——核心四样齐了即可推进。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 M5 总结（对照 M5 硬交付清单）。</li>
+<li>确认 Method/Experiment 就绪。</li>
+<li>承接 M6 计划。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M5 总结（硬交付对照）+ 进入 M6 的确认。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>某项没齐（如可视化数量）→ 标 M6 补；主实验+消融+两章齐了即可进 M6。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某硬交付缺?→ 决定补还是 M6 处理；核心（主实验/消融/两章）齐了就进 M6。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了 M5 收官。<strong>做了</strong>（M5 总结）、<strong>学了</strong>（阶段收尾确认）、<strong>会了</strong>（确认从实验/写部分章进入完整论文阶段）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W20。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ M5 硬交付检查清单（对照你原计划）</h2><ul>
+<li>[ ] 3 数据集主实验完成（3-seed 平均±std） · [ ] 8 类消融完成 + 分析报告 · [ ] 跨数据集迁移（加分）</li>
+<li>[ ] 三数据集整合大表 · [ ] 可视化对比图 15–20 张 · [ ] Method 章定稿（含架构图 + Algorithm 1）</li>
+<li>[ ] Experiment 章 v1(4.1–4.5) · [ ] 实验日志完整归档</li>
+</ul>
+</section><section class="wtail"><h2>🎓 M5 全月能力总览（W17–W20）</h2><ul>
+<li>设计/管理大规模实验矩阵（63 组）+ wandb 追踪 + 三数据集整合大表 + 跨数据集分析 + 迁移实验</li>
+<li>8 类系统消融 + 据证据精简方法</li>
+<li>把实验写成论文：Method 章定稿（检查清单）+ Experiment 章(4.1–4.5)+ LaTeX 表 + Limitation + 一致性检查</li>
+<li><strong>贯穿 M5 的两条主线</strong>:① <strong>实验工程的严谨</strong>（矩阵管理、多seed mean±std、公平对比、文码图一致、可复现五要素）——这些让你的结果可信、经得起审稿人检验;② <strong>科研诚实的落地</strong>（可视化含负面反cherry-pick、消融如实判贡献、主动写Limitation）——诚实反而增强可信度，是成熟研究者的标志。</li>
+<li><strong>单卡定位在 M5 的强化</strong>：把“单张4090”写成论文卖点（参数量/FPS、删冗余提效率、实现细节大方写硬件），跳出“和大组拼精度绝对值”的死局，转到“精度持平但更高效”这个你能赢且被认可的赛道。</li>
+<li><strong>质的飞跃</strong>：经过 M5，你的方法从“探索一个idea”成长为“有完整主实验+系统消融+泛化证据、Method/Experiment两章定稿”的扎实工作——从“做研究”正式迈向“写论文”,M6 就把这些成果组织成一篇可投稿的完整论文。</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D140</summary><textarea data-note="d140" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W20 加厚补充包（范例 / 实用工具 / 每日自测 / 写作坑速查）</h2><h2>一、合格范例 — Experiment 结构 + 结果描述句式 + Method 检查清单</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># Experiment 章结构</span>
+4.1 数据集与实现细节(3数据集 + backbone/lr/bs/epoch/优化器/硬件[单张4090])
+4.2 与SOTA对比(引入baseline → 逐数据集分析 → 主表Table 1)
+4.3 消融(消融表Table 2 + 8类分析)
+4.4 可视化分析(4-6图,各2-3句,含负面)
+4.5 Discussion(局限 + 失败场景 + 改进方向)
+
+<span class="gh"># 结果描述句式(套用)</span>
+&quot;在{数据集}上,我们的方法达{指标},比SOTA {方法}({指标})提升{Δ};
+ 尤其在{某类/场景}提升{Δ},说明{原因}。&quot;
+
+<span class="gh"># Method 检查清单</span>
+□符号首次定义 □公式↔文字一致 □图↔文字一致 □伪代码↔代码一致 □每个设计有&quot;为什么&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 大表转 LaTeX + 两章一致性自检</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">re</span>
+<span class="c1"># ① 整合大表 → LaTeX tabular(最优自动加粗)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_latex</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datasets</span><span class="p">):</span>    <span class="c1"># data={&quot;method&quot;:{&quot;D1&quot;:mean,...}}</span>
+    <span class="n">best</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">begin</span><span class="si">{tabular}</span><span class="s2">{l|&quot;</span> <span class="o">+</span> <span class="s2">&quot;c&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;}</span><span class="se">\n\\</span><span class="s2">toprule&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Method &amp; &quot;</span> <span class="o">+</span> <span class="s2">&quot; &amp; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; </span><span class="se">\\\\</span><span class="s2"> </span><span class="se">\\</span><span class="s2">midrule&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dd</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">-</span><span class="n">best</span><span class="p">[</span><span class="n">d</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span> <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">textbf{&quot;</span><span class="o">+</span><span class="n">v</span><span class="o">+</span><span class="s2">&quot;}&quot;</span>
+            <span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> &amp; &quot;</span> <span class="o">+</span> <span class="s2">&quot; &amp; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; </span><span class="se">\\\\</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">bottomrule</span><span class="se">\n\\</span><span class="s2">end</span><span class="si">{tabular}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ② 两章一致性:抽取关键设置词供人工比对</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_terms</span><span class="p">(</span><span class="n">md_path</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">md_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(lr=\S+|bs=\d+|\d+\s*epochs?|[A-Z][A-Za-z]*Loss)&#39;</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">to_latex</span><span class="p">({</span><span class="s2">&quot;baseline1&quot;</span><span class="p">:{</span><span class="s2">&quot;D1&quot;</span><span class="p">:</span><span class="mf">75.0</span><span class="p">,</span><span class="s2">&quot;D2&quot;</span><span class="p">:</span><span class="mf">67.0</span><span class="p">,</span><span class="s2">&quot;D3&quot;</span><span class="p">:</span><span class="mf">70.0</span><span class="p">},</span><span class="s2">&quot;Ours&quot;</span><span class="p">:{</span><span class="s2">&quot;D1&quot;</span><span class="p">:</span><span class="mf">78.1</span><span class="p">,</span><span class="s2">&quot;D2&quot;</span><span class="p">:</span><span class="mf">69.4</span><span class="p">,</span><span class="s2">&quot;D3&quot;</span><span class="p">:</span><span class="mf">72.6</span><span class="p">}},</span> <span class="p">[</span><span class="s2">&quot;D1&quot;</span><span class="p">,</span><span class="s2">&quot;D2&quot;</span><span class="p">,</span><span class="s2">&quot;D3&quot;</span><span class="p">])</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 输出可直接编译的 LaTeX 主表（最优加粗）;② 抽取两章关键设置词供比对一致性。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D134</strong>：① Method 为什么要据最终代码更新（事实来源是什么）?② 检查清单 5 条是哪些？为什么“产品说明书”类比贴切？</li>
+<li><strong>D135</strong>：① Method 互审的灵魂问题是什么（为什么自己读不出问题）?② Algorithm 1 写多细（菜谱步骤类比）？</li>
+<li><strong>D136</strong>：① 实现细节为什么必须写（数据集/超参/硬件）?② 单卡为什么要大方写进去（卖点）？</li>
+<li><strong>D137</strong>：① 结果描述的句式？为什么“只报数字”是流水账?② 为什么要把表转 LaTeX 并加粗最优？</li>
+<li><strong>D138</strong>：① 为什么要主动写 Limitation（为什么“主动认怂比被审稿人挑强”）？它从哪里找（三个来源）？</li>
+<li><strong>D139</strong>：① Method 和 Experiment 要在哪些方面一致？为什么这是审稿人爱挑的点？改完为什么要再扫一遍？</li>
+<li><strong>D140</strong>：① 竞赛优先选什么样的（为什么选公开有榜）？天智杯能当联系空天院的敲门砖吗？真正的破冰靠什么？</li>
+<li><strong>综合</strong>：① Method 章为什么“只有公式没直觉”是最致命的？直觉+公式+图三件套指什么?② 单卡为什么是卖点而非示弱?③ 写作时的“原因”素材从前几周哪里来？</li>
+</ul>
+<h2>四、本周写作坑速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method 写了代码没有的组件</td>
+<td>没据最终方法更新</td>
+<td>以最终 config 为事实来源，删/补</td>
+</tr>
+<tr>
+<td>别人无法复现实验</td>
+<td>实现细节缺失</td>
+<td>写全数据集/超参/硬件（正文或 supp）</td>
+</tr>
+<tr>
+<td>结果只报数字</td>
+<td>没解读</td>
+<td>用“提升+原因”句式</td>
+</tr>
+<tr>
+<td>回避 Limitation</td>
+<td>怕暴露不足</td>
+<td>主动写(诚实=加分)，具体到场景</td>
+</tr>
+<tr>
+<td>Method 与 Experiment 矛盾</td>
+<td>各写各的</td>
+<td>一致性检查，数字以最终实验为准</td>
+</tr>
+<tr>
+<td>把天智杯当联系空天院敲门砖</td>
+<td>误判主办方</td>
+<td>天智杯非空天院主办；练手可以，破冰靠你的工作</td>
+</tr>
+<tr>
+<td>Method 只有公式没直觉</td>
+<td>只写“是什么”不写“为什么”</td>
+<td>每个组件补“它解决什么问题”的直觉（最致命的缺漏）</td>
+</tr>
+<tr>
+<td>自己读Method觉得清楚、别人读不懂</td>
+<td>太熟而脑补缺失细节</td>
+<td>找外部视角互审，以“读完能否实现”为标准</td>
+</tr>
+<tr>
+<td>伪代码太长像抄代码</td>
+<td>塞了太多细节</td>
+<td>≤20行抓主流程，细节移正文</td>
+</tr>
+<tr>
+<td>可视化只贴图不分析</td>
+<td>没配解读</td>
+<td>每图配2-3句（展示什么+说明方法什么特点）</td>
+</tr>
+<tr>
+<td>LaTeX表手写语法错</td>
+<td>手敲易漏&amp;/\</td>
+<td>用脚本从数据自动生成（还自动加粗最优）</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w19.html"><span class="dir">← 上一篇</span><span class="nm">W19 消融全面深化（8 类）</span></a><a class="next" href="w21.html"><span class="dir">下一篇 →</span><span class="nm">W21 Experiment 章打磨 + Int</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d134">D134 周一</a><a class="sub" href="#d134-am">上午 更新 Method 章骨架（基于</a><a class="sub" href="#d134-noon">中午 更新架构图</a><a class="sub" href="#d134-pm">晚上 写 Method 章最终版（过检</a><a href="#d135">D135 周二</a><a class="sub" href="#d135-am">上午 写 Algorithm 1 伪代</a><a class="sub" href="#d135-noon">中午 找朋友互审 Method 章</a><a class="sub" href="#d135-pm">晚上 根据反馈修改 Method</a><a href="#d136">D136 周三</a><a class="sub" href="#d136-am">上午 写 Experiment 章框架</a><a class="sub" href="#d136-noon">中午 写 Section 4.1（数据</a><a class="sub" href="#d136-pm">晚上 写 Section 4.2 第一</a><a href="#d137">D137 周四</a><a class="sub" href="#d137-am">上午 写 Section 4.2 主体</a><a class="sub" href="#d137-noon">中午 制作论文 LaTeX 表格</a><a class="sub" href="#d137-pm">晚上 写 Section 4.3 消融</a><a href="#d138">D138 周五</a><a class="sub" href="#d138-am">上午 写 Section 4.4 可视</a><a class="sub" href="#d138-noon">中午 写 Section 4.5 Di</a><a class="sub" href="#d138-pm">晚上 整合 Experiment 全章</a><a href="#d139">D139 周六</a><a class="sub" href="#d139-am">上午 通读两章，检查一致性</a><a class="sub" href="#d139-noon">中午 修改不一致之处</a><a class="sub" href="#d139-pm">晚上 让朋友帮看 Experiment</a><a href="#d140">D140 周日</a><a class="sub" href="#d140-am">上午 W20 周复盘</a><a class="sub" href="#d140-noon">中午 规划竞赛启动(W23)需要的准备</a><a class="sub" href="#d140-pm">晚上 M5 总结</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

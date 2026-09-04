@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="29">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>M8 + 连接期详注版（W29–W48） · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><a href="w29.html">W29</a><span>›</span><span class="chip">M8+连接期 · 详注版</span></div><h1 class="title">M8 + 连接期详注版（W29–W48）</h1><p class="subtitle">第二课题 / 开源运营 / 冷邮件 —— 附全书缺失的《附录 D 冷邮件模板》</p></div><div class="note"><b>★ 又一个和「附录 E」同类的空洞</b>　全书提「冷邮件」152 次、正文写着「附录 D 有邮件模板」，但没有任何附录，全文搜索<b>主题行 0 个、称呼 0 个 —— 一封邮件正文都没有</b>。本页补齐中英双语模板、七条设计原则，以及原文回避了的回复率预期。</div>
+<h2 id="h-第二课题-开源运营-冷邮件-附全书缺失的-附录-D-冷邮件模板">第二课题 / 开源运营 / 冷邮件 —— 附全书缺失的《附录 D 冷邮件模板》</h2>
+<blockquote class="quote callout callout-expect">
+<p><strong>覆盖</strong>：M8（W29–W32 竞赛收口 + 第二课题 + GitHub 运营）、M9–M12 的连接线（W41–W48 简历 / 作品集 / 汇报 PPT / 冷邮件）。</p>
+<p><strong>★ 又一个和「附录 E」同类的结构性空洞</strong>：</p>
+<p><code>text
+全书提到「冷邮件」152 次、「邮件模板」37 次
+正文明确写着「v5.0 附录 D 有邮件模板」
+但：全书没有任何附录文件，也没有任何「附录」章节
+而且全文搜索：Subject 行 0 个、Dear Prof 0 个 —— 一封邮件正文都没有</code></p>
+<p><strong>你用 12 个月准备“最终一击”，而那一击本身的模板不存在。</strong> 这一页把它补上，另外补简历、作品集、汇报 PPT 的结构，以及一件原文回避了的事：<strong>回复率的诚实预期</strong>。</p>
+</blockquote>
+<hr />
+<h1 id="h-第一部分-M8-W29-W32">第一部分 · M8（W29–W32）</h1>
+<h2 id="h-W29-竞赛技术报告怎么写">W29 · 竞赛技术报告怎么写</h2>
+<p>原文让你把竞赛“沉淀成技术报告 + 开源仓库 + 影响力”。<strong>技术报告和论文是两种文体</strong>，别用写论文的方式写它。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>论文</th>
+<th><strong>竞赛技术报告</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的</td>
+<td>说服审稿人这个贡献值得发表</td>
+<td><strong>让别人能复现你的名次</strong></td>
+</tr>
+<tr>
+<td>重点</td>
+<td>创新点 + 严谨对比</td>
+<td><strong>每个 trick 涨了多少分</strong></td>
+</tr>
+<tr>
+<td>允许</td>
+<td>必须有理论/动机支撑</td>
+<td><strong>“试出来的、说不清为什么”也可以写</strong></td>
+</tr>
+<tr>
+<td>长度</td>
+<td>5–12 页</td>
+<td>3–6 页够了</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>核心是一张表</strong>（原文 D188 让你写“Trick 贡献分解表”，这里给格式）：</p>
+<figure class="code" data-lang="markdown"><pre><code>| # | 改动 | 线上分数 | 相对上一行 | 训练耗时 | 保留？ |
+|---|------|---------|-----------|---------|--------|
+| 0 | 官方 baseline | 0.612 | — | 6h | ✅ |
+| 1 | + 更强 backbone | 0.641 | +0.029 | 11h | ✅ |
+| 2 | + 多尺度训练 | 0.658 | +0.017 | 16h | ✅ |
+| 3 | + SAHI 切片推理 | 0.679 | +0.021 | +0（仅推理） | ✅ |
+| 4 | + 自监督预训练 | 0.681 | +0.002 | +14h | ❌ 性价比太低 |
+| 5 | + 5 模型 Ensemble | 0.694 | +0.013 | ×5 | ⚠️ 比赛用，实用不推荐 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 这张表的三个要点</strong>：
+1. <strong>每行只加一个东西</strong>，和上一行只差一处——<strong>和你 M4 学的方法迭代是同一套纪律</strong>
+2. <strong>必须有“耗时”和“保留？”两列</strong> —— 竞赛可以不计成本，但技术报告的价值在于告诉别人“哪些值得用”
+3. <strong>诚实记录没用的 trick</strong>（第 4 行那种）—— <strong>这比只报有用的更有参考价值</strong></p>
+<h2 id="h-W30-W31-第二课题的-复用红利-到底有多大">W30–W31 · ★ 第二课题的“复用红利”到底有多大</h2>
+<p>原文说第二篇要“复用第一篇的一切，跑出更快的节奏”。<strong>具体能快多少，把账算出来</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>第一篇花了</th>
+<th><strong>第二篇</strong></th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>环境搭建</td>
+<td>1–2 天</td>
+<td><strong>0</strong></td>
+<td>环境还在</td>
+</tr>
+<tr>
+<td>数据管道</td>
+<td>3–5 天</td>
+<td><strong>0.5 天</strong></td>
+<td><code>to_dota.py</code>、切图、可视化全部现成</td>
+</tr>
+<tr>
+<td>实验框架</td>
+<td>1 周（W11）</td>
+<td><strong>0</strong></td>
+<td>直接复用</td>
+</tr>
+<tr>
+<td>baseline 复现</td>
+<td>1 周（W2）</td>
+<td><strong>0.5 天</strong></td>
+<td>同一个 baseline，权重和 config 都在</td>
+</tr>
+<tr>
+<td>绘图与表格</td>
+<td>2 天</td>
+<td><strong>0.5 天</strong></td>
+<td><code>paper_figs.py</code> 现成</td>
+</tr>
+<tr>
+<td>论文骨架</td>
+<td>1 周（W15）</td>
+<td><strong>2–3 天</strong></td>
+<td>结构熟了，Related Work 部分可复用</td>
+</tr>
+<tr>
+<td>投稿流程</td>
+<td>1 周</td>
+<td><strong>1 天</strong></td>
+<td>系统熟了，Cover Letter 改改就行</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>约 5 周纯工程</strong></td>
+<td><strong>约 1 周</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>★ 所以第二篇真正的时间应该花在“想清楚问题”上，而不是重新造轮子。</strong></p>
+<p><strong>如果你发现第二篇又在重复第一篇的工程工作，说明你第一篇的框架没搭好</strong>——回去补，那笔投资会在第三篇再赚一次。</p>
+</blockquote>
+<h2 id="h-W30-第二课题从哪来-从第一篇的没做完里长出来">W30 · 第二课题从哪来（“从第一篇的没做完里长出来”）</h2>
+<p><strong>三个来源，按质量排序</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>具体在哪</th>
+<th>质量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>① 你第一篇的 Limitation 段</strong></td>
+<td>你自己写的“本方法的不足”</td>
+<td>★★★ <strong>最好</strong>：你最清楚它为什么不足</td>
+</tr>
+<tr>
+<td><strong>② 审稿意见里的建议</strong></td>
+<td>“如果作者能进一步探讨 X 会更好”</td>
+<td>★★★ <strong>审稿人替你指的方向，而且他会认可</strong></td>
+</tr>
+<tr>
+<td><strong>③ 消融里的反常现象</strong></td>
+<td>W12/W19 里那些你没解释清楚的结果</td>
+<td>★★ 需要额外挖</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 一个具体动作</strong>：打开你第一篇的 Limitation 段，<strong>逐句问“这句话能不能变成一篇论文”</strong>。通常第一篇的 Limitation 有 3 条，其中至少 1 条是可做的。</p>
+<h2 id="h-W32-GitHub-仓库运营-W35-还有-爆款打造周">W32 · GitHub 仓库运营（W35 还有“爆款打造周”）</h2>
+<p><strong>★ 先说实话</strong>：<strong>大多数学术仓库不会火，这很正常。</strong> 一个能一键复现、README 清楚的仓库，即使只有几十个 star，<strong>在求职和联系导师时的价值已经完全兑现了</strong>。不要把 star 数当目标。</p>
+<p><strong>README 的必要结构</strong>（按读者从上到下的注意力排）：</p>
+<figure class="code" data-lang="markdown"><pre><code># 项目名 · 一句话说清做什么
+[徽章：论文链接 / 许可证 / Python 版本]
+
+![一张效果图]              ← ★ 第一屏必须有图，这决定别人往不往下看
+
+## Highlights
+- 三条 bullet，说清和别人的区别
+
+## Installation
+（★ 完整命令，含版本号，别写&quot;参考官方文档&quot;）
+
+## Quick Start
+（★ 三行以内出结果的最小例子）
+
+## Model Zoo
+| 模型 | 数据集 | mAP | config | 权重 |
+（★ 权重给 HuggingFace 链接）
+
+## Reproduce
+bash reproduce.sh    （你 M4 写的）
+
+## Citation
+（BibTeX，方便别人引用）
+
+## Acknowledgement
+（★ 致谢你 fork/借鉴的项目，学术礼貌）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 三条实际有用的运营动作</strong>（比“打造爆款”实在）：
+1. <strong>在论文的 Abstract 末尾放仓库链接</strong> —— 这是最有效的引流
+2. <strong>给你 fork 过的上游项目提一个有用的 PR 或 issue</strong> —— 建立真实的技术联系
+3. <strong>在 Papers with Code 上关联你的论文和代码</strong> —— 免费曝光</p>
+<hr />
+<h1 id="h-第二部分-连接期的三份材料-W42-W45">第二部分 · ★ 连接期的三份材料（W42–W45）</h1>
+<h2 id="h-2-1-简历-一页-针对-转行读博-找机会">2.1 简历（一页，针对“转行读博 + 找机会”）</h2>
+<p><strong>★ 你的简历和普通学生简历的区别</strong>：你要证明的不是“我上过什么课”，而是<strong>“我在 12 个月里从零做出了什么”</strong>。</p>
+<figure class="code" data-lang="markdown"><pre><code># 姓名
+邮箱 · GitHub · Google Scholar · 个人主页（如有）
+
+## 研究方向
+遥感图像 &lt;你的具体方向&gt;；&lt;一句话说清你的技术特长&gt;
+
+## 教育背景
+&lt;学校 · 专业 · 学位 · 起止&gt;    ← ★ 一行就够，不要列课程
+
+## 研究成果                     ← ★ 放在教育背景之后、最显眼的位置
+- [论文1] &lt;标题&gt;. IEEE GRSL, 2026 (Under Review / Accepted). [arXiv] [Code]
+- [论文2] &lt;标题&gt;. 投稿中.
+- [竞赛] &lt;竞赛名&gt;, 排名 X/Y (前 Z%). [技术报告] [代码]
+- [开源] &lt;仓库名&gt;, N stars. &lt;一句话说明它解决什么&gt;
+
+## 技术能力                     ← ★ 具体到工具和数字，不要写&quot;熟悉深度学习&quot;
+- 框架：PyTorch, MMDetection/MMRotate, MMSegmentation
+- 方向：旋转目标检测、SAR 图像处理、自监督预训练
+- 工程：单卡训练优化（混合精度/梯度检查点）、多 seed 实验管理、可复现流程
+
+## 代表性工作（2–3 项，各 3 行）   ← ★ 这一节让人记住你
+### &lt;项目名&gt;（时间）
+- 问题：&lt;一句话&gt;
+- 做法：&lt;一句话&gt;
+- 结果：&lt;★ 带数字，如&quot;mAP 提升 2.7，参数仅增加 3%，单卡可训&quot;&gt;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 四条写简历的纪律</strong>：
+1. <strong>一页。</strong> 超过一页说明你在写不重要的东西。
+2. <strong>每条成果带数字。</strong> “提升了性能” → “mAP +2.7（3 seeds）”
+3. <strong>在校生的成果就放最前面</strong>，不要按时间倒序把教育背景压在上面
+4. <strong>英文版和中文版都要有</strong>，联系海外时用英文</p>
+<h2 id="h-2-2-作品集-PDF-W45-原文要-有冲击力的战绩展示板">2.2 作品集 PDF（W45，原文要“有冲击力的战绩展示板”）</h2>
+<p><strong>作品集是简历的展开版</strong>，8–12 页，PDF。<strong>结构</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>第 1 页  封面：姓名 + 一句话定位 + 联系方式
+第 2 页  一页总览：12 个月做了什么（时间线 + 关键节点）
+第 3-5 页 项目一（第一篇论文）
+         · 问题是什么（配图）
+         · 我的方法（架构图）
+         · 结果（主表 + 定性对比图）
+         · ★ 我在这个项目里独立完成了什么
+第 6-7 页 项目二（第二篇 / 竞赛）
+第 8 页  技术栈与工程能力（★ 附 GitHub 截图和 reproduce.sh 的说明）
+第 9 页  ★ 我最擅长的三件事 + 我想解决的下一个问题
+第 10 页 附录：完整论文/竞赛/开源清单
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 第 9 页是最关键的一页</strong>，因为它回答的是对方最关心的问题：<strong>“这个人加入我的组，能干什么？”</strong> 前面 8 页都是过去，这一页是未来。</p>
+<h2 id="h-2-3-汇报-PPT-20-分钟-W42-备好-W53-用">2.3 汇报 PPT（20 分钟，W42 备好、W53 用）</h2>
+<figure class="code" data-lang="text"><pre><code>1 页   自我介绍（30 秒，★ 不要超过 1 页）
+2 页   我做的方向 + 为什么做它（1 分钟）
+3-8 页 第一篇工作（8 分钟）
+       · 问题 → 现有方法的不足 → 我的方法 → 结果 → 消融
+       · ★ 每页一个信息点，不要堆字
+9-11页 第二篇 / 竞赛（4 分钟）
+12 页  ★ 我目前的困惑 / 想请教的问题（2 分钟）
+13 页  我能为您的组做什么（2 分钟）
+14 页  致谢 + 联系方式
+       （留 3 分钟提问）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 第 12 页最重要，也最容易被砍掉。</strong> 一个只讲自己做了什么的汇报是“汇报”；<strong>一个带着真问题来请教的汇报是“交流”</strong>。老师会记住后者。</p>
+<p>你 W43 为每位老师准备的“3 个尖锐问题”，就放在这一页。</p>
+</blockquote>
+<hr />
+<h1 id="h-第三部分-补上缺失的-附录-D-冷邮件模板">第三部分 · ★★ 补上缺失的《附录 D · 冷邮件模板》</h1>
+<h2 id="h-3-0-先说一件原文回避了的事-回复率">3.0 先说一件原文回避了的事：回复率</h2>
+<p>原文用 W41–W48 整整八周准备这封邮件，称它为“12 个月的最终一击”。<strong>准备是对的，但“最终一击”这个框架有风险</strong>——它暗示这一击成了就赢了、不成就完了。</p>
+<p><strong>诚实的预期</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>· 给知名教授发冷邮件，作为校外人士，★ 不回复是最常见的结果
+· 收到礼貌但简短的回复（&quot;谢谢关注，目前没有名额&quot;）也很常见
+· 收到实质性回复（愿意聊一次）就已经是很好的结果
+· 三封发出去，有一封回复就算成功
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 但这不代表这八周白准备了</strong>，理由有三条：</p>
+<ol>
+<li><strong>准备的过程本身产出了三份可复用的材料</strong>（简历 / 作品集 / 汇报 PPT），<strong>你后面找工作、申博、申访问都要用</strong></li>
+<li><strong>为了写这封邮件，你精读了三位老师的最新论文</strong> —— 这本身就是高质量的领域跟踪</li>
+<li><strong>一封没回复的邮件可以再发给第二批人</strong> —— 模板和材料是复用的，边际成本很低</li>
+</ol>
+<blockquote class="quote">
+<p><strong>★ 所以正确的框架不是“最终一击”，而是“第一轮投递”。</strong> 原文 W50 安排了“Plan B 启动 + 多层备选不放弃”，方向是对的——<strong>但心理预期应该在 W48 发出之前就建立好，而不是等没回复了再调整。</strong></p>
+</blockquote>
+<h2 id="h-3-1-中文版模板-发给国内老师">3.1 中文版模板（发给国内老师）</h2>
+<figure class="code" data-lang="text"><pre><code>主题：请教｜遥感&lt;方向&gt;中&lt;具体问题&gt;的一点困惑 —— &lt;你的姓名&gt;
+
+尊敬的 X 老师：
+
+您好。冒昧来信，我是 &lt;学校/单位&gt; 的 &lt;身份&gt;，方向是 &lt;你的方向&gt;。
+过去一年我从 &lt;你的原背景&gt; 转向遥感 CV，独立完成了两项工作
+（其一已投 IEEE GRSL，代码开源于 &lt;链接&gt;）。
+
+【第2段 · ★ 证明你真读过他的东西 —— 这一段决定他读不读下去】
+我最近仔细读了您 &lt;年份&gt; 发表在 &lt;期刊&gt; 的《&lt;论文标题&gt;》。文中
+&lt;具体的某个设计/某个实验现象&gt; 让我印象很深。不过在 &lt;某个具体条件&gt;
+下我有一点困惑：&lt;你的问题，2-3 句，具体、技术性、不是能百度到的&gt;。
+我在自己的实验里也观察到了类似现象：&lt;你的一个具体数字或现象&gt;。
+
+【第3段 · 我做了什么，一句话带过，不要展开】
+我目前的工作是 &lt;一句话&gt;，在 DOTA/DIOR/HRSC 三个数据集上
+mAP 相对 baseline 提升 &lt;X.X&gt;（3 个随机种子平均），参数量仅增加 &lt;Y&gt;%，
+全部在单张消费级显卡上完成。详细内容在附件的简历和作品集里。
+
+【第4段 · ★ 明确、低门槛的请求】
+如果方便的话，不知能否向您请教上面这个问题？
+或者，如果您有兴趣，我可以做一个 20 分钟的线上汇报，
+介绍我这一年的工作，时间由您定。
+
+打扰了，无论是否方便回复，都感谢您的时间。
+
+顺祝
+研安
+
+&lt;你的姓名&gt;
+&lt;邮箱&gt; ｜ &lt;GitHub&gt; ｜ &lt;Google Scholar&gt;
+
+附件：简历.pdf ｜ 作品集.pdf ｜ 论文预印本.pdf
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-3-2-英文版模板-发给海外老师">3.2 英文版模板（发给海外老师）</h2>
+<figure class="code" data-lang="text"><pre><code>Subject: Question on &lt;specific topic&gt; in your &lt;Year&gt; &lt;Venue&gt; paper — &lt;Your Name&gt;
+
+Dear Prof. X,
+
+I hope this email finds you well. My name is &lt;Name&gt;, a &lt;role&gt; at &lt;affiliation&gt;
+working on &lt;your direction&gt;. Over the past year I transitioned from &lt;background&gt;
+into remote sensing computer vision, completing two works independently
+(one under review at IEEE GRSL; code at &lt;link&gt;).
+
+I recently read your &lt;Year&gt; &lt;Venue&gt; paper &quot;&lt;Title&gt;&quot; with great interest.
+The &lt;specific design/finding&gt; was particularly striking to me. I have one
+question regarding &lt;specific condition&gt;: &lt;your question, 2-3 sentences&gt;.
+In my own experiments I observed something related: &lt;your concrete number&gt;.
+
+My current work &lt;one sentence&gt;. It improves mAP by &lt;X.X&gt; over the baseline
+across three benchmarks (averaged over three seeds) with only &lt;Y&gt;% additional
+parameters, all trained on a single consumer GPU. Details are in the attached
+CV and portfolio.
+
+Would you be open to sharing your thoughts on the question above? Alternatively,
+I would be glad to give a 20-minute online presentation on my work at a time
+convenient for you.
+
+Thank you very much for your time, regardless of whether you are able to reply.
+
+Best regards,
+&lt;Name&gt;
+&lt;email&gt; | &lt;GitHub&gt; | &lt;Google Scholar&gt;
+
+Attachments: CV.pdf | Portfolio.pdf | Preprint.pdf
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-3-3-这封邮件的七条设计原则">3.3 ★ 这封邮件的七条设计原则</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>原则</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>主题行要具体</strong></td>
+<td>“请教” / “求指导” 会被当成群发。<strong>主题里带上他论文的具体话题</strong>，一眼看出你读过</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>第 2 段必须证明你真读了</strong></td>
+<td>★ <strong>这是全信最重要的一段。</strong> 老师每周收到大量泛泛的信，只有“真读过我东西”的会被读完</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>问题要具体、技术性、且百度不到</strong></td>
+<td>能搜到的问题说明你没认真想。<strong>问题的质量直接代表你的水平</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>自我介绍不超过 3 句</strong></td>
+<td>他现在不关心你，他关心你问的问题。<strong>成果放附件</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>请求要低门槛且有梯度</strong></td>
+<td>“回答一个问题”比“收我做学生”容易答应得多。<strong>先建立联系，再谈别的</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>给对方不回复的台阶</strong></td>
+<td>“无论是否方便回复都感谢您的时间” —— 减少他的心理负担，<strong>反而提高回复率</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>全信控制在 300 字以内</strong>（正文）</td>
+<td>手机上能一屏看完。长信=不会读</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-3-4-五个会让邮件直接进垃圾桶的错误">3.4 五个会让邮件直接进垃圾桶的错误</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>❌</th>
+<th>为什么致命</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>群发痕迹（“尊敬的老师”没写名字，或忘了改上一封的名字）</td>
+<td><strong>立刻出局</strong>，而且很常见</td>
+</tr>
+<tr>
+<td>只夸不问（“拜读大作，深受启发，希望能加入您的团队”）</td>
+<td>没有信息量，看不出你的水平</td>
+</tr>
+<tr>
+<td>一上来就要名额 / 要推荐信</td>
+<td>门槛太高，对方只能拒绝</td>
+</tr>
+<tr>
+<td>附件过大或格式奇怪（.rar / 20MB）</td>
+<td>打不开就等于没发。<strong>PDF，总共 5MB 以内</strong></td>
+</tr>
+<tr>
+<td>深夜或周末发</td>
+<td>会被后来的邮件淹掉。★ <strong>工作日上午 9–10 点发</strong>（原文说了这一条，是对的）</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-3-5-发出后怎么办">3.5 发出后怎么办</h2>
+<figure class="code" data-lang="text"><pre><code>Day 0    发出。★ 然后关掉邮箱去做别的事
+Day 1-6  不做任何事。不刷、不追问
+Day 7    ★ 若无回复，发一封简短追问（不是重发原信）：
+         &quot;X 老师您好，上周冒昧向您请教了 &lt;一句话概括问题&gt;。
+          知道您很忙，若不方便回复完全理解。
+          如果有机会，我很期待您的看法。&quot;
+         —— 三行以内
+Day 14   仍无回复 → 停止。★ 不要发第三封
+         → 转 Plan B：换一批人，或换渠道（会议现场、组会旁听、共同认识的人引荐）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 关于追问的一条纪律</strong>：<strong>最多追一次。</strong> 追第二次会从“认真”变成“打扰”，而学术圈很小，负面印象的成本远高于一次未回复。</p>
+</blockquote>
+<h2 id="h-3-6-收到回复了怎么办-原文-D327-说-立即认真专业地回复-这里给具体做法">3.6 收到回复了怎么办（原文 D327 说“立即认真专业地回复”，这里给具体做法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>回复类型</th>
+<th>你该怎么回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>实质性回答了你的问题</strong></td>
+<td>★ <strong>当天内回</strong>。感谢 + <strong>针对他的回答再往前走一步</strong>（“按您说的思路，我试了 X，观察到 Y”）—— <strong>这一步是把一次问答变成持续对话的关键</strong></td>
+</tr>
+<tr>
+<td><strong>礼貌但简短（“谢谢关注”）</strong></td>
+<td>简短感谢，不要追加要求。<strong>留个好印象，半年后有新成果时可以再联系</strong></td>
+</tr>
+<tr>
+<td><strong>表示有兴趣，问你更多</strong></td>
+<td>24 小时内详细回复 + <strong>主动提议 20 分钟线上汇报</strong>，给两三个时间选项</td>
+</tr>
+<tr>
+<td><strong>说没有名额</strong></td>
+<td>感谢 + <strong>问一句“是否方便推荐其他老师”</strong> —— 这是最常见的转介机会</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h1 id="h-W29-W48-验收清单">W29–W48 验收清单</h1>
+<ul>
+<li>[ ] 竞赛技术报告完成，<strong>含 trick 贡献分解表（带耗时和“保留？”列）</strong></li>
+<li>[ ] 第二课题选题来自第一篇的 Limitation 或审稿意见</li>
+<li>[ ] <strong>第二篇的工程时间确实比第一篇短很多</strong>（如果没有，回去补框架）</li>
+<li>[ ] GitHub README 结构完整，<strong>第一屏有效果图</strong>，<code>reproduce.sh</code> 能跑</li>
+<li>[ ] 简历一页，<strong>每条成果带数字</strong>，中英文各一版</li>
+<li>[ ] 作品集 PDF 8–12 页，<strong>第 9 页“我能做什么”写透了</strong></li>
+<li>[ ] 汇报 PPT 20 分钟，<strong>第 12 页“我的困惑”准备了真问题</strong></li>
+<li>[ ] 三封冷邮件写好，<strong>每封第 2 段都证明了你真读过对方的论文</strong></li>
+<li>[ ] 邮件自审：主题具体 / 无群发痕迹 / 正文 300 字内 / 附件 PDF 且总共 &lt;5MB</li>
+<li>[ ] <strong>心理预期已建立</strong>：三封有一封回复就算成功，没回复不代表这八周白费</li>
+<li>[ ] 发送追踪表建好，<strong>追问最多一次的纪律写在表头</strong></li>
+</ul>
+<blockquote class="quote">
+<p><strong>技能卡｜冷邮件的三个层次</strong>
+① <strong>能被读完</strong> —— 主题具体、300 字内、无群发痕迹 → ② <strong>能证明你的水平</strong> —— 第 2 段的问题必须具体、技术性、百度不到 → ③ <strong>能被答应</strong> —— 请求要低门槛（回答一个问题 ≫ 收我做学生），并给对方不回复的台阶。</p>
+<p><strong>最大的误解</strong>：以为冷邮件是“推销自己”。<strong>它其实是“用一个好问题证明你值得对话”</strong> —— 你的成果放附件，正文里最亮的应该是那个问题。</p>
+</blockquote>
+<p><strong>剩下的部分（W49–W104）</strong>：阶段三（第三课题 + 线上汇报 + 访问申请）和阶段四（求职 / 申博 / 收尾）。这部分的性质更偏职业路径，<strong>且高度依赖你 W48 之后的实际反馈</strong>——回复了走一条路，没回复走另一条。等你真的走到那里，情况会比现在的任何预设都更清楚。</p>
+<div class="pager"><a class="prev" href="w29.html"><span class="dir">← 上一篇</span><span class="nm">W29 竞赛最终收口</span></a><a class="next" href="w30.html"><span class="dir">下一篇 →</span><span class="nm">W30 第二课题立项</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#h-第二课题-开源运营-冷邮件-附全书缺失的-附录-D-冷邮件模板">第二课题 / 开源运营 / 冷邮件 —— 附全书缺失的《附录 D 冷邮件模板》</a><a href="#h-第一部分-M8-W29-W32">第一部分 · M8（W29–W32）</a><a href="#h-W29-竞赛技术报告怎么写">W29 · 竞赛技术报告怎么写</a><a href="#h-W30-W31-第二课题的-复用红利-到底有多大">W30–W31 · ★ 第二课题的“复用红利”到底有多大</a><a href="#h-W30-第二课题从哪来-从第一篇的没做完里长出来">W30 · 第二课题从哪来（“从第一篇的没做完里长出来”）</a><a href="#h-W32-GitHub-仓库运营-W35-还有-爆款打造周">W32 · GitHub 仓库运营（W35 还有“爆款打造周”）</a><a href="#h-第二部分-连接期的三份材料-W42-W45">第二部分 · ★ 连接期的三份材料（W42–W45）</a><a href="#h-2-1-简历-一页-针对-转行读博-找机会">2.1 简历（一页，针对“转行读博 + 找机会”）</a><a href="#h-2-2-作品集-PDF-W45-原文要-有冲击力的战绩展示板">2.2 作品集 PDF（W45，原文要“有冲击力的战绩展示板”）</a><a href="#h-2-3-汇报-PPT-20-分钟-W42-备好-W53-用">2.3 汇报 PPT（20 分钟，W42 备好、W53 用）</a><a href="#h-第三部分-补上缺失的-附录-D-冷邮件模板">第三部分 · ★★ 补上缺失的《附录 D · 冷邮件模板》</a><a href="#h-3-0-先说一件原文回避了的事-回复率">3.0 先说一件原文回避了的事：回复率</a><a href="#h-3-1-中文版模板-发给国内老师">3.1 中文版模板（发给国内老师）</a><a href="#h-3-2-英文版模板-发给海外老师">3.2 英文版模板（发给海外老师）</a><a href="#h-3-3-这封邮件的七条设计原则">3.3 ★ 这封邮件的七条设计原则</a><a href="#h-3-4-五个会让邮件直接进垃圾桶的错误">3.4 五个会让邮件直接进垃圾桶的错误</a><a href="#h-3-5-发出后怎么办">3.5 发出后怎么办</a><a href="#h-3-6-收到回复了怎么办-原文-D327-说-立即认真专业地回复-这里给具体做法">3.6 收到回复了怎么办（原文 D327 说“立即认真专业地回复”，这里给具体做法）</a><a href="#h-W29-W48-验收清单">W29–W48 验收清单</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

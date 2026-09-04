@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="5">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W5 详注版 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><a href="w5.html">W5</a><span>›</span><span class="chip">W5 · 详注版</span></div><h1 class="title">W5 详注版</h1><p class="subtitle">变化检测 + 语义分割 —— 第三次版本地狱，以及「UNetFormer 不在 MMSegmentation 里」</p></div><div class="note"><b>★ 原文 D32 的指令做不到</b>　UNetFormer 在 GeoSeg（PyTorch Lightning），不在 MMSegmentation 里，两件不兼容的事被拼在了一起。本页给了两条路线的取舍、MMSegmentation 的完整安装、三个数据集地址，以及 <code>metrics.py</code>：实测 F1 两种口径差 <b>8.8 个点</b>。</div>
+<h2 id="h-变化检测-语义分割-第三次版本地狱-以及-UNetFormer-不在-MMSegmentation-里">变化检测 + 语义分割 —— 第三次版本地狱，以及「UNetFormer 不在 MMSegmentation 里」</h2>
+<blockquote class="quote callout callout-expect">
+<p><strong>覆盖</strong>：W5 全周（D29–D35）。</p>
+<p><strong>W5 的 F1 / mIoU 讲解，原文写得是全书最好的几段之一</strong>（“全猜没变也有 98% 准确率”那个例子很到位），所以这一页<strong>不重复它</strong>，而是补它缺的三块：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>缺口</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>D32 让你“跑 UNetFormer baseline（体验 MMSegmentation）”</strong></td>
+<td>★ <strong>UNetFormer 根本不在 MMSegmentation 里</strong>，它在另一个框架（GeoSeg，PyTorch Lightning）。这句指令是两件不兼容的事拼在一起</td>
+</tr>
+<tr>
+<td><strong>MMSegmentation 怎么装，全书零字</strong></td>
+<td>第三套 MM 框架，版本地狱重演</td>
+</tr>
+<tr>
+<td><strong>F1/mIoU 只有解释，没有动手</strong></td>
+<td>原文自己在“卡住自救”里提到“F1 要只在变化类上算，不是两类平均”——但没说差多少。<strong>实测差 8.8 个点</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>三个数据集（LEVIR-CD / WHU-CD / LoveDA）的下载地址原文也都没给，一并补上。</p>
+</blockquote>
+<hr />
+<h1 id="h-1-本周你要装的第三套框架">1. 本周你要装的第三套框架</h1>
+<h2 id="h-先垫概念-这次和前两次有什么不同">① 先垫概念：这次和前两次有什么不同</h2>
+<p>你已经装过 MMRotate（W1）和用过裸 PyTorch（W3）。<strong>这周会同时碰到三种代码组织方式</strong>，先分清：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>代码</th>
+<th>框架基础</th>
+<th>特点</th>
+<th>本周在哪用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BIT / ChangeFormer</strong></td>
+<td><strong>裸 PyTorch</strong>（各自独立的仓库）</td>
+<td>轻量、单文件脚本、自己写训练循环</td>
+<td>D29、D31 变化检测</td>
+</tr>
+<tr>
+<td><strong>MMSegmentation</strong></td>
+<td>MM 生态（和 MMRotate 同源）</td>
+<td>config 继承那一套，你已经熟了</td>
+<td>D32 语义分割</td>
+</tr>
+<tr>
+<td><strong>GeoSeg</strong>（UNetFormer 的家）</td>
+<td><strong>PyTorch Lightning + timm</strong></td>
+<td>又是另一套约定</td>
+<td>D32（如果你要跑 UNetFormer 本体）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>★ 这本身是个重要认知</strong>：<strong>开源代码没有统一标准。</strong> 你两年里会遇到至少五六种组织方式。<strong>能快速判断“这是哪一类、入口在哪”，比熟悉某一个框架更值钱。</strong></p>
+<p><strong>判断方法（30 秒）</strong>：
+<code>text
+有 configs/ + tools/train.py          → MM 系
+有 pytorch_lightning 的 import        → Lightning
+有 main.py / train.py 且直接写 for 循环 → 裸 PyTorch</code></p>
+</blockquote>
+<h2 id="h-MMSegmentation-怎么装-全书零字-这里补">② MMSegmentation 怎么装（全书零字，这里补）</h2>
+<p><strong>★ 关键：不要装进你的 <code>mmrot</code> 环境。</strong> MMSegmentation 0.x 和 MMRotate 0.x 虽然同代，但依赖版本要求不完全一样，混装容易互相顶掉。<strong>单开一个环境。</strong></p>
+<figure class="code" data-lang="bash"><pre><code>conda create -n mmseg python=3.9 -y
+conda activate mmseg
+
+# 和 W1 一模一样的四步（见《MMRotate 保姆级实操》）
+pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
+pip install &quot;numpy&lt;2&quot; &quot;yapf==0.40.1&quot; &quot;setuptools&lt;70&quot;        # ★ 三个地雷依赖，同样要按住
+pip install mmcv-full==1.7.2 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+
+git clone https://github.com/open-mmlab/mmsegmentation.git -b 0.x
+cd mmsegmentation
+pip install -v -e .
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 注意 <code>-b 0.x</code></strong>：MMSegmentation 的默认分支是 1.x（用 mmengine + mmcv 2.x），<strong>和你熟悉的 0.x 那一套不同</strong>。为了复用你 W1 学到的知识，<strong>建议先走 0.x 分支</strong>。</p>
+<p><strong>验证</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c &quot;import mmcv, mmseg; print('mmcv', mmcv.__version__, '| mmseg', mmseg.__version__)&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>如果报错</strong>，直接翻 <a href="w1-d1-mmrotate.html">《MMRotate 保姆级实操》第 5 节</a> 的报错表——<strong>症状和解法完全一样</strong>，那张表是通用的。</p>
+<blockquote class="quote">
+<p><strong>⑥ 你同时学会了什么</strong>：<strong>第二次装 MM 系框架，你应该只花 20 分钟。</strong> 如果还是花了两小时，说明 W1 的 SOP 没写好——<strong>回去把 SOP 补成“换个框架能直接照抄”的程度</strong>。这就是当初写 SOP 的意义。</p>
+</blockquote>
+<hr />
+<h1 id="h-2-D32-的问题-UNetFormer-不在-MMSegmentation-里">2. ★ D32 的问题：UNetFormer 不在 MMSegmentation 里</h1>
+<p>原文写的是：“<strong>跑 UNetFormer baseline（LoveDA，体验 MMSegmentation）</strong>”。</p>
+<p><strong>这一句把两件不兼容的事拼在了一起：</strong></p>
+<ul>
+<li><strong>UNetFormer</strong> 的官方实现在 <strong>GeoSeg</strong>（<code>github.com/WangLibo1995/GeoSeg</code>），基于 <strong>PyTorch Lightning + timm</strong>。</li>
+<li><strong>MMSegmentation</strong> 里<strong>没有</strong> UNetFormer。</li>
+</ul>
+<p><strong>照原文做，你会在 MMSegmentation 的 configs 里翻半天找不到 UNetFormer，然后不知道自己错在哪。</strong></p>
+<h2 id="h-两条路-先想清楚你今天要什么">★ 两条路，先想清楚你今天要什么</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>路线 A：跑 UNetFormer 本体</th>
+<th>路线 B：体验 MMSegmentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用什么</td>
+<td><strong>GeoSeg</strong>（PyTorch Lightning）</td>
+<td><strong>MMSegmentation</strong></td>
+</tr>
+<tr>
+<td>和你上午读的论文对得上吗</td>
+<td>✅ 就是那篇</td>
+<td>❌ 换成别的模型</td>
+</tr>
+<tr>
+<td>复用你 W1 学的 config 技能吗</td>
+<td>❌ 又是一套新约定</td>
+<td>✅ 完全复用</td>
+</tr>
+<tr>
+<td>参考成绩</td>
+<td>UNetFormer 在 LoveDA 上 <strong>52.4% mIoU</strong></td>
+<td>看你选的模型</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 我的建议：走路线 B，用 MMSegmentation 内置模型在 LoveDA 上跑。</strong></p>
+<p>理由：<strong>今天的教学目的是“体验语义分割这个任务、拿到第一个 mIoU”，不是“复现 UNetFormer 这一篇”。</strong> 用 MMSegmentation 能复用你已有的 config 技能，40 分钟就能出结果，而学 GeoSeg 那套 Lightning 约定要额外花两三小时——<strong>这两三小时这周不值当</strong>。</p>
+<p><strong>如果你就是想跑 UNetFormer</strong>（比如你打算做分割方向），<strong>把它挪到 W5 之后的机动时间</strong>，别占用 D32。</p>
+<h2 id="h-路线-B-的具体做法">路线 B 的具体做法</h2>
+<p>MMSegmentation 0.x <strong>内置支持 LoveDA 数据集</strong>，configs 里有现成的配置。</p>
+<figure class="code" data-lang="bash"><pre><code>cd mmsegmentation
+ls configs/ | head -20              # 看有哪些方法
+ls configs/*/  | grep -i loveda     # 找 LoveDA 的配置
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>建议先用一个轻量模型跑通</strong>（不要一上来上大模型）：</p>
+<figure class="code" data-lang="bash"><pre><code># 以 DeepLabV3+ 或 SegFormer 之类的内置模型为例，
+# 找到 configs 下带 loveda 的那个 .py，然后：
+python tools/train.py configs/&lt;方法&gt;/&lt;带loveda的配置&gt;.py --work-dir work_dirs/seg_loveda
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>评测（原文给的命令是对的）</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python tools/test.py &lt;config&gt; work_dirs/seg_loveda/latest.pth --eval mIoU
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 注意和 MMRotate 的对称性</strong>：训练是 <code>tools/train.py</code>、评测是 <code>tools/test.py --eval &lt;指标&gt;</code>，<strong>只是指标从 <code>mAP</code> 换成了 <code>mIoU</code></strong>。这就是 MM 生态的价值——<strong>换任务不换手感</strong>。</p>
+</blockquote>
+<h2 id="h-顺手记一笔-这是个-idea">顺手记一笔（这是个 idea）</h2>
+<p><strong>UNetFormer 在 LoveDA 上是 52.4% mIoU</strong>（论文报的），而它主打的是“又快又准”——<strong>推理速度在 3090 上能到 322 FPS</strong>。</p>
+<p><strong>这个“效率导向”的定位，和你单卡的处境高度契合。</strong> 如果你后面选分割方向，<strong>“轻量化 / 效率”是你天然的差异化角度</strong>。记进 <code>待做idea.md</code>。</p>
+<hr />
+<h1 id="h-3-三个数据集的下载-原文都没给">3. 三个数据集的下载（原文都没给）</h1>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>用在</th>
+<th>去哪找</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LEVIR-CD</strong></td>
+<td>D29 变化检测</td>
+<td>GitHub 搜 <code>LEVIR-CD dataset</code>，官方仓库（justchenhao）有下载链接</td>
+<td>建筑变化，<strong>官方已切好 256×256</strong>，开箱即用</td>
+</tr>
+<tr>
+<td><strong>WHU-CD</strong></td>
+<td>D31 对比</td>
+<td>搜 <code>WHU Building Change Detection Dataset</code>，武大官方页面</td>
+<td>需要自己切块</td>
+</tr>
+<tr>
+<td><strong>LoveDA</strong></td>
+<td>D32 分割</td>
+<td>GitHub 搜 <code>LoveDA dataset</code>，官方仓库有 Zenodo 下载链接</td>
+<td>城市/农村 7 类 + <strong>1 个 ignore 类</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="h-LoveDA-的-ignore-类-原文在-卡住自救-里提了一句-这里讲清">★ LoveDA 的 ignore 类（原文在“卡住自救”里提了一句，这里讲清）</h2>
+<p>LoveDA 的标签里：</p>
+<figure class="code" data-lang="text"><pre><code>0        = ignore / no-data     ← ★ 必须从 mIoU 里排除
+1-7      = background, building, road, water, barren, forest, agriculture
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>如果你算 mIoU 时把 0 类也算进去，数字会不对</strong>，而且和论文没法比。MMSegmentation 的 LoveDA 配置里已经设了 <code>reduce_zero_label=True</code> 来处理这件事——<strong>但你要知道它在做什么</strong>，见下一节的实测。</p>
+<h2 id="h-BIT-的环境-原文说-按-README-配环境">BIT 的环境（原文说“按 README 配环境”）</h2>
+<p>BIT_CD 仓库是 2021 年的代码。<strong>按 W1 学的“考古模式”处理</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>git clone https://github.com/justchenhao/BIT_CD.git &amp;&amp; cd BIT_CD
+conda create -n cd python=3.9 -y &amp;&amp; conda activate cd
+pip install &quot;numpy&lt;2&quot; &quot;setuptools&lt;70&quot;           # 先按住地雷依赖
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+pip install opencv-python matplotlib einops     # BIT 用到的
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 老代码的通用处理原则</strong>（<a href="../self-rescue.html">《通用自救手册》§2</a>）：<strong>先按住 numpy/setuptools，再装 torch，最后装它 README 列的包，不要照抄它 requirements.txt 里的老版本号</strong>——那些版本今天多半装不上。</p>
+<p><strong>数据要摆成</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>LEVIR-CD/
+├── A/       ← 前时相图
+├── B/       ← 后时相图
+├── label/   ← 变化掩膜
+└── list/    ← train.txt / val.txt / test.txt（文件名列表）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<hr />
+<h1 id="h-4-亲手实现-F1-和-mIoU-原文只讲不做">4. ★ 亲手实现 F1 和 mIoU（原文只讲不做）</h1>
+<p>原文把“为什么用 F1 不用准确率”讲清楚了。<strong>但有一件事它只在“卡住自救”里提了半句、没展开</strong>：</p>
+<blockquote class="quote">
+<p>“是否用了<strong>变化检测专门的 F1 计算</strong>（只在'变化'类上算，不是两类平均）”</p>
+</blockquote>
+<p><strong>这两种算法差多少？</strong> 下面这段代码回答它。<strong>我实测跑过。</strong></p>
+<p>新建 <code>20-代码实验/utils/metrics.py</code>：</p>
+<figure class="code" data-lang="python"><pre><code>&quot;&quot;&quot;metrics.py —— 亲手实现 F1 / IoU / mIoU，看清指标在算什么。&quot;&quot;&quot;
+import numpy as np
+
+
+def confusion(pred, gt, num_classes, ignore_index=None):
+    &quot;&quot;&quot;混淆矩阵。行 = 真值类别，列 = 预测类别。&quot;&quot;&quot;
+    pred, gt = np.asarray(pred).ravel(), np.asarray(gt).ravel()
+    if ignore_index is not None:
+        m = gt != ignore_index
+        pred, gt = pred[m], gt[m]
+    k = (gt &gt;= 0) &amp; (gt &lt; num_classes)
+    return np.bincount(num_classes * gt[k].astype(int) + pred[k],
+                       minlength=num_classes ** 2).reshape(num_classes, num_classes)
+
+
+def binary_prf(pred, gt, positive=1):
+    &quot;&quot;&quot;二分类的 P / R / F1 / IoU —— 变化检测用这个。&quot;&quot;&quot;
+    tp = int(((pred == positive) &amp; (gt == positive)).sum())
+    fp = int(((pred == positive) &amp; (gt != positive)).sum())
+    fn = int(((pred != positive) &amp; (gt == positive)).sum())
+    p = tp / (tp + fp) if tp + fp else 0.0
+    r = tp / (tp + fn) if tp + fn else 0.0
+    f1 = 2 * p * r / (p + r) if p + r else 0.0
+    iou = tp / (tp + fp + fn) if tp + fp + fn else 0.0
+    return dict(P=p, R=r, F1=f1, IoU=iou, TP=tp, FP=fp, FN=fn)
+
+
+def miou(cm):
+    &quot;&quot;&quot;从混淆矩阵算逐类 IoU 和 mIoU。&quot;&quot;&quot;
+    inter = np.diag(cm).astype(float)
+    union = cm.sum(1) + cm.sum(0) - np.diag(cm)
+    iou = np.divide(inter, union, out=np.full_like(inter, np.nan), where=union &gt; 0)
+    return iou, float(np.nanmean(iou))
+
+
+if __name__ == '__main__':
+    rng = np.random.default_rng(0)
+
+    # ---- 场景1：极不平衡的变化检测，验证&quot;准确率会骗人&quot; ----
+    gt = np.zeros(10000, int); gt[:200] = 1            # 只有 2% 是变化
+    lazy = np.zeros(10000, int)                        # 全猜&quot;没变&quot;的废物模型
+    print('【全猜没变的废物模型】')
+    print('  准确率 =', (lazy == gt).mean())
+    print('  ', binary_prf(lazy, gt))
+
+    real = gt.copy()
+    fn_idx = rng.choice(np.where(gt == 1)[0], 40, replace=False); real[fn_idx] = 0   # 漏检 40
+    fp_idx = rng.choice(np.where(gt == 0)[0], 30, replace=False); real[fp_idx] = 1   # 误检 30
+    print('【一个真的在干活的模型】')
+    print('  准确率 =', (real == gt).mean())
+    print('  ', {k: (round(v, 4) if isinstance(v, float) else v)
+                 for k, v in binary_prf(real, gt).items()})
+
+    # ---- 场景2：★ F1 只在变化类算 vs 两类平均，差多少 ----
+    r  = binary_prf(real, gt, positive=1)
+    r0 = binary_prf(1 - real, 1 - gt, positive=1)      # 把&quot;不变&quot;当正类再算一次
+    print('\n【F1 的两种算法】')
+    print(f'  只算变化类 F1 = {r[&quot;F1&quot;]:.4f}   ← 变化检测论文报的是这个')
+    print(f'  两类平均  F1 = {(r[&quot;F1&quot;] + r0[&quot;F1&quot;]) / 2:.4f}   ← 算错会虚高一大截')
+
+    # ---- 场景3：mIoU 与 ignore_index ----
+    g = rng.integers(0, 8, (64, 64)); p = g.copy()
+    mask = rng.random(g.shape) &lt; 0.25                   # 25% 的像素预测错
+    p[mask] = rng.integers(0, 8, int(mask.sum()))
+    g[:8, :] = 0                                        # LoveDA: 0 = ignore（无标注区）
+    print('\n【mIoU 与 ignore】')
+    print(f'  不排除 ignore 类: mIoU = {miou(confusion(p, g, 8))[1]:.4f}')
+    print(f'  排除 ignore 类  : mIoU = {miou(confusion(p, g, 8, ignore_index=0))[1]:.4f}'
+          f'   ← LoveDA 官方口径')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-合格样例-实测输出">③ 合格样例 —— 实测输出</h2>
+<figure class="code" data-lang="text"><pre><code>【全猜没变的废物模型】
+  准确率 = 0.98
+   {'P': 0.0, 'R': 0.0, 'F1': 0.0, 'IoU': 0.0, 'TP': 0, 'FP': 0, 'FN': 200}
+【一个真的在干活的模型】
+  准确率 = 0.993
+   {'P': 0.8421, 'R': 0.8, 'F1': 0.8205, 'IoU': 0.6957, 'TP': 160, 'FP': 30, 'FN': 40}
+
+【F1 的两种算法】
+  只算变化类 F1 = 0.8205   ← 变化检测论文报的是这个
+  两类平均  F1 = 0.9085   ← 算错会虚高一大截
+
+【mIoU 与 ignore】
+  不排除 ignore 类: mIoU = 0.5483
+  排除 ignore 类  : mIoU = 0.5752   ← LoveDA 官方口径
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2 id="h-从这三组数字读出四件事">★ 从这三组数字读出四件事</h2>
+<ol>
+<li><strong>准确率 98% 的废物模型，F1 = 0。</strong> 原文举了这个例子，现在你亲手算出来了。</li>
+<li><strong>真正干活的模型准确率只高了 1.3 个点（98% → 99.3%），F1 却从 0 到 0.82。</strong> ——<strong>准确率在不平衡任务里几乎没有分辨力</strong>。</li>
+<li><strong>★ F1 的两种算法差 8.8 个点（0.8205 vs 0.9085）。</strong> 如果你误用了“两类平均”，会以为自己的模型比论文强很多，<strong>实际是算法用错了</strong>。BIT 在 LEVIR-CD 上报的 ~89–91% 是“只算变化类”的口径。</li>
+<li><strong>ignore 类排不排除，mIoU 差 2.7 个点。</strong> LoveDA 必须排除。</li>
+</ol>
+<blockquote class="quote">
+<p><strong>★ 这就是 <a href="w2-d10-d14-full.html">W2-D13 那条纪律</a>的第二次应用</strong>：<strong>任何你要用的度量，先用手算案例对拍一遍。</strong> 指标算错不会报错，只会给你一个错误的自我认知——<strong>而且会一路错到论文里</strong>。</p>
+</blockquote>
+<hr />
+<h1 id="h-5-D35-三任务对比文档-原文要-800-字-这里给骨架">5. D35 · 三任务对比文档（原文要 800 字，这里给骨架）</h1>
+<figure class="code" data-lang="markdown"><pre><code># 变化检测 vs 语义分割 vs 目标检测
+
+## 一、任务定义
+| | 目标检测 | 语义分割 | 变化检测 |
+|---|---|---|---|
+| 输入 | 单张图 | 单张图 | **同一地点两个时相** |
+| 输出 | 框 + 类别 | 每像素一个类别 | 变化掩膜（变/没变） |
+| 本质 | 定位 + 分类 | 逐像素分类 | **双时相对比** |
+
+## 二、数据与标注
+| | 检测 | 分割 | 变化检测 |
+|---|---|---|---|
+| 标注形式 | 四点/五参数框 | 逐像素 mask | 逐像素二值 mask |
+| 标注成本 | 中 | **高** | 高（还要配准两个时相） |
+| 遥感特有的坑 | 大图要切、目标任意朝向 | 类别极不均衡、有 ignore 区 | **两时相必须配准** |
+
+## 三、指标（★ 核心）
+| | 指标 | 为什么是它 |
+|---|---|---|
+| 检测 | **mAP** | 综合各类、各置信度阈值的定位+分类精度 |
+| 分割 | **mIoU** | 逐类算 IoU 再平均，小类和大类同权重 |
+| 变化检测 | **F1（只算变化类）+ IoU** | 变化像素极少，准确率会骗人 |
+
+★ 三者的共同思想：**不让多数类蒙混过关**。
+
+## 四、代码与框架
+| | 我用的 | 组织方式 |
+|---|---|---|
+| 检测 | MMRotate | MM 系 config 继承 |
+| 分割 | MMSegmentation | 同上，手感一致 |
+| 变化检测 | BIT / ChangeFormer | 各自独立的裸 PyTorch 仓库 |
+
+## 五、★ 我的判断（这一节最重要）
+- 三个任务里，我觉得最有意思的是：______，因为 ______
+- 最容易做出东西的是：______（考虑数据可得性 + 单卡算力 + 我的背景）
+- 我暂时排除的是：______，理由 ______
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 第五节现在写下来，W6-D42 的 SWOT 和 W7-D49 的方向决策书会直接用到。</strong></p>
+<hr />
+<h1 id="h-W5-验收清单">W5 验收清单</h1>
+<ul>
+<li>[ ] <code>mmseg</code> 环境装好，<code>import mmseg</code> 有版本号</li>
+<li>[ ] BIT 在 LEVIR-CD 上训完，<strong>F1 落在 ~89–91%</strong></li>
+<li>[ ] 分割 baseline 在 LoveDA 上跑出 mIoU（用 MMSegmentation 内置模型即可）</li>
+<li>[ ] <strong><code>metrics.py</code> 自测跑出那四组数字</strong>，你能解释“F1 两种算法差 8.8 点”意味着什么</li>
+<li>[ ] 变化检测 SOTA 表、分割排行榜各建好</li>
+<li>[ ] 三任务对比文档 ≥800 字，<strong>含第五节“我的判断”</strong></li>
+<li>[ ] W5 复盘完成</li>
+</ul>
+<blockquote class="quote">
+<p><strong>技能卡｜换任务时的三个必查</strong>
+① <strong>指标换了吗</strong>（检测 mAP / 分割 mIoU / 变化检测 F1）→ ② <strong>指标的具体口径是什么</strong>（只算正类还是平均？ignore 类排不排？）→ ③ <strong>代码是哪一类框架</strong>（MM 系 / Lightning / 裸 PyTorch）。
+<strong>第 ② 条是新手最容易栽的地方</strong>——同一个指标名，口径不同能差 8 个点。</p>
+</blockquote>
+<p><strong>下一周（W6）</strong>：遥感 VLM。<strong>那一周最需要的不是代码，是对“我这一张卡能不能做”的诚实判断</strong>——见 <a href="w6-w8-full.html">W6–W8 详注版</a>。</p>
+<div class="pager"><a class="prev" href="w5.html"><span class="dir">← 上一篇</span><span class="nm">W5 变化检测 + 语义分割</span></a><a class="next" href="w6.html"><span class="dir">下一篇 →</span><span class="nm">W6 遥感 VLM（视觉-语言模型）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#h-变化检测-语义分割-第三次版本地狱-以及-UNetFormer-不在-MMSegmentation-里">变化检测 + 语义分割 —— 第三次版本地狱，以及「UNetFormer 不在 MMSegmentation 里」</a><a href="#h-1-本周你要装的第三套框架">1. 本周你要装的第三套框架</a><a href="#h-先垫概念-这次和前两次有什么不同">① 先垫概念：这次和前两次有什么不同</a><a href="#h-MMSegmentation-怎么装-全书零字-这里补">② MMSegmentation 怎么装（全书零字，这里补）</a><a href="#h-2-D32-的问题-UNetFormer-不在-MMSegmentation-里">2. ★ D32 的问题：UNetFormer 不在 MMSegmentation 里</a><a href="#h-两条路-先想清楚你今天要什么">★ 两条路，先想清楚你今天要什么</a><a href="#h-路线-B-的具体做法">路线 B 的具体做法</a><a href="#h-顺手记一笔-这是个-idea">顺手记一笔（这是个 idea）</a><a href="#h-3-三个数据集的下载-原文都没给">3. 三个数据集的下载（原文都没给）</a><a href="#h-LoveDA-的-ignore-类-原文在-卡住自救-里提了一句-这里讲清">★ LoveDA 的 ignore 类（原文在“卡住自救”里提了一句，这里讲清）</a><a href="#h-BIT-的环境-原文说-按-README-配环境">BIT 的环境（原文说“按 README 配环境”）</a><a href="#h-4-亲手实现-F1-和-mIoU-原文只讲不做">4. ★ 亲手实现 F1 和 mIoU（原文只讲不做）</a><a href="#h-合格样例-实测输出">③ 合格样例 —— 实测输出</a><a href="#h-从这三组数字读出四件事">★ 从这三组数字读出四件事</a><a href="#h-5-D35-三任务对比文档-原文要-800-字-这里给骨架">5. D35 · 三任务对比文档（原文要 800 字，这里给骨架）</a><a href="#h-W5-验收清单">W5 验收清单</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
