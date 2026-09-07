@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="41">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W41 · 论文跟进 + 持续产出 —— 人脉预热深化 +  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M11 第二篇投稿 + 第三课题启动</span><span>·</span><span>Week 41</span><span>·</span><span>D281–D287</span></div><h1 class="title">论文跟进 + 持续产出 —— 人脉预热深化 + 内容输出（被动建立存在感）+ 申请会议 poster</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="281" data-k="am" title="D281 上午段"></i><i data-d="281" data-k="noon" title="D281 中午段"></i><i data-d="281" data-k="pm" title="D281 晚上段"></i></span><span class="sday"><i data-d="282" data-k="am" title="D282 上午段"></i><i data-d="282" data-k="noon" title="D282 中午段"></i><i data-d="282" data-k="pm" title="D282 晚上段"></i></span><span class="sday"><i data-d="283" data-k="am" title="D283 上午段"></i><i data-d="283" data-k="noon" title="D283 中午段"></i><i data-d="283" data-k="pm" title="D283 晚上段"></i></span><span class="sday"><i data-d="284" data-k="am" title="D284 上午段"></i><i data-d="284" data-k="noon" title="D284 中午段"></i><i data-d="284" data-k="pm" title="D284 晚上段"></i></span><span class="sday"><i data-d="285" data-k="am" title="D285 上午段"></i><i data-d="285" data-k="noon" title="D285 中午段"></i><i data-d="285" data-k="pm" title="D285 晚上段"></i></span><span class="sday"><i data-d="286" data-k="am" title="D286 上午段"></i><i data-d="286" data-k="noon" title="D286 中午段"></i><i data-d="286" data-k="pm" title="D286 晚上段"></i></span><span class="sday"><i data-d="287" data-k="am" title="D287 上午段"></i><i data-d="287" data-k="noon" title="D287 中午段"></i><i data-d="287" data-k="pm" title="D287 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：M10 你做了人脉预热的起步（列清单、精读老师近作）。M11 开篇这一周把“连接”推深一层，分三条线：① <strong>论文跟进</strong>（两篇在审，按状态处理）；② <strong>★ 人脉预热深化</strong>——逐个组精读近作（付琨/王超/孙显组）、攒尖锐问题、整理“每位老师研究近况”、<strong>更新你 M1 画的空天院技术地图</strong>（用 10 个月后的“非小白视角”重看）；③ <strong>持续产出 + 被动建立存在感</strong>——写 3 篇知乎长文（技术综述/方法解读/行业观察）+ 申请一次会议 workshop poster（线下认识老师的最佳场景）。<strong>主题是“让对的人看到你”</strong>——不只主动联系，也通过优质内容和会议曝光被动建立存在感。
+<strong>本周科研能力目标</strong>（你原计划，保留）：跟进两篇论文；深化人脉预热（精读三个组 + 研究近况文档 + 技术地图更新）；写 3 篇知乎长文；申请会议 poster。
+<strong>承上</strong>：W40 你精读了老师近作、学了“尖锐但有建设性的问题”、写了进度报告和 PPT。<strong>本周把这些用起来、推深</strong>——精读扩到三个组、技术地图刷新、知乎长文把你的积累输出成“被动存在感”。这都是 W43 准备邮件、W48 发出、乃至会议见面的铺垫。</p>
+<p><strong>🧩 贯穿线索</strong>：人脉预热聚焦三个真实对接的组——<strong>王超组</strong>（SAR/跨模态 TACMT ↔ 你第二课题）、<strong>孙显组</strong>（RingMo 检测/基础模型 ↔ 你第一课题）、<strong>付琨</strong>（孙显组核心）。知乎长文围绕你的方向（旋转检测 / SAR 难题 / 跨域）。技术地图更新仍守事实（RingMo=孙显组、TACMT=王超组，不臆测未核实的方向）。</p>
+</blockquote>
+<hr />
+<h2>🧭 W41 总览：跟进、深化连接、输出存在感</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两篇论文状态跟进</td>
+<td>按状态处理（等待/修改/rebuttal）</td>
+<td>论文线不掉队</td>
+</tr>
+<tr>
+<td>精读三个组近作 + 尖锐问题</td>
+<td>付琨/王超/孙显组各 1 篇 + ≥3 问题/篇</td>
+<td>人脉预热做功课——了解各组当前在做什么</td>
+</tr>
+<tr>
+<td>“每位老师研究近况”文档</td>
+<td>方向/在研项目/合作网络</td>
+<td>对接老师的“情报底稿”</td>
+</tr>
+<tr>
+<td>更新空天院技术地图</td>
+<td>M1 那张图的 10 个月后版</td>
+<td>用非小白视角刷新对空天院的理解</td>
+</tr>
+<tr>
+<td>知乎长文 ×3</td>
+<td>综述/方法解读/行业观察</td>
+<td>被动建立存在感（优质内容持续曝光）</td>
+</tr>
+<tr>
+<td>申请会议 workshop poster</td>
+<td>poster 申请 + 摘要</td>
+<td>线下认识空天院老师的最佳场景</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D281–282 是人脉预热深化（精读三个组 + 研究近况 + 技术地图）；D283–285 是内容输出（3 篇知乎长文，每天一篇：综述/方法/观察）；D286 申请 poster；D287 复盘。<strong>核心心态：连接期不只靠“发邮件”，更靠“持续被看到”——优质内容、会议曝光、对老师工作的深入了解，三管齐下，让 W48 的那封邮件不是冷启动，而是“早有耳闻”的水到渠成。</strong> 这周看似“杂”（论文+精读+写帖+poster 多线并行），但它们都指向同一个目标：让你在对接空天院之前，先成为一个“有作品、有判断、被看见”的人。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d281" data-d="281"><header class="day-head"><span class="dnum">D281</span><h2 class="day-t">周一 · 检查两篇论文状态 + 精读付琨组、王超组各 1 篇 + 批注</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天先查两篇论文状态、按需处理，然后进入人脉预热深化——精读付琨组、王超组各 1 篇近作 + 批注。提醒：两篇论文若都在审、无需行动，就把时间投入人脉预热（读老师近作）；若某篇要修改/rebuttal，优先处理（复用 W36/W39 的审稿方法）。本周人脉预热的精读，是<strong>逐个组深入</strong>（W40 是泛选 2 篇，本周按组系统读），更有针对性。</p>
+</blockquote>
+</div><section class="slot" id="d281-am" data-d="281" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D281 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">检查两篇论文状态并按需处理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（两篇论文可能的状态与对应动作）</h4><div class="blk-b"><ul>
+<li>两篇论文此时可能处于：① <strong>Under Review</strong>（在审，无需行动，耐心等）；② <strong>Major/Minor Revision</strong>（要修改，优先处理，复用 W36/W39 方法：读三遍、标三类、补实验、Response Letter）；③ <strong>Reject/Resubmit 或需 rebuttal</strong>（按要求处理）。<strong>先查状态，再决定本周时间分配</strong>。</li>
+<li><strong>为什么“在审就投人脉预热”</strong>：审稿不可控、有它自己的节奏；你能主动推进的是人脉预热和产出。<strong>论文在审的等待期，正是做连接功课的好时机</strong>——不空等。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>登录两篇论文的投稿系统查状态 → ① 都在审/无行动项 → 确认状态、本周专注人脉预热 + 内容输出；② 某篇要修改 → 评估工作量，优先安排（复用审稿处理方法），其余线相应压缩；③ 记录两篇当前状态（进 M11 跟踪）。建议建一个“论文状态跟踪”小表：每篇记 投稿日期/期刊/当前状态/下次该检查的时间/待办（如有 revision 的 deadline），一眼看清两篇各自走到哪、有没有时限要赶——避免两篇在审时漏掉某篇的关键节点。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>两篇状态已查清、本周时间分配已定（无行动则全力人脉预热+产出；有修改则优先处理）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>反复刷状态、焦虑结果 → 查一次、确认、转向能主动做的事（人脉预热）。</li>
+<li>有修改项却拖着不处理 → 审稿响应有时限，要修改就优先安排。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>状态长期 Under Review 担心？→ 在正常审稿周期内耐心等（别频繁催）；收到 Revision 工作量大？→ 复用 W36 方法先难后易、用现成框架补实验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>查清两篇状态、合理分配了本周时间</strong>。<strong>做了</strong>（查两篇状态 + 定时间分配 + 记录跟踪）、<strong>学了</strong>（论文三种状态对应动作、在审等待期投入人脉预热、不空等）、<strong>会了</strong>（根据论文进展灵活安排、把等待期转化为连接功课）。</p>
+</div></section></section><section class="slot" id="d281-noon" data-d="281" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D281 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">精读付琨组最新 1 篇 + 批注</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么按“组”系统精读）</h4><div class="blk-b"><ul>
+<li>W40 你泛选了 2 篇；本周升级为<strong>按组系统精读</strong>——付琨组、王超组、孙显组各 1 篇近作。好处是<strong>针对每个对接组深入</strong>：了解这个组当前的具体方向、方法偏好、未解问题，比泛读更能支撑你和这个组的对接（邮件/见面时谈到点上）。</li>
+<li><strong>付琨</strong>是孙显组核心成员，<strong>对接你第一课题方向</strong>（检测/基础模型应用线）。精读他近作 = 了解这条线的最新动态。为什么不只读“大牛”孙显、也读付琨这样的核心成员：① 核心成员往往是论文的实际主导者，读他的工作更能看清组里“具体怎么做研究”；② 对接时，核心成员/师兄博后常是更现实的“第一接触点”（比直接联系大牛门槛低、回应概率高），他们也是了解组内情况、甚至帮你引荐的入口。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>找付琨（孙显组）最新 1 篇论文（近一年、和你方向相关的）→ 精读：① 解决什么问题/方法/创新；② 当前研究重点；③ <strong>和你工作的接点</strong>（你的方法/发现能否对话、补充）；④ 批注 ≥1–2 个“尖锐但有建设性的问题”（三要素：复述+理解优势+延伸边界）→ 归入请教清单。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>付琨组 1 篇精读 + 批注完成，记清“他们在做什么 + 接点 + 尖锐问题”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 精读只总结不找接点 → 落到“和我的接点”（为对接铺垫）；② 找不到付琨的代表作 → 从孙显组近作里找他参与的、和你方向最相关的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>付琨论文难找/方向不确定？→ 看孙显组主页/近作的作者列表，找他署名的；论文难懂？→ 抓问题+方法+贡献主线。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>精读了付琨组近作、找到接点与尖锐问题</strong>。<strong>做了</strong>（精读付琨组 1 篇 + 找接点 + 批注尖锐问题）、<strong>学了</strong>（按组系统精读更有针对性、付琨对接第一课题线、落到接点）、<strong>会了</strong>（为对接某个具体组做深入功课）。</p>
+</div></section></section><section class="slot" id="d281-pm" data-d="281" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D281 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">精读王超组最新 1 篇 + 批注</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>王超组对接你第二课题（SAR/跨模态，TACMT 是文本-SAR 跨模态）——是三个组里和你契合度最高的</strong>。精读王超组近作格外重要：他们的 SAR/跨模态方向就是你第二课题所在，了解他们当前在做什么，能让你的对接最有针对性（你的 speckle-aware 工作正好和他们对话）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>找王超组最新 1 篇（SAR/跨模态方向）→ 精读：问题/方法/创新、当前重点、<strong>和你第二课题的接点</strong>（你的 speckle 处理/跨域工作怎么和他们对话、补充）→ 批注 ≥2 个尖锐问题（重点结合你第二课题问，如“您在跨模态对齐用了 X，我在第二课题处理 speckle 时……，好奇 X 在 SAR 噪声场景下……”）→ 归入请教清单，标为“高优先对接组”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>王超组 1 篇精读 + 批注（含结合第二课题的尖锐问题），明确这是最高契合的对接组。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 没意识到王超组的高契合度、泛泛读 → 这是最对口的组，要读透、问题要结合你第二课题；② 问题不结合自己工作 → 结合第二课题问，既请教又自然带出你的对口工作。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>王超组近作太专？→ 抓他们的核心 idea（跨模态怎么对齐、SAR 怎么处理），联系你第二课题的经验问；接点找不到？→ 你做 SAR speckle、他们做 SAR 跨模态，天然在 SAR 这个交集上对话。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>精读了最高契合组（王超组）的近作、攒了对口的尖锐问题</strong>。<strong>做了</strong>（精读王超组 1 篇 + 结合第二课题找接点 + 批注 + 标高优先）、<strong>学了</strong>（王超组=最高契合对接组、SAR 是你和他们的天然交集、问题结合自己工作）、<strong>会了</strong>（为最对口的对接组做最有针对性的功课）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜按组系统精读（人脉预热深化）</strong>：W40 泛选→W41 按组精读（付琨/王超/孙显组各 1 篇近作）。每组了解：当前方向/方法偏好/未解问题/和你的接点。<strong>三个组的对接定位</strong>：王超组（SAR/跨模态 TACMT）=最高契合↔第二课题；孙显组（RingMo 检测/基础模型）↔第一课题；付琨=孙显组核心↔第一课题线。精读落到“和我的接点”，批注尖锐问题结合自己课题问（既请教又带出你的对口工作）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 两篇论文状态检查（定本周时间分配）✅ 付琨组 + 王超组各 1 篇精读 + 批注（含尖锐问题，归入请教清单）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D281</summary><textarea data-note="d281" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d282" data-d="282"><header class="day-head"><span class="dnum">D282</span><h2 class="day-t">周二 · 精读孙显组最新 1 篇 + 整理“研究近况”文档 + 更新空天院技术地图</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天补上孙显组的精读（攒 ≥3 个尖锐问题），并把三个组的功课<strong>沉淀成两个东西</strong>：一份“每位老师研究近况”文档、一次“空天院技术地图”更新。提醒：★ 你 M1 画过一张空天院技术地图（当时是“小白视角”）；10 个月后的你有了大量积累，<strong>重看会发现很多当时没注意的细节和趋势</strong>——更新它，就是刷新你对空天院的整体理解，为对接打下“全局认知”。</p>
+</blockquote>
+</div><section class="slot" id="d282-am" data-d="282" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D282 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读孙显组最新 1 篇（近 3 个月）+ 写 ≥3 个尖锐问题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>孙显组是空天院的核心团队之一</strong>（RingMo 系列是其遥感基础模型/检测的旗舰），对接你第一课题方向。读他们<strong>近 3 个月</strong>的最新论文，是了解这个组当前最前沿动向的最直接方式（越新越能反映他们现在在攻什么）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>找孙显组近 3 个月内发的 1 篇论文（最新优先）→ 精读：问题/方法/创新、<strong>当前最前沿方向</strong>（从最新论文看他们现在攻什么）、和你第一课题的接点 → 写 <strong>≥3 个“尖锐但有建设性的问题”</strong>（三要素，结合你的旋转检测/基础模型应用工作）→ 归入请教清单。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>孙显组 1 篇精读 + ≥3 个尖锐问题，记清他们当前最前沿方向 + 与第一课题接点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 读了旧论文不是最新的 → 找近 3 个月的（反映当前动向）；② 问题不够“尖锐建设性” → 按三要素、要“读了才问得出来”的深度。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>找不到近 3 个月的孙显组论文？→ 看 Scholar/arXiv 按时间排，或 follow 后的推送；问题想不出 ≥3 个？→ 从论文里“一笔带过/留作未来/有隐含假设”处找。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>精读了孙显组最新近作、攒了 3 个对口尖锐问题</strong>。<strong>做了</strong>（精读孙显组近 3 月 1 篇 + 找前沿方向/接点 + ≥3 尖锐问题）、<strong>学了</strong>（读最新论文看当前动向、孙显组对接第一课题、问题结合自己工作）、<strong>会了</strong>（把握核心对接组的当前前沿）。</p>
+</div></section></section><section class="slot" id="d282-noon" data-d="282" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D282 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整理“每位老师的研究近况”文档</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（研究近况文档是什么、为什么有用）</h4><div class="blk-b"><ul>
+<li>把三个组精读的功课，<strong>汇总成一份“每位老师研究近况”文档</strong>——每位老师：最新研究方向、在研项目（如能查到）、合作者网络、和你的对接点、你攒的尖锐问题。它是你对接老师的<strong>“情报底稿”</strong>：写邮件、见面、汇报时，对这位老师“在做什么、我和他怎么对接、我能问什么”一目了然。</li>
+<li><strong>和零散笔记的不同</strong>：零散精读笔记分散；这份文档<strong>按“人”聚合</strong>，让你对每位目标老师有完整画像。等 W43 准备邮件时，直接从这里取“对接点 + 请教问题”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>建“每位老师研究近况”文档（见补充包范例 1）——每位老师一节：① 最新研究方向（从近作总结）；② 在研项目/资助（如主页/基金能查到）；③ 合作者网络（常合作的人，可能的间接联系入口）；④ 和你的对接点；⑤ 你攒的尖锐问题（请教点）；把三个组（孙显/付琨/王超组 + 师兄博后）都填进去。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一份按老师聚合的研究近况文档，每位有方向/项目/合作网络/对接点/请教点，完整可用于对接。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 文档只列“他做了什么”缺对接点/请教点 → 这两项是对接的关键，必须有；② 合作者网络忽略 → 合作者可能是间接联系入口（如某师兄），值得记。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>在研项目查不到？→ 看主页/基金委网站/近作致谢，查不到就留空（不臆测）；信息太散？→ 按“方向/项目/合作/对接点/请教点”五栏固定结构填。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把功课汇总成了对接的“情报底稿”</strong>。<strong>做了</strong>（建研究近况文档 + 五栏聚合三个组 + 填对接点/请教点）、<strong>学了</strong>（按人聚合成完整画像、文档是对接情报底稿、合作网络是间接入口）、<strong>会了</strong>（系统沉淀对接所需的老师情报）。</p>
+</div></section></section><section class="slot" id="d282-pm" data-d="282" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D282 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">更新空天院技术地图（M1 那张图的 10 个月后版）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么 10 个月后要重画技术地图）</h4><div class="blk-b"><ul>
+<li>你 M1 画过一张“空天院技术地图”（各组/方向/代表作），但那是<strong>零基础“小白视角”</strong>——当时很多东西你看不懂、注意不到。<strong>10 个月后的你有了大量积累</strong>（读了 100+ 篇、做了两篇论文、精读了这几个组），重看会发现：当时漏掉的方向、看错的归属（如你 M2-W7 才订正 RingMo=孙显组）、新出现的趋势、各组之间的关系。<strong>更新它 = 用现在的认知刷新对空天院的整体理解</strong>。</li>
+<li><strong>为什么这对对接重要</strong>：对接老师前，你需要对空天院有“全局认知”（谁在做什么、各组关系、你的位置在哪）。更新后的技术地图就是这张全局图——让你的对接是“了解全局后的精准对接”，而非盲目。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>调出 M1 画的空天院技术地图 → 用现在的认知更新：① <strong>补全/修正各组方向</strong>（基于精读，如孙显组的基础模型+检测线、王超组的 SAR+跨模态线，订正当初的小白误判）；② <strong>加入新趋势</strong>（这 10 个月领域和这些组的新动向）；③ <strong>标出你的位置</strong>（你的两个课题在这张图上对接哪里——下游特化/SAR 难题，和他们的基础模型工作互补）；④ <strong>标对接优先级</strong>（王超组最高，等）；对比 M1 版，记下“我现在比当初多看懂了什么”——这个对比本身就是你成长的证据（当初看不懂的归属、注意不到的趋势，现在一目了然）。可以用一句话概括每个组现在在你眼里的形象（如“王超组=SAR 跨模态前沿，和我第二课题正面对话”“孙显组=基础模型+检测，我做它下游的高效特化”），让地图既是知识图也是你的“对接坐标系”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>更新后的空天院技术地图——各组方向准确、含新趋势、标出你的位置和对接优先级；与 M1 版对比看出认知提升。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 更新时仍臆测未核实的方向 → 基于精读的事实更新，不确定的标“待核实”（守事实订正）；② 不标“你的位置” → 技术地图要体现“你和他们怎么对接”，标出你的发力点和互补关系。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>M1 的地图找不到了？→ 重画一张（按精读的三个组 + 你了解的其他组/方向）；不确定某组关系？→ 基于精读和论文合作网络推断，存疑的标注。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用 10 个月的积累刷新了空天院技术地图、建立了对接全局认知</strong>。<strong>做了</strong>（更新技术地图 + 修正方向/加趋势/标你的位置和优先级 + 对比 M1）、<strong>学了</strong>（10 个月后非小白视角重看刷新理解、技术地图是对接全局图、标出自己的位置与互补）、<strong>会了</strong>（建立对目标机构的全局认知以支撑精准对接）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜更新技术地图（非小白视角）</strong>：M1 的技术地图是“小白视角”；10 个月后用积累重看会发现漏掉的方向、看错的归属（如 RingMo 归属订正）、新趋势、各组关系。更新=刷新对空天院的全局认知。更新要点：①基于精读修正各组方向（守事实，不臆测）②加新趋势 ③<strong>标出你的位置</strong>（你的发力点对接哪里、和他们基础模型工作的互补）④标对接优先级（王超组最高）。对接前需要“了解全局后的精准对接”，不盲目。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 孙显组最新 1 篇精读 + ≥3 尖锐问题 ✅ “每位老师研究近况”文档（五栏聚合三个组）✅ 空天院技术地图更新（标你的位置 + 对接优先级）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D282</summary><textarea data-note="d282" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d283" data-d="283"><header class="day-head"><span class="dnum">D283</span><h2 class="day-t">周三 · 写知乎长文 1·技术综述 + 发布 + GitHub 维护</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写第一篇知乎长文——你方向的技术综述（“2024–2025 遥感 XX 方向进展梳理”，2000–3000 字 + 配图），发布并分享。提醒：★ 好的技术综述帖会被<strong>大量收藏、持续带来曝光</strong>。如果空天院的师生也刷知乎（概率不小），他们可能会看到你——这是“<strong>被动建立存在感</strong>”。综述帖也最能体现你的领域积累（读了 100+ 篇），是高价值的内容输出。</p>
+</blockquote>
+</div><section class="slot" id="d283-am" data-d="283" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D283 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写技术综述长文（2000–3000 字，配图）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（技术综述帖写什么、为什么价值高）</h4><div class="blk-b"><ul>
+<li><strong>技术综述帖 = 系统梳理你方向（如旋转检测/SAR 检测）2024–2025 的进展</strong>：有哪些主要方法流派、各自思路、代表工作、未解问题、趋势。它<strong>价值高</strong>是因为：① 帮读者快速了解一个方向（实用→被收藏）；② 体现你的领域积累和判断力（读了大量论文才写得出）；③ <strong>被动建立存在感</strong>（被收藏/转发持续曝光，同行/目标组可能看到）。</li>
+<li><strong>和你的论文 Intro/RW 的关系</strong>：你写论文时梳理过相关工作，<strong>这些积累正好复用</strong>——综述帖是把“为论文做的领域梳理”扩展成面向大众的科普综述（更全、更通俗、加你的判断）。</li>
+<li><strong>★ 为什么对你的长线特别值</strong>：一篇被广泛收藏的高质量综述，会在很长时间里持续被搜到、被分享——这是“一次投入、长期复利”的存在感。对你这种要对接空天院、又没有现成人脉的人，<strong>让目标组的人“在某个综述里见过你的名字”，比一封冷邮件的第一印象友好得多</strong>——它把你从“一个陌生的发邮件者”变成“那个写了不错综述的人”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写技术综述（2000–3000 字，见补充包范例 2 结构）——① 开头（这个方向为什么重要、本文梳理什么）；② <strong>主要方法流派</strong>（分几类讲思路 + 代表工作，复用你论文 RW 的积累 + 扩展）；③ <strong>关键进展/趋势</strong>（2024–2025 的新动向）；④ <strong>未解问题/未来方向</strong>（体现你的判断，也暗合你的课题）；⑤ 配图（方法分类图/趋势图/代表结果）；语言通俗、有条理、有你的见解。<strong>注意</strong>：客观梳理，可适当提及自己工作但不喧宾夺主（综述的可信度靠客观）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一篇 2000–3000 字、有条理、有见解、配图的技术综述帖——读者读完能快速了解这个方向的全貌和趋势。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>综述写成论文罗列（堆砌“X 做了…Y 做了…”）→ 要有分类、有逻辑、有你的判断（流派/趋势/未解问题）。</li>
+<li>通篇推销自己的工作 → 综述靠客观赢得信任，自己的工作适度提及即可。</li>
+<li>没配图 → 配图（方法分类/趋势/代表结果）大幅提升可读性和被收藏率。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知怎么组织？→ 按“方法流派分类 + 趋势 + 未解问题”组织（复用论文 RW 框架扩展）；内容太多写不完？→ 聚焦你最熟的子方向（旋转检测或 SAR），写深写透好过面面俱到。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写出了体现领域积累的技术综述帖</strong>。<strong>做了</strong>（写 2000-3000 字综述 + 方法流派/趋势/未解问题 + 配图）、<strong>学了</strong>（综述价值=实用被收藏+体现积累+被动存在感、复用论文 RW 积累、靠客观赢信任）、<strong>会了</strong>（把领域积累输出成高价值的科普综述）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜技术综述帖（被动建立存在感）</strong>：系统梳理你方向 2024–2025 进展（方法流派/代表工作/趋势/未解问题），2000–3000 字+配图。价值：实用被收藏+体现你的领域积累+<strong>被动建立存在感</strong>（被收藏转发持续曝光，目标组师生可能看到）。复用论文 RW 的领域梳理扩展成科普。要有分类/逻辑/你的判断，别堆砌；靠客观赢信任，自己工作适度提及；配图提升收藏率。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d283-noon" data-d="283" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D283 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">发布 + 分享到相关社区</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>写完要<strong>发布并分享到对的地方</strong>，内容才有曝光。除知乎，可同步到相关社区（CV/遥感的公众号、技术群、Reddit/Twitter 等你 M9 建过的渠道）。<strong>分享是为了让对的人看到</strong>（同行、潜在的目标组师生），不是刷量。一个小技巧：发布时间选在工作日的通勤/午休/晚间等阅读高峰，标题用方向+年份的可搜索词，这样既能被算法推给对的人群，也能在别人日后搜索这个方向时被找到（长尾曝光）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在知乎发布综述帖（好标题 + 排版清晰 + 配图）→ 分享到相关社区/群/你的其他渠道 → 写一句简介引导阅读；发布后留意初期反馈（评论/收藏）。<strong>控时长</strong>——发布分享即可，不无限投入。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>综述帖已发布、分享到几个相关渠道、有简介引导。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 写了不分享 → 没曝光就白写，分享到对的渠道；② 到处刷屏式分享 → 分享到相关、对口的地方即可，不刷屏。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知分享到哪？→ 你 M9 建的渠道（公众号/群/Reddit 等）+ 知乎相关话题；标题不会起？→ 用“方向 + 年份 + 梳理/综述”（如“2024-2025 遥感旋转检测进展梳理”），清晰可被搜到。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把综述帖发布并分享到了对的渠道</strong>。<strong>做了</strong>（发布 + 分享相关社区 + 简介引导 + 留意反馈）、<strong>学了</strong>（分享让对的人看到、对口渠道非刷屏、好标题可被搜到）、<strong>会了</strong>（让优质内容获得有效曝光）。</p>
+</div></section></section><section class="slot" id="d283-pm" data-d="283" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D283 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">GitHub 仓库维护 + 回复 Issues</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>内容输出周也顺手维护 GitHub（回 Issue、修小问题、更新文档）。<strong>保持仓库活跃</strong>和知乎存在感是一回事——都是“被动建立存在感”的组成（活跃的仓库 + 优质的帖子，让你的工作持续可见）。副线，顺手做。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>花少量时间——回复积压 Issue/PR、修明显小问题、更新文档、看 star 趋势；<strong>控时长</strong>，顺手维护即收。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Issue 清空、小问题已修、仓库保持活跃。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 内容周把时间又砸进 GitHub 大改 → 副线顺手维护；② Issue 不回 → 顺手清掉（责任田）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Issue 多？→ 优先回有意义的（bug/使用问题）；想大改？→ 记待办，有余力再做。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>保持了仓库活跃（被动存在感的一环）</strong>。<strong>做了</strong>（回 Issue + 修小问题 + 更新文档 + 控时长）、<strong>学了</strong>（活跃仓库+优质帖子共同建立存在感、副线顺手做）、<strong>会了</strong>（低成本维持开源项目可见度）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 知乎技术综述长文（2000–3000 字 + 配图）✅ 发布 + 分享到相关社区 ✅ GitHub 维护 + 回 Issues。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D283</summary><textarea data-note="d283" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d284" data-d="284"><header class="day-head"><span class="dnum">D284</span><h2 class="day-t">周四 · 写知乎长文 2·方法解读（故事性）+ 发布 + 读 2 篇</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写第二篇知乎长文——方法解读（“我如何用 XX 技术解决遥感 YY 问题：从 idea 到论文投稿的全过程”，偏故事性），发布并分享，再读 2 篇新论文。提醒：方法解读帖<strong>偏故事性</strong>——讲你做这个课题的“心路和过程”（怎么发现问题、怎么想到方法、踩了什么坑、怎么投稿），比干讲方法更吸引人。★ 守住核心延后线：可以讲问题/思路/过程，但<strong>未发表的核心实现细节不泄露</strong>（论文还在审）。</p>
+</blockquote>
+</div><section class="slot" id="d284-am" data-d="284" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D284 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写方法解读长文（故事性，从 idea 到投稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（方法解读帖为什么偏故事性）</h4><div class="blk-b"><ul>
+<li>方法解读帖讲“<strong>你如何解决一个问题的全过程</strong>”——从发现问题、产生 idea、设计方法、遇到困难、到写论文投稿。<strong>故事性</strong>（真实的探索过程 + 心路 + 踩坑）比“我的方法多牛”的硬核讲解更吸引人——读者爱看“一个人是怎么做出来的”，有代入感、有共鸣。尤其对同样在转型/做研究的读者，你“零基础起步、踩坑、最终做出两篇论文”的真实过程，比任何技术细节都更能打动他们——这种共鸣会转化为关注、收藏和口碑传播。</li>
+<li><strong>和综述帖的不同</strong>：综述是客观梳理领域（广度）；方法解读是讲你自己一个课题的故事（深度 + 个人视角）。两者互补——综述显积累，方法解读显你的研究过程和能力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写方法解读帖（故事性）——① 起点（你怎么发现这个问题，如“做完第一篇我发现 SAR 的 speckle 一直是个坎”）；② idea 的产生（怎么想到你的方法，可讲灵感/借鉴/试错）；③ 实现与踩坑（真实的探索过程，但<strong>不泄未发表核心实现细节</strong>）；④ 结果与投稿（效果 + 投稿历程 + 心态）；⑤ 给读者的启发；语言真诚、有故事性、引流到 GitHub/arXiv。<strong>讲“是什么/为什么/怎么想的/踩了什么坑”，不讲未发表的核心实现细节</strong>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一篇有故事性、讲清研究过程、引流、且不泄未发表核心的方法解读帖——读者读了想了解你的工作、有代入感。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>写成硬核方法讲解（堆公式）→ 偏故事性、讲过程和心路更吸引人。</li>
+<li>一激动泄露未发表核心实现细节 → 守延后线，讲思路层面不讲核心实现。</li>
+<li>通篇自夸 → 多讲真实探索（含踩坑/失败），少自夸，更有共鸣。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知怎么讲故事？→ 按“发现问题→产生 idea→踩坑→结果→启发”时间线讲；担心泄核心？→ 自检“这段写出去别人能复现我的核心创新吗”，能就删、讲到思路层面。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写出了有故事性、引流又不泄核心的方法解读帖</strong>。<strong>做了</strong>（写故事性方法解读 + 讲过程/踩坑 + 引流 + 守核心延后）、<strong>学了</strong>（方法解读偏故事性更吸引人、讲过程心路、守延后线）、<strong>会了</strong>（把研究过程讲成有代入感的故事、放大影响力）。</p>
+</div></section></section><section class="slot" id="d284-noon" data-d="284" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D284 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">发布 + 分享</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>和综述帖一样，方法解读写完要发布分享。两篇风格不同（综述客观/方法解读故事性）正好覆盖不同读者。发布后可互相引导（综述帖里提到“我的具体方法见这篇解读”）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>发布方法解读帖（好标题如“我如何用…解决…：从 idea 到投稿”) → 分享到相关渠道 → 可在综述帖/GitHub 互相引流 → 留意反馈。<strong>控时长</strong>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>方法解读帖已发布、分享、与综述帖/GitHub 互引。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不与其他内容互引 → 互相引流放大整体曝光；② 标题平淡 → 用“我如何…从 idea 到投稿”这类有故事感的标题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>曝光不如综述？→ 风格不同受众不同，正常；持续输出比单篇爆款重要。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>发布了方法解读帖并与其他内容互引</strong>。<strong>做了</strong>（发布 + 分享 + 互引 + 留意反馈）、<strong>学了</strong>（不同风格覆盖不同读者、内容互引放大曝光）、<strong>会了</strong>（构建相互引流的内容矩阵）。</p>
+</div></section></section><section class="slot" id="d284-pm" data-d="284" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D284 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读 2 篇新论文（持续追踪）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>内容输出之余保持读论文（持续追踪 + 可能为第三课题/综述更新埋线索）。轻量泛读即可。读论文这条线之所以贯穿始终（连缓冲周/内容周都不停），是因为它是你所有产出的“燃料”——综述靠它、第三课题靠它、对老师的请教问题也靠它；停了读论文，输出很快就会枯竭。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>从 alert/清单挑 2 篇近期相关论文 → 泛读抓主线 + 简要笔记 → 更新清单 → 留意第三课题线索/目标组新作（标进知识库）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>2 篇泛读笔记 + 清单更新 + 线索标记。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 内容周完全停读论文 → 保持轻量追踪；② 读完不记 → 简要笔记。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>时间紧？→ 读摘要+图表+结论抓主线。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>保持了轻量的领域追踪</strong>。<strong>做了</strong>（泛读 2 篇 + 笔记 + 更新清单 + 标线索）、<strong>学了</strong>（输出之余持续追踪、为第三课题/综述埋线索）、<strong>会了</strong>（在产出期维持领域敏感度）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 知乎方法解读长文（故事性，从 idea 到投稿，不泄核心）✅ 发布 + 分享 + 互引 ✅ 2 篇新论文笔记。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D284</summary><textarea data-note="d284" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d285" data-d="285"><header class="day-head"><span class="dnum">D285</span><h2 class="day-t">周五 · 写知乎长文 3·行业观察（观点性）+ 发布 + 整理本周帖子数据</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写第三篇知乎长文——行业观察（“遥感 CV 的下一个风口在哪？”，偏观点性，基于你读过的 100+ 篇论文的总结），发布，并整理本周 3 篇帖子的数据。提醒：行业观察帖<strong>偏观点性</strong>——基于你的大量阅读，给出对领域走向的判断。这最能体现你的“领域判断力”（不只是会做，还看得清趋势）。三篇风格各异（综述客观/方法解读故事/观察观点）正好立体展示你的能力。</p>
+</blockquote>
+</div><section class="slot" id="d285-am" data-d="285" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D285 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写行业观察长文（观点性，基于 100+ 篇积累）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（行业观察帖写什么、为什么体现判断力）</h4><div class="blk-b"><ul>
+<li>行业观察帖 = <strong>基于你的大量阅读，给出对领域走向的判断</strong>（哪些方向在兴起、哪些在饱和、下一个风口可能在哪、为什么）。它<strong>偏观点</strong>——不是客观罗列，而是亮出你的看法和论据。这最能体现你的<strong>领域判断力</strong>：读了 100+ 篇、做了两篇论文，你对这个领域“往哪走”有了自己的判断，这种判断力是研究者的高阶能力。<strong>对对接老师而言，这恰是最能让人记住你的特质</strong>——能做实验的人很多，但能看清领域走向、对“下一步往哪走”有独到判断的年轻人不多。一篇有洞察的观察帖传递的信号是“这个人不只会埋头做，还想得清楚、有研究品味”。</li>
+<li><strong>和综述帖的不同</strong>：综述是“梳理已发生的”（客观）；行业观察是“判断将发生的”（观点）。观察帖更冒险（观点可能被质疑）也更显水平（敢判断且有论据）。<strong>它也暗合你的战略</strong>——你判断的“风口”可以和你的发力方向（SAR 难题/跨域/高效）呼应。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写行业观察帖（观点性）——① 提出观察的问题（“遥感 CV 下一个风口在哪？”）；② <strong>基于阅读给判断</strong>（哪几个方向在兴起：如多模态、SAR 智能解译、高效基础模型、跨域泛化等，给你的论据）；③ <strong>论证</strong>（为什么这些是风口：技术成熟度/需求/未解问题）；④ 可点出你看好的方向（暗合你的发力点，但论据要扎实）；⑤ 结尾留开放讨论（观点帖欢迎交流）；语言有判断、有论据、真诚。<strong>观点要有论据支撑</strong>（基于你读的论文），不是空谈。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一篇有判断、有论据、引发思考的行业观察帖——读者读完能感到“这人对领域有自己的洞察”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>观点没有论据（空谈“我觉得 X 会火”）→ 基于你读的论文给论据（技术趋势/需求/未解问题）。</li>
+<li>不敢给观点（写成又一篇综述）→ 观察帖就要亮判断（敢判断且有据才显水平）。</li>
+<li>观点太绝对/标题党 → 有判断但留余地（“可能”“值得关注”），靠论据而非耸动取胜。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知判断什么方向？→ 从你读的 100+ 篇里看“哪些方向论文在激增、哪些问题反复被提”；担心判断错？→ 观点帖允许有不同看法，给足论据、留开放讨论即可（错也是交流）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写出了体现领域判断力的行业观察帖</strong>。<strong>做了</strong>（写观点性观察帖 + 给判断和论据 + 留开放讨论）、<strong>学了</strong>（观察帖判断将发生的、体现领域判断力、观点要有论据、暗合战略）、<strong>会了</strong>（基于大量阅读输出对领域走向的有据判断）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜行业观察帖（体现判断力）</strong>：基于大量阅读给对领域走向的判断（哪些方向兴起/饱和、下一个风口、为什么），偏观点性。最显你的<strong>领域判断力</strong>（读了 100+ 篇后看得清趋势=研究者高阶能力）。和综述不同：判断将发生的（观点）vs 梳理已发生的（客观）。要点：观点有论据（基于论文趋势/需求/未解问题）、敢判断但留余地、暗合你的发力方向、留开放讨论。靠论据非标题党。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d285-noon" data-d="285" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D285 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">发布</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>发布观察帖，完成本周“综述+方法+观察”三篇内容矩阵。三篇立体展示你：综述（领域积累）+方法解读（研究能力）+观察（判断力）。发布后三篇可互引，形成“了解我的工作”的入口集群。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>发布观察帖（好标题如“遥感 CV 的下一个风口在哪？我读 100+ 篇后的判断”) → 分享 → 与前两篇互引 → 留意讨论。<strong>控时长</strong>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>观察帖已发布、与综述/方法帖互引，三篇矩阵成形。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 三篇各自孤立 → 互引形成入口集群；② 观点帖不回应讨论 → 观点帖靠交流增值，适度回应评论。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>评论有反对意见？→ 理性交流（有据回应、虚心听不同看法），这正是观点帖的价值。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了三篇内容矩阵的发布</strong>。<strong>做了</strong>（发布观察帖 + 互引 + 留意讨论）、<strong>学了</strong>（三篇立体展示积累/能力/判断力、矩阵互引成入口集群、观点帖靠交流增值）、<strong>会了</strong>（构建立体展示自己的内容矩阵）。</p>
+</div></section></section><section class="slot" id="d285-pm" data-d="285" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D285 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整理本周 3 篇帖子的数据（阅读量/点赞/收藏）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>发布后<strong>追踪数据</strong>（阅读量/点赞/收藏）能让你了解：哪类内容更受欢迎、哪篇带来更多曝光、整体触达多少人。<strong>数据是反馈</strong>——帮你判断内容运营是否有效、下次写什么。但记住：<strong>数据是参考不是目的</strong>（被对的人看到 &gt; 单纯高阅读）。对你来说，一篇 2000 阅读但被你目标组的某位老师看到的帖子，价值远超一篇 5 万阅读但都是路人的爆款——所以别用纯阅读量论成败，重点是持续产出对口的优质内容，让它们在对的圈子里慢慢沉淀。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>整理本周 3 篇的数据（可用补充包的内容数据追踪脚本）——记录每篇的阅读量/点赞/收藏 → 算总触达 + 互动率（（赞+藏）/阅读）→ 看哪篇表现最好（哪类内容更受欢迎）→ 记录趋势，为后续内容方向参考。<strong>客观看待</strong>，不被数据绑架。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 篇数据已整理（阅读/赞/藏 + 总触达 + 互动率），看出哪类内容更受欢迎，作后续参考。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只看阅读量不看互动率 → 互动率（赞藏比）更反映内容质量和共鸣；② 数据不好就否定 → 内容积累是长期的，单周数据不说明全部，且“被对的人看到”比量重要。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>数据不理想？→ 分析是选题、标题、还是时机；提醒自己存在感是长期累积；某篇特别好？→ 分析为什么（选题/角度），复制成功要素。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用数据评估了内容运营、保持了正确认识</strong>。<strong>做了</strong>（整理 3 篇数据 + 算触达/互动率 + 看最佳 + 记趋势）、<strong>学了</strong>（数据是反馈非目的、互动率反映质量、被对的人看到&gt;高阅读）、<strong>会了</strong>（用数据指导内容运营但不被绑架）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 知乎行业观察长文（观点性，基于 100+ 篇）✅ 发布 + 三篇矩阵互引 ✅ 本周 3 篇数据整理（触达 + 互动率 + 最佳分析）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D285</summary><textarea data-note="d285" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d286" data-d="286"><header class="day-head"><span class="dnum">D286</span><h2 class="day-t">周六 · 申请投一次会议 workshop poster + 准备摘要 + 提交</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天申请投一次会议的 workshop poster（推荐 IGARSS workshop / 中国图象图形学学会年会 / CVPR EarthVision workshop，如时间合适），准备 poster 摘要（500 字 + 1 张图）并提交。提醒：★ <strong>poster ≠ 论文</strong>（不影响你的论文投稿，是额外的展示机会），但它让你有机会<strong>在学术会议上展示工作</strong>——这是<strong>认识空天院老师的最佳场景之一</strong>（线下、面对面、围绕你的工作自然交流）。</p>
+</blockquote>
+</div><section class="slot" id="d286-am" data-d="286" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D286 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">选定并申请一次会议 workshop poster</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（poster 是什么、为什么对你价值大）</h4><div class="blk-b"><ul>
+<li><strong>会议 poster</strong> = 在学术会议的展板区展示你工作的一页海报，会议期间你站在 poster 前，感兴趣的人会来看、来问、来交流。<strong>poster ≠ 论文</strong>：它通常只需一个简短摘要（不需完整论文）、不影响你的论文投稿（你的论文照样在期刊审）、门槛低。</li>
+<li><strong>★ 为什么对你价值大</strong>：① <strong>线下展示机会</strong>（让人看到你的工作）；② <strong>★ 认识老师的最佳场景</strong>——学术会议是同领域人聚集的地方，<strong>站在 poster 前和路过的老师/同行自然交流，比邮件破冰自然得多</strong>（你 W38 选第二篇投 IGARSS workshop 也有这个考虑）。如果空天院的老师参会，这是面对面认识的绝佳机会——你不需要“贸然搭讪”，而是<strong>站在自己的工作前，让对你课题感兴趣的人自然走过来</strong>，对话从“你这个 speckle-aware 模块怎么做的”自然展开，比邮件破冰自然百倍，也更容易给人留下深刻印象。③ 锻炼表达（讲清自己的工作）。</li>
+<li><strong>选哪个</strong>：IGARSS workshop（顶级遥感会议，目标组很可能参会）、中国图象图形学学会年会（国内、空天院老师常去）、CVPR EarthVision workshop（遥感+CV 交叉）——<strong>优先选目标组（空天院老师）可能参加的、时间合适的</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>调研几个候选 workshop（IGARSS workshop / 图象图形学年会 / EarthVision）的：截稿时间、poster 要求（摘要字数/格式）、是否还能投、目标组参会概率 → 选 1 个时间合适、目标组可能参加的 → 确认投稿方式和要求。用你已有的工作（第一或第二课题，已投稿/arXiv 的）作 poster 内容（不需新工作）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>选定 1 个合适的 workshop（时间/要求/目标组参会概率都考虑了），明确了 poster 要求和投稿方式。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>选了时间冲突/已截稿的 → 先查截稿时间，选还能投的。</li>
+<li>忽略“目标组参会概率”只看会议名气 → 优先选空天院老师可能去的（认识老师的目的）。</li>
+<li>以为 poster 要新工作 → 用已有工作即可（poster 是展示，不需未发表新成果）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知选哪个会议？→ 优先 IGARSS workshop（目标组参会概率高）或国内图象图形学年会；都截稿了？→ 找近期还开放的遥感/CV workshop，或记下时间投下一个。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>选定并启动了一次 poster 申请</strong>。<strong>做了</strong>（调研候选 workshop + 按时间/要求/参会概率选定 + 确认投稿方式）、<strong>学了</strong>（poster≠论文不影响投稿、是认识老师最佳场景、优先目标组参会的会议、用已有工作）、<strong>会了</strong>（为线下学术曝光和对接选定合适的会议机会）。</p>
+</div></section></section><section class="slot" id="d286-noon" data-d="286" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D286 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">准备 poster 摘要（500 字 + 1 张图）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（poster 摘要写什么）</h4><div class="blk-b"><ul>
+<li>poster 摘要（~500 字 + 1 张图）= 浓缩你工作的核心：<strong>问题 + 方法 + 关键结果 + 价值</strong>。它比论文摘要更精炼、更“展示导向”（吸引人来你 poster 前）。配的 1 张图通常是你的方法架构图或最亮眼的结果图。</li>
+<li><strong>和论文摘要的不同</strong>：论文摘要面向“说服审稿人”（严谨全面）；poster 摘要面向“吸引人来看 + 快速 get”（精炼亮眼）。要点突出、一图传神。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 poster 摘要（~500 字，见补充包范例 3）——① 一句问题（你解决什么）；② 方法核心（你的关键创新，一两句）；③ 关键结果（SOTA/效率，带数字 + 单卡 4090 卖点）；④ 价值（为什么重要）；选 1 张最能传达工作的图（架构图或最亮结果图）；语言精炼、突出亮点。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一份 ~500 字精炼的 poster 摘要 + 选好 1 张代表图，要点突出、吸引人。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 摘要写成论文摘要（太全太长）→ poster 摘要精炼、展示导向、突出亮点；② 图选得平淡 → 选最能一眼传达工作的（架构图/最亮结果）；③ 不带数字/卖点 → 带关键数字和单卡高效卖点；④ 把 poster 当成“论文的缩小版”密密麻麻塞满字 → poster 是给人“扫一眼想停下”的，留白、大图、关键数字突出，细节留给你口头讲。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>500 字放不下？→ 砍到“问题+方法核心+关键结果+价值”四要素，每个一两句；不知选哪张图？→ 选你论文里最常被提及/最直观的那张。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写出了精炼的 poster 摘要</strong>。<strong>做了</strong>（写 500 字摘要 + 四要素 + 选代表图 + 带数字/卖点）、<strong>学了</strong>（poster 摘要展示导向精炼、与论文摘要不同、一图传神）、<strong>会了</strong>（把工作浓缩成吸引人的会议展示材料）。</p>
+</div></section></section><section class="slot" id="d286-pm" data-d="286" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D286 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">提交 poster 申请</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>按 workshop 要求提交 poster 申请（摘要 + 图 + 作者信息）。提交后等通知（workshop poster 接收率通常较高）。<strong>这是你“被看到”的又一渠道</strong>——即便这次没接收，过程也让你熟悉了会议投稿、备好了 poster 材料（可投下一个）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>按 workshop 投稿系统/邮箱要求提交——摘要 + 图 + 作者信息 + 必要字段 → 核对无误提交 → 记录确认；若有多个合适 workshop，可记下时间陆续投。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>poster 申请已提交、拿到确认；材料（摘要+图）已备好（可复用投其他 workshop）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 提交前不核对要求（字数/格式）→ 按 workshop 要求核对再提交；② 一次没中就放弃 → poster 机会多，备好材料投下一个。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>投稿系统/方式不清？→ 看 workshop 主页的 submission 说明；担心没中？→ workshop poster 接收率通常高，且材料可复用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>提交了 poster 申请、备好了可复用的展示材料</strong>。<strong>做了</strong>（按要求提交 + 核对 + 记录 + 备复用材料）、<strong>学了</strong>（poster 是“被看到”渠道、过程本身有价值、材料可复用投多个）、<strong>会了</strong>（完成会议 poster 的申请、为线下对接创造机会）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 选定并申请一次会议 workshop poster ✅ poster 摘要（500 字 + 1 图，含单卡卖点）✅ 提交 poster 申请（材料可复用）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D286</summary><textarea data-note="d286" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d287" data-d="287"><header class="day-head"><span class="dnum">D287</span><h2 class="day-t">周日 · 周复盘 W41 + 统计知乎 3 篇总数据 + 计划 W42</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：本周最后一天——复盘 W41、统计知乎 3 篇总数据、规划 W42。提醒：W41 是“连接深化 + 内容输出”周，复盘要确认两条线的进展（人脉预热深化：三个组精读+技术地图；内容输出：3 篇长文+poster）。W42 按计划是“准备汇报 PPT + 简历初稿”——继续为对接做材料准备。</p>
+</blockquote>
+</div><section class="slot" id="d287-am" data-d="287" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D287 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">周复盘 W41</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（连接深化周复盘什么）</h4><div class="blk-b"><ul>
+<li>W41 复盘重点：① <strong>人脉预热深化</strong>（三个组精读、研究近况文档、技术地图更新——对接功课的进展和质量）；② <strong>内容输出</strong>（3 篇知乎长文 + poster 申请——被动存在感的建立）；③ <strong>论文跟进</strong>（两篇状态）；④ 持续读论文。<strong>特别盘“被动建立存在感”这条新动作</strong>——它和主动联系（W43/W48）互补，本周首次系统做（3 篇矩阵 + poster）。★ 想清这两条腿的关系：<strong>被动存在感（内容/poster）在前面铺路，主动联系（邮件/见面）在后面收口</strong>——你 W48 发邮件时，若对方“恰好看过你的综述”或“在某 workshop 见过你的 poster”，这封邮件的回复率会高得多。本周的内容输出和 poster，本质是为后面的主动联系积累“对方对你的熟悉度”。</li>
+<li><strong>和上周（W40 缓冲）的不同</strong>：W40 是喘息+整理；W41 重新回到主动产出（内容+对接深化）。节奏从“缓”回到“进”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 W41 周报——① 硬交付逐项打勾（两篇状态、三个组精读+研究近况文档+技术地图、3 篇知乎长文、poster 申请）；② 量化（精读 N 篇、攒了 M 个尖锐问题、3 篇帖子数据、poster 投了几个）；③ <strong>连接进展自检</strong>（对接情报够不够支撑 W43 写邮件？技术地图刷新了认知吗？内容矩阵立体吗？）；④ 心态（产出节奏、对“被动存在感”的认识）；⑤ W42 就绪度。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W41 周报——硬交付确认、量化清晰、对“人脉预热深化+内容输出”两条线做了进展自检、明确为 W43 准备邮件攒够了功课。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只盘内容输出忘了盘人脉预热深化质量 → 两条线都要盘，尤其对接功课是否够支撑 W43；② 觉得“没新论文产出”而低落 → 本周的对接功课+内容矩阵+poster 都是连接期的实打实进展。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定对接功课够不够？→ 自检“W43 写邮件时，每位老师的对接点+请教问题都现成了吗”；内容数据一般？→ 存在感靠长期累积，本周建立了矩阵就是进展。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了连接深化周、确认了为对接攒够功课</strong>。<strong>做了</strong>（W41 周报 + 量化 + 两条线进展自检 + 心态）、<strong>学了</strong>（连接深化周盘对接功课+被动存在感、节奏从缓回到进、本周进展是连接期实打实的）、<strong>会了</strong>（系统复盘连接期的多线进展）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜连接深化周复盘</strong>：盘两条新线——①人脉预热深化（精读三个组+研究近况文档+技术地图更新，自检：够支撑 W43 写邮件吗？认知刷新了吗？）②被动建立存在感（3 篇内容矩阵+poster，自检：立体吗？）+论文跟进。和缓冲周不同：节奏从缓回到进。别因“没新论文产出”低落——对接功课+内容矩阵+poster 是连接期实打实进展。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d287-noon" data-d="287" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D287 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">统计知乎 3 篇帖子的总数据</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把本周 3 篇帖子的数据<strong>汇总统计</strong>（总阅读/赞/藏 + 三篇对比），看整体内容运营效果和哪类内容最受欢迎。这是对“被动建立存在感”努力的量化反馈——本周触达了多少人、什么内容最能引发共鸣，指导后续内容方向。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>汇总 3 篇总数据（阅读/赞/藏）→ 三篇对比（哪篇最好、哪类内容受欢迎）→ 算整体触达和互动 → 记录（和 M9 的引流帖对比，看存在感累积趋势）→ 填进周报。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 篇总数据汇总 + 对比，看出最受欢迎的内容类型，记录了存在感累积趋势。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只看单篇不看整体趋势 → 看累积趋势（存在感是长期建立的）；② 被数据牵着走改变方向 → 数据参考，但持续输出优质内容是根本。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>数据平平？→ 提醒被动存在感靠长期累积、被对的人看到比量重要；想优化？→ 复制最受欢迎那篇的成功要素（选题/角度）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>汇总评估了本周内容运营效果</strong>。<strong>做了</strong>（汇总 3 篇数据 + 对比 + 算触达/互动 + 记趋势）、<strong>学了</strong>（量化被动存在感努力、看累积趋势、数据参考非牵引）、<strong>会了</strong>（评估内容运营并指导后续方向）。</p>
+</div></section></section><section class="slot" id="d287-pm" data-d="287" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D287 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W42（准备汇报 PPT + 简历初稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W42 该规划什么）</h4><div class="blk-b"><ul>
+<li>W42 按计划是“<strong>准备汇报 PPT + 简历初稿</strong>”——继续为对接做材料准备。你 W40 做了 PPT 骨架，W42 要<strong>完善 PPT + 写简历初稿</strong>（对接老师/未来求职都要用）。这是连接期“材料准备”的推进：技术地图（W41）→ 研究近况/请教清单（W40-41）→ PPT/简历（W42）→ 准备邮件（W43）→ 发出（W48）。</li>
+<li><strong>为什么现在准备简历</strong>：对接老师、申请机会都可能要简历。<strong>提前准备好一份突出你硬成果（两篇论文+repo+竞赛）和差异化（单卡高效/SAR 难题）的简历</strong>，等机会来时立刻能用。对你这种非传统路径（零基础转型、导师不支持）的人，简历尤其要会“讲故事”——不是罗列“我会什么”，而是用成果证明“我能独立做出研究”：两篇论文（投稿/arXiv）证明完整科研能力、爆款 repo 证明工程与影响力、单卡 4090 路线证明高效务实。这套“成果叙事”比任何自我描述都有说服力，也正好对接空天院“看重实打实工作”的取向。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定 W42 规划——① 完善汇报 PPT（在 W40 骨架上充实内容、补图、美化到可用）；② 写简历初稿（突出转型成果：两篇论文/arXiv、GitHub/star、竞赛、技能；定位单卡高效/下游特化/SAR 难题）；③ 这些材料和技术地图/研究近况/请教清单一起，构成 W43 准备邮件的完整素材包；④ 持续人脉预热（读老师近作）+ 论文跟进；明确 W42 核心 = 备好 PPT+简历，向 W43 准备邮件靠拢。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W42 规划——PPT 完善 + 简历初稿 + 与已有材料整合，明确为 W43 准备邮件做最后的材料准备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① W42 只做 PPT 忘了简历 → 两个都要（对接/求职都用）；② 简历不突出差异化 → 突出硬成果+单卡高效定位；③ 忘了持续人脉预热 → 连接功课不能断（向 W43/W48 铺路）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>简历不知怎么写？→ 突出“零基础 10 个月→两篇论文+爆款 repo”的转型故事 + 差异化定位；材料散？→ 统一归入对接素材包（PPT/简历/技术地图/研究近况/请教清单）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划好了 W42、向“准备邮件”再近一步</strong>。<strong>做了</strong>（W42 规划 + PPT 完善 + 简历初稿 + 材料整合 + 持续人脉预热）、<strong>学了</strong>（连接期材料准备的推进链、提前备简历突出差异化、功课不断）、<strong>会了</strong>（规划好对接材料的系统准备）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 周报 W41（两条线进展自检）✅ 知乎 3 篇总数据统计（累积趋势）✅ W42 计划（PPT + 简历初稿，向准备邮件靠拢）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D287</summary><textarea data-note="d287" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W41 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>本周是“连接深化 + 内容输出”周，补充包给你四样可直接照用的：① 三个范例（“每位老师研究近况”文档模板 · 知乎技术综述帖结构 · poster 摘要模板 + workshop 选择对照）；② 一个完整可运行的“知乎内容数据追踪器”（3 篇帖子数据 + 互动率）+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · “每位老师研究近况”文档模板（对接情报底稿）</h3>
+<figure class="code" data-lang="text"><pre><code>=== 空天院目标老师研究近况（对接情报底稿） ===
+
+■ 王超组（★最高契合 ↔ 第二课题）
+  · 最新研究方向：SAR 智能解译 / 文本-SAR 跨模态（TACMT 等）
+  · 在研项目/资助：&lt;主页/基金委查到的，查不到留空&gt;
+  · 合作者网络：&lt;常合作者 → 可能的间接联系入口&gt;
+  · 和我的对接点：我的 SAR speckle-aware / 跨域工作 ↔ 他们的 SAR 跨模态
+  · 请教点（尖锐问题）：&lt;W40-41 攒的 2-3 个，结合第二课题&gt;
+
+■ 孙显组（↔ 第一课题）
+  · 最新研究方向：遥感基础模型 / 目标检测（RingMo 系列）
+  · 在研项目/资助：&lt;查到的&gt;
+  · 合作者网络：付琨等（组内核心）
+  · 和我的对接点：我的旋转检测/高效下游 ↔ 他们的基础模型（互补：我做高效特化）
+  · 请教点：&lt;≥3 个，结合第一课题&gt;
+
+■ 付琨（孙显组核心 ↔ 第一课题线）
+  · 最新方向 / 对接点 / 请教点：&lt;同上结构填&gt;
+
+■ 师兄/博后（间接入口）
+  · &lt;从合作网络找到的活跃成员，了解组内情况的入口&gt;</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>用法：按“方向/项目/合作网络/对接点/请教点”五栏填每位老师。这是 W43 写邮件的直接素材（取对接点+请教问题）。守事实，查不到的留空不臆测。</p>
+</blockquote>
+<h3>范例 2 · 知乎技术综述帖结构（2000–3000 字）</h3>
+<figure class="code" data-lang="text"><pre><code>标题：2024–2025 遥感 &lt;你的方向，如旋转检测/SAR检测&gt; 进展梳理
+一、引言：这个方向为什么重要 + 本文梳理什么（200字）
+二、主要方法流派（分 3-4 类，每类思路+代表工作）（800-1000字）
+     ——复用你论文 RW 的领域梳理，扩展+通俗化
+三、关键进展与趋势：2024-2025 的新动向（数据集/方法/性能）（500字）
+四、未解问题与未来方向：你的判断（暗合你的课题方向）（400字）
+五、结语 + 引流（GitHub/arXiv）（100字）
+配图：方法分类图 / 趋势图 / 代表结果对比（≥1张，提升收藏率）
+原则：有分类/逻辑/你的判断，别堆砌；客观为主，自己工作适度提及。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2b · 知乎方法解读帖故事线模板（偏故事性）</h3>
+<figure class="code" data-lang="text"><pre><code>标题：我如何用 &lt;方法&gt; 解决遥感 &lt;问题&gt;：从 idea 到论文投稿的全过程
+一、起点：我怎么发现这个问题（如&quot;做完第一篇我发现 SAR 的 speckle 一直是个坎&quot;）
+二、idea 的产生：怎么想到这个方法（灵感/借鉴通用CV/试错——讲思路不讲核心实现）
+三、踩坑与迭代：真实的探索过程（迁移遇阻、调不通、换思路——共鸣点）
+四、结果与投稿：效果（带数字+单卡卖点）+ 投稿历程 + 心态
+五、给读者的启发 + 引流（GitHub/arXiv）
+★ 守延后线：讲&quot;是什么/为什么/怎么想/踩了什么坑&quot;，不讲未发表核心实现细节。
+原则：真诚、有故事性、含踩坑/失败（更有共鸣），少自夸。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · poster 摘要模板（~500 字 + 1 图）+ workshop 选择对照</h3>
+<figure class="code" data-lang="markdown"><pre><code>【poster 摘要 ~500 字】
+· 问题（1-2句）：&lt;你解决什么，如 SAR 旋转舰船检测中的 speckle 噪声敏感&gt;
+· 方法核心（2-3句）：&lt;你的关键创新，如 speckle-aware 模块 + ...&gt;
+· 关键结果（2-3句，带数字+卖点）：&lt;在 N 个数据集 SOTA，+X mAP，仅用单张 RTX 4090&gt;
+· 价值（1句）：&lt;为什么重要：高效/数据友好/面向应用&gt;
+配图：方法架构图 或 最亮结果对比图（1张，一眼传达工作）
+
+【workshop 选择对照】
+| 会议 | 特点 | 目标组参会概率 | 适合度 |
+|---|---|---|---|
+| IGARSS workshop | 顶级遥感会议 | 高（空天院常参加） | ★★★ |
+| 中国图象图形学学会年会 | 国内、CV+遥感 | 高（国内老师常去） | ★★★ |
+| CVPR EarthVision | 遥感+CV 交叉、国际 | 中 | ★★ |
+→ 优先选&quot;目标组可能参加+时间合适&quot;的；poster 用已有工作即可。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · 知乎内容数据追踪器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本追踪你 3 篇知乎长文的数据（阅读/点赞/收藏），算总触达和互动率（（赞+藏）/阅读），找出表现最好的内容类型——指导后续内容方向。被动建立存在感是长期的，用它持续追踪比手记更清楚。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># zhihu_tracker.py —— 知乎内容数据追踪器</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># 标题类型, 阅读, 点赞, 收藏</span>
+    <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;技术综述&quot;</span><span class="p">,</span> <span class="s2">&quot;views&quot;</span><span class="p">:</span> <span class="mi">3200</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span> <span class="s2">&quot;favs&quot;</span><span class="p">:</span> <span class="mi">420</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;方法解读&quot;</span><span class="p">,</span> <span class="s2">&quot;views&quot;</span><span class="p">:</span> <span class="mi">2100</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">:</span> <span class="mi">95</span><span class="p">,</span>  <span class="s2">&quot;favs&quot;</span><span class="p">:</span> <span class="mi">130</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;行业观察&quot;</span><span class="p">,</span> <span class="s2">&quot;views&quot;</span><span class="p">:</span> <span class="mi">4500</span><span class="p">,</span> <span class="s2">&quot;likes&quot;</span><span class="p">:</span> <span class="mi">260</span><span class="p">,</span> <span class="s2">&quot;favs&quot;</span><span class="p">:</span> <span class="mi">310</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">engagement</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="c1"># 互动率 =(赞+藏)/阅读，反映内容质量与共鸣</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;likes&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;favs&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;views&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;views&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="n">posts</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 本周知乎 3 篇数据 ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| 类型 | 阅读 | 赞 | 藏 | 互动率 |&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;|---|---|---|---|---|&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;views&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;likes&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;favs&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">engagement</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% |&quot;</span><span class="p">)</span>
+    <span class="n">total_v</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;views&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">)</span>
+    <span class="n">total_e</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;likes&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;favs&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">总触达：</span><span class="si">{</span><span class="n">total_v</span><span class="si">}</span><span class="s2"> 次阅读，</span><span class="si">{</span><span class="n">total_e</span><span class="si">}</span><span class="s2"> 次互动（赞+藏）&quot;</span><span class="p">)</span>
+    <span class="n">best_reach</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;views&quot;</span><span class="p">])</span>
+    <span class="n">best_eng</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">engagement</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;触达最高：</span><span class="si">{</span><span class="n">best_reach</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">（</span><span class="si">{</span><span class="n">best_reach</span><span class="p">[</span><span class="s1">&#39;views&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> 阅读）&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;互动率最高：</span><span class="si">{</span><span class="n">best_eng</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">（</span><span class="si">{</span><span class="n">engagement</span><span class="p">(</span><span class="n">best_eng</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%，&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;最能引发收藏/共鸣 → 后续可多写此类）&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">report</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="markdown"><pre><code>=== 本周知乎 3 篇数据 ===
+
+| 类型 | 阅读 | 赞 | 藏 | 互动率 |
+|---|---|---|---|---|
+| 技术综述 | 3200 | 180 | 420 | 18.8% |
+| 方法解读 | 2100 | 95 | 130 | 10.7% |
+| 行业观察 | 4500 | 260 | 310 | 12.7% |
+
+总触达：9800 次阅读，1395 次互动（赞+藏）
+触达最高：行业观察（4500 阅读）
+互动率最高：技术综述（18.8%，最能引发收藏/共鸣 → 后续可多写此类）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把真实数据填进 posts，脚本算每篇互动率、总触达、并区分“触达最高”（观点帖易传播）和“互动率最高”（综述帖易被收藏=高价值留存）。互动率比纯阅读更反映内容质量——后续可多写互动率高的类型。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D281（论文状态+精读付琨/王超组）</strong></p>
+<ol>
+<li>两篇论文的三种状态对应什么动作？在审等待期该做什么？</li>
+<li>为什么按“组”系统精读比泛读更有针对性？三个组分别对接你哪个课题？</li>
+<li>为什么说王超组是最高契合的对接组？</li>
+</ol>
+<p><strong>D282（精读孙显组+研究近况文档+技术地图）</strong></p>
+<ol>
+<li>为什么读孙显组“近 3 个月”的论文？</li>
+<li>“每位老师研究近况”文档的五栏是什么？它叫什么底稿？</li>
+<li>为什么 10 个月后要重画 M1 的技术地图？更新时要标出什么？</li>
+</ol>
+<p><strong>D283（技术综述帖）</strong></p>
+<ol>
+<li>技术综述帖的价值有哪三点？为什么能“被动建立存在感”？</li>
+<li>综述帖怎么写才不是“论文罗列”？复用了你论文的什么？</li>
+</ol>
+<p><strong>D284（方法解读帖）</strong></p>
+<ol>
+<li>方法解读帖为什么偏故事性？守核心延后线时讲什么、不讲什么？</li>
+<li>它和综述帖怎么互补？</li>
+</ol>
+<p><strong>D285（行业观察帖 + 数据）</strong></p>
+<ol>
+<li>行业观察帖体现你的什么能力？观点和综述的客观有什么不同？</li>
+<li>三篇内容矩阵分别展示你的什么？</li>
+<li>看帖子数据为什么“互动率”比“阅读量”更重要？</li>
+</ol>
+<p><strong>D286（poster 申请）</strong></p>
+<ol>
+<li>poster 和论文的关系是什么？为什么说它是“认识老师的最佳场景”？</li>
+<li>选 workshop 优先考虑什么？poster 要新工作吗？</li>
+<li>poster 摘要和论文摘要有什么不同？</li>
+</ol>
+<p><strong>D287（复盘+数据+W42计划）</strong></p>
+<ol>
+<li>连接深化周复盘要盘哪两条新线？怎么自检对接功课够不够？</li>
+<li>连接期材料准备的推进链是什么（技术地图→…→发出）？</li>
+<li>为什么现在要准备简历？突出什么？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>反复刷论文状态焦虑结果</td>
+<td>盯不可控的</td>
+<td>查一次确认，转向能主动做的（人脉预热/产出）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>精读老师近作只总结不找接点</td>
+<td>没落到对接</td>
+<td>落到“和我的接点”，为对接铺垫</td>
+</tr>
+<tr>
+<td>3</td>
+<td>没意识到王超组高契合、泛泛读</td>
+<td>没分优先级</td>
+<td>王超组最对口，读透、问题结合第二课题</td>
+</tr>
+<tr>
+<td>4</td>
+<td>读了孙显组旧论文不是最新</td>
+<td>没看时间</td>
+<td>找近 3 个月的（反映当前动向）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>研究近况文档缺对接点/请教点</td>
+<td>漏关键栏</td>
+<td>五栏必含对接点+请教点（对接关键）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>更新技术地图仍臆测未核实方向</td>
+<td>不守事实</td>
+<td>基于精读更新，存疑标“待核实”</td>
+</tr>
+<tr>
+<td>7</td>
+<td>综述帖写成论文罗列堆砌</td>
+<td>没逻辑判断</td>
+<td>分流派/趋势/未解问题+你的判断</td>
+</tr>
+<tr>
+<td>8</td>
+<td>综述/方法帖通篇推销自己</td>
+<td>喧宾夺主</td>
+<td>综述靠客观赢信任，自己工作适度提及</td>
+</tr>
+<tr>
+<td>9</td>
+<td>方法解读泄露未发表核心实现</td>
+<td>没守延后线</td>
+<td>讲思路层面，核心实现不泄（论文在审）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>行业观察观点没论据（空谈）</td>
+<td>不严谨</td>
+<td>基于读的论文给论据（趋势/需求/未解）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>帖子写了不分享</td>
+<td>没曝光</td>
+<td>分享到对口渠道（你的内容才被看到）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>只看阅读量不看互动率</td>
+<td>指标片面</td>
+<td>互动率（赞藏比）更反映质量与共鸣</td>
+</tr>
+<tr>
+<td>13</td>
+<td>选了已截稿/时间冲突的 workshop</td>
+<td>没查时间</td>
+<td>先查截稿，选还能投+目标组参会的</td>
+</tr>
+<tr>
+<td>14</td>
+<td>以为 poster 要新工作</td>
+<td>误解 poster</td>
+<td>用已有工作即可，poster 是展示不需新成果</td>
+</tr>
+<tr>
+<td>15</td>
+<td>poster 摘要写成论文摘要太长</td>
+<td>定位错</td>
+<td>精炼四要素（问题/方法/结果/价值）+1图</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>W41 收尾</strong>：你把连接期推深了一层——精读了付琨/王超/孙显三个组的近作、攒下了对口的尖锐问题、整理出“每位老师研究近况”的对接情报底稿、用 10 个月的积累刷新了空天院技术地图（看清了自己在这张图上的位置和互补点）。同时写了 3 篇知乎长文（综述显积累、方法解读显能力、行业观察显判断力），立体地<strong>被动建立存在感</strong>，还申请了会议 poster（线下认识老师的最佳场景）。这一切都在为 W43 准备邮件、W48 发出、乃至会议见面铺路——让那封邮件不是冷启动，而是“早有耳闻”的水到渠成。下周（W42）：完善汇报 PPT + 写简历初稿，把对接材料备齐。回头看这一周，你做的每件事——精读、技术地图、知乎长文、poster——都不是孤立的任务，而是在系统地回答一个问题：“当我 W48 真的联系空天院老师时，我凭什么让对方愿意回我？” 答案就是这周织进去的：扎实的对接功课、立体的公开存在感、可能的线下一面之缘。<strong>阶段二进入收尾段，连接的网正在一点点织密——稳扎稳打，你正把“零基础转型”一步步走成“带着作品敲门”。</strong></p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p><h4>对外连接</h4><p>邮件模板见 <a href="../appendix-d.html">附录 D</a>。三条要点：<b>主题要具体</b>、<b>第 2 段必须证明你真读过对方论文</b>、<b>请求要低门槛</b>。不回复是最常见结果，三封有一封回复就算成功，<b>追问最多一次</b>。</p></section>
+<div class="pager"><a class="prev" href="w40.html"><span class="dir">← 上一篇</span><span class="nm">W40 缓冲周 + M10 月复盘</span></a><a class="next" href="w42.html"><span class="dir">下一篇 →</span><span class="nm">W42 准备汇报 PPT + 简历初稿</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d281">D281 周一</a><a class="sub" href="#d281-am">上午 检查两篇论文状态并按需处理</a><a class="sub" href="#d281-noon">中午 精读付琨组最新 1 篇 + 批注</a><a class="sub" href="#d281-pm">晚上 精读王超组最新 1 篇 + 批注</a><a href="#d282">D282 周二</a><a class="sub" href="#d282-am">上午 精读孙显组最新 1 篇（近 3 </a><a class="sub" href="#d282-noon">中午 整理“每位老师的研究近况”文档</a><a class="sub" href="#d282-pm">晚上 更新空天院技术地图（M1 那张图</a><a href="#d283">D283 周三</a><a class="sub" href="#d283-am">上午 写技术综述长文（2000–300</a><a class="sub" href="#d283-noon">中午 发布 + 分享到相关社区</a><a class="sub" href="#d283-pm">晚上 GitHub 仓库维护 + 回复</a><a href="#d284">D284 周四</a><a class="sub" href="#d284-am">上午 写方法解读长文（故事性，从 id</a><a class="sub" href="#d284-noon">中午 发布 + 分享</a><a class="sub" href="#d284-pm">晚上 读 2 篇新论文（持续追踪）</a><a href="#d285">D285 周五</a><a class="sub" href="#d285-am">上午 写行业观察长文（观点性，基于 1</a><a class="sub" href="#d285-noon">中午 发布</a><a class="sub" href="#d285-pm">晚上 整理本周 3 篇帖子的数据（阅读</a><a href="#d286">D286 周六</a><a class="sub" href="#d286-am">上午 选定并申请一次会议 worksh</a><a class="sub" href="#d286-noon">中午 准备 poster 摘要（500</a><a class="sub" href="#d286-pm">晚上 提交 poster 申请</a><a href="#d287">D287 周日</a><a class="sub" href="#d287-am">上午 周复盘 W41</a><a class="sub" href="#d287-noon">中午 统计知乎 3 篇帖子的总数据</a><a class="sub" href="#d287-pm">晚上 计划 W42（准备汇报 PPT </a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

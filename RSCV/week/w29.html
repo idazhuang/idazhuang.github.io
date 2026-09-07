@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="29">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W29 · 竞赛最终收口 —— 把竞赛沉淀成“技术报告 +  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M8 竞赛收口 + 第二课题立项</span><span>·</span><span>Week 29</span><span>·</span><span>D190–D196</span></div><h1 class="title">竞赛最终收口 —— 把竞赛沉淀成“技术报告 + 开源仓库 + 影响力”</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="190" data-k="am" title="D190 上午段"></i><i data-d="190" data-k="noon" title="D190 中午段"></i><i data-d="190" data-k="pm" title="D190 晚上段"></i></span><span class="sday"><i data-d="191" data-k="am" title="D191 上午段"></i><i data-d="191" data-k="noon" title="D191 中午段"></i><i data-d="191" data-k="pm" title="D191 晚上段"></i></span><span class="sday"><i data-d="192" data-k="am" title="D192 上午段"></i><i data-d="192" data-k="noon" title="D192 中午段"></i><i data-d="192" data-k="pm" title="D192 晚上段"></i></span><span class="sday"><i data-d="193" data-k="am" title="D193 上午段"></i><i data-d="193" data-k="noon" title="D193 中午段"></i><i data-d="193" data-k="pm" title="D193 晚上段"></i></span><span class="sday"><i data-d="194" data-k="am" title="D194 上午段"></i><i data-d="194" data-k="noon" title="D194 中午段"></i><i data-d="194" data-k="pm" title="D194 晚上段"></i></span><span class="sday"><i data-d="195" data-k="am" title="D195 上午段"></i><i data-d="195" data-k="noon" title="D195 中午段"></i><i data-d="195" data-k="pm" title="D195 晚上段"></i></span><span class="sday"><i data-d="196" data-k="am" title="D196 上午段"></i><i data-d="196" data-k="noon" title="D196 中午段"></i><i data-d="196" data-k="pm" title="D196 晚上段"></i></span></div></div>
+
+<div class="note"><b>编者注 · 日号</b>　本模块（M8）各周的 D 编号相对「周号 × 7」的标准映射整体前移了 7 天（W29 标注为 D190–D196，按周号推算应为 D197–D203），因此 D218–D224 在正文中没有对应内容。原文照录未改，按顺序做即可，不影响内容衔接。详见<a href="../errata.html">校订说明</a>。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>:M8 开篇。论文已投(M7)，竞赛也到收官——本周把竞赛<strong>收口沉淀</strong>成持久的资产：写<strong>竞赛技术报告</strong>、<strong>开源代码</strong>、做适度的<strong>社区分享</strong>（让一个月的努力产生持续价值，而不是赛完就丢）。同时开始酝酿<strong>第二课题</strong>（M8 后半正式立项）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：系统总结竞赛经验；学会写技术报告。
+<strong>★ 优先级提醒（你的定位 6.5）</strong>：社区推广/引流是“<strong>强作品的自然放大</strong>”，不是主线。本周做这些，是因为你<strong>已经有了</strong>实打实的竞赛成果和代码——是“把好东西让更多人看到”，而非“刷存在感”。<strong>核心始终是研究本身</strong>；分享是顺手放大，一两小时完成即可，别变成主业。
+<strong>先给你打个预防针</strong>:① <strong>竞赛若没到 Top 10% 别沮丧</strong>（★再次校准）——竞赛是锦上添花，你的核心成果是论文投稿 + 即将开源的代码;② <strong>技术报告/开源/分享别拖成大工程</strong>——它们是“把已有成果沉淀和放大”，高效完成即可，重心要尽快转回研究主线（第二课题）;③ <strong>竞赛冲刺耗了不少精力，本周安排恢复</strong>（可持续性是你长跑的头号风险）。
+<strong>本周精力怎么分配</strong>：前半周(D190-192)写技术报告（沉淀经验）、D193 开源、D194 适度分享、D195 休息恢复 + 酝酿第二课题、D196 复盘 + 转向研究主线。教学按“收口沉淀 + 转向主线”组织。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d190" data-d="190"><header class="day-head"><span class="dnum">D190</span><h2 class="day-t">周一 · 竞赛最后提交 + 确认最终排名 + 心态校准</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午竞赛若还有提交机会、做最后一次尝试；中午确认最终排名、截图；晚上做心态校准（Top 10% 没到也不沮丧）。</p>
+<p><strong>预期管理</strong>：今天竞赛收官——最后提交（如有机会）+确认最终排名+心态校准。提醒：若还有提交机会，把效果最好的组合微调后重提；确认最终排名、截图存档；<strong>★心态校准：Top 10%没达到不沮丧——不影响整体计划</strong>，竞赛是锦上添花，你已有论文投稿+即将开源的代码这些核心成果，竞赛学到的工程技巧（TTA/Ensemble/自监督/SAHI…）本身就有价值，把注意力放回可沉淀的资产（报告/代码/经验）。</p>
+</blockquote>
+</div><section class="slot" id="d190-am" data-d="190" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D190 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">竞赛最后一次提交（如有机会）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（收官提交：用最好的组合）</h4><div class="blk-b"><ul>
+<li>竞赛若还有提交机会（没到 deadline、还有提交次数），<strong>做最后一次尝试</strong>——把你 W27 确定的最优组合（超级 Ensemble + 最优 WBF 参数）再微调一下，争取最后的提升。如果没有提交机会了（已截止），直接确认最终排名。</li>
+<li><strong>收官提交的心态</strong>：这是最后的机会，用你验证过最好的方案（别这时候试没验证的新招，风险高）。微调（如 WBF 参数微调、加一个好模型），稳中求进。<strong>目标是把已有最优方案发挥到最好，而非冒险</strong>。</li>
+<li><strong>为什么收官阶段“稳中求进”而非“放手一搏”</strong>：有人会觉得“最后一搏，不如试个大招赌一把”——<strong>这通常是错的</strong>。你已经通过几周迭代积累了验证过的最优方案，这时候上一个没验证的新招，大概率没用、甚至搞砸（把好的提交浪费在没把握的尝试上）。<strong>正确的收官策略是：在已验证最优的基础上做低风险的微调</strong>（微调 WBF 阈值、加一个确认好的模型），稳稳地把已有优势发挥到极致。这也是一种重要的判断力：<strong>知道什么时候该探索（早期）、什么时候该收敛求稳（收官）</strong>。早期大胆试错、收官稳健收口，这种“分阶段调整风险偏好”的智慧，在竞赛、研究、乃至做任何项目时都适用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>若还有提交机会：把最优组合微调（WBF 参数/加好模型），最后提交。</li>
+<li>若已截止：直接进入确认最终排名。</li>
+<li>用验证过最好的方案，稳中求进。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛最后一次提交完成（用最优组合微调），或确认已无提交机会。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>最后一次提交试没验证的新招 → 用验证过最好的方案，别冒险；还有机会却不试 → 有机会就用最优组合再争取一下。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>微调没提升?→ 用已有最优方案提交即可（已经尽力）；不确定哪个是最优?→ 看 Trick 日志里线上分最高的组合。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了竞赛的收官提交</strong>。<strong>做了</strong>（最后提交/确认无机会）、<strong>学了</strong>（收官用最优方案稳中求进、别冒险）、<strong>会了</strong>（把已有最优方案发挥到最好）。</p>
+<blockquote class="quote">
+<p><strong>覆盖</strong>：M8（W29–W32 竞赛收口 + 第二课题 + GitHub 运营）、M9–M12 的连接线（W41–W48 简历 / 作品集 / 汇报 PPT / 冷邮件）。</p>
+<p><strong>★ 又一个和「<a href="../appendix-e.html">附录 E</a>」同类的结构性空洞</strong>：</p>
+<p><code>text
+全书提到「冷邮件」152 次、「邮件模板」37 次
+正文明确写着「v5.0 <a href="../appendix-d.html">附录 D</a> 有邮件模板」
+但：全书没有任何附录文件，也没有任何「附录」章节
+而且全文搜索：Subject 行 0 个、Dear Prof 0 个 —— 一封邮件正文都没有</code></p>
+<p><strong>你用 12 个月准备“最终一击”，而那一击本身的模板不存在。</strong> 这一页把它补上，另外补简历、作品集、汇报 PPT 的结构，以及一件原文回避了的事：<strong>回复率的诚实预期</strong>。</p>
+</blockquote>
+<hr />
+<h5 id="21m8md0-1">第一部分 · M8（W29–W32）</h5>
+<h6 id="21m8md0-2">W29 · 竞赛技术报告怎么写</h6>
+<p>原文让你把竞赛“沉淀成技术报告 + 开源仓库 + 影响力”。<strong>技术报告和论文是两种文体</strong>，别用写论文的方式写它。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>论文</th>
+<th><strong>竞赛技术报告</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目的</td>
+<td>说服审稿人这个贡献值得发表</td>
+<td><strong>让别人能复现你的名次</strong></td>
+</tr>
+<tr>
+<td>重点</td>
+<td>创新点 + 严谨对比</td>
+<td><strong>每个 trick 涨了多少分</strong></td>
+</tr>
+<tr>
+<td>允许</td>
+<td>必须有理论/动机支撑</td>
+<td><strong>“试出来的、说不清为什么”也可以写</strong></td>
+</tr>
+<tr>
+<td>长度</td>
+<td>5–12 页</td>
+<td>3–6 页够了</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>核心是一张表</strong>（原文 D188 让你写“Trick 贡献分解表”，这里给格式）：</p>
+<figure class="code" data-lang="markdown"><pre><code>| # | 改动 | 线上分数 | 相对上一行 | 训练耗时 | 保留？ |
+|---|------|---------|-----------|---------|--------|
+| 0 | 官方 baseline | 0.612 | — | 6h | ✅ |
+| 1 | + 更强 backbone | 0.641 | +0.029 | 11h | ✅ |
+| 2 | + 多尺度训练 | 0.658 | +0.017 | 16h | ✅ |
+| 3 | + SAHI 切片推理 | 0.679 | +0.021 | +0（仅推理） | ✅ |
+| 4 | + 自监督预训练 | 0.681 | +0.002 | +14h | ❌ 性价比太低 |
+| 5 | + 5 模型 Ensemble | 0.694 | +0.013 | ×5 | ⚠️ 比赛用，实用不推荐 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 这张表的三个要点</strong>：
+1. <strong>每行只加一个东西</strong>，和上一行只差一处——<strong>和你 M4 学的方法迭代是同一套纪律</strong>
+2. <strong>必须有“耗时”和“保留？”两列</strong> —— 竞赛可以不计成本，但技术报告的价值在于告诉别人“哪些值得用”
+3. <strong>诚实记录没用的 trick</strong>（第 4 行那种）—— <strong>这比只报有用的更有参考价值</strong></p>
+<h6 id="21m8md0-3">W30–W31 · ★ 第二课题的“复用红利”到底有多大</h6>
+<p>原文说第二篇要“复用第一篇的一切，跑出更快的节奏”。<strong>具体能快多少，把账算出来</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>第一篇花了</th>
+<th><strong>第二篇</strong></th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>环境搭建</td>
+<td>1–2 天</td>
+<td><strong>0</strong></td>
+<td>环境还在</td>
+</tr>
+<tr>
+<td>数据管道</td>
+<td>3–5 天</td>
+<td><strong>0.5 天</strong></td>
+<td><code>to_dota.py</code>、切图、可视化全部现成</td>
+</tr>
+<tr>
+<td>实验框架</td>
+<td>1 周（W11）</td>
+<td><strong>0</strong></td>
+<td>直接复用</td>
+</tr>
+<tr>
+<td>baseline 复现</td>
+<td>1 周（W2）</td>
+<td><strong>0.5 天</strong></td>
+<td>同一个 baseline，权重和 config 都在</td>
+</tr>
+<tr>
+<td>绘图与表格</td>
+<td>2 天</td>
+<td><strong>0.5 天</strong></td>
+<td><code>paper_figs.py</code> 现成</td>
+</tr>
+<tr>
+<td>论文骨架</td>
+<td>1 周（W15）</td>
+<td><strong>2–3 天</strong></td>
+<td>结构熟了，Related Work 部分可复用</td>
+</tr>
+<tr>
+<td>投稿流程</td>
+<td>1 周</td>
+<td><strong>1 天</strong></td>
+<td>系统熟了，Cover Letter 改改就行</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>约 5 周纯工程</strong></td>
+<td><strong>约 1 周</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>★ 所以第二篇真正的时间应该花在“想清楚问题”上，而不是重新造轮子。</strong></p>
+<p><strong>如果你发现第二篇又在重复第一篇的工程工作，说明你第一篇的框架没搭好</strong>——回去补，那笔投资会在第三篇再赚一次。</p>
+</blockquote>
+<h6 id="21m8md0-4">W30 · 第二课题从哪来（“从第一篇的没做完里长出来”）</h6>
+<p><strong>三个来源，按质量排序</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>具体在哪</th>
+<th>质量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>① 你第一篇的 Limitation 段</strong></td>
+<td>你自己写的“本方法的不足”</td>
+<td>★★★ <strong>最好</strong>：你最清楚它为什么不足</td>
+</tr>
+<tr>
+<td><strong>② 审稿意见里的建议</strong></td>
+<td>“如果作者能进一步探讨 X 会更好”</td>
+<td>★★★ <strong>审稿人替你指的方向，而且他会认可</strong></td>
+</tr>
+<tr>
+<td><strong>③ 消融里的反常现象</strong></td>
+<td>W12/W19 里那些你没解释清楚的结果</td>
+<td>★★ 需要额外挖</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 一个具体动作</strong>：打开你第一篇的 Limitation 段，<strong>逐句问“这句话能不能变成一篇论文”</strong>。通常第一篇的 Limitation 有 3 条，其中至少 1 条是可做的。</p>
+<h6 id="21m8md0-5">W32 · GitHub 仓库运营（W35 还有“爆款打造周”）</h6>
+<p><strong>★ 先说实话</strong>：<strong>大多数学术仓库不会火，这很正常。</strong> 一个能一键复现、README 清楚的仓库，即使只有几十个 star，<strong>在求职和联系导师时的价值已经完全兑现了</strong>。不要把 star 数当目标。</p>
+<p><strong>README 的必要结构</strong>（按读者从上到下的注意力排）：</p>
+<figure class="code" data-lang="markdown"><pre><code># 项目名 · 一句话说清做什么
+[徽章：论文链接 / 许可证 / Python 版本]
+
+![一张效果图]              ← ★ 第一屏必须有图，这决定别人往不往下看
+
+## Highlights
+- 三条 bullet，说清和别人的区别
+
+## Installation
+（★ 完整命令，含版本号，别写&quot;参考官方文档&quot;）
+
+## Quick Start
+（★ 三行以内出结果的最小例子）
+
+## Model Zoo
+| 模型 | 数据集 | mAP | config | 权重 |
+（★ 权重给 HuggingFace 链接）
+
+## Reproduce
+bash reproduce.sh    （你 M4 写的）
+
+## Citation
+（BibTeX，方便别人引用）
+
+## Acknowledgement
+（★ 致谢你 fork/借鉴的项目，学术礼貌）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 三条实际有用的运营动作</strong>（比“打造爆款”实在）：
+1. <strong>在论文的 Abstract 末尾放仓库链接</strong> —— 这是最有效的引流
+2. <strong>给你 fork 过的上游项目提一个有用的 PR 或 issue</strong> —— 建立真实的技术联系
+3. <strong>在 Papers with Code 上关联你的论文和代码</strong> —— 免费曝光</p>
+<hr />
+<h5 id="21m8md0-6">第二部分 · ★ 连接期的三份材料（W42–W45）</h5>
+<h6 id="21m8md0-7">2.1 简历（一页，针对“转行读博 + 找机会”）</h6>
+<p><strong>★ 你的简历和普通学生简历的区别</strong>：你要证明的不是“我上过什么课”，而是<strong>“我在 12 个月里从零做出了什么”</strong>。</p>
+<figure class="code" data-lang="markdown"><pre><code># 姓名
+邮箱 · GitHub · Google Scholar · 个人主页（如有）
+
+## 研究方向
+遥感图像 &lt;你的具体方向&gt;；&lt;一句话说清你的技术特长&gt;
+
+## 教育背景
+&lt;学校 · 专业 · 学位 · 起止&gt;    ← ★ 一行就够，不要列课程
+
+## 研究成果                     ← ★ 放在教育背景之后、最显眼的位置
+- [论文1] &lt;标题&gt;. IEEE GRSL, 2026 (Under Review / Accepted). [arXiv] [Code]
+- [论文2] &lt;标题&gt;. 投稿中.
+- [竞赛] &lt;竞赛名&gt;, 排名 X/Y (前 Z%). [技术报告] [代码]
+- [开源] &lt;仓库名&gt;, N stars. &lt;一句话说明它解决什么&gt;
+
+## 技术能力                     ← ★ 具体到工具和数字，不要写&quot;熟悉深度学习&quot;
+- 框架：PyTorch, MMDetection/MMRotate, MMSegmentation
+- 方向：旋转目标检测、SAR 图像处理、自监督预训练
+- 工程：单卡训练优化（混合精度/梯度检查点）、多 seed 实验管理、可复现流程
+
+## 代表性工作（2–3 项，各 3 行）   ← ★ 这一节让人记住你
+### &lt;项目名&gt;（时间）
+- 问题：&lt;一句话&gt;
+- 做法：&lt;一句话&gt;
+- 结果：&lt;★ 带数字，如&quot;mAP 提升 2.7，参数仅增加 3%，单卡可训&quot;&gt;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 四条写简历的纪律</strong>：
+1. <strong>一页。</strong> 超过一页说明你在写不重要的东西。
+2. <strong>每条成果带数字。</strong> “提升了性能” → “mAP +2.7（3 seeds）”
+3. <strong>在校生的成果就放最前面</strong>，不要按时间倒序把教育背景压在上面
+4. <strong>英文版和中文版都要有</strong>，联系海外时用英文</p>
+<h6 id="21m8md0-8">2.2 作品集 PDF（W45，原文要“有冲击力的战绩展示板”）</h6>
+<p><strong>作品集是简历的展开版</strong>，8–12 页，PDF。<strong>结构</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>第 1 页  封面：姓名 + 一句话定位 + 联系方式
+第 2 页  一页总览：12 个月做了什么（时间线 + 关键节点）
+第 3-5 页 项目一（第一篇论文）
+         · 问题是什么（配图）
+         · 我的方法（架构图）
+         · 结果（主表 + 定性对比图）
+         · ★ 我在这个项目里独立完成了什么
+第 6-7 页 项目二（第二篇 / 竞赛）
+第 8 页  技术栈与工程能力（★ 附 GitHub 截图和 reproduce.sh 的说明）
+第 9 页  ★ 我最擅长的三件事 + 我想解决的下一个问题
+第 10 页 附录：完整论文/竞赛/开源清单
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 第 9 页是最关键的一页</strong>，因为它回答的是对方最关心的问题：<strong>“这个人加入我的组，能干什么？”</strong> 前面 8 页都是过去，这一页是未来。</p>
+<h6 id="21m8md0-9">2.3 汇报 PPT（20 分钟，W42 备好、W53 用）</h6>
+<figure class="code" data-lang="text"><pre><code>1 页   自我介绍（30 秒，★ 不要超过 1 页）
+2 页   我做的方向 + 为什么做它（1 分钟）
+3-8 页 第一篇工作（8 分钟）
+       · 问题 → 现有方法的不足 → 我的方法 → 结果 → 消融
+       · ★ 每页一个信息点，不要堆字
+9-11页 第二篇 / 竞赛（4 分钟）
+12 页  ★ 我目前的困惑 / 想请教的问题（2 分钟）
+13 页  我能为您的组做什么（2 分钟）
+14 页  致谢 + 联系方式
+       （留 3 分钟提问）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 第 12 页最重要，也最容易被砍掉。</strong> 一个只讲自己做了什么的汇报是“汇报”；<strong>一个带着真问题来请教的汇报是“交流”</strong>。老师会记住后者。</p>
+<p>你 W43 为每位老师准备的“3 个尖锐问题”，就放在这一页。</p>
+</blockquote>
+<hr />
+<h5 id="21m8md0-10">第三部分 · ★★ 补上缺失的《<a href="../appendix-d.html">附录 D</a> · 冷邮件模板》</h5>
+<h6 id="21m8md0-11">3.0 先说一件原文回避了的事：回复率</h6>
+<p>原文用 W41–W48 整整八周准备这封邮件，称它为“12 个月的最终一击”。<strong>准备是对的，但“最终一击”这个框架有风险</strong>——它暗示这一击成了就赢了、不成就完了。</p>
+<p><strong>诚实的预期</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>· 给知名教授发冷邮件，作为校外人士，★ 不回复是最常见的结果
+· 收到礼貌但简短的回复（&quot;谢谢关注，目前没有名额&quot;）也很常见
+· 收到实质性回复（愿意聊一次）就已经是很好的结果
+· 三封发出去，有一封回复就算成功
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 但这不代表这八周白准备了</strong>，理由有三条：</p>
+<ol>
+<li><strong>准备的过程本身产出了三份可复用的材料</strong>（简历 / 作品集 / 汇报 PPT），<strong>你后面找工作、申博、申访问都要用</strong></li>
+<li><strong>为了写这封邮件，你精读了三位老师的最新论文</strong> —— 这本身就是高质量的领域跟踪</li>
+<li><strong>一封没回复的邮件可以再发给第二批人</strong> —— 模板和材料是复用的，边际成本很低</li>
+</ol>
+<blockquote class="quote">
+<p><strong>★ 所以正确的框架不是“最终一击”，而是“第一轮投递”。</strong> 原文 W50 安排了“Plan B 启动 + 多层备选不放弃”，方向是对的——<strong>但心理预期应该在 W48 发出之前就建立好，而不是等没回复了再调整。</strong></p>
+</blockquote>
+<h6 id="21m8md0-12">3.1 中文版模板（发给国内老师）</h6>
+<figure class="code" data-lang="text"><pre><code>主题：请教｜遥感&lt;方向&gt;中&lt;具体问题&gt;的一点困惑 —— &lt;你的姓名&gt;
+
+尊敬的 X 老师：
+
+您好。冒昧来信，我是 &lt;学校/单位&gt; 的 &lt;身份&gt;，方向是 &lt;你的方向&gt;。
+过去一年我从 &lt;你的原背景&gt; 转向遥感 CV，独立完成了两项工作
+（其一已投 IEEE GRSL，代码开源于 &lt;链接&gt;）。
+
+【第2段 · ★ 证明你真读过他的东西 —— 这一段决定他读不读下去】
+我最近仔细读了您 &lt;年份&gt; 发表在 &lt;期刊&gt; 的《&lt;论文标题&gt;》。文中
+&lt;具体的某个设计/某个实验现象&gt; 让我印象很深。不过在 &lt;某个具体条件&gt;
+下我有一点困惑：&lt;你的问题，2-3 句，具体、技术性、不是能百度到的&gt;。
+我在自己的实验里也观察到了类似现象：&lt;你的一个具体数字或现象&gt;。
+
+【第3段 · 我做了什么，一句话带过，不要展开】
+我目前的工作是 &lt;一句话&gt;，在 DOTA/DIOR/HRSC 三个数据集上
+mAP 相对 baseline 提升 &lt;X.X&gt;（3 个随机种子平均），参数量仅增加 &lt;Y&gt;%，
+全部在单张消费级显卡上完成。详细内容在附件的简历和作品集里。
+
+【第4段 · ★ 明确、低门槛的请求】
+如果方便的话，不知能否向您请教上面这个问题？
+或者，如果您有兴趣，我可以做一个 20 分钟的线上汇报，
+介绍我这一年的工作，时间由您定。
+
+打扰了，无论是否方便回复，都感谢您的时间。
+
+顺祝
+研安
+
+&lt;你的姓名&gt;
+&lt;邮箱&gt; ｜ &lt;GitHub&gt; ｜ &lt;Google Scholar&gt;
+
+附件：简历.pdf ｜ 作品集.pdf ｜ 论文预印本.pdf
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="21m8md0-13">3.2 英文版模板（发给海外老师）</h6>
+<figure class="code" data-lang="text"><pre><code>Subject: Question on &lt;specific topic&gt; in your &lt;Year&gt; &lt;Venue&gt; paper — &lt;Your Name&gt;
+
+Dear Prof. X,
+
+I hope this email finds you well. My name is &lt;Name&gt;, a &lt;role&gt; at &lt;affiliation&gt;
+working on &lt;your direction&gt;. Over the past year I transitioned from &lt;background&gt;
+into remote sensing computer vision, completing two works independently
+(one under review at IEEE GRSL; code at &lt;link&gt;).
+
+I recently read your &lt;Year&gt; &lt;Venue&gt; paper &quot;&lt;Title&gt;&quot; with great interest.
+The &lt;specific design/finding&gt; was particularly striking to me. I have one
+question regarding &lt;specific condition&gt;: &lt;your question, 2-3 sentences&gt;.
+In my own experiments I observed something related: &lt;your concrete number&gt;.
+
+My current work &lt;one sentence&gt;. It improves mAP by &lt;X.X&gt; over the baseline
+across three benchmarks (averaged over three seeds) with only &lt;Y&gt;% additional
+parameters, all trained on a single consumer GPU. Details are in the attached
+CV and portfolio.
+
+Would you be open to sharing your thoughts on the question above? Alternatively,
+I would be glad to give a 20-minute online presentation on my work at a time
+convenient for you.
+
+Thank you very much for your time, regardless of whether you are able to reply.
+
+Best regards,
+&lt;Name&gt;
+&lt;email&gt; | &lt;GitHub&gt; | &lt;Google Scholar&gt;
+
+Attachments: CV.pdf | Portfolio.pdf | Preprint.pdf
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="21m8md0-14">3.3 ★ 这封邮件的七条设计原则</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>原则</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>主题行要具体</strong></td>
+<td>“请教” / “求指导” 会被当成群发。<strong>主题里带上他论文的具体话题</strong>，一眼看出你读过</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>第 2 段必须证明你真读了</strong></td>
+<td>★ <strong>这是全信最重要的一段。</strong> 老师每周收到大量泛泛的信，只有“真读过我东西”的会被读完</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>问题要具体、技术性、且百度不到</strong></td>
+<td>能搜到的问题说明你没认真想。<strong>问题的质量直接代表你的水平</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>自我介绍不超过 3 句</strong></td>
+<td>他现在不关心你，他关心你问的问题。<strong>成果放附件</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>请求要低门槛且有梯度</strong></td>
+<td>“回答一个问题”比“收我做学生”容易答应得多。<strong>先建立联系，再谈别的</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>给对方不回复的台阶</strong></td>
+<td>“无论是否方便回复都感谢您的时间” —— 减少他的心理负担，<strong>反而提高回复率</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>全信控制在 300 字以内</strong>（正文）</td>
+<td>手机上能一屏看完。长信=不会读</td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="21m8md0-15">3.4 五个会让邮件直接进垃圾桶的错误</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>❌</th>
+<th>为什么致命</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>群发痕迹（“尊敬的老师”没写名字，或忘了改上一封的名字）</td>
+<td><strong>立刻出局</strong>，而且很常见</td>
+</tr>
+<tr>
+<td>只夸不问（“拜读大作，深受启发，希望能加入您的团队”）</td>
+<td>没有信息量，看不出你的水平</td>
+</tr>
+<tr>
+<td>一上来就要名额 / 要推荐信</td>
+<td>门槛太高，对方只能拒绝</td>
+</tr>
+<tr>
+<td>附件过大或格式奇怪（.rar / 20MB）</td>
+<td>打不开就等于没发。<strong>PDF，总共 5MB 以内</strong></td>
+</tr>
+<tr>
+<td>深夜或周末发</td>
+<td>会被后来的邮件淹掉。★ <strong>工作日上午 9–10 点发</strong>（原文说了这一条，是对的）</td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="21m8md0-16">3.5 发出后怎么办</h6>
+<figure class="code" data-lang="text"><pre><code>Day 0    发出。★ 然后关掉邮箱去做别的事
+Day 1-6  不做任何事。不刷、不追问
+Day 7    ★ 若无回复，发一封简短追问（不是重发原信）：
+         &quot;X 老师您好，上周冒昧向您请教了 &lt;一句话概括问题&gt;。
+          知道您很忙，若不方便回复完全理解。
+          如果有机会，我很期待您的看法。&quot;
+         —— 三行以内
+Day 14   仍无回复 → 停止。★ 不要发第三封
+         → 转 Plan B：换一批人，或换渠道（会议现场、组会旁听、共同认识的人引荐）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 关于追问的一条纪律</strong>：<strong>最多追一次。</strong> 追第二次会从“认真”变成“打扰”，而学术圈很小，负面印象的成本远高于一次未回复。</p>
+</blockquote></div></section></section><section class="slot" id="d190-noon" data-d="190" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D190 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">确认最终排名 + 截图存档</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>竞赛结束后，<strong>确认你的最终排名（百分位），截图存档</strong>。这个排名 + 你的 Trick 贡献分解表（W27 做的），是你竞赛经历的完整记录——简历、面试、技术报告都会用到。</p>
+<ul>
+<li><strong>为什么要截图存档</strong>：竞赛排行榜后续可能关闭/变动，<strong>及时截图保存你的最终排名</strong>（作为凭证）。和复盘报告、Trick 贡献分解表一起存好。</li>
+<li><strong>凭证意识（养成存证的习惯）</strong>：学术/职业路上，很多成果需要“凭证”——竞赛排名、论文录用通知、开源 star 数等。<strong>这些东西时过境迁可能找不回（排行榜关了、邮件删了），养成“及时截图/存档”的习惯</strong>，以后申请、面试、写简历时，这些凭证就是你成果的客观证明。竞赛排名截图，就是这种存证习惯的一次实践：此刻随手一截，未来用得上时不抓瞎。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>确认竞赛最终排名（百分位、具体名次）。</li>
+<li>截图存档（排行榜上你的位置）。</li>
+<li>和 W27 的复盘报告、Trick 贡献分解表一起归档。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛最终排名确定、截图存档，和复盘材料一起归档。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>排行榜关闭前没截图 → 及时截图；只记名次不记百分位 → 记百分位（更有意义，如 Top X%）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>排行榜已关闭?→ 找之前的截图/提交记录；排名不理想 → 见下午的校准。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>归档了竞赛最终成果</strong>。<strong>做了</strong>（确认排名 + 截图存档）、<strong>学了</strong>(及时存证、排名+方法=完整经历)、<strong>会了</strong>（沉淀竞赛成果凭证）。</p>
+</div></section></section><section class="slot" id="d190-pm" data-d="190" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D190 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">心态校准(★ 竞赛排名 = 锦上添花)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ 重要心态校准：竞赛排名的正确认知）</h4><div class="blk-b"><ul>
+<li><strong>如果竞赛进入了 Top 10%——太好了，值得高兴</strong>；<strong>如果没有——不要沮丧，这完全不影响你的整体计划</strong>。这是一个需要反复强调的心态校准。</li>
+<li><strong>为什么“竞赛排名是锦上添花，不是核心”</strong>:① <strong>你的核心成果是论文投稿（M7 已完成）+ 即将开源的代码</strong>——这些才是决定你学术进展、申请/求职竞争力的东西；竞赛排名是附加的;② <strong>竞赛的真正价值不在排名，而在你学到的能力</strong>——这一路你掌握了 TTA、Ensemble、伪标签、半监督、自监督预训练、知识蒸馏、任务特定 loss、SAHI、超级 Ensemble……这一整套工程技巧，是宝贵的、可迁移的资产，远比一个排名数字重要;③ <strong>没到 Top 10% 不影响计划</strong>——你的主线是“论文 + 开源 + 第二课题”，竞赛是练兵和补充。</li>
+<li><strong>把注意力放回“可沉淀的资产”</strong>：与其纠结排名，不如把精力放在<strong>把竞赛沉淀成持久资产</strong>——技术报告（本周写）、开源代码（本周开源）、经验复盘（W27 做了）。<strong>这些沉淀下来的东西，价值会持续（简历/面试/被引流/能力展示），而排名只是一个瞬时的数字</strong>。所以，无论排名如何，本周的重点是把竞赛“变现”成可持续的资产，然后转回研究主线。</li>
+<li><strong>为什么对你尤其要强调这个</strong>：你是认真、有追求的人，容易因为指标没达到而自我否定。<strong>但要看到全局：你这几个月完成了人生第一次论文投稿、做了一个有完整复盘的竞赛、积累了一整套工程能力</strong>——这是巨大的成长。别让一个竞赛排名的不完美，遮蔽了你真实的、重大的进步。带着对自己成长的肯定，继续往前走。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>接受竞赛的最终排名（好就高兴，不理想也不沮丧）。</li>
+<li>提醒自己：核心是论文 + 开源 + 能力，竞赛排名是锦上添花。</li>
+<li>把注意力转向“把竞赛沉淀成资产”（本周的技术报告/开源）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>心态校准到位——正确看待竞赛排名（锦上添花），注意力转向可沉淀的资产。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★校准）</h4><div class="blk-b"><ul>
+<li><strong>Top 10% 没达到就沮丧/自我否定</strong> → 不影响整体计划！核心是论文投稿 + 开源 + 学到的能力，竞赛是锦上添花。</li>
+<li><strong>纠结排名，忽略沉淀</strong> → 把精力放在技术报告/开源（可持续资产），而非纠结瞬时排名。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>还是为排名失落?→ 回看你这几个月的全部成就（论文投稿、完整竞赛、一整套技能），排名只是其中一个小数字；怎么走出来?→ 投入“把竞赛沉淀成资产”的具体工作，做起来就好了。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>校准了对竞赛排名的认知</strong>。<strong>做了</strong>（接受排名 + 心态校准 + 转向沉淀）、<strong>学了</strong>（竞赛是锦上添花、价值在能力和沉淀、别让支线遮蔽主线进步）、<strong>会了</strong>（健康看待竞赛结果）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜竞赛排名校准(★)</strong>：竞赛排名是<strong>锦上添花，不是核心</strong>。核心是论文投稿+开源代码+学到的能力（TTA/Ensemble/自监督/SAHI…可迁移）。没到Top 10%不影响计划。把注意力放回可沉淀的资产（技术报告/开源/复盘），而非纠结瞬时排名——沉淀的价值持续，排名只是数字。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛最终排名确定（截图存档）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D190</summary><textarea data-note="d190" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d191" data-d="191"><header class="day-head"><span class="dnum">D191</span><h2 class="day-t">周二 · 写竞赛技术报告 Sec 1–4</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写技术报告 Sec1-2（背景+数据分析）；中午写 Sec3（方法概述，pipeline 图+各模块）；晚上写 Sec4（实验，trick 列表+提升+消融）。</p>
+<p><strong>预期管理</strong>：今天写竞赛技术报告Sec1-4。提醒：<strong>技术报告≠论文</strong>——它比论文轻、比博客正式，讲清“这个竞赛我怎么做的”；结构：Sec1背景+Sec2数据分析（EDA发现）+Sec3方法概述（pipeline图+各模块）+Sec4实验（trick列表+每个trick提升幅度+消融）;Sec4直接用你W27的Trick贡献分解表；这是竞赛/项目复盘的标准产出形式，以后做项目也用得上。</p>
+</blockquote>
+</div><section class="slot" id="d191-am" data-d="191" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D191 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Sec1 背景 + Sec2 数据分析</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（技术报告 ≠ 论文，是另一种文档类型）</h4><div class="blk-b"><ul>
+<li><strong>技术报告(technical report)是一种介于论文和博客之间的文档</strong>——比论文轻（不需要严格的相关工作、理论分析、与SOTA的全面对比），但比博客正式（有结构、有数据、讲清方法）。它的目的是<strong>清楚地讲明“这个竞赛/项目我是怎么做的、效果如何”</strong>。</li>
+<li><strong>为什么要会写技术报告（一种重要的文档能力）</strong>：技术报告是<strong>工业界和竞赛中最常用的成果呈现形式</strong>——做完一个项目/竞赛，写一份技术报告说清楚你的方案和结果。它比论文快（不用那么严谨的学术包装）、比口头讲清楚（有文档可查）。<strong>会写技术报告，是把你的工作系统呈现给别人（同事、面试官、社区）的核心能力</strong>。这次写竞赛技术报告，就是学这种文档类型。</li>
+<li><strong>技术报告的标准结构</strong>:① <strong>Sec1 背景</strong>——竞赛是什么、任务是什么、为什么有挑战;② <strong>Sec2 数据分析</strong>——数据的特点（你 EDA 的发现：类别分布、目标尺度、难点）;③ <strong>Sec3 方法概述</strong>——你的方案（pipeline 图 + 各模块）;④ <strong>Sec4 实验</strong>——trick 列表 + 每个 trick 的提升 + 消融;⑤ <strong>Sec5 结果分析</strong>——失败案例、经验教训（D192 写）。</li>
+<li><strong>Sec1+Sec2 怎么写</strong>:① <strong>背景</strong>——简述竞赛任务（检测/分割什么）、评测指标、挑战在哪（用 2-3 段说清）;② <strong>数据分析</strong>——把你 EDA 的发现写出来（类别分布是否长尾、目标尺度、标注特点、难点），并说明这些发现如何指导了你的方案（如“小目标多→用 SAHI”）。<strong>数据分析体现你“先理解数据再动手”的专业性</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 Sec1 背景（竞赛任务、指标、挑战）。</li>
+<li>写 Sec2 数据分析（EDA 发现 + 如何指导方案）。</li>
+<li>用简洁的技术报告语言(清楚 &gt; 华丽)。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>技术报告 Sec1（背景）+ Sec2（数据分析）成形，数据分析体现 EDA 发现和方案动机。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>把技术报告写成论文（过度学术包装）</strong> → 技术报告讲清“怎么做的”即可，不用论文那么严谨的包装。</li>
+<li><strong>数据分析只罗列统计不讲动机</strong> → 说明发现如何指导方案（EDA→策略）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不知技术报告写多详细?→ 目标是“别人看完能理解并复现你的方案”，够这个详细度即可；背景写多长?→ 2-3 段说清任务和挑战。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>技术报告的开头（背景+数据分析）</strong>。<strong>做了</strong>（写 Sec1+Sec2）、<strong>学了</strong>（技术报告≠论文、标准结构、数据分析体现专业性）、<strong>会了</strong>（写清竞赛背景和数据分析）。</p>
+</div></section></section><section class="slot" id="d191-noon" data-d="191" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D191 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Sec3 方法概述（pipeline 图 + 各模块）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Sec3 方法概述——<strong>用一张 pipeline 图 + 文字，讲清你的整体方案</strong>：数据怎么处理、用了什么模型、训练用了哪些 trick、推理怎么做。pipeline 图是核心（一图讲清整体流程），文字补充各模块细节。</p>
+<ul>
+<li><strong>pipeline 图怎么画</strong>：画出你方案的整体流程——数据预处理 → 模型(backbone+head)→ 训练（用了哪些 trick：多尺度/半监督/自监督预训练…）→ 推理(TTA/SAHI/Ensemble+WBF)。<strong>一张图让读者一眼看懂你的整体方案</strong>。</li>
+<li><strong>为什么 pipeline 图重要</strong>：你的方案有很多组件（多个 trick、多个阶段），纯文字描述读者难以建立整体印象。<strong>一张 pipeline 图把所有组件和它们的关系可视化，读者一眼就懂整体流程</strong>，再配文字看各模块细节。这是技术报告（和论文 Method）的标配。</li>
+<li><strong>画 pipeline 图也在帮你理清自己的方案</strong>：画 pipeline 图的过程，本身就是一次“梳理”——你要想清楚：数据怎么流、各模块的输入输出是什么、各 trick 在哪个阶段起作用、它们的先后关系。<strong>很多人画图时才发现自己的方案某处其实没想透，或某两个组件的关系含糊</strong>。所以画 pipeline 图不只是“为了让读者懂”，也是<strong>逼自己把方案的逻辑彻底理顺</strong>的好机会。画清楚了，说明你真正理解了自己做的东西；画不清楚的地方，正是你需要再想想的地方。这种“用图理清思路”的能力，在做研究、讲方案、写论文 Method 时都用得上。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>画 pipeline 图（数据→模型→训练trick→推理trick 的整体流程）。</li>
+<li>写 Sec3 文字（各模块描述：用了什么、为什么）。</li>
+<li>图文配合（图给整体、文给细节）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Sec3 方法概述成形，有 pipeline 图（整体流程清晰）+ 各模块文字描述。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>没 pipeline 图纯文字 → 画 pipeline 图（一图讲清整体）；图太复杂看不懂 → 图要清晰（主流程突出，细节放文字）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>pipeline 图怎么画?→ 按“数据→训练→推理”三阶段画，每阶段标用了什么；不会画图工具?→ 用 draw.io/PPT 画框图。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用 pipeline 图 + 文字写方法概述</strong>。<strong>做了</strong>（画 pipeline 图 + 写 Sec3）、<strong>学了</strong>（pipeline 图讲清整体、图文配合）、<strong>会了</strong>（系统呈现你的技术方案）。</p>
+</div></section></section><section class="slot" id="d191-pm" data-d="191" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D191 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Sec4 实验（trick 列表 + 提升 + 消融）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Sec4 实验——<strong>用你 W27 做的 Trick 贡献分解表</strong>，呈现每个 trick 的提升幅度（起点→每招增量→最终），这本质是一个“消融分析”（每个 trick 的贡献）。这是技术报告最有价值的部分（读者最想知道“什么招有效、提升多少”）。</p>
+<ul>
+<li><strong>Sec4 直接用 Trick 贡献分解表</strong>：你 W27 已经做了 Trick 贡献分解表（起点 → +换backbone +X → +TTA +Y → … → 最终）——<strong>这张表就是 Sec4 的核心</strong>，直接用。它清晰展示了每个 trick 的贡献，本质是竞赛方案的“消融研究”。</li>
+<li><strong>为什么这部分最有价值</strong>：读你技术报告的人（想学这个竞赛怎么打、或面试官评估你），<strong>最想知道的就是“你用了什么招、每招提升多少、最有效的是什么”</strong>——Trick 贡献分解表正好回答这些。它体现你不只是“堆 trick”，而是清楚每招的价值（科学的态度）。</li>
+<li><strong>Trick 贡献分解=对竞赛方案的“消融”，体现科学态度</strong>：回想你 W19 学的消融研究——“每个组件贡献多少”。竞赛的 Trick 贡献分解表本质是同一个思想：不是笼统说“我用了一堆招拿了高分”，而是<strong>逐招拆解“这招 +X、那招 +Y”，清楚每招的真实贡献</strong>。这区分了两种人：一种是“东试西试碰运气、不知道为什么work”的调参侠；另一种是“清楚每个选择的依据和效果”的研究者。<strong>Trick 贡献分解表把你归入后者</strong>——它展示你做竞赛也是带着科学态度的（控制变量、量化贡献），这种态度正是做研究最核心的素养。面试官、审稿人看到这种清晰的贡献拆解，会认可你“懂方法、有分析能力”，而非只会刷分。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 W27 的 Trick 贡献分解表整理进 Sec4。</li>
+<li>补充消融分析（每个 trick 的贡献、最有效的招）。</li>
+<li>配实验图表（贡献分解的柱状图等）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>技术报告 Sec4 实验成形，含 Trick 贡献表（每个 trick 提升清晰）、消融分析。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Sec4 只报最终分不分解每招 → 用 Trick 贡献分解表（读者最想看）；贡献凭印象 → 用实际提交分数。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>Trick 贡献表数据不全?→ 从 Trick 日志/提交历史补；怎么呈现更直观?→ 表格 + 柱状图（每招增量）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了技术报告的实验部分</strong>。<strong>做了</strong>（整理 Trick 贡献表进 Sec4 + 消融分析）、<strong>学了</strong>(Sec4 是最有价值部分、Trick 贡献分解=消融、用实际数据)、<strong>会了</strong>（系统呈现竞赛实验结果）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜技术报告</strong>：介于论文和博客之间的文档，讲清“项目/竞赛怎么做的”。结构：Sec1背景+Sec2数据分析(EDA)+Sec3方法概述（pipeline图+各模块）+Sec4实验(Trick贡献分解表=消融)+Sec5结果分析/失败案例/经验。工业界和竞赛最常用的成果呈现形式，多用途（作品集/开源/面试/poster）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛技术报告 Sec1-4（背景/数据分析/方法概述/实验）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D191</summary><textarea data-note="d191" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d192" data-d="192"><header class="day-head"><span class="dnum">D192</span><h2 class="day-t">周三 · 写技术报告 Sec5 + 画图 + 定稿（5–8页）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写 Sec5（结果分析+失败案例+经验教训）；中午画 pipeline 图和结果图；晚上定稿技术报告（5–8页）。</p>
+<p><strong>预期管理</strong>：今天定稿竞赛技术报告。提醒：Sec5（结果分析+失败案例+经验教训）是体现你“深度反思”的部分——不只报成功，还分析失败案例（模型在什么图上表现差）和“如果再来一次会怎么做”；配好 pipeline 图和结果图；定稿控制在 5–8 页（技术报告要精炼）；<strong>技术报告价值多元</strong>：进作品集、开源吸 star、面试谈资、有 workshop 可投 poster——是把竞赛“变现”成持久资产的关键。</p>
+</blockquote>
+</div><section class="slot" id="d192-am" data-d="192" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D192 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Sec5 结果分析 + 失败案例 + 经验教训</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（失败案例分析体现深度）</h4><div class="blk-b"><ul>
+<li>Sec5 是技术报告的&quot;反思&quot;部分——不只报告成功（前面 Sec4 已报提升），还要<strong>分析失败案例</strong>（模型在什么样的图像上表现差）和<strong>总结经验教训</strong>（&quot;如果再来一次我会怎么做&quot;）。</li>
+<li><strong>为什么“失败案例分析”特别能体现你的水平</strong>：只报告“我用了这些招、提升了多少”是初级的；<strong>能分析“我的方法在什么情况下失败、为什么”才是深度</strong>——它说明你不只是调参刷分，而是真正理解了问题和方法的边界。面试官、审稿人、读者都看重这种“知道自己方法的局限”的清醒。<strong>这也呼应你写论文 Limitation 的能力</strong>：诚实面对不足，反而显专业、增信任。</li>
+<li><strong>怎么做失败案例分析</strong>:① 找出模型预测错的典型案例（漏检的、误检的、定位不准的）;② 分析它们的共性（是小目标？密集场景？特殊类别？光照/角度?）;③ 推测原因 + 改进方向。<strong>这一步把你 W27 的“失败案例分析”整理成报告的 Sec5</strong>。</li>
+<li><strong>经验教训（&quot;如果再来一次&quot;）</strong>：总结这次竞赛的得失——哪些招最有效、哪些走了弯路、下次会怎么做。<strong>这是把一次性的竞赛经验，提炼成可复用的方法论</strong>（下次参赛/做项目能直接用）。</li>
+<li><strong>失败案例分析也是科研能力的核心（不只竞赛）</strong>：“分析方法在什么情况下失败、为什么”这个能力，贯穿你整个研究生涯——写论文的 Limitation 要它、回应审稿意见要它、设计下一个改进要它。<strong>科研的进步往往来自“理解失败”</strong>：你的方法在某类样本上差（如 SAR 的强 speckle 噪声、密集小目标），分析清楚为什么，就指明了下一步改进的方向（甚至是第二个课题的来源）。所以失败案例分析不是“自曝其短”，而是<strong>最有价值的科研动作之一</strong>——它把“哪里不行”变成“接下来做什么”。这次在技术报告里练这个，以后做研究持续用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 Sec5 结果分析（整体表现 + 在哪些情况下好/差）。</li>
+<li>失败案例分析（典型错误案例 + 共性 + 原因 + 改进方向）。</li>
+<li>经验教训（&quot;如果再来一次我会怎么做&quot;）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>技术报告 Sec5 成形，含失败案例分析（有共性和原因）、经验教训。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只报成功不报失败 → 失败案例分析最体现深度；失败案例只列不分析原因 → 推测原因 + 改进方向。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>找不到失败案例的共性?→ 把错误案例按类型（小目标/密集/特殊类）归类找规律；经验教训写不出?→ 回想哪些招走了弯路、哪些最有效。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写技术报告的反思部分（失败分析+经验）</strong>。<strong>做了</strong>（写 Sec5 + 失败案例分析 + 经验教训）、<strong>学了</strong>（失败分析体现深度、提炼可复用经验）、<strong>会了</strong>（深度反思竞赛得失）。</p>
+</div></section></section><section class="slot" id="d192-noon" data-d="192" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D192 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">画 pipeline 图和结果图</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>技术报告的图是核心——<strong>pipeline 图</strong>（整体方案流程，Sec3 用）和<strong>结果图</strong>（Trick 贡献柱状图、失败案例可视化等，Sec4/Sec5 用）。好的图让报告一目了然、专业。</p>
+<ul>
+<li><strong>图要清晰专业</strong>：和论文的图一样，技术报告的图也要清晰（主信息突出）、规范（有标注、配色和谐）。pipeline 图展示整体流程，结果图展示数据（提升幅度、案例）。<strong>图是读者最先看的，画好图，报告的专业度立刻上一个台阶</strong>。</li>
+<li><strong>复用你做论文图的经验（技能迁移）</strong>：你在 M6 给论文画过 teaser、画过 Method 示意图、做过实验图表——<strong>那些“怎么画出版级的图”的经验（配色克制、字体可读、留白、矢量导出），在技术报告的图上完全适用</strong>。技术报告的图标准可以略放松（不必像论文那么严苛），但“清晰、专业、图文配合”的原则是一样的。这又是一次技能的复利：你为论文练就的可视化能力，在技术报告、以后的项目汇报、slides 里反复用得上。把它当成一项长期的、可迁移的能力来打磨，而非每次从头摸索。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>画/完善 pipeline 图（整体方案，清晰专业）。</li>
+<li>画结果图（Trick 贡献柱状图、关键案例可视化）。</li>
+<li>图配到报告对应章节。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>pipeline 图 + 结果图完成，清晰专业，配进报告。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>图粗糙随意 → 技术报告的图也要清晰规范；图太多太杂 → 保留核心的（pipeline + 贡献分解 + 关键案例）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>画图工具不熟?→ draw.io/PPT 画框图、matplotlib 画结果图；图不好看 → 参考好的技术报告的图风格。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>为技术报告画了核心图</strong>。<strong>做了</strong>（pipeline 图 + 结果图）、<strong>学了</strong>（图是报告核心、要清晰专业）、<strong>会了</strong>（用图直观呈现方案和结果）。</p>
+</div></section></section><section class="slot" id="d192-pm" data-d="192" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D192 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">定稿技术报告（5–8页）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>整合 Sec1-5 + 图，<strong>定稿技术报告，控制在 5–8 页</strong>（技术报告要精炼，不像论文那么长）。通读一遍确保结构清晰、图文配合、讲清了“怎么做的”。</p>
+<ul>
+<li><strong>为什么控制 5–8 页</strong>：技术报告的读者（同行、面试官、社区）时间有限，<strong>精炼、重点突出比冗长全面更有用</strong>。5–8 页足够讲清一个竞赛方案（背景+数据+方法+实验+反思）。别写成几十页的论文，那样没人看完。</li>
+<li><strong>技术报告的多元价值（为什么值得认真写）</strong>:① <strong>进作品集</strong>——展示你的实战能力;② <strong>开源到 GitHub 吸引 star</strong>——配在代码仓库里;③ <strong>面试谈资</strong>——面试时一份清晰的技术报告是很好的展示;④ <strong>可投 poster</strong>——如果竞赛有 workshop，可投 poster。<strong>一份技术报告，多个用途，是把竞赛“变现”成持久资产的关键</strong>。</li>
+<li><strong>“会写文档”是被低估的核心能力</strong>：很多技术能力强的人，栽在“做得好但讲不清”——做了很厉害的工作，却没法让别人快速理解其价值。<strong>而技术报告正是“把工作讲清楚”的训练</strong>：用结构化的方式（背景→数据→方法→实验→反思）、配合图表，让读者高效理解你做了什么、为什么、效果如何。这个能力贯穿你的职业生涯——写论文、做项目汇报、申请材料、面试展示，本质都是“把复杂工作讲清楚”。<strong>很多人觉得“写文档是杂活”，但能把工作系统、清晰地呈现出来，本身就是稀缺的核心竞争力</strong>。这次认真写技术报告，练的就是这个可迁移的硬本事。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合 Sec1-5 + 图，定稿技术报告。</li>
+<li>控制在 5–8 页（精炼）。</li>
+<li>通读确保结构清晰、图文配合。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛技术报告定稿（5–8 页，结构清晰、图文配合、讲清方案）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>写成几十页论文 → 控制 5–8 页精炼；只有文字没图 → 图文配合（图是核心）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>超过 8 页?→ 精简冗余、次要内容删或缩；不确定够不够清楚?→ 给同学看，他能否理解你的方案。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>定稿了一份完整的竞赛技术报告</strong>。<strong>做了</strong>（整合定稿 5–8 页）、<strong>学了</strong>（技术报告精炼、多元价值）、<strong>会了</strong>（产出一份可多用途的技术报告）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜技术报告定稿</strong>：整合 Sec1-5（背景/数据/方法/实验/反思）+ 核心图（pipeline+结果），控制 5–8 页精炼。失败案例分析最体现深度。多元价值：作品集/开源吸star/面试谈资/投poster——把竞赛变现成持久资产。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛技术报告（5–8 页）定稿。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D192</summary><textarea data-note="d192" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d193" data-d="193"><header class="day-head"><span class="dnum">D193</span><h2 class="day-t">周四 · 整理竞赛代码 → 开源到 GitHub + README</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午整理竞赛代码、开源到 GitHub、写 README；中午加 requirements.txt + 一键脚本；晚上加技术报告 PDF。</p>
+<p><strong>预期管理</strong>：今天开源竞赛代码到 GitHub。提醒：写好 README（问题描述/方法/如何复现/结果/排名）——README 是仓库的门面，决定别人会不会用；加 requirements.txt + 一键训练/推理脚本（降低复现门槛）；把技术报告 PDF 也放进仓库；<strong>开源是被动引流</strong>——即使排名不是第一，很多人搜“[竞赛名] solution”会找到你的仓库、给 star，这是不花精力的持续曝光，也是你能力的公开证据。</p>
+</blockquote>
+</div><section class="slot" id="d193-am" data-d="193" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D193 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整理竞赛代码 + 开源到 GitHub + 写 README</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(开源代码 = 被动引流 + 能力证据)</h4><div class="blk-b"><ul>
+<li>把竞赛代码整理、开源到 GitHub 公开仓库，配一份好的 README。<strong>这是把竞赛沉淀成持久资产的关键一步</strong>——代码开源后，会持续为你带来价值（被搜索到、被 star、作为能力证据）。</li>
+<li><strong>为什么开源是“被动引流”（贴合你的定位 6.5）</strong>：很多人在搜“[竞赛名] solution”“[竞赛名] 方案”时，会找到你的开源仓库——<strong>即使你排名不是第一，清晰可复现的开源方案也能获得 star 和关注</strong>。这是<strong>不花额外精力的持续曝光</strong>（代码放在那，自动被搜到），也是你工程能力的<strong>公开证据</strong>（申请/求职时，一个有 star 的开源仓库比简历上的一句话有力得多）。<strong>这正是“强作品的自然放大”</strong>——你有了实打实的代码，顺手开源，让它持续产生价值。</li>
+<li><strong>README 是仓库的门面（最重要）</strong>:README 决定别人会不会用你的代码。<strong>好的 README 包含：问题描述（竞赛/任务是什么）、方法（你的方案概述）、如何复现（环境+数据+训练+推理步骤）、结果（你的成绩+排名）</strong>。README 写得清楚、复现步骤明确，别人才愿意用、才会 star。</li>
+<li><strong>代码整理要点</strong>：开源前整理代码（删冗余/调试代码、加必要注释、结构清晰），让别人能读懂、能跑。<strong>别把一团乱的实验代码直接传上去</strong>——整理过的、可复现的代码才有价值。</li>
+<li><strong>开源对你“联系空天院”的潜在价值</strong>：回想你的破冰策略——真正能和空天院建立联系的，是你围绕他们方向（空天·灵眸/RingMo）做出的、看得见的工作。<strong>一个清晰、可复现、有 star 的开源仓库，正是这种“看得见的工作”的载体</strong>。当你将来联系孙显/付琨/王超组时，一个“我做了这个工作、代码开源在这里、复现方式清晰”的仓库，比任何自我介绍都有说服力——它让对方能直接看到你的实力。<strong>开源不只是被动引流，更是把你的能力固化成可展示、可验证的证据</strong>，为将来的学术联系铺路。所以认真整理、开源好每一个仓库，是在为长期目标积累实打实的筹码。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整理竞赛代码（删冗余、加注释、结构清晰）。</li>
+<li>创建 GitHub 公开仓库，上传代码。</li>
+<li>写 README（问题描述/方法/如何复现/结果/排名）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛代码开源到 GitHub,README 清晰（含问题/方法/复现/结果/排名）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>把一团乱的代码直接传</strong> → 整理过（删冗余、加注释）再开源，可复现才有价值。</li>
+<li><strong>README 太简略</strong> → README 是门面，问题/方法/复现/结果/排名都要写清。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不知 README 写什么?→ 看优秀竞赛方案仓库的 README 模板（问题/方法/复现/结果）；代码太乱整理费劲?→ 至少保证核心训练/推理脚本能跑、有说明。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>开源竞赛代码 + 写 README</strong>。<strong>做了</strong>（整理代码 + 开源 + 写 README）、<strong>学了</strong>(开源=被动引流+能力证据、README 是门面)、<strong>会了</strong>（把代码沉淀成可复现的公开资产）。</p>
+</div></section></section><section class="slot" id="d193-noon" data-d="193" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D193 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">加 requirements.txt + 一键训练/推理脚本</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>降低复现门槛——加 <strong><code>requirements.txt</code></strong>（列出依赖，别人一键安装环境）+ <strong>一键训练/推理脚本</strong>（别人一条命令就能跑）。<strong>复现门槛越低，越多人能用、越多 star</strong>。</p>
+<ul>
+<li><strong>为什么要降低复现门槛</strong>：别人想用你的代码，如果配环境复杂、不知道怎么跑，大概率就放弃了。<strong><code>requirements.txt</code>(一键装依赖)+ 一键脚本（一条命令训练/推理）让复现变简单</strong>，别人才愿意用。这是开源代码“好用”的关键。</li>
+<li><strong>可复现性是你工程素养的体现（也保护未来的自己）</strong>：一个能一键复现的仓库，传递的是“这个人工程严谨、代码可靠”的信号——这本身就是能力证据。<strong>而且可复现不只为别人，也为未来的你</strong>：几个月后你可能要基于这个竞赛代码做第二课题、或回头复用某个 trick，如果当时没整理好（环境没记、脚本没封装），未来的你也会一头雾水、重新踩坑。<strong>现在花一小时把环境和脚本整理清楚，是给未来的自己省下几小时的调试</strong>。可复现性是软件工程的基本素养，养成“任何项目都做到可一键复现”的习惯，无论对协作、对开源、对自己的长期效率都受益。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>生成 <code>requirements.txt</code>(列出所有依赖及版本)。</li>
+<li>写一键训练脚本(<code>train.sh</code>)和一键推理脚本(<code>infer.sh</code>)。</li>
+<li>在 README 里说明用法。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>仓库有 <code>requirements.txt</code> + 一键训练/推理脚本，别人能低门槛复现。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>依赖没列全别人装不上 → requirements.txt 列全（pip freeze 辅助）；脚本写死路径别人没法用 → 用参数/配置，别硬编码。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>requirements 怎么生成?→ <code>pip freeze &gt; requirements.txt</code>(再清理掉无关的)；一键脚本怎么写?→ 把训练/推理命令封装成 .sh，关键参数可配。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>降低代码复现门槛</strong>。<strong>做了</strong>（requirements.txt + 一键脚本）、<strong>学了</strong>(低门槛=更多人用、复现简单的重要性)、<strong>会了</strong>（让开源代码好用易复现）。</p>
+</div></section></section><section class="slot" id="d193-pm" data-d="193" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D193 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">在仓库中添加技术报告 PDF</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把 D192 定稿的技术报告 PDF 也放进仓库——<strong>代码 + 技术报告 = 完整的方案展示</strong>。别人看你的仓库，既能跑代码，又能读技术报告了解方法，价值翻倍。</p>
+<ul>
+<li><strong>代码+报告的组合价值</strong>：代码展示“怎么实现”，技术报告展示“怎么思考、为什么这么做、效果如何”。<strong>两者结合，你的仓库就是一个完整的、专业的竞赛方案展示</strong>——这比单有代码或单有报告都更有说服力。面试、申请时，这样一个仓库是很强的能力证据。</li>
+<li><strong>一个完整仓库 = 一份“立体简历”</strong>：简历上写“参加了某竞赛、用了 Ensemble 等技巧”只是一句苍白的话；而一个<strong>代码可跑、报告清晰、结果可查、复现简单</strong>的完整仓库，是这句话的立体证明——别人能亲自验证你说的都是真的、能看到你的代码质量、能读懂你的思路深度。<strong>在申请研究生/工作、联系导师时，给对方一个这样的仓库链接，胜过千言万语</strong>。这就是为什么本周花几天把竞赛“沉淀”成完整仓库是值得的：它把一次性的竞赛经历，固化成了一份可以反复使用、持续为你说话的“立体作品”。把它做完整、做专业，是对自己几个月努力的负责。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把技术报告 PDF 放进仓库(如 <code>docs/</code> 目录)。</li>
+<li>在 README 里链接技术报告。</li>
+<li>确认仓库完整（代码 + README + requirements + 脚本 + 报告）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>仓库含技术报告 PDF,README 链接到它，仓库完整专业。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>报告和代码分开放别人找不到 → 报告放仓库 + README 链接；仓库结构乱 → 清晰的目录结构(src/docs/scripts)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>仓库还缺什么?→ 对照“代码+README+requirements+脚本+报告”清单确认完整。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了开源仓库（代码+报告完整）</strong>。<strong>做了</strong>（加技术报告 PDF + 完善仓库）、<strong>学了</strong>(代码+报告=完整方案展示)、<strong>会了</strong>（打造一个专业完整的开源仓库）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜开源仓库（被动引流）</strong>：整理代码→GitHub公开+好README（问题/方法/复现/结果/排名）+requirements.txt+一键脚本+技术报告PDF。复现门槛越低star越多。开源是“强作品的自然放大”：被搜到、被star、作能力证据，不花精力的持续曝光。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛代码开源 ✅ README ✅ 技术报告入仓库。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D193</summary><textarea data-note="d193" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d194" data-d="194"><header class="day-head"><span class="dnum">D194</span><h2 class="day-t">周五 · 适度社区分享（经验帖 + 英文摘要）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写竞赛经验分享帖（≥2000字）；中午发 Reddit 英文版摘要；晚上在竞赛相关社群分享。</p>
+<p><strong>预期管理</strong>：今天适度社区分享。提醒：<strong>★定位6.5——社区分享是“强作品的自然放大”，不是主线</strong>；你已有实打实的成果（论文+开源+报告），分享是“把好东西让更多人看到”，一两小时高效完成即可，别变成主业；经验帖（比赛流程+关键Trick+排名截图+代码链接）发知乎/CSDN/公众号，英文摘要发Reddit r/ML；核心始终是研究本身，分享完尽快转回主线。</p>
+</blockquote>
+</div><section class="slot" id="d194-am" data-d="194" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D194 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写竞赛经验分享帖（≥2000字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（分享是放大，不是主业 ★定位6.5）</h4><div class="blk-b"><ul>
+<li>在知乎/CSDN/公众号写一篇竞赛经验分享帖（≥2000 字）：比赛流程 + 关键 Trick + 排名截图 + 代码链接。<strong>但要牢记定位：社区分享是“强作品的自然放大”，不是主线</strong>。</li>
+<li><strong>为什么“分享是放大而非主业”</strong>：你能写这篇分享帖，是因为你<strong>已经有了</strong>实打实的成果（论文投稿、开源代码、技术报告）——分享是“把已有的好东西让更多人看到”，而非“为了刷存在感而分享”。<strong>这个顺序很重要</strong>：先有强作品，再顺手放大；不能本末倒置，把精力都花在分享/引流上而荒废研究。<strong>核心始终是研究本身</strong>；分享一两小时高效完成即可，别变成主业。</li>
+<li><strong>经验帖怎么写（高效）</strong>：复用你的技术报告内容（背景/方法/Trick/结果），改写成更易读的博客风格 + 加排名截图 + 代码链接。<strong>很多内容可以从技术报告直接转</strong>，不用从零写，一两小时能完成。</li>
+<li><strong>分享帖的价值（顺手的放大）</strong>:① 帮到搜索这个竞赛的人（利他）;② 为你的开源仓库引流（被动获 star）;③ 建立一点领域内的可见度。<strong>这些是“顺手的放大”，不花太多精力就能获得，但别为此投入过多</strong>。</li>
+<li><strong>警惕“分享上瘾”对研究的侵蚀（为什么要克制）</strong>：社区分享有即时反馈（点赞、评论、涨粉），容易让人上瘾——发一篇有反应，就想发更多、追求更多关注。<strong>但这对你是危险的</strong>：研究是慢的、孤独的、反馈延迟的（一篇论文几个月才有审稿结果），而分享是快的、热闹的、反馈即时的。<strong>如果被即时反馈吸引，把越来越多精力投入分享/运营，研究主线就会荒废</strong>——这是本末倒置的陷阱。要清醒：<strong>你的核心竞争力来自研究本身（论文、开源的硬成果），不是粉丝数或点赞数</strong>。分享是“有了硬成果之后顺手放大”，一两小时完成就收手，把精力守在研究上。记住这个顺序：<strong>先成果，后放大；成果是主，放大是辅</strong>。这是定位 6.5 的核心。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写竞赛经验分享帖（≥2000 字：流程 + 关键 Trick + 排名截图 + 代码链接）。</li>
+<li>复用技术报告内容，改写成博客风格（高效，别从零写）。</li>
+<li>发到知乎/CSDN/公众号。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛经验分享帖（≥2000 字，有流程/Trick/排名/代码链接），一两小时完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★定位）</h4><div class="blk-b"><ul>
+<li><strong>把分享当主业，投入过多精力</strong> → 分享是放大，一两小时高效完成，核心是研究。</li>
+<li><strong>从零写分享帖</strong> → 复用技术报告内容改写，高效。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>写不快?→ 直接从技术报告改（背景/方法/Trick 都现成）；不知发哪?→ 知乎（技术社区活跃）、CSDN（搜索权重高）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>高效做社区分享（作为强作品的放大）</strong>。<strong>做了</strong>（写经验帖 + 复用报告内容）、<strong>学了</strong>（分享是放大非主业、复用已有内容高效、核心是研究）、<strong>会了</strong>（把成果顺手放大而不喧宾夺主）。</p>
+</div></section></section><section class="slot" id="d194-noon" data-d="194" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D194 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">发 Reddit r/MachineLearning 英文版摘要</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>在 Reddit r/MachineLearning 发一个英文版的简短摘要（竞赛+方案+代码链接）——触及国际社区。<strong>同样是顺手的放大</strong>，把中文经验帖的核心改成英文摘要发出去即可。</p>
+<ul>
+<li><strong>为什么发英文社区</strong>:r/MachineLearning 是国际 ML 社区，发个英文摘要能让国际读者看到你的工作、为开源仓库引流（国际 star）。<strong>英文摘要不用长，核心（做了什么+结果+代码链接）即可</strong>，从你的内容改写，几分钟完成。</li>
+<li><strong>顺手积累一点英文表达的练习</strong>：你写论文已经在练英文，发英文摘要是顺手的额外练习——把工作用简洁的英文讲清楚，本身对你的学术英文有帮助。但同样适度即可，几分钟完成，别纠结措辞。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把核心内容改成英文简短摘要（竞赛+方案+排名+代码链接）。</li>
+<li>发到 Reddit r/MachineLearning（或相关 subreddit）。</li>
+<li>简洁即可，别花太多时间。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Reddit 英文版摘要发出（简洁、有代码链接）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>英文摘要写太长 → 简洁（做了什么+结果+链接）；花太多时间 → 几分钟从已有内容改。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>英文不熟?→ 用工具辅助 + 你的 Abstract 句式；不知发哪个 subreddit?→ r/MachineLearning 的 project/research 帖。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>触及了国际社区（顺手放大）</strong>。<strong>做了</strong>（发 Reddit 英文摘要）、<strong>学了</strong>（英文社区引流、简洁高效）、<strong>会了</strong>（向国际社区展示工作）。</p>
+</div></section></section><section class="slot" id="d194-pm" data-d="194" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D194 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛社群分享 + 收尾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>在竞赛相关的微信群/论坛分享你的方案和代码链接（同道交流）。<strong>这是社区放大的收尾</strong>——分享完，本周的“收口沉淀”基本完成，重心要转回研究主线（第二课题）。</p>
+<ul>
+<li><strong>分享收尾 + 转向主线</strong>：在竞赛社群分享（同道之间交流，也可能获得反馈）。<strong>做完这些，提醒自己：分享到此为止，接下来（D195-196 及 W30）重心是恢复 + 转向第二课题</strong>。别让分享/社区活动持续占用研究时间。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在竞赛微信群/论坛分享方案 + 代码链接。</li>
+<li>简短交流（可能获得反馈）。</li>
+<li>提醒自己：社区放大到此为止，重心转回研究。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>在竞赛社群完成分享；明确社区放大收尾、重心转回主线。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>沉迷社群讨论占用研究时间 → 分享交流适度，重心是研究；分享后没转回主线 → 明确收尾，D195-196 转向第二课题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>社群讨论停不下来?→ 设个时间限制，到点转回；有价值的反馈 → 记下来（可能对第二课题有启发）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了社区放大并准备转回主线</strong>。<strong>做了</strong>（社群分享 + 收尾）、<strong>学了</strong>（放大适度、及时转回研究主线）、<strong>会了</strong>（平衡分享与研究、不喧宾夺主）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜社区分享（★强作品的自然放大）</strong>：分享是“把已有好东西让更多人看到”，不是主业——你先有论文/开源/报告，再顺手放大。复用技术报告内容高效改写（知乎/CSDN/公众号经验帖+Reddit英文摘要+社群），一两小时完成。核心始终是研究，分享完尽快转回主线。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 竞赛分享帖 ✅ 社区推广（适度）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D194</summary><textarea data-note="d194" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d195" data-d="195"><header class="day-head"><span class="dnum">D195</span><h2 class="day-t">周六 · （恢复日）· 休息调整 + 酝酿第二课题</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午休息调整（竞赛冲刺消耗大，给自己一天恢复）；中午轻松读 1-2 篇论文；晚上思考第二课题方向。</p>
+<p><strong>预期管理</strong>：今天恢复日。提醒：<strong>★可持续性是你长跑的头号风险</strong>——竞赛冲刺+论文投稿+收口沉淀连续高强度，今天给自己一天恢复（休息不是浪费，是为了走得更远）；轻松读1-2篇你方向的论文（不带任务，纯输入）；开始酝酿第二课题方向（不急于定，先发散思考）。今天的“慢”，是为了后面的“稳”。</p>
+</blockquote>
+</div><section class="slot" id="d195-am" data-d="195" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D195 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">休息调整（★ 可持续性）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ 可持续性是长跑的头号风险）</h4><div class="blk-b"><ul>
+<li>竞赛冲刺(W26-27)+ 论文投稿(W27)+ 收口沉淀（本周前几天）是连续的高强度工作——<strong>今天给自己一天恢复</strong>。休息不是浪费，是为了后面走得更远。</li>
+<li><strong>为什么“可持续性”对你是头号风险</strong>：你的目标（中科院空天院）是个长跑（24 个月计划），不是冲刺。<strong>长跑最大的风险不是某一周不够努力，而是中途耗尽、倦怠、放弃</strong>。连续的高强度（尤其刚经历竞赛冲刺+投稿的紧张）若不及时恢复，容易累积疲惫、影响后续状态甚至健康。<strong>主动安排恢复，是对长跑负责</strong>。这一天的休息，是为了接下来几个月（第二课题、M9-M24）能稳定、可持续地推进。</li>
+<li><strong>怎么休息（真正放松）</strong>：这一天真正放松——别盯着竞赛排名、别想着工作，做点让自己恢复的事（运动、休息、娱乐）。<strong>身心恢复了，后面才有持续的精力</strong>。可持续的节奏（张弛有度），比一味紧绷更能走到终点。</li>
+<li><strong>可持续性背后的现实（为什么不能硬撑）</strong>：你的处境有几个长期压力源——导师不支持（缺乏外部鼓励和资源）、单卡 4090（算力受限要靠效率取胜）、零基础转型（很多东西要自学）、目标高（空天院）。<strong>这些压力如果叠加上“从不休息的硬撑”，极易导致倦怠甚至放弃</strong>——而放弃才是这个长跑计划真正的、唯一的“失败”。<strong>主动安排恢复，恰恰是对抗这些压力、保证你能走完全程的关键策略</strong>：不是因为你不够努力才休息，而是因为你要走得足够远才必须休息。把恢复当成和做实验、写论文同等重要的“任务”来对待——它保护的是你这个“长跑选手”本身。带着这种认知，理直气壮地恢复，然后可持续地继续。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>今天真正休息（别盯排名、别想工作）。</li>
+<li>做让自己恢复的事（运动/休息/娱乐）。</li>
+<li>接受“休息是为了走得更远”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>获得了真正的休息和恢复，身心放松。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>休息日还焦虑工作/刷排名 → 真正放下，恢复才有效；觉得休息是浪费 → 可持续性是长跑头号风险，恢复是必要投资。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>停不下来、放不下工作?→ 提醒自己长跑需要可持续，这一天的恢复是为了后面几个月；闲不住 → 做点轻松但非工作的事。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>学会主动安排恢复（为长跑负责）</strong>。<strong>做了</strong>（真正休息恢复）、<strong>学了</strong>（可持续性是长跑头号风险、休息是必要投资）、<strong>会了</strong>（张弛有度地维持长期节奏）。</p>
+</div></section></section><section class="slot" id="d195-noon" data-d="195" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D195 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">轻松读 1–2 篇论文（纯输入）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>轻松读 1-2 篇你方向的论文——<strong>不带任务、纯输入</strong>（不是为了解决具体问题，而是开阔视野、保持对领域的感觉）。恢复日的“轻输入”，既不累，又能为第二课题的酝酿提供素材。</p>
+<ul>
+<li><strong>“无任务阅读”的价值</strong>：平时读论文多是带着任务（找方法、补对比）。<strong>恢复日的无任务阅读，是纯粹的输入</strong>——读点你方向有意思的新论文，不强求消化，只为保持对领域前沿的感觉、可能激发第二课题的灵感。轻松、无压力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>挑 1-2 篇你方向的有意思的论文（新的、感兴趣的）。</li>
+<li>轻松读（不带任务，不强求精读）。</li>
+<li>记下任何有启发的点（可能对第二课题有用）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>轻松读了 1-2 篇论文，保持对领域的感觉，记下有启发的点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>恢复日还硬啃难论文 → 轻松读、不强求；读了没记启发 → 记下有意思的点（为第二课题攒灵感）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知读什么?→ 挑最近你 follow 的方向的新论文，或综述；读不进去 → 那就纯休息，别勉强。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了恢复日的轻输入</strong>。<strong>做了</strong>（无任务读 1-2 篇论文）、<strong>学了</strong>（无任务阅读保持领域感觉、攒灵感）、<strong>会了</strong>（轻松保持对前沿的接触）。</p>
+</div></section></section><section class="slot" id="d195-pm" data-d="195" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D195 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">思考第二课题方向（发散）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>开始酝酿第二课题方向——<strong>先发散思考，不急于定</strong>（W30 才正式立项）。第二课题最自然的来源是你第一篇论文的 Limitation &amp; Future Work（没做完的、可延伸的方向）。今晚只是开始想，广撒网。</p>
+<ul>
+<li><strong>第二课题从哪来（最自然的来源）</strong>：<strong>第一篇论文做不完的事，就是第二个课题最自然的来源</strong>。比如你第一篇做了 DOTA 旋转检测 → 第二篇可以做 SAR 上的旋转检测（跨模态迁移），或小样本/域泛化的延伸。<strong>这样两篇论文形成“系列”，展示你在这个方向的持续深耕</strong>（比东一篇西一篇更显专业、更有积累）。这呼应你的整体定位（在遥感 CV 的特定方向深耕）。</li>
+<li><strong>今晚只发散</strong>：不急于定方向（W30 会调研+评估+决策）。今晚回顾第一篇的 Limitation、想想哪些方向有意思、广撒网列一些可能性。<strong>发散在前，收敛在后</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>回顾第一篇论文的 Limitation &amp; Future Work（你写的局限 + mock reviewer 指出的不足）。</li>
+<li>发散思考可能的第二课题方向（广撒网，先不评判）。</li>
+<li>列一些候选（W30 再调研评估）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>开始酝酿第二课题——回顾了第一篇 Limitation，发散列了一些候选方向（不急于定）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>今晚就想定方向 → 先发散，W30 再收敛决策；脱离第一篇凭空想 → 从第一篇的 Limitation 延伸最自然（形成系列）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>想不出方向?→ 从第一篇的“做不完的事”(Limitation/Future Work)找，最自然；方向太多?→ 都先列着，W30 调研评估再筛。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>开始酝酿第二课题（发散）</strong>。<strong>做了</strong>（回顾 Limitation + 发散列候选）、<strong>学了</strong>（第二课题从第一篇 Limitation 延伸、形成系列、先发散后收敛）、<strong>会了</strong>（从已有工作中挖掘下一个课题）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜可持续性（★长跑头号风险）</strong>:24个月是长跑不是冲刺，最大风险是中途耗尽倦怠。连续高强度后主动安排恢复（休息是必要投资，不是浪费）。张弛有度才能走到终点。恢复日：真休息+轻输入（无任务读论文）+发散酝酿，慢下来是为了后面更稳。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 休息恢复日 ✅ 第二课题方向发散。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D195</summary><textarea data-note="d195" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d196" data-d="196"><header class="day-head"><span class="dnum">D196</span><h2 class="day-t">周日 · （复盘日）· W29 复盘 + 转向第二课题</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午 W29 周复盘；中午开始思考第二课题；晚上计划 W30（第二课题立项）。</p>
+<p><strong>预期管理</strong>:W29收尾：周复盘 + 转向第二课题。提醒：本周完成了竞赛收口沉淀（技术报告+开源+适度分享）——竞赛这条线圆满收官，沉淀成了持久资产；复盘重点记“如何把成果沉淀和放大”的经验；重心正式转回研究主线——W30开始第二课题立项（从第一篇Limitation挖掘，复用代码框架快速推进）。M7投稿+M8收口后，你进入第二个研究周期。</p>
+</blockquote>
+</div><section class="slot" id="d196-am" data-d="196" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D196 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W29 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“把成果沉淀和放大”的经验（技术报告怎么写、开源怎么做、分享的度怎么把握）。本周是竞赛的圆满收官——把一个月的竞赛努力<strong>沉淀成了持久资产</strong>（技术报告/开源代码/经验帖），而非赛完就丢。这些经验值得记：技术报告的写法、开源仓库的打造、社区分享的“度”（放大而非主业）。</p>
+<ul>
+<li><strong>本周成果回顾</strong>：竞赛最终排名确定（心态校准）、竞赛技术报告（5-8页）、代码开源+README、适度社区分享、开始酝酿第二课题。竞赛这条线圆满收官。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（竞赛收口 + 转向）。</li>
+<li>记沉淀和放大的经验（技术报告/开源/分享的度）。</li>
+<li>记本周产出（报告/仓库/分享）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W29 周报（竞赛收口的成果 + 经验沉淀）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账 → 记关键经验（沉淀方法、分享的度）；只记做了什么不记心得 → 提炼可复用的经验。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周（多半是技术报告的失败分析或开源的整理）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了竞赛收口周</strong>。<strong>做了</strong>（W29 周报）、<strong>学了</strong>（沉淀和放大的经验）、<strong>会了</strong>（总结竞赛收口的得失）。</p>
+</div></section></section><section class="slot" id="d196-noon" data-d="196" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D196 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">开始思考第二课题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>在 D195 发散的基础上，进一步思考第二课题——为 W30 的正式立项做准备。回顾第一篇的 Limitation，初步聚焦几个最有潜力的方向（W30 会调研+评估+决策）。</p>
+<ul>
+<li><strong>从发散到初步聚焦</strong>:D195 你广撒网列了候选，今天进一步想——哪些方向① 是第一篇的自然延伸（形成系列）② 有可行性（数据/代码可复用）③ 你感兴趣。初步聚焦到几个，W30 详细调研评估。</li>
+<li><strong>三个筛选维度的权衡（怎么选才不踩坑）</strong>:① <strong>延伸性</strong>——是第一篇的自然延伸吗？（形成系列、复用积累）;② <strong>可行性</strong>——数据拿得到吗？代码能复用吗？单卡 4090 跑得动吗？时间成本可控吗？（避免选个做不动的）;③ <strong>价值/兴趣</strong>——这个方向有研究价值吗？你真的感兴趣能坚持吗？<strong>三者要平衡，缺一不可</strong>：只看兴趣不看可行性，可能选个数据都拿不到的死胡同；只看可行性不看价值，可能做个没意思的增量。<strong>理想的第二课题是三者的交集</strong>：延伸第一篇（有积累）、可行（做得动）、有价值（值得做）。今天初步用这三维筛，W30 再用评分矩阵详细评估决策。这种“多维度权衡选题”的能力，是研究者最重要的判断力之一——选对方向比埋头苦干更重要。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>回顾 D195 列的候选方向。</li>
+<li>初步聚焦（延伸性 + 可行性 + 兴趣）。</li>
+<li>为 W30 立项做准备（列出要调研的方向）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二课题方向初步聚焦到几个，为 W30 立项做好准备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>今天就定死方向 → W30 调研评估后再决策；只看兴趣不看可行性 → 综合延伸性+可行性+兴趣。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>候选太多难聚焦?→ 优先“第一篇自然延伸 + 代码可复用”的；不确定可行性?→ W30 会调研评估，今天先列出来。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>初步聚焦了第二课题方向</strong>。<strong>做了</strong>（从发散到初步聚焦）、<strong>学了</strong>（综合延伸性/可行性/兴趣）、<strong>会了</strong>（为课题立项收敛方向）。</p>
+</div></section></section><section class="slot" id="d196-pm" data-d="196" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D196 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W30（第二课题立项）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>计划 W30——<strong>第二课题正式立项</strong>。W30 你会：回顾第一篇 Limitation 整理候选 → 调研文献 → 评估可行性（数据/代码复用/时间）→ 用评分矩阵决策 → toy 实验验证。<strong>第二课题会比第一篇快得多</strong>（复用第一篇的代码框架、领域知识、实验经验）。</p>
+<ul>
+<li><strong>W30 预告 + 第二课题为什么更快</strong>:W30 正式立项第二课题。<strong>第二课题预计只需 4 个月(M8-M12)，远快于第一篇的 8 个月(M1-M8)</strong>——因为你已经有了:① 代码框架（直接复用）② 领域知识（不用重学）③ 实验经验（知道怎么高效做）。<strong>第一篇你是“从零搭建一切”，第二篇是“在成熟基础上推进”</strong>，所以快得多。这是第一篇打下的基础的复利。</li>
+<li><strong>第二课题“形成系列”的战略价值（对接空天院）</strong>：为什么强调第二课题从第一篇延伸、形成系列？因为<strong>“系列工作”展示的是“在一个方向上的持续深耕”，这比零散的多篇论文更有分量</strong>。想象你将来对接空天院：“我在遥感旋转检测/SAR 跨模态这个方向做了两篇连续的工作（第一篇解决 X，第二篇延伸解决 Y）”——这传递的信号是“我在这个领域有积累、有持续产出能力、是认真深耕的人”，正是空天院这类顶尖机构看重的。<strong>一个连贯的研究故事（系列），远胜于一堆不相关的尝试</strong>。所以第二课题选“第一篇的自然延伸”（如光学→SAR 的跨模态、或某个 Limitation 的针对性解决），不只是因为快，更是在<strong>构建你在特定方向的学术身份和深度</strong>——这是长期定位的关键一步。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>计划 W30 的立项流程（回顾Limitation→调研→评估→决策→toy实验）。</li>
+<li>明确第二课题会复用第一篇的框架（快速推进）。</li>
+<li>准备好转入第二个研究周期。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W30 立项计划清晰，准备好正式开始第二课题。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>第二课题又从零开始 → 复用第一篇框架/知识/经验，快得多；立项流程不清 → 按“回顾→调研→评估→决策→toy验证”走。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>担心第二课题难?→ 有第一篇的基础，会快很多；不知怎么立项?→ W30 有详细流程（回顾Limitation挖掘候选→调研→评分矩阵决策）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划了第二课题立项、准备转入新周期</strong>。<strong>做了</strong>（计划 W30 立项）、<strong>学了</strong>（第二课题复用基础更快、立项流程）、<strong>会了</strong>（规划下一个研究周期）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜第二课题来源与加速</strong>：最自然的来源=第一篇的Limitation/Future Work（延伸成“系列”，显持续深耕）。第二课题更快（M8-M12约4个月vs第一篇8个月）：复用代码框架+领域知识+实验经验。第一篇“从零搭建”，第二篇“成熟基础上推进”——这是第一篇打下基础的复利。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W29 ✅ 转向第二课题（W30 立项计划）。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W29 累计交付</h2><p>竞赛最终排名确定（截图存档 + 心态校准）、竞赛技术报告（5–8 页：背景/数据分析/方法概述/实验/结果分析+失败案例+经验）、竞赛代码开源 + README + requirements + 一键脚本 + 技术报告入仓库、适度社区分享（经验帖 + Reddit 英文摘要 + 社群）、休息恢复日、第二课题方向酝酿、W29 周报 + W30 立项计划。本周你把一个月的竞赛努力<strong>沉淀成了持久资产</strong>——核心是学会了<strong>写技术报告</strong>（介于论文和博客之间的文档，工业界/竞赛最常用的成果呈现）、<strong>开源代码</strong>（被动引流 + 能力证据）、<strong>适度社区分享</strong>（强作品的自然放大，不是主业）；同时主动安排<strong>恢复</strong>（可持续性是长跑头号风险）、开始<strong>酝酿第二课题</strong>（从第一篇 Limitation 延伸，形成系列）。竞赛这条线圆满收官，重心转回研究主线。</p>
+</section><section class="wtail"><h2>🎓 W29 你“长出来”的能力清单</h2><ul>
+<li>竞赛排名心态校准（★锦上添花，核心是论文+开源+能力）</li>
+<li>写<strong>技术报告</strong>（背景/数据/方法/实验/反思，失败案例分析体现深度，5–8 页）</li>
+<li><strong>开源代码</strong> + README + requirements + 一键脚本（被动引流 + 能力证据）</li>
+<li><strong>适度社区分享</strong>（★强作品的自然放大，复用报告内容高效，不喧宾夺主）</li>
+<li>主动安排<strong>恢复</strong>（★可持续性是长跑头号风险）</li>
+<li>从第一篇 <strong>Limitation 挖掘第二课题</strong>（形成系列，复用框架更快）</li>
+<li><strong>核心认知</strong>：竞赛排名是锦上添花（核心是可沉淀的资产）、技术报告/开源/分享是把成果“变现”成持久价值、分享是放大非主业（★定位6.5）、可持续性是长跑头号风险、第二课题从第一篇 Limitation 延伸更快（复利）</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D196</summary><textarea data-note="d196" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W29 加厚补充包（范例 / 实用工具 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 技术报告结构 + README 模板 + 第二课题来源</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 竞赛技术报告（5–8 页结构）</span>
+Sec1 背景：竞赛任务（检测/分割什么）+ 评测指标 + 挑战
+Sec2 数据分析：EDA发现（类别分布/目标尺度/难点）+ 如何指导方案
+Sec3 方法概述：pipeline图（数据→训练trick→推理trick）+ 各模块描述
+Sec4 实验：Trick贡献分解表（起点→每招增量→最终）= 消融
+Sec5 结果分析：失败案例（共性+原因+改进）+ 经验教训（如果再来一次）
+
+<span class="gh"># README 模板（开源仓库门面）</span>
+<span class="gu">## 问题描述：竞赛/任务是什么</span>
+<span class="gu">## 方法：方案概述（贴pipeline图）</span>
+<span class="gu">## 如何复现：环境(requirements.txt) → 数据 → 训练(train.sh) → 推理(infer.sh)</span>
+<span class="gu">## 结果：成绩 + 最终排名（Top X%）</span>
+<span class="gu">## 技术报告：链接到 docs/report.pdf</span>
+
+<span class="gh"># 第二课题来源（从第一篇Limitation延伸，形成系列）</span>
+第一篇：DOTA旋转检测（光学遥感）
+候选1：SAR上的旋转检测（跨模态迁移）← 贴合SAR难题方向
+候选2：小样本/域泛化的旋转检测延伸
+候选3：第一篇某Limitation的针对性解决
+→ W30调研+评分矩阵决策，复用第一篇代码框架（M8-M12约4个月）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 开源仓库一键脚本骨架</h2>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># requirements.txt 生成（清理无关依赖后提交）</span>
+pip<span class="w"> </span>freeze<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;torch|mmcv|mmdet|mmrotate|numpy|opencv|ensemble-boxes&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+
+<span class="c1"># train.sh 一键训练（关键参数可配，别硬编码路径）</span>
+<span class="c1">#!/bin/bash</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">configs</span><span class="p">/best_model.py</span><span class="si">}</span>
+<span class="nv">GPUS</span><span class="o">=</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">1</span><span class="si">}</span>
+python<span class="w"> </span>tools/train.py<span class="w"> </span><span class="nv">$CONFIG</span><span class="w"> </span>--gpus<span class="w"> </span><span class="nv">$GPUS</span><span class="w"> </span>--work-dir<span class="w"> </span>work_dirs/
+
+<span class="c1"># infer.sh 一键推理 + 生成提交</span>
+<span class="c1">#!/bin/bash</span>
+<span class="nv">CKPT</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">work_dirs</span><span class="p">/best.pth</span><span class="si">}</span>
+python<span class="w"> </span>tools/infer.py<span class="w"> </span>--ckpt<span class="w"> </span><span class="nv">$CKPT</span><span class="w"> </span>--tta<span class="w"> </span>--out<span class="w"> </span>submission.json
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;提交文件已生成：submission.json（含TTA）&quot;</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>：别人 clone 仓库后,<code>pip install -r requirements.txt</code> 装环境 → <code>bash train.sh</code> 训练 → <code>bash infer.sh</code> 推理。复现门槛越低，star 越多。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D190</strong>：① 为什么竞赛排名是“锦上添花”而非核心？② 没到 Top 10% 为什么不影响计划？③ 注意力该放回什么（可沉淀的资产）？</li>
+<li><strong>D191</strong>：① 技术报告和论文有什么区别？② 技术报告的标准结构（5节）？③ Sec4 直接用你什么（Trick贡献分解表）？</li>
+<li><strong>D192</strong>：① 为什么失败案例分析最体现深度？② 技术报告为什么控制 5–8 页？③ 技术报告有哪些价值（多用途）？④ 为什么说“会写文档”是被低估的核心能力？</li>
+<li><strong>D193</strong>：① 为什么说开源是“被动引流”？② README 该包含什么？③ 为什么要 requirements + 一键脚本（降低复现门槛）？④ 开源对联系空天院有什么潜在价值？</li>
+<li><strong>D194</strong>：① 为什么说社区分享是“放大而非主业”（★定位6.5）？② 分享帖怎么高效写（复用什么）？③ 为什么要警惕“分享上瘾”侵蚀研究？</li>
+<li><strong>D195</strong>：① 为什么“可持续性是长跑头号风险”？② 恢复日该做什么（真休息+轻输入+发散）？③ 你有哪些长期压力源、为什么更要主动恢复？④ 为什么说休息是必要投资而非浪费？</li>
+<li><strong>D196</strong>：① 第二课题最自然的来源是什么？② 为什么第二课题更快(M8-M12 vs M1-M8)？③ 为什么第二课题要“形成系列”（对接空天院的价值）？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>竞赛排名不理想就沮丧</td>
+<td>把排名当核心</td>
+<td>★校准：排名是锦上添花，核心是论文+开源+能力</td>
+</tr>
+<tr>
+<td>技术报告写成论文</td>
+<td>过度学术包装</td>
+<td>技术报告讲清“怎么做的”即可，5–8页精炼</td>
+</tr>
+<tr>
+<td>只报成功不报失败</td>
+<td>缺深度反思</td>
+<td>失败案例分析（共性+原因+改进）最体现水平</td>
+</tr>
+<tr>
+<td>开源代码没人用</td>
+<td>README差/复现难</td>
+<td>好README+requirements+一键脚本，降复现门槛</td>
+</tr>
+<tr>
+<td>把社区分享当主业</td>
+<td>本末倒置</td>
+<td>★定位6.5：分享是强作品的放大，一两小时即可，核心是研究</td>
+</tr>
+<tr>
+<td>连续高强度后倦怠</td>
+<td>没安排恢复</td>
+<td>★可持续性是长跑头号风险，主动安排恢复日</td>
+</tr>
+<tr>
+<td>第二课题又从零开始</td>
+<td>没复用第一篇</td>
+<td>从第一篇Limitation延伸+复用代码框架，快得多</td>
+</tr>
+<tr>
+<td>第二课题方向定不下</td>
+<td>发散收敛混乱</td>
+<td>先发散(D195)后收敛（W30调研+评分矩阵决策）</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w27.html"><span class="dir">← 上一篇</span><span class="nm">W27 正式投稿 + 竞赛最终冲刺</span></a><a class="next" href="w30.html"><span class="dir">下一篇 →</span><span class="nm">W30 第二课题立项</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d190">D190 周一</a><a class="sub" href="#d190-am">上午 竞赛最后一次提交（如有机会）</a><a class="sub" href="#d190-noon">中午 确认最终排名 + 截图存档</a><a class="sub" href="#d190-pm">晚上 心态校准(★ 竞赛排名 = 锦上</a><a href="#d191">D191 周二</a><a class="sub" href="#d191-am">上午 写 Sec1 背景 + Sec2</a><a class="sub" href="#d191-noon">中午 写 Sec3 方法概述（pipe</a><a class="sub" href="#d191-pm">晚上 写 Sec4 实验（trick </a><a href="#d192">D192 周三</a><a class="sub" href="#d192-am">上午 写 Sec5 结果分析 + 失败</a><a class="sub" href="#d192-noon">中午 画 pipeline 图和结果图</a><a class="sub" href="#d192-pm">晚上 定稿技术报告（5–8页）</a><a href="#d193">D193 周四</a><a class="sub" href="#d193-am">上午 整理竞赛代码 + 开源到 Git</a><a class="sub" href="#d193-noon">中午 加 requirements.t</a><a class="sub" href="#d193-pm">晚上 在仓库中添加技术报告 PDF</a><a href="#d194">D194 周五</a><a class="sub" href="#d194-am">上午 写竞赛经验分享帖（≥2000字）</a><a class="sub" href="#d194-noon">中午 发 Reddit r/Machi</a><a class="sub" href="#d194-pm">晚上 竞赛社群分享 + 收尾</a><a href="#d195">D195 周六</a><a class="sub" href="#d195-am">上午 休息调整（★ 可持续性）</a><a class="sub" href="#d195-noon">中午 轻松读 1–2 篇论文（纯输入）</a><a class="sub" href="#d195-pm">晚上 思考第二课题方向（发散）</a><a href="#d196">D196 周日</a><a class="sub" href="#d196-am">上午 W29 周复盘</a><a class="sub" href="#d196-noon">中午 开始思考第二课题</a><a class="sub" href="#d196-pm">晚上 计划 W30（第二课题立项）</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

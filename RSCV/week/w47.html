@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="47">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W47 · 阶段二总复盘 —— 写最重要的自我反思文档，把发 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M12 阶段二收尾 + 首批冷邮件</span><span>·</span><span>Week 47</span><span>·</span><span>D316–D322</span></div><h1 class="title">阶段二总复盘 —— 写最重要的自我反思文档，把发邮件的一切最终化</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="316" data-k="am" title="D316 上午段"></i><i data-d="316" data-k="noon" title="D316 中午段"></i><i data-d="316" data-k="pm" title="D316 晚上段"></i></span><span class="sday"><i data-d="317" data-k="am" title="D317 上午段"></i><i data-d="317" data-k="noon" title="D317 中午段"></i><i data-d="317" data-k="pm" title="D317 晚上段"></i></span><span class="sday"><i data-d="318" data-k="am" title="D318 上午段"></i><i data-d="318" data-k="noon" title="D318 中午段"></i><i data-d="318" data-k="pm" title="D318 晚上段"></i></span><span class="sday"><i data-d="319" data-k="am" title="D319 上午段"></i><i data-d="319" data-k="noon" title="D319 中午段"></i><i data-d="319" data-k="pm" title="D319 晚上段"></i></span><span class="sday"><i data-d="320" data-k="am" title="D320 上午段"></i><i data-d="320" data-k="noon" title="D320 中午段"></i><i data-d="320" data-k="pm" title="D320 晚上段"></i></span><span class="sday"><i data-d="321" data-k="am" title="D321 上午段"></i><i data-d="321" data-k="noon" title="D321 中午段"></i><i data-d="321" data-k="pm" title="D321 晚上段"></i></span><span class="sday"><i data-d="322" data-k="am" title="D322 上午段"></i><i data-d="322" data-k="noon" title="D322 中午段"></i><i data-d="322" data-k="pm" title="D322 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：阶段二（M5–M12，产出期 + 连接期）即将收尾，本周（W47）是<strong>倒数第二周</strong>，做两件大事：① <strong>系统总复盘</strong>——写一份 ≥5000 字的《阶段二总结报告》（论文/竞赛/开源/能力成长/时间管理/下阶段，这是你最重要的自我反思文档，不是“作业”）+ 做一张数据 Dashboard；② <strong>为 W48 发邮件做最终准备</strong>——制定阶段三周级详细计划、把邮件草稿基于最新论文状态最终化、备齐附件、读老师“最最新”论文、做心理准备。★ 下周（W48，D323+）就要发出人生中第一封学术冷启动邮件了——本周把一切准备到位。
+<strong>本周科研能力目标</strong>（你原计划，保留）：完成阶段二总复盘（≥5000 字总结报告 + Dashboard）；制定阶段三详细计划；最终化邮件草稿与附件；做好发邮件的心理准备。
+<strong>承上</strong>：W45–46 你做了作品集/简历/主页/博客并集中曝光，连接期“铺路”完成。<strong>本周把这半年系统总结、把发邮件的所有材料最终化</strong>——这是 W48“收口”前的最后整备。</p>
+<p><strong>🧩 贯穿线索</strong>：总复盘回看阶段二的全部成果（两篇论文 DOTA 旋转检测 / SAR speckle-aware + 爆款 repo + 竞赛 + 连接期建设）。能力成长与 M1 起点对比（零基础→独立产出）。阶段三核心目标明确：<strong>联系空天院 → 暑期访问/实习 → 第三篇论文</strong>。邮件最终化仍守一切原则（≤300 字 / 定制 / 不卑不亢 / 基于最新论文状态 / 守核心延后）。</p>
+</blockquote>
+<hr />
+<h2>🧭 W47 总览：系统总结 + 发邮件最终整备</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>《阶段二总结报告》Part 1–3</td>
+<td>论文/竞赛/开源回顾</td>
+<td>系统沉淀产出期经验</td>
+</tr>
+<tr>
+<td>Part 4–6 + 整合全文 ≥5000 字</td>
+<td>能力成长（与M1对比）/时间管理/下阶段 + 全文</td>
+<td>最重要的自我反思文档</td>
+</tr>
+<tr>
+<td>数据 Dashboard</td>
+<td>论文/star/阅读量/代码行数/时间投入</td>
+<td>量化半年成果，一目了然</td>
+</tr>
+<tr>
+<td>M13–M18 阶段三详细计划（周级）</td>
+<td>计划框架 + 核心目标 + 邮件时间表</td>
+<td>发完邮件有清晰下一程</td>
+</tr>
+<tr>
+<td>最终化邮件草稿 + 备齐附件</td>
+<td>草稿（最新措辞） + 简历/论文/作品集 PDF</td>
+<td>W48 发出的成品弹药</td>
+</tr>
+<tr>
+<td>读老师最最新论文 + 心理准备</td>
+<td>最终论文检查 + 心态就绪</td>
+<td>确保问题最新、平常心发出</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D316–318 写总结报告（Part 1–6 + 整合 ≥5000 字 + Dashboard）；D319 制定阶段三周级计划 + 邮件时间表；D320 最终化邮件草稿 + 备附件；D321 读老师最最新论文 + 调技术问题 + GitHub 维护；D322 复盘 + 心理准备 + 充电。<strong>核心心态：这周一半向后看（总结半年走过的路）、一半向前看（把发邮件的一切备到位）。总结报告别当成应付的作业——它是你最诚实的自我对话，帮你看清成长、提炼方法论、规划下一程。同时把邮件的每个细节（措辞、附件、文件名、技术问题）都最终化，让 W48 那封邮件以最好的状态、最从容的心态发出。</strong> 也借这个节点对自己说一句：很多人做了大量工作，却从不停下来系统总结，于是经验留在模糊的记忆里、慢慢流失；而你这一周郑重地把半年沉淀成文档、把成长看个清楚——这件事本身，就是优秀研究者和普通执行者的分水岭之一。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d316" data-d="316"><header class="day-head"><span class="dnum">D316</span><h2 class="day-t">周一 · 写《阶段二总结报告》Part 1–3（论文 / 竞赛 / 开源回顾）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写阶段二总结报告的前三部分——Part 1 论文产出回顾（两篇论文的选题/实验设计/写作/投稿审稿）、Part 2 竞赛回顾（选赛事/Trick 路线/排名/教训）、Part 3 开源运营回顾（GitHub 0→N stars 增长策略/社区互动）。提醒：★ 这份报告<strong>不是“作业”，是你最重要的自我反思文档</strong>——系统回看你做了什么、怎么做的、学到了什么，沉淀成可复用的经验（第三课题、未来都用得上）。</p>
+</blockquote>
+</div><section class="slot" id="d316-am" data-d="316" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D316 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Part 1：论文产出回顾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要系统回顾论文产出）</h4><div class="blk-b"><ul>
+<li>你阶段二完成了两篇论文的完整流程（选题→实验→写作→投稿→审稿）。<strong>系统回顾</strong>不是流水账，而是<strong>提炼经验</strong>：选题怎么找到 Gap 的、实验怎么设计的、写作哪里吃力又怎么突破、投稿/审稿学到了什么。<strong>这些经验是你最宝贵的资产</strong>——第三课题会直接复用（不用重新摸索）。</li>
+<li><strong>为什么现在回顾</strong>：趁记忆还新，把两篇论文的完整经验沉淀下来。等第三课题启动时，这份回顾就是你的“方法论手册”（怎么选题、怎么做实验、怎么写、怎么投）。一个真实的差别是：没有这份手册的人，做第三篇时还要从头摸索、重复踩前两篇踩过的坑；而有了它，你能直接站在前两篇的经验上起步，少走很多弯路、做得更快更稳。前两篇的“学费”，要靠这份回顾把它转化成“资产”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Part 1 论文产出回顾（见补充包范例 1）——对两篇论文各回顾：① <strong>选题过程</strong>（怎么找到 Gap、为什么做这个）；② <strong>实验设计</strong>（baseline/消融/可视化怎么设计的、什么有效）；③ <strong>写作经验</strong>（哪部分难、怎么突破、学到的写作技巧）；④ <strong>投稿/审稿经历</strong>（选刊、投稿流程、审稿响应学到了什么）；提炼“下次能复用的经验”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Part 1 完成——两篇论文的选题/实验/写作/投稿经验系统回顾，提炼了可复用的方法论。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>写成流水账（“先做了 X 再做了 Y”）→ 要提炼经验（学到了什么、下次怎么做更好）。</li>
+<li>只记成功不记教训 → 踩的坑/吃力处也要记（教训也是经验）。</li>
+<li>泛泛而谈不具体 → 具体到“选题怎么找 Gap、实验怎么设计”等可操作的经验。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知回顾什么？→ 按“选题/实验/写作/投稿”四块，每块提炼经验和教训；觉得没什么可写？→ 你独立走完两次完整流程，每个环节都有经验（哪怕“下次实验要早点记日志”也是）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>系统回顾并沉淀了论文产出的经验</strong>。<strong>做了</strong>（Part 1 两篇论文选题/实验/写作/投稿回顾 + 提炼可复用经验）、<strong>学了</strong>（回顾是提炼经验非流水账、记成功也记教训、具体可操作、是第三课题的方法论手册）、<strong>会了</strong>（把论文全流程经验沉淀成可复用资产）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜阶段性总结报告（提炼经验）</strong>：阶段收尾写系统总结报告——★ 不是作业，是最重要的自我反思文档。核心是<strong>提炼可复用经验</strong>（非流水账）：论文（选题/实验/写作/投稿的经验+教训）、竞赛、开源等。记成功也记教训、具体可操作。趁记忆新沉淀下来，第三课题/未来直接复用——它是你的“方法论手册”。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d316-noon" data-d="316" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D316 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">Part 2：竞赛回顾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>你阶段二参加过竞赛（M6-M8）。回顾竞赛：选赛事的考量、Trick 路线（用了哪些竞赛 trick）、排名历程、经验教训。<strong>竞赛的价值不只在排名</strong>——它锻炼了你的工程能力、调参/集成技巧、时间压力下的产出，这些经验值得提炼。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Part 2 竞赛回顾——① 选赛事（为什么选这个、与你方向的关系）；② Trick 路线（用了哪些技巧：数据增强/集成/WBF/TTA 等，哪些有效）；③ 排名历程（从开始到最终排名的过程）；④ 经验教训（学到的工程/调参/时间管理经验）；提炼可复用的竞赛/工程经验。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Part 2 完成——竞赛的选赛/Trick/排名/教训系统回顾，提炼了工程经验。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只报排名不提经验 → 提炼工程/调参/集成经验（这些可复用）；② 不记教训 → 失败的尝试也是经验；③ 觉得“竞赛和我的研究无关、不值得回顾” → 竞赛锻炼的工程力/调参/时间压力下产出，正是做研究也需要的硬功夫，值得提炼。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>竞赛细节记不清？→ 翻竞赛笔记/提交记录；觉得排名不够好？→ 竞赛重在锻炼工程力和经验，不只看名次。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>回顾并沉淀了竞赛经验</strong>。<strong>做了</strong>（Part 2 选赛/Trick/排名/教训回顾 + 提炼工程经验）、<strong>学了</strong>（竞赛价值在锻炼工程力和经验非只排名、提炼可复用技巧）、<strong>会了</strong>（把竞赛经验沉淀为工程能力资产）。</p>
+</div></section></section><section class="slot" id="d316-pm" data-d="316" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D316 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Part 3：开源运营回顾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>你阶段二把 GitHub repo 从 0 做到了 N stars（M9 爆款打造 + 持续运营）。回顾开源运营：增长策略（怎么从 0 到爆款）、社区互动（Issue/PR/讨论）、内容配合（README/Colab/文档/知乎引流）。<strong>这套“让开源被看见”的经验，是你被动建立存在感的核心方法论</strong>，未来持续受用。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Part 3 开源运营回顾——① 增长策略（怎么从 0 到 N stars：爆款打造/一键复现/Model Zoo/Colab/内容引流）；② 社区互动（怎么维护 Issue/PR、和用户互动）；③ 内容配合（README/文档/知乎帖怎么配合引流）；④ 经验教训（什么最有效、副线如何不被 star 绑架）；提炼可复用的开源运营经验。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Part 3 完成——开源从 0 到 N 的增长策略/社区/内容配合系统回顾，提炼了运营经验。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只报 star 数不提策略 → 提炼“怎么做到的”（可复用）；② 把开源当主线复盘 → 它是副线（不被 star 绑架），客观回顾。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知运营经验是什么？→ 回顾“哪个动作带来了 star 增长”（爆款打造/Colab/引流帖）；star 不够多？→ 重在策略和经验，且 repo 是放大器不是核心资产。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>回顾并沉淀了开源运营经验</strong>。<strong>做了</strong>（Part 3 增长策略/社区/内容配合回顾 + 提炼运营经验）、<strong>学了</strong>（开源运营经验是被动存在感核心方法论、提炼怎么做到的、副线客观看待）、<strong>会了</strong>（把开源运营经验沉淀为可复用方法论）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 阶段二总结报告 Part 1（论文产出回顾）✅ Part 2（竞赛回顾）✅ Part 3（开源运营回顾）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D316</summary><textarea data-note="d316" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d317" data-d="317"><header class="day-head"><span class="dnum">D317</span><h2 class="day-t">周二 · 写《阶段二总结报告》Part 4–6（能力成长 / 时间管理 / 下阶段）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天写总结报告的后三部分——Part 4 科研能力成长（阅读速度/代码/实验设计/写作，与 M1 对比）、Part 5 时间管理回顾（实际 vs 计划投入/最高效时段/最大浪费）、Part 6 下阶段规划摘要。提醒：Part 4 的“与 M1 对比”最能让你看清成长幅度（零基础→独立产出）；Part 5 的时间管理回顾帮你优化阶段三的节奏；Part 6 衔接阶段三规划。</p>
+</blockquote>
+</div><section class="slot" id="d317-am" data-d="317" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D317 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Part 4：科研能力成长（与 M1 对比）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要与 M1 对比看能力成长）</h4><div class="blk-b"><ul>
+<li>阶段二最大的收获之一是<strong>科研能力的质变</strong>。和 M1 起点对比，最能看清成长：① <strong>论文阅读速度</strong>（M1 读不懂→现在快速抓主线）；② <strong>代码编写能力</strong>（M1 复现别人→现在搭自己框架）；③ <strong>实验设计水平</strong>（M1 不会设计→现在能设计严谨对比）；④ <strong>论文写作能力</strong>（M1 没写过→现在独立写两篇）。<strong>这个对比是给自己的正向反馈</strong>（看见走了多远），也客观界定你现在的水平。这种“看见成长”对你尤其重要：单兵作战、缺外部反馈的人，最容易陷入“我是不是不行/进步太慢”的自我怀疑；而和 12 个月前那个连论文都读不懂的自己对比，你会清楚地看到——你不是没进步，而是进步巨大。这份客观的自我认知，是支撑你继续走下去的底气。</li>
+<li><strong>和 W40 进度报告的关系</strong>：W40 做过一次 M1 对比（更侧重产出量化）；这里更侧重<strong>能力维度的质变</strong>（阅读/代码/实验/写作四项能力），是对能力成长的专门复盘。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Part 4 能力成长（与 M1 对比，见补充包范例 1）——四项能力各写“M1 时 vs 现在”：① 论文阅读速度（读不懂/慢 → 快速抓主线）；② 代码编写能力（复现 → 自建框架）；③ 实验设计水平（不会 → 能设计严谨对比/消融）；④ 论文写作能力（没写过 → 独立写两篇）；提炼“最大的几个能力跃迁”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Part 4 完成——四项科研能力与 M1 对比清晰，提炼了最大的能力跃迁。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>对比含糊（“进步了”）→ 每项具体写 M1 vs 现在的状态。</li>
+<li>只看产出不看能力 → 这部分专门看能力质变（阅读/代码/实验/写作）。</li>
+<li>妄自菲薄 → 客观看：零基础到独立产出两篇是实打实的能力跃迁。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>记不清 M1 能力？→ 翻 M1 周文件/笔记（当时的困惑就是起点）；觉得能力还不够？→ 和起点比是巨大跃迁，和顶尖比有 gap 正常（gap 是阶段三的提升方向）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了科研能力的质变</strong>。<strong>做了</strong>（Part 4 四项能力与 M1 对比 + 提炼能力跃迁）、<strong>学了</strong>（与 M1 对比看能力质变、四项能力维度、客观看待跃迁）、<strong>会了</strong>（清晰界定自己科研能力的成长幅度）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜能力成长复盘（与 M1 对比）</strong>：阶段收尾专门复盘科研能力质变，与 M1 起点对比四项：论文阅读速度（读不懂→抓主线）、代码能力（复现→自建框架）、实验设计（不会→严谨对比/消融）、论文写作（没写过→独立两篇）。每项具体写“M1 vs 现在”。是给自己的正向反馈（看见走了多远）+ 客观界定水平。和起点比是跃迁、和顶尖比有 gap 正常（gap=阶段三提升方向）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d317-noon" data-d="317" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D317 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">Part 5：时间管理回顾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要回顾时间管理）</h4><div class="blk-b"><ul>
+<li>你按“早 6:30–8:00 + 午 12:30–13:30 + 晚 21:00–23:30”的碎片时间执行了大半年。<strong>回顾时间管理</strong>：实际投入 vs 计划投入（有没有偷懒/超额）、效率最高的时段（早/午/晚哪段产出最高）、最大的时间浪费（什么最耗时又低效）。<strong>这帮你优化阶段三的节奏</strong>——把高效时段用在硬任务、减少浪费。</li>
+<li><strong>为什么重要</strong>：你时间有限（碎片化），时间管理的优化直接影响产出效率。诚实回顾“我的时间都去哪了、哪段最高效、什么在浪费”，能让阶段三事半功倍。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Part 5 时间管理回顾——① 实际 vs 计划投入（执行率如何、哪些没按计划）；② 效率最高的时段（早/午/晚哪段产出最高，适合放什么任务）；③ 最大的时间浪费（什么最耗时低效：刷状态/纠结/无效会议等）；④ 优化建议（阶段三怎么调：高效时段放硬任务、减少浪费）；诚实复盘。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Part 5 完成——时间投入/高效时段/浪费诚实回顾，给出阶段三优化建议。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不诚实（粉饰执行率）→ 诚实回顾才有用（看清真实问题）；② 只记录不优化 → 给出阶段三的优化建议（高效时段/减浪费）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>记不清时间投入？→ 凭印象 + 大致估（趋势比精确重要）；不知怎么优化？→ 把硬任务放最高效时段、识别并减少最大浪费。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>诚实回顾了时间管理、为阶段三优化节奏</strong>。<strong>做了</strong>（Part 5 投入/高效时段/浪费回顾 + 优化建议）、<strong>学了</strong>（时间管理回顾要诚实、识别高效时段和浪费、优化阶段三节奏）、<strong>会了</strong>（基于诚实复盘优化时间利用效率）。</p>
+</div></section></section><section class="slot" id="d317-pm" data-d="317" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D317 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Part 6：下阶段规划摘要</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>Part 6 是<strong>承上启下的桥</strong>——基于前五部分的回顾（产出经验 + 能力 + 时间），写一段“下阶段（阶段三）规划摘要”：阶段三的核心目标、大致路线。它不是详细计划（详细计划是 D319 的事），而是<strong>总结报告里对未来的展望</strong>，让这份报告“既回顾过去也指向未来”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 Part 6 下阶段规划摘要——① 阶段三核心目标（联系空天院→暑期访问/实习→第三篇论文）；② 三条线（连接收口/第三课题/争取机会，W46 想过的）；③ 基于本报告的洞察（用上能力 gap、时间优化、经验复用）；④ 简短的展望（不细到周，那是 D319）；衔接 D319 的详细计划。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Part 6 完成——阶段三核心目标 + 三条线 + 基于洞察的展望，承接 D319 详细计划。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① Part 6 写成详细计划 → 这里是摘要展望（详细计划 D319 做）；② 脱离前文洞察 → 用上前五部分的洞察（能力 gap/时间优化/经验复用）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知摘要写什么？→ 核心目标 + 三条线 + 一句基于洞察的展望；和 D319 重复？→ 这里是方向摘要，D319 是周级细化。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写出了承上启下的下阶段规划摘要</strong>。<strong>做了</strong>（Part 6 核心目标 + 三条线 + 基于洞察的展望）、<strong>学了</strong>（Part 6 是回顾与未来的桥、摘要非详细计划、用上前文洞察）、<strong>会了</strong>（让总结报告既回顾过去也指向未来）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 阶段二总结报告 Part 4（能力成长与 M1 对比）✅ Part 5（时间管理回顾）✅ Part 6（下阶段规划摘要）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D317</summary><textarea data-note="d317" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d318" data-d="318"><header class="day-head"><span class="dnum">D318</span><h2 class="day-t">周三 · 整合《阶段二总结报告》全文（≥5000 字）+ 做数据 Dashboard</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把六部分整合成《阶段二总结报告》全文（≥5000 字），通读修改，并提取关键数字做一张“Dashboard”。提醒：★ 这份 ≥5000 字的报告<strong>不是“作业”，是你最重要的自我反思文档</strong>——它沉淀了你半年的全部经验和成长，是第三课题和未来的方法论手册。Dashboard 把关键成果量化成一张表，一目了然。</p>
+</blockquote>
+</div><section class="slot" id="d318-am" data-d="318" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D318 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整合全文（≥5000 字）+ 通读修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要整合成完整的 ≥5000 字报告）</h4><div class="blk-b"><ul>
+<li>六部分（论文/竞赛/开源/能力/时间/下阶段）整合成<strong>一份连贯的 ≥5000 字报告</strong>，比零散的六块更有价值：① 完整（一份文档涵盖半年全貌）；② 连贯（各部分串成一个成长故事）；③ 可复用（第三课题/未来查阅的方法论手册）。<strong>≥5000 字</strong>让回顾足够深入、经验足够具体。</li>
+<li><strong>为什么强调“不是作业”</strong>：如果当成应付的作业，会写得敷衍、没价值；当成“最重要的自我反思文档”，会认真提炼真实的经验和洞察——后者才让这份报告真正帮到你。<strong>它是写给未来的你看的。</strong> 想象半年后、一年后，当你做第三篇遇到某个环节卡住时，翻开这份报告，看到当初的你是怎么解决类似问题的、踩过什么坑、总结过什么方法——那一刻你会感激今天认真写下它的自己。好的总结报告，是你给未来的自己留的一份“过来人经验”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整合六部分成连贯全文（≥5000 字，加引言/结语串起来）；② 通读修改（逻辑连贯、经验具体、洞察清晰）；③ 确保是“提炼经验+真实反思”而非流水账；④ 突出最重要的几条经验和洞察（方便日后快速查阅）；存为《阶段二总结报告》。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>《阶段二总结报告》≥5000 字、六部分连贯、提炼了真实经验和洞察、是一份有价值的自我反思文档。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>当作业敷衍 → 当成最重要的自我反思文档，认真提炼。</li>
+<li>六部分简单拼接不连贯 → 加引言/结语、串成成长故事。</li>
+<li>全是流水账无洞察 → 突出经验、洞察、方法论（可复用的部分）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>写不到 5000 字？→ 每部分的经验/教训/洞察展开（这些最有价值）；不知怎么串连贯？→ 用“产出（论文/竞赛/开源）→能力成长→时间管理→下阶段”的逻辑线。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整合出了完整的阶段二总结报告</strong>。<strong>做了</strong>（六部分整合成 ≥5000 字连贯全文 + 通读修改 + 突出经验洞察）、<strong>学了</strong>（完整报告比零散更有价值、当反思文档非作业、突出可复用经验）、<strong>会了</strong>（把半年经验沉淀成一份有价值的方法论手册）。</p>
+</div></section></section><section class="slot" id="d318-noon" data-d="318" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D318 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">通读修改（精炼提升）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>整合后<strong>再通读修改一遍</strong>——精炼表述、补关键洞察、确保读起来流畅有价值。这份报告日后会反复查阅，值得打磨到“自己读了有收获”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>通读全文 → ① 精炼啰嗦处；② 补遗漏的关键经验/洞察；③ 确保逻辑流畅、重点突出；④ 检查无错别字、格式清晰；⑤ 自检“日后查阅这份报告能帮到我吗”；定稿。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>报告通读修改完毕——精炼、流畅、重点突出、有价值，定稿。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 整合完不通读（粗糙）→ 通读打磨（要反复查阅的文档）；② 越改越啰嗦 → 精炼为主，突出重点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知改哪里？→ 读着觉得啰嗦/不清/没价值的地方；担心不够好？→ 自检“日后能帮到我吗”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把报告打磨到了高质量</strong>。<strong>做了</strong>（通读 + 精炼 + 补洞察 + 定稿）、<strong>学了</strong>（要反复查阅的文档值得打磨、精炼突出重点）、<strong>会了</strong>（把反思文档打磨到自己读了有收获）。</p>
+</div></section></section><section class="slot" id="d318-pm" data-d="318" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D318 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">提取关键数字做 Dashboard</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Dashboard 是什么、有什么用）</h4><div class="blk-b"><ul>
+<li><strong>Dashboard = 把阶段二的关键数字提取出来做成一张速览表</strong>：论文数 / 引用数 / star 数 / 论文阅读量 / 代码行数 / 时间投入小时数。它把半年成果<strong>量化成一目了然的一张表</strong>，用途：① 自己一眼看清成果规模；② 作总结报告的“数据摘要”；③ 用于作品集/简历/汇报（量化战绩）。</li>
+<li><strong>为什么有“时间投入小时数”</strong>：这个数字很有意义——它量化了你的付出（半年碎片时间累计多少小时），既是对自己努力的肯定，也帮你算“产出/投入”的效率。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>提取关键数字做 Dashboard（可用补充包的 Dashboard 思路）——① 论文数（投稿/在审/接收 + arXiv）；② 引用数（如有）；③ star 数；④ 论文阅读量（累计读了多少篇/知乎帖阅读量）；⑤ 代码行数（框架/项目）；⑥ <strong>时间投入小时数</strong>（半年碎片时间累计估算）；做成清晰的一张表/图；可加与 M1 的对比。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>阶段二 Dashboard——六类关键数字清晰呈现（含时间投入），一目了然，可作数据摘要。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只列产出不算时间投入 → 时间投入小时数有意义（量化付出+算效率）；② 数字过时 → 用最新；③ Dashboard 太花哨 → 清晰一目了然即可。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某数字没有？→ 估算（如时间投入按每天小时数×天数）；代码行数怎么算？→ 用 cloc 工具或估算。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做出了量化半年成果的 Dashboard</strong>。<strong>做了</strong>（提取六类数字含时间投入 + 做成速览表 + 可对比 M1）、<strong>学了</strong>（Dashboard 量化成果一目了然、时间投入量化付出和效率、清晰为要）、<strong>会了</strong>（把阶段成果浓缩成一张量化速览表）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜数据 Dashboard（量化战绩）</strong>：把阶段关键数字提取成一张速览表：论文数/引用数/star 数/论文阅读量/代码行数/<strong>时间投入小时数</strong>。一目了然、作总结报告的数据摘要、用于作品集/简历/汇报。时间投入小时数尤其有意义（量化你的付出+算产出效率）。清晰为要、用最新数字、可加 M1 对比。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ <strong>《阶段二总结报告》（≥5000 字）</strong>（六部分整合 + 通读修改）✅ 数据 Dashboard（六类关键数字含时间投入）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D318</summary><textarea data-note="d318" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d319" data-d="319"><header class="day-head"><span class="dnum">D319</span><h2 class="day-t">周四 · 制定 M13–M18（阶段三）详细计划（周级粒度）+ 核心目标 + 邮件时间表</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天制定阶段三（M13–M18）的详细计划（按周级粒度）、确定核心目标、规划邮件发送时间表。提醒：W46 你搭了阶段三大纲，今天<strong>细化到周级</strong>。★ 阶段三核心目标明确：<strong>联系空天院 → 暑期访问/实习 → 第三篇论文</strong>。这是发完 W48 邮件后的清晰路线图——让你不会发完就茫然。</p>
+</blockquote>
+</div><section class="slot" id="d319-am" data-d="319" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D319 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">制定阶段三周级详细计划</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（阶段三周级计划该怎么排）</h4><div class="blk-b"><ul>
+<li>W46 的大纲是大方向（三条线），今天<strong>细化到周级粒度</strong>（每周/每两周大致做什么）。阶段三（M13–M18，约 26 周）的周级计划，围绕三条线展开：① <strong>连接收口</strong>（W48 发邮件后的跟进：追问、争取回应、线上汇报/见面/访问）；② <strong>第三课题</strong>（立项→实验→第三篇论文，延续 SAR 难题/跨域）；③ <strong>争取机会</strong>（访问/实习/合作的争取）。<strong>周级计划让你知道“每周该推进什么”</strong>，但要留弹性（W48 结果影响连接收口线）。</li>
+<li><strong>注意</strong>：阶段三的源计划（如果有）可能按主题划分（不一定按天），你今天先按自己的理解搭一个周级框架，真到阶段三再对照调整。这里有个心态要摆正：阶段三的计划必然比阶段一二更“不确定”——因为它高度依赖外部（老师回不回、有没有访问机会），不像前面那样“只要我做就能推进”。所以阶段三的计划不是“必须照做的时间表”，而是“无论外部如何变化，我都有事可做、有路可走”的弹性框架。这种“以我为主、随机应变”的规划心态，比一份僵硬的完美计划更管用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定阶段三周级计划（见补充包范例 2）——① 连接收口线（M13 初跟进 W48 邮件、追问、争取机会；Plan B）；② 第三课题线（M13–M15 立项+实验、M16–M18 写作+投稿）；③ 争取机会线（暑期访问/实习的争取节奏）；④ 副线（持续开源/内容）；按周/双周排大致任务；留 W48 结果的弹性。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>阶段三周级计划——三条线的周级任务大致清晰、留了弹性，是发完邮件后的清晰路线图。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>计划太僵化（不留弹性）→ 连接收口线依赖 W48 结果，留弹性（有回应/无回应不同路径）。</li>
+<li>只排第三课题忘了连接收口/争取机会 → 三条线都要排。</li>
+<li>计划脱离实际（排太满）→ 留缓冲，碎片时间有限，别排满。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知周级怎么排？→ 第三课题按“立项/实验/写作/投稿”分阶段、连接收口按“跟进/争取”排、争取机会随进展；担心计划赶不上变化？→ 周级框架是方向，按 W48 结果和实际灵活调。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>制定了阶段三的周级详细计划</strong>。<strong>做了</strong>（三条线周级任务 + 留弹性 + 留缓冲）、<strong>学了</strong>（周级计划知道每周推进什么、连接收口留弹性、别排满）、<strong>会了</strong>（为下一阶段制定有弹性的周级路线图）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜阶段三周级计划（三条线）</strong>：大纲（大方向）→周级粒度（每周/双周做什么）。三条线：连接收口（W48 后跟进/追问/争取机会，留 W48 结果弹性）+第三课题（立项→实验→写作→投稿，延续 SAR 难题/跨域）+争取机会（访问/实习/合作）。副线持续开源/内容。★ 留弹性（有回应/无回应不同路径）+留缓冲（碎片时间有限别排满）。阶段三源可能按主题划分，先搭框架真到时调整。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d319-noon" data-d="319" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D319 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">确定阶段三核心目标（联系空天院→暑期访问/实习→第三篇论文）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（阶段三核心目标的逻辑）</h4><div class="blk-b"><ul>
+<li>阶段三的核心目标是一条<strong>递进的路径</strong>：<strong>联系空天院（W48 发邮件）→ 暑期访问/实习（争取到实地/线上参与目标组的机会）→ 第三篇论文（在更好的环境/合作下产出）</strong>。这条路径把“连接”转化为“实质机会”再转化为“更高的产出”——是你这条转型路线的关键跃迁（从单兵作战到融入目标团队）。</li>
+<li><strong>为什么这个目标合理</strong>：① 联系是第一步（让对方知道你）；② 访问/实习是实质接触（建立信任、了解团队、可能转化为长期合作/读博）；③ 第三篇论文是在更好条件下的产出（可能与目标组合作，质量更高）。<strong>层层递进，每一步为下一步铺垫。</strong> 理解这个递进很重要：你不是指望一封邮件就直接“进空天院”——那不现实。而是先让对方认识你（联系）、再争取一次实质接触（访问/实习，建立信任、了解彼此是否合适）、最后在更好的条件下做出更高质量的成果（第三篇，可能合作）。每一步都把你和目标团队的关系推进一格，水到渠成，而非一步登天。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>明确阶段三核心目标——① 写清这条递进路径（联系→访问/实习→第三篇）；② 每一步的具体目标和判断标准（如“联系”=发出+争取回应、“访问/实习”=争取到参与机会、“第三篇”=立项+产出）；③ 把核心目标作为阶段三计划的主线；④ 留 Plan B（如访问没争取到，怎么继续）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>阶段三核心目标明确——递进路径（联系→访问/实习→第三篇）清晰，每步有目标和判断标准，留了 Plan B。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 目标模糊（“加入空天院”）→ 拆成递进路径（联系→访问/实习→第三篇）；② 没留 Plan B → 每步留备选（如访问没成怎么继续攒成果再争取）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>目标定不清？→ 用递进路径（联系→访问/实习→第三篇）；担心达不到？→ 有 Plan B（持续攒成果、换时机/换人），路径是方向不是死命令。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确定了阶段三的递进核心目标</strong>。<strong>做了</strong>（递进路径 + 每步目标/标准 + 作主线 + 留 Plan B）、<strong>学了</strong>（核心目标是递进路径、每步为下一步铺垫、留 Plan B）、<strong>会了</strong>（为阶段三确立清晰可执行的递进目标）。</p>
+</div></section></section><section class="slot" id="d319-pm" data-d="319" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D319 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">规划邮件发送时间表（W48 发第一批）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要规划邮件发送时间表）</h4><div class="blk-b"><ul>
+<li>W48 要发第一批邮件（联系空天院老师）。<strong>规划发送时间表</strong>：① 第一批发给谁（哪几位老师，优先级）；② 什么时候发（W48 的哪天、考虑老师可能的查收时间）；③ 怎么发（一次发几封、间隔）；④ 跟进计划（多久没回再追问，W49 是“第一封追问周”）。<strong>有时间表，W48 发出就有条不紊</strong>，不是临时慌乱。</li>
+<li><strong>第一批发给谁</strong>：基于你的定制邮件素材（孙显/付琨/王超），优先最对口的（王超组）+ 核心成员（付琨，更现实的接触点）。可以分批（先发最对口的，看反馈再发其他），也可以一起发。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>规划邮件发送时间表——① 第一批名单（孙显/付琨/王超，标优先级，王超组最对口）；② 发送时间（W48 哪天、避开深夜/周末晚，选工作日上午等查收时段）；③ 发送方式（分批 or 一起，间隔）；④ 跟进计划（多久没回再礼貌追问，对接 W49 追问周）；记成时间表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>邮件发送时间表——第一批名单/时间/方式/跟进计划清晰，W48 发出有条不紊。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不规划临时发（慌乱）→ 有时间表（名单/时间/方式/跟进）；② 发送时间不当（深夜/周末）→ 选工作日查收时段；③ 没跟进计划 → 规划追问节奏（对接 W49）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知先发谁？→ 最对口的（王超组）+ 核心成员（付琨）优先；不知什么时间发？→ 工作日上午（老师可能查收）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划好了邮件发送时间表</strong>。<strong>做了</strong>（第一批名单 + 发送时间/方式 + 跟进计划）、<strong>学了</strong>（有时间表 W48 发出有条不紊、选查收时段、规划追问节奏）、<strong>会了</strong>（为发邮件制定有条理的执行时间表）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ M13–M18 阶段三周级详细计划 ✅ 阶段三核心目标（联系→访问/实习→第三篇）✅ 邮件发送时间表（W48 发第一批 + 跟进计划）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D319</summary><textarea data-note="d319" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d320" data-d="320"><header class="day-head"><span class="dnum">D320</span><h2 class="day-t">周五 · 最终检查邮件草稿（基于最新论文状态更新措辞）+ 准备邮件附件</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把邮件草稿最终化——基于最新论文状态更新措辞，并准备齐邮件附件（简历 PDF + 论文 PDF + 作品集 PDF），确保所有附件文件名清晰。提醒：邮件草稿你 W43 写过、反复磨过，今天<strong>最终化</strong>：① 措辞用最新论文状态（若第一篇接收→“已发表/已接收”）；② 附件齐全且文件名规范（如 <code>CV_YourName_2027.pdf</code>）。这是 W48 发出的成品弹药。</p>
+</blockquote>
+</div><section class="slot" id="d320-am" data-d="320" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D320 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">最终检查邮件草稿（基于最新论文状态更新措辞）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么发前要基于最新状态最终化）</h4><div class="blk-b"><ul>
+<li>你的邮件草稿（W43 写、反复磨）里提到了论文状态。<strong>发出前要基于最新状态最终化措辞</strong>——尤其如果这段时间第一篇被接收了，措辞要从“投稿中/在审”改成“已接收/已发表（X 期刊）”。<strong>“已发表论文”是确定的成果，对接说服力远强于“在审”</strong>。这正是当初 W43 安排“W48 才发”的原因（赌这段时间论文可能接收）。如果这个赌注兑现了——第一篇在这一个月里真的被接收了——那么你当初“延迟一个月”的战略耐心，此刻就换来了一封分量重得多的邮件：从“我有一篇在审的论文”变成“我有一篇 X 期刊已接收的论文”，对一位素未谋面的老师来说，后者的可信度和说服力完全不在一个量级。</li>
+<li><strong>最终检查的内容</strong>：① 论文状态措辞（最新）；② 对接点/技术问题是否还准确（D321 会再读老师最新论文确认）；③ 四项自审（≤300 字/技术问题/成果/附件说明）是否仍满足；④ 不卑不亢、定制是否到位。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>最终检查 3 封邮件草稿——① 更新论文状态措辞（接收→“已接收/已发表 X 期刊”；在审→准确表述）；② 确认对接点准确（待 D321 读最新论文再核）；③ 过一遍四项自审（≤300 字/技术问题/成果/附件）；④ 确认不卑不亢、定制到位；⑤ 存为邮件草稿（接近最终，D321 再调技术问题）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>3 封邮件草稿基于最新论文状态最终化——措辞准确（接收则“已发表”）、四项自审过、不卑不亢、定制到位。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>论文接收了邮件还写“在审” → 更新成“已接收/已发表”（说服力强得多）。</li>
+<li>直接用 W43 旧草稿发 → 发前最终化（状态/措辞可能要更新）。</li>
+<li>最终化时破坏了四项/定制 → 改后再过一遍自审。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>论文还在审怎么写？→ 准确表述“投稿于 X 期刊，审稿中”（不夸大）；不确定措辞？→ 接收用“已被 X 接收”、在审用“投稿审稿中”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>基于最新状态最终化了邮件草稿</strong>。<strong>做了</strong>（更新论文状态措辞 + 四项自审 + 确认定制/不卑不亢）、<strong>学了</strong>（发前基于最新状态最终化、已发表比在审说服力强、改后重审）、<strong>会了</strong>（把邮件草稿最终化到发送状态）。</p>
+</div></section></section><section class="slot" id="d320-noon" data-d="320" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D320 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">准备邮件附件（简历 PDF + 论文 PDF + 作品集 PDF）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（邮件该附哪些材料）</h4><div class="blk-b"><ul>
+<li>对接邮件附上材料，方便老师深入了解你。标准附件：① <strong>简历 PDF</strong>（W45 最终版，中文/英文）；② <strong>论文 PDF</strong>（第一篇/第二篇的 arXiv 版或已发表版——论文本身可分享，守核心延后指的是未发表的核心代码不开源，论文 PDF 本身是公开的）；③ <strong>作品集 PDF</strong>（W45 定稿，≤5MB）。<strong>附件让对方一次性拿到你的全部材料</strong>（但邮件正文要短，附件作补充）。</li>
+<li><strong>注意附件大小</strong>：邮件附件总大小别太大（作品集已控 ≤5MB），太大可放主页链接代替（邮件正文已附主页链接，附件给最核心的）。一个实用的取舍原则：邮件正文里那个主页链接，本身就是“一站式入口”（点开能看到全部论文/代码/作品集）；所以附件不必贪多，给最核心的一两个（简历 + 作品集）即可，既保证老师手边有最关键的材料，又不让一封塞满大附件的邮件给人压力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>准备齐邮件附件——① 简历 PDF（W45 最终版，按对象选中文/英文版）；② 论文 PDF（arXiv/已发表版，最核心的一两篇）；③ 作品集 PDF（W45 定稿，≤5MB）；④ 检查附件都是最新版、能打开、大小合适；⑤ 也可只在正文放主页链接、附件给最核心的（避免附件过大）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>邮件附件齐全——简历/论文/作品集 PDF 都是最新版、能打开、大小合适，可随邮件发送。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 附件用旧版（旧简历/旧作品集）→ 用最新版（W45 定稿）；② 附件过大（超邮箱限制）→ 控制大小、或主页链接代替部分；③ 附件打不开/损坏 → 发前检查能打开。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>附件太多太大？→ 正文放主页链接、附件给最核心的（简历+作品集）；用中文还是英文简历？→ 国内老师用中文版。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>备齐了邮件附件</strong>。<strong>做了</strong>（简历/论文/作品集 PDF + 检查最新/能开/大小 + 控制总量）、<strong>学了</strong>（标准附件、论文 PDF 可分享（守延后指核心代码）、附件作补充正文要短）、<strong>会了</strong>（为邮件准备齐全合适的附件）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜邮件附件准备</strong>：标准附件=简历 PDF（最终版，国内用中文）+论文 PDF（arXiv/已发表版，论文本身可分享，守延后指未发表核心代码）+作品集 PDF（≤5MB）。检查都是最新版、能打开、大小合适。★ 附件作补充、正文要短；附件过大就正文放主页链接、附件只给最核心的（简历+作品集）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d320-pm" data-d="320" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D320 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">确保所有附件文件名清晰</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么文件名要规范）</h4><div class="blk-b"><ul>
+<li>附件的<strong>文件名也要专业、清晰</strong>——如 <code>CV_YourName_2027.pdf</code>、<code>Portfolio_YourName.pdf</code>，而不是 <code>简历最终版（1）.pdf</code>、<code>未命名.pdf</code>。<strong>规范的文件名传递专业感</strong>，也方便老师保存/查找（一堆附件里能认出哪个是你的）。这是细节，但细节体现专业。</li>
+<li><strong>命名规范</strong>：① 英文 + 你的名字 + 类型（CV/Portfolio/Paper）+ 可加年份；② 不用乱码/默认名/带括号的版本号；③ 一致的命名风格。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>规范所有附件文件名——① 简历：<code>CV_YourName_2027.pdf</code>（或中文 <code>简历_姓名.pdf</code>）；② 作品集：<code>Portfolio_YourName.pdf</code>；③ 论文：<code>Paper_Title_YourName.pdf</code>；④ 统一命名风格、清晰专业、不带乱码/版本括号；⑤ 确认每个附件名一看就知道是什么。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>所有附件文件名规范清晰（如 <code>CV_YourName_2027.pdf</code>），专业、一看就懂、命名一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 文件名乱（“未命名/最终版(1)”）→ 规范命名（CV_姓名_年份）；② 命名风格不一致 → 统一；③ 文件名带乱码/中文乱码 → 用清晰的英文/规范中文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知怎么命名？→ 类型_姓名_年份（CV_YourName_2027）；中英文混乱？→ 统一一种风格。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规范了所有附件的文件名</strong>。<strong>做了</strong>（规范命名 CV/Portfolio/Paper_姓名 + 统一风格 + 清晰专业）、<strong>学了</strong>（规范文件名传递专业感、方便老师保存查找、细节体现专业）、<strong>会了</strong>（用规范的文件命名提升材料专业度）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 邮件附件齐全（简历/论文/作品集 PDF，最新版 + 大小合适 + 文件名规范）✅ 邮件草稿基于最新状态最终化。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D320</summary><textarea data-note="d320" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d321" data-d="321"><header class="day-head"><span class="dnum">D321</span><h2 class="day-t">周六 · 读空天院最新论文 1 篇（确保“最最新”）+ 最终调整邮件技术问题 + GitHub 维护</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读空天院老师最新的 1 篇论文（确保你了解他们“最最新”的动态）、据此最终调整邮件草稿里的技术问题（确保问题是“最新的”）、做 GitHub 最终维护。提醒：发邮件前最后确认对接点和技术问题<strong>没有过时</strong>——万一老师上周刚发了新论文、你邮件里问的却是旧问题，会显得没跟踪。今天做最后的“最新化”。</p>
+</blockquote>
+</div><section class="slot" id="d321-am" data-d="321" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D321 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">读空天院最新论文 1 篇（确保了解“最最新”动态）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么发前还要再读最新论文）</h4><div class="blk-b"><ul>
+<li>研究在持续更新。你 W41/W43 精读过老师的论文，但<strong>发邮件前要再确认一次有没有“最最新”的论文</strong>（这一两周可能又发了新的）。万一你要联系的老师刚发了一篇新作，而你邮件里提的是几个月前的工作、问的是已被新论文解决的问题，会显得“没在持续跟踪”——反而减分。<strong>发前最后扫一遍最新动态，确保你提的是最新的。</strong></li>
+<li><strong>为什么是“最最新”</strong>：强调“发邮件这个时间点的最新”——比 W43 时又新了。读这 1 篇，确保你邮件里的对接点和问题是“此刻最新的”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 在 Scholar 查你要联系的老师（尤其王超组、最对口的）最最新的论文（近一两周/最新的）；② 读这 1 篇（抓主线 + 看是否影响你的对接点/问题）；③ 确认你邮件里的对接点和技术问题是否还“最新”（有没有被新论文影响）；④ 记录。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>读了老师最最新的 1 篇论文，确认了你邮件的对接点/问题是否还最新（或需要调整）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>觉得 W43 读过就够了 → 发前再确认最最新的（这一两周可能有新作）。</li>
+<li>读了不核对邮件 → 核对你的对接点/问题是否还最新。</li>
+<li>因为“只读 1 篇”就敷衍略过 → 这 1 篇是发邮件前的“最后一道核对”，它决定你邮件里的问题是不是“此刻最新的”，值得认真读、认真核。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>没有最最新的论文？→ 那 W43 的对接点仍有效（确认即可）；新论文影响了你的问题？→ 据此调整邮件的技术问题（中午段做）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确认了老师的最最新动态</strong>。<strong>做了</strong>（读最最新 1 篇 + 核对对接点/问题是否最新）、<strong>学了</strong>（发前确认最最新动态、避免提过时问题显得没跟踪、确保最新）、<strong>会了</strong>（在发邮件前做最后的动态核实）。</p>
+</div></section></section><section class="slot" id="d321-noon" data-d="321" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D321 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">最终调整邮件草稿中的技术问题（确保“最新”）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据上午读的最最新论文，<strong>最终调整邮件里的技术问题</strong>——确保你问的是“最新的、有深度的、读了他最新工作才问得出的”问题。如果新论文影响了你原来的问题（如已解决/已讨论），就换一个更新、更对口的问题。<strong>邮件里的技术问题是定制的核心，确保它最新最有深度。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 据最最新论文，检查邮件里的技术问题是否还最新有深度；② 若被新论文影响（已解决/已讨论），换一个更新的、读了最新工作才问得出的问题；③ 确保问题仍是邮件友好措辞（请教式、先肯定后延伸）；④ 最终确定邮件里的 1–2 个技术问题；⑤ 邮件草稿至此基本最终定稿。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>邮件草稿的技术问题最终调整完毕——最新、有深度、邮件友好，邮件草稿基本最终定稿。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不据最新论文调问题 → 确保问题最新（没被新论文解决/讨论过）；② 调成攻击性/太浅 → 仍是邮件友好、有深度的请教问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>原问题被新论文解决了？→ 从新论文里找新的好问题（更显你读了最新工作）；不确定够不够新？→ 自检“这问题是读了他最新论文才问得出的吗”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把邮件的技术问题最终调到了最新</strong>。<strong>做了</strong>（据最新论文调技术问题 + 确保最新有深度邮件友好 + 邮件基本定稿）、<strong>学了</strong>（技术问题是定制核心要最新、被新论文影响就换、保持邮件友好）、<strong>会了</strong>（确保邮件里的请教问题是此刻最新最有深度的）。</p>
+</div></section></section><section class="slot" id="d321-pm" data-d="321" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D321 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">GitHub 最终维护</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>发邮件前<strong>GitHub 最终维护</strong>一遍——确保 repo 活跃、文档最新、Issue 清空、Year in Review 更新。因为老师收到邮件可能会去看你的 GitHub（邮件正文/作品集都有链接），<strong>确保他看到的是一个活跃、专业、最新的仓库</strong>（第一印象的一部分）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 回 Issue/PR、修小问题；② 确认 README/文档最新（含 Year in Review、最新论文状态）；③ 确认 Colab/链接都正常；④ 看 star 趋势；⑤ 确保老师点进来看到的是活跃专业的仓库。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>GitHub 最终维护完毕——活跃、文档最新、Issue 清空、链接正常，可放心被老师查看。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 发邮件前不维护（仓库显旧/有未回 Issue）→ 最终维护（老师会看）；② 文档/状态过时 → 更新到最新。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Issue 多？→ 优先回有意义的；文档哪里过时？→ 论文状态/Year in Review/链接。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了发邮件前的 GitHub 最终维护</strong>。<strong>做了</strong>（回 Issue + 文档最新 + 链接正常 + 确认活跃专业）、<strong>学了</strong>（老师会看 GitHub、确保活跃专业最新、第一印象一部分）、<strong>会了</strong>（确保对外展示的仓库处于最佳状态）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 最终论文检查（读老师最最新 1 篇 + 确认对接点/问题最新）✅ 邮件技术问题最终调整 ✅ GitHub 最终维护。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D321</summary><textarea data-note="d321" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d322" data-d="322"><header class="day-head"><span class="dnum">D322</span><h2 class="day-t">周日 · 周复盘 W47 + 心理准备（下周发第一封冷邮件）+ 放松充电</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：本周最后一天——复盘 W47、做心理准备（下周就要发出人生中第一封学术冷启动邮件了）、放松充电。提醒：W47 你完成了阶段二总复盘 + 把发邮件的一切最终化。下周（W48）是大事——发出第一封冷邮件 + 阶段二收尾。今天复盘确认一切就绪，做好心理准备（重要但平常心），然后好好放松充电，养足状态迎接 W48。</p>
+</blockquote>
+</div><section class="slot" id="d322-am" data-d="322" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D322 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">周复盘 W47</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（阶段二倒数第二周复盘什么）</h4><div class="blk-b"><ul>
+<li>W47 复盘重点：① <strong>总复盘完成度</strong>（《阶段二总结报告》≥5000 字 + Dashboard 完成）；② <strong>阶段三计划就绪</strong>（周级计划 + 核心目标 + 邮件时间表）；③ <strong>★ W48 发邮件就绪度</strong>（邮件草稿最终化、附件齐全文件名规范、技术问题最新、发送时间表定好——发邮件的一切都备好了吗）；④ 心态（对 W48 发出的准备）。<strong>这是 W48 发出前的最后一次系统确认。</strong> 之所以要这么郑重地做一次全面确认，是因为第一封邮件只有一次“第一印象”的机会——你不希望因为某个本可避免的疏漏（附件忘了带、文件名乱、措辞还写着“在审”）而折损了精心准备的效果。逐项核对清单，就是用一点点细心，守住你半年准备的成果。</li>
+<li><strong>W48 就绪清单</strong>（核心）：邮件草稿（最新状态/最新问题/四项自审）✓、附件（简历/论文/作品集 PDF + 规范文件名）✓、发送时间表（名单/时间/跟进）✓、心理准备 ✓。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 W47 周报——① 硬交付逐项打勾（总结报告 ≥5000 字/Dashboard/阶段三计划/邮件最终化/附件/最新论文检查）；② <strong>W48 发邮件就绪度全面确认</strong>（对照 W48 就绪清单：草稿/附件/文件名/技术问题/时间表/心态）；③ 阶段二收获总览（半年走到哪）；④ 对 W48 的准备（一切就绪了吗、还差什么）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W47 周报——总复盘完成、阶段三计划就绪、★ W48 发邮件就绪度全面确认（一切备好），心态就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不全面确认 W48 就绪度 → 对照就绪清单逐项确认（这是发出前最后机会）。</li>
+<li>发现没就绪的不补 → 立即补（趁 W48 前）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不确定就绪没？→ 对照 W48 就绪清单（草稿/附件/文件名/问题/时间表/心态）逐项核；还差什么？→ 立即补（趁今天/明天）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>全面确认了 W48 发邮件的就绪度</strong>。<strong>做了</strong>（W47 周报 + W48 就绪度全面确认 + 阶段二收获总览）、<strong>学了</strong>（倒数第二周确认全部就绪、对照就绪清单、差的立即补）、<strong>会了</strong>（在关键行动前做系统的就绪确认）。</p>
+</div></section></section><section class="slot" id="d322-noon" data-d="322" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D322 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">心理准备（下周发人生中第一封学术冷启动邮件）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么需要心理准备、该怎么准备）</h4><div class="blk-b"><ul>
+<li>下周要发出<strong>人生中第一封学术冷启动邮件</strong>——联系你仰慕的、目标团队的老师。这是大事，可能有紧张、忐忑、怕被拒/被忽略的情绪。<strong>心理准备很重要</strong>：① 认识到这是<strong>重要但平常</strong>的一步（发邮件是阶段三的起点，不是成败在此一举）；② 接受<strong>可能没回应</strong>（冷邮件回复率本就不高，没回不代表你不行，有 Plan B）；③ 带着<strong>自信和平常心</strong>（你有两篇论文+爆款 repo+精良作品集，是带着实力平等交流，不是卑微求人）。值得反复对自己强调这一点：一年前你或许会觉得“我凭什么联系这样的老师”，但现在的你，手里握着的是实打实的两篇论文、一个被几十人 star 的开源项目、一份能让人 2 分钟看懂你实力的作品集——这些不是包装出来的，是你一天天做出来的。你完全有资格、也有底气，平等地敲这扇门。</li>
+<li><strong>关键心态</strong>：① 这是“开启对话”不是“决定命运”——回了就争取，没回就继续做、换时机再联系；② 你准备得足够充分（功课/材料/邮件都磨到位了），剩下的交给概率，尽人事听天命；③ <strong>无论结果，你的成长和研究都继续</strong>——发邮件不改变你已有的实力和正在走的路。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>做心理准备——① 提醒自己这是重要但平常的一步（阶段三起点，非成败一举）；② 接受可能没回应（回复率不高、有 Plan B、没回不否定你）；③ 建立自信平常心（你有实力、准备充分、平等交流）；④ 想清“回了怎么办、没回怎么办”（都有路走）；⑤ 放下“必须成功”的包袱，以“尽人事听天命”的心态准备发出。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>心理准备到位——认识到这是重要但平常的一步、接受可能没回应、带着自信平常心、想清了两种结果的应对，能从容地发出邮件。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>把发邮件当“成败一举”（过度紧张）→ 它是阶段三起点、开启对话，不决定命运。</li>
+<li>怕被拒/被忽略而迟迟不敢发 → 接受可能没回应（有 Plan B）、带着平常心发。</li>
+<li>卑微心态（“求老师收我”）→ 你带着实力平等交流（价值卡片的互惠心态）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>紧张到不敢发？→ 提醒自己准备充分、这是平常一步、有 Plan B；怕没回应？→ 没回是常态、不否定你、可换时机/换人再联系；觉得自己不够格？→ 你有两篇论文+爆款 repo，是带着实力平等交流。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做好了发邮件的心理准备</strong>。<strong>做了</strong>（认识重要但平常 + 接受可能没回应 + 建立自信平常心 + 想清两种应对）、<strong>学了</strong>（发邮件是开启对话非决定命运、接受不确定有 Plan B、平等交流不卑微、尽人事听天命）、<strong>会了</strong>（以从容自信的心态迎接重要的对接行动）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜发邮件的心理准备（重要但平常心）</strong>：第一封冷邮件是大事，但要以平常心对待——① 它是阶段三的起点、是“开启对话”，不是“成败在此一举”;② 接受可能没回应（冷邮件回复率本不高、没回不否定你、有 Plan B）；③ 带自信平常心（你有两篇论文+爆款 repo+精良作品集，是带实力平等交流，不卑微求人）；④ 想清“回了/没回”都有路走；⑤ 准备充分后，尽人事听天命。无论结果，你的成长和研究都继续。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d322-pm" data-d="322" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D322 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">放松 + 充电</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上放松充电，养足状态迎接 W48。这周做了总复盘（脑力密集）+ 发邮件最终准备（心理有压力），该好好歇一歇。<strong>带着好状态和从容心态发出邮件，比带着疲惫和焦虑发更好。</strong> 可持续性的从容也体现在这里。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>放松充电——做让你恢复的事、保证睡眠、不安排工作；让身心从这周缓过来、心态平和；为 W48 养足状态。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>放松充电到位——身心恢复、心态平和，以好状态迎接 W48。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 因 W48 临近而焦虑到放松不下来 → 准备充分了，养精蓄锐才能从容发出；② 熬夜反而累 → 注意睡眠。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>忍不住焦虑 W48？→ 提醒准备充分、平常心、有 Plan B；难放松？→ 做具体让你平静的事。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>放松充电、为 W48 养足了状态</strong>。<strong>做了</strong>（放松 + 保证睡眠 + 心态平和 + 养状态）、<strong>学了</strong>（好状态+从容心态发邮件更好、可持续的从容、养精蓄锐）、<strong>会了</strong>（在关键行动前调整到最佳身心状态）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 周报 W47（W48 发邮件就绪度全面确认）✅ 心理准备（重要但平常心，想清两种应对）✅ 放松充电（为 W48 养足状态）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D322</summary><textarea data-note="d322" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W47 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>本周是“阶段二总复盘 + 发邮件最终整备”周，补充包给你四样可直接照用的：① 三个范例（阶段二总结报告 6-Part 结构 + Dashboard 字段 · 阶段三周级计划框架 + 邮件发送时间表 · 邮件附件清单 + 文件名规范 + 最终自审清单）；② 一个完整可运行的“W48 发送就绪检查器”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 阶段二总结报告 6-Part 结构（≥5000 字）+ Dashboard 字段</h3>
+<figure class="code" data-lang="text"><pre><code>《阶段二总结报告》（≥5000 字，最重要的自我反思文档）
+Part 1 论文产出回顾：两篇论文各——选题(怎么找Gap)/实验设计/写作经验/投稿审稿
+        → 提炼可复用经验+教训
+Part 2 竞赛回顾：选赛事/Trick路线(哪些有效)/排名历程/经验教训
+Part 3 开源运营回顾：GitHub 0→N stars增长策略/社区互动/内容配合
+Part 4 科研能力成长(与M1对比)：论文阅读速度/代码编写/实验设计/论文写作
+        → 每项&quot;M1 vs 现在&quot;+最大能力跃迁
+Part 5 时间管理回顾：实际vs计划投入/最高效时段/最大时间浪费 → 阶段三优化建议
+Part 6 下阶段规划摘要：核心目标(联系空天院→访问/实习→第三篇)+三条线+基于洞察的展望
+→ 整合成连贯全文(引言+结语串起来)，提炼经验非流水账。
+
+【Dashboard 字段（关键数字速览表）】
+论文数(投稿/在审/接收+arXiv) | 引用数 | star数 | 论文阅读量(读过篇数/知乎阅读量)
+| 代码行数(cloc) | ★时间投入小时数(碎片时间累计) | (可加与M1对比)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · 阶段三（M13–M18）周级计划框架 + 邮件发送时间表</h3>
+<figure class="code" data-lang="text"><pre><code>【阶段三周级计划框架（三条线并行，留弹性）】
+连接收口线：M13初 W48发邮件→跟进/追问(W49追问周)→争取回应/线上汇报/见面
+            → 争取访问/实习；(无回应→Plan B：换时机/换人/继续攒成果再联系)
+第三课题线：M13-M15 立项(选方向SAR难题/跨域)+实验 → M16-M18 写作+第三篇投稿
+争取机会线：随连接进展争取暑期访问/实习/合作
+副线：持续开源/内容(不被绑架)
+★ 留W48结果弹性、留缓冲(碎片时间有限别排满)；阶段三源或按主题划分，先搭框架到时调。
+
+【邮件发送时间表（W48发第一批）】
+· 第一批名单(标优先级)：王超组(★最对口)+付琨(核心成员/更现实接触点)+孙显
+· 发送时间：W48工作日上午(老师可能查收时段)，避开深夜/周末晚
+· 方式：分批(先发最对口看反馈)或一起发
+· 跟进计划：发出后约1-2周没回→礼貌追问(对接W49追问周)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · 邮件附件清单 + 文件名规范 + 最终自审清单</h3>
+<figure class="code" data-lang="text"><pre><code>【邮件附件清单】
+□ 简历 PDF(W45最终版，国内老师用中文版)
+□ 论文 PDF(arXiv/已发表版，最核心一两篇；论文本身可分享，守延后指未发表核心代码)
+□ 作品集 PDF(W45定稿，≤5MB)
+★ 附件作补充、正文要短；总量过大→正文放主页链接、附件只给简历+作品集
+
+【文件名规范】
+CV_YourName_2027.pdf / Portfolio_YourName.pdf / Paper_Title_YourName.pdf
+→ 英文+姓名+类型(+年份)，统一风格，不用&quot;未命名/最终版(1)/乱码&quot;
+
+【邮件草稿最终自审清单（发前过一遍）】
+□ 论文状态措辞最新？(接收→&quot;已发表/已接收 X期刊&quot;；在审→准确表述)
+□ 技术问题最新？(读了老师最最新论文、没被新论文解决/讨论过)
+□ ≤300字？□ 有具体技术问题？□ 有你的成果？□ 有附件说明？
+□ 定制？(提到他具体工作，非群发) □ 不卑不亢？(请教+平等，非谄媚/索取)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · W48 发送就绪检查器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本把“W48 发邮件需要的一切”做成一张就绪清单，逐项检查（草稿措辞最新/附件齐/文件名规范/技术问题最新/时间表/心态），告诉你“是否可以发”+ 还差什么。发前跑一下，确保万事俱备。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># launch_ready_checker.py —— W48 发邮件就绪检查器</span>
+<span class="n">readiness</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;邮件草稿基于最新论文状态最终化&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;技术问题已据老师最最新论文调整&quot;</span><span class="p">:</span>  <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;邮件四项自审通过(≤300字/问题/成果/附件)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;简历PDF(最终版)已备&quot;</span><span class="p">:</span>            <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;论文PDF已备&quot;</span><span class="p">:</span>                    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;作品集PDF(≤5MB)已备&quot;</span><span class="p">:</span>           <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;附件文件名规范(CV_Name_年份)&quot;</span><span class="p">:</span>    <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;发送时间表已定(名单/时间/跟进)&quot;</span><span class="p">:</span>   <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;GitHub最终维护(活跃专业最新)&quot;</span><span class="p">:</span>     <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;心理准备到位(重要但平常心)&quot;</span><span class="p">:</span>       <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== W48 发邮件就绪检查 ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">not_ready</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">ok</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="s1">&#39;✅&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌ 待办&#39;</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">:</span>
+            <span class="n">not_ready</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">就绪：</span><span class="si">{</span><span class="n">done</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="si">}</span><span class="s2"> 项&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">not_ready</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🚀 万事俱备！W48 可以从容发出第一封邮件了。&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   记住：这是开启对话，不是成败一举；尽人事，听天命。&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️ 还差以下，发出前补齐：&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">not_ready</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">check</span><span class="p">(</span><span class="n">readiness</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>=== W48 发邮件就绪检查 ===
+
+[✅] 邮件草稿基于最新论文状态最终化
+[✅] 技术问题已据老师最最新论文调整
+[✅] 邮件四项自审通过(≤300字/问题/成果/附件)
+[✅] 简历PDF(最终版)已备
+[✅] 论文PDF已备
+[✅] 作品集PDF(≤5MB)已备
+[✅] 附件文件名规范(CV_Name_年份)
+[✅] 发送时间表已定(名单/时间/跟进)
+[✅] GitHub最终维护(活跃专业最新)
+[✅] 心理准备到位(重要但平常心)
+
+就绪：10/10 项
+🚀 万事俱备！W48 可以从容发出第一封邮件了。
+   记住：这是开启对话，不是成败一举；尽人事，听天命。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把每项的真实状态（True/False）填进 readiness，脚本告诉你整体就绪度和还差什么。把“发邮件”这件有心理压力的大事，拆成一张可逐项确认的清单——当 10 项全绿时，你就能带着“我准备好了”的底气，从容发出那封邮件。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D316（总结报告 Part 1–3）</strong></p>
+<ol>
+<li>为什么说总结报告“不是作业，是最重要的自我反思文档”？核心是提炼什么？</li>
+<li>论文产出回顾要回顾哪四块？竞赛/开源回顾分别提炼什么经验？</li>
+</ol>
+<p><strong>D317（Part 4–6）</strong></p>
+<ol>
+<li>科研能力成长要与 M1 对比哪四项能力？为什么要对比？</li>
+<li>时间管理回顾要诚实回顾什么？为了什么（优化什么）？</li>
+<li>Part 6 和 D319 详细计划有什么区别？</li>
+</ol>
+<p><strong>D318（整合 ≥5000 字 + Dashboard）</strong></p>
+<ol>
+<li>为什么要整合成完整的 ≥5000 字报告（而非零散六块）？</li>
+<li>Dashboard 包含哪些字段？为什么“时间投入小时数”有意义？</li>
+</ol>
+<p><strong>D319（阶段三计划 + 核心目标 + 邮件时间表）</strong></p>
+<ol>
+<li>阶段三周级计划的三条线是什么？为什么要留弹性？</li>
+<li>阶段三核心目标的递进路径是什么？为什么要留 Plan B？</li>
+<li>邮件发送时间表要规划什么？第一批优先发谁？</li>
+</ol>
+<p><strong>D320（邮件最终化 + 附件）</strong></p>
+<ol>
+<li>为什么发前要基于最新论文状态最终化措辞？和 W43“W48 才发”的关系？</li>
+<li>标准邮件附件有哪些？论文 PDF 能附吗（守延后指什么）？</li>
+<li>为什么附件文件名要规范？</li>
+</ol>
+<p><strong>D321（读最新论文 + 调问题 + 维护）</strong></p>
+<ol>
+<li>为什么发邮件前还要再读老师“最最新”的论文？</li>
+<li>技术问题为什么要据最新论文“最新化”？</li>
+<li>为什么发邮件前要 GitHub 最终维护？</li>
+</ol>
+<p><strong>D322（复盘 + 心理准备 + 充电）</strong></p>
+<ol>
+<li>W48 就绪清单包含哪些核心项？</li>
+<li>★ 发第一封冷邮件的心理准备要点是什么？为什么是“重要但平常心”？</li>
+<li>为什么要养足状态、平常心发邮件？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>总结报告当作业敷衍</td>
+<td>没当回事</td>
+<td>当成最重要的自我反思文档，认真提炼经验</td>
+</tr>
+<tr>
+<td>2</td>
+<td>总结报告写成流水账</td>
+<td>没提炼</td>
+<td>提炼可复用经验+教训（非“先做X再做Y”）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>能力成长不与 M1 对比</td>
+<td>看不清成长</td>
+<td>四项能力“M1 vs 现在”对比</td>
+</tr>
+<tr>
+<td>4</td>
+<td>时间管理回顾不诚实</td>
+<td>粉饰</td>
+<td>诚实回顾（投入/高效时段/浪费）才有用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Dashboard 不算时间投入</td>
+<td>漏关键字段</td>
+<td>含时间投入小时数（量化付出+算效率）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>阶段三计划太僵化无弹性</td>
+<td>没考虑W48结果</td>
+<td>连接收口线留弹性（有回应/无回应路径）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>阶段三只排第三课题</td>
+<td>漏连接收口/机会</td>
+<td>三条线都排</td>
+</tr>
+<tr>
+<td>8</td>
+<td>论文接收了邮件还写“在审”</td>
+<td>没最新化</td>
+<td>更新“已接收/已发表”（说服力强）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>直接用 W43 旧草稿发</td>
+<td>没最终化</td>
+<td>发前最终化（状态/问题/措辞）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>邮件附件用旧版/过大/打不开</td>
+<td>没检查</td>
+<td>用最新版、控大小、发前检查能打开</td>
+</tr>
+<tr>
+<td>11</td>
+<td>附件文件名乱(未命名/最终版(1))</td>
+<td>不专业</td>
+<td>规范命名（CV_Name_年份）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>不读老师最最新论文就发</td>
+<td>问题可能过时</td>
+<td>发前确认最最新动态、问题最新化</td>
+</tr>
+<tr>
+<td>13</td>
+<td>把发邮件当“成败一举”（过度紧张）</td>
+<td>心态错</td>
+<td>它是开启对话非决定命运、有Plan B</td>
+</tr>
+<tr>
+<td>14</td>
+<td>怕被拒迟迟不敢发</td>
+<td>完美主义/恐惧</td>
+<td>接受可能没回应、平常心、尽人事听天命</td>
+</tr>
+<tr>
+<td>15</td>
+<td>卑微心态“求老师收我”</td>
+<td>没互惠心态</td>
+<td>带实力平等交流（价值卡片的互惠）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>W47 收尾</strong>：你完成了阶段二的系统总复盘——一份 ≥5000 字的《阶段二总结报告》（论文/竞赛/开源/能力成长/时间管理/下阶段，你最诚实的自我对话，沉淀了半年的全部经验和方法论）+ 一张量化战绩的 Dashboard。你也把发邮件的一切最终化了：阶段三周级计划 + 核心目标（联系空天院→暑期访问/实习→第三篇论文）+ 邮件发送时间表、基于最新论文状态最终化的邮件草稿、齐全且文件名规范的附件、据老师最最新论文调整的技术问题。最后，你做了最重要的一件事——<strong>心理准备</strong>：第一封冷邮件是大事，但它是开启对话、是阶段三的起点，不是成败一举；你带着两篇论文、爆款 repo、精良作品集，是带着实力平等交流，不是卑微求人。准备充分后，尽人事、听天命。★ 一切就绪。下周（W48，D323–336）——<strong>发出人生中第一封学术冷启动邮件 + 阶段二正式收尾</strong>。<strong>这是你 12 个月一步步走到的时刻：从读不懂论文的零基础，到带着完整作品、被领域看见、向目标团队从容敲门。阶段二的最后一个周文件，就是那一声门响。无论那扇门后传来什么回应——热情的、礼貌的、或者暂时的沉默——你都已经赢了最重要的一仗：你用 12 个月，把一个“零基础、单卡、没人看好”的开局，走成了“带着两篇论文和完整作品，有底气敲任何一扇门”的局面。门响之后的路还长，但你已经证明了自己能走。</strong></p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>复盘</h4><p>月复盘用 <a href="../appendix-e.html">附录 E</a> 的模板。周复盘问"我做完了吗"，<b>月复盘问"方向对不对、节奏能不能持续"</b>。</p></section>
+<div class="pager"><a class="prev" href="w46.html"><span class="dir">← 上一篇</span><span class="nm">W46 社区曝光 + 博客发布</span></a><a class="next" href="w48.html"><span class="dir">下一篇 →</span><span class="nm">W48 🚀 发出第一封邮件 + 阶段二正式收尾</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d316">D316 周一</a><a class="sub" href="#d316-am">上午 Part 1：论文产出回顾</a><a class="sub" href="#d316-noon">中午 Part 2：竞赛回顾</a><a class="sub" href="#d316-pm">晚上 Part 3：开源运营回顾</a><a href="#d317">D317 周二</a><a class="sub" href="#d317-am">上午 Part 4：科研能力成长（与 </a><a class="sub" href="#d317-noon">中午 Part 5：时间管理回顾</a><a class="sub" href="#d317-pm">晚上 Part 6：下阶段规划摘要</a><a href="#d318">D318 周三</a><a class="sub" href="#d318-am">上午 整合全文（≥5000 字）+ 通</a><a class="sub" href="#d318-noon">中午 通读修改（精炼提升）</a><a class="sub" href="#d318-pm">晚上 提取关键数字做 Dashboar</a><a href="#d319">D319 周四</a><a class="sub" href="#d319-am">上午 制定阶段三周级详细计划</a><a class="sub" href="#d319-noon">中午 确定阶段三核心目标（联系空天院→</a><a class="sub" href="#d319-pm">晚上 规划邮件发送时间表（W48 发第</a><a href="#d320">D320 周五</a><a class="sub" href="#d320-am">上午 最终检查邮件草稿（基于最新论文状</a><a class="sub" href="#d320-noon">中午 准备邮件附件（简历 PDF + </a><a class="sub" href="#d320-pm">晚上 确保所有附件文件名清晰</a><a href="#d321">D321 周六</a><a class="sub" href="#d321-am">上午 读空天院最新论文 1 篇（确保了</a><a class="sub" href="#d321-noon">中午 最终调整邮件草稿中的技术问题（确</a><a class="sub" href="#d321-pm">晚上 GitHub 最终维护</a><a href="#d322">D322 周日</a><a class="sub" href="#d322-am">上午 周复盘 W47</a><a class="sub" href="#d322-noon">中午 心理准备（下周发人生中第一封学术</a><a class="sub" href="#d322-pm">晚上 放松 + 充电</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

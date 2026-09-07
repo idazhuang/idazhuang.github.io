@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="" data-stage="2" data-week="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>缓冲周怎么用 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="index.html">首页</a><a class="hide-sm" href="calendar.html">进度地图</a><a class="hide-sm" href="guide.html">使用指南</a><a class="hide-sm" href="glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="index.html">首页</a><span>›</span><span class="chip">W28 · W44</span></div><h1 class="title">缓冲周怎么用</h1><p class="subtitle">原计划留了两周缓冲（W28、W44）却没写内容。这一页是网站补的。</p></div><p>原计划里有两周是<strong>缓冲周</strong>：<strong>W28</strong>（在 M7 与 M8 之间）和 <strong>W44</strong>（在 M11 与 M12 之间）。
+它们没有独立的周文件——因为缓冲周的内容本来就不该提前写死。</p>
+<p>这一页是网站补的，用来回答一个很实际的问题：<strong>缓冲周到底该干什么？</strong></p>
+<h2>缓冲周不是休假，也不是“多做一周”</h2>
+<p>它的作用只有一个：<strong>把偏差吸收掉，让后面 60 多周还能按原节奏走</strong>。
+长周期计划失败，几乎从来不是因为某一周做慢了，而是因为<strong>慢了以后没有回正的机制</strong>，
+偏差一路滚雪球，到某个点整个计划就被放弃了。缓冲周就是那个回正机制。</p>
+<h2>进缓冲周的第一件事：先诚实盘点（30 分钟）</h2>
+<p>拿出前面几周的周复盘，逐条对一遍，然后把自己归到下面三类中的一类。别骗自己，也别过度自责。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>你的状态</th>
+<th>判断依据</th>
+<th>这一周该怎么用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A · 落后了</strong></td>
+<td>有明确没做完的硬交付（实验没跑完、论文某章没写、baseline 缺几个）</td>
+<td>全周补进度，只补<strong>硬交付</strong>，不开新任务</td>
+</tr>
+<tr>
+<td><strong>B · 跟上了但很虚</strong></td>
+<td>任务都打了勾，但心里知道很多是“糊过去的”：代码没跑通只是抄了、论文读了没写笔记</td>
+<td>全周做<strong>返工</strong>：把糊过去的地方补实</td>
+</tr>
+<tr>
+<td><strong>C · 真的跟上了</strong></td>
+<td>硬交付齐、笔记齐、实验可复现</td>
+<td>一半时间做<strong>加固</strong>，一半时间<strong>真休息</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2>A 类：落后了怎么补</h2>
+<ol>
+<li><strong>列出所有欠账</strong>，写在一张纸上，每条标注“补完要几个时段”。</li>
+<li><strong>按对后续的阻塞程度排序</strong>——会卡住下一周的排最前，不会卡住的往后放。</li>
+<li><strong>只补前 60%</strong>。剩下的 40% 直接<strong>划掉</strong>，不是延后，是划掉。
+长计划里最危险的心态是“欠的都要补上”，那样你会在补账里彻底陷进去。</li>
+<li><strong>一周结束时必须回到主线</strong>，无论补没补完。</li>
+</ol>
+<blockquote class="quote">
+<p>划掉欠账不是失败。计划的价值在于让你两年后站在目标上，不在于每一格都打勾。</p>
+</blockquote>
+<h2>B 类：返工清单（照着查）</h2>
+<ul>
+<li>跑过的 baseline，<strong>换台机器 / 换个终端能不能一次跑通</strong>？跑不通就说明没有真复现。</li>
+<li>读过的论文，<strong>5 段式笔记的第 4 段（启发 / 没解决的）写了没有</strong>？空着的等于没读。</li>
+<li>实验结果，<strong>随机种子固定了吗？记录在实验矩阵里了吗</strong>？没有的话数字不可信。</li>
+<li>写过的章节，<strong>能不能对着大纲说清每一段在论证什么</strong>？说不清就是堆砌。</li>
+<li>代码，<strong>有没有一份 README 让三个月后的自己能重新跑起来</strong>？</li>
+</ul>
+<h2>C 类：加固 + 休息</h2>
+<ul>
+<li><strong>加固</strong>：把《环境 SOP》《报错速查表》《实验矩阵》三份文档更新到最新；把知识库里散落的笔记打标签归位；
+给已有的开源仓库补一段文档或一个 demo。这些事平时永远排不上，缓冲周正好做。</li>
+<li><strong>休息</strong>：<strong>真的休息 2–3 天</strong>，不看论文不跑实验。24 个月是长跑，会主动休息的人才走得完。</li>
+</ul>
+<h2>无论哪一类，缓冲周都要做的三件事</h2>
+<ol>
+<li><strong>更新阶段目标</strong>：对照阶段硬交付清单，看还差什么，把剩余周次重新分配一遍。</li>
+<li><strong>检查两条线的平衡</strong>：博士论文（原方向）这几周被挤掉了多少？如果连续三周为零，下一阶段必须补回来。</li>
+<li><strong>写一段给自己的话</strong>：这几周最消耗你的是什么？可以怎么减少？写进周复盘。</li>
+</ol>
+<h2>什么时候可以跳过缓冲周</h2>
+<p>只有一种情况：<strong>A 类欠账为零、B 类返工项为零，而且你最近两周睡得好、状态稳</strong>。
+这时可以把缓冲周直接并进下一模块，提前一周开始。<strong>但这一周的“休息”不能省</strong>，
+把它挪到周末即可。</p>
+<div class="pager"><a class="prev" href="errata.html"><span class="dir">← 上一篇</span><span class="nm">勘误与更新</span></a><a class="next" href="index.html"><span class="dir">返回首页 →</span><span class="nm">首页</span></a></div>
+
+</div>
+  </main>
+  
+</div>
+<script src="assets/nav-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

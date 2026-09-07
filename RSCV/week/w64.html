@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="3" data-week="64">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W64 · 完整 benchmark + 论文加入空天院结果 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段三 · 深化期</span><span>M16 合作成果推进</span><span>·</span><span>Week 64</span><span>·</span><span>D442–D448</span></div><h1 class="title">完整 benchmark + 论文加入空天院结果 + ★ 讨论署名 —— 把工作做成可发表的成果，争取合作论文署名</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆 · 单周文件 · 访问进行中）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="442" data-k="am" title="D442 上午段"></i><i data-d="442" data-k="noon" title="D442 中午段"></i><i data-d="442" data-k="pm" title="D442 晚上段"></i></span><span class="sday"><i data-d="443" data-k="am" title="D443 上午段"></i><i data-d="443" data-k="noon" title="D443 中午段"></i><i data-d="443" data-k="pm" title="D443 晚上段"></i></span><span class="sday"><i data-d="444" data-k="am" title="D444 上午段"></i><i data-d="444" data-k="noon" title="D444 中午段"></i><i data-d="444" data-k="pm" title="D444 晚上段"></i></span><span class="sday"><i data-d="445" data-k="am" title="D445 上午段"></i><i data-d="445" data-k="noon" title="D445 中午段"></i><i data-d="445" data-k="pm" title="D445 晚上段"></i></span><span class="sday"><i data-d="446" data-k="am" title="D446 上午段"></i><i data-d="446" data-k="noon" title="D446 中午段"></i><i data-d="446" data-k="pm" title="D446 晚上段"></i></span><span class="sday"><i data-d="447" data-k="am" title="D447 上午段"></i><i data-d="447" data-k="noon" title="D447 中午段"></i><i data-d="447" data-k="pm" title="D447 晚上段"></i></span><span class="sday"><i data-d="448" data-k="am" title="D448 上午段"></i><i data-d="448" data-k="noon" title="D448 中午段"></i><i data-d="448" data-k="pm" title="D448 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：欢迎进入 <strong>W64（访问第四周，实验深化 + 论文 + 讨论署名）</strong>！上一周（W63）你深化了核心实验、找到并启动了一个具体合作点。这一周做三件事：① ★ <strong>核心实验完整 benchmark</strong>（方法在空天院数据上的完整 benchmark：baseline 对比 + 消融 + 可视化——做成扎实、完整、可发表的一套结果）；② ★ <strong>论文进展 + 讨论署名</strong>（第三篇论文如果还没投 → 加入空天院数据的实验结果 → 更新 Experiment 章 → ★ <strong>与老师/师兄讨论是否可以挂空天院署名</strong>——把访问的工作变成一篇有空天院署名的合作论文）；③ <strong>社交加深关系</strong>（参加实验室聚餐/运动活动，加深和团队的关系）。同时可能有 ★ <strong>30min 组会正式汇报</strong>（W64 或 W65 组会日）。★ W64 的主线：“把核心实验做成完整 benchmark、把空天院数据结果写进论文、和老师讨论合作署名——争取访问最实质的成果（一篇合作论文）。”
+<strong>本周科研能力目标</strong>（你原计划，保留）：完整 benchmark（baseline + 消融 + 可视化）+ 论文加入空天院数据结果 + 与老师讨论署名 + 社交 + 博士课题维护。
+<strong>承上</strong>：W63 你深化了实验、找到了具体合作点。<strong>本周把实验做成完整 benchmark、论文加入空天院数据结果、和老师讨论合作署名。</strong></p>
+<p><strong>🧩 贯穿线索</strong>：★ <strong>完整 benchmark</strong>（baseline 对比 + 消融 + 可视化）把工作做成扎实、可发表的结果。★ <strong>论文加入空天院数据结果 + 讨论署名是 W64 的灵魂</strong>——第三篇论文（如还没投）加入空天院数据的实验结果、更新 Experiment 章，并 ★ <strong>得体地和老师/师兄讨论是否可挂空天院署名</strong>（一篇有空天院署名的合作论文是访问最实质的成果，也是你和目标团队深度连接的证明）。★ <strong>社交加深关系</strong>（聚餐/运动让合作更顺、关系更近）。★ <strong>每天 1h 维护博士课题</strong>雷打不动。★★ <strong>远程合作模式</strong>：远程做 benchmark、线上讨论署名、线上社交（如远程则社交方式调整），核心不变。守核心延后、单卡高效照旧。下一程（W65）实验深化 + 论文写作 + GitHub 远程维护 + ★ M16 月度复盘（M16 收官）。</p>
+<p><strong>📌 本周结构</strong>：D442 完整 benchmark（baseline 对比）+ 论文加入空天院结果启动；D443 完整 benchmark（消融）+ 更新 Experiment 章；D444 完整 benchmark（可视化）+ ★ 与老师/师兄讨论署名；D445 完整 benchmark 收尾 +（可能）★ 30min 组会汇报 + Experiment 章完善；D446 论文 Experiment 章定稿 + ★ 社交（聚餐/运动）；D447 实验集中日（benchmark 做扎实）+ 论文推进；D448 周复盘 + 周报（第 4 份）+ 计划 W65。</p>
+</blockquote>
+<hr />
+<h2>🧭 W64 总览：完整 benchmark → 论文加空天院结果 + 讨论署名 → 社交</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这一周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>★ 完整 benchmark（baseline + 消融 + 可视化）</td>
+<td>可发表的完整结果</td>
+<td>工作做扎实、可写论文</td>
+</tr>
+<tr>
+<td>★ 论文加入空天院数据结果 + 更新 Experiment</td>
+<td>更新的论文</td>
+<td>把访问工作写进论文</td>
+</tr>
+<tr>
+<td>★ 与老师/师兄讨论空天院署名</td>
+<td>署名方向</td>
+<td>争取合作论文（访问实质成果）</td>
+</tr>
+<tr>
+<td>社交加深关系（聚餐/运动）</td>
+<td>更近的关系</td>
+<td>合作更顺、连接更深</td>
+</tr>
+<tr>
+<td>博士课题维护（每天 1h）</td>
+<td>博士线不断档</td>
+<td>后院安稳前线冲</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D442 baseline 对比 + 论文加空天院结果；D443 消融 + 更新 Experiment；D444 可视化 + ★ 讨论署名；D445 benchmark 收尾 +（可能）30min 汇报；D446 Experiment 定稿 + ★ 社交；D447 实验集中日；D448 复盘 + 周报 + 计划 W65。<strong>核心心态：这一周是把访问的工作“做成可发表的成果、争取合作署名”的关键周。完整 benchmark（baseline + 消融 + 可视化）把你的方法在空天院数据上的结果做扎实——这是可以写进论文的硬证据。而 W64 真正的里程碑，是 ★ 论文加入空天院数据结果 + 讨论署名：把第三篇论文（如还没投）加入空天院数据的实验结果、更新 Experiment 章，并 ★ 得体地和老师/师兄讨论是否可以挂空天院署名。★★ 这一步意义重大：一篇有空天院署名的合作论文，是访问最实质的成果——它不只是一篇论文，更是你和目标团队建立了实质合作关系的证明，是你未来读博/求职/继续合作的硬资产。讨论署名要得体：基于你的真实贡献和合作、尊重老师和团队、不强求（署名是合作的自然结果，不是索取）。同时，参加实验室的聚餐/运动活动加深关系——好的关系让合作更顺、连接更深。如果老师安排你在组会做 30min 正式汇报，认真汇报、收集反馈。★ 别忘每天 1h 维护博士课题。★ 走到这里，访问进入“出可发表成果 + 争取合作署名”的关键阶段——离一篇空天院合作论文，只差临门几脚。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d442" data-d="442"><header class="day-head"><span class="dnum">D442</span><h2 class="day-t">周一 · 完整 benchmark（baseline 对比）+ 论文加入空天院数据结果启动</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 第一天——① 上午团队协作 + 完整 benchmark：baseline 对比做完整（你的方法 vs 多个 baseline，在空天院数据上）；② 中午 benchmark 推进 + 论文启动加入空天院数据结果；③ 晚上论文（更新 Experiment 章：加空天院数据结果）+ 博士维护 1h。提醒：完整 benchmark 的第一步是把 baseline 对比做完整——你的方法在空天院数据上和多个 baseline 公平对比，证明你方法的优势。★★ 远程模式：远程做 benchmark、线上论文写作。</p>
+</blockquote>
+</div><section class="slot" id="d442-am" data-d="442" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D442 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 完整 benchmark：baseline 对比做完整</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（完整 benchmark 的 baseline 对比）</h4><div class="blk-b"><ul>
+<li>上午<strong>完整 benchmark：baseline 对比做完整</strong>——① <strong>跑完整的 baseline 对比</strong>（你的方法 vs 多个有代表性的 baseline，在空天院数据上——公平对比，证明你方法的优势）；② ★ <strong>公平对比</strong>（相同数据、相同评测、相同条件——baseline 用合理配置，不能强行让你方法赢）；③ <strong>整理对比结果</strong>（成表格：你的方法 vs 各 baseline 的指标）；④ <strong>团队协作</strong>（继续融入、和师兄对齐 benchmark 设置）。<strong>baseline 对比是完整 benchmark 的核心——证明你的方法在空天院数据上确实更好。</strong></li>
+<li>★★ <strong>远程模式</strong>：远程做 baseline 对比，同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 跑完整 baseline 对比（你的方法 vs 多个 baseline，空天院数据）；② ★ 公平对比（相同条件、baseline 合理配置）；③ 整理对比结果（表格）；④ 团队协作（和师兄对齐设置）；⑤ benchmark 的 baseline 部分完整。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>baseline 对比做完整——你的方法 vs 多个 baseline 公平对比、整理成表格，benchmark 的 baseline 部分完整、有说服力。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>baseline 对比不公平（强行赢）→ ★ 公平对比（相同条件、baseline 合理配置）。</li>
+<li>baseline 太少（不充分）→ 多个有代表性的 baseline。</li>
+<li>不整理（结果乱）→ 整理成对比表格。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>选哪些 baseline？→ 团队数据上有代表性的、领域常用的 + 问师兄；怎么公平？→ 相同数据/评测/条件，baseline 合理配置。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做完整了 baseline 对比</strong>。<strong>做了</strong>（跑完整 baseline 对比 + 公平 + 整理表格 + 团队协作）、<strong>学了</strong>（baseline 对比证明优势、公平对比、整理表格）、<strong>会了</strong>（在空天院数据上做完整公平的 baseline 对比）。</p>
+</div></section></section><section class="slot" id="d442-noon" data-d="442" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D442 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">benchmark 推进 + 论文加入空天院数据结果启动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（论文加入空天院数据结果）</h4><div class="blk-b"><ul>
+<li>中午<strong>论文加入空天院数据结果启动</strong>——① <strong>第三篇论文状态</strong>（如果还没投/可以更新）：把访问期间在空天院数据上的实验结果加进论文；② ★ <strong>加入空天院数据结果</strong>（你的方法在空天院数据上的 benchmark 结果——这是访问期间的新增证据，让论文更强、更有说服力）；③ <strong>规划更新 Experiment 章</strong>（在论文 Experiment 章加入空天院数据的实验小节）；④ <strong>benchmark 推进</strong>（继续完善 benchmark）。★ <strong>论文加入空天院数据结果，让你的论文有了“在真实/团队数据上验证”的强证据</strong>——也为合作署名打基础。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 看第三篇论文状态（可更新）；② ★ 把空天院数据结果加进论文（新增证据）；③ 规划更新 Experiment 章（加空天院数据小节）；④ benchmark 推进；⑤ 论文加入空天院结果启动。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文加入空天院数据结果启动——看了论文状态、规划了把空天院数据结果加进 Experiment 章，benchmark 推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 访问结果不加进论文（白做）→ ★ 加进论文（新增证据）；② 不规划更新 Experiment → 规划加空天院数据小节；③ benchmark 停 → 继续推进。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么加结果？→ 在 Experiment 章加“在空天院数据上的实验”小节（benchmark 结果）；论文已投了？→ 看是否有 revision 机会或为下一篇/合作论文准备。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了论文加入空天院结果</strong>。<strong>做了</strong>（看论文状态 + 加空天院结果 + 规划更新 Experiment + benchmark 推进）、<strong>学了</strong>（论文加空天院结果=强证据、为署名打基础、更新 Experiment）、<strong>会了</strong>（把访问的实验结果加进论文）。</p>
+</div></section></section><section class="slot" id="d442-pm" data-d="442" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D442 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文（更新 Experiment 章：加空天院结果）+ 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>更新 Experiment 章（加空天院结果）</strong>——① <strong>写空天院数据实验小节</strong>（在 Experiment 章加入：空天院数据集介绍 + 你的方法在其上的 benchmark 结果[baseline 对比]+ 分析）；② ★ <strong>和已有实验整合</strong>（空天院数据结果和论文已有的实验[公开数据集]整合，形成更全面的验证）；③ ★ <strong>博士维护 1h</strong>（每晚雷打不动）。<strong>更新 Experiment 章，把空天院数据结果正式写进论文。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写空天院数据实验小节（数据集 + benchmark 结果 + 分析）；② ★ 和已有实验整合；③ ★ 博士维护 1h；④ 边做边写；⑤ Experiment 章更新。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Experiment 章更新——写了空天院数据实验小节、和已有实验整合，博士维护 1h。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 空天院结果孤立（不整合）→ 和已有实验整合；② 只放数字不分析 → 加分析；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么写空天院小节？→ 数据集介绍 + benchmark 结果 + 分析，和已有实验整合；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>更新了 Experiment 章、维护了博士</strong>。<strong>做了</strong>（写空天院实验小节 + 整合 + 博士维护 1h）、<strong>学了</strong>（更新 Experiment 加空天院结果、和已有整合、博士维护持续）、<strong>会了</strong>（把空天院数据结果写进论文 Experiment 章）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文加入空天院数据结果（更新 Experiment·强证据）</strong>：把访问期间的实验结果写进论文——①第三篇论文（如还没投/可更新）→加入你的方法在空天院数据上的 benchmark 结果②★ 加入空天院数据结果=访问期间的新增强证据（在真实/团队数据上验证，让论文更强、更有说服力）③更新 Experiment 章：加“在空天院数据上的实验”小节（数据集介绍 + baseline 对比结果 + 分析）+ ★ 和已有实验（公开数据集）整合形成更全面验证。★ 这也为合作署名打基础。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 完整 benchmark：baseline 对比做完整（公平）✅ 论文加入空天院数据结果启动 ✅ 更新 Experiment 章（空天院实验小节）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D442</summary><textarea data-note="d442" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d443" data-d="443"><header class="day-head"><span class="dnum">D443</span><h2 class="day-t">周二 · 完整 benchmark（消融）+ 更新 Experiment 章</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 第二天——① 上午团队协作 + 完整 benchmark：消融做完整（你的方法各部分在空天院数据上的贡献）；② 中午 benchmark + 论文更新 Experiment 章（整合空天院数据结果）；③ 晚上论文写作 + 博士维护 1h。提醒：消融是完整 benchmark 的关键——在空天院数据上验证你方法各部分的贡献，让结果扎实。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d443-am" data-d="443" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D443 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 完整 benchmark：消融做完整</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>完整 benchmark：消融做完整</strong>——① <strong>在空天院数据上做完整消融</strong>（你的方法各部分[模块/策略/损失]逐个去掉/替换看贡献——★ 复用前几篇消融框架零成本）；② <strong>分析各部分贡献</strong>（在空天院数据上各部分的贡献、为什么）；③ <strong>整理成 benchmark 的一部分</strong>（baseline 对比 + 消融）；④ <strong>团队协作</strong>。<strong>消融让你的方法在空天院数据上的结果扎实——证明各部分都有用。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 在空天院数据上做完整消融（各部分，复用框架）；② 分析各部分贡献；③ 整理成 benchmark 一部分；④ 团队协作；⑤ 消融完整。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>消融做完整——在空天院数据上做了完整消融、分析了贡献、整理进 benchmark，结果扎实。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 消融不完整（漏部分）→ 各部分都消融；② 消融框架从零写 → ★ 复用前几篇框架；③ 只跑不分析 → 分析贡献。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>消融怎么做？→ 各部分逐个去掉/替换（复用框架）；贡献怎么分析？→ 去掉后下降幅度 + 空天院数据上的特点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做完整了消融</strong>。<strong>做了</strong>（空天院数据上完整消融 + 分析贡献 + 整理进 benchmark + 团队协作）、<strong>学了</strong>（消融让结果扎实、复用框架、空天院数据上分析）、<strong>会了</strong>（在空天院数据上做完整消融）。</p>
+</div></section></section><section class="slot" id="d443-noon" data-d="443" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D443 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">benchmark + 论文更新 Experiment 章（整合空天院结果）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>论文更新 Experiment 章（整合空天院结果）</strong>——① <strong>把消融结果加进 Experiment</strong>（空天院数据上的消融结果，加进论文）；② ★ <strong>整合空天院数据的完整结果</strong>（baseline 对比 + 消融 + 可视化，整合成 Experiment 章的“空天院数据实验”小节）；③ <strong>更新论文叙述</strong>（空天院数据结果说明什么、和已有实验的呼应）；④ <strong>benchmark 继续完善</strong>。<strong>更新 Experiment 章，把空天院数据的完整结果写进论文。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 把消融结果加进 Experiment；② ★ 整合空天院完整结果（baseline + 消融 + 可视化）；③ 更新论文叙述；④ benchmark 完善；⑤ Experiment 章整合。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Experiment 章整合——消融结果加进、空天院完整结果整合、更新了叙述，论文有了空天院数据的完整实验。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 结果零散（不整合）→ 整合成完整小节；② 不更新叙述（只贴数字）→ 写说明什么、呼应；③ benchmark 停 → 继续完善。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么整合？→ baseline + 消融 + 可视化整合成“空天院数据实验”小节；叙述写啥？→ 结果说明什么 + 和已有实验呼应。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整合更新了 Experiment 章</strong>。<strong>做了</strong>（加消融结果 + 整合空天院完整结果 + 更新叙述 + benchmark 完善）、<strong>学了</strong>（整合空天院完整结果、更新叙述、论文更全面）、<strong>会了</strong>（把空天院数据的完整实验整合进论文）。</p>
+</div></section></section><section class="slot" id="d443-pm" data-d="443" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D443 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文写作 + 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文写作</strong>——① <strong>完善 Experiment 章</strong>（空天院数据实验小节的表述、图表、分析）；② <strong>看论文整体</strong>（加入空天院数据结果后，论文是否更强、逻辑是否顺）；③ ★ <strong>博士维护 1h</strong>（每晚雷打不动）。<strong>论文写作让加入空天院数据结果后的论文更完整、扎实。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 完善 Experiment 章（表述/图表/分析）；② 看论文整体（更强/逻辑顺）；③ ★ 博士维护 1h；④ 边做边写；⑤ 论文更完整。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作 + 博士维护——完善了 Experiment 章、看了论文整体、博士维护 1h，论文更完整扎实。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只加结果不完善（粗糙）→ 完善表述/图表/分析；② 不看整体（局部好整体乱）→ 看论文整体逻辑；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>完善啥？→ 空天院实验小节的表述/图表/分析；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了论文、维护了博士</strong>。<strong>做了</strong>（完善 Experiment + 看整体 + 博士维护 1h）、<strong>学了</strong>（完善论文、看整体逻辑、博士维护持续）、<strong>会了</strong>（完善加入空天院结果后的论文）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 完整 benchmark：消融做完整（空天院数据上）✅ 论文更新 Experiment 章（整合空天院结果）✅ 论文写作完善 + 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D443</summary><textarea data-note="d443" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d444" data-d="444"><header class="day-head"><span class="dnum">D444</span><h2 class="day-t">周三 · 完整 benchmark（可视化）+ ★ 与老师/师兄讨论署名</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 第三天，署名讨论的关键——① 上午团队协作 + ★ 与老师/师兄讨论是否可挂空天院署名（基于你的工作和合作）；② 中午完整 benchmark：可视化做完整（诚实可视化）；③ 晚上论文写作 + 博士维护 1h。提醒：和老师讨论署名是 W64 的灵魂——★ 得体地、基于真实贡献地讨论是否可挂空天院署名（一篇合作论文是访问最实质的成果）。★★ 远程模式：视频/线上讨论署名。</p>
+</blockquote>
+</div><section class="slot" id="d444-am" data-d="444" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D444 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">★ 与老师/师兄讨论是否可挂空天院署名</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么得体地讨论署名）</h4><div class="blk-b"><ul>
+<li>上午 ★ <strong>与老师/师兄讨论是否可挂空天院署名</strong>——这是 W64 的灵魂、访问争取实质成果的关键：① <strong>基于真实贡献和合作</strong>（你的工作用了空天院的数据/资源/指导、和团队有合作——基于这些真实的贡献和合作讨论署名，是合理的）；② ★ <strong>得体地提</strong>（“我这篇论文用了团队的数据、得到了您和师兄的指导，也和师兄有合作，想请教是否合适挂上团队/您的署名？”——尊重、不强求）；③ <strong>尊重老师的判断</strong>（署名涉及学术规范和团队规矩，尊重老师怎么说）；④ <strong>讨论署名安排</strong>（如可挂：谁一作、谁通讯、团队成员怎么署——遵循学术规范和老师意见）。★ <strong>署名是合作的自然结果，不是索取</strong>——基于真实贡献、得体讨论、尊重老师判断。一篇有空天院署名的合作论文，是访问最实质的成果。</li>
+<li>★★ <strong>远程模式</strong>：视频/线上讨论署名，同样得体。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 基于真实贡献和合作（数据/资源/指导/合作）；② ★ 得体地提署名（尊重、不强求）；③ 尊重老师的判断；④ 讨论署名安排（如可挂：一作/通讯/团队成员）；⑤ 记录讨论结果。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>和老师/师兄讨论了署名——基于真实贡献得体地提、尊重了老师判断、讨论了署名安排（如可挂），署名方向明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不讨论署名（错失合作论文）→ ★ 得体地讨论。</li>
+<li>强求署名（不尊重）→ 基于真实贡献、尊重老师判断、不强求。</li>
+<li>署名不遵循规范（乱挂）→ 遵循学术规范和老师意见。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>怎么开口？→ “论文用了团队数据 + 您和师兄的指导 + 和师兄合作，想请教是否合适挂团队署名”；老师说不合适？→ 尊重（可能规矩/贡献度考虑），这篇仍是你的成果，合作继续；可挂怎么安排？→ 遵循学术规范 + 老师意见（一作/通讯/团队成员）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>讨论了署名</strong>。<strong>做了</strong>（基于真实贡献 + 得体提 + 尊重判断 + 讨论安排 + 记录）、<strong>学了</strong>（★ 署名是合作的自然结果非索取、得体讨论、尊重老师、遵循规范）、<strong>会了</strong>（得体地和老师讨论合作论文署名）。</p>
+</div></section></section><section class="slot" id="d444-noon" data-d="444" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D444 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">完整 benchmark：可视化做完整</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>完整 benchmark：可视化做完整</strong>——① <strong>做完整可视化</strong>（结果对比图、可视化样例[检测/分割结果]、曲线图——空天院数据上的结果可视化）；② ★ <strong>诚实可视化</strong>（正面案例 + 困难/失败案例——诚实展示）；③ <strong>整理成完整 benchmark</strong>（baseline 对比 + 消融 + 可视化——一套完整的结果）；④ <strong>可视化也用于论文/汇报</strong>。<strong>可视化让 benchmark 完整、结果直观有说服力。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 做完整可视化（对比图/样例/曲线）；② ★ 诚实可视化（正面 + 困难案例）；③ 整理成完整 benchmark；④ 用于论文/汇报；⑤ benchmark 完整。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>可视化做完整——做了完整可视化（诚实，含困难案例）、整理成完整 benchmark，结果直观有说服力。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 可视化不完整 → 做对比图/样例/曲线；② 只正面案例 → ★ 含困难/失败案例；③ 不整理 → 整理成完整 benchmark。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>可视化啥？→ 对比图 + 样例（正面+困难） + 曲线；完整 benchmark？→ baseline + 消融 + 可视化一套。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做完整了可视化</strong>。<strong>做了</strong>（完整可视化 + 诚实 + 整理 benchmark + 用于论文汇报）、<strong>学了</strong>（可视化让 benchmark 完整、诚实可视化、有说服力）、<strong>会了</strong>（把 benchmark 的可视化做完整）。</p>
+</div></section></section><section class="slot" id="d444-pm" data-d="444" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D444 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文写作 + 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文写作</strong>——① <strong>把可视化加进论文</strong>（空天院数据的可视化加进 Experiment 章）；② <strong>完善论文</strong>（加入完整 benchmark[baseline + 消融 + 可视化]后，完善论文的表述和逻辑）；③ ★ <strong>博士维护 1h</strong>。<strong>论文写作把完整 benchmark 写进论文，让论文更强。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 把可视化加进论文；② 完善论文（表述/逻辑）；③ ★ 博士维护 1h；④ 边做边写；⑤ 论文更强。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作 + 博士维护——可视化加进论文、完善了论文、博士维护 1h，论文更强。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 可视化不加进论文 → 加进 Experiment；② 不完善 → 完善表述逻辑；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写啥？→ 可视化加进 Experiment + 完善论文；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了论文、维护了博士</strong>。<strong>做了</strong>（加可视化 + 完善论文 + 博士维护 1h）、<strong>学了</strong>（可视化加进论文、完善、博士维护持续）、<strong>会了</strong>（把完整 benchmark 写进论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 与老师/师兄讨论空天院署名（合作论文·得体）</strong>：访问争取实质成果的关键——基于真实贡献和合作（你的工作用了空天院数据/资源/指导 + 和团队合作）讨论署名:①★ 得体地提（&quot;论文用了团队数据 + 您和师兄的指导 + 和师兄合作，想请教是否合适挂团队署名?&quot;——尊重、不强求）②尊重老师的判断（署名涉及学术规范和团队规矩）③讨论署名安排（如可挂：谁一作/谁通讯/团队成员怎么署，遵循学术规范和老师意见）。★ 署名是合作的自然结果，不是索取。一篇有空天院署名的合作论文=访问最实质的成果+你和团队深度连接的证明。★★ 远程：视频讨论。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ ★ 与老师/师兄讨论署名（得体、基于真实贡献）✅ 完整 benchmark：可视化做完整（诚实）✅ 论文写作（加可视化）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D444</summary><textarea data-note="d444" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d445" data-d="445"><header class="day-head"><span class="dnum">D445</span><h2 class="day-t">周四 · 完整 benchmark 收尾 +（可能）★ 30min 组会汇报 + Experiment 章完善</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 第四天——① 上午团队协作 +（如 W64 组会日）★ 30min 组会正式汇报 / 或 benchmark 收尾；② 中午完整 benchmark 收尾（baseline + 消融 + 可视化整合成完整 benchmark）；③ 晚上论文 Experiment 章完善 + 博士维护 1h。提醒：如果 W64 是组会日，今天做 30min 正式汇报（汇报访问期间的实验进展和结果、收集全组反馈）；完整 benchmark 收尾——把一套完整的结果做扎实。★★ 远程模式：线上组会汇报。</p>
+</blockquote>
+</div><section class="slot" id="d445-am" data-d="445" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D445 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 +（可能）★ 30min 组会正式汇报</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（30min 组会正式汇报）</h4><div class="blk-b"><ul>
+<li>上午——① <strong>如果 W64 是组会日</strong>：★ <strong>做 30min 组会正式汇报</strong>（用你 W63 准备/打磨的 PPT，汇报访问期间的实验进展 + 初步结果 + 完整 benchmark + 合作，★ 重点是访问期间的工作）；② ★ <strong>收集全组反馈</strong>（汇报的目的之一是收集建议——认真听、★ 记录所有反馈[谁提了什么]）；③ <strong>虚心应对</strong>（“感谢建议，我回去试试”而非辩解）；④ <strong>如果不是组会日</strong>：benchmark 收尾 + 团队协作（30min 汇报在 W65 组会日做）。★ <strong>30min 组会汇报是让全组深入了解你工作、收集宝贵反馈的机会</strong>——汇报专业、收集反馈、虚心应对。</li>
+<li>★★ <strong>远程模式</strong>：线上组会做汇报（视频 + PPT），同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>①【组会日】做 30min 汇报（实验进展 + 结果 + benchmark + 合作，重点访问工作）；② ★ 收集全组反馈（记录所有建议）；③ 虚心应对；④【非组会日】benchmark 收尾 + 团队协作；⑤ 汇报专业、收集反馈。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>（组会日）30min 汇报完成——汇报了访问工作和结果、收集并记录了反馈、虚心应对；（非组会日）benchmark 收尾。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>汇报只讲方法不讲访问工作 → ★ 重点访问期间的工作和结果。</li>
+<li>不记录反馈（错失建议）→ ★ 记录所有反馈。</li>
+<li>对反馈辩解（不虚心）→ “感谢建议，我回去试试”。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>W64 是组会日吗？→ 是则汇报、否则 W65 汇报；汇报紧张？→ 你 W63 打磨练习过，自然讲；反馈怎么处理？→ 记录 + 虚心 + 汇报后据反馈改进。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了 30min 汇报（如组会日）/收尾了 benchmark</strong>。<strong>做了</strong>（30min 汇报 + 收集反馈 + 虚心 / benchmark 收尾）、<strong>学了</strong>（汇报重点访问工作、收集记录反馈、虚心应对）、<strong>会了</strong>（做组会正式汇报并收集反馈）。</p>
+</div></section></section><section class="slot" id="d445-noon" data-d="445" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D445 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">完整 benchmark 收尾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>完整 benchmark 收尾</strong>——① <strong>整合成完整 benchmark</strong>（baseline 对比 + 消融 + 可视化——整合成一套完整、扎实的结果）；② <strong>检查完整性</strong>（benchmark 是否覆盖了 baseline 对比、消融、可视化，结果是否扎实、有说服力）；③ <strong>据组会反馈调整</strong>（如已汇报，据全组反馈调整 benchmark/实验）；④ <strong>确认 benchmark 可用于论文</strong>。★ <strong>完整 benchmark 收尾——把访问期间的核心实验做成一套完整、可发表的结果</strong>（M16 硬交付要“空天院数据上的实验结果[baseline + your method]”）。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整合成完整 benchmark（baseline + 消融 + 可视化）；② 检查完整性（覆盖 + 扎实 + 有说服力）；③ 据组会反馈调整（如已汇报）；④ 确认可用于论文；⑤ benchmark 收尾。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>完整 benchmark 收尾——整合成完整 benchmark（baseline + 消融 + 可视化）、检查了完整性、据反馈调整，可用于论文。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① benchmark 不完整（漏部分）→ 覆盖 baseline/消融/可视化；② 不据反馈调整 → 据组会反馈改进；③ 不确认可用 → 确认扎实可用于论文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>benchmark 完整吗？→ 看 baseline 对比 + 消融 + 可视化是否齐、结果是否扎实；反馈怎么用？→ 据全组建议调整实验/补充。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>收尾了完整 benchmark</strong>。<strong>做了</strong>（整合完整 benchmark + 检查完整性 + 据反馈调整 + 确认可用）、<strong>学了</strong>（完整 benchmark 覆盖 baseline/消融/可视化、据反馈调整、可发表）、<strong>会了</strong>（把核心实验做成完整可发表的 benchmark）。</p>
+</div></section></section><section class="slot" id="d445-pm" data-d="445" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D445 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文 Experiment 章完善 + 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文 Experiment 章完善</strong>——① <strong>完善空天院数据实验小节</strong>（完整 benchmark[baseline + 消融 + 可视化]整合进 Experiment 章，表述/图表/分析完善）；② ★ <strong>据组会反馈完善论文</strong>（如已汇报，据全组建议完善论文）；③ ★ <strong>博士维护 1h</strong>。<strong>Experiment 章完善，把完整 benchmark 写好——论文有了访问期间的强证据。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 完善空天院数据实验小节（benchmark 整合，表述/图表/分析）；② ★ 据组会反馈完善；③ ★ 博士维护 1h；④ 边做边写；⑤ Experiment 章完善。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Experiment 章完善——空天院数据实验小节完善、据反馈完善，博士维护 1h，论文有强证据。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① Experiment 小节粗糙 → 完善表述/图表/分析；② 不据反馈完善 → 据组会建议改；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>完善啥？→ benchmark 整合进 Experiment 的表述/图表/分析；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了 Experiment 章、维护了博士</strong>。<strong>做了</strong>（完善 Experiment 小节 + 据反馈完善 + 博士维护 1h）、<strong>学了</strong>（Experiment 完善、据反馈改、博士维护持续）、<strong>会了</strong>（把完整 benchmark 完善进论文 Experiment 章）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 30min 组会正式汇报（汇报访问工作·收集反馈）</strong>：老师安排的组会完整汇报（W64 或 W65 组会日）——用 W63 准备/打磨的 PPT 汇报：访问期间实验进展 + 初步结果 + 完整 benchmark + 合作,★ 重点是访问期间的工作（你做了什么、结果如何）。★ 汇报目的之一=收集全组反馈：认真听 + ★ 记录所有反馈（谁提了什么）+ 虚心应对（&quot;感谢建议，我回去试试&quot;而非辩解）。汇报后据反馈改进实验/论文。复用 W51/W62/W63 的汇报经验。★★ 远程：线上组会视频 + PPT。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅（如组会日）★ 30min 组会汇报 + 收集反馈 / benchmark 收尾 ✅ 完整 benchmark 收尾（baseline + 消融 + 可视化）✅ 论文 Experiment 章完善 + 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D445</summary><textarea data-note="d445" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d446" data-d="446"><header class="day-head"><span class="dnum">D446</span><h2 class="day-t">周五 · 论文 Experiment 章定稿 + ★ 社交（实验室聚餐/运动）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 第五天——① 上午团队协作 + 论文 Experiment 章定稿（空天院数据结果整合好）；② 中午论文进展 + 据组会反馈改进（如已汇报）；③ 晚上 ★ 社交（参加实验室聚餐/运动活动，加深关系）+ 博士维护 1h。提醒：论文 Experiment 章定稿（加入空天院数据的完整结果）；★ 参加实验室社交活动加深和团队的关系——好的关系让合作更顺、连接更深。★★ 远程模式：如远程则社交方式调整（线上交流/视频）。</p>
+</blockquote>
+</div><section class="slot" id="d446-am" data-d="446" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D446 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 论文 Experiment 章定稿</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>论文 Experiment 章定稿</strong>——① <strong>定稿空天院数据实验小节</strong>（完整 benchmark[baseline + 消融 + 可视化]整合好、表述图表分析到位）；② ★ <strong>Experiment 章整体定稿</strong>（公开数据集实验 + 空天院数据实验整合成完整的 Experiment 章——更全面的验证）；③ <strong>看论文整体</strong>（加入空天院结果后论文更强、逻辑顺）；④ <strong>团队协作</strong>。<strong>Experiment 章定稿，论文有了访问期间的完整强证据。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 定稿空天院数据实验小节；② ★ Experiment 章整体定稿（公开 + 空天院数据整合）；③ 看论文整体；④ 团队协作；⑤ Experiment 定稿。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Experiment 章定稿——空天院数据小节定稿、Experiment 整体定稿（更全面验证）、论文更强。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 小节不定稿（半成品）→ 定稿到位；② 不整体定稿（割裂）→ 公开 + 空天院整合；③ 不看整体 → 看论文逻辑。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>定稿啥？→ benchmark 整合 + 表述图表分析到位；整体怎么整合？→ 公开数据集实验 + 空天院数据实验=更全面验证。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>定稿了 Experiment 章</strong>。<strong>做了</strong>（定稿空天院小节 + Experiment 整体定稿 + 看整体 + 团队协作）、<strong>学了</strong>（Experiment 定稿、公开 + 空天院整合、更全面验证）、<strong>会了</strong>（把加入空天院结果的 Experiment 章定稿）。</p>
+</div></section></section><section class="slot" id="d446-noon" data-d="446" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D446 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">论文进展 + 据组会反馈改进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>论文进展 + 据组会反馈改进</strong>——① <strong>论文进展</strong>（Experiment 定稿后，看论文整体进展——离投稿/完整还差什么）；② ★ <strong>据组会反馈改进</strong>（如本周已做 30min 汇报，据全组反馈改进论文/实验——全组的建议很宝贵）；③ <strong>规划论文后续</strong>（结合署名讨论：如可挂空天院署名→合作论文，和老师商量后续；如不挂→你独立的论文继续）；④ <strong>明确下一步</strong>。<strong>论文进展 + 据反馈改进，让论文向更完整、可发表推进。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 看论文整体进展；② ★ 据组会反馈改进；③ 规划论文后续（结合署名）；④ 明确下一步；⑤ 论文向可发表推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文进展 + 据反馈改进——看了进展、据组会反馈改进了、规划了后续（结合署名），下一步明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不据反馈改进（浪费建议）→ 据全组反馈改；② 不规划后续（停滞）→ 结合署名规划；③ 不明确下一步 → 明确。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>反馈怎么用？→ 据全组建议改论文/实验；后续怎么规划？→ 结合署名（合作论文和老师商量/独立论文继续）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了论文、据反馈改进</strong>。<strong>做了</strong>（看进展 + 据反馈改进 + 规划后续 + 明确下一步）、<strong>学了</strong>（据组会反馈改进、结合署名规划后续）、<strong>会了</strong>（据反馈推进论文向可发表）。</p>
+</div></section></section><section class="slot" id="d446-pm" data-d="446" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D446 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">★ 社交（实验室聚餐/运动）+ 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么参加社交活动）</h4><div class="blk-b"><ul>
+<li>晚上 ★ <strong>参加实验室社交活动（聚餐/运动）</strong>——① ★ <strong>加深和团队的关系</strong>（聚餐、运动等社交活动是加深关系的好机会——工作之外的相处让关系更近、更自然）；② <strong>融入更深</strong>（从“工作伙伴”到“朋友”，融入更深）；③ <strong>让合作更顺</strong>（好的关系让合作更顺畅、沟通更轻松、未来联系更紧）；④ <strong>真诚相处</strong>（真诚、热情、不功利——关系是真诚相处出来的）。★ <strong>社交加深关系，是访问期间“软性”但重要的投入</strong>——好的关系让合作更顺、连接更深、未来的路更宽。同时 ★ <strong>博士维护 1h</strong>（社交后或调整时间）。</li>
+<li>★★ <strong>远程模式</strong>：如果是远程合作，社交方式调整（线上交流、视频聊天、群里互动——虽不如线下，但保持关系的维护）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 参加实验室社交活动（聚餐/运动）；② ★ 加深关系（工作之外相处）；③ 真诚热情不功利；④ 融入更深；⑤ ★ 博士维护 1h（调整时间）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>参加了社交活动、加深了关系——聚餐/运动、工作之外相处、真诚热情，融入更深，博士维护 1h。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不参加社交（关系停在工作）→ ★ 参加、加深关系；② 功利相处（不真诚）→ 真诚热情；③ 只工作不社交（融入浅）→ 工作 + 社交并重。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不好意思参加？→ 主动跟着去，真诚相处；远程怎么社交？→ 线上交流/视频/群里互动维护关系。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>参加了社交、加深了关系</strong>。<strong>做了</strong>（参加聚餐/运动 + 加深关系 + 真诚 + 博士维护 1h）、<strong>学了</strong>（★ 社交加深关系、让合作更顺连接更深、真诚相处）、<strong>会了</strong>（用社交加深和团队的关系）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜社交加深关系（聚餐/运动·真诚）</strong>：访问期间“软性”但重要的投入——①参加实验室社交活动（聚餐/运动等，工作之外相处）②★ 加深和团队的关系（从“工作伙伴”到“朋友”，融入更深）③让合作更顺(好关系=沟通轻松+合作顺畅+未来联系紧)④真诚、热情、不功利（关系是真诚相处出来的）。★ 好的关系让合作更顺、连接更深、未来的路更宽。★★ 远程：社交方式调整（线上交流/视频/群里互动维护关系）。+ 博士维护 1h 持续。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 Experiment 章定稿（公开 + 空天院数据整合）✅ 论文进展 + 据组会反馈改进 ✅ ★ 社交（聚餐/运动加深关系）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D446</summary><textarea data-note="d446" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d447" data-d="447"><header class="day-head"><span class="dnum">D447</span><h2 class="day-t">周六 · 实验集中日（benchmark 做扎实）+ 论文推进</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 第六天，实验集中日——① 上午实验集中（benchmark 做扎实、补缺）；② 中午实验分析 + 论文推进（Experiment 章）；③ 晚上实验收尾 + 博士维护 1h。提醒：周六集中把完整 benchmark 做扎实（补任何缺口）、推进论文——为周日周报和下周（W65 实验深化 + M16 月复盘）打基础。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d447-am" data-d="447" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D447 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">实验集中（benchmark 做扎实、补缺）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周六<strong>实验集中——benchmark 做扎实</strong>——① <strong>补 benchmark 的任何缺口</strong>（baseline 对比/消融/可视化如有缺的、或据组会反馈要补的实验，补上）；② ★ <strong>利用周末多跑</strong>（按团队 GPU 规则用，把 benchmark 做扎实）；③ <strong>确认 benchmark 完整扎实</strong>（一套完整、可发表、经得起审稿的结果）；④ <strong>实验管理</strong>。<strong>实验集中日把完整 benchmark 做扎实——M16 硬交付的“空天院数据实验结果”做到位。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 补 benchmark 缺口（baseline/消融/可视化/据反馈补的）；② ★ 利用周末多跑（按规则用）；③ 确认完整扎实；④ 实验管理；⑤ benchmark 做扎实。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验集中——补了 benchmark 缺口、利用了周末、确认完整扎实、实验管理，benchmark 做到位。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 周末不跑（浪费）→ ★ 集中跑补缺；② 占太多 GPU → 按规则用；③ benchmark 有缺口 → 补齐。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>补什么？→ baseline/消融/可视化缺的 + 据组会反馈要补的；资源不够？→ 按规则排队、优先关键。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>集中做扎实了 benchmark</strong>。<strong>做了</strong>（补缺口 + 利用周末 + 确认完整 + 实验管理）、<strong>学了</strong>（实验集中补缺、做扎实、M16 硬交付到位）、<strong>会了</strong>（在集中日把完整 benchmark 做扎实）。</p>
+</div></section></section><section class="slot" id="d447-noon" data-d="447" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D447 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实验分析 + 论文推进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>实验分析 + 论文推进</strong>——① <strong>分析完整 benchmark</strong>（你的方法在空天院数据上的完整结果——表现、优势、各部分贡献）；② <strong>论文推进</strong>（把分析/补的结果加进论文 Experiment、完善）；③ ★ <strong>平衡实验和论文</strong>；④ <strong>实验/论文管理</strong>。<strong>分析 + 论文推进，让 benchmark 和论文都向“可发表”完善。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 分析完整 benchmark（表现/优势/贡献）；② 论文推进（加结果/完善）；③ ★ 平衡实验和论文；④ 管理；⑤ 向可发表完善。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验分析 + 论文推进——分析了完整 benchmark、推进了论文、平衡了两者，向可发表完善。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只跑不分析 → 分析表现优势；② 顾此失彼 → 平衡实验和论文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么分析？→ 完整 benchmark 看表现/优势/贡献；论文推进啥？→ 加结果 + 完善 Experiment。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>分析了实验、推进了论文</strong>。<strong>做了</strong>（分析 benchmark + 论文推进 + 平衡 + 管理）、<strong>学了</strong>（分析表现优势、平衡实验论文、向可发表）、<strong>会了</strong>（分析 benchmark 并推进论文）。</p>
+</div></section></section><section class="slot" id="d447-pm" data-d="447" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D447 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">实验收尾 + 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>实验收尾</strong>——① <strong>收尾本周实验</strong>（让跑着的实验收尾、整理本周的完整 benchmark 进展）；② <strong>整理结果</strong>（完整 benchmark 整理清楚——为周报和下周用）；③ ★ <strong>博士维护 1h</strong>；④ <strong>不过劳</strong>（可持续）。<strong>实验收尾，把本周的完整 benchmark 整理出来。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 收尾本周实验；② 整理完整 benchmark；③ ★ 博士维护 1h；④ 不过劳；⑤ benchmark 就绪。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验收尾——本周实验收尾、完整 benchmark 整理清楚、博士维护 1h，结果就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不收尾（结果散）→ 整理；② 过劳 → 适度可持续；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>整理啥？→ 完整 benchmark（baseline/消融/可视化）；太累？→ 适度收尾可持续。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>收尾了实验、维护了博士</strong>。<strong>做了</strong>（收尾 + 整理 benchmark + 博士维护 1h + 不过劳）、<strong>学了</strong>（收尾整理、可持续、博士维护持续）、<strong>会了</strong>（收尾并整理完整 benchmark）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 实验集中（benchmark 做扎实、补缺）✅ 实验分析 + 论文推进 ✅ 实验收尾 + 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D447</summary><textarea data-note="d447" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d448" data-d="448"><header class="day-head"><span class="dnum">D448</span><h2 class="day-t">周日 · 周复盘 W64 + 周报（第 4 份）+ 计划 W65</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W64 最后一天——① 上午周复盘 W64（完整 benchmark/论文加空天院结果/署名讨论/社交）；② 中午周报（第 4 份，M16 硬交付周报×4 达成）+ 署名讨论进展记录；③ 晚上计划 W65（实验深化 + 论文写作 + GitHub 远程维护 + ★ M16 月度复盘）。提醒：W64 复盘要看完整 benchmark 做扎实了没、论文加空天院结果了没、署名讨论结果如何；周报是第 4 份（M16 硬交付周报×4 达成）。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d448-am" data-d="448" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D448 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">周复盘 W64</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W64 复盘什么）</h4><div class="blk-b"><ul>
+<li>W64 复盘重点：① ★ <strong>完整 benchmark</strong>（baseline + 消融 + 可视化，做扎实了吗——M16 硬交付“空天院数据实验结果[baseline + your method]”）；② ★ <strong>论文加空天院结果 + 署名讨论</strong>（论文加进了吗、Experiment 章更新了吗、署名讨论结果如何）；③ <strong>30min 组会汇报</strong>（如已做，反馈如何）；④ <strong>社交</strong>（参加了吗、关系加深了吗）；⑤ <strong>博士维护</strong>。<strong>W64 是访问“出可发表成果 + 争取署名”的关键周。</strong></li>
+<li>★★ <strong>远程模式</strong>：复盘远程实验、线上论文署名讨论、线上社交、博士维护。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 W64 复盘——① 完整 benchmark（做扎实情况）；② ★ 论文加空天院结果 + 署名讨论（结果）；③ 30min 汇报（如已做）；④ 社交；⑤ 博士维护 + 心态。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W64 复盘——完整 benchmark + 论文署名 + 汇报 + 社交 + 博士维护都盘点，访问关键周情况清楚。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不盘署名讨论（核心）→ ★ 盘署名结果；② 不盘 benchmark 完整度 → 盘做扎实没；③ 不对照 → 逐项确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>署名讨论结果？→ 客观记录（可挂/不可挂/待定 + 安排）;benchmark 扎实没？→ baseline/消融/可视化完整度。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了 W64</strong>。<strong>做了</strong>（复盘 benchmark + 论文署名 + 汇报 + 社交 + 博士维护）、<strong>学了</strong>（W64=可发表成果 + 争取署名、盘 benchmark 和署名）、<strong>会了</strong>（复盘访问的关键产出周）。</p>
+</div></section></section><section class="slot" id="d448-noon" data-d="448" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D448 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">周报（第 4 份）+ 署名讨论进展记录</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>周报（第 4 份）+ 署名讨论记录</strong>——① <strong>周报</strong>（本周完成：完整 benchmark + 论文加空天院结果 + 署名讨论 + 社交；下周计划：实验深化 + 论文 + M16 月复盘；困难求建议）；② ★ <strong>M16 硬交付周报×4 达成</strong>（这是访问期间第 4 份周报，M16 硬交付的“周报×4”达成）；③ <strong>署名讨论进展记录</strong>（署名讨论的结果、合作论文的安排——为合作论文推进准备）。<strong>周报建立的汇报节奏完成 M16 的周报×4，署名记录沉淀合作成果方向。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写周报（本周完成 + 下周计划 + 困难求建议）；② ★ 简短虚心（第 4 份，M16 周报×4 达成）；③ 发给带你的老师/师兄；④ 记录署名讨论进展；⑤ 汇报节奏完成。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>周报发出（第 4 份）+ 署名记录——周报简短有干货虚心、署名讨论进展记录，M16 周报×4 达成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 周报啰嗦 → 简短；② 不记录署名进展 → 记录（为合作论文准备）；③ 不发（断节奏）→ 主动发（M16 要×4）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>周报写啥？→ 本周完成（benchmark/论文/署名/社交） + 下周计划 + 困难；署名记录啥？→ 讨论结果 + 合作论文安排。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>发了周报、记录了署名进展</strong>。<strong>做了</strong>（写周报 + 简短虚心 + 发出 + 记录署名）、<strong>学了</strong>（周报×4 达成、署名记录为合作论文准备）、<strong>会了</strong>（持续周报并记录合作署名进展）。</p>
+</div></section></section><section class="slot" id="d448-pm" data-d="448" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D448 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W65（实验深化 + 论文 + ★ M16 月复盘）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W65 做什么）</h4><div class="blk-b"><ul>
+<li>晚上<strong>计划 W65（M16 收官周）</strong>——① <strong>周一-周五实验深化 + 论文写作</strong>（继续深化实验、推进论文——如合作论文则和团队推进、署名按讨论结果）；② <strong>周六 GitHub 远程维护</strong>（★ 访问期间 GitHub 不能断更——回复 Issue、发布小更新，保持影响力）；③ ★ <strong>周日 M16 月度复盘</strong>（用<a href="../appendix-e.html">附录 E</a> 复盘 M16，★ 对照 M16 硬交付清单 6 项：融入团队[认识所有成员 + ≥2 次组会]/空天院数据实验结果/组会汇报≥1次/找到≥1个合作点/周报×4/博士课题未断档）；④ <strong>可能的 30min 组会汇报</strong>（如 W64 没做，W65 组会日做）。今晚把 W65 计划列好。</li>
+<li>★★ <strong>远程模式</strong>：W65 同样实验深化 + 论文 + GitHub 维护 + M16 月复盘。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 列 W65 计划（实验深化 + 论文 + GitHub 维护 + M16 月复盘）；② 周一-五实验论文要点；③ 周六 GitHub 维护；④ ★ 周日 M16 月复盘（<a href="../appendix-e.html">附录 E</a> + 对照硬交付 6 项）；⑤ 排好 W65 节奏。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W65 计划列好——实验深化 + 论文 + GitHub 维护 + M16 月复盘的要点清楚，节奏排好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不计划 W65 → 列好计划；② 忘了 M16 月复盘 → 周日排月复盘；③ 忘了 GitHub 维护 → 周六排（不能断更）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>W65 怎么排？→ 实验深化 + 论文（周一-五） + GitHub 维护（周六） + M16 月复盘（周日）；月复盘对照啥？→ M16 硬交付 6 项。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>计划好了 W65</strong>。<strong>做了</strong>（列 W65 计划 + 实验论文 + GitHub + M16 月复盘 + 排节奏）、<strong>学了</strong>（W65=M16 收官、实验论文 + GitHub + 月复盘对照硬交付）、<strong>会了</strong>（规划 M16 收官周）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜周报×4 达成 + 衔接 W65（M16 收官·对照硬交付6项）</strong>：W64 周报是访问第 4 份（★ M16 硬交付“周报×4”达成）——本周完成（完整 benchmark + 论文加空天院结果 + 署名讨论 + 社交）+ 下周计划 + 困难。★ 记录署名讨论进展（为合作论文准备）。★ 衔接 W65（M16 收官）：周一-五实验深化 + 论文写作/周六 GitHub 远程维护（★ 不能断更：回 Issue + 小更新）/周日★ M16 月度复盘(<a href="../appendix-e.html">附录 E</a>,★ 对照 M16 硬交付清单 6 项：融入团队[认识所有成员 + ≥2 次组会]/空天院数据实验结果/组会汇报≥1次/找到≥1个合作点/周报×4/博士课题未断档)。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 周复盘 W64（benchmark/论文署名/汇报/社交）✅ 周报（第 4 份，M16 周报×4 达成）+ 署名进展记录 ✅ 计划 W65（实验深化 + 论文 + M16 月复盘）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D448</summary><textarea data-note="d448" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W64 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>完整 benchmark + 论文 + 讨论署名周，补充包给你四样可直接照用的：① 三个范例（完整 benchmark 结构 + 论文加空天院结果要点 · 署名讨论得体话术 + 合作论文署名常识 · 30min 汇报反馈处理 + 社交加深关系要点）；② 一个完整可运行的“M16 硬交付进度追踪器”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 完整 benchmark 结构 + 论文加空天院结果要点</h3>
+<figure class="code" data-lang="text"><pre><code>【完整 benchmark 结构(空天院数据上,可发表)】
+□ baseline 对比(你的方法 vs 多个有代表性 baseline,★公平:相同数据/评测/条件)
+□ 消融(各部分逐个去掉/替换看贡献,★复用前几篇框架零成本)
+□ 可视化(对比图/可视化样例/曲线,★诚实:正面+困难/失败案例)
+□ 结果分析(表现/优势/各部分贡献/空天院数据上的特点)
+□ ★单卡高效卖点(Params/FPS)
+→ 一套完整、扎实、经得起审稿的结果(M16硬交付:空天院数据实验结果[baseline+your method])。
+
+【论文加空天院数据结果要点】
+· 在 Experiment 章加&quot;在空天院数据上的实验&quot;小节
+· 内容: 空天院数据集介绍 + 你的方法的完整benchmark结果 + 分析
+· ★和已有实验(公开数据集)整合=更全面的验证(公开+真实/团队数据)
+· 让论文更强、更有说服力 + 为合作署名打基础</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · 署名讨论得体话术 + 合作论文署名常识</h3>
+<figure class="code" data-lang="text"><pre><code>【署名讨论得体话术(基于真实贡献·尊重·不强求)】
+&quot;老师,我这篇论文用了团队的数据、得到了您和师兄的指导,也和师兄有合作。
+ 想请教一下,是否合适挂上团队/您的署名?完全尊重您的意见和团队的规矩。&quot;
+→ ①基于真实贡献(数据/资源/指导/合作) ②得体尊重不强求 ③尊重老师判断
+   ④★署名是合作的自然结果,不是索取
+
+【合作论文署名常识】
+· 一作: 主要贡献者(通常做了最多核心工作的人,可能是你)
+· 通讯作者: 通常是导师/PI(对论文负责、对外联系)
+· 其他作者: 按贡献排序(参与合作的师兄/团队成员)
+· ★署名安排遵循学术规范 + 老师/团队意见,不自作主张
+· 如老师说不合适→尊重(可能贡献度/规矩考虑),这篇仍是你的成果,合作继续</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · 30min 汇报反馈处理 + 社交加深关系要点</h3>
+<figure class="code" data-lang="text"><pre><code>【30min 组会汇报反馈处理】
+汇报时: ★记录所有反馈(谁提了什么) + 虚心(&quot;感谢建议,我回去试试&quot;非辩解)
+汇报后: 反馈分类→必采纳(切中要害)/可参考/存疑→据反馈改进实验/论文
+        重要建议可后续找提出者深入请教(加深合作)
+→ 全组反馈是宝贵的免费咨询,认真对待。
+
+【社交加深关系要点】
+· 参加实验室社交活动(聚餐/运动等),工作之外相处
+· ★加深关系: 从&quot;工作伙伴&quot;到&quot;朋友&quot;,融入更深
+· 真诚、热情、不功利(关系是真诚相处出来的)
+· 好关系=沟通轻松+合作顺畅+未来联系紧
+★★远程: 线上交流/视频/群里互动维护关系(虽不如线下)。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · M16 硬交付进度追踪器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本对照 M16 的 6 项硬交付，追踪访问期间的整体进度——看哪些达成、哪些还差，确保 M16 收官时所有硬交付到位。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># m16_deliverable_tracker.py —— M16 硬交付进度追踪器</span>
+<span class="n">M16_deliverables</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;融入团队(认识所有成员+≥2次组会)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;已认识全组+参加多次组会&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;空天院数据实验结果(baseline+your method)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;完整benchmark做扎实&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;组会汇报≥1次(30min)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;W64或W65组会日做&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;找到≥1个具体合作点&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;W63已确定并启动&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;周报×4(每周日发送)&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;W61-W64各1份=4份达成&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;博士课题未断档&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;每天1h维护,未断档&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== M16 硬交付进度 ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">])</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">mark</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;⏳&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mark</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     → </span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">done</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">M16 硬交付: </span><span class="si">{</span><span class="n">done</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">pct</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="n">todo</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">todo</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;还差：&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">todo</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">→ W65 收官前补齐(尤其组会30min汇报)。&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎉 M16 硬交付全部达成！可写 M16 月度复盘、准备 M17。&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">track</span><span class="p">(</span><span class="n">M16_deliverables</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>=== M16 硬交付进度 ===
+
+✅ 融入团队(认识所有成员+≥2次组会)
+     → 已认识全组+参加多次组会
+✅ 空天院数据实验结果(baseline+your method)
+     → 完整benchmark做扎实
+⏳ 组会汇报≥1次(30min)
+     → W64或W65组会日做
+✅ 找到≥1个具体合作点
+     → W63已确定并启动
+✅ 周报×4(每周日发送)
+     → W61-W64各1份=4份达成
+✅ 博士课题未断档
+     → 每天1h维护,未断档
+
+M16 硬交付: 5/6 = 83%
+还差：
+  - 组会汇报≥1次(30min)
+
+→ W65 收官前补齐(尤其组会30min汇报)。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把 M16 的 6 项硬交付状态填进去，脚本算出进度并列出“还差什么”。示例 83%——融入团队、空天院数据实验结果、合作点、周报×4、博士未断档都达成，只差组会 30min 汇报（W64 或 W65 做）。它把“M16 收官还差什么”一目了然，确保 M16 月复盘时所有硬交付到位。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D442（baseline 对比 + 论文加空天院结果）</strong></p>
+<ol>
+<li>完整 benchmark 的 baseline 对比为什么要“公平”？怎么公平？</li>
+<li>论文加入空天院数据结果有什么意义（强证据 + 为署名打基础）？</li>
+</ol>
+<p><strong>D443（消融 + 更新 Experiment）</strong></p>
+<ol>
+<li>在空天院数据上做消融为什么“复用前几篇框架零成本”？</li>
+<li>怎么把空天院结果整合进 Experiment 章？</li>
+</ol>
+<p><strong>D444（可视化 + ★ 讨论署名）</strong></p>
+<ol>
+<li>★ 怎么得体地和老师讨论空天院署名？为什么“署名是合作的自然结果，不是索取”？</li>
+<li>可视化为什么要诚实（含困难案例）？</li>
+</ol>
+<p><strong>D445（benchmark 收尾 + 可能 30min 汇报）</strong></p>
+<ol>
+<li>★ 30min 组会汇报重点讲什么？为什么要记录所有反馈、虚心应对？</li>
+<li>完整 benchmark 收尾要覆盖什么（baseline/消融/可视化）？</li>
+</ol>
+<p><strong>D446（Experiment 定稿 + ★ 社交）</strong></p>
+<ol>
+<li>Experiment 章整体定稿怎么整合（公开 + 空天院数据=更全面验证）？</li>
+<li>★ 为什么要参加社交活动加深关系？真诚相处什么意思？</li>
+</ol>
+<p><strong>D447（实验集中日 + 论文）</strong></p>
+<ol>
+<li>实验集中日补 benchmark 什么缺口？为什么利用周末？</li>
+<li>怎么平衡实验和论文？</li>
+</ol>
+<p><strong>D448（复盘 + 周报×4 + 计划 W65）</strong></p>
+<ol>
+<li>★ M16 硬交付的 6 项是什么？W64 周报达成了哪项（周报×4）？</li>
+<li>W65（M16 收官）要做什么（实验深化 + 论文 + GitHub 维护 + ★ M16 月复盘）？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>baseline 对比不公平</td>
+<td>强行赢</td>
+<td>★ 公平对比（相同条件+baseline合理配置）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>baseline 太少</td>
+<td>不充分</td>
+<td>多个有代表性的 baseline</td>
+</tr>
+<tr>
+<td>3</td>
+<td>访问结果不加进论文</td>
+<td>白做</td>
+<td>★ 加进论文（新增强证据）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>空天院结果孤立不整合</td>
+<td>验证不全面</td>
+<td>和已有实验整合（公开+真实数据）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>消融框架从零写</td>
+<td>慢</td>
+<td>★ 复用前几篇框架（零成本）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>不讨论署名</td>
+<td>错失合作论文</td>
+<td>★ 得体地讨论</td>
+</tr>
+<tr>
+<td>7</td>
+<td>强求署名</td>
+<td>不尊重</td>
+<td>基于真实贡献+尊重老师+不强求</td>
+</tr>
+<tr>
+<td>8</td>
+<td>署名乱挂不遵循规范</td>
+<td>违学术规范</td>
+<td>遵循规范+老师意见</td>
+</tr>
+<tr>
+<td>9</td>
+<td>只展示正面案例</td>
+<td>不诚实</td>
+<td>★ 诚实可视化（含困难/失败案例）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>汇报不记录反馈</td>
+<td>错失建议</td>
+<td>★ 记录所有反馈+虚心</td>
+</tr>
+<tr>
+<td>11</td>
+<td>不参加社交</td>
+<td>关系停在工作</td>
+<td>★ 参加、真诚加深关系</td>
+</tr>
+<tr>
+<td>12</td>
+<td>占太多公共 GPU</td>
+<td>违规</td>
+<td>按团队分配规则用</td>
+</tr>
+<tr>
+<td>13</td>
+<td>benchmark 有缺口</td>
+<td>不完整</td>
+<td>补齐 baseline/消融/可视化</td>
+</tr>
+<tr>
+<td>14</td>
+<td>周报断了（M16要×4）</td>
+<td>没汇报节奏</td>
+<td>每周日发(W61-W64=4份)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>★ 忘记博士课题维护</td>
+<td>断档惹导师</td>
+<td>★ 每天 1h 雷打不动</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>🎉 W64 收尾 · 完整 benchmark + 论文加空天院结果 + 讨论署名完成！</strong> 你完成了访问的第四周——把访问的工作“做成可发表的成果、争取合作署名”。这一周，你 ★ <strong>把核心实验做成了完整 benchmark</strong>——baseline 对比（公平）、消融（复用框架）、可视化（诚实含困难案例）、结果分析，做成了一套扎实、完整、可发表的结果（M16 硬交付的“空天院数据实验结果”做到位）。你 ★ <strong>把空天院数据结果写进了论文</strong>——更新了 Experiment 章、和已有实验整合成更全面的验证。而 W64 真正的里程碑，是 ★ <strong>你和老师/师兄讨论了是否可挂空天院署名</strong>——基于你的真实贡献和合作、得体地提、尊重老师的判断。★★ 一篇有空天院署名的合作论文，是访问最实质的成果，也是你和目标团队建立实质合作关系的证明。如果有组会，你也做了 30min 正式汇报、收集了反馈。你还 ★ 参加了实验室的社交活动加深关系（好的关系让合作更顺、连接更深），守住了 ★ 每天 1h 维护博士课题、发出了第 4 份周报（M16 硬交付周报×4 达成）。</p>
+</blockquote>
+<blockquote class="quote">
+<p>★ <strong>这一周的关键，是把“访问的工作”沉淀为“实质的成果和连接”</strong>——完整 benchmark 是硬证据、论文加空天院结果是把工作写进可发表的载体、讨论署名是争取合作论文（访问最实质的成果）、社交是加深关系。这些加起来，让你的访问不只是“来做了一段研究”，而是“和空天院建立了实质的合作、产出了共同的成果”——这正是你从 W48 第一封冷邮件一路走来，最想抵达的地方。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>W64（完整 benchmark + 论文 + 讨论署名）完成</strong> ✅ —— 你做成了完整 benchmark、把空天院结果写进论文、讨论了合作署名、加深了关系、守住了博士线和周报节奏。<strong>下一程：W65（M16 收官）——实验深化 + 论文写作 + GitHub 远程维护 + ★ M16 月度复盘（对照 M16 硬交付 6 项）。</strong> 带着这份可发表的成果和实质的合作，把 M16（暑期访问前半）走向收官——一篇空天院合作论文，已在眼前。</p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p></section>
+<div class="pager"><a class="prev" href="w63.html"><span class="dir">← 上一篇</span><span class="nm">W63 核心实验深化 + 合作深化</span></a><a class="next" href="w65.html"><span class="dir">下一篇 →</span><span class="nm">W65 实验深化 + 论文写作 + GitHub</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d442">D442 周一</a><a class="sub" href="#d442-am">上午 团队协作 + 完整 benchm</a><a class="sub" href="#d442-noon">中午 benchmark 推进 + 论</a><a class="sub" href="#d442-pm">晚上 论文（更新 Experiment</a><a href="#d443">D443 周二</a><a class="sub" href="#d443-am">上午 团队协作 + 完整 benchm</a><a class="sub" href="#d443-noon">中午 benchmark + 论文更新</a><a class="sub" href="#d443-pm">晚上 论文写作 + 博士维护 1h</a><a href="#d444">D444 周三</a><a class="sub" href="#d444-am">上午 ★ 与老师/师兄讨论是否可挂空天</a><a class="sub" href="#d444-noon">中午 完整 benchmark：可视化</a><a class="sub" href="#d444-pm">晚上 论文写作 + 博士维护 1h</a><a href="#d445">D445 周四</a><a class="sub" href="#d445-am">上午 团队协作 +（可能）★ 30mi</a><a class="sub" href="#d445-noon">中午 完整 benchmark 收尾</a><a class="sub" href="#d445-pm">晚上 论文 Experiment 章完</a><a href="#d446">D446 周五</a><a class="sub" href="#d446-am">上午 团队协作 + 论文 Experi</a><a class="sub" href="#d446-noon">中午 论文进展 + 据组会反馈改进</a><a class="sub" href="#d446-pm">晚上 ★ 社交（实验室聚餐/运动）+ </a><a href="#d447">D447 周六</a><a class="sub" href="#d447-am">上午 实验集中（benchmark 做</a><a class="sub" href="#d447-noon">中午 实验分析 + 论文推进</a><a class="sub" href="#d447-pm">晚上 实验收尾 + 博士维护 1h</a><a href="#d448">D448 周日</a><a class="sub" href="#d448-am">上午 周复盘 W64</a><a class="sub" href="#d448-noon">中午 周报（第 4 份）+ 署名讨论进</a><a class="sub" href="#d448-pm">晚上 计划 W65（实验深化 + 论文</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

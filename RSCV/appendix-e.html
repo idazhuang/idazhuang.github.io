@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="" data-stage="1" data-week="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>附录 E · 月度复盘模板 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="index.html">首页</a><a class="hide-sm" href="calendar.html">进度地图</a><a class="hide-sm" href="guide.html">使用指南</a><a class="hide-sm" href="glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="index.html">首页</a><span>›</span><span class="chip">附录</span></div><h1 class="title">附录 E · 月度复盘模板</h1><p class="subtitle">全书引用 169 次却不存在的那份模板 —— 24 个月通用</p></div>
+<div class="note"><b>这份模板原本应该在「附录 E」</b>　全书正文引用它 <b>169 次</b>，但原资料里没有任何附录。这里补齐。配套讲解见 <a href="week/w4.html">W4 · D28</a>。</div>
+<h2 id="tpl-e">月度复盘模板</h2>
+<figure class="code" data-lang="markdown"><pre><code># M__ 月度复盘（20XX-XX-XX）
+
+&gt; 用法：每个月的最后一天做，2 小时，不要拆开。
+&gt; ★ 月复盘和周复盘的根本区别：周复盘问&quot;我做完了吗&quot;（战术），
+&gt;   月复盘问&quot;我做的方向对不对、还能不能持续&quot;（战略）。
+
+## 第一部分 · 事实盘点（30 分钟，只写可验证的）
+
+### 1.1 交付物清单
+| 类型 | 本月产出 | 数量 | 累计 |
+|------|----------|------|------|
+| 论文笔记 | | | |
+| 跑通的实验 | | | |
+| 写出的脚本/工具 | | | |
+| 文档（报告/总结/卡片） | | | |
+| idea 池条目 | | | |
+
+### 1.2 计划完成度
+| 周 | 计划主题 | 实际完成 | 达成率 | 溢出到哪 |
+|----|----------|----------|--------|---------|
+
+### 1.3 时间去哪了（★ 诚实）
+| 类别 | 估计小时数 | 占比 | 我满意吗 |
+|------|-----------|------|---------|
+| 读论文 | | | |
+| 写代码/跑实验 | | | |
+| **环境/调试等&quot;非生产性&quot;时间** | | | ← 这一项超过 30% 要警惕 |
+| 写作/整理 | | | |
+
+## 第二部分 · 四个战略问题（60 分钟，这是月复盘的核心）
+
+### Q1. 我一个月前 vs 现在，能力差在哪？
+（要具体到&quot;从不会 X 到会 X&quot;，不要写&quot;进步很大&quot;）
+- 一个月前我不会：
+- 现在我能独立做到：
+- ★ 最关键的一项能力跃迁是：
+
+### Q2. 我的方向判断变了吗？
+- 月初我以为我会做：
+- 现在我倾向于：
+- 改变的原因是（★ 必须是具体的经历，不是感觉）：
+- 我还需要什么信息才能最终决定：
+
+### Q3. 我的节奏可持续吗？
+| 检查项 | 状态 | 说明 |
+|--------|------|------|
+| 睡眠 | 🟢/🟡/🔴 | |
+| 连续性（有没有断档超过 3 天） | | |
+| 情绪（有没有出现&quot;不想打开电脑&quot;） | | |
+| ★ 如果按这个节奏再走 3 个月，我会垮吗 | | |
+
+（★ 这一项是&quot;透支垮掉&quot;的保险。红灯就必须调整下个月的计划强度，
+  而不是靠意志硬扛。）
+
+### Q4. 我有没有在错误的方向上过度投入？
+- 本月投入最多时间的是：
+- 它对我的最终目标（毕业/论文/求职）的贡献是：
+- ★ 如果这件事完全没做，我会损失什么？（答&quot;没什么&quot;就要止损）
+- 下个月我要**减少**投入的是：
+
+## 第三部分 · 资产盘点（15 分钟）
+
+### 3.1 知识库体检
+- [ ] 论文笔记是否每篇都有第 4 段（启发）
+- [ ] `待查清单.md` 还剩几条未清
+- [ ] `待做idea.md` 有几条，其中有&quot;证据+对照组&quot;的有几条
+- [ ] 代码是否都能重跑（随机抽一个跑跑看）
+- [ ] 实验是否都记了完整协议（数据/split/指标/硬件）
+
+### 3.2 可对外展示的资产
+（简历上能写的、GitHub 上能放的、汇报能讲的）
+-
+
+## 第四部分 · 下月计划（15 分钟）
+
+### 4.1 下月的一个主目标（只写一个）
+-
+
+### 4.2 三个可验收的里程碑
+| 周 | 里程碑 | 怎么验收 |
+|----|--------|---------|
+
+### 4.3 基于本月教训要做的调整
+- 要开始做：
+- 要停止做：
+- 要继续做：
+
+## 一句话总结本月
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<div class="pager"><a class="prev" href="appendix-d.html"><span class="dir">← 上一篇</span><span class="nm">附录 D · 冷邮件模板</span></a><a class="next" href="glossary.html"><span class="dir">下一篇 →</span><span class="nm">全书术语表</span></a></div>
+
+    </div>
+  </main>
+  <aside class="outline"><div class="oh">本页目录</div><a href="#tpl-e">月度复盘模板</a></aside>
+</div>
+<script src="assets/nav-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

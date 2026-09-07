@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="9">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W9 · 找 Gap —— 从“读别人的”正式转向“做自己 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M3 选方向读穿</span><span>·</span><span>Week 9</span><span>·</span><span>D57–D63</span></div><h1 class="title">找 Gap —— 从“读别人的”正式转向“做自己的”</h1><p class="subtitle">「教-学-做」带教版（加厚版）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="57" data-k="am" title="D57 上午段"></i><i data-d="57" data-k="noon" title="D57 中午段"></i><i data-d="57" data-k="pm" title="D57 晚上段"></i></span><span class="sday"><i data-d="58" data-k="am" title="D58 上午段"></i><i data-d="58" data-k="noon" title="D58 中午段"></i><i data-d="58" data-k="pm" title="D58 晚上段"></i></span><span class="sday"><i data-d="59" data-k="am" title="D59 上午段"></i><i data-d="59" data-k="noon" title="D59 中午段"></i><i data-d="59" data-k="pm" title="D59 晚上段"></i></span><span class="sday"><i data-d="60" data-k="am" title="D60 上午段"></i><i data-d="60" data-k="noon" title="D60 中午段"></i><i data-d="60" data-k="pm" title="D60 晚上段"></i></span><span class="sday"><i data-d="61" data-k="am" title="D61 上午段"></i><i data-d="61" data-k="noon" title="D61 中午段"></i><i data-d="61" data-k="pm" title="D61 晚上段"></i></span><span class="sday"><i data-d="62" data-k="am" title="D62 上午段"></i><i data-d="62" data-k="noon" title="D62 中午段"></i><i data-d="62" data-k="pm" title="D62 晚上段"></i></span><span class="sday"><i data-d="63" data-k="am" title="D63 上午段"></i><i data-d="63" data-k="noon" title="D63 中午段"></i><i data-d="63" data-k="pm" title="D63 晚上段"></i></span></div></div>
+
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的位置</strong>:M1–M2 你在“输入”（读、复现、选方向）。从 M3 起，你<strong>正式开始产出原创研究</strong>。第一步、也是决定论文价值的一步：<strong>找到一个真正的 Gap</strong>（别人没做好/没做的具体问题），并用极小成本快速验证“这个方向有没有戏”。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会“Gap Analysis”——从文献中系统地发现未解决的问题。
+<strong>诚实校准（本周反复用）</strong>：你要找的 Gap 必须是 <strong>“小而硬、1 张 4090 能验证、9 个月能做出”</strong> 的。凡是“需要海量数据/算力才能填”的 Gap（如“训一个更大的多模态底座”），对你都是<strong>陷阱 Gap</strong>，本周的“穷人验证”会把它们筛掉。
+<strong>本周读法说明</strong>：这一周是从“读”到“做”的惊险一跳，很多新手在这里卡很久——所以本周教得<strong>特别细</strong>，每个步骤都给可对照的样例和“卡住怎么办”的决策树。</p>
+</blockquote>
+<hr />
+<h2>🧭 W9 总览：找 Gap 的漏斗（每一层都过一遍）</h2>
+<figure class="code" data-lang="text"><pre><code>W8 的 A 级论文 Limitation / Future Work（原料,≥10 条）
+        │  配通用 CV 现成解法（你的独特优势）
+        ▼
+10+ 条「局限性—解决思路」对照表
+        │  查重（Google Scholar / Connected Papers）
+        ▼
+去重后的候选思路（排除&quot;已被做过&quot;的）
+        │  成功路径预演 + 实验成本评估（对 4090 诚实）
+        ▼
+Top 5（评分表）
+        │  找人当审稿人挑刺（动机够不够强?）
+        ▼
+3 个候选
+        │  toy 实验验证&quot;有没有信号&quot;
+        ▼
+进入 W10 三选一</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>本周每天的时间分配建议</strong>（沿用你计划的三段）：上午 1.5h（最需动脑的“想”放这）、中午 1h（轻量整理/调研）、晚上 2.5h（写方案/跑 toy）。</p>
+<hr />
+</section>
+<article class="day" id="d57" data-d="57"><header class="day-head"><span class="dnum">D57</span><h2 class="day-t">周一 · 从 Limitation 里挖 Gap + 配通用 CV 解法</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天是“找题”的第一天。新手最大的误区是“凭空想一个很酷的 idea”——<strong>别</strong>。今天教你一个<strong>稳、不靠灵感</strong>的方法：从论文作者<strong>自己承认的不足</strong>里挖 Gap，再用你的通用 CV 优势去补。</p>
+<p><strong>预期管理</strong>：今天正式从“读”转向“做”——开始找你自己的研究 Gap。提醒：别凭空想“酷 idea”（多半要么被做过要么不是真问题），今天用最稳的方法——从 A 级论文自己写的 Limitation/Future Work 里挖 Gap。关键是“抓本质而非现象”（写出“为什么有这个问题”），写不出本质说明还没真读懂，回去再看。这是从“读者”到“作者”惊险一跳的第一步，慢一点、扎实一点。</p>
+</blockquote>
+</div><section class="slot" id="d57-am" data-d="57" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D57 上午段"><span class="slot-tag">上午段·1.5h</span><h3 class="slot-t">从 A 级论文的 Limitation/Future Work 挖出 ≥10 条 Gap</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（假设你第一次听说“Gap”）</h4><div class="blk-b"><ul>
+<li><strong>Gap = 现有方法的不足 / 未解决的问题</strong>。一篇科研论文的 Introduction，本质就在回答三句话：<strong>前人做了什么 → 还没做什么(=Gap)→ 我来做这个</strong>。所以<strong>Gap 就是你整篇论文存在的理由</strong>；你论文的价值 ≈ 你填的这个 Gap 有多大、多硬、多少人在乎。</li>
+<li><strong>最稳、最不容易“想当然”的 Gap 来源</strong>，是 A 级论文自己写的 <strong>Limitation（局限）</strong> 和 <strong>Future Work（未来工作）</strong>——这是作者亲口承认“我们还没解决的”。你站在他们的肩膀上，顺着他们指的方向走，比自己拍脑袋安全得多。</li>
+<li>为什么现在做：你 W8 已经把这个方向的 A 级论文读穿了，手里有 ~10 篇笔记和每篇的“第 4 段（启发/没解决）”——今天就是把这些“没解决的”系统地汇成一张表。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>打开你 W8 写的所有 A 级论文笔记，逐篇翻到它的 <strong>Limitation / Future Work</strong> 段落（在论文里通常在 Conclusion 附近，或单独一节）。</li>
+<li>新建 <code>10-论文笔记/{方向}_Gap表.md</code>，建一张表，逐条把局限性抄进去，<strong>每条 1 句话 + 标注出处</strong>。要求 <strong>≥10 条</strong>。</li>
+<li>表头用这五列:<code>编号 | 局限性(1句话) | 出自哪篇 | 这个问题的本质是什么 | 严重程度(高/中/低)</code>。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子（给你一个真实示例，照着填）</h4><div class="blk-b"><blockquote class="quote">
+<p>以“遥感旋转目标检测”方向为例，你的 Gap 表可能长这样（<strong>这是示范，你要填你自己方向的</strong>）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>局限性</th>
+<th>出自</th>
+<th>本质</th>
+<th>严重程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G1</td>
+<td>密集排列的小目标（如停车场的车）易漏检/粘连</td>
+<td>Oriented R-CNN</td>
+<td>小目标特征在下采样后丢失 + 框重叠</td>
+<td>高</td>
+</tr>
+<tr>
+<td>G2</td>
+<td>跨数据集（A 训 B 测）性能大幅下降</td>
+<td>ReDet</td>
+<td>域差异、传感器差异未建模</td>
+<td>高</td>
+</tr>
+<tr>
+<td>G3</td>
+<td>角度回归在 0°/180° 边界不稳定</td>
+<td>Gliding Vertex</td>
+<td>角度的周期性导致回归不连续</td>
+<td>中</td>
+</tr>
+<tr>
+<td>G4</td>
+<td>标注成本高，全监督依赖大量旋转框标注</td>
+<td>DOTA 系</td>
+<td>旋转框标注比水平框贵得多</td>
+<td>高</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>合格标准</strong>:≥10 行；每行能溯源到具体论文；“本质”列写出“为什么会有这个问题”（不是只重复现象）。<strong>写不出“本质”= 你还没真正读懂这个 Gap，回去再看那篇论文的相关段落。</strong></p>
+</blockquote>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>凭空想 Gap、不从 Limitation 挖</strong>：新手最爱“我觉得 XX 会很酷”——但你“觉得”的往往要么早被做过、要么根本不是真问题。<strong>先从作者自陈的不足挖</strong>，这是有据可依的起点。</li>
+<li><strong>只抄现象、不写本质</strong>：“小目标检测不好”是现象；“小目标特征在下采样后丢失”才是本质。<strong>只有抓住本质，后面才知道往哪改</strong>。</li>
+<li><strong>贪多凑数、每条都很泛</strong>:10 条具体的 &gt; 30 条空泛的。宁可少而准。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><ul>
+<li>某篇论文<strong>没写 Limitation/Future Work</strong>?→ 看它实验表里<strong>哪一类样本/哪个数据集上它掉点最多</strong>，那就是它的隐藏局限；或问自己“它在什么极端条件下会失效”。</li>
+<li>10 条凑不齐?→ 把每篇 A 级论文的“未来工作”逐条拆开（一篇常提 2-3 个方向），很快超过 10 条。</li>
+<li>不确定某条算不算“真 Gap”?→ 今天先全收进来，标“待核实”，明天 D58 查重时再判断真假。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>从文献系统性地挖 Gap</strong>（而非拍脑袋），并养成“抓本质而非现象”的习惯。这是写出有说服力 Introduction 的源头——你未来每篇论文的“立论”都从这一步来。<strong>做了</strong>（≥10 条 Gap 表）、<strong>学了</strong>（Gap 的定义、Limitation 是最稳的 Gap 来源）、<strong>会了</strong>（从论文自陈不足里提炼“可做的问题”并写清其本质）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜挖 Gap 三步</strong>:① 翻 A 级论文的 Limitation/Future Work → ② 一句话记下局限 + 出处 → ③ 追问“它的本质/根因是什么”(本质 = 你后面改进的着力点)。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>覆盖</strong>：W9（找 Gap）、W10（穷人验证 + Proposal，<strong>原文称“整个奠基期最关键的一周”</strong>）、W11（实验框架 + 第一组对比）、W12（消融 + go/no-go）。</p>
+<p><strong>M3 和前面的模块本质不同</strong>：W1–W8 你在学别人的东西，<strong>M3 开始你要产出自己的东西并判断它有没有用</strong>。这里最容易出的错不是“做不出来”，而是<strong>“做出来了，但你误以为它有用”</strong>。</p>
+<p><strong>★ 这一页补的四个硬缺口</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>缺口</th>
+<th>原文怎么说</th>
+<th>缺什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>显著性判定</strong></td>
+<td>W12-D79“A1 结果分析（并判断显著性）”</td>
+<td><strong>完全没说怎么判断</strong>。+0.4 mAP 算不算提升？没有标准</td>
+</tr>
+<tr>
+<td><strong>随机性固定</strong></td>
+<td>W11 给了 <code>--seed $seed</code></td>
+<td><strong>没给 <code>set_seed()</code> 本身</strong>，少一行就复现不了</td>
+</tr>
+<tr>
+<td><strong>toy 实验设计</strong></td>
+<td>W9-D61“评估候选 1 的最小可行实验”</td>
+<td>没说什么叫“最小”、怎么设计</td>
+</tr>
+<tr>
+<td><strong>go/no-go 标准</strong></td>
+<td>W12-D84“方法有正信号吗？能继续吗？”</td>
+<td><strong>没有判定标准</strong>，全凭感觉</td>
+</tr>
+</tbody>
+</table></div>
+</blockquote>
+<hr />
+<h5 id="18m3md0-1">第一部分 · W9 找 Gap</h5>
+<h6 id="18m3md0-2">★ 从 Limitation 挖 Gap：三个层次（原文只说“挖 ≥10 条”）</h6>
+<p>不是所有 Limitation 都能变成好 Gap。<strong>按可做性分三层</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>长什么样</th>
+<th>例子</th>
+<th>对你</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1 · 作者明说的</strong></td>
+<td>Conclusion 里的 “Future Work”</td>
+<td>“我们的方法在小目标上仍有不足”</td>
+<td>✅ 最容易找，但<strong>别人也都看得到，竞争最激烈</strong></td>
+</tr>
+<tr>
+<td><strong>L2 · 实验暴露的</strong></td>
+<td>论文表格里某一列明显低，作者没解释</td>
+<td>per-class AP 里 bridge 特别低</td>
+<td>✅ <strong>最适合你</strong>——要读表才能发现，多数人不读表</td>
+</tr>
+<tr>
+<td><strong>L3 · 默认假设</strong></td>
+<td>全领域都默认成立、但可能不成立的前提</td>
+<td>都假设训练和测试同分布；都假设有充足算力</td>
+<td>⚠️ 最有价值，也最难，<strong>但一旦成立就是大文章</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 你的优势在 L2。</strong> 因为你 W2 亲手跑过 baseline、看过 per-class AP、做过消融——<strong>你有别人没有的“自己的实验观察”</strong>。</p>
+<p><strong>具体动作</strong>：打开你 W2-D11 的 per-class AP 表和 <code>待做idea.md</code>，<strong>把里面每一条实验观察，去 A 级论文里找对应的讨论</strong>。找不到讨论的，就是 L2 型 Gap。</p></div></section></section><section class="slot" id="d57-noon" data-d="57" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D57 中午段"><span class="slot-tag">中午段·1h</span><h3 class="slot-t">给每条 Gap 配“通用 CV 里的现成解法”（≥5 条可迁移）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>你这个人<strong>最独特的优势，是通用 CV 的积累</strong>（你转型前的底子 + M1–M2 学的通用视觉知识）。遥感圈很多人不熟通用 CV 最新进展；而你能把“通用 CV 里已经验证有效、但还没进遥感”的招数搬过来。<strong>“遥感的 Gap × 通用 CV 的现成解法”= 别人不容易做、你却能做的题</strong>。这正是你“通用 CV 巧技嫁接”这条发力线的具体操作。</p>
+<ul>
+<li><strong>为什么这是转型者最强的找题姿势</strong>：纯遥感背景的研究者，熟悉遥感但可能不了解通用 CV 的最新进展；纯 CV 背景的人，熟悉通用方法但不懂遥感的真问题。<strong>而你两边都沾——既通过 M1-M2 了解了遥感的 Gap，又有通用 CV 的底子</strong>。这个“交叉地带”正是你的甜区：你能看到“通用 CV 里有个好方法，正好能治遥感的某个痛点，但还没人这么做”——这种题别人不容易想到（单边背景的人看不全），你却能做。<strong>别浪费你这个跨领域的独特优势</strong>。</li>
+<li><strong>怎么具体操作（可复制的动作）</strong>:① 拿一条遥感 Gap（如“跨域掉点”）;② 在脑子里过一遍通用 CV 的“工具箱”（域自适应、测试时适配、对比学习、自监督、LoRA、半监督、各种注意力机制……）——问“哪个能治这条 Gap”;③ 搜 <code>通用CV方法名 + remote sensing</code> 确认遥感圈有没有人搬过——<strong>没人搬，就是你的机会</strong>（你做了就是“第一个把 X 引入遥感的”）。这个流程可以对每条 Gap 重复，源源不断产出“嫁接型”选题。</li>
+<li><strong>为什么“通用 CV 有、遥感还少见”的招最值钱</strong>：如果你想到的解法遥感圈已经在用，那就不是你的独特优势了（谁都能做）。<strong>要刻意找“通用 CV 已验证有效、但遥感还没怎么用”的方法</strong>——这种“时间差/信息差”正是你作为跨领域者的红利。通用 CV 发展快，很多好方法还没扩散到遥感，这个窗口期就是你的机会。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 Gap 表里新增一列 <code>可借鉴的通用 CV 解法</code>。逐条想：“通用 CV 里有没有现成方法能缓解这个 Gap?”至少给 <strong>≥5 条</strong> Gap 配上。</p>
+<blockquote class="quote">
+<p>接着上面的示例：</p>
+<ul>
+<li>G1 密集小目标 → 通用 CV 里的“小目标专用检测头 / 高分辨率特征（如 HRNet 思路）/ 查询式检测（DETR 系对密集目标的处理）”。</li>
+<li>G2 跨域下降 → 通用 CV 的“域自适应(domain adaptation)/ 测试时适配(TTA、TENT)”。</li>
+<li>G4 标注贵 → 通用 CV 的“半监督 / 自监督 / 少样本学习”。</li>
+</ul>
+</blockquote>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>≥5 条 Gap 旁边写清“通用 CV 里有 XX 方法可借鉴（它原本解决什么、为什么可能迁过来）”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 写的&quot;解法&quot;太笼统（&quot;用深度学习&quot;）→ 要具体到某类方法/某个代表工作;② 只想到遥感圈已经在用的招（那就不是你的独特优势了）——尽量想<strong>通用 CV 有、遥感还少见</strong>的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>想不出通用 CV 解法?→ 回顾你 M2 读过的通用视觉概念（注意力、对比学习、LoRA、半监督…），逐个问“它能不能治这条 Gap”；或搜 “通用CV方法名 + remote sensing” 看有没有人搬过(没人搬 = 你的机会)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>用“优势×真问题”的交叉找题</strong>——这是跨领域转型者最强的找题姿势（你比纯遥感背景的人多了一整套通用 CV 弹药）。</p>
+</div></section></section><section class="slot" id="d57-pm" data-d="57" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D57 晚上段"><span class="slot-tag">晚上段·2.5h</span><h3 class="slot-t">给 10 条 Gap 各配一个“解决思路雏形”（2–3 句）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>有了 Gap + 可借鉴解法，现在把它们捏成“思路雏形”——用 2-3 句话说“我打算怎么做”。这还不是完整方法，只是“如果做，大概往哪个方向”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>Gap 表再加一列 <code>解决思路雏形(2-3句)</code>。逐条写，<strong>句式</strong>：“针对【Gap】，借鉴【通用 CV 解法】，我打算【具体做法】，预期【效果】。”</p>
+<blockquote class="quote">
+<p>示例：“针对密集小目标漏检(G1)，借鉴通用 CV 的高分辨率特征思路，我打算在检测头前加一个轻量高分辨率分支专门保留小目标特征，预期在 small-vehicle 类上提升 AP。”</p>
+</blockquote>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>10 条 Gap 都有 2-3 句的思路雏形，每条能让人看懂“你想干嘛”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑（★校准）</h4><div class="blk-b"><p>思路雏形清一色“做更大的模型/用更多数据”——你做不了，这些会在后面被筛掉，别浪费。<strong>优先写“小而巧”的思路</strong>（加个轻量模块、换种表示、引入一个通用 CV 技巧、做个评测）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某条 Gap 想不出思路?→ 跳过，标“暂无思路”;10 条里有 6-7 条有思路就够进下一步。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把&quot;别人没解决的问题&quot;转化成了&quot;我可能怎么解决的思路&quot;——完成了从&quot;读者&quot;到&quot;潜在作者&quot;的视角切换。<strong>做了</strong>（带思路雏形的 Gap 表）、<strong>学了</strong>（&quot;优势×Gap→思路&quot;的造题公式）、<strong>会了</strong>（把抽象 Gap 落成具体可做的思路方向）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 局限性—思路对照表（≥10 条，含“通用 CV 解法”列 + “思路雏形”列）。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜造题公式（转型者最强姿势）</strong>:<code>你独有的东西(通用 CV 积累)× 遥感里一个真问题(Gap)= 别人不容易做、你却能做的题</code>。遥感圈很多人不熟通用 CV 最新进展；你把“通用 CV 已验证有效、但还没进遥感”的招搬过来填遥感的 Gap，天然差异化。搜 <code>通用CV方法名 + remote sensing</code>，没人搬=你的机会。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D57</summary><textarea data-note="d57" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d58" data-d="58"><header class="day-head"><span class="dnum">D58</span><h2 class="day-t">周二 · 查重（这个 idea 是不是已经被做过了）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote">
+<p>想到 idea 后，<strong>第一件事不是兴奋，是查重</strong>。新手最痛的经历就是：闷头做了三个月，投稿前发现去年已经有人发过一模一样的。今天教你怎么高效查重、怎么判断“撞车了”还是“还有空间”。</p>
+</blockquote>
+<blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天做查重——想到 idea 先别兴奋，先确认没人做过（避免白干三个月）。提醒：查重有三态——“一模一样→弃”、“类似但不同→好（有空间，记下差异点）”、“完全没人→警惕陷阱再验证”。中英文都要搜（顶会多英文）；看到“类似”别慌着放弃，类似恰恰说明方向对、你有差异化空间。</p>
+</blockquote>
+</div><section class="slot" id="d58-am" data-d="58" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D58 上午段"><span class="slot-tag">上午段·1.5h</span><h3 class="slot-t">逐个思路在 Google Scholar 查重</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li>查重 = 确认“你的 idea 是不是已经有人做了”。<strong>怎么判断结果</strong>：
+<ul>
+<li>找到<strong>一模一样</strong>的论文（同任务+同方法+同模态）→ 这个 idea <strong>放弃</strong>（或必须找到明确的差异点）。</li>
+<li>只找到<strong>“类似但不完全一样”</strong>的 → <strong>很好</strong>！说明这方向有人关注（证明它重要、不是冷门死路），但还有空间让你做得更好/不同。</li>
+<li><strong>完全没人做</strong> → 别急着狂喜，可能是真空白（机会），也可能是“没意义/做不动”的陷阱（回想 M1 学的真假空白），今晚要进一步判断。</li>
+</ul>
+</li>
+<li><strong>为什么“查重”是动手前的保命动作</strong>：科研最痛的不是“做不出”，而是“做出来了才发现别人去年发过一模一样的”——几个月白费。<strong>查重花半天，能省你几个月</strong>，是性价比最高的一步。养成“想到 idea 先查重、别先兴奋着手”的习惯。</li>
+<li><strong>为什么“类似但不同”反而是最好的结果（反直觉，但重要）</strong>：新手看到“有人做过类似的”会慌、想放弃——这是错的。<strong>“有类似工作”恰恰证明了三件好事</strong>:① 这个方向是真问题（有人愿意花精力做、能发表）;② 它不是无人问津的死胡同（有受众）;③ 而“类似但不完全一样”说明还有空间——你可以做得更好、用不同的角度、解决他们没解决的子问题。<strong>真正可怕的是“完全没人做”</strong>（可能是陷阱）和“一模一样”（撞车），而“类似”是甜区。记得把“最相关的已有工作”链接存下来，写论文的 Related Work 和“讲清自己的差异点”时正好用。</li>
+<li><strong>为什么“完全没人做”要先警惕而非狂喜</strong>：一个看起来“全新、没人碰”的方向，要先问“为什么没人做？”——可能是真空白（确实是好机会，大家还没注意到），但更可能是陷阱:① 这问题其实没意义/没人在乎;② 它需要海量数据/算力，普通人做不动（只有巨头能做）;③ 它有隐藏的、大家都知道的死结。<strong>回想 M1 学的真假空白三标准（小而硬/单卡可做/有人在乎）</strong>，用它筛——三个都满足才是真机会。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>对每个有思路的 Gap，在 <strong>Google Scholar</strong> 搜:<code>你的方法关键词 + 遥感/SAR/remote sensing</code>(中英文各搜一遍)。</p>
+<blockquote class="quote">
+<p>示例搜法：G1 的思路 → 搜 “small object rotated detection remote sensing”、“high-resolution feature aerial small object” 等；按时间筛<strong>近 2 年(2024-2025)</strong>，看有没有人做了。</p>
+</blockquote>
+<ul>
+<li>在 Gap 表加一列 <code>查重结论</code>，标：<strong>已被做（弃）/ 类似（可做得更好）/ 没人做（待核实真假）</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>每个有思路的 Gap 都有明确查重结论 + 1-2 篇“最相关的已有工作”链接（留着，后面写 Related Work / 讲差异点要用）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① <strong>只搜中文、只搜一个关键词</strong>→ 漏掉英文同类工作（顶会顶刊多是英文）;② 搜到“类似”就慌着放弃→ 类似不等于撞车，<strong>类似恰恰说明方向对、且你有差异化空间</strong>;③ 看到“完全没人做”就狂喜→ 先怀疑是不是陷阱。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某个 idea 搜出一堆“类似”的，分不清撞没撞→ 用 <strong>Connected Papers / Semantic Scholar</strong> 看那篇的“引用网络”（下午做），能快速看清“这一簇做类似事的论文”，再判断你的差异点够不够。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你掌握了 <strong>idea 查重</strong>这个保命动作，并学会判断“撞车/有空间/真假空白”——这一步省下你未来几个月可能白费的力气。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜查重三态</strong>：一模一样→弃；类似但不同→好（有空间，记下差异点）；完全没人→警惕陷阱，再验证。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d58-noon" data-d="58" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D58 中午段"><span class="slot-tag">中午段·1h</span><h3 class="slot-t">用 Connected Papers / Semantic Scholar 查引用网络</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>Connected Papers / Semantic Scholar</strong> 能把一篇论文的“相关论文网络”可视化——输入一篇，它给出一簇“做类似事”的论文。这比单纯关键词搜更能发现“已经有人做过类似的”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>对每个“类似/没人做”的 idea，把最相关的那篇丢进 Connected Papers，看它周围一簇论文里有没有和你 idea 重合的；把发现的重要相关工作补进 Gap 表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>每个候选 idea 周围的“相关工作簇”摸清，确认没有完全撞车的。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤ 坑与自救</h4><div class="blk-b"><p>工具打不开/需登录→ Semantic Scholar 免费可用；或直接看那篇相关论文的“被引/引用”列表手动找。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会用<strong>引用网络工具</strong>高效摸清“谁做过类似的”——比关键词搜更全面，降低撞车风险。</p>
+<h6 id="18m3md1-1">D58 查重：三个必查的地方（原文说了工具，没说查什么）</h6>
+<p><strong>★ 查重不是“搜一下有没有同名论文”，而是回答三个问题</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>① 这个「问题」有没有人提过？
+   → Scholar 搜问题的描述（不是你的方法名）
+   → 例：&quot;SAR ship detection azimuth robustness&quot;
+
+② 这个「解法」有没有人用过？（哪怕在别的任务上）
+   → 搜解法的通用名 + 任意领域
+   → ★ 常见情况：通用 CV 里早就有，只是没人搬到遥感
+     这不算撞车，反而是好事——但你要在 Related Work 里承认来源
+
+③ 这个「问题+解法」的组合有没有人做过？
+   → 两个关键词一起搜
+   → 只有这一项撞了才是真撞车
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 大多数新手的错误是只做第 ③ 步</strong>，结果要么把已有工作当创新，要么把“通用 CV 已有、遥感没有”误判成撞车而放弃。</p>
+<p><strong>Connected Papers 怎么用</strong>（原文提到但没说）：在 <code>connectedpapers.com</code> 输入一篇核心论文，它会画出这篇周围的引用网络图。<strong>看图上有没有和你想法接近的节点</strong>——比逐个搜关键词高效得多。</p></div></section></section><section class="slot" id="d58-pm" data-d="58" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D58 晚上段"><span class="slot-tag">晚上段·2.5h</span><h3 class="slot-t">排除已做过的 → 得到“去重后候选思路”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>把查重结论是“已被做（弃）”的划掉，剩下“类似（可做更好）+ 没人做（已验证是真空白）”的，就是你的<strong>去重后候选思路池</strong>。<strong>这一步是“安全筛查”</strong>：经过查重，你手里剩下的每条思路都满足“没撞车”——这意味着你后面做它，不会出现“投稿才发现别人做过”的悲剧。<strong>对“没人做”的要格外用真假空白三标准（小而硬/单卡可做/有人在乎）再筛一遍</strong>，把“看似空白实为陷阱”的（如要海量算力的大方向）剔除。最稳的其实是“类似但不同”的那些——有人验证了方向、你又有差异化空间。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 Gap 表里<strong>划掉/标灰</strong>已被做的；对“没人做”的，逐条判断真假空白（问：它是真没人做，还是因为没意义/要海量算力才没人做?）；整理出一份干净的“去重后候选思路”清单。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份去重后的候选清单（通常 5-8 条），每条都“没撞车 + 是真问题 + 单卡可做”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑（★校准）</h4><div class="blk-b"><p>把“完全没人做的大方向”（如“做个更大的遥感基础模型”）当成真空白留下→ 那是巨头的赛道、你的陷阱，划掉。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>去重后候选太少(&lt;3 条)?→ 回 D57 再从 Limitation 多挖几条；或把“类似但不同”的多保留几条（它们其实最稳）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了 idea 的“安全筛查”，手里是一份<strong>没撞车、是真问题、自己能做</strong>的候选池。<strong>做了</strong>（去重后候选清单）、<strong>学了</strong>（引用网络查重、真假空白再判断）、<strong>会了</strong>（把一堆原始 idea 筛成“安全可做”的少数候选）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 去重后思路列表（5–8 条）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D58</summary><textarea data-note="d58" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d59" data-d="59"><header class="day-head"><span class="dnum">D59</span><h2 class="day-t">周三 · 成功路径预演 + 实验成本评估（选题的杀手锏）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote">
+<p>今天用两把“尺子”给候选思路称重：一把是“<strong>成功路径预演</strong>”（能不能想象出做成后的论文长相），一把是“<strong>实验成本</strong>”（1 张 4090 做不做得起）。这两把尺子能把“听起来酷但做不出”的 idea 当场筛掉。</p>
+</blockquote>
+<blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天用两把尺子筛 idea——“成功路径预演”（想象论文长什么样：标题/teaser图/主结果表）和“实验成本”（4090 做不做得起）。提醒：想得出论文长相=idea 够成熟可做，想不出=还太模糊或做不出（这是极灵敏的成熟度检测器）；实验成本要对单卡诚实，凡需海量算力/标注的直接判低分。这两把尺子专治“听着酷但做不出”。</p>
+</blockquote>
+</div><section class="slot" id="d59-am" data-d="59" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D59 上午段"><span class="slot-tag">上午段·1.5h</span><h3 class="slot-t">Top 5 思路各做“成功路径预演”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么这是杀手锏）</h4><div class="blk-b"><ul>
+<li><strong>成功路径预演</strong>= 对每个 idea,<strong>想象它已经做成了</strong>——这篇论文长什么样？标题是什么？第一页那张“teaser figure”（吸睛大图）画的是什么？主结果表大概什么样？</li>
+<li><strong>为什么管用</strong>：如果你能<strong>清楚想象出论文的样子</strong>，说明这个 idea 够具体、够可行；如果你<strong>怎么也想象不出来</strong>（画不出 teaser、说不清主结果），说明它还太模糊或根本做不出——这是一个极灵敏的“成熟度检测器”。</li>
+<li><strong>为什么“画不出 teaser”是强烈的危险信号</strong>:teaser figure 是论文第一页那张“一图说清你做了什么、好在哪”的图。如果你连这张图画什么都想不出，说明<strong>你的 idea 还没具体到“有一个能展示的、看得见的改进”</strong>——要么太模糊（不知道具体改什么），要么改进不可视化/不明显（没有能拿出来给人看的效果）。审稿人和读者第一眼看的就是 teaser，你自己都想象不出，这个 idea 大概率还不成熟。</li>
+<li><strong>它为什么比“觉得这个 idea 不错”可靠</strong>：“觉得不错”是模糊的直觉，容易自我欺骗；“能不能想象出标题+teaser+主结果表”是<strong>具体的、可操作的检验</strong>——你要真去想这三样，想得出就是真的想清楚了，想不出就是真的没想清楚。<strong>把模糊的“可行性判断”变成具体的“想象论文三件套”</strong>，这是资深研究者下意识在做的事（他们看一个 idea，脑子里立刻浮现“这能做成什么样的 paper”）。</li>
+<li><strong>预演还能帮你提前发现“做出来也没人看”的 idea</strong>：有些 idea 你能想象出论文，但那张 teaser 和主结果“平平无奇”（提升 0.2 点、没有亮眼对比）——这说明即便做出来，也是篇没人在乎的水文。<strong>预演让你提前看到“成品的吸引力”</strong>，从而避开那些“能做但不值得做”的。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>从去重后候选里挑 <strong>Top 5</strong>（凭直觉初选），每个写三样：</p>
+<ol>
+<li><strong>假想标题</strong>（具体、点出方法+任务，如“HRFormer-Lite: 面向遥感密集小目标的轻量高分辨率旋转检测”）。</li>
+<li><strong>teaser figure 画什么</strong>（一句话，如“左：baseline 漏掉一片密集小车；右：我的方法全检出”）。</li>
+<li><strong>主结果表长什么样</strong>（一句话，如“3 个数据集上 small-vehicle AP 比 SOTA 高 2-4 点”）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 个候选都能写出具体的“假想标题 + teaser + 主结果”。<strong>有 1-2 个你怎么也想象不出 teaser/主结果的——把它标记为“不成熟/待调研”，这正是预演帮你筛出来的。</strong></p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑（★校准）</h4><div class="blk-b"><p>预演出来的论文是“我提出一个更大的模型/更大的数据集”——那张 teaser 你画不出、那些实验你跑不起，<strong>预演时就该感到“不对劲”</strong>。这正是预演在帮你识别陷阱。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>某 idea 想不出 teaser?→ 两种可能：(a)idea 太模糊，需再调研；(b)idea 其实不适合可视化（如纯理论改进），那就想“它的主结果表/曲线”能不能说清。两样都想不出 → 这个候选暂时搁置。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会用<strong>“成功路径预演”反向检验 idea 的成熟度与可行性</strong>——想得出论文长相 = 可做；想不出 = 还不行。这是资深研究者选题时的下意识动作。<strong>做了</strong>（Top 5 的预演）、<strong>学了</strong>（预演法、teaser 的作用）、<strong>会了</strong>（用“能否想象论文长相”判断 idea 成熟度）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜成功路径预演三问</strong>:① 标题是什么?② teaser 图画什么?③ 主结果表/曲线长什么样？三个都答得出 = 成熟可做。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d59-noon" data-d="59" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D59 中午段"><span class="slot-tag">中午段·1h</span><h3 class="slot-t">评估每个 idea 的实验成本（对 1 张 4090 诚实）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>每个 idea 做起来要花多少资源？<strong>这是个人研究者的生死线</strong>。要诚实评估：需要多少 GPU 时间？什么数据集（下载/标注成本）？什么开源代码可复用？</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>Top 5 每个估算:<code>需要的 GPU 时间(粗估) | 需要的数据集(有现成的吗) | 可复用的开源代码 | 单张 4090 能否做</code>。</p>
+<blockquote class="quote">
+<p>红线：凡是“需要预训练大模型/几十张卡/海量标注”的，<strong>单卡可行性直接判低分</strong>。</p>
+</blockquote>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 个候选都有诚实的成本估算 + “4090 能否做”的判断。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>对成本盲目乐观（&quot;应该能跑吧&quot;）→ 要具体：你的方法要训几个模型？每个多久？数据多大？</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>估不准 GPU 时间?→ 参考你 M2/M3 跑过的类似实验耗时（你已有体感）；数据集不确定有没有→ 回 W8 的数据集表查。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>对算力/数据成本诚实估算</strong>——把“想做”和“做得起”分开，这是个人研究者避免中途卡死的关键。</p>
+<h6 id="18m3md2-1">D59 · 实验成本评估（对 4090 诚实）</h6>
+<p>沿用 W6–W8 详注版 的显存换算表，再加一张<strong>时间账</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>实验类型</th>
+<th>单卡 4090 大致耗时</th>
+<th>一周能跑几次</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toy 实验（小数据 + 少 epoch）</td>
+<td><strong>0.5–2 小时</strong></td>
+<td>很多次</td>
+</tr>
+<tr>
+<td>DOTA 完整训练（12 epoch，2 万张切块）</td>
+<td><strong>8–14 小时</strong></td>
+<td>白天一次 + 晚上一次</td>
+</tr>
+<tr>
+<td><strong>3 个 seed 的一组对比</strong>（baseline + 你的方法）</td>
+<td><strong>6 次训练 ≈ 3–4 天</strong></td>
+<td><strong>一周勉强一组</strong></td>
+</tr>
+<tr>
+<td>5 组消融 × 3 seed</td>
+<td>30 次训练 ≈ 半个月</td>
+<td>❌ 不现实</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>★ 最后一行是 W12 的现实约束，原文没算这笔账。</strong> W12 要你做 5 组消融，如果每组都跑 3 seed，需要半个月。<strong>W12 只有一周。</strong></p>
+<p><strong>解决办法</strong>（W12 那节会展开）：<strong>消融用 1 个 seed 筛选方向，只对最终确定的关键配置补 3 seed。</strong> 这是学术界的通行做法，但要在报告里写清楚。</p>
+</blockquote></div></section></section><section class="slot" id="d59-pm" data-d="59" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D59 晚上段"><span class="slot-tag">晚上段·2.5h</span><h3 class="slot-t">完善 Top 5 评估表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>把“成功路径预演 + 实验成本”汇成一张 Top 5 评估表，为明天找人讨论、后天收敛做准备。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>建表 <code>idea | 创新性(1-5) | 可行性(1-5) | 实验成本(越低越好) | 与空天院方向匹配(1-5) | 发文目标(GRSL/JSTARS/TGRS) | 成熟度(能否预演)</code>,5 行填满。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张 5 行评估表，每列都填了，能看出“哪几个又可行又匹配又成熟”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤ 坑与自救</h4><div class="blk-b"><p>某项不知怎么打分→凭你已有的体感粗打 1-5 即可，这是为收敛排序服务，不求精确。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你产出了一张<strong>可比较的 Top 5 评估表</strong>——把“凭感觉选”变成“按维度比”，决策更靠谱。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Top 5 评估表。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D59</summary><textarea data-note="d59" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d60" data-d="60"><header class="day-head"><span class="dnum">D60</span><h2 class="day-t">周四 · 找人当“审稿人”挑刺 → 收敛到 3 个候选</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote">
+<p>今天请外人帮你“挑刺”。一个人想 idea 容易陷入“自我确认偏误”——你越喜欢的 idea 越看不见它的漏洞。今天用别人的眼睛，把 Top 5 收敛到 3 个最扛得住的候选。</p>
+</blockquote>
+<blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天找人当“审稿人”挑刺，把 Top 5 收敛到 3 个候选。提醒：破解“自我确认偏误”（越喜欢越看不见漏洞）的办法就是找人挑刺，越狠越好——别只想听夸奖，被问住恰恰是收获。一个灵敏测试：给非遥感的聪明朋友 1 分钟讲清“为什么重要”，讲不清=动机不够强。收敛要狠，留“能做出来且有意义”的，不是“最炫”的。</p>
+</blockquote>
+</div><section class="slot" id="d60-am" data-d="60" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D60 上午段"><span class="slot-tag">上午段·1.5h</span><h3 class="slot-t">找 1–2 个朋友以“审稿人”身份讨论 Top 5</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>自我确认偏误</strong>：你倾向于只看见支持自己 idea 的证据、忽略反对的。<strong>破解办法 = 找人挑刺</strong>。</li>
+<li><strong>一个灵敏的测试</strong>：找一个<strong>非遥感背景</strong>的朋友，给他讲你的 idea，问他“<strong>这个为什么重要？</strong>”。<strong>如果你 1 分钟讲不清动机 → 说明动机不够强</strong>（连聪明的外行都说服不了，怎么说服审稿人）。</li>
+<li><strong>为什么“动机”是论文的命根子</strong>：审稿人拒稿最常见的理由不是“方法不对”，而是“<strong>so what?</strong>”（你做这个有什么意义？谁在乎?）。一个方法再精巧，如果解决的问题没人关心，论文就没价值。<strong>动机（为什么这个问题重要、值得解决）决定了论文的天花板</strong>——动机强，方法一般也能发；动机弱，方法再炫也容易被拒。所以在投入几个月做之前，先确认动机够强，是性价比极高的一步。</li>
+<li><strong>为什么用“给外行讲清”来测动机</strong>：如果一个问题真的重要，它的重要性应该能用大白话讲清楚（如“现在的方法在密集小目标上漏检很多，而停车场车辆计数、灾后建筑评估都需要准确检测密集小目标”）——连聪明的外行都能听懂“哦这确实有用”。<strong>如果你只能用一堆术语绕、讲不清它到底为什么重要，那动机多半是你自己想象的、站不住的</strong>。外行听不懂不是他笨，是你的动机不够实在。</li>
+<li><strong>为什么必须找别人、不能只靠自己</strong>：你对自己的 idea 有感情（花了时间想出来的），会不自觉地放大它的优点、忽视它的硬伤——这是人性，无法靠“我客观一点”克服。<strong>外人没有这层感情滤镜，能一眼看到你看不见的漏洞</strong>。尤其要请他们“挑刺”而非“鼓励”——你需要的是 W9 就暴露问题（还能改/换），而不是做了三个月被审稿人暴露（来不及了）。</li>
+<li><strong>被问住是收获不是打击</strong>：朋友问“这不是 XX 已经做了吗？”“你凭什么能做出来？”“最大的风险是什么？”——你答不上来的每个问题，都是这个 idea 的一处真实弱点。<strong>现在被问住，总比投稿被拒强</strong>。把被问住的点记下来，正是收敛和改进的依据。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>找 1-2 个朋友/同学，线上语音/视频 30min；先用 1-2 句给他讲每个候选 idea，请他以“审稿人/挑刺者”身份问：“为什么重要？”“是不是已经有人做了？”“你凭什么能做出来？”“最大的风险是什么？”</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>每个候选都被问了“为什么重要/有没有人做/风险是什么”；你记下了哪些 idea 你“讲不清动机”或“被问住”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 找人时只想听夸奖→ 明确请他们挑刺、越狠越好;② 被问住了就辩解→ 被问住恰恰是收获（暴露了 idea 的弱点）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>找不到人?→ 用“假装给完全外行写一段 200 字的科普介绍”代替：写不顺、讲不清的那个 idea，动机就不够强。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>用外部视角检验 idea</strong>，尤其用“能不能给外行讲清动机”测动机强度——动机是论文的命根子。</p>
+</div></section></section><section class="slot" id="d60-noon" data-d="60" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D60 中午段"><span class="slot-tag">中午段·1h</span><h3 class="slot-t">整理讨论反馈</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>讨论收到一堆零散质疑，得<strong>结构化整理</strong>才能用——把质疑分两类：<strong>致命质疑</strong>（动机弱/已被做/单卡做不起，这类直接决定 idea 去留）和<strong>可改进质疑</strong>（细节/方法问题，这类是优化点不是否决点）。分清两类，收敛时才知道“哪些 idea 该砍、哪些只是要改进”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把讨论中每个 idea 收到的质疑逐条记下，分“致命质疑（动机弱/已被做/做不起）”和“可改进质疑（细节问题）”两栏；每个 idea 旁标注“致命质疑数”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>每个候选 idea 都有一份分类质疑清单，致命/可改进分开，一眼看出哪些 idea 带着致命伤。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 把“细节可改进”误当致命而错杀好 idea → 致命的只有“动机弱/撞车/做不起”三类;② 把致命质疑当细节而硬留 → 动机弱是绝症，别自欺。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>分不清某质疑是致命还是可改进?→ 问“这个问题能靠改进方法解决吗？”能（如“loss 设计不好”）=可改进；不能（如“这问题没人在乎”“已经有人做了”）=致命。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>结构化整理反馈</strong>（分致命/可改进），为收敛提供依据。<strong>做了</strong>（分类质疑清单）、<strong>学了</strong>（致命 vs 可改进的区分）、<strong>会了</strong>（把零散反馈整理成可用于决策的结构）。</p>
+</div></section></section><section class="slot" id="d60-pm" data-d="60" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D60 晚上段"><span class="slot-tag">晚上段·2.5h</span><h3 class="slot-t">据反馈精修 → 排除明显不可行 → 收敛到 3 个候选</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>综合评估表分数 + 讨论反馈，<strong>砍掉有致命质疑的</strong>，收敛到 <strong>3 个候选</strong>（最值得花 toy 实验去验证的）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>对每个 idea 做“去留判断”——有致命质疑（动机弱/撞车/单卡做不起）的砍掉；剩下评分高、动机强、单卡可做的，留 3 个。写一句话说明“为什么留这 3 个”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><strong>3 个候选确定</strong>，每个都“动机讲得清 + 没撞车 + 4090 能做 + 能想象出论文”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑（★校准）</h4><div class="blk-b"><p>为了“听起来更创新”留下一个动机弱或做不起的→ 收敛要狠，留的是“能做出来且有意义”的，不是“最炫的”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>3 个里有 2 个很像?→ 保留更具体/更可行的那个，换一个差异化的进来（3 个候选最好覆盖不同角度，toy 验证才有比较价值）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用外部反馈 + 评分把 Top 5 收敛到 3 个候选</strong>——从“想了一堆”到“锁定值得验证的少数”，这是选题从发散到收敛的关键一跳。<strong>做了</strong>（讨论纪要 + 3 候选）、<strong>学了</strong>（自我确认偏误、动机强度测试）、<strong>会了</strong>（综合评分与质疑做收敛取舍）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 讨论纪要 ✅ 3 个候选确定。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D60</summary><textarea data-note="d60" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d61" data-d="61"><header class="day-head"><span class="dnum">D61</span><h2 class="day-t">周五 · 候选 1 详细技术方案 + 架构草图</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote">
+<p>接下来三天(D61-D63)聚焦候选 1：今天把它写成详细方案、画出架构、设计好“最小可行实验”，明天开跑。这是你第一次把一个 idea “做实”。</p>
+</blockquote>
+<blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把候选 1 从“2-3 句思路”做实成详细方案+架构图+toy 实验设计。提醒：方案的核心是“创新点和 Gap 必须对得上”（为创新而创新是大忌）；画架构图会逼你想清每一步（模糊处一画就暴露）;toy 实验要设计成“2 天能跑通的最小验证”，且明确“和谁比、怎么算有信号”。这是你第一次把想法落成可执行的实验。</p>
+</blockquote>
+</div><section class="slot" id="d61-am" data-d="61" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D61 上午段"><span class="slot-tag">上午段·1.5h</span><h3 class="slot-t">候选 1 详细技术方案（≥500 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>把候选 1 从“2-3 句思路雏形”扩成“详细技术方案”——讲清<strong>输入是什么、输出是什么、核心创新点是什么、用什么 loss、在什么数据集验证</strong>。这是 toy 实验和后面 Proposal 的底稿。</p>
+<ul>
+<li><strong>为什么要“写下来”而非“想清楚就行”</strong>：你以为想清楚了，一动笔写就会发现一堆模糊处——“我的模块具体加在哪？”“输入输出的维度对得上吗？”“创新点到底是哪一点？”<strong>写作是最严格的思考检验</strong>：能写清楚才是真想清楚，写不清楚说明还有没想透的地方。而且这份方案是 toy 实验的施工图、后面 Proposal 的底稿，现在写好，后面省力。</li>
+<li><strong>核心创新点必须和 Gap 严丝合缝（本周反复强调）</strong>：最常见的毛病是“为创新而创新”——为了显得新，加一堆花哨模块，但它们和你要解决的 Gap 没关系。<strong>正确的逻辑链是：Gap（什么问题）→ 通用 CV 解法（借鉴什么）→ 你的创新点（怎么把解法落到这个 Gap 上）</strong>，三者一条线。检验方法：你的创新点应该能一句话说清“它怎么治那个 Gap”（如“加高分辨率分支保留小目标特征，所以能治密集小目标漏检”）——说不清这个因果，创新点就是无的放矢。</li>
+<li><strong>检验标准很具体</strong>：写完后，想象“一个懂通用 CV 但不懂你这个具体 idea 的人”读这份方案——<strong>他读完能不能复述出“你要加什么、解决什么”？</strong> 能，说明方案清楚；不能（他读完一脸懵），说明你没写清楚，回去改。这个“假想读者复述”的检验，适用于你以后写的所有方案/论文。</li>
+<li><strong>四要素缺一不可</strong>：问题与输入输出（定位 Gap 和任务）、核心创新点（你的新东西）、关键设计（怎么实现）、验证方案（怎么证明有用）——少了任何一个，方案都不完整。尤其“验证方案”新手常漏（只想方法不想怎么证明），但<strong>一个方法如果说不清“在哪个数据集、和谁比、用什么指标证明它好”，就等于没法验证、没法发表</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 ≥500 字方案，按这个结构：</p>
+<ol>
+<li><strong>问题与输入输出</strong>：解决哪个 Gap；输入（什么图/什么模态）→ 输出（框/mask/类别）。</li>
+<li><strong>核心创新点</strong>：你加的那个新东西是什么（一句话说清），它怎么治那个 Gap。</li>
+<li><strong>关键设计</strong>：用什么 backbone/loss/模块；和 baseline 的差异在哪。</li>
+<li><strong>验证方案</strong>：在哪个（些）数据集、和谁比、用什么指标。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>≥500 字方案，<strong>一个懂通用 CV 但不懂你具体 idea 的人读完，能复述出“你要加什么、解决什么”</strong>。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 方案只说“我用注意力/transformer”不说“加在哪、为什么、怎么治 Gap”→ 等于没说;② 创新点和 Gap 对不上（为创新而创新）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写不清创新点?→ 回到“它治的是哪条 Gap、用的是哪个通用 CV 解法”，把这两者接起来就是创新点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会把一个 idea <strong>落成可执行的详细技术方案</strong>（输入输出/创新点/设计/验证四要素）——这是从“想法”到“可做的实验”的桥。</p>
+</div></section></section><section class="slot" id="d61-noon" data-d="61" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D61 中午段"><span class="slot-tag">中午段·1h</span><h3 class="slot-t">候选 1 架构草图</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>架构图</strong>= 把你的方法画成“数据怎么从输入流到输出、你的新模块加在哪”的框图。画图会逼你想清楚每一步（很多模糊之处一画图就暴露）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用手绘或 draw.io，画候选 1 的架构：输入图 → backbone → （你的新模块，标红）→ head → 输出。标清你的创新模块的位置和数据流。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张能看懂“你的新模块加在哪、输入输出是什么”的草图。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤</h4><div class="blk-b"><p>画不出新模块内部→先画它在整体里的位置（黑盒），内部细节做 toy 时再定。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>用架构草图把方法可视化</strong>——画图即思考，暴露并理清模糊之处。</p>
+</div></section></section><section class="slot" id="d61-pm" data-d="61" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D61 晚上段"><span class="slot-tag">晚上段·2.5h</span><h3 class="slot-t">评估候选 1 的“最小可行实验(toy)”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（toy 实验）</h4><div class="blk-b"><ul>
+<li><strong>最小可行实验 / toy 实验</strong>：用<strong>最小数据集</strong>（如 10% 训练集）、<strong>最简配置</strong>（如 ResNet-18 backbone）、<strong>最少 epoch</strong>（如 5），快速看核心想法<strong>有没有“信号”</strong>。</li>
+<li><strong>“有信号”的标准</strong>：哪怕只比 baseline 好 <strong>0.1%</strong> 也算有信号——说明<strong>方向对了</strong>，后面可以加码。<strong>toy 不是验证“方法好不好”，是验证“方向对不对”</strong>（成本极低、结论极有用，是个人研究者对抗算力劣势的核心武器）。</li>
+<li><strong>为什么 toy 实验是单卡选手的“核武器”</strong>：大组可以“广撒网”——同时跑十几个 idea 的完整实验，哪个好用哪个。你单卡做不到（一个完整实验就要几天）。但 toy 让你用几小时、极小成本就能判断一个方向“有没有戏”——<strong>用最小代价探方向，只在有信号的方向上才投入完整实验</strong>。这样你虽然算力少，但不会把宝贵的算力浪费在没信号的方向上，效率反而可能更高。<strong>toy 思维是算力劣势者最重要的生存技能</strong>。</li>
+<li><strong>为什么“看方向不看高低”是 toy 的灵魂</strong>:toy 用的是小数据、小模型、少 epoch，它的绝对指标必然很低（远不如完整训练）——所以<strong>看 toy 的绝对高低毫无意义</strong>。要看的是“在同样的 toy 条件下，加了你的创新模块 vs 不加(baseline)，有没有正向差异”。只要稳定为正（哪怕 0.5 点），就说明你的想法在起作用、方向大概率对，值得放大到完整实验；如果持平或为负，要么方向不对、要么代码有 bug（先查 bug）。<strong>toy 是个“方向对不对”的指南针，不是“性能多高”的标尺</strong>。</li>
+<li><strong>toy 的两个常见误区（避开）</strong>:① <strong>把 toy 做大</strong>（用全量数据、训 100 epoch）——那就失去了“最小快速”的意义，几小时变几天，toy 的价值没了;② <strong>没设 baseline 对照</strong>——toy 结果没有参照，你看不出“有没有信号”（信号是相对 baseline 的差异，不是绝对值）。<strong>toy 必须小、必须有对照</strong>，这两点是它有效的前提。</li>
+<li><strong>toy 结果差时的正确反应</strong>:toy 跑出来比 baseline 差，<strong>第一反应应该是“是不是代码 bug 或 toy 没搭对”，而非“idea 死了”</strong>。因为你刚改的代码很可能有接错（模块输入输出形状不对等）、或 toy 设置不当（数据太少、epoch 太少没学到东西）。<strong>先在 10 张图上过拟合验证代码通不通</strong>(能过拟合=代码通)，排除 bug 后再判断方向。很多好 idea 被新手在 toy 阶段因为一个 bug 误杀了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写清候选 1 的 toy 怎么搭：用哪个小数据子集、多简的模型、跑几个 epoch、和谁比、看哪个指标、<strong>预计 2 天内能跑通</strong>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份“2 天内能跑通的极简实验方案”，明确“怎么算有信号”（比 baseline 好任意正值）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 把 toy 搞得很大（用全量数据、训 100 epoch）→ 失去“最小快速”的意义;② 没设“和谁比”→ toy 结果没参照，看不出有没有信号。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定 toy 用多小?→ 原则是“小到能在你 4090 上几小时内跑完一轮”，通常 10% 数据 + ResNet-18 + 几个 epoch。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你掌握了<strong>“最小可行实验(toy)”思维</strong>——用最小成本探方向，避免在没信号的方向上砸几个月。这是贯穿你整个研究生涯、尤其适合算力有限者的核心习惯。<strong>做了</strong>（候选 1 详细方案 + 架构草图 + toy 方案）、<strong>学了</strong>（toy 实验的定义、“有信号”的判据）、<strong>会了</strong>（把一个 idea 拆成 2 天能跑通的最小验证）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜toy 实验四要素</strong>：最小数据(10%)+ 最简模型（小 backbone）+ 最少 epoch（几轮）+ 明确的“和谁比”。好坏不看高低，只看“有没有正信号”。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 候选 1 详细方案（≥500 字）✅ 架构草图 ✅ toy 方案。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜详细技术方案四要素</strong>:① <strong>问题与输入输出</strong>（填哪个 Gap、输入什么→输出什么）② <strong>核心创新点</strong>（你加的新东西一句话说清，它怎么治那个 Gap）③ <strong>关键设计</strong>（backbone/loss/模块、和 baseline 的差异）④ <strong>验证方案</strong>（哪些数据集、和谁比、什么指标）。检验标准：<strong>懂通用 CV 但不懂你 idea 的人读完能复述“你要加什么、解决什么”</strong>。红线：创新点必须和 Gap 对得上，别为创新而创新。</p>
+</blockquote>
+<hr />
+<h6 id="18m3md3-1">D61–D62 · ★ 什么叫“最小可行实验”（toy）</h6>
+<p>原文说“评估候选 1 的最小可行实验（toy）”，<strong>但没定义“最小”</strong>。</p>
+<h6 id="18m3md3-2">toy 实验的三条设计原则</h6>
+<figure class="code" data-lang="text"><pre><code>① 时间上限 2 小时 —— 超过就不叫 toy 了，拆得更小
+② 只验证一件事 —— 你的核心假设成立不成立，其余全部固定
+③ 必须有对照组 —— 没有对照的 toy 什么都证明不了
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="18m3md3-3">怎么把一个完整实验“缩”成 toy</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>缩什么</th>
+<th>完整实验</th>
+<th>toy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据量</strong></td>
+<td>全部 2 万张切块</td>
+<td><strong>随机抽 1000–2000 张</strong></td>
+</tr>
+<tr>
+<td><strong>epoch</strong></td>
+<td>12</td>
+<td><strong>2–3</strong></td>
+</tr>
+<tr>
+<td><strong>模型</strong></td>
+<td>ResNet-50 + FPN</td>
+<td>同一个（<strong>不要换，换了就不可比</strong>）</td>
+</tr>
+<tr>
+<td><strong>评测</strong></td>
+<td>完整 val</td>
+<td>固定的小 val 子集</td>
+</tr>
+<tr>
+<td><strong>seed</strong></td>
+<td>3 个</td>
+<td><strong>1 个</strong>（toy 阶段只看方向，不下结论）</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 关键原则</strong>：<strong>只缩“规模”，不缩“结构”。</strong> 数据少、轮次少可以，但<strong>模型、流程、评测方式必须和完整实验一致</strong>——否则 toy 的结论迁移不到完整实验上。</p>
+<h6 id="18m3md3-4">toy 结果怎么读（★ 这是原文完全没有的部分）</h6>
+<p>toy 实验<strong>不能证明你的方法有效</strong>，它只能给三种信号：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>信号</th>
+<th>长什么样</th>
+<th>该怎么办</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>正信号</strong></td>
+<td>你的方法在 toy 上明显好于对照（比如 +2 以上）</td>
+<td>✅ 值得投入完整实验</td>
+</tr>
+<tr>
+<td><strong>中性信号</strong></td>
+<td>差不多，或涨跌在 ±1 以内</td>
+<td>⚠️ <strong>不代表方法没用</strong>——toy 规模太小，噪声大。<strong>看趋势和 loss 曲线，而不是最终数字</strong></td>
+</tr>
+<tr>
+<td><strong>负信号</strong></td>
+<td>明显更差，或训不起来</td>
+<td>❌ 先查是不是实现有 bug（用 tiny-batch 过拟合检查）；确认没 bug 再考虑放弃</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>★ 最重要的一条</strong>：<strong>toy 出中性信号是最常见的情况，不要因此就毙掉 idea。</strong> toy 的作用是<strong>排除“明显不行”和发现“明显有戏”</strong>，中间地带需要完整实验才知道。</p>
+<p><strong>原文 D65 说“含中/负信号怎么如实写”——就是这个意思。诚实记录中性信号，不要美化成正信号。</strong></p>
+</blockquote>
+<hr />
+<h5 id="18m3md3-5">第二部分 · W10 Proposal（原文要 3000 字）</h5>
+<h6 id="18m3md3-6">完整骨架（七节，填完自然超 3000 字）</h6>
+<figure class="code" data-lang="markdown"><pre><code># Proposal v1：&lt;你的题目&gt;
+
+## 1. Title
+（★ 好标题的公式：&lt;解决什么问题&gt; via &lt;你的方法&gt; for &lt;什么任务&gt;）
+（反面例子：&quot;基于深度学习的遥感目标检测研究&quot; —— 没有信息量）
+
+## 2. Motivation（≥600 字）
+### 2.1 任务背景（100 字，一句话说清任务是什么、为什么重要）
+### 2.2 现有方法怎么做（200 字，用你 W8 的技术演进图谱）
+### 2.3 ★ 它们的共同缺陷是什么（200 字）
+    —— 这一段是全文的地基。必须具体到&quot;在什么条件下会失效&quot;
+### 2.4 ★ 我的观察（100 字）
+    —— 最好是你自己实验里看到的现象，配一个数字或一张图
+    例：&quot;我在 DOTA 上复现 Oriented R-CNN，bridge 类 AP 比均值低 X 个点&quot;
+
+## 3. Related Work（≥800 字，分 2–3 个小节）
+（★ 写法：不是罗列&quot;某某做了什么&quot;，而是按&quot;技术路线&quot;分组，
+   每组说清&quot;这条路的思想是什么、到哪一步了、还差什么&quot;）
+### 3.1 &lt;路线一&gt;
+### 3.2 &lt;路线二&gt;
+### 3.3 ★ 与本文最接近的工作，以及本文的区别（这一小节审稿人一定会看）
+
+## 4. Proposed Method（≥1200 字）
+### 4.1 总体框架（配架构图）
+### 4.2 核心组件 A：为什么这样设计
+    —— ★ 每个设计选择都要回答&quot;为什么是这样，不是别的&quot;
+### 4.3 核心组件 B
+### 4.4 损失函数 / 训练策略
+### 4.5 ★ 复杂度分析（参数量、FLOPs、相对 baseline 增加多少）
+    —— 单卡背景下，这一节是你的加分项
+
+## 5. Experiment Plan
+| # | 实验 | 目的 | 数据集 | 指标 | 预计耗时 | 优先级 |
+|---|------|------|--------|------|---------|--------|
+| E1 | baseline 复现 | 建立对照 | | | | P0 |
+| E2 | 我的方法 vs baseline（3 seed） | 主结果 | | | | P0 |
+| E3 | 消融：去掉组件 A | 证明 A 有用 | | | | P0 |
+| ... |
+★ 每行都要填&quot;预计耗时&quot;，加起来对照你剩下的时间。超了就砍。
+
+## 6. Expected Contribution（3 条以内）
+1.
+2.
+3.
+（★ 每条都要是&quot;可被实验验证的陈述&quot;，不是&quot;我们提出了一个新方法&quot;）
+
+## 7. Risks &amp; Mitigation
+| 风险 | 概率 | 影响 | 缓解方案 |
+|------|------|------|---------|
+| 方法没有提升 | | | Plan B：转成分析/评测类工作 |
+| 有人先发了 | | | |
+| 算力不够 | | | |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>★ 第 7 节不要写成走过场。</strong> M3-D84 的 go/no-go 决策，直接看你这一节写没写透。<strong>一个想清楚了风险的人，遇到坏结果时不会崩。</strong></p>
+</blockquote></div></section></section><details class="notes"><summary>我的笔记 · D61</summary><textarea data-note="d61" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d62" data-d="62"><header class="day-head"><span class="dnum">D62</span><h2 class="day-t">周六 · （集中日）· 候选 1 toy 实验：跑起来</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote">
+<p>今天把候选 1 的 idea 第一次变成“能跑的代码”。从“想法”到“可运行实验”这一步，是很多人卡住的地方——今天跨过它。</p>
+</blockquote>
+<blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把候选 1 第一次变成能跑的代码并启动 toy。提醒：别从零重写——在你 M2 复现过的 SOTA 代码上<strong>只加你的创新模块</strong>（最小改动、改动集中，好排查）。心态要端正：toy 不期望效果好，只看方向对不对；跑出来差很可能是代码 bug 而非 idea 死了（可在 10 张图上过拟合验证代码通不通）。跨过“想法→可运行实验”这一步，很多人就卡在这。</p>
+</blockquote>
+</div><section class="slot" id="d62-am" data-d="62" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D62 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">准备数据 + 改代码（在 M2 复现的 SOTA 代码上改最小改动）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>不要从零写——<strong>在你 M2 复现过的 SOTA 代码基础上，做最小改动</strong>实现你的创新模块。复用现成框架，改动越小越快。</p>
+<ul>
+<li><strong>为什么“复用 &gt; 重写”是工程铁律</strong>：从零写一个完整 pipeline（数据加载、训练循环、评估、日志）要好几天，而且到处是 bug。而 baseline 的代码已经把这些都调通了——你只需在它基础上加你的一个创新模块。<strong>改动越少，出错越少、定位越快</strong>：如果实验出问题，你知道“问题一定在我改的那几行”，不用在整个 pipeline 里大海捞针。这就是为什么 M2 让你认真复现 SOTA 代码——那些代码现在成了你做实验的“现成底座”。</li>
+<li><strong>改动要“集中”而非“散落”</strong>：把你的创新模块尽量做成一个独立的、低侵入的组件(如残差式接入:<code>return x + my_module(x)</code>)，只在一两处接进 baseline，而不是把改动散布到代码各处。<strong>集中改动的好处</strong>:① 好排查（出错就看那一处）;② 好做消融（把你的模块一行注释掉就是 baseline，对照清晰）;③ 好迁移（以后换个 baseline 也能快速接上）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 准备 toy 用的小数据子集（取 10%）;② 在复现代码里<strong>只加你的创新模块</strong>（其余不动）;③ 配好 toy 的超参（小模型、几个 epoch）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>代码改完、数据备好，准备启动；改动集中在“你的新模块”那几处。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 一上来重写整个 pipeline→慢且易错，要在现成代码上最小改动;② 改动散落多处→ 集中改、好排查。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知道在哪改?→ 找到 baseline 代码里“backbone 输出 → head 输入”之间（你的模块多半加在这），或 loss 计算处。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>在现成代码上最小改动实现自己的 idea</strong>——这是把 idea 快速变实验的工程技巧(复用 &gt; 重写)。</p>
+</div></section></section><section class="slot" id="d62-noon" data-d="62" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D62 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 toy 实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>把上午改好的代码正式启动训练。toy 的精髓是“快”——小数据、小模型、几个 epoch，目标是几小时内出个初步结果，所以启动后挂后台、记好命令即可，不用守着。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>启动 toy 训练（后台挂）；记下命令到实验日志。</p>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># toy 实验启动（10% 数据 + 小 backbone + 几个 epoch），后台挂、存日志</span>
+nohup<span class="w"> </span>python<span class="w"> </span>train.py<span class="w"> </span>--config<span class="w"> </span>configs/toy_candidate1.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--data-fraction<span class="w"> </span><span class="m">0</span>.1<span class="w"> </span>--backbone<span class="w"> </span>resnet18<span class="w"> </span>--epochs<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&gt;<span class="w"> </span>logs/toy_c1_<span class="k">$(</span>date<span class="w"> </span>+%m%d<span class="k">)</span>.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PID: </span><span class="nv">$!</span><span class="s2">  已记入实验日志&quot;</span><span class="w">          </span><span class="c1"># 记下 PID 和命令，方便复现/排查</span>
+<span class="c1"># 同时把命令、数据比例、超参写进 20-代码实验/实验日志.md</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>toy 训练已在后台启动，命令+超参已归档，几小时内可看初步结果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 守着等（浪费时间）→ 挂后台干别的;② 命令不记（没法复现）→ 命令+超参必入日志;③ toy 配置忘了缩小（用了全量/大模型）→ 确认 data-fraction 和小 backbone 生效。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>启动即报错?→ 回 M1/M2 的复现自救套路（路径用绝对路径、OOM 减 batch、版本对照）；确认不是你的新模块接错（print 模块输入输出形状）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你把自己改的 idea 代码正式跑了起来。<strong>做了</strong>（toy 启动+命令归档）、<strong>学了</strong>（toy 挂后台的高效习惯）、<strong>会了</strong>（启动并记录一个可复现的最小实验）。</p>
+</div></section></section><section class="slot" id="d62-pm" data-d="62" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D62 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">监控实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念（toy 心态，务必端正）</h4><div class="blk-b"><p><strong>不要期望 toy 效果好</strong>——它只验证“方向对不对”。比 baseline 差 5% 以内→正常，继续观察；差 20%→可能方向有问题（或代码 bug），考虑排查/换候选。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>监控 loss 是否正常下降（回用 M1 的三曲线诊断）；等初步指标。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>toy 能正常训练、loss 在降（结果好坏明天分析）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>toy 一跑出来差就以为 idea 死了→ toy 看方向不看高低，且很可能是代码改动引入的 bug。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救（决策树）</h4><div class="blk-b"><p>① toy 跑不通（报错）→ 回 M1/M2 的复现自救（路径/OOM/版本）;② loss 不降→ 先在 10 张图上过拟合验证“模型+你的模块”能学（能过拟合说明代码通，是 toy 设置问题）;③ 结果远差于 baseline→ 先 print 你的模块的输入输出形状，排除接错。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你第一次<strong>把自己的 idea 变成能跑的代码并启动实验</strong>——从“想法”到“可运行实验”这一步，你跨过去了。<strong>做了</strong>（候选 1 toy 启动）、<strong>学了</strong>（toy 的正确心态、复用代码改最小）、<strong>会了</strong>（在现成框架上实现自己的模块并跑通）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 候选 1 toy 实验启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D62</summary><textarea data-note="d62" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d63" data-d="63"><header class="day-head"><span class="dnum">D63</span><h2 class="day-t">周日 · （复盘日）· 候选 1 信号分析 + W9 复盘</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote">
+<p>本周收尾。今天看候选 1 的 toy 到底有没有“信号”，并为整个阶段一最关键的 W10 做好资源预排。</p>
+</blockquote>
+<blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>:W9 收尾，判候选 1 的 toy 信号 + 为最关键的 W10 做资源预排。提醒：toy 没信号别急着否定 idea——先确认不是 toy 没搭对（bug/数据太少/epoch 太少）；就算候选 1 信号弱也不慌，你还有候选 2、3 没验证，这正是“准备 3 个候选”的意义。W10 是阶段一最关键的一周（三候选验证+三选一+Proposal v1），今晚要把精力提前排好。</p>
+</blockquote>
+</div><section class="slot" id="d63-am" data-d="63" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D63 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">候选 1 toy 结果分析 + 候选 2 数据准备</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>看候选 1 的 toy 结果——<strong>有没有正信号</strong>（比 baseline 好任意正值）？有则记录；没有则分析原因（是 idea 不行，还是 toy 没搭对/有 bug）。同时为候选 2 准备数据（下周 W10 要连跑三个候选）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>对比 toy 的“你 vs baseline”指标 → 判信号（正/中/负）+ 一句原因分析；准备候选 2 的 toy 数据/代码改动。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>候选 1 的信号判断 + 原因；候选 2 toy 准备就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>没信号就直接否定 idea→ 先确认不是 toy 没搭对（bug/数据太少/epoch 太少）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>候选 1 无信号且排除了 bug→ 不要紧，你还有候选 2、3（下周验证），这正是“准备 3 个候选”的意义。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>从 toy 结果判信号并归因</strong>（区分“idea 不行”和“toy 没搭对”）——这是用 toy 做决策的关键判断力。</p>
+</div></section></section><section class="slot" id="d63-noon" data-d="63" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D63 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">记录候选 1 信号</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>把 toy 结果沉淀成一份<strong>标准格式的信号报告</strong>——别让结果只留在脑子里或散落的日志里。统一格式（方法/baseline/toy/差值/信号/改进空间）便于 W10 把三个候选横向对比、做三选一决策。<strong>信号报告是你 toy 决策的依据，要可比、可追溯</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把候选 1 信号报告写进 <code>20-代码实验/信号报告/候选1.md</code>(格式见 W10:<code>方法|baseline|toy|差值|信号|改进空间</code>)。</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 候选 1 信号报告</span>
+| 方法 | baseline 指标 | toy 指标 | 差值 | 信号 | 改进空间 |
+|---|---|---|---|---|---|
+| 候选1(轻量高分辨率小目标模块) | small-veh AP 48.2 | 49.0 | +0.8 | 正信号✓ | 全量数据/更深训练或可放大 |
+结论：toy 上 +0.8 的正信号 → 方向疑似对，值得 W10 加码验证（注：toy 只看方向不看绝对高低）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>候选 1 信号报告成文，格式与 W10 三选一对齐，结论明确（正/中/负信号 + 一句解读）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 只记数字不记“和谁比/什么条件”→ 信号无参照系;② 不写改进空间 → 漏掉“放大后可能更好”的判断。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定算正信号还是噪声?→ toy 数据少，小幅波动可能是噪声；但只要稳定为正（多看一两个 seed 仍为正），就当正信号记下，W10 再加码确认。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>学会了什么</h4><div class="blk-b"><p>你学会<strong>把实验结果沉淀成标准信号报告</strong>。<strong>做了</strong>（候选1信号报告）、<strong>学了</strong>（可比格式的价值）、<strong>会了</strong>（把 toy 结果写成可用于决策的报告）。</p>
+</div></section></section><section class="slot" id="d63-pm" data-d="63" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D63 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">W9 复盘 + W10 计划（最关键的一周）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念（W10 预警）</h4><div class="blk-b"><p>下周是整个 M3、甚至整个阶段一<strong>最关键的一周</strong>——你要完成“穷人验证”（三候选都跑 toy）+ <strong>Proposal v1</strong>。请保证下周<strong>至少 35h 投入</strong>（状态允许的话；若不允许，按导读②减配，Proposal 先成核心节）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用模板做 W9 周报（完成度/卡点/对策/下周三件事）；下周三件事默认:① 候选 2、3 toy + 信号报告 ② 三选一锁定课题 ③ 写出 Proposal v1。<strong>为 W10 预排好时间和精力</strong>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W9 周报 + W10 的资源预排（尽量保证下周高投入）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>W9 卡在“找不到好 idea”而焦虑→ 你已经走完了系统的找题漏斗，有 3 个候选，这比“凭灵感等一个”靠谱得多；toy 信号弱也正常，下周三个一起验证再定。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>候选 1 信号不好、有点慌→ 记住你还有 2 个候选没验证，且 W10 就是为“从三个里选有信号的”设计的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了第一个“原创探索周”的复盘，并为最关键的 W10 做好了资源预排。<strong>做了</strong>（候选 1 信号报告 + W9 周报）、<strong>学了</strong>（W10 的重要性与资源准备）、<strong>会了</strong>（把高强度周提前规划好精力）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 候选 1 信号报告 ✅ 周报 W9。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W9 累计交付</h2><p>带“通用 CV 解法 + 思路雏形 + 查重结论”的 Gap 表（≥10 条）、去重后候选清单（5–8 条）、Top 5 评估表、3 个候选确定、候选 1 详细方案 + 架构草图 + toy 实验（已启动 + 首份信号分析）、W9 周报。这一周你完成了从“读别人的”到“做自己的”惊险一跳——走通了一整套“找题漏斗”（挖Gap→配解法→查重→预演→成本评估→外审→收敛→toy验证），手里有了 3 个经过系统筛查的候选，这比“凭灵感等一个 idea”靠谱百倍，也为最关键的 W10（三选一+Proposal）铺好了路。</p>
+</section><section class="wtail"><h2>🎓 W9 你“长出来”的能力清单</h2><ul>
+<li><strong>挖 Gap</strong>：从 Limitation/Future Work 系统挖 Gap、抓本质而非现象</li>
+<li><strong>造题</strong>：用“通用 CV 优势 × 遥感真问题”的交叉造思路</li>
+<li><strong>查重</strong>:Google Scholar + Connected Papers，判断撞车/有空间/真假空白</li>
+<li><strong>筛题</strong>：成功路径预演（能否想象论文长相）+ 实验成本评估（对 4090 诚实）+ 外部审稿视角测动机</li>
+<li><strong>做实验</strong>：把 idea 落成详细方案 + 架构图、设计并跑通最小可行(toy)实验、从 toy 判信号</li>
+<li><strong>校准</strong>：全程把 Gap 与思路钉在“小而硬、单卡可做”</li>
+<li><strong>元习惯</strong>：用 toy 实验以最小成本探方向（算力劣势者的核武器）、用“复用现成代码最小改动”快速把 idea 变实验、用“写作/画图/给外行讲”三种方式严格检验思考是否到位(写得清/画得出/讲得明=真想清楚了，反之就是还没透)</li>
+</ul>
+<blockquote class="quote">
+<p><strong>下一格预告（W10·最关键一周，已是加厚版）</strong>：你会把候选 2、3 <strong>都跑 toy、出信号报告</strong>，用决策矩阵<strong>三选一锁定最终课题</strong>，然后从零写出一份 <strong>≥3000 字 Research Proposal v1</strong>(Title/Motivation/Related Work/Method/Experiment Plan/Contribution/Risks)——这是你后续 6 个月实验的“施工蓝图”。我会一节一节、带模板地教你写。</p>
+</blockquote>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D63</summary><textarea data-note="d63" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W9 加厚补充包（范例 / 模板+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 ① — 一张“找题漏斗”全流程 Gap 表长这样（D57–D58 对照着填）</h2>
+<blockquote class="quote">
+<p>本周的核心产物就是这张表。它从“局限性”一路长到“查重结论”，<strong>每一列都是漏斗的一层</strong>。下面是填到 D58 时的达标示范（以“遥感旋转目标检测”方向为例，<strong>你填你自己方向的</strong>）：</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code>| 编号 | 局限性 | 出自 | 本质/根因 | 严重 | 通用CV可借鉴解法 | 思路雏形(2-3句) | 查重结论 |
+|---|---|---|---|---|---|---|---|
+| G1 | 密集小目标漏检/粘连 | Oriented R-CNN | 下采样丢小目标特征+框重叠 | 高 | 高分辨率特征(HRNet)/查询式(DETR) | 检测头前加轻量高分辨率分支保小目标特征，预期 small-veh AP↑ | 类似(可做更好) |
+| G2 | 跨数据集(A训B测)大幅掉点 | ReDet | 域差异/传感器差异未建模 | 高 | 域自适应/测试时适配(TENT) | 加一个轻量域对齐模块，在跨域设定下评测鲁棒性 | 类似(可做更好) |
+| G3 | 角度回归0°/180°边界不稳 | Gliding Vertex | 角度周期性致回归不连续 | 中 | 角度编码/分类化回归 | 把角度回归改成周期友好的编码方式 | 已被做(弃) |
+| G4 | 全监督依赖大量旋转框标注 | DOTA系 | 旋转框标注比水平框贵 | 高 | 半监督/自监督/少样本 | 用少量标注+自监督预训练做旋转检测 | 没人做(待核实) |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么给你这个</strong>：① 它示范了“局限性→本质→解法→思路→查重”的完整链条；② 注意“查重结论”列——<strong>G3 已被做就划掉，G1/G2 类似最稳（方向对+有空间），G4 没人做要核实真假</strong>；③ “通用CV解法”列正是你转型者的独特弹药（遥感圈少见、你却熟）。</p>
+<h2>二、合格范例 ② — Top 5 评估表 + 成功路径预演（D59 对照着填）</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># Top 5 评估表（1-5分，实验成本越低越好）</span>
+| idea | 创新 | 可行(单卡)★ | 实验成本↓ | 空天院匹配★ | 发文目标 | 成熟度(能预演?) |
+|---|---|---|---|---|---|---|
+| 候选1 高分辨率小目标模块 | 4 | 5 | 低 | 5 | GRSL/JSTARS | 能(teaser清晰) |
+| 候选2 跨域鲁棒性评测+轻量对齐 | 4 | 5 | 低 | 4 | JSTARS | 能 |
+| 候选3 少样本旋转检测 | 4 | 4 | 中 | 4 | TGRS | 部分 |
+| <span class="gd">~~候选4 更大多模态底座~~</span> | 5 | 1 | 极高 | 3 | — | ✗画不出teaser→淘汰 |
+
+<span class="gh"># 成功路径预演（候选1）</span>
+假想标题：HRLite-Det: 面向遥感密集小目标的轻量高分辨率旋转检测
+teaser图：左 baseline 漏掉一片密集小车；右 我的方法全检出（红框对比）
+主结果表：3 个数据集 small-vehicle AP 比 SOTA 高 2-4 点，参数量/FPS 持平或更优
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>关键</strong>：候选4 你“画不出 teaser、跑不起实验”——预演当场把它筛掉，这就是预演的威力。</p>
+<h2>三、模板 + 代码 — toy 实验脚手架（D61–D62 直接套）</h2>
+<blockquote class="quote">
+<p>toy 的精髓是“最小快速”。下面是一个把“在现成代码上最小改动跑 toy”标准化的脚手架：</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># toy_runner.py —— 标准化 toy：小数据子集 + 小模型 + 几 epoch + 和 baseline 比</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_toy_subset</span><span class="p">(</span><span class="n">full_list</span><span class="p">,</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>     <span class="c1"># 取 10% 数据做 toy</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">full_list</span><span class="p">)))</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span> <span class="n">keep</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">*</span><span class="n">frac</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">full_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">keep</span><span class="p">]</span>
+
+<span class="c1"># 你的创新模块——只加这一块，其余复用 baseline 代码</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyModule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>          <span class="c1"># 例：轻量高分辨率小目标分支（占位，按 idea 实现）</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_ch</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_ch</span><span class="p">,</span> <span class="n">in_ch</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 真实实现替换这里</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># 残差式接入，最小侵入</span>
+
+<span class="c1"># 信号判断：toy 只看&quot;和 baseline 比有没有正信号&quot;，不看绝对高低</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_signal</span><span class="p">(</span><span class="n">my_metric</span><span class="p">,</span> <span class="n">base_metric</span><span class="p">):</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="n">my_metric</span> <span class="o">-</span> <span class="n">base_metric</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;正信号✓&quot;</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;噪声/持平&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.3</span> <span class="k">else</span> <span class="s2">&quot;负信号✗&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;my=</span><span class="si">{</span><span class="n">my_metric</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> base=</span><span class="si">{</span><span class="n">base_metric</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> diff=</span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="c1"># 用法：跑 baseline 和&quot;+MyModule&quot;两版 toy（其余完全一致），比 diff</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>代码 bug 自检</strong>（toy 跑出来差先怀疑 bug，不是 idea 死）：在 10 张图上把“baseline+你的模块”过拟合——<strong>能过拟合到接近 100%</strong> 说明代码通、是 toy 设置问题；<strong>过拟合不了</strong>说明模块接错（print 输入输出形状排查）。</p>
+</blockquote>
+<h2>四、每日“今日自测”</h2>
+<ul>
+<li><strong>D57</strong>：① Gap 是什么？为什么说它是论文存在的理由？② 为什么“从 Limitation 挖”比“凭空想”稳？③ “抓本质”和“抄现象”的区别？</li>
+<li><strong>D58</strong>：① 查重三态分别怎么处理？② 为什么“类似但不同”是好消息？③ “完全没人做”为什么要先警惕？</li>
+<li><strong>D59</strong>：① 成功路径预演的三问是什么？② 想不出 teaser 说明什么？③ 实验成本评估对你为什么是生死线？</li>
+<li><strong>D60</strong>：① 什么是自我确认偏误、怎么破？② “给外行讲清动机”测的是什么？③ 收敛该留“最炫”还是“能做且有意义”的？</li>
+<li><strong>D61</strong>：① 详细技术方案的四要素？② 创新点和 Gap 对不上叫什么毛病？③ 画架构图的好处？</li>
+<li><strong>D62</strong>：① 为什么在现成代码上最小改动而非重写？② toy 跑出来差，先怀疑什么？</li>
+<li><strong>D63</strong>：① toy “有信号”的判据是什么（看高低还是看方向）？② 候选1没信号为什么不慌？③ 为什么 toy 是算力劣势者的“核武器”？</li>
+</ul>
+<h2>五、本周常见错误（不是报错，是“找题/做题的思路坑”）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>常见错误</th>
+<th>为什么错</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>凭灵感等一个“酷 idea”</td>
+<td>多半被做过或不是真问题</td>
+<td>从 A 级论文 Limitation 系统挖 Gap</td>
+</tr>
+<tr>
+<td>只抄现象不写本质</td>
+<td>不知往哪改</td>
+<td>每条 Gap 追问“根因是什么”</td>
+</tr>
+<tr>
+<td>想到 idea 先兴奋着手做</td>
+<td>可能撞车白干几个月</td>
+<td>先查重（中英文+引用网络）</td>
+</tr>
+<tr>
+<td>看到“类似”就放弃</td>
+<td>类似=方向对+有空间</td>
+<td>记下差异点，类似最稳可做</td>
+</tr>
+<tr>
+<td>把“没人做的大方向”当机会</td>
+<td>多是巨头赛道/陷阱</td>
+<td>用“小而硬+单卡可做+有人在乎”筛</td>
+</tr>
+<tr>
+<td>idea 成本盲目乐观（&quot;应该能跑&quot;）</td>
+<td>中途算力卡死</td>
+<td>诚实估 GPU 时间/数据/代码，对4090诚实</td>
+</tr>
+<tr>
+<td>一个人闷头想、不找人挑刺</td>
+<td>自我确认偏误看不见漏洞</td>
+<td>找人当审稿人，越狠越好</td>
+</tr>
+<tr>
+<td>toy 跑出来差就否定 idea</td>
+<td>多半是代码 bug 或 toy 设置</td>
+<td>先 10 图过拟合验证代码，再判方向</td>
+</tr>
+<tr>
+<td>toy 搞成大实验（全量+百 epoch）</td>
+<td>失去“最小快速”意义</td>
+<td>10%数据+小模型+几 epoch</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<div class="pager"><a class="prev" href="w8.html"><span class="dir">← 上一篇</span><span class="nm">W8 方向 Deep Dive</span></a><a class="next" href="w10.html"><span class="dir">下一篇 →</span><span class="nm">W10 穷人验证 + Proposal v1 —</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d57">D57 周一</a><a class="sub" href="#d57-am">上午 从 A 级论文的 Limitat</a><a class="sub" href="#d57-noon">中午 给每条 Gap 配“通用 CV </a><a class="sub" href="#d57-pm">晚上 给 10 条 Gap 各配一个“</a><a href="#d58">D58 周二</a><a class="sub" href="#d58-am">上午 逐个思路在 Google Sch</a><a class="sub" href="#d58-noon">中午 用 Connected Pape</a><a class="sub" href="#d58-pm">晚上 排除已做过的 → 得到“去重后候</a><a href="#d59">D59 周三</a><a class="sub" href="#d59-am">上午 Top 5 思路各做“成功路径预</a><a class="sub" href="#d59-noon">中午 评估每个 idea 的实验成本（</a><a class="sub" href="#d59-pm">晚上 完善 Top 5 评估表</a><a href="#d60">D60 周四</a><a class="sub" href="#d60-am">上午 找 1–2 个朋友以“审稿人”身</a><a class="sub" href="#d60-noon">中午 整理讨论反馈</a><a class="sub" href="#d60-pm">晚上 据反馈精修 → 排除明显不可行 </a><a href="#d61">D61 周五</a><a class="sub" href="#d61-am">上午 候选 1 详细技术方案（≥500</a><a class="sub" href="#d61-noon">中午 候选 1 架构草图</a><a class="sub" href="#d61-pm">晚上 评估候选 1 的“最小可行实验(</a><a href="#d62">D62 周六</a><a class="sub" href="#d62-am">上午 准备数据 + 改代码（在 M2 </a><a class="sub" href="#d62-noon">中午 启动 toy 实验</a><a class="sub" href="#d62-pm">晚上 监控实验</a><a href="#d63">D63 周日</a><a class="sub" href="#d63-am">上午 候选 1 toy 结果分析 + </a><a class="sub" href="#d63-noon">中午 记录候选 1 信号</a><a class="sub" href="#d63-pm">晚上 W9 复盘 + W10 计划（最</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

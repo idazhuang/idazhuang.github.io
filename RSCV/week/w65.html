@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="3" data-week="65">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W65 · 实验深化 + 论文写作 + GitHub 远程维 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段三 · 深化期</span><span>M16 合作成果推进</span><span>·</span><span>Week 65</span><span>·</span><span>D449–D455</span></div><h1 class="title">实验深化 + 论文写作 + GitHub 远程维护 + ★ M16 月度复盘 —— 给暑期访问前半画上句号</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆 · 单周文件 · 🎉 M16 收官 / 访问前半收尾）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="449" data-k="am" title="D449 上午段"></i><i data-d="449" data-k="noon" title="D449 中午段"></i><i data-d="449" data-k="pm" title="D449 晚上段"></i></span><span class="sday"><i data-d="450" data-k="am" title="D450 上午段"></i><i data-d="450" data-k="noon" title="D450 中午段"></i><i data-d="450" data-k="pm" title="D450 晚上段"></i></span><span class="sday"><i data-d="451" data-k="am" title="D451 上午段"></i><i data-d="451" data-k="noon" title="D451 中午段"></i><i data-d="451" data-k="pm" title="D451 晚上段"></i></span><span class="sday"><i data-d="452" data-k="am" title="D452 上午段"></i><i data-d="452" data-k="noon" title="D452 中午段"></i><i data-d="452" data-k="pm" title="D452 晚上段"></i></span><span class="sday"><i data-d="453" data-k="am" title="D453 上午段"></i><i data-d="453" data-k="noon" title="D453 中午段"></i><i data-d="453" data-k="pm" title="D453 晚上段"></i></span><span class="sday"><i data-d="454" data-k="am" title="D454 上午段"></i><i data-d="454" data-k="noon" title="D454 中午段"></i><i data-d="454" data-k="pm" title="D454 晚上段"></i></span><span class="sday"><i data-d="455" data-k="am" title="D455 上午段"></i><i data-d="455" data-k="noon" title="D455 中午段"></i><i data-d="455" data-k="pm" title="D455 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：欢迎进入 <strong>W65（M16 收官周，暑期访问前半的最后一周）</strong>！上一周（W64）你做成了完整 benchmark、把空天院数据结果写进论文、和老师讨论了署名、加深了关系。这一周做三件事：① <strong>实验深化 + 论文写作</strong>（周一-周五：把访问期间的实验做扎实、推进论文——如合作论文则和团队推进、署名按讨论结果）；② ★ <strong>GitHub 远程维护</strong>（周六：访问期间 GitHub 不能断更——回复 Issue、发布小更新，保持影响力）；③ ★ <strong>M16 月度复盘</strong>（周日：用<a href="../appendix-e.html">附录 E</a> 复盘 M16，★ 对照 M16 硬交付清单 6 项、评估访问前半的成果，计划 M17）。同时可能有 ★ <strong>30min 组会正式汇报</strong>（如 W64 没做，W65 组会日做）。★ W65 的主线：“把访问前半的实验和论文做扎实、保持 GitHub 影响力、对 M16 做一次诚实的复盘——给暑期访问前半画上一个扎实的句号。”
+<strong>本周科研能力目标</strong>（你原计划，保留）：实验深化 + 论文写作 + GitHub 远程维护 + M16 月度复盘（对照硬交付 6 项）+ 博士课题维护。
+<strong>承上</strong>：W64 你做成了完整 benchmark、论文加空天院结果、讨论了署名。<strong>本周把实验和论文做扎实、保持 GitHub 影响力、做 M16 月复盘，给访问前半收官。</strong></p>
+<p><strong>🧩 贯穿线索</strong>：★ <strong>实验深化 + 论文写作</strong>把访问前半的工作做成阶段性完整的成果（完整 benchmark + 合作论文推进）。★ <strong>GitHub 远程维护</strong>——★★ 访问期间 GitHub 不能断更（你的“被动名片”要保持活跃，回 Issue + 小更新）。★ <strong>M16 月度复盘是 W65 的灵魂</strong>——用<a href="../appendix-e.html">附录 E</a> 系统复盘 M16（暑期访问前半），★ <strong>对照 M16 硬交付清单 6 项</strong>（融入团队/空天院数据实验结果/组会汇报≥1次/找到≥1个合作点/周报×4/博士课题未断档），评估访问前半的实质成果（合作论文 + 连接深化），据结果计划 M17。★ <strong>每天 1h 维护博士课题</strong>雷打不动。★★ <strong>远程合作模式</strong>：远程深化实验、线上论文、GitHub 维护、线上月复盘，核心不变。守核心延后、单卡高效照旧。下一程 M17（W66-69，暑期访问后半·论文合作冲刺）。</p>
+<p><strong>📌 本周结构</strong>：D449 实验深化 +（可能）★ 30min 组会汇报 + 论文写作；D450 合作实验推进 + 论文写作（合作论文）；D451 实验结果整合 + 论文写作；D452 与师兄/老师对齐论文 + 论文写作；D453 论文写作收尾 + 访问前半成果盘点；D454 ★ GitHub 远程维护（不能断更）+ 实验/论文轻量推进；D455 ★ M16 月度复盘（<a href="../appendix-e.html">附录 E</a>）+ 对照硬交付 6 项 + 计划 M17。</p>
+</blockquote>
+<hr />
+<h2>🧭 W65 总览：实验深化 + 论文 → GitHub 维护 → ★ M16 月度复盘</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这一周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实验深化 + 论文写作（周一-五）</td>
+<td>阶段性完整的实验 + 论文</td>
+<td>访问前半成果做扎实</td>
+</tr>
+<tr>
+<td>★ GitHub 远程维护（周六）</td>
+<td>活跃的仓库</td>
+<td>影响力不断档</td>
+</tr>
+<tr>
+<td>★ M16 月度复盘（周日，对照硬交付 6 项）</td>
+<td>M16 月报 + 访问前半评估</td>
+<td>收官复盘、校准方向</td>
+</tr>
+<tr>
+<td>计划 M17</td>
+<td>M17 计划（论文合作冲刺）</td>
+<td>衔接访问后半</td>
+</tr>
+<tr>
+<td>博士课题维护（每天 1h）</td>
+<td>博士线不断档</td>
+<td>后院安稳前线冲</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D449 实验深化 +（可能）30min 汇报 + 论文；D450 合作实验 + 论文；D451 结果整合 + 论文；D452 对齐论文 + 论文；D453 论文收尾 + 成果盘点；D454 ★ GitHub 维护 + 轻量推进；D455 ★ M16 月复盘 + 对照硬交付 + 计划 M17。<strong>核心心态：这一周是暑期访问前半的收官——把实验和论文做扎实、给 M16 一个诚实的复盘。前五天继续深化实验、推进论文（如合作论文则和团队推进、署名按讨论结果），把访问前半的工作做成阶段性完整的成果（完整 benchmark + 一篇正在成形的合作论文）。周六别忘了 ★ GitHub 远程维护——访问期间你的“被动名片”不能断更，回 Issue、发小更新，保持影响力。而周日的 ★ M16 月度复盘是这周的灵魂：用<a href="../appendix-e.html">附录 E</a> 系统复盘暑期访问前半,★ 对照 M16 硬交付清单 6 项（融入团队、空天院数据实验结果、组会汇报、找到合作点、周报×4、博士课题未断档），诚实评估访问前半的实质成果——你和空天院的连接深化到了什么程度？合作论文进展如何？据这些校准 M17（访问后半）的策略。★ 走到这里，你完成了暑期访问的前半——从“零遥感基础”到“走进空天院、和团队合作、产出共同成果”，你已经把“遥远的连接”变成了“实质的合作”。M16 收官，是对这段珍贵访问前半的盘点，也是后半冲刺的起点。带着这份扎实和实质的成果，给 M16 画上句号。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d449" data-d="449"><header class="day-head"><span class="dnum">D449</span><h2 class="day-t">周一 · 实验深化 +（可能）★ 30min 组会汇报 + 论文写作</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 第一天——① 上午团队协作 +（如 W65 组会日且 W64 没汇报）★ 30min 组会正式汇报 + 收集反馈 / 或实验深化；② 中午实验深化（完整 benchmark 进一步打磨/合作实验推进）；③ 晚上论文写作 + 博士维护 1h。提醒：如果 30min 组会汇报还没做（M16 硬交付要“组会汇报≥1次”），本周组会日一定要做；实验深化把访问前半的工作做扎实。★★ 远程模式：线上组会汇报、远程实验。</p>
+</blockquote>
+</div><section class="slot" id="d449-am" data-d="449" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D449 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 +（可能）★ 30min 组会正式汇报</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午——① <strong>如果 30min 组会汇报还没做</strong>（W64 没做，且 W65 是组会日）：★ <strong>做 30min 组会正式汇报</strong>（汇报访问期间的实验进展 + 完整 benchmark + 合作 + 初步结果，★ 重点访问期间的工作，收集并记录全组反馈，虚心应对）——★ <strong>这是 M16 硬交付“组会汇报≥1次(30min)”必须完成的一项</strong>；② <strong>如果已汇报</strong>（W64 做了）：实验深化 + 团队协作（据上次汇报反馈继续改进）；③ <strong>团队协作</strong>（继续融入）。<strong>确保 30min 组会汇报在 M16 内完成（硬交付），收集全组反馈。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：线上组会做汇报，同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>①【未汇报】做 30min 汇报（实验进展 + benchmark + 合作 + 结果，重点访问工作，记录反馈，虚心）；②【已汇报】实验深化 + 据反馈改进；③ 团队协作；④ 确保汇报在 M16 内完成；⑤ 收集反馈。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>（未汇报）30min 汇报完成 + 收集反馈（M16 硬交付达成）；（已汇报）实验深化 + 据反馈改进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>拖到 M16 结束还没汇报（硬交付未达成）→ ★ 本周组会日一定做。</li>
+<li>汇报不记录反馈 → ★ 记录所有反馈。</li>
+<li>对反馈辩解 → 虚心应对。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>W64 汇报了吗？→ 没有则 W65 组会日必做（硬交付）；组会日是哪天？→ 据团队组会安排；汇报内容？→ 用 W63 准备的 PPT（访问工作 + benchmark + 合作）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了 30min 汇报（如未汇报）/深化了实验</strong>。<strong>做了</strong>（30min 汇报 + 收集反馈 / 实验深化 + 据反馈改进）、<strong>学了</strong>（确保组会汇报在 M16 内完成[硬交付]、收集反馈、虚心）、<strong>会了</strong>（完成 M16 的组会正式汇报）。</p>
+</div></section></section><section class="slot" id="d449-noon" data-d="449" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D449 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实验深化（完整 benchmark 打磨/合作实验推进）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>实验深化</strong>——① <strong>完整 benchmark 进一步打磨</strong>（据组会反馈/进一步分析，把 benchmark 打磨得更扎实）；② <strong>合作实验推进</strong>（合作点的共同产出实验推进——向合作论文积累）；③ ★ <strong>平衡你的核心实验和合作实验</strong>；④ <strong>实验管理</strong>。<strong>实验深化把访问前半的实验做扎实、向阶段性完整推进。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 完整 benchmark 打磨（据反馈/分析）；② 合作实验推进；③ ★ 平衡核心和合作实验；④ 实验管理；⑤ 向阶段性完整推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验深化——benchmark 打磨、合作实验推进、平衡两者，向阶段性完整推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① benchmark 不打磨（停在上周）→ 据反馈/分析打磨；② 合作实验停 → 推进；③ 顾此失彼 → 平衡。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>打磨啥？→ 据组会反馈/进一步分析完善 benchmark；合作实验？→ 向合作论文的共同产出推进。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>深化了实验</strong>。<strong>做了</strong>（benchmark 打磨 + 合作实验推进 + 平衡 + 实验管理）、<strong>学了</strong>（实验深化做扎实、平衡核心和合作、向阶段性完整）、<strong>会了</strong>（深化访问期间的实验）。</p>
+</div></section></section><section class="slot" id="d449-pm" data-d="449" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D449 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文写作 + 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文写作</strong>——① <strong>推进论文</strong>（如合作论文：据署名讨论结果，把访问的工作[完整 benchmark + 合作]写进论文）；② ★ <strong>据署名安排推进</strong>（如可挂空天院署名→合作论文，和团队的工作/结果都写进去；如不挂→你的论文继续）；③ ★ <strong>博士维护 1h</strong>。<strong>论文写作把访问的工作沉淀为论文——合作论文向成形推进。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 推进论文（写访问的工作）；② ★ 据署名安排推进（合作论文/你的论文）；③ ★ 博士维护 1h；④ 边做边写；⑤ 论文成形。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作 + 博士维护——推进了论文（据署名安排）、博士维护 1h，论文向成形推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 论文不推进（停滞）→ 写访问的工作；② 不据署名安排（方向乱）→ 据署名讨论结果推进；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写啥？→ 完整 benchmark + 合作的工作和结果；署名怎么处理？→ 据 W64 讨论结果（合作论文/独立）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了论文、维护了博士</strong>。<strong>做了</strong>（推进论文 + 据署名安排 + 博士维护 1h）、<strong>学了</strong>（论文据署名安排推进、合作论文成形、博士维护持续）、<strong>会了</strong>（据署名结果推进论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜实验深化收尾 + 合作论文推进（据署名结果）</strong>：访问前半实验和论文收尾——①实验深化（完整 benchmark 据组会反馈/分析打磨 + 合作实验推进向共同产出,★ 平衡核心和合作实验）②论文写作据署名讨论结果推进：如可挂空天院署名→合作论文（团队的工作/结果 + 你的工作都写进去），如不挂→你的独立论文继续。★ 把访问的工作（完整 benchmark + 合作）沉淀为阶段性完整的论文。★ 30min 组会汇报如 W64 没做、W65 组会日必做（M16 硬交付“组会汇报≥1次”）。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅（如未汇报）★ 30min 组会汇报 + 收集反馈 / 实验深化 ✅ 实验深化（benchmark 打磨 + 合作实验）✅ 论文写作（据署名推进）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D449</summary><textarea data-note="d449" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d450" data-d="450"><header class="day-head"><span class="dnum">D450</span><h2 class="day-t">周二 · 合作实验推进 + 论文写作（合作论文）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 第二天——① 上午团队协作 + 合作实验推进（合作点的共同产出）；② 中午实验深化（据反馈补充实验/合作实验）；③ 晚上论文写作（合作论文，据署名讨论结果推进）+ 博士维护 1h。提醒：合作实验是合作论文的核心——把合作点的共同产出做出来，让合作论文有实质内容。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d450-am" data-d="450" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D450 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 合作实验推进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>合作实验推进</strong>——① <strong>推进合作点的共同产出</strong>（W63 确定的合作点：帮师兄跑对比/你的方法验证他数据/共同设计的改进——把共同产出做出来）；② <strong>和师兄密切协作</strong>（合作实验和师兄密切配合、同步进展）；③ ★ <strong>共同产出是合作论文的核心</strong>（合作实验的结果就是合作论文的实质内容）；④ <strong>记录合作进展</strong>。<strong>合作实验推进，让合作论文有实质的共同产出。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：线上合作实验，同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 推进合作点共同产出（按合作点）；② 和师兄密切协作同步；③ ★ 共同产出（合作论文核心）；④ 记录进展；⑤ 合作实验向出结果推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>合作实验推进——推进了共同产出、和师兄协作同步、共同产出向合作论文积累，记录进展。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 合作实验停滞 → 推进出结果；② 不和师兄同步 → 密切协作；③ 不记录 → 记录共同产出。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>合作实验做啥？→ 按合作点（对比/验证/设计）出共同产出；卡住？→ 和师兄讨论。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了合作实验</strong>。<strong>做了</strong>（推进共同产出 + 和师兄协作 + 记录）、<strong>学了</strong>（合作实验出共同产出=合作论文核心、和师兄密切协作）、<strong>会了</strong>（推进合作实验的共同产出）。</p>
+</div></section></section><section class="slot" id="d450-noon" data-d="450" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D450 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实验深化（据反馈补充实验/合作实验）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>实验深化</strong>——① <strong>据组会反馈补充实验</strong>（如组会汇报后全组提了建议，补相应的实验）；② <strong>合作实验深化</strong>（合作点的实验进一步深化、做扎实）；③ ★ <strong>按 GPU 规则用</strong>；④ <strong>实验管理</strong>。<strong>据反馈补充 + 合作实验深化，让访问前半的实验做扎实、可写论文。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 据组会反馈补充实验；② 合作实验深化；③ ★ 按 GPU 规则用；④ 实验管理；⑤ 实验做扎实。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验深化——据反馈补充了实验、合作实验深化，实验做扎实、可写论文。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不据反馈补（浪费建议）→ 据组会反馈补；② 合作实验不深化 → 深化做扎实；③ 占太多 GPU → 按规则用。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>补什么实验？→ 据组会反馈要补的；合作实验怎么深化？→ 把共同产出做扎实。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>深化了实验</strong>。<strong>做了</strong>（据反馈补充 + 合作实验深化 + 按规则用 + 实验管理）、<strong>学了</strong>（据反馈补充、合作实验深化、做扎实）、<strong>会了</strong>（据反馈和合作深化实验）。</p>
+</div></section></section><section class="slot" id="d450-pm" data-d="450" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D450 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文写作（合作论文）+ 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文写作（合作论文）</strong>——① <strong>写合作论文</strong>（如可挂空天院署名→合作论文：把合作的工作[共同产出]+ 你的完整 benchmark 写进论文）；② ★ <strong>据署名安排组织内容</strong>（合作论文的方法/实验/贡献，体现合作各方的工作）；③ ★ <strong>博士维护 1h</strong>。<strong>论文写作让合作论文成形——访问最实质的成果在积累。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写合作论文（共同产出 + 完整 benchmark）；② ★ 据署名安排组织内容；③ ★ 博士维护 1h；④ 边做边写；⑤ 合作论文成形。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作 + 博士维护——写了合作论文（共同产出 + benchmark）、据署名组织内容、博士维护 1h，合作论文成形。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 合作论文不写（停滞）→ 写共同产出 + benchmark；② 不体现合作各方工作 → 据署名组织内容；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>合作论文写啥？→ 共同产出 + 你的 benchmark + 合作各方工作；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了合作论文、维护了博士</strong>。<strong>做了</strong>（写合作论文 + 据署名组织 + 博士维护 1h）、<strong>学了</strong>（合作论文体现合作各方工作、成形、博士维护持续）、<strong>会了</strong>（推进合作论文成形）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 团队协作 + 合作实验推进（共同产出）✅ 实验深化（据反馈补充 + 合作实验）✅ 论文写作（合作论文）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D450</summary><textarea data-note="d450" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d451" data-d="451"><header class="day-head"><span class="dnum">D451</span><h2 class="day-t">周三 · 实验结果整合 + 论文写作</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 第三天——① 上午团队协作 + 实验结果整合（你的实验 + 合作实验的结果整合）；② 中午实验深化收尾（把访问期间的实验做扎实、整理）；③ 晚上论文写作（整合结果、推进论文）+ 博士维护 1h。提醒：实验结果整合是把访问前半的所有实验（完整 benchmark + 合作实验）整合成一套完整的结果——为论文和月复盘准备。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d451-am" data-d="451" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D451 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 实验结果整合</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>实验结果整合</strong>——① <strong>整合所有实验结果</strong>（你的完整 benchmark[baseline + 消融 + 可视化]+ 合作实验的共同产出——整合成一套完整的访问前半实验结果）；② ★ <strong>形成清晰的结果体系</strong>（哪些是你的核心实验、哪些是合作产出、各说明什么）；③ <strong>为论文和月复盘准备</strong>（整合好的结果用于论文和 M16 月复盘）；④ <strong>团队协作</strong>。<strong>实验结果整合，把访问前半的所有实验做成清晰完整的结果体系。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整合所有实验结果（benchmark + 合作）；② ★ 形成清晰结果体系（核心/合作/说明什么）；③ 为论文和月复盘准备；④ 团队协作；⑤ 完整结果体系。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验结果整合——整合了所有结果、形成清晰结果体系、为论文和月复盘准备，访问前半实验完整。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 结果零散（不整合）→ 整合成体系；② 体系不清（混乱）→ 分清核心/合作/说明什么；③ 不为月复盘准备 → 整合好备用。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么整合？→ benchmark + 合作实验整合成完整结果体系；体系怎么清晰？→ 分清你的核心实验 vs 合作产出。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整合了实验结果</strong>。<strong>做了</strong>（整合所有结果 + 形成体系 + 为论文月复盘准备 + 团队协作）、<strong>学了</strong>（整合结果成清晰体系、分清核心和合作、备用）、<strong>会了</strong>（把访问前半的实验整合成完整结果体系）。</p>
+</div></section></section><section class="slot" id="d451-noon" data-d="451" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D451 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实验深化收尾（做扎实、整理）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>实验深化收尾</strong>——① <strong>收尾访问前半的实验</strong>（让跑着的实验收尾、把实验做扎实）；② <strong>整理实验</strong>（完整 benchmark + 合作实验整理清楚、归档）；③ ★ <strong>确认实验扎实可用于论文</strong>（经得起审稿的结果）；④ <strong>实验管理</strong>。<strong>实验深化收尾，把访问前半的实验做扎实、整理归档。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 收尾访问前半实验；② 整理实验（benchmark + 合作，归档）；③ ★ 确认扎实可用于论文；④ 实验管理；⑤ 实验做扎实。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验深化收尾——收尾了实验、整理归档、确认扎实可用于论文，访问前半实验做扎实。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不收尾（实验散）→ 收尾整理；② 实验不扎实（经不起审稿）→ 确认扎实；③ 不归档 → 归档（可追溯）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么收尾？→ 实验做扎实 + 整理归档；扎实吗？→ 结果可信、可复现、经得起审稿。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>收尾了实验深化</strong>。<strong>做了</strong>（收尾实验 + 整理归档 + 确认扎实 + 实验管理）、<strong>学了</strong>（实验收尾做扎实、归档可追溯、经得起审稿）、<strong>会了</strong>（把访问前半的实验收尾做扎实）。</p>
+</div></section></section><section class="slot" id="d451-pm" data-d="451" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D451 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文写作（整合结果、推进论文）+ 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文写作</strong>——① <strong>把整合的结果写进论文</strong>（完整的实验结果体系写进论文 Experiment）；② <strong>推进论文</strong>（论文向阶段性完整推进——访问前半的论文产出）；③ ★ <strong>博士维护 1h</strong>。<strong>论文写作把整合的结果写进论文，论文向阶段性完整推进。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 把整合结果写进论文（Experiment）；② 推进论文（向阶段性完整）；③ ★ 博士维护 1h；④ 边做边写；⑤ 论文推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作 + 博士维护——整合结果写进论文、论文推进、博士维护 1h，论文向阶段性完整。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 结果不写进论文 → 写进 Experiment；② 论文不推进 → 向阶段性完整推进；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写啥？→ 整合的完整结果体系写进 Experiment；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了论文、维护了博士</strong>。<strong>做了</strong>（写整合结果 + 推进论文 + 博士维护 1h）、<strong>学了</strong>（整合结果写进论文、向阶段性完整、博士维护持续）、<strong>会了</strong>（把整合结果写进论文推进）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 团队协作 + 实验结果整合（完整结果体系）✅ 实验深化收尾（做扎实、归档）✅ 论文写作（整合结果）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D451</summary><textarea data-note="d451" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d452" data-d="452"><header class="day-head"><span class="dnum">D452</span><h2 class="day-t">周四 · 与师兄/老师对齐论文 + 论文写作</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 第四天——① 上午团队协作 + 与师兄/老师对齐论文（合作论文的方向/分工/进度）；② 中午论文写作（把访问的工作写成阶段性完整的论文/章节）；③ 晚上论文写作 + 博士维护 1h。提醒：与师兄/老师对齐论文是合作论文推进的关键——对齐方向、分工、进度，让合作论文顺利推进。★★ 远程模式：视频/线上对齐。</p>
+</blockquote>
+</div><section class="slot" id="d452-am" data-d="452" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D452 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 与师兄/老师对齐论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（怎么对齐合作论文）</h4><div class="blk-b"><ul>
+<li>上午<strong>与师兄/老师对齐论文</strong>（如合作论文）——① <strong>对齐方向</strong>（合作论文的方向、核心贡献、投哪——和老师/师兄达成共识）；② <strong>对齐分工</strong>（谁写哪部分、谁做哪些实验——明确分工）；③ <strong>对齐进度</strong>（论文的时间安排、什么时候完成草稿——尤其访问结束前要完成的部分）；④ ★ <strong>尊重合作节奏</strong>（合作论文涉及多方，尊重老师/师兄的意见和节奏）。<strong>与师兄/老师对齐论文，让合作论文方向清晰、分工明确、进度可控。</strong></li>
+<li>★★ <strong>远程模式</strong>：视频/线上对齐，同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 对齐方向（核心贡献、投哪）；② 对齐分工（谁写哪部分、谁做哪些实验）；③ 对齐进度（时间安排、草稿完成节点）；④ ★ 尊重合作节奏；⑤ 合作论文方向清晰、分工明确。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>与师兄/老师对齐论文——对齐了方向/分工/进度、尊重合作节奏，合作论文清晰可控。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不对齐就自己写（方向偏）→ 和老师/师兄对齐方向。</li>
+<li>分工不明（重复/遗漏）→ 明确谁写哪部分。</li>
+<li>不尊重合作节奏（自作主张）→ 尊重老师/师兄意见。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>对齐什么？→ 方向 + 分工 + 进度；分工怎么定？→ 你写你的核心工作部分，和师兄商量其他；进度怎么排？→ 访问结束前完成哪些。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>对齐了合作论文</strong>。<strong>做了</strong>（对齐方向 + 分工 + 进度 + 尊重节奏）、<strong>学了</strong>（合作论文对齐方向分工进度、尊重合作节奏）、<strong>会了</strong>（和团队对齐合作论文的推进）。</p>
+</div></section></section><section class="slot" id="d452-noon" data-d="452" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D452 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">论文写作（写成阶段性完整）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>论文写作（写成阶段性完整）</strong>——① <strong>写你负责的部分</strong>（据分工，把你负责的论文部分[如 Method/Experiment/你的核心工作]写成阶段性完整）；② ★ <strong>复用你的论文写作经验</strong>（你写过三篇论文，写作驾轻就熟）；③ <strong>向阶段性完整推进</strong>（访问前半的论文产出——一篇正在成形的合作论文/你的论文）；④ <strong>论文管理</strong>。<strong>论文写作把你负责的部分写成阶段性完整，合作论文向成形推进。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写你负责的部分（据分工）；② ★ 复用论文写作经验；③ 向阶段性完整推进；④ 论文管理；⑤ 论文成形。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作——写了你负责的部分、向阶段性完整推进，论文成形。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 写作从零摸索（慢）→ ★ 复用经验；② 不据分工（越界/遗漏）→ 写你负责的部分；③ 不向完整推进 → 写成阶段性完整。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写哪部分？→ 据分工（你的核心工作部分）；怎么快？→ 复用你三篇论文的写作经验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了论文</strong>。<strong>做了</strong>（写负责部分 + 复用经验 + 向阶段性完整 + 论文管理）、<strong>学了</strong>（据分工写、复用经验、向阶段性完整）、<strong>会了</strong>（把负责的论文部分写成阶段性完整）。</p>
+</div></section></section><section class="slot" id="d452-pm" data-d="452" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D452 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文写作 + 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>论文写作</strong>——① <strong>继续写论文</strong>（推进你负责的部分、向更完整）；② <strong>看论文整体</strong>（合作论文的整体进展——离完整草稿还差什么）；③ ★ <strong>博士维护 1h</strong>。<strong>论文写作继续推进，合作论文向完整草稿靠近。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 继续写论文；② 看论文整体进展；③ ★ 博士维护 1h；④ 边做边写；⑤ 向完整草稿靠近。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作 + 博士维护——继续写了论文、看了整体进展、博士维护 1h，向完整草稿靠近。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 论文停滞 → 继续推进；② 不看整体（局部好整体乱）→ 看整体进展；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>写啥？→ 继续你负责的部分 + 看整体；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了论文、维护了博士</strong>。<strong>做了</strong>（继续写 + 看整体 + 博士维护 1h）、<strong>学了</strong>（继续推进、看整体、博士维护持续）、<strong>会了</strong>（持续推进合作论文向完整草稿）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜与师兄/老师对齐合作论文（方向/分工/进度·尊重节奏）</strong>：合作论文推进的关键——①对齐方向（核心贡献、投哪，和老师/师兄达成共识）②对齐分工（谁写哪部分、谁做哪些实验，明确）③对齐进度（时间安排、草稿完成节点，尤其访问结束前要完成的部分）④★ 尊重合作节奏（合作论文涉及多方，尊重老师/师兄意见和节奏）。★ 写作时据分工写你负责的部分（复用你三篇论文经验），向阶段性完整推进。★★ 远程：视频/线上对齐。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 团队协作 + 与师兄/老师对齐论文（方向/分工/进度）✅ 论文写作（写成阶段性完整）✅ 论文写作 + 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D452</summary><textarea data-note="d452" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d453" data-d="453"><header class="day-head"><span class="dnum">D453</span><h2 class="day-t">周五 · 论文写作收尾 + 访问前半成果盘点</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 第五天——① 上午团队协作 + 论文写作收尾（访问前半的论文产出阶段性完整）；② 中午实验/论文阶段性整理（访问前半的成果：benchmark + 合作 + 论文）；③ 晚上访问前半成果盘点（为月复盘准备）+ 博士维护 1h。提醒：今天把论文写作阶段性收尾、盘点访问前半的所有成果——为周日的 M16 月复盘准备。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d453-am" data-d="453" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D453 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">团队协作 + 论文写作收尾</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>论文写作收尾</strong>——① <strong>阶段性收尾论文</strong>（把你负责的论文部分写到阶段性完整——访问前半的论文产出）；② ★ <strong>明确论文状态</strong>（合作论文到哪了——草稿完整度、还差什么、访问后半[M17]要完成什么）；③ <strong>和分工/进度对齐</strong>（你的部分是否达到了对齐的进度）；④ <strong>团队协作</strong>。<strong>论文写作阶段性收尾，明确访问前半的论文产出和后半的任务。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 阶段性收尾论文（你的部分到阶段性完整）；② ★ 明确论文状态（完整度/还差什么/M17 任务）；③ 和分工进度对齐；④ 团队协作；⑤ 论文产出明确。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文写作收尾——你的部分阶段性完整、明确了论文状态（完整度 + M17 任务）、和进度对齐，访问前半论文产出明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不收尾（论文悬着）→ 阶段性收尾；② 不明确状态（M17 抓瞎）→ 明确完整度和 M17 任务；③ 不和进度对齐 → 对齐分工进度。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>收尾到什么程度？→ 你负责的部分阶段性完整；论文还差啥？→ 明确草稿完整度 + M17 要完成的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>收尾了论文写作</strong>。<strong>做了</strong>（阶段性收尾 + 明确状态 + 和进度对齐 + 团队协作）、<strong>学了</strong>（论文阶段性收尾、明确状态和 M17 任务、对齐进度）、<strong>会了</strong>（把论文写作阶段性收尾、明确后续）。</p>
+</div></section></section><section class="slot" id="d453-noon" data-d="453" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D453 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">实验/论文阶段性整理（访问前半成果）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>实验/论文阶段性整理</strong>——① <strong>整理访问前半的成果</strong>（完整 benchmark + 合作实验 + 合作论文/论文进展——访问前半的所有产出）；② ★ <strong>形成成果清单</strong>（你在访问前半做了什么、产出了什么——为月复盘准备）；③ <strong>归档</strong>（实验/论文/合作记录归档，可追溯）；④ <strong>看成果的价值</strong>（这些成果对你/对合作的意义）。<strong>实验/论文阶段性整理，把访问前半的成果理清楚——为 M16 月复盘准备。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理访问前半成果（benchmark + 合作 + 论文）；② ★ 形成成果清单（做了什么/产出什么）；③ 归档（可追溯）；④ 看成果价值；⑤ 为月复盘准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验/论文阶段性整理——整理了访问前半成果、形成成果清单、归档，为月复盘准备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 成果不整理（月复盘没素材）→ 整理成清单；② 不归档 → 归档可追溯；③ 不看价值 → 看成果对你/合作的意义。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>成果清单有啥？→ 完整 benchmark + 合作实验 + 合作论文进展 + 组会汇报 + 周报×4；归档啥？→ 实验/论文/合作记录。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了访问前半成果</strong>。<strong>做了</strong>（整理成果 + 形成清单 + 归档 + 看价值）、<strong>学了</strong>（整理成果成清单、归档、看价值、为月复盘准备）、<strong>会了</strong>（系统整理访问前半的成果）。</p>
+</div></section></section><section class="slot" id="d453-pm" data-d="453" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D453 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">访问前半成果盘点（为月复盘准备）+ 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>访问前半成果盘点</strong>——① <strong>盘点访问前半的整体收获</strong>（实验[完整 benchmark]、合作[合作点 + 共同产出]、论文[合作论文进展]、连接[和团队的关系深化]、个人成长[在团队做研究的能力提升]）；② ★ <strong>对照 M16 硬交付清单 6 项</strong>（初步对照：融入团队/空天院数据实验结果/组会汇报/合作点/周报×4/博士未断档——哪些达成了）；③ <strong>为周日 M16 月复盘准备</strong>（盘点好，周日系统复盘）；④ ★ <strong>博士维护 1h</strong>。<strong>访问前半成果盘点，为 M16 月复盘做准备、心里有数。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 盘点整体收获（实验/合作/论文/连接/成长）；② ★ 初步对照 M16 硬交付 6 项；③ 为周日月复盘准备；④ ★ 博士维护 1h；⑤ 心里有数。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问前半成果盘点——盘点了整体收获、初步对照硬交付 6 项，为月复盘准备，博士维护 1h。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不盘点（月复盘仓促）→ 盘点好；② 不对照硬交付 → 初步对照 6 项；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>盘点啥？→ 实验/合作/论文/连接/成长 + 对照硬交付 6 项；为月复盘？→ 盘点好周日系统复盘。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>盘点了访问前半成果</strong>。<strong>做了</strong>（盘点整体收获 + 对照硬交付 + 为月复盘准备 + 博士维护 1h）、<strong>学了</strong>（盘点访问前半收获、对照硬交付、为月复盘准备）、<strong>会了</strong>（盘点访问前半的整体成果）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 团队协作 + 论文写作收尾（阶段性完整、明确 M17 任务）✅ 实验/论文阶段性整理（成果清单）✅ 访问前半成果盘点（为月复盘准备）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D453</summary><textarea data-note="d453" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d454" data-d="454"><header class="day-head"><span class="dnum">D454</span><h2 class="day-t">周六 · ★ GitHub 远程维护（不能断更）+ 实验/论文轻量推进</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 第六天——① 上午 ★ GitHub 远程维护（回复 Issue、发布小更新——访问期间不能断更）；② 中午 GitHub 维护（README 更新/社区互动）+ 实验/论文轻量推进；③ 晚上轻量整理（为月复盘准备）+ 博士维护 1h。提醒：访问期间 GitHub 不能断更——你的“被动名片”要保持活跃（回 Issue、发小更新）。★★ 远程模式：GitHub 维护同样（本就线上）。</p>
+</blockquote>
+</div><section class="slot" id="d454-am" data-d="454" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D454 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">★ GitHub 远程维护（回 Issue + 发布小更新）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么访问期间 GitHub 不能断更）</h4><div class="blk-b"><ul>
+<li>上午 ★ <strong>GitHub 远程维护</strong>——① ★ <strong>访问期间 GitHub 不能断更</strong>（你忙于访问，但 GitHub 这个“被动名片”不能荒废——荒废会让查看的人觉得项目不活跃）；② <strong>回复 Issue</strong>（用户提的问题/issue，及时回复——保持活跃和负责）；③ <strong>发布小更新</strong>（小的代码优化/文档更新/release——保持仓库活跃）；④ ★ <strong>守核心延后</strong>（未发表的核心代码延后开源，框架性的可更新）。<strong>GitHub 远程维护保持你的被动影响力——访问期间也不断档。</strong></li>
+<li>★★ <strong>远程模式</strong>：GitHub 维护本就是线上，同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 回复 Issue（用户问题/issue）；② 发布小更新（代码优化/文档/release）；③ 保持仓库活跃；④ ★ 守核心延后（未发表核心延后）；⑤ 被动影响力不断档。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>GitHub 远程维护——回复了 Issue、发布了小更新、保持活跃，守核心延后，被动影响力不断档。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>访问期间 GitHub 荒废（显不活跃）→ ★ 保持活跃（回 Issue + 小更新）。</li>
+<li>Issue 不回复（显不负责）→ 及时回复。</li>
+<li>泄露未发表核心代码 → ★ 守核心延后。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>没空多弄？→ 回 Issue + 小更新保持活跃即可；更新啥？→ 文档/小优化/release（未发表核心延后）;Issue 多？→ 优先重要的回。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>维护了 GitHub</strong>。<strong>做了</strong>（回 Issue + 发小更新 + 保持活跃 + 守核心延后）、<strong>学了</strong>（★ 访问期间 GitHub 不能断更、保持活跃、守核心延后）、<strong>会了</strong>（访问期间远程维护 GitHub 影响力）。</p>
+</div></section></section><section class="slot" id="d454-noon" data-d="454" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D454 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">GitHub 维护（README/社区互动）+ 实验/论文轻量推进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>GitHub 维护 + 实验/论文轻量推进</strong>——① <strong>README 更新</strong>（如有新进展，更新 README；可加访问期间的进展，如适用）；② <strong>社区互动</strong>（知乎/技术社区适度互动，保持存在感）；③ <strong>实验/论文轻量推进</strong>（周末轻量推进访问的实验/论文）；④ <strong>副线控时长</strong>（GitHub/社区是副线，核心是访问的实验和论文）。<strong>GitHub 维护 + 轻量推进，保持影响力副线、推进核心。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 更新 README（如有新进展）；② 社区互动（适度）；③ 实验/论文轻量推进；④ 副线控时长；⑤ 影响力 + 核心都顾。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>GitHub 维护 + 轻量推进——README 更新、社区互动、实验/论文轻量推进，副线控时长。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 副线花太多时间（喧宾夺主）→ 控时长；② README 长期不更 → 更新；③ 完全不碰核心 → 轻量推进实验/论文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>更新啥？→ README 新进展 + 社区适度互动；核心怎么顾？→ 轻量推进实验/论文。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>维护了 GitHub、推进了核心</strong>。<strong>做了</strong>（更新 README + 社区互动 + 轻量推进 + 控时长）、<strong>学了</strong>（维护影响力副线、控时长、顾核心）、<strong>会了</strong>（平衡影响力副线和访问核心）。</p>
+</div></section></section><section class="slot" id="d454-pm" data-d="454" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D454 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">轻量整理（为月复盘准备）+ 博士维护 1h</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>轻量整理</strong>——① <strong>整理本周</strong>（实验深化 + 论文 + GitHub 维护——本周的工作）；② <strong>为周日月复盘准备</strong>（M16 月复盘的素材：访问前半成果 + 硬交付对照——已在 D453 盘点，今晚补充完善）；③ ★ <strong>博士维护 1h</strong>；④ <strong>轻量、不费劲</strong>。<strong>轻量整理为周日的 M16 月复盘做最后准备。</strong></p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理本周（实验/论文/GitHub）；② 为月复盘准备（补充完善素材）；③ ★ 博士维护 1h；④ 轻量；⑤ 月复盘准备就绪。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>轻量整理——整理了本周、为月复盘准备（素材完善）、博士维护 1h，月复盘就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不整理（月复盘仓促）→ 轻量整理；② 整理太重（周末过劳）→ 轻量；③ 忘博士维护 → ★ 1h。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>整理啥？→ 本周工作 + 月复盘素材；博士维护？→ 1h。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>轻量整理了、维护了博士</strong>。<strong>做了</strong>（整理本周 + 为月复盘准备 + 博士维护 1h）、<strong>学了</strong>（轻量整理为月复盘准备、博士维护持续）、<strong>会了</strong>（为月复盘做最后准备）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ GitHub 远程维护（访问期间不能断更）</strong>：访问期间保持被动影响力——①★ GitHub 不能断更（你忙于访问，但“被动名片”不能荒废——荒废让查看者觉得项目不活跃）②回复 Issue（用户问题及时回，保持活跃负责）③发布小更新（代码优化/文档/release，保持仓库活跃）④★ 守核心延后（未发表核心代码延后开源，框架性的可更新）。+ README 更新 + 社区适度互动（影响力副线，控时长，核心是访问的实验和论文）。★★ 远程：GitHub 维护本就线上，同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ ★ GitHub 远程维护（回 Issue + 小更新，不断档）✅ GitHub 维护（README/社区）+ 实验/论文轻量推进 ✅ 轻量整理（为月复盘准备）+ 博士维护 1h。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D454</summary><textarea data-note="d454" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d455" data-d="455"><header class="day-head"><span class="dnum">D455</span><h2 class="day-t">周日 · ★ M16 月度复盘（<a href="../appendix-e.html">附录 E</a>）+ 对照硬交付 6 项 + 计划 M17</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W65 最后一天，也是 M16 收官——① 上午 ★ M16 月度复盘（用<a href="../appendix-e.html">附录 E</a>：量化交付盘点 5 类 + 计划完成度 + Top3 收获 + 卡点 + 下月 5 件事 + 健康情绪）；② 中午 ★ 对照 M16 硬交付清单 6 项 + 评估访问前半成果（合作论文/连接深化）；③ 晚上 ★ 计划 M17（W66-69，暑期访问后半·论文合作冲刺）。提醒：M16 月复盘要诚实——评估访问前半的实质成果（你和空天院的连接深化到什么程度、合作论文进展如何），据结果计划 M17。这是暑期访问前半收官、阶段三的关键复盘。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d455-am" data-d="455" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D455 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">★ M16 月度复盘（用<a href="../appendix-e.html">附录 E</a> 模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M16 月复盘怎么做）</h4><div class="blk-b"><ul>
+<li>用<strong>附录 E 月度复盘模板</strong>对 M16（W61-65，D421-455，暑期访问前半）做诚实复盘：① <strong>一、量化交付盘点</strong>（论文阅读/实验进度/论文写作/开源影响力/人脉社交——★ M16 重点在<strong>实验进度</strong>[空天院数据完整 benchmark]+ <strong>论文写作</strong>[合作论文进展]+ <strong>人脉社交</strong>[融入团队/组会汇报/合作点/社交]）；② <strong>二、计划完成度总评</strong>（M16 的 Top 5 事项：融入、完整 benchmark、组会汇报、合作点、合作论文 + 总完成率）；③ <strong>三、Top 3 收获</strong>（如“走进空天院和团队合作产出共同成果”“访问的核心是合作不是单干”）；④ <strong>四、Top 3 卡点 + 解决方案</strong>；⑤ <strong>五、下月 5 件最重要的事</strong>（M17：论文合作冲刺等）；⑥ <strong>六、健康与情绪自评</strong>（访问期间的状态、可持续性）。★ <strong>诚实面对</strong>——复盘是发现问题、校准方向。</li>
+<li><strong>为什么用<a href="../appendix-e.html">附录 E</a></strong>：M16 是“暑期访问前半”（融入 + 合作 + 出成果），<a href="../appendix-e.html">附录 E</a> 的结构化复盘能全面盘清访问前半的成果、连接深化和个人成长。</li>
+<li>★★ <strong>远程模式</strong>：同样用<a href="../appendix-e.html">附录 E</a> 复盘（远程合作的融入/产出/连接）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 用<a href="../appendix-e.html">附录 E</a> 模板填 M16 月报；② 量化盘点（★ 重点实验[benchmark]+ 论文[合作论文]+ 人脉[融入/汇报/合作点/社交]）；③ 计划完成度（Top 5 + 完成率）；④ Top 3 收获 + Top 3 卡点；⑤ 下月 5 件事 + 健康情绪（★ 诚实 + 关注可持续性）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M16 月度复盘完成——<a href="../appendix-e.html">附录 E</a> 模板填好（量化 + 完成度 + 收获 + 卡点 + 下月 + 健康），诚实盘清访问前半得失。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不复盘直接进 M17（方向不校准）→ 用<a href="../appendix-e.html">附录 E</a> 认真复盘。</li>
+<li>复盘只报喜（发现不了问题）→ ★ 诚实面对卡点。</li>
+<li>不关注可持续性（访问累垮风险）→ ★ 健康情绪自评、关注可持续。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>复盘没头绪？→ 用<a href="../appendix-e.html">附录 E</a> 模板逐节填；量化数据哪来？→ 访问前半记录（benchmark/合作/论文/汇报/周报）；收获/卡点？→ 访问前半最重要的 3 件事/最大的 3 个困难。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了 M16 月度复盘</strong>。<strong>做了</strong>（用<a href="../appendix-e.html">附录 E</a> 填月报 + 量化盘点 + 完成度 + 收获卡点 + 下月 + 健康情绪）、<strong>学了</strong>（<a href="../appendix-e.html">附录 E</a> 结构化复盘、诚实发现问题、M16 重点盘实验+合作论文+人脉、关注可持续）、<strong>会了</strong>（用月度模板系统复盘暑期访问前半）。</p>
+</div></section></section><section class="slot" id="d455-noon" data-d="455" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D455 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">★ 对照 M16 硬交付清单 6 项 + 评估访问前半成果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（对照硬交付 + 评估成果）</h4><div class="blk-b"><ul>
+<li>M16 设了 6 项<strong>硬交付</strong>，逐项对照确认：① <strong>融入团队</strong>（认识所有成员、参加 ≥2 次组会）；② <strong>在空天院数据上的实验结果</strong>（baseline + your method——完整 benchmark）；③ <strong>组会汇报 ≥1 次</strong>（30min）；④ <strong>找到 ≥1 个具体合作点</strong>；⑤ <strong>周报 ×4</strong>（每周日发送）；⑥ <strong>博士课题未断档</strong>。★ 对照硬交付，确认 M16 核心目标都达成（或有明确说明）。</li>
+<li>★ <strong>评估访问前半成果</strong>——这是 M16 复盘最关键的：① <strong>连接深化</strong>（你和空天院的连接，从“线上交流/访问申请”深化到了“实质合作”——深化到什么程度了？）；② <strong>合作论文</strong>（合作论文进展如何、署名怎么定、什么时候完成——这是访问最实质的成果）；③ <strong>个人成长</strong>（在空天院做研究的能力、和团队合作的能力提升）；④ ★ <strong>据评估定 M17 策略</strong>（访问后半 M17 怎么把合作论文冲到完成、把连接进一步深化）。<strong>评估访问前半成果，让你清楚地知道：访问前半收获了什么、后半要冲什么。</strong></li>
+<li>★★ <strong>远程模式</strong>：同样对照（远程合作的融入[线上]/实验结果/汇报/合作点/周报/博士未断档）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 对照 M16 硬交付 6 项逐项确认（达成/部分/未达）；② ★ 评估访问前半成果（连接深化 + 合作论文 + 个人成长）；③ 据评估定 M17 策略；④ 标出待续项 + 方案；⑤ 访问前半盘点（成果 + 连接）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M16 硬交付对照完成（6 项达成或有说明）+ 访问前半成果评估清楚（连接深化 + 合作论文 + M17 策略），承上启下。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不对照硬交付（漏核心目标）→ 逐项对照；② 不评估访问成果（缺关键判断）→ ★ 评估连接深化和合作论文；③ 不据结果定策略（M17 抓瞎）→ 据评估定 M17 策略。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>硬交付有没达成的？→ 标待续 + 方案（如组会汇报、合作论文）；连接深化到什么程度？→ 从访问申请到实质合作、合作论文；M17 策略？→ 把合作论文冲到完成 + 进一步深化连接。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>对照了硬交付、评估了访问前半成果</strong>。<strong>做了</strong>（对照硬交付 6 项 + 评估访问前半成果 + 据结果定 M17 策略 + 标待续 + 访问前半盘点）、<strong>学了</strong>（硬交付对照确认核心目标、★ 评估连接深化和合作论文、定 M17 策略）、<strong>会了</strong>（对照硬交付 + 评估访问成果并据此规划方向）。</p>
+</div></section></section><section class="slot" id="d455-pm" data-d="455" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D455 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">★ 计划 M17（W66-69，暑期访问后半·论文合作冲刺）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M17 做什么）</h4><div class="blk-b"><ul>
+<li>★ <strong>计划 M17（W66-69，暑期访问后半·论文合作冲刺）</strong>——基于 M16 复盘和访问前半成果评估：① <strong>W66-67 论文合作冲刺</strong>（与合作师兄密集讨论论文 + 核心实验最后一轮[访问结束前把所有实验跑完]+ 第三篇/合作论文完整草稿完成[所有章节 + 图表 + 实验]→ ★ W66 周一下午老师 1v1 中期 check[汇报进展 + 关键问题“结果够投目标期刊吗”]→ W67 周日论文草稿发合作者 review）；② <strong>W68-69</strong>（访问收尾/后续——据访问情况）。★ M17 的主线：“访问后半冲刺——把合作论文的实验跑完、草稿写完、发合作者 review，争取一篇空天院合作论文。”今晚把 M17 计划列好。</li>
+<li><strong>为什么这样规划 M17</strong>：M16 把访问推进到“实质合作 + 合作论文成形”，M17（访问后半）要冲刺把合作论文完成——这是访问争取实质成果（一篇空天院合作论文）的最后冲刺。</li>
+<li>★★ <strong>远程模式</strong>：M17 同样论文合作冲刺（线上密集协作）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 列 M17 计划（W66-67 论文合作冲刺[密集讨论 + 实验最后一轮 + 完整草稿 + 老师 1v1 中期 check + 发合作者 review]；W68-69 访问收尾/后续）；② 论文冲刺要点（实验跑完 + 草稿完成）；③ 结合 M16 访问前半成果；④ 排好 M17 节奏。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M17 计划列好——论文合作冲刺（实验最后一轮 + 完整草稿 + 中期 check + 发 review）的要点清楚，结合访问前半成果，节奏排好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不计划 M17（衔接断）→ 列好计划；② 不结合访问成果（脱节）→ 据访问前半成果规划；③ 论文冲刺没节点 → 排好实验/草稿/review 节点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>M17 怎么排？→ W66-67 论文合作冲刺（实验最后一轮 + 完整草稿 + 老师 1v1 中期 check + 发合作者 review）；W68-69 访问收尾；访问后半重点？→ 把合作论文冲到完成。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>计划好了 M17</strong>。<strong>做了</strong>（列 M17 计划 + 论文冲刺要点 + 结合访问成果 + 排节奏）、<strong>学了</strong>（M17=暑期访问后半·论文合作冲刺、把合作论文冲到完成）、<strong>会了</strong>（规划访问后半的论文合作冲刺）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ M16 月复盘（<a href="../appendix-e.html">附录 E</a>·对照硬交付 6 项·评估访问前半成果）</strong>：暑期访问前半(M16)月复盘用<a href="../appendix-e.html">附录 E</a>——量化盘点 5 类(★ 重点实验[空天院数据完整 benchmark]+ 论文[合作论文进展]+ 人脉[融入/组会汇报/合作点/社交])+ 计划完成度 + Top3 收获 + 卡点 + 下月 + 健康情绪（★ 关注可持续）。★ 对照 M16 硬交付清单 6 项(融入团队[认识所有成员+≥2次组会]/空天院数据实验结果[baseline+your method]/组会汇报≥1次[30min]/找到≥1个具体合作点/周报×4/博士课题未断档)。★★ 评估访问前半成果(连接深化[从访问申请到实质合作]+ 合作论文进展 + 个人成长)+ 据结果定 M17 策略（把合作论文冲到完成 + 进一步深化连接）。诚实发现问题、校准方向——暑期访问前半收官、阶段三的关键复盘。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ ★ M16 月度复盘（<a href="../appendix-e.html">附录 E</a>：量化 + 完成度 + 收获卡点 + 下月 + 健康）✅ ★ 对照 M16 硬交付 6 项 + 评估访问前半成果 ✅ ★ 计划 M17（暑期访问后半·论文合作冲刺）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D455</summary><textarea data-note="d455" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W65 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>M16 收官周，补充包给你四样可直接照用的：① 三个范例（访问前半成果盘点清单 + 合作论文推进要点 · M16 硬交付清单 6 项 + <a href="../appendix-e.html">附录 E</a> M16 月复盘要点 · GitHub 远程维护清单 + M17 论文合作冲刺预览）；② 一个完整可运行的“M16 月复盘 dashboard”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 访问前半成果盘点清单 + 合作论文推进要点</h3>
+<figure class="code" data-lang="text"><pre><code>【访问前半(M16)成果盘点清单】
+实验: 完整benchmark(空天院数据上,baseline对比+消融+可视化,扎实可发表)
+合作: ≥1个具体合作点(确定+启动+共同产出)
+论文: 合作论文进展(加入空天院数据结果+Experiment更新+署名讨论+草稿推进)
+连接: 融入团队(认识所有成员+≥2次组会)+组会30min汇报+社交加深关系
+节奏: 周报×4(W61-W64各1份)+博士课题未断档(每天1h)
+成长: 在空天院做研究的能力+和团队合作的能力提升
+→ 暑期访问前半=从&quot;访问申请&quot;到&quot;实质合作+合作论文成形&quot;。
+
+【合作论文推进要点】
+· 据署名讨论结果推进(可挂空天院署名→合作论文/不挂→你的独立论文)
+· 与师兄/老师对齐(方向/分工/进度,★尊重合作节奏)
+· 写你负责的部分(据分工,复用你三篇论文经验)
+· 共同产出(合作实验)是合作论文的实质内容
+· M17冲刺完成(实验最后一轮+完整草稿+发合作者review)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · M16 硬交付清单 6 项 + <a href="../appendix-e.html">附录 E</a> M16 月复盘要点</h3>
+<figure class="code" data-lang="text"><pre><code>【M16硬交付检查清单(6项,逐项✅完成/⚠️部分/❌未达)】
+□ 融入团队(认识所有成员+参加≥2次组会)
+□ 在空天院数据上的实验结果(baseline+your method)
+□ 组会汇报≥1次(30min)
+□ 找到≥1个具体合作点
+□ 周报×4(每周日发送)
+□ 博士课题未断档
+
+【附录E M16月复盘要点】
+一、量化盘点5类: ★实验进度(空天院数据完整benchmark) + 论文写作(合作论文进展) +
+   ★人脉社交(融入团队/组会汇报/合作点/社交) + 论文阅读 + 开源影响力(GitHub)
+二、计划完成度: Top5(融入/完整benchmark/组会汇报/合作点/合作论文) + 总完成率
+三、Top3收获 / 四、Top3卡点+方案 / 五、下月(M17)5件事 / 六、健康情绪(★关注可持续)
+★★ 评估访问前半成果: 连接深化(从访问申请→实质合作) + 合作论文进展 + 个人成长
+   →据结果定M17策略(把合作论文冲到完成 + 进一步深化连接)
+★ 诚实发现问题、校准方向(暑期访问前半收官、阶段三关键复盘)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · GitHub 远程维护清单 + M17 论文合作冲刺预览</h3>
+<figure class="code" data-lang="text"><pre><code>【GitHub 远程维护清单(访问期间不能断更)】
+□ 回复Issue(用户问题及时回,保持活跃负责)
+□ 发布小更新(代码优化/文档更新/release,保持仓库活跃)
+□ 更新README(如有新进展)
+□ 社区适度互动(知乎/技术社区,保持存在感)
+□ ★守核心延后(未发表核心代码延后开源,框架性的可更新)
+→ 你的&quot;被动名片&quot;不能荒废,副线控时长(核心是访问的实验和论文)。
+
+【M17(W66-69)暑期访问后半·论文合作冲刺预览】
+W66-67 论文合作冲刺:
+· 上午: 与合作师兄密集讨论(论文怎么写/实验还缺什么/图表怎么设计)
+· 下午: 核心实验最后一轮(★访问结束前把所有实验跑完)
+· 晚上: 论文写作(合作发表→协商谁一作/通讯/投哪)
+· ★W66周一下午: 老师1v1中期check(汇报进展+关键问题&quot;结果够投目标期刊吗&quot;)
+· W67: 第三篇/合作论文完整草稿完成(所有章节+图表+实验)→周日发合作者review(给1周)
+W68-69: 访问收尾/后续(据访问情况)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · M16 月复盘 dashboard（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本汇总 M16（暑期访问前半）的量化指标 + 硬交付对照，生成月复盘 dashboard——把访问前半的成果一目了然，辅助 M16 月度复盘。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># m16_review_dashboard.py —— M16(暑期访问前半)月复盘 dashboard</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># 访问前半量化指标</span>
+    <span class="s2">&quot;完整benchmark(空天院数据)&quot;</span><span class="p">:</span> <span class="s2">&quot;baseline对比+消融+可视化(扎实可发表)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;具体合作点&quot;</span><span class="p">:</span> <span class="s2">&quot;1个(确定+启动+共同产出)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;合作论文进展&quot;</span><span class="p">:</span> <span class="s2">&quot;加空天院结果+Experiment更新+署名讨论+草稿推进&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;组会汇报(30min)&quot;</span><span class="p">:</span> <span class="s2">&quot;1次(已汇报+收集反馈)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;周报&quot;</span><span class="p">:</span> <span class="s2">&quot;4份(W61-W64)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;博士课题维护&quot;</span><span class="p">:</span> <span class="s2">&quot;35天×1h(W61-W65未断档)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GitHub&quot;</span><span class="p">:</span> <span class="s2">&quot;访问期间保持维护(回Issue+小更新)&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">hard_deliverables</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># M16硬交付6项</span>
+    <span class="s2">&quot;融入团队(认识所有成员+≥2次组会)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;空天院数据实验结果(baseline+your method)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;组会汇报≥1次(30min)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;找到≥1个具体合作点&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;周报×4&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;博士课题未断档&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dashboard</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== M16(暑期访问前半)月复盘 Dashboard ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;【量化指标】&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  · </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hard_deliverables</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hard_deliverables</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">【硬交付】</span><span class="si">{</span><span class="n">done</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">done</span><span class="o">/</span><span class="n">total</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hard_deliverables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="s1">&#39;✅&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;❌&#39;</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">42</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">done</span> <span class="o">==</span> <span class="n">total</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎉 M16 硬交付全部达成！暑期访问前半圆满收官。&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   访问前半成果: 从&#39;访问申请&#39;→&#39;实质合作+合作论文成形&#39;。&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   M17(访问后半): 论文合作冲刺,把合作论文冲到完成。&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hard_deliverables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⏳ 还差: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span><span class="si">}</span><span class="s2"> → M16收官前补齐。&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">dashboard</span><span class="p">()</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">=== M16(暑期访问前半)月复盘 Dashboard ===</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【量化指标】</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 完整benchmark(空天院数据)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">baseline对比+消融+可视化(扎实可发表)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 具体合作点</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1个(确定+启动+共同产出)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 合作论文进展</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">加空天院结果+Experiment更新+署名讨论+草稿推进</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 组会汇报(30min)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1次(已汇报+收集反馈)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 周报</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4份(W61-W64)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 博士课题维护</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">35天×1h(W61-W65未断档)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· GitHub</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">访问期间保持维护(回Issue+小更新)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【硬交付】6/6 = 100%</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">✅ 融入团队(认识所有成员+≥2次组会)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">✅ 空天院数据实验结果(baseline+your method)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">✅ 组会汇报≥1次(30min)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">✅ 找到≥1个具体合作点</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">✅ 周报×4</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">✅ 博士课题未断档</span>
+
+<span class="l l-Scalar l-Scalar-Plain">==========================================</span>
+<span class="l l-Scalar l-Scalar-Plain">🎉 M16 硬交付全部达成！暑期访问前半圆满收官。</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">访问前半成果</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">从&#39;访问申请&#39;→&#39;实质合作+合作论文成形&#39;。</span>
+<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">M17(访问后半)</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">论文合作冲刺,把合作论文冲到完成。</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把 M16 的量化指标和硬交付状态填进去，脚本生成月复盘 dashboard——访问前半的成果（完整 benchmark、合作点、合作论文、组会汇报、周报×4、博士未断档、GitHub 维护）一目了然，硬交付 6 项全达成。它把“暑期访问前半收获了什么、硬交付到位没”系统呈现，辅助你做诚实的 M16 月复盘、规划 M17。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D449（实验深化 + 可能 30min 汇报）</strong></p>
+<ol>
+<li>如果 30min 组会汇报 W64 没做，W65 为什么“组会日一定要做”（M16 硬交付）？</li>
+<li>论文写作据什么推进（署名讨论结果：合作论文/独立论文）？</li>
+</ol>
+<p><strong>D450（合作实验 + 合作论文）</strong></p>
+<ol>
+<li>为什么“合作实验的共同产出是合作论文的核心”？</li>
+<li>合作论文写作怎么体现合作各方的工作？</li>
+</ol>
+<p><strong>D451（结果整合 + 论文）</strong></p>
+<ol>
+<li>实验结果整合要形成什么（清晰的结果体系：核心/合作/说明什么）？</li>
+<li>实验深化收尾为什么要“确认扎实可用于论文”？</li>
+</ol>
+<p><strong>D452（对齐论文 + 论文）</strong></p>
+<ol>
+<li>★ 与师兄/老师对齐合作论文要对齐什么（方向/分工/进度）？为什么尊重合作节奏？</li>
+<li>写论文为什么“复用你三篇论文经验”？</li>
+</ol>
+<p><strong>D453（论文收尾 + 成果盘点）</strong></p>
+<ol>
+<li>论文写作收尾要明确什么（论文状态 + M17 任务）？</li>
+<li>访问前半成果盘点哪几块（实验/合作/论文/连接/成长）？</li>
+</ol>
+<p><strong>D454（★ GitHub 维护 + 轻量推进）</strong></p>
+<ol>
+<li>★ 为什么访问期间 GitHub“不能断更”？维护做什么（回 Issue/小更新/守核心延后）？</li>
+<li>副线（GitHub/社区）和核心（访问实验论文）怎么平衡？</li>
+</ol>
+<p><strong>D455（★ M16 月复盘 + 硬交付 + 计划 M17）</strong></p>
+<ol>
+<li>★ M16 月复盘用什么模板？重点盘哪几类（实验/合作论文/人脉）？</li>
+<li>★ M16 硬交付 6 项是什么？怎么评估访问前半成果（连接深化/合作论文）？</li>
+<li>M17（访问后半）要做什么（论文合作冲刺）？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>30min 组会汇报拖到 M16 结束没做</td>
+<td>硬交付未达成</td>
+<td>★ W65 组会日一定做</td>
+</tr>
+<tr>
+<td>2</td>
+<td>论文不据署名安排推进</td>
+<td>方向乱</td>
+<td>据 W64 署名讨论结果（合作/独立）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>合作实验停滞</td>
+<td>合作论文没实质内容</td>
+<td>推进共同产出（合作论文核心）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>实验结果零散不整合</td>
+<td>体系乱</td>
+<td>整合成清晰结果体系</td>
+</tr>
+<tr>
+<td>5</td>
+<td>实验不扎实（经不起审稿）</td>
+<td>论文有风险</td>
+<td>确认扎实可复现可发表</td>
+</tr>
+<tr>
+<td>6</td>
+<td>不和师兄/老师对齐论文</td>
+<td>方向偏/分工乱</td>
+<td>★ 对齐方向/分工/进度</td>
+</tr>
+<tr>
+<td>7</td>
+<td>不尊重合作节奏（自作主张）</td>
+<td>影响合作</td>
+<td>尊重老师/师兄意见</td>
+</tr>
+<tr>
+<td>8</td>
+<td>论文写作从零摸索</td>
+<td>慢</td>
+<td>★ 复用你三篇论文经验</td>
+</tr>
+<tr>
+<td>9</td>
+<td>访问期间 GitHub 荒废</td>
+<td>显不活跃</td>
+<td>★ 不能断更（回 Issue+小更新）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>泄露未发表核心代码</td>
+<td>违守核心延后</td>
+<td>★ 守核心延后</td>
+</tr>
+<tr>
+<td>11</td>
+<td>副线花太多时间</td>
+<td>喧宾夺主</td>
+<td>控时长（核心是访问实验论文）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>不做 M16 月复盘直接进 M17</td>
+<td>方向不校准</td>
+<td>★ 用<a href="../appendix-e.html">附录 E</a> 认真复盘</td>
+</tr>
+<tr>
+<td>13</td>
+<td>月复盘只报喜</td>
+<td>发现不了问题</td>
+<td>★ 诚实面对卡点</td>
+</tr>
+<tr>
+<td>14</td>
+<td>不对照硬交付/不评估访问成果</td>
+<td>缺关键判断</td>
+<td>★ 对照 6 项+评估连接深化和合作论文</td>
+</tr>
+<tr>
+<td>15</td>
+<td>★ 忘记博士课题维护</td>
+<td>断档惹导师</td>
+<td>★ 每天 1h 雷打不动</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>🎉🎉 W65 收尾 · M16（暑期访问前半）圆满收官！</strong> 你完成了 M16 的最后一周，也给整个暑期访问的前半画上了一个扎实的句号——这一周，你把访问前半的实验和论文做扎实（实验深化收尾、合作论文推进、与师兄/老师对齐方向分工进度），保持了 GitHub 的影响力（★ 访问期间不能断更，回 Issue、发小更新），并用<a href="../appendix-e.html">附录 E</a> 对 M16 做了一次诚实的复盘——★ 对照 M16 硬交付清单 6 项（融入团队、空天院数据实验结果、组会汇报、找到合作点、周报×4、博士课题未断档），评估了访问前半的实质成果，据结果规划了 M17（论文合作冲刺）。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>回望 M16（W61-65，暑期访问前半）</strong>：这个月，你完成了一次了不起的跨越——从“提交访问申请”到“走进空天院、融入团队、和团队合作、产出共同成果”。你报到融入（认识全组、参加组会、帮师兄做小事），正式进入工作状态（组会自我介绍、核心实验跑出第一份结果、发周报），深化了核心实验（完整 benchmark：baseline + 消融 + 可视化），★ <strong>找到并推进了一个具体的合作点</strong>（共同产出），★ <strong>把空天院数据结果写进论文、和老师讨论了合作署名</strong>（一篇空天院合作论文正在成形），做了 30min 组会正式汇报、参加社交加深关系，还守住了每天 1h 维护博士课题、发出了 4 份周报。★ <strong>从 W48 发出第一封冷邮件，到现在坐在空天院的工位上、和团队一起做研究、产出一篇正在成形的合作论文——你把“和空天院建立连接”这件最初看起来遥远的事，变成了“实质的合作和共同的成果”。</strong> 这条路你走得无比扎实——它没有任何捷径，每一步都是用真实的成果、谦逊的姿态、和说到做到的执行力一点点垒起来的。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>M16（暑期访问前半）圆满收官</strong> ✅ —— 你融入了团队、做成了完整 benchmark、找到了合作点、推进了合作论文、做了组会汇报、守住了博士线和周报节奏，访问前半的连接已深化为实质的合作。<strong>下一程：M17（W66–69，暑期访问后半·论文合作冲刺）——与合作师兄密集讨论、核心实验最后一轮、把合作论文的完整草稿写完、发合作者 review，争取一篇空天院合作论文。</strong> 带着这份实质的合作和正在成形的合作论文，把暑期访问的后半，冲刺到一个漂亮的成果——一篇有空天院署名的合作论文，已在前方不远处。</p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>判断结果可不可信</h4><p>这一周会产生需要判断"有没有提升"的数字。<b>少于 3 个 seed 不下结论；看同 seed 的<u>配对差</u>，不要只看 mean±std</b>——只看边际方差会误杀真正有效的方法。判定工具见 <a href="w9.html">W9–W12</a>。</p><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p></section>
+<div class="pager"><a class="prev" href="w64.html"><span class="dir">← 上一篇</span><span class="nm">W64 完整 benchmark + 论文加入空</span></a><a class="next" href="w66.html"><span class="dir">下一篇 →</span><span class="nm">W66 论文合作冲刺（上）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d449">D449 周一</a><a class="sub" href="#d449-am">上午 团队协作 +（可能）★ 30mi</a><a class="sub" href="#d449-noon">中午 实验深化（完整 benchmar</a><a class="sub" href="#d449-pm">晚上 论文写作 + 博士维护 1h</a><a href="#d450">D450 周二</a><a class="sub" href="#d450-am">上午 团队协作 + 合作实验推进</a><a class="sub" href="#d450-noon">中午 实验深化（据反馈补充实验/合作实</a><a class="sub" href="#d450-pm">晚上 论文写作（合作论文）+ 博士维护</a><a href="#d451">D451 周三</a><a class="sub" href="#d451-am">上午 团队协作 + 实验结果整合</a><a class="sub" href="#d451-noon">中午 实验深化收尾（做扎实、整理）</a><a class="sub" href="#d451-pm">晚上 论文写作（整合结果、推进论文）+</a><a href="#d452">D452 周四</a><a class="sub" href="#d452-am">上午 团队协作 + 与师兄/老师对齐论</a><a class="sub" href="#d452-noon">中午 论文写作（写成阶段性完整）</a><a class="sub" href="#d452-pm">晚上 论文写作 + 博士维护 1h</a><a href="#d453">D453 周五</a><a class="sub" href="#d453-am">上午 团队协作 + 论文写作收尾</a><a class="sub" href="#d453-noon">中午 实验/论文阶段性整理（访问前半成</a><a class="sub" href="#d453-pm">晚上 访问前半成果盘点（为月复盘准备）</a><a href="#d454">D454 周六</a><a class="sub" href="#d454-am">上午 ★ GitHub 远程维护（回 </a><a class="sub" href="#d454-noon">中午 GitHub 维护（README</a><a class="sub" href="#d454-pm">晚上 轻量整理（为月复盘准备）+ 博士</a><a href="#d455">D455 周日</a><a class="sub" href="#d455-am">上午 ★ M16 月度复盘（用附录 E</a><a class="sub" href="#d455-noon">中午 ★ 对照 M16 硬交付清单 6</a><a class="sub" href="#d455-pm">晚上 ★ 计划 M17（W66-69，</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="3" data-week="52">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W52 · M13 月复盘 + 第三课题推进 —— your · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段三 · 深化期</span><span>M13 空天院破冰</span><span>·</span><span>Week 52</span><span>·</span><span>D358–D364</span></div><h1 class="title">M13 月复盘 + 第三课题推进 —— your method 快速迭代 + 用<a href="../appendix-e.html">附录 E</a> 复盘阶段三第一个月</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="358" data-k="am" title="D358 上午段"></i><i data-d="358" data-k="noon" title="D358 中午段"></i><i data-d="358" data-k="pm" title="D358 晚上段"></i></span><span class="sday"><i data-d="359" data-k="am" title="D359 上午段"></i><i data-d="359" data-k="noon" title="D359 中午段"></i><i data-d="359" data-k="pm" title="D359 晚上段"></i></span><span class="sday"><i data-d="360" data-k="am" title="D360 上午段"></i><i data-d="360" data-k="noon" title="D360 中午段"></i><i data-d="360" data-k="pm" title="D360 晚上段"></i></span><span class="sday"><i data-d="361" data-k="am" title="D361 上午段"></i><i data-d="361" data-k="noon" title="D361 中午段"></i><i data-d="361" data-k="pm" title="D361 晚上段"></i></span><span class="sday"><i data-d="362" data-k="am" title="D362 上午段"></i><i data-d="362" data-k="noon" title="D362 中午段"></i><i data-d="362" data-k="pm" title="D362 晚上段"></i></span><span class="sday"><i data-d="363" data-k="am" title="D363 上午段"></i><i data-d="363" data-k="noon" title="D363 中午段"></i><i data-d="363" data-k="pm" title="D363 晚上段"></i></span><span class="sday"><i data-d="364" data-k="am" title="D364 上午段"></i><i data-d="364" data-k="noon" title="D364 中午段"></i><i data-d="364" data-k="pm" title="D364 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：阶段三第四周，也是 <strong>M13（阶段三第一个月）的最后一周</strong>。双轨继续，本周重心在研究：① <strong>第三课题 your method 快速迭代（v1→v2）</strong>——节奏与 M9 相同（一天一个版本），基于 W51 的 baseline 结果改进你的方法，逼近一个好结果；② <strong>持续跟进 + 收口</strong>——检查两篇论文审稿状态（有修改本周内处理）、GitHub 月度更新、整理第三课题中期结果；③ ★ <strong>M13 月度复盘（用<a href="../appendix-e.html">附录 E</a> 模板）</strong>——重点评估“我和空天院的连接建立到什么程度了？”，据结果决定是否需要紧急调整策略（如 0 回复 → Plan C 参加学术会议当面交流）。★ M13 是阶段三的第一个月——这次月复盘的核心不是“做了多少”，而是“连接的方向对不对、要不要调策略”。
+<strong>本周科研能力目标</strong>（你原计划，保留）：第三课题 your method v1–v2 + 论文状态处理 + GitHub 月度更新 + M13 月度复盘（<a href="../appendix-e.html">附录 E</a>）。
+<strong>承上</strong>：W51 你（如有）完成了汇报、推进了第三课题 baseline（2 数据集 × 5 baseline + method v1）。<strong>本周把 method 从 v1 快速迭代到 v2</strong>（据 baseline 分析改进）+ 用<a href="../appendix-e.html">附录 E</a> 复盘 M13。</p>
+<p><strong>🧩 贯穿线索</strong>：第三课题 your method 快速迭代（一天一版，如 M9）——据 baseline 分析找改进点，每天一个改进版本，在 2 数据集上看提升信号。M13 月复盘用<a href="../appendix-e.html">附录 E</a>（量化交付盘点 + 计划完成度 + 收获 + 问题/调整），★ 重点评估连接程度 + 对照 M13 硬交付清单（5 项）+ 风险预案。守核心延后、单卡高效照旧。</p>
+<p><strong>📌 阶段三格式</strong>：本周（v5.0 文件 4/5）原计划用“主题 + 时段分组”格式，本带教版展开成逐日（D358–D364）+ 满深度，忠实覆盖全部任务和关键日期（含<a href="../appendix-e.html">附录 E</a> 月复盘）。</p>
+</blockquote>
+<hr />
+<h2>🧭 W52 总览：method 快速迭代 + M13 月复盘</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第三课题 your method v1→v2 迭代</td>
+<td>method v2（一天一版）</td>
+<td>据 baseline 改进，逼近好结果</td>
+</tr>
+<tr>
+<td>检查两篇论文审稿状态 + 处理</td>
+<td>论文状态处理</td>
+<td>有修改本周内响应，不拖</td>
+</tr>
+<tr>
+<td>整理第三课题中期结果 + 邮件记录</td>
+<td>中期结果 + 记录整理</td>
+<td>厘清研究和连接的现状</td>
+</tr>
+<tr>
+<td>GitHub 仓库月度更新</td>
+<td>release + README + Issue</td>
+<td>持续运营（副线）</td>
+</tr>
+<tr>
+<td>★ M13 月度复盘（<a href="../appendix-e.html">附录 E</a>）</td>
+<td>M13 月报</td>
+<td>评估连接程度，决定是否调策略</td>
+</tr>
+<tr>
+<td>计划 W53–54</td>
+<td>W53–54 计划</td>
+<td>衔接 M14（线上汇报集中期）</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D358–360（周一–三）your method v1→v2 快速迭代（一天一版）；D361（周四）检查论文审稿状态 + 处理修改；D362（周五）整理中期结果 + 邮件记录 + 论文状态；D363（周六）GitHub 月度更新；D364（周日）★ M13 月度复盘（<a href="../appendix-e.html">附录 E</a>）+ 计划 W53–54。<strong>核心心态：这周研究是主旋律——把第三课题的方法快速迭代起来（一天一版的节奏会让你很快看到改进），用前两篇沉淀的迭代能力把它推向一个好结果；同时不忘收口（论文审稿、GitHub、整理）。而周日的 M13 月复盘是这个月最重要的一刻——诚实地评估“连接这条线到底走到哪了”，如果进展不及预期（尤其 0 回复），不要回避，而要据风险预案果断调整策略（Plan C/D）。月复盘看的是方向，方向对了再努力才有意义。这一点对你这种长期单兵、容易“埋头硬干”的人尤其重要——你很擅长每天推进任务，但容易忽略“抬头看路”。M13 月复盘就是强制自己抬头的时刻：连接这条线如果方向有问题（比如选的老师都不对口、或方式有误），再多的努力也是白费；及时校准，才能把后面的力气用在对的地方。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d358" data-d="358"><header class="day-head"><span class="dnum">D358</span><h2 class="day-t">周一 · 分析 W51 baseline 结果（找改进点）+ 邮件处理 + your method v2 迭代（第 1 版）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：本周第一天，第三课题 your method 进入快速迭代——① 上午分析 W51 的 baseline 结果（your method v1 相比最强 baseline 的表现、哪里还能改进）；② 中午邮件处理（持续跟进）；③ 晚上做 your method 的第 1 个改进版本（一天一版的节奏，如 M9）。提醒：迭代的关键是“据分析改进”——不是瞎改，而是看 v1 的结果/问题，找到明确的改进点，针对性地改。</p>
+</blockquote>
+</div><section class="slot" id="d358-am" data-d="358" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D358 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">分析 W51 baseline 结果（your method v1 vs 最强 baseline，找改进点）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（迭代前为什么要先分析）</h4><div class="blk-b"><ul>
+<li>第三课题 your method 要从 v1 迭代到 v2（更好的版本）。★ <strong>迭代不是瞎改，而是“据分析改进”</strong>——先分析 W51 的结果：① your method v1 相比最强 baseline 提升了多少（在 2 数据集上）？② 哪里还不够好（某个数据集弱、某类样本差、某个指标低）？③ 为什么（方法的哪个部分是瓶颈）？<strong>找到明确的改进点，迭代才有方向、才高效</strong>（针对性改，而非碰运气）。这其实是科研迭代和“调参玄学”的本质区别：玄学是随机试、试中了也不知为什么；科学迭代每一步都有假设（“改进 X 能解决 Y 问题”）、有验证（看结果是否符合假设）、有归因（知道为何有效/无效）——后者不仅更快，积累的还是可迁移的认知。</li>
+<li><strong>复用 M9 的迭代方法</strong>：你 M9（第二课题方法迭代）做过“一天一版”的快速迭代——分析→改进→验证→再分析。现在第三课题直接复用这个节奏（W47 总结报告沉淀的方法论）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 分析 W51 的 baseline 结果：your method v1 vs 最强 baseline（2 数据集，提升幅度）；② 找不够好的地方（哪个数据集/哪类样本/哪个指标弱）；③ 分析瓶颈（方法的哪部分导致）；④ <strong>确定 v2 的改进点</strong>（明确、可操作，如改进某模块/某策略）；⑤ 记录分析和改进计划。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W51 结果分析透（v1 vs baseline、瓶颈），确定了 v2 的明确改进点（针对性、可操作）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不分析就瞎改（碰运气）→ ★ 据分析找明确改进点（针对性迭代）。</li>
+<li>只看总指标不看细节 → 看哪个数据集/样本/指标弱（定位瓶颈）。</li>
+<li>改进点不明确（“再优化一下”）→ 明确可操作（改进 X 模块/X 策略）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>找不到改进点？→ 看 v1 哪里弱（数据集/样本/指标）+ 方法的瓶颈部分；不确定瓶颈？→ 做简单分析（如可视化失败案例、看各模块贡献）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>分析了 v1 结果、确定了改进方向</strong>。<strong>做了</strong>（分析 v1 vs baseline + 找瓶颈 + 确定 v2 明确改进点 + 记录）、<strong>学了</strong>（迭代要据分析改进非瞎改、看细节定位瓶颈、改进点明确、复用 M9 节奏）、<strong>会了</strong>（基于实验结果分析定位改进方向）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜your method 快速迭代（一天一版·据分析改进）</strong>：第三课题方法从 v1 迭代（复用 M9 节奏：一天一个版本）。★ 关键=据分析改进（非瞎改）：先分析当前版本结果（vs 最强 baseline、哪里弱、瓶颈在哪）→ 确定明确可操作的改进点 → 针对性改进 → 验证 → 再分析。循环加速逼近好结果。看细节（哪个数据集/样本/指标弱）定位瓶颈，改进点要明确（改进 X 模块/策略，非“再优化”）。在 2 数据集上看提升信号。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d358-noon" data-d="358" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D358 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">邮件处理（持续跟进）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>邮件处理</strong>——检查邮箱（老师/师兄回复、汇报后续等），对照邮件状态分析树持续跟进。<strong>研究为主的一周，连接仍要持续跟进</strong>（有回复及时接、按分析树推进 Plan B/C/D）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查邮箱、处理回复（老师→汇报/师兄→引荐，W48/W50 模板）；② 对照分析树跟进（有回复推进/无回复按 Plan B 等师兄、准备 Plan C/D）；③ 更新追踪表；④ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>邮件处理到位（回复跟进/追踪表更新），连接持续推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 研究忙就不跟进 → 持续跟进（连接是长线，断了再续成本高）；② 不更新追踪表 → 更新（状态清晰才能正确决策）；③ 有汇报机会却因忙研究而拖延回复 → 汇报机会优先（窗口可能转瞬即逝）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>有汇报后续？→ 据老师建议规划（反哺第三课题/争取访问）；都没回？→ 按分析树（等师兄/Plan C/D）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>持续跟进了连接</strong>。<strong>做了</strong>（检查邮箱+处理回复+对照分析树+更新追踪表）、<strong>学了</strong>（研究为主也持续跟进连接、对照分析树推进）、<strong>会了</strong>（在专注研究时持续推进连接）。</p>
+</div></section></section><section class="slot" id="d358-pm" data-d="358" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D358 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">your method v2 迭代（第 1 个改进版本）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上做 your method 的<strong>第 1 个改进版本</strong>——基于上午确定的改进点，改进方法、跑实验、看效果。★ <strong>一天一版的节奏</strong>（如 M9）：今晚改一个点、跑起来，明天看结果再决定下一步。<strong>快速迭代让你很快逼近好结果</strong>（每天一个改进版本，累积起来提升明显）。一天一版还有个隐性好处：它逼着你把改进切成小块、快速验证，而不是憋一个“大招”埋头做一周、最后发现方向错了浪费一周。小步快跑、频繁验证，是单卡资源下最稳健的研究节奏——每天都有反馈，错了也只错一天。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 基于改进点，改进方法（实现改进的模块/策略）；② 在 2 数据集上跑（或先在主数据集快速验证）；③ 单元验证改进实现正确；④ 启动训练、看初步效果；⑤ 记录这一版的改进点和（待出的）结果；⑥ 一天一版（今晚改+跑，明天看结果）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>your method 第 1 个改进版本（v2 候选）实现并跑起来，改进点明确、实现正确，等结果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 一次改太多点（不知哪个有效）→ 一版改一个主要点（可归因）；② 改进实现有 bug → 单元验证；③ 不记录（迭代乱）→ 记录每版改进点+结果（实验管理）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>改进没效果？→ 明天看结果再分析（可能要换改进点）；实现卡住？→ 拆小验证、参考前两篇类似实现。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做出了 method 的第 1 个改进版本</strong>。<strong>做了</strong>（据改进点改进方法 + 2 数据集跑 + 单元验证 + 启动 + 记录）、<strong>学了</strong>（一天一版快速迭代、一版改一个点可归因、记录每版）、<strong>会了</strong>（基于分析做出针对性的方法改进版本）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ W51 baseline 结果分析（确定 v2 改进点）✅ 邮件持续跟进 ✅ your method 第 1 个改进版本（跑起来，等结果）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D358</summary><textarea data-note="d358" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d359" data-d="359"><header class="day-head"><span class="dnum">D359</span><h2 class="day-t">周二 · your method 迭代（第 2 版）+ 论文阅读 + 邮件处理</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天继续 your method 迭代——① 上午看昨晚改进版本的结果 + 论文阅读（保持节奏）；② 中午邮件处理；③ 晚上做第 2 个改进版本。提醒：迭代是“改进→看结果→再改进”的循环——昨晚的改进有没有效果，今天看结果，有效则保留/深化，无效则换方向。一天一版，稳步逼近。</p>
+</blockquote>
+</div><section class="slot" id="d359-am" data-d="359" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D359 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">看第 1 版结果 + 决定下一步 + 论文阅读</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（迭代的“看结果→决策”环节）</h4><div class="blk-b"><ul>
+<li>昨晚的第 1 个改进版本跑出结果了——<strong>看结果、决策下一步</strong>：① 改进<strong>有效</strong>（提升了）→ 保留这个改进，继续深化或叠加下一个改进；② 改进<strong>无效/变差</strong> → 这个改进点不对，回退、换一个改进方向。<strong>迭代就是“改进→看结果→决策”的循环</strong>——每一步都基于结果，不断逼近好结果。<strong>这是科学的迭代方式</strong>（用结果指导，不是凭感觉堆改进）。要特别警惕“舍不得回退”的心态——你花了一晚上实现某个改进，结果它没用，本能上会想“再调调说不定就好了”、舍不得删。但如果一个改进的核心思路就不对，再调也是浪费；果断回退、保持方法干净，比抱着无效改进不放更明智。代码和方法都一样：删掉无效的部分，是一种进步而非损失。</li>
+<li><strong>同时保持论文阅读</strong>（每周 2–3 篇，第三课题方向）——可能从论文里找到新的改进 idea。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 看第 1 个改进版本的结果（vs v1，2 数据集）；② 决策：有效→保留/深化；无效→回退换方向；③ 确定第 2 版的改进点（深化第 1 个，或换新的）；④ 论文阅读（2–3 篇，找改进 idea）；⑤ 记录第 1 版的结论。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第 1 版结果看了、决策了（保留/回退）、确定了第 2 版改进点；论文阅读推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不看结果就继续改（盲目）→ 看结果决策（有效保留/无效回退）。</li>
+<li>无效的改进也保留（堆砌）→ 无效就回退（保持方法干净）。</li>
+<li>不从论文找 idea → 阅读中留意改进 idea。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>改进有效但提升小？→ 保留 + 深化或叠加下一个（小提升累积也可观）；都无效？→ 重新分析瓶颈、换改进角度（可能要更大的改动，或从论文里找新思路）；连续几版都没进展？→ 退一步看 idea 本身是否有效（toy 阶段验证过应该有戏，多半是实现/调参问题）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用结果指导了迭代决策</strong>。<strong>做了</strong>（看第 1 版结果 + 决策保留/回退 + 定第 2 版改进点 + 论文阅读）、<strong>学了</strong>（迭代=改进→看结果→决策循环、有效保留无效回退、从论文找 idea）、<strong>会了</strong>（基于实验结果科学地推进方法迭代）。</p>
+</div></section></section><section class="slot" id="d359-noon" data-d="359" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D359 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">邮件处理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同昨天——邮件处理、持续跟进（对照分析树）。<strong>研究迭代中不忘连接。</strong> 哪怕这周连接没有新动静，每天花十分钟检查、跟进，也是必要的——一来不错过可能随时到来的回复（机会窗口短），二来保持对这条线的“在场感”，不至于一头扎进研究、把连接彻底搁置。研究和连接是阶段三的两条腿，缺一不可。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查邮箱、处理回复；② 对照分析树跟进；③ 更新追踪表；④ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>邮件处理到位，连接跟进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不跟进 → 持续；② 不更新 → 更新追踪表。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>有回复？→ 及时处理；无回复？→ 按分析树。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>继续跟进了连接</strong>。<strong>做了</strong>（邮件处理+跟进+更新追踪表）、<strong>学了</strong>（迭代中不忘连接）、<strong>会了</strong>（持续维持连接跟进）。</p>
+</div></section></section><section class="slot" id="d359-pm" data-d="359" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D359 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">your method 迭代（第 2 个改进版本）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上做<strong>第 2 个改进版本</strong>——基于上午的决策（深化第 1 个有效改进，或换新方向），实现、跑、看效果。<strong>一天一版，累积提升。</strong> 到这里 your method 已迭代 2 版，向 v2（一个明显优于 v1 的版本）逼近。每天看着指标一点点往上走，是这种快速迭代节奏带给你的正反馈——它会让原本枯燥的实验变得有盼头，也帮你在外部连接尚不明朗时，从研究的稳步进展里获得确定的成就感和动力。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 实现第 2 个改进（深化或新方向）；② 2 数据集跑（或主数据集快速验证）；③ 单元验证；④ 启动、看初步效果；⑤ 记录这一版；⑥ 一天一版节奏。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第 2 个改进版本实现并跑起来，向更好的 v2 逼近。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 一次改太多 → 一版一个主要改进；② 不记录 → 记录每版。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>改进卡住？→ 拆小、参考前两篇；没效果？→ 明天看结果再调。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做出了第 2 个改进版本</strong>。<strong>做了</strong>（实现第 2 个改进 + 跑 + 验证 + 记录）、<strong>学了</strong>（一天一版累积提升、逼近 v2）、<strong>会了</strong>（持续推进方法的针对性迭代）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 第 1 版结果分析 + 决策 ✅ 论文阅读 2–3 篇 ✅ your method 第 2 个改进版本（跑起来）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D359</summary><textarea data-note="d359" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d360" data-d="360"><header class="day-head"><span class="dnum">D360</span><h2 class="day-t">周三 · your method 迭代（第 3 版）+ 中期结果汇总（v1→v2 提升）+ 邮件处理</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天——① 上午看第 2 版结果 + 做第 3 个改进版本；② 中午邮件处理；③ 晚上汇总 your method 的中期结果（v1→v2 的提升，在 2 数据集上）。提醒：经过几天迭代，your method 应该有了一个明显优于 v1 的版本（v2）；今天汇总中期结果，明确这个月方法迭代的成果。</p>
+</blockquote>
+</div><section class="slot" id="d360-am" data-d="360" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D360 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">看第 2 版结果 + 第 3 个改进版本</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同样的迭代循环——看第 2 版结果、决策、做第 3 个改进版本。<strong>几天的迭代（v1→v2→v3 候选）逐步逼近一个好的 v2</strong>（这里 v2 指“这个月迭代出的、明显优于初始 v1 的版本”）。每天一版的累积，方法应有明显改进。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 看第 2 版结果（vs 之前，2 数据集）；② 决策（保留/回退）；③ 做第 3 个改进版本（实现、跑、验证）；④ 记录；⑤ 评估当前最好版本（向 v2 定型靠近）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第 2 版结果看了、决策了，第 3 个改进版本做了；当前最好版本明显优于初始 v1。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>迭代不收敛（一直换方向无积累）→ 保留有效改进、稳步积累（每版站在上一版的肩膀上）。</li>
+<li>不评估当前最好版本 → 明确当前最好（向 v2 定型）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>改进遇瓶颈？→ 重新分析、或读论文找新 idea、或接受当前 v2（够好就定型）；提升停滞？→ 可能 v2 已接近这个月的合理水平（W53+ 再深化）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>持续迭代、逼近了好的 v2</strong>。<strong>做了</strong>（看第 2 版结果 + 决策 + 第 3 个改进版本 + 评估当前最好）、<strong>学了</strong>（迭代要收敛积累、评估当前最好版本、向 v2 定型）、<strong>会了</strong>（通过持续迭代得到明显改进的方法版本）。</p>
+</div></section></section><section class="slot" id="d360-noon" data-d="360" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D360 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">邮件处理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同前——邮件处理、持续跟进。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查邮箱、处理回复；② 对照分析树跟进；③ 更新追踪表；④ 如有汇报后续，据老师建议规划（反哺第三课题/争取访问）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>邮件处理、连接跟进，有回复则推进后续。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不跟进 → 持续；② 不更新 → 更新；③ 汇报后续不规划 → 据老师建议落地。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>按回复情况处理（有回复接/无回复按分析树）；汇报后老师给了建议？→ 反哺第三课题或作为争取访问的依据。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>继续跟进了连接</strong>。<strong>做了</strong>（邮件处理+跟进+汇报后续规划）、<strong>学了</strong>（持续跟进、汇报后续反哺研究/访问）、<strong>会了</strong>（维持连接跟进并转化汇报成果）。</p>
+</div></section></section><section class="slot" id="d360-pm" data-d="360" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D360 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">your method 中期结果汇总（v1→v2 提升，2 数据集）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么汇总中期结果）</h4><div class="blk-b"><ul>
+<li>经过几天迭代，<strong>汇总 your method 的中期结果</strong>——明确这个月方法迭代的成果：① v1（初始）→ v2（迭代后）的提升（在 2 数据集上，相比最强 baseline）；② 哪些改进有效（积累的有效改进）；③ 当前 v2 的水平（够好了吗、还有多少提升空间）。<strong>中期结果汇总让你清楚第三课题的进展</strong>（方法已迭代到什么水平），也为 M13 月复盘（实验进度）和后续（W53+ 深化）提供依据。这里有个判断“够不够好”的实用标准：你的 v2 相比最强 baseline 的提升，是否达到了“可以写进论文、审稿人会认可”的程度——通常需要在多个数据集上有稳定、有意义的提升（不是某一个数据集上偶然的微小提升）。如果达到了，v2 可以定型、进入写作准备；如果还差一截，W53+ 继续深化。</li>
+<li><strong>守核心延后</strong>：汇总是给自己看的进展，未来核心实现仍延后开源。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 汇总 v1→v2 的提升（2 数据集，vs 最强 baseline，见补充包范例 1）；② 列出有效的改进（积累的）；③ 评估当前 v2 水平（提升幅度、是否够好、剩余空间）；④ 记录中期结果（清晰，作 M13 月复盘和后续依据）；⑤ 明确第三课题下一步（W53+ 深化 method、消融、或开始更多实验）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>your method 中期结果汇总——v1→v2 提升清楚（2 数据集 vs baseline）、有效改进列出、当前水平评估，第三课题进展明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不汇总（进展不清）→ 汇总（v1→v2 提升、有效改进、当前水平）；② 只看主数据集 → 2 数据集都看（泛化）；③ 不评估剩余空间 → 评估（够好则定型/不够则 W53+ 深化）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>提升不明显？→ 客观记录、分析原因（W53+ 继续）；不知够不够好？→ 和 baseline/SOTA 比、看是否达到可写论文的水平。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>汇总了第三课题方法迭代的中期成果</strong>。<strong>做了</strong>（汇总 v1→v2 提升[2 数据集 vs baseline] + 列有效改进 + 评估当前水平 + 明确下一步）、<strong>学了</strong>（中期汇总厘清进展、2 数据集看泛化、评估剩余空间、守延后）、<strong>会了</strong>（系统汇总方法迭代的阶段性成果）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 第 2 版结果 + 第 3 个改进版本 ✅ 邮件持续跟进 ✅ your method 中期结果汇总（v1→v2 提升，2 数据集）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D360</summary><textarea data-note="d360" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d361" data-d="361"><header class="day-head"><span class="dnum">D361</span><h2 class="day-t">周四 · 检查第一/第二篇论文审稿状态 + 处理修改要求（如有）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天——检查第一/第二篇论文的审稿状态，★ 如有修改要求（major/minor revision、rebuttal），本周内处理。提醒：审稿意见来了要及时响应（不拖）——修改/rebuttal 是论文录用的关键环节，认真对待。如果没有新进展，就继续推进第三课题。</p>
+</blockquote>
+</div><section class="slot" id="d361-am" data-d="361" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D361 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">检查第一/第二篇论文审稿状态</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要定期检查 + 及时响应）</h4><div class="blk-b"><ul>
+<li>你有两篇论文在审（或第一篇可能已接收）。<strong>定期检查审稿状态</strong>——可能的进展：① <strong>收到审稿意见</strong>（major/minor revision、reject、accept）；② <strong>仍在审</strong>（耐心等）。★ <strong>如果收到修改要求（revision/rebuttal），要及时响应</strong>——审稿意见有时间窗口（如 major revision 给 1–2 个月），及时认真地修改/回应，是论文录用的关键。<strong>别让审稿意见拖着</strong>（拖久了影响录用、也占着心思）。一个常见的心理误区是：看到审稿意见（尤其批评多的）会有畏难情绪、想“缓两天再面对”。但越拖越焦虑、也越容易错过 deadline。正确的做法是尽快读完意见、把它拆解成一条条具体的待办——一旦变成“补这个实验、改那段话”的具体任务，畏难感就消失了，剩下的就是执行。</li>
+<li><strong>被拒则改投</strong>（W46 的流程：D1 读意见→D2-3 改→D4 改投→D5 提交，不反思人生立即行动）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 登录投稿系统，查两篇论文状态；② <strong>如收到审稿意见</strong>：判断类型（revision/reject/accept）；revision→进入修改流程（本周内处理，见中午/晚上）；reject→按 W46 流程改投；accept→更新所有材料（W46 流程）；③ <strong>如仍在审</strong>：耐心等，继续第三课题；④ 记录状态。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>查清两篇状态；如有修改要求，明确了处理计划（本周内）；如被拒/接收，按流程处理；如在审，继续第三课题。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不定期检查（错过修改窗口）→ 定期查、及时响应。</li>
+<li>收到 revision 拖着不改 → ★ 本周内处理（及时认真）。</li>
+<li>被拒后消沉 → 立即改投（W46 流程，不反思人生）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>收到 major revision？→ 仔细读意见、逐条规划修改（本周内）；被拒？→ 读意见改进、改投下一个期刊（W46 流程）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>检查并响应了论文审稿状态</strong>。<strong>做了</strong>（查两篇状态 + 按类型处理[revision 进流程/reject 改投/accept 更新]+ 记录）、<strong>学了</strong>（定期检查、revision 及时响应有时间窗口、被拒立即改投）、<strong>会了</strong>（妥善管理论文审稿的各种状态）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文审稿响应（及时·认真）</strong>：两篇论文在审需定期检查状态。★ 收到修改要求（revision/rebuttal）要及时响应（本周内处理）——审稿意见有时间窗口（major revision 常给 1-2 月），及时认真修改/回应是录用关键，别拖（拖久影响录用+占心思）。处理：revision→逐条规划修改；reject→按 W46 流程立即改投（D1 读意见→D2-3 改→D4 改投→D5 提交，不反思人生）;accept→更新所有材料（简历/作品集/主页/邮件“已发表”）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d361-noon" data-d="361" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D361 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">处理修改要求（如有）：规划修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p><strong>如收到 revision</strong>，中午<strong>规划修改</strong>——仔细读审稿意见、逐条列出修改点、规划本周内怎么改（哪些是实验补充、哪些是写作修改、哪些是 rebuttal 回应）。<strong>规划清楚，修改才高效</strong>（major revision 通常涉及补实验 + 改写作 + 回应每条意见）。如无 revision，继续第三课题。这里要破除一个误区：很多新手把“被要求 major revision”当成坏消息、甚至差点放弃——其实 major revision 是好消息，它意味着审稿人认为你的工作有价值、值得给机会改进，只要认真回应，录用的概率相当高。真正的坏消息是直接 reject，而即便 reject 也有改投这条路。所以收到 revision，该高兴、该认真，而不是气馁。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① <strong>如有 revision</strong>：仔细读审稿意见（理解每条）；逐条列修改点（补实验/改写作/rebuttal 回应）；规划本周内的修改安排（轻重缓急）；② <strong>如无</strong>：继续第三课题（method 迭代/中期结果）；③ 记录修改计划。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>如有 revision，修改计划清晰（逐条修改点 + 本周安排）；如无，第三课题推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不读透意见就改 → 仔细读、理解每条；② 修改无计划（乱）→ 逐条列、排安排；③ 漏回应某条意见 → 每条都回应（rebuttal）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>意见多/难？→ 逐条拆解、分清补实验/改写作/回应；时间紧？→ 排轻重缓急、本周内核心的先做。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划了论文修改</strong>。<strong>做了</strong>（如有 revision：读透意见+逐条列修改点+规划本周安排/如无：第三课题）、<strong>学了</strong>（读透意见、逐条规划、排轻重缓急、每条回应）、<strong>会了</strong>（系统规划论文的修改响应）。</p>
+</div></section></section><section class="slot" id="d361-pm" data-d="361" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D361 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">处理修改要求（如有）：开始修改 / 第三课题实验</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>开始修改</strong>（如有 revision）——按计划动手改（补实验/改写作/写 rebuttal），本周内完成。如无 revision，晚上继续第三课题实验（method 迭代深化）。<strong>论文修改和第三课题，按实际情况安排重心。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① <strong>如有 revision</strong>：按计划开始改（补实验跑起来/改写作/起草 rebuttal），本周内推进；② <strong>如无</strong>：第三课题实验（method 迭代/深化/更多实验）；③ 记录进度。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>如有 revision，修改开始推进（按计划）；如无，第三课题实验推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① revision 拖到最后 → 及时开始、本周内（有时间窗口）；② 第三课题和 revision 都想做导致都没做好 → 按重心（有 revision 通常优先 revision，因为它有 deadline 且关乎已有论文录用）；③ rebuttal 写得情绪化/对抗 → 礼貌、专业、用论据回应（审稿人也是同行，态度很重要）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>补实验来不及？→ 优先核心的、合理安排；rebuttal 难写？→ 逐条礼貌回应、用实验/论据支撑。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了论文修改或第三课题</strong>。<strong>做了</strong>（如有 revision：开始改[补实验/写作/rebuttal]/如无：第三课题实验）、<strong>学了</strong>（revision 及时开始本周内、按重心安排）、<strong>会了</strong>（推进论文修改响应或研究）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文审稿状态检查 + 处理（如有修改要求：规划 + 开始修改，本周内）/ 第三课题推进（如无）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D361</summary><textarea data-note="d361" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d362" data-d="362"><header class="day-head"><span class="dnum">D362</span><h2 class="day-t">周五 · 整理：第三课题中期结果 + 邮件互动记录 + 论文状态</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天整理三样东西——① 第三课题中期结果（method v1→v2 提升、有效改进）；② 邮件互动记录（冷邮件两轮 + Plan B + 回复/汇报的全貌）；③ 论文状态（两篇审稿/修改进度）。提醒：整理是为周日的 M13 月复盘做准备——把研究、连接、论文三条线的现状都厘清，月复盘才能准确评估。</p>
+</blockquote>
+</div><section class="slot" id="d362-am" data-d="362" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D362 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整理第三课题中期结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（整理中期结果的意义）</h4><div class="blk-b"><ul>
+<li>经过这周的迭代，<strong>整理第三课题的中期结果</strong>——把 method v1→v2 的提升、有效的改进、当前水平、剩余空间系统记下来。<strong>这是第三课题这个月进展的“快照”</strong>：① 给 M13 月复盘（实验进度）提供准确数据；② 给 W53+ 的后续（深化/消融/写作）提供起点；③ 厘清“第三课题做到哪了”（method 迭代的成果）。这种定期的“中期快照”习惯，会让你在做长周期研究时始终心里有数——你随时知道自己处在课题的哪个阶段、离目标还有多远，而不是埋头做了几个月却说不清进展。这对写论文尤其有用：到写作时，这些中期快照就是现成的“实验结果素材库”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理 method v1→v2 提升（2 数据集 vs 最强 baseline，量化）；② 列有效的改进（这周积累的）；③ 评估当前水平（够好了吗、剩余空间）；④ 整理 baseline 完成情况（2 数据集 × 5 baseline）；⑤ 记录中期结果（清晰，作月复盘和后续依据）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第三课题中期结果整理清楚——method 提升、有效改进、当前水平、baseline 情况，作月复盘和后续依据。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不整理（进展模糊）→ 整理（提升/改进/水平/baseline）；② 数据不量化 → 量化（提升幅度、指标）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>结果零散？→ 按“baseline 完成/method 迭代/提升幅度/剩余空间”整理。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了第三课题的中期成果</strong>。<strong>做了</strong>（整理 method 提升 + 有效改进 + 当前水平 + baseline 情况 + 记录）、<strong>学了</strong>（中期结果是进展快照、为月复盘和后续提供依据、量化）、<strong>会了</strong>（系统整理课题的阶段性进展）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜第三课题中期整理</strong>：阶段月底整理第三课题中期结果作月复盘和后续依据——① method v1→v2 提升（2 数据集 vs 最强 baseline，量化）② 有效改进列表（积累的）③ 当前水平评估（够好吗/剩余空间）④ baseline 完成情况（2 数据集×5）。是第三课题进展的“快照”：给月复盘提供准确数据、给 W53+ 深化/消融/写作提供起点、厘清做到哪了。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d362-noon" data-d="362" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D362 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整理邮件互动记录（连接全貌）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么整理邮件互动记录）</h4><div class="blk-b"><ul>
+<li>连接这条线走过几轮（冷邮件 W48 → 追问 W49 → 最终跟进 + Plan B W50 → 汇报/跟进 W51）。<strong>整理邮件互动记录</strong>——把连接的全貌厘清：① 三位老师各自的状态（回了/没回/汇报了/什么结果）；② Plan B 师兄/博后的状态；③ 整体进展（建立了哪些联系、到什么程度）。<strong>这是周日月复盘&quot;评估连接程度&quot;的核心依据</strong>（M13 月复盘的重点就是评估连接到什么程度）。整理时要诚实、具体——不要笼统地写&quot;联系了一些老师&quot;，而要具体到&quot;发了 3 封冷邮件+3 封追问+3 封师兄信，收到 X 封回复，其中 Y 位约了汇报/Z 位表达了兴趣&quot;。具体的事实才能支撑准确的评估和正确的决策；模糊的自我安慰（&quot;应该快有回应了吧&quot;）只会延误调整。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理三位老师的状态（冷邮件/追问/最终跟进/回复/汇报的结果）；② 整理 Plan B 师兄/博后的状态（发了/回了/引荐了）；③ 整理整体进展（建立了哪些联系、到什么程度、有无实质机会）；④ 对照邮件状态分析树（当前在哪个分支）；⑤ 记录连接全貌（作月复盘评估依据）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>邮件互动记录整理清楚——老师/Plan B 状态、整体进展、当前分支，作月复盘“评估连接程度”的依据。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不整理（连接现状模糊）→ 整理全貌（老师/Plan B/进展）；② 不对照分析树 → 对照（当前分支、下一步）；③ 整理时用模糊的自我安慰代替具体事实 → 具体到几封发出/几封回复/几位约谈（事实支撑评估）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>记录乱？→ 按老师/师兄分类 + 整体进展；不知到什么程度？→ 看有无回复/汇报/实质机会（月复盘会评估）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了连接的全貌</strong>。<strong>做了</strong>（整理老师状态 + Plan B 状态 + 整体进展 + 对照分析树 + 记录）、<strong>学了</strong>（邮件互动记录是月复盘评估连接的核心依据、厘清全貌）、<strong>会了</strong>（系统整理对接进展的全貌）。</p>
+</div></section></section><section class="slot" id="d362-pm" data-d="362" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D362 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整理论文状态 + 汇总</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>整理论文状态 + 汇总三条线</strong>——① 论文状态（两篇审稿/修改进度，周四查的）；② 汇总研究（第三课题中期结果）、连接（邮件互动记录）、论文（状态）三条线的现状。<strong>整理汇总让 M13 月复盘有完整、准确的素材。</strong> 好的月复盘 30% 靠当天的反思、70% 靠平时和这种集中整理积累的素材——如果素材零散、数据不全，月复盘就只能凭印象写、容易失真。花这一晚把三条线整理齐，周日的复盘才能基于事实、得出靠谱的结论和决策。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理两篇论文状态（在审/revision/接收/改投）；② 汇总三条线现状（第三课题 + 连接 + 论文）；③ 形成 M13 月复盘的素材包（研究/连接/论文的数据和现状）；④ 为周日月复盘做好准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文状态整理清楚，三条线现状汇总，M13 月复盘素材齐备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 论文状态不清 → 整理（每篇的状态）；② 三条线不汇总 → 汇总（月复盘要全面）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>素材零散？→ 按研究/连接/论文三条线整理汇总。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>汇总了月复盘的素材</strong>。<strong>做了</strong>（整理论文状态 + 汇总三条线 + 形成月复盘素材包）、<strong>学了</strong>（整理论文状态、三条线汇总、为月复盘备素材）、<strong>会了</strong>（为月度复盘准备完整准确的素材）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 第三课题中期结果整理 ✅ 邮件互动记录整理（连接全貌）✅ 论文状态整理 + 三条线汇总（M13 月复盘素材齐备）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D362</summary><textarea data-note="d362" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d363" data-d="363"><header class="day-head"><span class="dnum">D363</span><h2 class="day-t">周六 · GitHub 仓库月度更新（发布新 release + 更新 README + 回复 Issue）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天做 GitHub 仓库的月度更新——发布新 release、更新 README、回复 Issue。提醒：GitHub 运营是副线，但月度更新保持仓库活跃、专业（持续的被动存在感）。月度节奏即可（不必天天弄），今天集中做。</p>
+</blockquote>
+</div><section class="slot" id="d363-am" data-d="363" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D363 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">发布新 release</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（GitHub release 月度更新）</h4><div class="blk-b"><ul>
+<li><strong>发布新 release</strong> = 给仓库打一个新版本标签、整理这个月的更新内容（新功能、修复、改进）。<strong>月度 release 让仓库显得活跃、维护良好</strong>（持续更新的项目更可信、更被信任），也方便用户跟踪版本。月度节奏（每月一个 release）即可。</li>
+<li><strong>release 内容</strong>：版本号（如 v1.x）、更新日志（这个月加了什么/改了什么/修了什么）、（如适用）新的预训练模型/功能。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理这个月的更新（新功能/修复/改进）；② 打版本标签（如 v1.x）；③ 写更新日志（清晰列出这个月的变化）；④ 发布 release；⑤ （如适用）附新的模型/资源；控时长（副线）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>新 release 发布——版本标签 + 更新日志清晰，仓库显得活跃维护良好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不发 release（仓库显得停更）→ 月度 release 保持活跃（停更的项目让人觉得没人维护、不敢用）。</li>
+<li>更新日志含糊 → 清晰列出变化（新增/修复/改进）。</li>
+<li>副线投入过多 → 控时长（月度节奏即可）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>这个月没大更新？→ 小的改进/修复也可以发（保持节奏）；不会发 release？→ GitHub Releases 页面新建、填标签和日志。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>发布了月度 release</strong>。<strong>做了</strong>（整理更新 + 打标签 + 写日志 + 发布 + 控时长）、<strong>学了</strong>（月度 release 保持活跃可信、清晰日志、副线控时长）、<strong>会了</strong>（用月度 release 维护开源项目的活跃度）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜GitHub 月度更新（保持活跃）</strong>：开源副线的月度节奏——① 发布新 release（打版本标签 v1.x+清晰更新日志：这个月新增/修复/改进，附新模型/资源）② 更新 README（最新成果/论文状态/功能）③ 回复 Issue（认真及时，体现维护)。月度更新让仓库显得活跃、维护良好（更可信被信任）、持续被动存在感。副线控时长（月度节奏即可，不必天天弄）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d363-noon" data-d="363" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D363 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">更新 README + 回复 Issue</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>① <strong>更新 README</strong>——加上最新成果（第三课题进展如适用、论文最新状态、最新数据）；② <strong>回复 Issue</strong>——认真及时回复用户的问题/反馈（体现维护、积累口碑）。<strong>README 是仓库门面、Issue 回复体现维护</strong>，都影响仓库的专业形象。换位想：一个潜在的合作者或老师点进你的仓库，看到 README 信息最新、Issue 都有认真回复、最近还有 release——他会觉得这是个“活的、被用心维护的”项目，对你的专业度和靠谱程度加分；反之，README 半年没更、Issue 堆着没人理，再好的代码也会被打折扣。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 更新 README（最新成果/论文状态/功能说明）；② 回复积压的 Issue（认真、及时、有帮助）；③ 处理 PR（如有）；④ 确保仓库整体专业、最新；控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>README 更新到最新，Issue 回复清空，仓库专业最新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① README 过时 → 更新最新成果/状态；② Issue 不回 → 认真及时回（口碑）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Issue 多？→ 优先有意义的；README 更新什么？→ 最新成果/论文状态/功能。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>更新了门面、维护了社区</strong>。<strong>做了</strong>（更新 README + 回复 Issue + 处理 PR + 控时长）、<strong>学了</strong>（README 是门面、Issue 回复体现维护和口碑）、<strong>会了</strong>（维护开源项目的门面和社区）。</p>
+</div></section></section><section class="slot" id="d363-pm" data-d="363" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D363 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">第三课题实验 / 论文写作准备</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上回到第三课题——继续实验（method 深化）或为论文写作做准备（如 method 已迭代到好的 v2，可开始想论文框架）。<strong>GitHub 是副线，第三课题是核心</strong>，晚上回归核心。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 第三课题实验（method 深化/更多实验）或论文写作准备（如 v2 够好，想论文框架/复用 Proposal）；② 记录进展；③ 为下周（W53+）的推进做准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第三课题实验或写作准备推进，下周方向明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 副线占太多忘了核心 → 晚上回归第三课题（GitHub 是放大器、第三课题才是核心资产）；② 不为下周准备 → 明确下周方向（W53+ method 深化/消融/写作）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>method 够好了？→ 可开始想论文框架（复用 Proposal/前两篇结构）；还要深化？→ 继续实验/消融。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>回归并推进了核心第三课题</strong>。<strong>做了</strong>（第三课题实验/写作准备 + 记录 + 为下周准备）、<strong>学了</strong>（GitHub 副线第三课题核心、回归核心、为下周准备）、<strong>会了</strong>（在副线之余持续推进核心研究）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ GitHub 月度更新（新 release + README 更新 + Issue 回复）✅ 第三课题实验 / 论文写作准备。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D363</summary><textarea data-note="d363" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d364" data-d="364"><header class="day-head"><span class="dnum">D364</span><h2 class="day-t">周日 · ★ M13 月度复盘（用<a href="../appendix-e.html">附录 E</a> 模板）+ 评估连接程度 + 风险预案 + 计划 W53–54</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：M13 最后一天，也是阶段三第一个月的复盘日——★ 用<a href="../appendix-e.html">附录 E</a> 模板做 M13 月度复盘、★ 重点评估“我和空天院的连接建立到什么程度了？”、对照 M13 硬交付清单（5 项）、据风险预案决定是否调整策略、计划 W53–54。提醒：这是阶段三第一个月的关键复盘——核心是评估连接的方向和进展，如果进展不及预期（尤其 0 回复），据风险预案果断调整（Plan C/D）。</p>
+</blockquote>
+</div><section class="slot" id="d364-am" data-d="364" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D364 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">★ M13 月度复盘（用<a href="../appendix-e.html">附录 E</a> 模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M13 月复盘用<a href="../appendix-e.html">附录 E</a> 做什么）</h4><div class="blk-b"><ul>
+<li>★ <strong>用<a href="../appendix-e.html">附录 E</a> 模板做 M13 月度复盘</strong>——系统盘点阶段三第一个月：① <strong>量化交付盘点</strong>（5 类：论文阅读 / 实验进度 / 论文写作 / 开源与影响力 / <strong>人脉与社交</strong>）；② <strong>计划完成度总评</strong>（Top 5 事项 + 总完成率）；③ <strong>Top 3 收获</strong>；④ 问题/不足；⑤ 下月调整；⑥ 异常信号检查。★ <strong>其中“人脉与社交”和“实验进度”是 M13 的重点</strong>——人脉与社交反映连接进展（邮件发出/回复/交流次数），实验进度反映第三课题（baseline/method 迭代）。</li>
+<li><strong>附录 E 的精神</strong>：诚实面对自己——复盘不是“汇报成绩”，是“发现问题”。尤其 M13 这个连接关键月，要诚实评估连接到底走到哪了。月复盘最大的敌人是“自我安慰”——把“还没回复”解释成“老师可能在忙、再等等”，把“0 实质进展”解释成“我已经很努力了”。这些解释可能都对，但它们会让你停留在无效的策略上。诚实意味着：如果一个策略一个月都没出结果，就要敢于承认它可能需要调整，而不是用“再坚持一下”麻痹自己。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用<a href="../appendix-e.html">附录 E</a> 模板填 M13 月复盘（见补充包范例 2）——① 量化交付盘点（5 类，重点人脉与社交[邮件发出/回复/交流]+ 实验进度[baseline 2 数据集/method v1-v2]）；② 计划完成度（Top 5 事项 + 完成率）；③ Top 3 收获；④ 问题/不足（诚实）；⑤ 下月调整；填好<a href="../appendix-e.html">附录 E</a> 主表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M13 月复盘<a href="../appendix-e.html">附录 E</a> 主表填好——5 类量化盘点（重点人脉/实验）+ 计划完成度 + 收获 + 问题 + 调整，诚实全面。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>月复盘当“汇报成绩”（只写好的）→ 诚实发现问题（尤其连接进展，问题才是改进的起点）。</li>
+<li>不用<a href="../appendix-e.html">附录 E</a> 模板（零散）→ 用模板（系统全面）。</li>
+<li>跳过“问题/调整”（回避）→ 诚实写问题 + 调整（月复盘的价值）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>数据不全？→ 用这周整理的素材（研究/连接/论文）；不知写什么问题？→ 诚实看哪条线不及预期（尤其连接）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用<a href="../appendix-e.html">附录 E</a> 系统复盘了 M13</strong>。<strong>做了</strong>（<a href="../appendix-e.html">附录 E</a> 主表：5 类量化盘点[重点人脉/实验]+计划完成度+收获+问题+调整）、<strong>学了</strong>（<a href="../appendix-e.html">附录 E</a> 系统复盘、重点人脉与社交+实验进度、诚实发现问题非汇报成绩）、<strong>会了</strong>（用标准模板系统复盘一个月）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜M13 月复盘（<a href="../appendix-e.html">附录 E</a>·诚实发现问题）</strong>：用<a href="../appendix-e.html">附录 E</a> 模板（M1-M24 通用）系统复盘——① 量化交付盘点 5 类：论文阅读/实验进度/论文写作/开源与影响力/<strong>人脉与社交</strong>（★阶段三重点：邮件发出/回复/交流次数反映连接进展）② 计划完成度（Top 5+总完成率）③ Top 3 收获 ④ 问题/不足 ⑤ 下月调整 ⑥ 异常信号检查。精神：诚实面对自己——复盘不是“汇报成绩”是“发现问题”。M13 重点=诚实评估连接到什么程度。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d364-noon" data-d="364" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D364 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">★ 重点评估“和空天院的连接程度” + 对照 M13 硬交付清单</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M13 月复盘的核心：评估连接程度）</h4><div class="blk-b"><ul>
+<li>★ <strong>M13 月复盘的核心问题</strong>：<strong>“我和空天院的连接建立到什么程度了？”</strong> 这是阶段三第一个月最重要的评估——① 有几位老师/师兄回复了？② 有没有汇报/交流/实质机会？③ 连接在“邮件状态分析树”的哪个分支？<strong>据此判断连接的方向和进展</strong>。同时<strong>对照 M13 硬交付清单（5 项）</strong>：≥1 位老师/师兄回复邮件 | 线上汇报完成（如已约到）| 第三课题 Proposal v1 | 第三课题 baseline 完成（2 数据集）| 第三课题 your method v1-v2。</li>
+<li><strong>如果 0 回复（连接没进展）</strong>：★ <strong>需要紧急调整策略</strong>——Plan C（参加他们组织的学术会议/workshop/暑期学校，当面交流）。这是 M13 月复盘可能触发的关键决策。要理解 Plan C 不是“失败后的无奈之举”，而是一个主动的、往往更有效的策略——当面交流（在学术会议/组会开放日/workshop 上）的转化率，通常远高于冷邮件：你能直接展示你的工作、和老师/学生面对面聊、给人留下鲜活的印象。很多成功的对接，本就是从一次会议上的偶遇和交谈开始的。所以 0 回复触发 Plan C，是把战场从“低效的邮件”转到“高效的当面”，是进攻而非撤退。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 评估“和空天院的连接程度”（几位回复/有无汇报机会/在分析树哪个分支/有无实质机会）；② 对照 M13 硬交付清单（5 项，逐项确认 ✅/部分/未达）；③ <strong>判断连接是否达预期</strong>：有回复/汇报→连接有进展（继续推进）；0 回复→★ 触发紧急调整（Plan C）；④ 记录评估结论 + 是否需要调整策略。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>连接程度评估清楚（几位回复/进展/分支）+ M13 硬交付清单对照 + 判断是否达预期（0 回复则触发 Plan C）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>回避评估连接（怕进展不好）→ ★ 诚实评估（方向比努力重要，逃避只会让错误的方向持续更久）。</li>
+<li>0 回复了还不调整策略 → ★ 触发 Plan C（紧急调整）。</li>
+<li>不对照硬交付清单 → 逐项对照（5 项）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>连接 0 回复？→ ★ 不焦虑、据风险预案 Plan C（学术会议当面交流）+ Plan D（投稿被审稿人看到）；有回复但没实质机会？→ 继续推进（追问未来机会/汇报/争取访问）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>评估了连接程度、判断了是否调整策略</strong>。<strong>做了</strong>（评估连接程度 + 对照硬交付清单 + 判断达预期否 + 0 回复触发 Plan C）、<strong>学了</strong>（M13 核心=评估连接程度、诚实面对、0 回复紧急调整 Plan C、对照硬交付）、<strong>会了</strong>（评估对接进展并据此决策策略调整）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜阶段三月度评估 + 风险预案</strong>：阶段三月复盘核心=★ 评估“和目标组连接到什么程度”（几位回复/有无汇报/实质机会/分析树分支）+ 对照月硬交付清单。★ 据结果调整：0 回复（10%）→Plan C（参加目标组学术活动/组会开放日/workshop/暑期学校当面自我介绍）+Plan D（投稿目标组老师可能审稿的期刊如 TGRS，论文好→被认可)；回复“不招访问”（20%）→礼貌追问未来机会+保持联系（每 2 月发进展更新）+转其他团队；回复积极但时间冲突（15%）→灵活调整访问时间（提前/延后 1-2 月）。诚实评估方向，不及预期果断调策略。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d364-pm" data-d="364" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D364 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">M13 风险预案应对 + 计划 W53–54</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（风险预案 + 衔接 M14）</h4><div class="blk-b"><ul>
+<li>① <strong>据 M13 月复盘的连接评估，应用对应的风险预案</strong>（见补充包范例 3）：0 回复→Plan C/D；回复“不招访问”→追问未来机会 + 每 2 月更新 + 转其他团队；时间冲突→灵活调整访问时间。<strong>把评估转化为下个月的具体行动。</strong>② <strong>计划 W53–54</strong>——M14（W53-56）是“线上汇报 + 访问申请”，W53-54 是“线上汇报集中期”（★ 2 周块）。从 M13 到 M14 是一个重心的转移：M13 是“启动+广撒网”（发邮件、多层备选、第三课题立项），M14 开始“聚焦+深化”——把有回应的线索（约到汇报的老师、感兴趣的师兄）集中转化为实质机会（汇报、访问申请），同时第三课题从 method 迭代走向更系统的实验和写作准备。本月的进展（连接评估、第三课题 method、论文状态）作为 W53+ 的输入。</li>
+<li><strong>阶段三第一个月的承转</strong>：M13 完成了启动（追问/选题立项/baseline/method 迭代/汇报如有）；M14 进入“线上汇报集中期 + 访问申请”（把连接推向实质机会）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 据连接评估应用风险预案（0 回复→Plan C/D 的具体安排；有回复→推进汇报/访问；不招访问→追问未来+转团队；时间冲突→调整时间）；② 计划 W53-54（线上汇报集中期，2 周块）：把本月进展（连接/method/论文）作输入；③ 计划第三课题 W53+ 推进（method 深化/消融/写作准备）；④ 留弹性（据连接结果）；⑤ 记录 M13 收官 + M14 启动。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>风险预案应用（据评估的具体行动）+ W53-54 计划（线上汇报集中期 + 第三课题）+ 本月进展作输入，M13 收官、M14 衔接。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 评估了不应用预案 → 转化为下月行动（评估的价值在于指导行动）；② 不计划 W53-54 → 计划（衔接 M14 线上汇报集中期）；③ W53-54 是 2 周块没注意 → 注意（线上汇报集中期是合并的 2 周块/14 天，写法同 W48）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知应用哪个预案？→ 据连接评估（0 回复 Plan C/不招访问追问转团队/时间冲突调整）；W53-54 怎么排？→ 线上汇报集中期（2 周块）+ 第三课题深化。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>应用了风险预案、衔接了 M14</strong>。<strong>做了</strong>（据评估应用风险预案 + 计划 W53-54[线上汇报集中期]+本月进展作输入 + M13 收官）、<strong>学了</strong>（评估转化为下月行动、衔接 M14 线上汇报集中期、留弹性）、<strong>会了</strong>（把月复盘评估转化为下阶段的具体计划）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ <strong>M13 月度复盘</strong>（<a href="../appendix-e.html">附录 E</a> 主表 + ★ 评估连接程度 + 对照硬交付清单 5 项）✅ 风险预案应用（据评估的下月行动）✅ W53–54 计划（线上汇报集中期 + 第三课题推进）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D364</summary><textarea data-note="d364" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W52 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>M13 收官周，补充包给你四样可直接照用的：① 三个范例（method v1→v2 迭代记录 + M13 硬交付清单 · M13 月复盘<a href="../appendix-e.html">附录 E</a> 填写示例 · M13 风险预案 + GitHub 月度更新清单）；② 一个完整可运行的“method 迭代追踪器”（追踪版本 × 数据集、算提升、选最佳版本）+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · method v1→v2 迭代记录 + M13 硬交付清单</h3>
+<figure class="code" data-lang="text"><pre><code>【method v1→v2 迭代记录（一天一版,据分析改进）】
+版本 | 改进点 | 数据集A | 数据集B | vs最强baseline | 决策
+v1(初始) | (Proposal的idea) | __ | __ | +__/+__ | 起点
+v1.1 | 改进X模块 | __ | __ | +__ | 有效→保留
+v1.2 | 深化X/叠加Y策略 | __ | __ | +__ | 有效→保留
+v1.3 | 改进Z | __ | __ | +__/持平 | 无效→回退
+v2(定型) | =v1.2(积累有效改进) | __ | __ | +__/+__ | 本月最佳
+→ 一版改一个主要点(可归因)、据结果决策(有效保留/无效回退)、2数据集看泛化。
+
+【M13 硬交付检查清单(5项,逐项✅/部分/未达)】
+□ ≥1位空天院老师/师兄回复了邮件
+□ 线上汇报完成(如已约到)
+□ 第三课题 Proposal v1
+□ 第三课题 baseline 完成(2数据集)
+□ 第三课题 your method v1-v2</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · M13 月复盘（<a href="../appendix-e.html">附录 E</a> 主表填写示例，重点人脉 + 连接评估）</h3>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 月度复盘 · M13（阶段三第1个月）  本月起止:W49~W52(D337~D364)</span>
+
+一、量化交付盘点
+1.2 实验进度: baseline跑通 计划10/实际__ | 方法迭代 v1→v2 | 最佳指标 __
+1.5 人脉与社交(★重点): 邮件发出 计划6/实际__ | 收到回复数 __ | 线上交流次数 __
+(其他:1.1论文阅读/1.3论文写作/1.4开源影响力 按实填)
+
+二、计划完成度: Top5(选题立项/baseline/method迭代/发追问+PlanB/汇报如有) 完成率__%
+
+三、Top3收获: 1.第三课题立项(能合作交叉点) 2.多层备选不放弃的心态 3.method迭代能力复用
+
+四、问题/不足: ★连接进展(几位回复?到什么程度?)诚实评估
+
+五、下月调整: 据连接评估——0回复→Plan C(学术会议)/有回复→推进汇报访问
+
+★★ 核心评估:&quot;我和空天院的连接建立到什么程度了?&quot;→__(几位回复/汇报/分支/实质机会)
+   → 如0回复:紧急调整 Plan C
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · M13 风险预案 + GitHub 月度更新清单</h3>
+<figure class="code" data-lang="text"><pre><code>【M13 风险预案(据连接评估应用)】
+风险 | 概率 | 应对
+3老师+3师兄全无回复 | 10% | Plan C:查空天院学术活动(组会开放日/workshop/暑期学校)
+                          报名→当面自我介绍; Plan D:投TGRS等空天院老师可能审稿的期刊,
+                          论文好→被认可
+回复&quot;目前不招访问&quot; | 20% | 礼貌追问&quot;是否有未来机会&quot;+保持联系(每2月发进展更新)+转其他团队
+回复积极但时间冲突 | 15% | 灵活调整访问时间(提前/延后1-2月)
+
+【GitHub 月度更新清单】
+□ 发布新release(版本标签v1.x+更新日志:本月新增/修复/改进+新模型如适用)
+□ 更新README(最新成果/论文状态/功能)
+□ 回复积压Issue(认真及时)
+□ 处理PR(如有)
+□ 控时长(副线,月度节奏)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · method 迭代追踪器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本追踪 your method 的各个迭代版本在 2 个数据集上的表现，算出每版相比最强 baseline 的提升，自动选出最佳版本——把“一天一版”的迭代过程量化管理，清楚看到哪版最好、提升多少。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># method_iter_tracker.py —— 第三课题 method 迭代追踪器</span>
+<span class="c1"># 最强 baseline 在 2 数据集上的指标（对比基准）</span>
+<span class="n">BEST_BASELINE</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;datasetA&quot;</span><span class="p">:</span> <span class="mf">78.0</span><span class="p">,</span> <span class="s2">&quot;datasetB&quot;</span><span class="p">:</span> <span class="mf">71.0</span><span class="p">}</span>
+
+<span class="c1"># 各迭代版本在 2 数据集上的指标</span>
+<span class="n">versions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;v1(初始)&quot;</span><span class="p">:</span>   <span class="p">{</span><span class="s2">&quot;datasetA&quot;</span><span class="p">:</span> <span class="mf">78.5</span><span class="p">,</span> <span class="s2">&quot;datasetB&quot;</span><span class="p">:</span> <span class="mf">71.2</span><span class="p">,</span> <span class="s2">&quot;改进&quot;</span><span class="p">:</span> <span class="s2">&quot;Proposal的idea&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;v1.1&quot;</span><span class="p">:</span>       <span class="p">{</span><span class="s2">&quot;datasetA&quot;</span><span class="p">:</span> <span class="mf">79.3</span><span class="p">,</span> <span class="s2">&quot;datasetB&quot;</span><span class="p">:</span> <span class="mf">71.8</span><span class="p">,</span> <span class="s2">&quot;改进&quot;</span><span class="p">:</span> <span class="s2">&quot;改进X模块&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;v1.2&quot;</span><span class="p">:</span>       <span class="p">{</span><span class="s2">&quot;datasetA&quot;</span><span class="p">:</span> <span class="mf">79.9</span><span class="p">,</span> <span class="s2">&quot;datasetB&quot;</span><span class="p">:</span> <span class="mf">72.5</span><span class="p">,</span> <span class="s2">&quot;改进&quot;</span><span class="p">:</span> <span class="s2">&quot;叠加Y策略&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;v1.3&quot;</span><span class="p">:</span>       <span class="p">{</span><span class="s2">&quot;datasetA&quot;</span><span class="p">:</span> <span class="mf">79.7</span><span class="p">,</span> <span class="s2">&quot;datasetB&quot;</span><span class="p">:</span> <span class="mf">72.4</span><span class="p">,</span> <span class="s2">&quot;改进&quot;</span><span class="p">:</span> <span class="s2">&quot;改进Z(无效)&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="n">versions</span><span class="p">,</span> <span class="n">baseline</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== method 迭代追踪（vs 最强 baseline）===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">best_name</span><span class="p">,</span> <span class="n">best_avg_gain</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="mf">1e9</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">versions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">gA</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;datasetA&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">baseline</span><span class="p">[</span><span class="s2">&quot;datasetA&quot;</span><span class="p">]</span>
+        <span class="n">gB</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;datasetB&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">baseline</span><span class="p">[</span><span class="s2">&quot;datasetB&quot;</span><span class="p">]</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="p">(</span><span class="n">gA</span> <span class="o">+</span> <span class="n">gB</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">（</span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;改进&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">）&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  A=</span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;datasetA&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">(+</span><span class="si">{</span><span class="n">gA</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">) | B=</span><span class="si">{</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;datasetB&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">(+</span><span class="si">{</span><span class="n">gB</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">) | 平均提升 +</span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">avg</span> <span class="o">&gt;</span> <span class="n">best_avg_gain</span><span class="p">:</span>
+            <span class="n">best_avg_gain</span><span class="p">,</span> <span class="n">best_name</span> <span class="o">=</span> <span class="n">avg</span><span class="p">,</span> <span class="n">name</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🏆 当前最佳版本：</span><span class="si">{</span><span class="n">best_name</span><span class="si">}</span><span class="s2">（平均提升 +</span><span class="si">{</span><span class="n">best_avg_gain</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">）&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   → 作为本月 v2 定型；W53+ 可继续深化/消融/写作&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">track</span><span class="p">(</span><span class="n">versions</span><span class="p">,</span> <span class="n">BEST_BASELINE</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="python"><pre><code><span class="o">===</span> <span class="n">method</span> <span class="n">迭代追踪</span><span class="err">（</span><span class="n">vs</span> <span class="n">最强</span> <span class="n">baseline</span><span class="err">）</span><span class="o">===</span>
+
+<span class="n">v1</span><span class="p">(</span><span class="n">初始</span><span class="p">)</span><span class="err">（</span><span class="n">Proposal的idea</span><span class="err">）</span>
+  <span class="n">A</span><span class="o">=</span><span class="mf">78.5</span><span class="p">(</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">|</span> <span class="n">B</span><span class="o">=</span><span class="mf">71.2</span><span class="p">(</span><span class="o">+</span><span class="mf">0.2</span><span class="p">)</span> <span class="o">|</span> <span class="n">平均提升</span> <span class="o">+</span><span class="mf">0.35</span>
+<span class="n">v1</span><span class="mf">.1</span><span class="err">（</span><span class="n">改进X模块</span><span class="err">）</span>
+  <span class="n">A</span><span class="o">=</span><span class="mf">79.3</span><span class="p">(</span><span class="o">+</span><span class="mf">1.3</span><span class="p">)</span> <span class="o">|</span> <span class="n">B</span><span class="o">=</span><span class="mf">71.8</span><span class="p">(</span><span class="o">+</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">|</span> <span class="n">平均提升</span> <span class="o">+</span><span class="mf">1.05</span>
+<span class="n">v1</span><span class="mf">.2</span><span class="err">（</span><span class="n">叠加Y策略</span><span class="err">）</span>
+  <span class="n">A</span><span class="o">=</span><span class="mf">79.9</span><span class="p">(</span><span class="o">+</span><span class="mf">1.9</span><span class="p">)</span> <span class="o">|</span> <span class="n">B</span><span class="o">=</span><span class="mf">72.5</span><span class="p">(</span><span class="o">+</span><span class="mf">1.5</span><span class="p">)</span> <span class="o">|</span> <span class="n">平均提升</span> <span class="o">+</span><span class="mf">1.70</span>
+<span class="n">v1</span><span class="mf">.3</span><span class="err">（</span><span class="n">改进Z</span><span class="p">(</span><span class="n">无效</span><span class="p">)</span><span class="err">）</span>
+  <span class="n">A</span><span class="o">=</span><span class="mf">79.7</span><span class="p">(</span><span class="o">+</span><span class="mf">1.7</span><span class="p">)</span> <span class="o">|</span> <span class="n">B</span><span class="o">=</span><span class="mf">72.4</span><span class="p">(</span><span class="o">+</span><span class="mf">1.4</span><span class="p">)</span> <span class="o">|</span> <span class="n">平均提升</span> <span class="o">+</span><span class="mf">1.55</span>
+
+<span class="err">🏆</span> <span class="n">当前最佳版本</span><span class="err">：</span><span class="n">v1</span><span class="mf">.2</span><span class="err">（</span><span class="n">平均提升</span> <span class="o">+</span><span class="mf">1.70</span><span class="err">）</span>
+   <span class="err">→</span> <span class="n">作为本月</span> <span class="n">v2</span> <span class="n">定型</span><span class="err">；</span><span class="n">W53</span><span class="o">+</span> <span class="n">可继续深化</span><span class="o">/</span><span class="n">消融</span><span class="o">/</span><span class="n">写作</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把每个迭代版本在 2 数据集上的指标填进 versions，脚本算出每版相比最强 baseline 的提升、自动选出最佳版本。能清楚看到 v1.2 是本月最佳（v1.3 的改进 Z 无效、提升反而降了，该回退）——这正是“据结果决策、有效保留无效回退”的量化体现。最佳版本作为本月 v2 定型，下个月继续深化。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D358（分析 + v2 迭代第 1 版）</strong></p>
+<ol>
+<li>★ method 迭代为什么要“据分析改进”而非瞎改？怎么找改进点？</li>
+<li>一天一版的节奏复用自哪个月？为什么一版改一个主要点？</li>
+</ol>
+<p><strong>D359（v2 迭代第 2 版）</strong></p>
+<ol>
+<li>迭代的“看结果→决策”环节是什么？有效/无效分别怎么处理？</li>
+</ol>
+<p><strong>D360（v2 迭代第 3 版 + 中期汇总）</strong></p>
+<ol>
+<li>为什么要汇总中期结果？汇总什么（提升/改进/水平）？</li>
+</ol>
+<p><strong>D361（论文审稿响应）</strong></p>
+<ol>
+<li>★ 收到 revision 为什么要“本周内及时处理”？怎么规划修改？</li>
+<li>被拒怎么办？接收怎么办？</li>
+</ol>
+<p><strong>D362（整理三条线）</strong></p>
+<ol>
+<li>整理的三样东西是什么？为什么整理（为周日月复盘）？</li>
+<li>邮件互动记录为什么是“评估连接程度”的核心依据？</li>
+</ol>
+<p><strong>D363（GitHub 月度更新）</strong></p>
+<ol>
+<li>GitHub 月度更新做哪三样（release/README/Issue）？为什么保持活跃？</li>
+</ol>
+<p><strong>D364（★ M13 月复盘）</strong></p>
+<ol>
+<li>★ <a href="../appendix-e.html">附录 E</a> 月复盘的精神是什么（汇报成绩还是发现问题）？5 类量化盘点是什么？</li>
+<li>★ M13 月复盘的核心问题是什么？0 回复怎么办？</li>
+<li>M13 硬交付清单 5 项是什么？M13 风险预案有哪几种情况？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>method 迭代不分析就瞎改</td>
+<td>无方向</td>
+<td>★ 据分析找明确改进点（针对性迭代）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>一次改太多点</td>
+<td>不可归因</td>
+<td>一版改一个主要点</td>
+</tr>
+<tr>
+<td>3</td>
+<td>无效的改进也保留</td>
+<td>堆砌</td>
+<td>看结果决策，无效回退</td>
+</tr>
+<tr>
+<td>4</td>
+<td>迭代不收敛（一直换方向）</td>
+<td>无积累</td>
+<td>保留有效改进、稳步积累</td>
+</tr>
+<tr>
+<td>5</td>
+<td>只看主数据集</td>
+<td>漏泛化</td>
+<td>2 数据集都看</td>
+</tr>
+<tr>
+<td>6</td>
+<td>收到 revision 拖着不改</td>
+<td>错过窗口</td>
+<td>★ 本周内及时认真处理</td>
+</tr>
+<tr>
+<td>7</td>
+<td>被拒后消沉</td>
+<td>心态</td>
+<td>立即改投（W46 流程，不反思人生）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>不整理三条线</td>
+<td>月复盘无素材</td>
+<td>整理研究/连接/论文（为月复盘）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>GitHub 不发 release</td>
+<td>显停更</td>
+<td>月度 release 保持活跃</td>
+</tr>
+<tr>
+<td>10</td>
+<td>副线投入过多</td>
+<td>挤占核心</td>
+<td>控时长（月度节奏）、晚上回归第三课题</td>
+</tr>
+<tr>
+<td>11</td>
+<td>月复盘当“汇报成绩”</td>
+<td>回避问题</td>
+<td>★ 诚实发现问题（尤其连接进展）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>不用<a href="../appendix-e.html">附录 E</a> 模板</td>
+<td>零散</td>
+<td>用模板（5 类盘点系统全面）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>★ 回避评估连接程度</td>
+<td>怕进展不好</td>
+<td>诚实评估（方向比努力重要）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>★ 0 回复了不调整策略</td>
+<td>不应变</td>
+<td>触发 Plan C（学术会议当面交流）</td>
+</tr>
+<tr>
+<td>15</td>
+<td>评估了不应用风险预案</td>
+<td>不落地</td>
+<td>转化为下月具体行动</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>W52 收尾 · M13 收官</strong>：你完成了 M13（阶段三第一个月）的最后一周。研究上——把第三课题的 your method 用“一天一版”的快速迭代（复用 M9 节奏）从 v1 推进到了一个明显更好的 v2（据 baseline 分析找改进点、有效保留无效回退、2 数据集看提升），还及时响应了论文审稿（如有修改本周内处理）、做了 GitHub 月度更新、整理了研究/连接/论文三条线的现状。而这周最重要的，是周日用<a href="../appendix-e.html">附录 E</a> 做的 <strong>M13 月度复盘</strong>——★ 你诚实地评估了“和空天院的连接建立到什么程度了”，对照了 M13 硬交付清单（5 项），并据结果决定了下个月的策略（有回复→推进汇报/访问；0 回复→Plan C 参加学术会议当面交流）。★ 这次月复盘的价值，不在于盘点做了多少，而在于校准方向——阶段三是连接的关键期，方向对了，后面的努力才有意义。下周（W53–54）进入 M14 的“线上汇报集中期”（★ 2 周块）。<strong>M13 你完成了阶段三的启动：连接发出并多轮跟进、第三课题立项并迭代出 v2。接下来的 M14–M18，是把连接推向实质机会（汇报/访问）、把第三课题推向第三篇论文的阶段——带着这个月攒下的进展和校准好的方向，继续走。回头看，从 W49 阶段三开篇到现在 M13 收官，你在外部回应充满不确定的情况下，依然稳稳地完成了第三课题从选题、立项到迭代出 v2 的全过程——这份“无论外界如何都能让自己持续产出”的定力，本身就是阶段三最宝贵的收获之一。它会一直支撑你走完后面更长、更需要耐心的路。</strong></p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>复盘</h4><p>月复盘用 <a href="../appendix-e.html">附录 E</a> 的模板。周复盘问"我做完了吗"，<b>月复盘问"方向对不对、节奏能不能持续"</b>。</p></section>
+<div class="pager"><a class="prev" href="w51.html"><span class="dir">← 上一篇</span><span class="nm">W51 汇报准备 / 持续跟进</span></a><a class="next" href="w53.html"><span class="dir">下一篇 →</span><span class="nm">W53 线上汇报集中期（上）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d358">D358 周一</a><a class="sub" href="#d358-am">上午 分析 W51 baseline </a><a class="sub" href="#d358-noon">中午 邮件处理（持续跟进）</a><a class="sub" href="#d358-pm">晚上 your method v2 迭</a><a href="#d359">D359 周二</a><a class="sub" href="#d359-am">上午 看第 1 版结果 + 决定下一步</a><a class="sub" href="#d359-noon">中午 邮件处理</a><a class="sub" href="#d359-pm">晚上 your method 迭代（第</a><a href="#d360">D360 周三</a><a class="sub" href="#d360-am">上午 看第 2 版结果 + 第 3 个</a><a class="sub" href="#d360-noon">中午 邮件处理</a><a class="sub" href="#d360-pm">晚上 your method 中期结果</a><a href="#d361">D361 周四</a><a class="sub" href="#d361-am">上午 检查第一/第二篇论文审稿状态</a><a class="sub" href="#d361-noon">中午 处理修改要求（如有）：规划修改</a><a class="sub" href="#d361-pm">晚上 处理修改要求（如有）：开始修改 </a><a href="#d362">D362 周五</a><a class="sub" href="#d362-am">上午 整理第三课题中期结果</a><a class="sub" href="#d362-noon">中午 整理邮件互动记录（连接全貌）</a><a class="sub" href="#d362-pm">晚上 整理论文状态 + 汇总</a><a href="#d363">D363 周六</a><a class="sub" href="#d363-am">上午 发布新 release</a><a class="sub" href="#d363-noon">中午 更新 README + 回复 I</a><a class="sub" href="#d363-pm">晚上 第三课题实验 / 论文写作准备</a><a href="#d364">D364 周日</a><a class="sub" href="#d364-am">上午 ★ M13 月度复盘（用附录 E</a><a class="sub" href="#d364-noon">中午 ★ 重点评估“和空天院的连接程度</a><a class="sub" href="#d364-pm">晚上 M13 风险预案应对 + 计划 </a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

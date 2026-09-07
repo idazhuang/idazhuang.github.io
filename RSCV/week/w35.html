@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="35">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W35 · GitHub 仓库爆款打造周 —— 把“能用的代 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M9 第二篇推进</span><span>·</span><span>Week 35</span><span>·</span><span>D239–D245</span></div><h1 class="title">GitHub 仓库爆款打造周 —— 把“能用的代码”做成“有人用的社区项目”（副线·集中一周·然后回归研究）</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="239" data-k="am" title="D239 上午段"></i><i data-d="239" data-k="noon" title="D239 中午段"></i><i data-d="239" data-k="pm" title="D239 晚上段"></i></span><span class="sday"><i data-d="240" data-k="am" title="D240 上午段"></i><i data-d="240" data-k="noon" title="D240 中午段"></i><i data-d="240" data-k="pm" title="D240 晚上段"></i></span><span class="sday"><i data-d="241" data-k="am" title="D241 上午段"></i><i data-d="241" data-k="noon" title="D241 中午段"></i><i data-d="241" data-k="pm" title="D241 晚上段"></i></span><span class="sday"><i data-d="242" data-k="am" title="D242 上午段"></i><i data-d="242" data-k="noon" title="D242 中午段"></i><i data-d="242" data-k="pm" title="D242 晚上段"></i></span><span class="sday"><i data-d="243" data-k="am" title="D243 上午段"></i><i data-d="243" data-k="noon" title="D243 中午段"></i><i data-d="243" data-k="pm" title="D243 晚上段"></i></span><span class="sday"><i data-d="244" data-k="am" title="D244 上午段"></i><i data-d="244" data-k="noon" title="D244 中午段"></i><i data-d="244" data-k="pm" title="D244 晚上段"></i></span><span class="sday"><i data-d="245" data-k="am" title="D245 上午段"></i><i data-d="245" data-k="noon" title="D245 中午段"></i><i data-d="245" data-k="pm" title="D245 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：这是一周<strong>集中做开源运营</strong>的特殊周——学会把 GitHub 仓库从“一份能跑的代码”经营成“一个有文档、有 demo、有人关注的社区项目”，目标冲击 <strong>50+ stars</strong>。主线是：仓库大改版+门面级 README → Colab demo+完善文档 → model card+一键复现+badge → 三天分渠道引流（知乎/CSDN/Reddit/Twitter/小红书+联系公众号）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会开源项目运营——从代码仓库变成“社区项目”；冲击 50+ stars。
+<strong>★★ 最重要的定位提醒（你的 6.5，本周务必守住）</strong>：<strong>开源运营是“强作品的自然放大”，是副线，不是主业</strong>。你之所以现在做这件事，是因为你已经有了实打实的硬成果（第一篇论文 + 第二课题完整工作 + 干净可复现的代码）——把好东西让更多人看到、用上，是顺势而为。<strong>但你的核心竞争力永远是研究产出（论文、课题），不是 star 数或粉丝数</strong>。所以:① 本周<strong>集中一周把运营做到位，然后回归研究主线</strong>（第二篇 M10 要正式写）;② <strong>绝不能让运营变成持续的内耗</strong>（天天刷 star、追涨粉、和评论区纠缠）——那会偏离你真正的目标;③ star 是结果不是目的，把作品和文档做好、价值传递到位，star 自然会来，不必为数字焦虑。<strong>带着“这是手段、不是目的”的清醒做这一周。</strong>
+<strong>★ 继续守住保护意识（未发表核心代码延后开源）</strong>：你第二篇论文还没发表（还在写）——<strong>第二篇的核心方法代码，等论文录用后再完整开源</strong>，本周公开/运营的是第一篇（已投稿/已挂 arXiv）的代码 + 通用工具 + 复现脚本。别为了“仓库内容丰富”把未发表工作的核心暴露出去。
+<strong>本周精力怎么分配</strong>:D239-242 做“产品”（仓库结构/README/展示图/Colab/文档/model card/复现/badge——把仓库打磨成门面级、零门槛的专业项目）;D243-245 做“分发”（三天分中英文渠道引流 + 联系公众号 + 融入上游社区）。教学按“先把产品做好、再把价值传出去，全程守住副线定位”组织。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d239" data-d="239"><header class="day-head"><span class="dnum">D239</span><h2 class="day-t">周一 · 仓库大改版 + README 框架 + 核心展示图</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午仓库大改版（改名+设计仓库结构）；中午写README主体框架（中英双语）；晚上制作核心展示图（架构图/结果对比图/可视化demo图）。</p>
+<p><strong>预期管理</strong>：本周集中做开源运营（★副线、手段非目的）。今天做仓库改版+README框架+展示图。提醒：好的README目标是“30秒内让人想star”——第一眼是精美banner图→一句话说清做什么→3-5个“为什么用这个项目”的理由→一行命令跑通demo；仓库结构要清晰(README/docs/models/configs/demo/assets);★守住保护意识（未发表的第二篇核心代码先不放）。</p>
+</blockquote>
+</div><section class="slot" id="d239-am" data-d="239" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D239 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">仓库大改版（改名 + 设计仓库结构）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(仓库结构 = 项目的“骨架”，清晰才专业)</h4><div class="blk-b"><ul>
+<li>把仓库<strong>改名为有信息量的名字</strong>(如 <code>Awesome-RemoteSensing-CV-from-General-CV</code>，如果还没改的话——它清楚表达“用通用 CV 做遥感”的定位、含关键词利于搜索)，并<strong>设计清晰的仓库结构</strong>:<code>README.md</code> + <code>docs/</code>(文档)+ <code>models/</code>(模型代码)+ <code>configs/</code>(配置)+ <code>demo/</code>(演示)+ <code>assets/</code>(图片/GIF)。</li>
+<li><strong>为什么仓库结构这么重要（第一印象的一半）</strong>：别人点进你的仓库，除了 README，会扫一眼目录结构。<strong>一个清晰、有组织的结构（文档、代码、配置、演示各归其位），让人觉得“这个项目专业、靠谱、好上手”；一个乱糟糟的结构（文件堆在根目录、没有组织），让人觉得“业余、难用”</strong>，直接影响他们要不要花时间用、要不要 star。结构是项目的骨架，清晰的骨架是专业感的基础。</li>
+<li><strong>★ 守住保护意识（结构里放什么）</strong>：设计结构时想清楚放什么——① 第一篇（已投稿/已挂 arXiv）的代码、通用工具、复现脚本可以放;② <strong>第二篇（未发表）的核心方法代码先不放或只放部分</strong>(<code>models/</code> 里第二篇核心模块等录用后再补)，放已发表部分 + baseline + 工具。<strong>结构可以先搭好（预留位置），但未发表的核心内容延后填充。</strong></li>
+<li><strong>这是“强作品的放大”，不是“为运营而运营”</strong>：你做这个仓库改版，是因为你有值得分享的硬成果（第一篇 + 工具）。<strong>把它整理得专业、好用，是顺势放大；但记住这是副线——花一周做到位，别陷进去。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>仓库改名（有信息量、含关键词，如 Awesome-RemoteSensing-CV-from-General-CV）。</li>
+<li>设计仓库结构(README/docs/models/configs/demo/assets)，各归其位。</li>
+<li>★只放第一篇 + 工具 + 复现脚本，第二篇核心代码预留位置、延后填充。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>仓库改名 + 清晰结构（各目录各归其位），公开内容守住保护意识（未发表核心代码未放）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>仓库名随意没信息量</strong> → 用含关键词、表达定位的名字（利于搜索）。</li>
+<li><strong>文件堆根目录没组织</strong> → 清晰结构(docs/models/configs/demo/assets)。</li>
+<li><strong>★ 把未发表的第二篇核心代码也放进去</strong> → 延后开源（等录用），先放第一篇 + 工具。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不确定结构怎么设计?→ 参考优秀开源项目（如 MMRotate）的目录组织；不确定哪些能放?→ 已发表/已投稿的能放、未发表核心保护；担心仓库显得“内容少”?→ 第一篇 + 工具 + 完善的文档/demo 已经很充实，质量比数量重要。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>设计专业的仓库结构 + 守住保护意识</strong>。<strong>做了</strong>（仓库改名 + 结构设计）、<strong>学了</strong>(结构=项目骨架/专业感、未发表核心延后、运营是放大)、<strong>会了</strong>（把仓库组织成专业项目的样子）。</p>
+</div></section></section><section class="slot" id="d239-noon" data-d="239" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D239 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 README 主体框架（中英双语）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（README：仓库的门面，目标“30 秒让人想 star”）</h4><div class="blk-b"><p>写 README 主体框架（中英双语）：项目简介 → 核心特性（3-5 个 bullet）→ 快速开始 → 模型动物园(Model Zoo)→ 结果展示 → 引用格式。<strong>README 的目标是“30 秒内让人想 star”。</strong></p>
+<ul>
+<li><strong>★ 好的 README 长什么样（看 star 过万的项目）</strong>：第一眼看到一张<strong>精美的 banner 图</strong>（一眼抓住注意）→ <strong>一句话说清楚项目做什么</strong>（不绕弯）→ <strong>3-5 个“为什么用这个项目”的理由</strong>（核心特性/卖点）→ <strong>一行命令就能跑通 demo</strong>（零门槛体验）。<strong>前 30 秒决定了别人要不要继续看、要不要 star</strong>——所以 README 顶部要在 30 秒内传达“这是什么、为什么值得用、怎么快速试”。</li>
+<li><strong>README 的核心板块</strong>:① <strong>项目简介</strong>（一句话 + banner 图）;② <strong>核心特性</strong>（3-5 个 bullet：你的卖点——如“单卡高效”“跨域泛化强”“即插即用”）;③ <strong>快速开始</strong>（几步跑通）;④ <strong>Model Zoo</strong>（预训练模型列表）;⑤ <strong>结果展示</strong>（性能表 + 可视化）;⑥ <strong>引用格式</strong>（方便别人引用你的论文）。</li>
+<li><strong>中英双语（覆盖更广）</strong>：英文受众更广（国际）、中文方便国内遥感社区。双语 README 覆盖两边的受众。</li>
+<li><strong>核心特性要突出你的定位（卖点）</strong>:3-5 个特性是别人“为什么用你项目”的理由。<strong>突出你的差异化卖点：单卡高效（Params/FPS 优势）、跨域泛化强、针对 SAR 难题、即插即用等</strong>——这些正是你研究定位的卖点，在 README 里也是吸引用户的理由。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 README 主体框架（中英双语）：简介 → 核心特性(3-5)→ 快速开始 → Model Zoo → 结果展示 → 引用。</li>
+<li>顶部做到“30 秒抓人”（banner + 一句话 + 核心特性）。</li>
+<li>核心特性突出你的卖点（单卡高效/跨域泛化/即插即用）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>README 主体框架（中英双语，六大板块，顶部 30 秒抓人，特性突出卖点）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>README 顶部不抓人（没 banner/没一句话定位）→ 30 秒内传达“是什么+卖点+怎么试”；核心特性平淡 → 突出差异化卖点（用户用你的理由）；只中文/只英文 → 双语覆盖更广。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知核心特性写什么?→ 你研究的卖点就是（单卡高效/跨域泛化/SAR/即插即用）；一句话定位难写?→ “用通用 CV 技术高效解决遥感旋转目标检测”之类，简洁说清。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了门面级 README 框架</strong>。<strong>做了</strong>（README 框架：六板块 + 双语 + 抓人）、<strong>学了</strong>（30 秒让人想 star、核心板块、特性突出卖点）、<strong>会了</strong>（打造仓库的专业门面）。</p>
+</div></section></section><section class="slot" id="d239-pm" data-d="239" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D239 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">制作核心展示图（架构图/结果对比图/可视化 demo 图）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（展示图：视觉吸引力）</h4><div class="blk-b"><p>制作 README 里的核心展示图——① <strong>方法架构图</strong>（精美版，一图讲清方法）;② <strong>结果对比图</strong>（3 数据集的 bar chart，直观显示你方法的优势）;③ <strong>可视化 demo 图</strong>（检测结果叠加在遥感图上，直观展示效果）。</p>
+<ul>
+<li><strong>为什么展示图重要（视觉是第一吸引力）</strong>：文字 README 之外，<strong>图是最快抓住注意力的</strong>。一张精美的架构图让人一眼懂你做了什么；一张结果对比 bar chart 让人一眼看到你方法更好；一张可视化 demo 图让人直观看到效果。<strong>好的展示图，是 README “30 秒抓人”的关键视觉元素</strong>（banner、架构图、结果图）。</li>
+<li><strong>三张图各自的作用</strong>:① 架构图——讲清“你的方法怎么 work”（技术）;② 结果对比图——证明“你的方法更好”（性能，bar chart 直观）;③ 可视化 demo 图——展示“实际效果”（检测框叠在遥感图上，直观吸引）。<strong>三张图覆盖技术、性能、效果三个维度。</strong></li>
+<li><strong>复用论文的图 + 美化</strong>：架构图、结果图你论文里有（复用），为 README 美化一下（更精美、更适合展示）。可视化 demo 图用你的可视化结果（W34 做过）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制作精美架构图（复用论文方法图 + 美化）。</li>
+<li>制作结果对比 bar chart（3 数据集，你的方法 vs baseline）。</li>
+<li>制作可视化 demo 图（检测结果叠在遥感图上）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>三张核心展示图（架构图/结果对比 bar chart/可视化 demo 图），精美、直观。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>图粗糙不精美 → README 的图要精美（视觉是第一吸引力）；只放架构图不放结果/效果 → 三张覆盖技术/性能/效果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>架构图不够精美?→ 复用论文图 + 工具美化（配色/排版）;bar chart 怎么画?→ matplotlib 画 3 数据集的对比柱状图；可视化 demo 用哪些?→ W34 做的可视化里选最直观的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>制作了核心展示图</strong>。<strong>做了</strong>（架构图/结果对比图/可视化 demo 图）、<strong>学了</strong>（视觉是第一吸引力、三图覆盖技术/性能/效果）、<strong>会了</strong>（用展示图增强仓库吸引力）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜门面级仓库（结构+README+展示图）</strong>:① 清晰仓库结构(README/docs/models/configs/demo/assets)=专业感骨架;② README目标“30秒让人想star”(banner+一句话定位+3-5核心特性[突出你的卖点：单卡高效/跨域泛化/即插即用]+一行命令跑通+Model Zoo+结果+引用，中英双语);③ 三张展示图（精美架构图/结果对比bar chart/可视化demo图）覆盖技术/性能/效果。★未发表的第二篇核心代码延后开源。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 仓库结构改版 ✅ README 框架（双语） ✅ 核心展示图（3 张）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D239</summary><textarea data-note="d239" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d240" data-d="240"><header class="day-head"><span class="dnum">D240</span><h2 class="day-t">周二 · 完善 README 细节 + Model Zoo 表格</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午完善README细节（安装/数据/训练/评估，每步复制粘贴就能跑）；中午晚上添加Model Zoo表格。</p>
+<p><strong>预期管理</strong>：今天完善README细节+Model Zoo。提醒：安装步骤要精确到每条命令、“复制粘贴就能跑”（别人跑不通就不会star）；数据集准备/训练/评估命令都要可复制执行；Model Zoo表格列出预训练模型（方法/backbone/数据集/指标/下载链接）;★守住保护意识（放第一篇+工具的模型，未发表的第二篇核心模型延后）。</p>
+</blockquote>
+</div><section class="slot" id="d240-am" data-d="240" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D240 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">完善 README 细节（每步“复制粘贴就能跑”）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（&quot;复制粘贴就能跑&quot;：降低使用门槛的关键）</h4><div class="blk-b"><p>完善 README 的细节——安装步骤（精确到每条命令）、数据集准备指南、训练命令、评估命令，<strong>每个步骤都要&quot;复制粘贴就能跑&quot;</strong>。</p>
+<ul>
+<li><strong>为什么“复制粘贴就能跑”是关键</strong>：别人想用你的项目，最大的障碍是“跑不通”。<strong>如果你的安装/使用步骤精确、完整、可直接复制执行，别人几分钟就跑起来了（体验好→愿意用和 star）；如果步骤含糊（假设别人知道某些前提、命令不完整），别人折腾半天跑不通就放弃了</strong>。“复制粘贴就能跑”= 把使用门槛降到最低 = 最多人能成功用上。这是开源项目“被用起来”的关键。</li>
+<li><strong>要精确的部分</strong>:① 安装（每条命令，含环境/依赖）;② 数据集准备（怎么下载、怎么组织目录）;③ 训练命令（可直接跑）;④ 评估命令（可直接跑）。<strong>每个都要别人能复制粘贴执行。自己照着走一遍验证（确保真的能跑通）。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>完善安装步骤（精确到每条命令）。</li>
+<li>写数据集准备指南、训练命令、评估命令（都可复制执行）。</li>
+<li>自己照着走一遍验证（确保能跑通）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>README 细节完善（安装/数据/训练/评估，每步可复制粘贴跑通，自己验证过）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>步骤含糊/不完整 → 精确到每条命令、可复制执行；不验证就发 → 自己照着走一遍确认能跑；假设别人有前提知识 → 写给零基础也能跟着做。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>步骤太多怕遗漏?→ 自己在干净环境照着走一遍（缺什么补什么）；命令复杂?→ 封装成脚本（一键）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了“零门槛”的使用指南</strong>。<strong>做了</strong>（安装/数据/训练/评估细节）、<strong>学了</strong>(复制粘贴就能跑=降门槛、验证能跑)、<strong>会了</strong>（让别人能轻松用上你的项目）。</p>
+</div></section></section><section class="slot" id="d240-noon" data-d="240" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D240 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">添加 Model Zoo 表格</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Model Zoo：预训练模型的“货架”）</h4><div class="blk-b"><p>添加 <strong>Model Zoo 表格</strong>——列出你提供的预训练模型：方法、backbone、数据集、指标、下载链接。</p>
+<ul>
+<li><strong>为什么 Model Zoo 有价值</strong>:Model Zoo 让别人<strong>不用自己训练，直接下载你的预训练模型用</strong>（省时省算力）——这对没有算力的用户特别有吸引力。一个有 Model Zoo 的项目，可用性大大提升（别人能直接拿模型做推理/微调）。<strong>它是项目“开箱即用”的体现。</strong></li>
+<li><strong>★ Model Zoo 放什么模型（保护意识）</strong>：放第一篇（已投稿）的模型 + 通用 baseline 的模型；<strong>第二篇（未发表）的核心模型先不放</strong>（等录用）。Model Zoo 表格可以先列已发表部分，未发表的标注“coming soon after publication”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>添加 Model Zoo 表格（方法/backbone/数据集/指标/下载链接）。</li>
+<li>提供预训练模型下载（第一篇 + baseline）。</li>
+<li>★第二篇核心模型延后（标 coming soon）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Model Zoo 表格（已发表模型 + 下载链接，可开箱即用，未发表的延后）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Model Zoo 没下载链接 → 提供可下载的预训练模型（开箱即用）;★放未发表的第二篇核心模型 → 延后（等录用），先放第一篇 + baseline。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>模型托管在哪?→ GitHub Release / 网盘 / HuggingFace；不确定放哪些?→ 已发表/已投稿的放，未发表核心延后。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>添加了 Model Zoo</strong>。<strong>做了</strong>（Model Zoo 表格 + 模型下载）、<strong>学了</strong>(Model Zoo=开箱即用、提升可用性、未发表延后)、<strong>会了</strong>（让项目提供可直接用的模型）。</p>
+</div></section></section><section class="slot" id="d240-pm" data-d="240" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D240 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Model Zoo 完善 + 检查 README 整体</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>完善 Model Zoo（补全信息），并整体检查 README——通读一遍，确保从“30 秒抓人”到“复制粘贴就能跑”到“Model Zoo 开箱即用”整体专业、流畅。站在新用户角度，看 README 是否清晰、能否引导人快速上手。</p>
+<ul>
+<li><strong>整体检查的视角</strong>：假装你是第一次看到这个项目的人——能否在 30 秒明白是什么、为什么用？能否照着快速跑通？能否找到想要的模型？<strong>从新用户视角通读，发现并补上不清晰的地方。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>完善 Model Zoo（补全信息）。</li>
+<li>整体通读 README（新用户视角）。</li>
+<li>补上不清晰/不流畅的地方。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>README 整体完善（抓人 + 可跑 + 开箱即用，新用户视角流畅）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不整体检查 → 通读确保流畅；不站新用户视角 → 假装第一次看，发现盲点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>看不出问题（太熟）?→ 隔天再读或找人看；某部分不流畅 → 调整顺序/补过渡。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整体完善了 README</strong>。<strong>做了</strong>（完善 Model Zoo + 整体检查）、<strong>学了</strong>（新用户视角通读、整体流畅）、<strong>会了</strong>（从用户视角打磨项目文档）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜零门槛使用（README细节+Model Zoo）</strong>:① README安装/数据/训练/评估每步“复制粘贴就能跑”（自己验证过）=降门槛、最多人能成功用;② Model Zoo表格（方法/backbone/数据集/指标/下载链接）=开箱即用、不用自己训练（对无算力用户尤其有吸引力）。★未发表的第二篇核心模型延后（标coming soon）。新用户视角通读打磨。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ README 细节完善 ✅ Model Zoo 表格。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D240</summary><textarea data-note="d240" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d241" data-d="241"><header class="day-head"><span class="dnum">D241</span><h2 class="day-t">周三 · Colab demo + 完善文档</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午添加Colab demo notebook（一键运行无需本地GPU）；中午在Colab中加可视化代码（用户上传自己的遥感图试效果）；晚上写docs/GETTING_STARTED.md + CHANGELOG.md。</p>
+<p><strong>预期管理</strong>：今天加Colab demo+完善文档。提醒：<strong>Colab demo是引流利器</strong>——很多人看到项目第一反应是“我想试试”，装环境太麻烦就放弃，Colab让他们一键试用→体验好→star；确保notebook在Colab上从安装到推理全部跑通；加可视化让用户上传自己的遥感图看效果（互动性强）；写详细入门文档GETTING_STARTED.md。</p>
+</blockquote>
+</div><section class="slot" id="d241-am" data-d="241" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D241 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">添加 Colab demo notebook（一键运行）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Colab demo：引流利器，零门槛试用）</h4><div class="blk-b"><p>添加 <strong>Google Colab demo notebook</strong>——一键运行，不需要本地 GPU。确保 notebook 能在 Colab 上<strong>从安装到推理全部跑通</strong>。</p>
+<ul>
+<li><strong>★ 为什么 Colab demo 是“引流利器”</strong>：很多人看到你的项目，第一反应是<strong>“我想试试”</strong>——但如果要在本地装环境（配 CUDA、装依赖、下数据），太麻烦，大部分人就放弃了。<strong>Colab demo 让他们点开链接，在 Colab 上用免费 GPU 一键跑你的方法、看效果——零门槛试用</strong>。试用体验好 → 觉得你的方法好 → star。<strong>很多开源项目获得关注的关键，就是一个能一键试用的 Colab demo</strong>。它把“想试试”直接转化为“试了、满意、star”。</li>
+<li><strong>Colab demo 要全程跑通</strong>：从安装(<code>!pip install</code>)→ 下载模型 → 加载 → 推理 → 可视化，<strong>整个流程在 Colab 上一键跑通</strong>（用 Colab 免费 GPU）。自己在 Colab 上验证能跑（别人点开就能用）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制作 Colab demo notebook（安装 → 下模型 → 推理 → 可视化）。</li>
+<li>确保在 Colab 上从安装到推理全部跑通（用免费 GPU）。</li>
+<li>在 README 加 Colab 徽章/链接。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Colab demo notebook（在 Colab 上一键跑通：安装到推理）,README 有链接。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Colab demo 跑不通 → 自己在 Colab 上验证全程跑通；demo 太复杂 → 简洁（安装+推理+可视化），让人快速看到效果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>Colab 环境问题?→ notebook 开头写好 pip install；模型太大?→ 用小模型/示例或提供下载。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用 Colab demo 做引流利器</strong>。<strong>做了</strong>（Colab demo 全程跑通）、<strong>学了</strong>(Colab 零门槛试用=引流利器、把“想试”转化为“star”)、<strong>会了</strong>（让任何人无需 GPU 一键试用）。</p>
+</div></section></section><section class="slot" id="d241-noon" data-d="241" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D241 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">Colab 中加可视化（用户上传自己的图）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（互动性：让用户试自己的数据）</h4><div class="blk-b"><p>在 Colab notebook 中添加可视化代码——<strong>让用户上传自己的遥感图，试试你方法的效果</strong>。</p>
+<ul>
+<li><strong>为什么“让用户试自己的图”更吸引人（互动性）</strong>：跑你提供的示例图是一回事，<strong>让用户上传自己的遥感图、看你的方法在他自己数据上的效果，互动性和代入感强得多</strong>——用户会更直观地感受到“这个方法对我有用”。这种互动体验，大大增加用户的兴趣和好感（更可能 star、更可能实际用）。</li>
+<li><strong>怎么做</strong>：在 Colab 加一个上传接口(<code>files.upload()</code>)，用户上传图 → 你的方法推理 → 可视化结果。让用户“玩起来”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在 Colab 加可视化代码（用户上传图 → 推理 → 可视化结果）。</li>
+<li>加上传接口(files.upload())，让用户试自己的数据。</li>
+<li>确保上传→推理→可视化流程顺畅。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Colab demo 支持用户上传自己的遥感图、看你方法的效果（互动性强）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>demo 只能跑固定示例 → 加上传接口让用户试自己的数据（互动）；上传流程卡 → 测试确保顺畅。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>上传接口不会写?→ Colab 的 <code>from google.colab import files; files.upload()</code>；用户图格式多样?→ 做基本的格式处理。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>让 demo 有了互动性</strong>。<strong>做了</strong>（Colab 加用户上传可视化）、<strong>学了</strong>(让用户试自己的数据=互动性/代入感)、<strong>会了</strong>（增强 demo 的互动吸引力）。</p>
+</div></section></section><section class="slot" id="d241-pm" data-d="241" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D241 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 docs/GETTING_STARTED.md + CHANGELOG.md</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（详细文档：深度用户的指南）</h4><div class="blk-b"><p>写 <code>docs/GETTING_STARTED.md</code>(详细的入门指南)+ <code>docs/CHANGELOG.md</code>(更新日志)。</p>
+<ul>
+<li><strong>为什么要详细文档（README 之外）</strong>:README 是“门面 + 快速开始”（让人快速上手）；<strong>而详细文档(GETTING_STARTED)给“想深入用”的用户</strong>——更详细的安装、配置、训练、自定义指南。<strong>README 抓人 + 详细文档支撑深度使用，两者配合</strong>。CHANGELOG 记录项目更新（让用户知道项目在活跃维护）。</li>
+<li><strong>GETTING_STARTED 内容</strong>：详细的环境配置、数据准备、训练流程、评估、如何自定义（改 config/换数据集）等。比 README 的“快速开始”更详细、更全面。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 docs/GETTING_STARTED.md（详细入门：配置/数据/训练/评估/自定义）。</li>
+<li>写 docs/CHANGELOG.md（更新日志）。</li>
+<li>README 链接到详细文档。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>GETTING_STARTED.md（详细入门指南）+ CHANGELOG.md（更新日志）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只有 README 没详细文档 → 详细文档支撑深度使用；CHANGELOG 没有 → 记更新（显示项目活跃）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>GETTING_STARTED 写什么?→ 比 README 更详细的全流程 + 自定义指南；CHANGELOG 格式?→ 按版本列更新内容。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了详细文档</strong>。<strong>做了</strong>(GETTING_STARTED + CHANGELOG)、<strong>学了</strong>（README 抓人 + 详细文档支撑深度使用、CHANGELOG 显活跃）、<strong>会了</strong>（为深度用户提供完整文档）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Colab demo（引流利器）+详细文档</strong>:Colab demo一键运行无需本地GPU（安装→推理→可视化全程跑通）——把“想试试”直接转化为“试了满意star”，是开源引流关键。加用户上传接口让人试自己的数据（互动性/代入感）。详细文档（GETTING_STARTED深度指南+CHANGELOG显活跃）支撑深度使用，与抓人的README配合。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Colab demo（含用户上传） ✅ 文档完善(GETTING_STARTED + CHANGELOG)。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D241</summary><textarea data-note="d241" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d242" data-d="242"><header class="day-head"><span class="dnum">D242</span><h2 class="day-t">周四 · model card + 一键复现 + 开源规范文件 + badge</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午加model card+一键复现reproduce_all.sh；中午加CONTRIBUTING.md+LICENSE(Apache-2.0)；晚上README顶部加badge(Stars/Python/License/Colab)。</p>
+<p><strong>预期管理</strong>：今天加model card+复现脚本+规范文件+badge。提醒：model card描述每个模型（训练数据/超参/评估/局限）;reproduce_all.sh一键复现所有结果；开源规范文件CONTRIBUTING（如何贡献）+LICENSE（推荐Apache-2.0）；<strong>badge的心理效应</strong>——README顶部彩色badge让项目看起来“专业、活跃、可靠”（开源社区的视觉语言，有badge比没有更可信）。</p>
+</blockquote>
+</div><section class="slot" id="d242-am" data-d="242" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D242 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">model card + 一键复现脚本</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（model card + 一键复现：负责任 + 可复现）</h4><div class="blk-b"><p>加 <strong>model card</strong>（每个模型的详细描述：训练数据、超参、评估结果、局限性）+ <strong>一键复现脚本 <code>scripts/reproduce_all.sh</code></strong>（一键复现所有结果）。</p>
+<ul>
+<li><strong>model card（负责任开源）</strong>：描述每个模型的训练数据、超参、评估结果、<strong>局限性</strong>——让用户清楚模型的能力和边界，负责任地使用（避免误用）。诚实写局限，体现专业性。</li>
+<li><strong>一键复现 reproduce_all.sh（可复现性最高体现）</strong>：把复现你论文所有结果的流程封装成一个脚本，别人一条命令就能复现。<strong>可复现性是开源的核心价值</strong>（别人能验证、能在此基础上做）。一键复现是可复现性的最高标准。</li>
+<li><strong>★ 守住保护意识</strong>:model card 和复现脚本针对已发表/已投稿的工作（第一篇 + baseline）；第二篇未发表的核心，复现脚本先不包含其核心方法（等录用）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 model card（训练数据/超参/评估/局限，诚实）。</li>
+<li>写 reproduce_all.sh（一键复现已发表结果）。</li>
+<li>★第二篇核心延后，先复现第一篇 + baseline。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>model card（五要素诚实）+ reproduce_all.sh（一键复现），守住保护意识。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>model card 只写优点不写局限 → 诚实写局限（负责任/专业）；复现脚本硬编码 → 用参数/配置;★含未发表核心 → 延后。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>model card 格式?→ 参考 HuggingFace 模板；复现脚本复杂?→ 分步封装成一键。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>加了 model card + 一键复现</strong>。<strong>做了</strong>(model card + reproduce_all.sh)、<strong>学了</strong>(model card 负责任、一键复现=可复现性最高体现)、<strong>会了</strong>（让项目负责任且可复现）。</p>
+</div></section></section><section class="slot" id="d242-noon" data-d="242" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D242 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">CONTRIBUTING.md + LICENSE（开源规范）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（开源规范文件：正规项目的标配）</h4><div class="blk-b"><p>加 <code>CONTRIBUTING.md</code>(如何贡献代码)+ <code>LICENSE</code>(推荐 Apache-2.0)。</p>
+<ul>
+<li><strong>为什么要这些规范文件</strong>:① <strong>CONTRIBUTING.md</strong>——告诉想贡献代码的人怎么参与（提 PR 的规范），让项目能接受社区贡献（从“个人项目”走向“社区项目”）;② <strong>LICENSE</strong>——明确开源协议（Apache-2.0 是常用的宽松协议），<strong>没有 LICENSE 的项目别人不敢用</strong>（法律上不明确）。<strong>这些规范文件是正规开源项目的标配，让项目显得专业、可信、可参与。</strong></li>
+<li><strong>Apache-2.0 为什么推荐</strong>：宽松（别人可自由使用/修改/商用）、有专利保护条款，是学术/工业界常用的开源协议。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 CONTRIBUTING.md（如何贡献：提 PR 规范等）。</li>
+<li>加 LICENSE(Apache-2.0)。</li>
+<li>让项目符合开源规范。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>CONTRIBUTING.md + LICENSE(Apache-2.0)，项目规范完整。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>没 LICENSE → 加（别人才敢用）；没 CONTRIBUTING → 加（让社区能参与）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>CONTRIBUTING 写什么?→ 简单的贡献流程（fork/PR/规范）;LICENSE 选哪个?→ Apache-2.0（宽松+专利保护）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>加了开源规范文件</strong>。<strong>做了</strong>(CONTRIBUTING + LICENSE)、<strong>学了</strong>(规范文件=正规项目标配、LICENSE 让人敢用、CONTRIBUTING 让社区参与)、<strong>会了</strong>（让项目符合开源规范）。</p>
+</div></section></section><section class="slot" id="d242-pm" data-d="242" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D242 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">README 顶部加 badge</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ badge 的心理效应：专业活跃可靠的视觉语言）</h4><div class="blk-b"><p>在 README 顶部加 badge:<code>![Stars]</code> <code>![Python]</code> <code>![License]</code> <code>![Colab]</code> 等（用 shield.io 生成）。</p>
+<ul>
+<li><strong>★ badge 的心理效应</strong>:README 顶部的彩色 badge（stars 数、Python 版本、License、Colab 链接等）<strong>让项目看起来“专业、活跃、可靠”</strong>。这是<strong>开源社区的视觉语言</strong>——有 badge 的项目，看起来比没有的更可信、更正规。badge 几乎不费功夫（shield.io 生成），但显著提升项目的“第一印象专业度”。</li>
+<li><strong>常用 badge</strong>:① Stars（星数，社会证明）;② Python（版本兼容）;③ License（协议）;④ Colab（一键试用链接）;⑤ 可加 arXiv（论文链接）、build status 等。<strong>这些 badge 一字排开在顶部，传达“这是个正规、活跃、可靠的项目”。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用 shield.io 生成 badge（Stars/Python/License/Colab 等）。</li>
+<li>加到 README 顶部。</li>
+<li>badge 链接到对应内容（Colab badge → Colab demo,arXiv badge → 论文）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>README 顶部一排 badge(Stars/Python/License/Colab)，提升专业感。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>没 badge（显得业余）→ 加 badge（专业感、视觉语言）;badge 不链接 → 链接到对应内容(Colab/arXiv)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>badge 怎么生成?→ shield.io 在线生成 markdown；放哪些?→ Stars/Python/License/Colab/arXiv 等常用的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>加了 badge 提升专业感</strong>。<strong>做了</strong>（README 顶部 badge）、<strong>学了</strong>(badge 的心理效应=专业活跃可靠、开源视觉语言)、<strong>会了</strong>（用 badge 增强项目可信度）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜负责任开源+专业感（model card/复现/规范/badge）</strong>:① model card（训练数据/超参/评估/局限，诚实）+reproduce_all.sh一键复现=负责任+可复现;② CONTRIBUTING（社区参与）+LICENSE（Apache-2.0，别人才敢用）=开源规范标配;③ README顶部badge（Stars/Python/License/Colab,shield.io生成）=★心理效应让项目看起来专业活跃可靠（开源视觉语言）。★未发表核心延后。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ model card ✅ 一键复现脚本 ✅ CONTRIBUTING+LICENSE ✅ badge。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D242</summary><textarea data-note="d242" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d243" data-d="243"><header class="day-head"><span class="dnum">D243</span><h2 class="day-t">周五 · 引流 Day 1（知乎 + CSDN + 微信）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午知乎发帖（转型故事）；中午CSDN发技术博客（教程）；晚上微信朋友圈+相关群分享（配可视化图）。</p>
+<p><strong>预期管理</strong>：今天引流第一天（★集中做、副线）。提醒：<strong>引流的核心是“提供价值”</strong>——不是“快来看我的项目”，而是“我做了个工具/教程，可能对你有用”；知乎帖核心是故事（你的转型经历，真实有共鸣）,CSDN帖核心是教程（怎么用你的代码）；内容有价值→自然有人star;★守住定位：引流是放大强作品、集中这几天做，别变成持续追star的内耗。</p>
+</blockquote>
+</div><section class="slot" id="d243-am" data-d="243" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D243 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">知乎发帖（转型故事）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(★ 引流核心=&quot;提供价值&quot;而非&quot;自夸&quot;，知乎重故事)</h4><div class="blk-b"><p>在知乎发帖，标题如&quot;从零基础到遥感 CV 论文——我的方法开源了（附代码+预训练权重+Colab demo）&quot;——内容：问题背景 → 方法简介 → 核心结果 → 使用方法 → GitHub 链接。</p>
+<ul>
+<li><strong>★ 引流的核心是“提供价值”（关键心法）</strong>：<strong>引流不是“快来看我的项目”（自夸，没人理），而是“我做了一个工具/教程，可能对你有用”（提供价值，有人感兴趣）</strong>。人们关注的是“这对我有什么用”，不是“你的项目多好”。所以引流内容要站在“给读者提供价值”的角度——你的工具能帮他们做什么、你的经历能给他们什么启发。<strong>内容有价值 → 自然有人 star/用</strong>。</li>
+<li><strong>知乎帖核心是故事（你的转型经历）</strong>：知乎的读者爱看故事。<strong>你的转型经历（从零基础到发论文）本身就是一个有共鸣、有故事性的真实经历</strong>——这是你的天然优势。帖子以转型故事为主线（怎么一步步做到的：历程、坑、转折），把方法/项目作为故事的一部分自然带出。<strong>真诚的转型故事，比干巴巴的项目介绍打动人得多。</strong></li>
+<li><strong>★ 守住定位（集中做、副线）</strong>：引流是放大强作品，集中这几天做。<strong>别花过多时间打磨“爆款”，更别陷入持续追数据的内耗</strong>——发出有价值的内容即可，核心是研究。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写知乎帖，标题有故事性（如“从零基础到遥感 CV 论文”）。</li>
+<li>内容以转型故事为主线（历程+坑+转折），自然带出方法/项目。</li>
+<li>带 GitHub/Colab/论文链接。站在“提供价值”角度。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>知乎帖（转型故事主线 + 提供价值 + 带链接），真诚有共鸣。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★定位）</h4><div class="blk-b"><ul>
+<li><strong>标题/内容只自夸项目（没故事/没价值）</strong> → 提供价值（故事/启发）、知乎重故事。</li>
+<li><strong>花大量时间追爆款</strong> → 集中做、副线，发有价值内容即可，别内耗。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么写故事?→ 真诚讲你的真实历程（零基础转型本身就是好故事）；怕没人看?→ 内容有价值（故事+工具）自然有受众，不必焦虑数据。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写“提供价值”的引流帖（知乎重故事）</strong>。<strong>做了</strong>（知乎转型故事帖）、<strong>学了</strong>(引流核心=提供价值非自夸、知乎重故事、你的转型经历是优势)、<strong>会了</strong>（用有价值的内容自然引流）。</p>
+</div></section></section><section class="slot" id="d243-noon" data-d="243" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D243 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">CSDN 发技术博客（教程）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（CSDN 重教程：提供技术价值）</h4><div class="blk-b"><p>在 CSDN 发技术博客——偏技术细节，如“如何用 [你的方法名] 做遥感旋转目标检测：完整教程”。</p>
+<ul>
+<li><strong>CSDN 重教程（技术价值）</strong>:CSDN 的读者多是找技术教程的开发者。<strong>这里的“提供价值”= 一篇能让人学会用你方法的完整教程</strong>（怎么装、怎么跑、怎么用在自己的任务上）。教程实用 → 别人照着用上你的方法 → star/关注。</li>
+<li><strong>教程 vs 故事（平台差异）</strong>：知乎重故事（转型经历）、CSDN 重教程（技术怎么用）——<strong>同样的项目，针对不同平台的受众，用不同的角度提供价值</strong>。从你的核心内容（项目 + 文档）改写适配。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 CSDN 技术博客（完整教程：装/跑/用）。</li>
+<li>偏技术细节，让人照着能用上你的方法。</li>
+<li>带 GitHub/Colab 链接。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>CSDN 技术教程帖（完整、实用，让人学会用你的方法）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>CSDN 也只发故事 → CSDN 重教程（技术价值）；教程不完整 → 完整可操作（装/跑/用）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>教程写什么?→ 基于你的 GETTING_STARTED 改写成教程；太长?→ 聚焦“怎么用你的方法做检测”这条主线。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写了技术教程帖（CSDN 重教程）</strong>。<strong>做了</strong>（CSDN 教程帖）、<strong>学了</strong>（CSDN 重教程/技术价值、按平台用不同角度提供价值）、<strong>会了</strong>（为技术受众提供实用教程）。</p>
+</div></section></section><section class="slot" id="d243-pm" data-d="243" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D243 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">微信朋友圈 + 相关群分享</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（微信：熟人/社群网络）</h4><div class="blk-b"><p>在微信朋友圈 + 相关微信群分享——配图用你的可视化结果图。</p>
+<ul>
+<li><strong>微信渠道的特点</strong>：朋友圈/微信群是熟人/社群网络（同学、同行、遥感/CV 群）。<strong>在这里分享，触达的是和你相关领域的人</strong>（可能直接对你的工作感兴趣）。配上直观的可视化结果图（吸引眼球）。</li>
+<li><strong>简洁分享</strong>：朋友圈/群分享要简洁——一句话 + 可视化图 + 链接。不用长篇，点到为止（熟人网络，有兴趣的会点链接）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>朋友圈分享（一句话 + 可视化图 + 链接）。</li>
+<li>相关微信群分享（遥感/CV 群，礼貌、不刷屏）。</li>
+<li>配直观的可视化结果图。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>朋友圈 + 相关群分享（简洁 + 可视化图 + 链接）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>群里刷屏 → 礼貌分享一次，不刷屏；没配图 → 配可视化图（吸引）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>哪些群分享?→ 你在的遥感/CV 相关群（相关受众）；怕打扰?→ 简洁分享一次，有价值的内容群友通常欢迎。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>通过微信触达相关受众</strong>。<strong>做了</strong>（朋友圈 + 群分享）、<strong>学了</strong>(微信=熟人/社群网络、简洁分享、配图)、<strong>会了</strong>（在社群网络分享工作）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜引流核心=&quot;提供价值&quot;（分渠道）</strong>:★引流不是&quot;快来看我项目&quot;（自夸）而是&quot;我做了工具/教程可能对你有用&quot;（提供价值）——内容有价值自然有人star。分平台用不同角度：知乎重故事（你的转型经历，真实有共鸣）、CSDN重教程（技术怎么用）、微信重社群触达（简洁+可视化图）。★定位：集中这几天做、副线，别陷入追数据的内耗。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 知乎帖 ✅ CSDN 帖 ✅ 微信分享。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D243</summary><textarea data-note="d243" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d244" data-d="244"><header class="day-head"><span class="dnum">D244</span><h2 class="day-t">周六 · 引流 Day 2（Reddit + Twitter + 小红书）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午Reddit r/MachineLearning+r/computervision英文帖；中午Twitter/X英文推；晚上小红书干货帖。</p>
+<p><strong>预期管理</strong>：今天引流第二天（英文+其他渠道）。提醒：<strong>中英文双渠道</strong>——中文渠道（知乎/CSDN/微信/小红书）覆盖国内遥感社区，英文渠道(Reddit/Twitter)覆盖国际社区，两者都要做；Reddit用“[P]项目”格式发到r/ML和r/computervision;Twitter配图+链接+hashtag；小红书偏科普向（吸引遥感专业学生）；从核心内容改写适配各平台。</p>
+</blockquote>
+</div><section class="slot" id="d244-am" data-d="244" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D244 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Reddit 发英文帖(r/ML + r/computervision)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ 中英文双渠道：覆盖国内+国际）</h4><div class="blk-b"><p>在 Reddit r/MachineLearning 发英文帖(标题用 “[P] xxx: A New Method for Remote Sensing Object Detection”)+ 在 r/computervision 交叉发帖。</p>
+<ul>
+<li><strong>★ 为什么中英文双渠道</strong>：<strong>中文渠道（知乎/CSDN/微信/小红书）覆盖国内遥感社区；英文渠道(Reddit/Twitter)覆盖国际社区</strong>——两边的受众不同，都要做才能最大化触达。<strong>英文渠道尤其重要</strong>：国际 CV 社区大、影响力广，Reddit r/MachineLearning 是知名的技术社区，一个好项目在这里被看到，能获得国际关注。</li>
+<li><strong>Reddit 的规范</strong>:① 用 “[P]”(Project)标签表明是项目分享;② 标题清晰说明项目(A New Method for Remote Sensing Object Detection);③ 内容简洁专业（项目做什么、亮点、链接）;④ r/computervision 交叉发帖（更多相关受众）。<strong>遵守 Reddit 社区规范（别像广告，要像分享有价值的项目）。</strong></li>
+<li><strong>同样是“提供价值”</strong>:Reddit 帖也是提供价值（一个有用的新方法/项目），不是自夸。专业、简洁地介绍。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在 r/MachineLearning 发英文帖(&quot;[P]&quot; 标签，标题清晰)。</li>
+<li>在 r/computervision 交叉发帖。</li>
+<li>内容简洁专业（项目/亮点/链接），遵守社区规范。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Reddit 英文帖(r/ML + r/computervision,“[P]” 规范，专业简洁)。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Reddit 帖像广告 → 像分享有价值的项目（遵守社区规范）；只发一个 sub → r/ML + r/computervision 交叉（更多受众）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>英文帖不熟?→ 用你论文 Abstract/README 英文改写；怕违反规范?→ 看 sub 的发帖规则，用 “[P]” 标签、专业介绍。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>在国际社区发帖（英文渠道）</strong>。<strong>做了</strong>（Reddit r/ML + r/computervision 英文帖）、<strong>学了</strong>（中英文双渠道、英文覆盖国际、Reddit 规范）、<strong>会了</strong>（在国际技术社区分享项目）。</p>
+</div></section></section><section class="slot" id="d244-noon" data-d="244" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D244 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">Twitter/X 发英文推</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Twitter：国际快速传播）</h4><div class="blk-b"><p>在 Twitter/X 发英文推：配图 + GitHub 链接 + 一句话描述 + 几个 hashtag(#RemoteSensing #ObjectDetection #DeepLearning)。</p>
+<ul>
+<li><strong>Twitter 的特点</strong>：简短、快速传播、国际受众（很多研究者活跃在 Twitter/X）。<strong>一条推：一句话亮点 + 配图（可视化/结果）+ 链接 + hashtag</strong>。hashtag 让相关领域的人能搜到。简洁有力。</li>
+<li><strong>配图很重要</strong>:Twitter 是视觉化的，配上你的可视化结果图/架构图，吸引眼球、增加点击。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>发英文推（一句话亮点 + 配图 + GitHub 链接 + hashtag）。</li>
+<li>hashtag 用 #RemoteSensing #ObjectDetection #DeepLearning 等。</li>
+<li>配直观的图。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Twitter 英文推（简洁亮点 + 配图 + 链接 + hashtag）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>推太长/没配图 → 简短 + 配图；没 hashtag → 加相关 hashtag（让人搜到）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不熟 Twitter?→ 简洁一句 + 图 + 链接 + hashtag 即可；没粉丝怕没人看?→ hashtag 让相关的人能发现，不必焦虑数据。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>在 Twitter 快速传播（国际）</strong>。<strong>做了</strong>（Twitter 英文推）、<strong>学了</strong>（Twitter 简短/国际/视觉化、hashtag）、<strong>会了</strong>（在国际平台简洁传播工作）。</p>
+</div></section></section><section class="slot" id="d244-pm" data-d="244" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D244 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">小红书发干货帖（科普向）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（小红书：科普向，吸引学生）</h4><div class="blk-b"><p>在小红书发“遥感 CV 干货帖”——偏科普向，吸引遥感专业学生。</p>
+<ul>
+<li><strong>小红书的受众</strong>：小红书有不少学生/年轻人，<strong>偏科普向的内容（用通俗的方式讲遥感 CV、你的转型经验）能吸引遥感专业学生</strong>——他们可能正在学、找资源，你的项目/经验对他们有价值。</li>
+<li><strong>科普向 = 通俗提供价值</strong>：用通俗易懂的方式讲（遥感 CV 是什么、你怎么入门转型、你的工具能帮什么）——对学生有启发和实用价值。配图（可视化/学习路径）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>发小红书干货帖（科普向：通俗讲遥感 CV/转型经验）。</li>
+<li>面向遥感专业学生（对他们有启发/价值）。</li>
+<li>配图 + 链接。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>小红书干货帖（科普向、通俗、对学生有价值）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>小红书发太硬核 → 科普向、通俗（面向学生）；没价值只自夸 → 提供价值（科普/经验）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>科普怎么写?→ 用通俗语言讲遥感 CV 入门/你的转型；怕太浅?→ 面向学生，通俗实用即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>通过小红书触达学生（科普向）</strong>。<strong>做了</strong>（小红书科普帖）、<strong>学了</strong>（小红书科普向/吸引学生、通俗提供价值）、<strong>会了</strong>（为学生受众做科普向内容）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜中英文双渠道引流</strong>：中文（知乎故事/CSDN教程/微信社群/小红书科普）覆盖国内遥感社区；英文(Reddit“[P]”项目帖+r/computervision交叉/Twitter简短配图+hashtag)覆盖国际社区——两者都做最大化触达。从核心内容（项目+文档）按平台改写适配。都遵守各平台规范、都是“提供价值”非自夸。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Reddit 帖 ✅ Twitter 帖 ✅ 小红书帖。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D244</summary><textarea data-note="d244" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d245" data-d="245"><header class="day-head"><span class="dnum">D245</span><h2 class="day-t">周日 · 引流 Day 3（联系公众号 + 社区互动 + 复盘）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午联系遥感CV公众号转发；中午给MMRotate/OBBDetection提PR/Issue建立存在感；晚上周复盘W35（统计star数/帖子阅读量）。</p>
+<p><strong>预期管理</strong>：引流第三天+W35收尾。提醒：联系1-2个遥感CV公众号（如“遥感与深度学习”“CVer”）看是否愿转发；给相关上游项目(MMRotate/OBBDetection)提PR/Issue建立存在感（融入社区）；周复盘统计当前star数/阅读量;★star增长理性预期（内容好+引流到位，1周30-50合理），别被数字绑架——更重要的是W35把仓库做成专业项目+回归研究主线（第二篇M10要写）。</p>
+</blockquote>
+</div><section class="slot" id="d245-am" data-d="245" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D245 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">联系遥感 CV 公众号转发</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（公众号：借助现有影响力）</h4><div class="blk-b"><p>联系 1-2 个遥感 CV 相关公众号（如“遥感与深度学习”“CVer”等），看是否愿意转发你的文章。</p>
+<ul>
+<li><strong>为什么联系公众号</strong>：这些公众号有现成的受众（关注遥感/CV 的读者）。<strong>如果他们愿意转发你的工作，能借助他们的影响力触达更多相关受众</strong>（比你自己发触达更广）。礼貌地联系、附上你的文章/项目链接，看是否愿转发。</li>
+<li><strong>这是借力，但成不成随缘</strong>：愿意转最好（放大效果），不愿意也无妨（你自己的渠道已铺开）。<strong>礼貌联系、不强求</strong>，别花太多精力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>联系 1-2 个遥感 CV 公众号（礼貌 + 文章/项目链接）。</li>
+<li>看是否愿转发（借力放大）。</li>
+<li>不强求（成不成随缘）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>联系了 1-2 个公众号（礼貌、附链接），看是否愿转发。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>为联系公众号花太多精力 → 礼貌联系即可、不强求；不礼貌/群发 → 真诚、个性化地联系。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>公众号不回/不愿转?→ 正常，你自己的渠道已铺开；联系哪些?→ 你关注的遥感/CV 公众号。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>尝试借助公众号放大</strong>。<strong>做了</strong>（联系公众号）、<strong>学了</strong>（借力现有影响力、礼貌不强求）、<strong>会了</strong>（借助渠道放大工作的传播）。</p>
+</div></section></section><section class="slot" id="d245-noon" data-d="245" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D245 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">给上游项目提 PR/Issue（建立存在感）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（融入社区：给上游项目贡献）</h4><div class="blk-b"><p>在 GitHub 上给相关项目（如 MMRotate、OBBDetection）提 PR 或 Issue——建立存在感。</p>
+<ul>
+<li><strong>为什么给上游项目提 PR/Issue</strong>:① <strong>建立存在感</strong>——你的项目基于这些框架（如 MMRotate），给它们贡献（修 bug、提改进、报问题），让社区认识你（你的 GitHub 账号/项目）;② <strong>融入社区</strong>——从“只做自己的项目”到“参与社区”，是开源生态的一部分;③ <strong>可能引流</strong>——你的 PR/Issue 里可以（恰当地）提到你的项目（如“我在 XX 项目中遇到/解决了这个”）。<strong>这是从“孤立的项目”融入“开源社区”的方式。</strong></li>
+<li><strong>真诚贡献（不是硬广）</strong>：提 PR/Issue 要真诚（真的修 bug/提改进/报有价值的问题），不是硬塞广告。真诚的贡献自然建立存在感和好感。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>给相关上游项目(MMRotate/OBBDetection)提 PR（修 bug/改进）或 Issue（报有价值的问题）。</li>
+<li>真诚贡献（不硬广）。</li>
+<li>建立存在感、融入社区。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>给上游项目提了有价值的 PR/Issue（真诚贡献），建立存在感。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>PR/Issue 是硬广 → 真诚贡献（真修 bug/提改进）；不参与社区 → 给上游贡献融入生态。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>提什么 PR/Issue?→ 你用这些框架时遇到的真实 bug/改进点；怕水平不够?→ 哪怕是报一个清晰的 bug、补一段文档，也是有价值的贡献。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>融入了开源社区</strong>。<strong>做了</strong>（给上游提 PR/Issue）、<strong>学了</strong>（建立存在感、融入社区、真诚贡献）、<strong>会了</strong>（参与开源生态、建立社区存在）。</p>
+</div></section></section><section class="slot" id="d245-pm" data-d="245" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D245 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">周复盘 W35（统计 star/阅读量 + ★回归主线）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ 复盘运营效果 + 理性看 star + 回归研究主线）</h4><div class="blk-b"><p>周复盘 W35——统计当前 star 数、帖子阅读量。<strong>但理性看待数字，更重要的是 W35 把仓库做成了专业项目，以及接下来回归研究主线。</strong></p>
+<ul>
+<li><strong>★ star 增长的理性预期</strong>：如果内容质量好 + 引流到位，公开后 1 周内达到 <strong>30-50 stars 是合理的</strong>。<strong>如果第一周 star 增长慢，检查:① README 是否足够吸引人;② 引流帖标题是否有吸引力;③ Colab demo 是否能跑通</strong>。但<strong>别被 star 数绑架</strong>——star 是结果不是目的，慢一点也正常（好项目会持续被发现）。</li>
+<li><strong>★★ 最重要：回归研究主线（运营是副线，到此为止）</strong>:W35 你集中把仓库做成了专业的社区项目、铺开了引流——<strong>这件副线的事到此告一段落</strong>。<strong>接下来(M10)的重心是研究主线：第二篇论文的正式写作</strong>。① 别让运营变成持续的内耗（天天刷 star、追数据）——那会偏离你的核心目标;② 适度维护仓库（回 issue、合理互动）即可，但重心回归研究;③ 你的核心竞争力是研究产出（论文/课题），开源运营是放大它的副线。<strong>带着“运营做到位了、该回归主线了”的清醒，结束这一周。</strong></li>
+<li><strong>本周成果回顾</strong>：仓库从“能用的代码”变成了“有文档、有 demo、有 badge、有引流的专业社区项目”，冲击 50+ stars。这是你强作品影响力的放大。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>W35 周报（统计 star/阅读量 + 运营效果）。</li>
+<li>★理性看 star（慢则检查 README/引流/Colab），不被数字绑架。</li>
+<li>★明确：运营副线到此为止，M10 回归研究主线（第二篇写作）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W35 周报（运营效果 + 理性看 star + 明确回归主线）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★定位）</h4><div class="blk-b"><ul>
+<li><strong>被 star 数绑架/持续追数据</strong> → star 是结果不是目的，运营做到位即可，回归研究。</li>
+<li><strong>运营变成主业</strong> → 副线到此为止，M10 重心是第二篇论文。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>star 增长慢焦虑?→ 检查 README/引流/Colab，但别焦虑（好项目持续被发现）；舍不得停运营?→ 提醒自己核心是研究，运营是放大、适度维护即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘运营并回归主线</strong>。<strong>做了</strong>（W35 周报 + 理性看 star + 明确回归）、<strong>学了</strong>（star 理性预期、不被数字绑架、运营副线到此为止回归研究）、<strong>会了</strong>（做好运营并守住“研究为核心”的定位）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜运营复盘+回归主线（守住定位）</strong>:★star增长理性预期（内容好+引流到位1周30-50合理），慢则检查README/引流标题/Colab，但别被数字绑架（star是结果非目的）。给上游项目（MMRotate等）真诚提PR/Issue=融入社区建立存在感。★★最重要：运营是放大强作品的副线，W35集中做到位后回归研究主线（第二篇M10写作），别让运营变成持续内耗。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 公众号联系 ✅ 社区互动（上游 PR/Issue） ✅ 周报 W35。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W35 累计交付</h2><p>GitHub 仓库爆款打造：仓库大改版（改名 + 清晰结构）+ 门面级 README（中英双语，30 秒抓人 + 核心特性 + Model Zoo + 结果展示）+ 核心展示图（架构图/结果对比/可视化 demo）+ README 细节（复制粘贴就能跑）+ Model Zoo 表格 + Colab demo（一键运行 + 用户上传）+ 详细文档(GETTING_STARTED + CHANGELOG)+ model card + 一键复现脚本 + CONTRIBUTING + LICENSE + badge、三天分中英文渠道引流（知乎转型故事/CSDN 教程/微信/Reddit/Twitter/小红书）+ 联系公众号 + 给上游项目提 PR/Issue + W35 周报。本周你学会了<strong>开源项目运营</strong>——把仓库从“能用的代码”做成“有文档、有 demo、有 badge、有引流的专业社区项目”，冲击 50+ stars。<strong>全程守住了两个关键定位:① 运营是“强作品的自然放大”、是副线（集中一周做到位后回归研究主线，不被 star 数绑架、不变成持续内耗）;② 未发表的第二篇核心代码延后开源（保护意识）。</strong></p>
+</section><section class="wtail"><h2>🎓 W35 你“长出来”的能力清单</h2><ul>
+<li><strong>门面级仓库</strong>（清晰结构 + README 30 秒抓人 + 核心特性突出卖点 + 展示图）</li>
+<li><strong>零门槛使用</strong>（README 复制粘贴就能跑 + Model Zoo 开箱即用 + Colab demo 一键试用 + 用户上传互动）</li>
+<li><strong>负责任 + 专业感</strong>（model card 诚实 + 一键复现 + CONTRIBUTING/LICENSE 规范 + badge 心理效应）</li>
+<li><strong>中英文双渠道引流</strong>（知乎故事/CSDN 教程/微信/Reddit/Twitter/小红书，按平台提供价值）</li>
+<li><strong>融入开源社区</strong>（给上游项目真诚提 PR/Issue 建立存在感）</li>
+<li><strong>★★ 守住定位</strong>：运营是放大强作品的副线（集中做、回归主线、不被 star 绑架、不内耗）、引流核心是“提供价值”非自夸、★未发表核心代码延后开源</li>
+<li><strong>核心认知</strong>：好 README&quot;30 秒让人想 star&quot;、Colab 是引流利器（把&quot;想试&quot;转化为&quot;star&quot;）、badge 的心理效应、引流=&quot;提供价值&quot;非&quot;快来看我&quot;、中英文双渠道、运营是手段不是目的（回归研究）</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D245</summary><textarea data-note="d245" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W35 加厚补充包（范例 / 实用工具+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 门面级 README 结构 + 引流帖角度</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 门面级 README（30秒让人想star）</span>
+![<span class="nt">Stars</span>](<span class="na">badge</span>) ![<span class="nt">Python</span>](<span class="na">badge</span>) ![<span class="nt">License</span>](<span class="na">badge</span>) ![<span class="nt">Colab</span>](<span class="na">badge</span>)  ←badge
+&lt;banner图：精美架构图或可视化结果&gt;                               ←视觉第一
+<span class="gh"># Awesome-RemoteSensing-CV-from-General-CV</span>
+<span class="k">&gt; </span><span class="ge">一句话：用通用CV技术高效解决遥感旋转目标检测（单卡可训）       ←一句话定位</span>
+<span class="gu">## ✨ Key Features（为什么用这个项目）</span>
+<span class="k">-</span><span class="w"> </span>🚀 单卡4090可训练（高效，Params/FPS优势）  ←突出你的卖点
+<span class="k">-</span><span class="w"> </span>🌐 强跨域泛化（多数据集验证）
+<span class="k">-</span><span class="w"> </span>🔌 即插即用（基于MMRotate）
+<span class="gu">## 🚀 Quick Start  →  一行命令跑通demo / Colab徽章</span>
+<span class="gu">## 📦 Model Zoo  →  方法|backbone|数据集|指标|下载（★未发表的标coming soon）</span>
+<span class="gu">## 📊 Results  →  3数据集对比表 + 可视化</span>
+<span class="gu">## 📝 Citation</span>
+★第二篇未发表核心方法代码：等论文录用后开源，先放第一篇+工具+复现脚本
+
+<span class="gh"># 引流帖角度（同项目，不同平台不同&quot;价值&quot;）</span>
+知乎（故事）：&quot;从零基础到遥感CV论文——我的方法开源了&quot;（转型经历有共鸣）
+CSDN（教程）：&quot;如何用XX做遥感旋转检测：完整教程&quot;（技术怎么用）
+Reddit（项目）：&quot;[P] XX: A New Method for Remote Sensing Object Detection&quot;
+小红书（科普）：通俗讲遥感CV入门+转型经验（面向学生）
+→ 核心都是&quot;提供价值&quot;非&quot;快来看我的项目&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — badge + Colab demo + 一键复现</h2>
+<figure class="code" data-lang="markdown"><pre><code>&lt;!-- ① README badge（shield.io生成，专业感视觉语言）--&gt;
+![<span class="nt">Stars</span>](<span class="na">https://img.shields.io/github/stars/USER/REPO?style=social</span>)
+![<span class="nt">Python</span>](<span class="na">https://img.shields.io/badge/python-3.10-blue</span>)
+![<span class="nt">License</span>](<span class="na">https://img.shields.io/badge/license-Apache--2.0-green</span>)
+[<span class="nt">![Colab</span>](<span class="na">https://colab.research.google.com/assets/colab-badge.svg</span>)](COLAB_LINK)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># ② Colab demo核心（一键运行+用户上传，引流利器）</span>
+<span class="c1"># !pip install -q -r requirements.txt        # Colab安装</span>
+<span class="c1"># !wget -q &lt;model_url&gt; -O best.pth           # 下预训练模型（已发表的）</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>                <span class="c1"># 用户上传自己的图（互动）</span>
+<span class="n">uploaded</span> <span class="o">=</span> <span class="n">files</span><span class="o">.</span><span class="n">upload</span><span class="p">()</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">infer</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_model</span><span class="p">,</span> <span class="n">predict</span><span class="p">,</span> <span class="n">visualize</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;best.pth&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">uploaded</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">fname</span><span class="p">);</span> <span class="n">visualize</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>  <span class="c1"># 看自己数据的效果</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># ③ scripts/reproduce_all.sh（一键复现，可复现性最高体现）</span>
+<span class="c1">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-e
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python<span class="w"> </span>tools/download.py<span class="w"> </span>--all<span class="w">                </span><span class="c1"># 数据+已发表模型</span>
+python<span class="w"> </span>tools/test.py<span class="w"> </span>--config<span class="w"> </span>configs/published.py<span class="w"> </span>--ckpt<span class="w"> </span>best.pth<span class="w"> </span>--out<span class="w"> </span>results/
+python<span class="w"> </span>tools/summarize.py<span class="w"> </span>results/<span class="w">            </span><span class="c1"># 应与论文Table一致</span>
+<span class="c1"># ★第二篇未发表核心方法不含在内，等录用后补</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① badge 提升专业感（shield.io 一键生成）;② Colab demo 零门槛 + 用户上传互动（引流利器）;③ reproduce_all.sh 一键复现已发表结果（未发表核心延后）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D239</strong>：① 好的 README 怎么做到“30 秒让人想 star”（四要素）？② 仓库结构为什么影响专业感？③ ★公开时哪些放、哪些延后（保护意识）？</li>
+<li><strong>D240</strong>：① 为什么 README 步骤要“复制粘贴就能跑”？② Model Zoo 的价值？★放哪些模型？</li>
+<li><strong>D241</strong>：① 为什么 Colab demo 是“引流利器”？② 让用户上传自己的图有什么好处（互动性）？③ 详细文档和 README 的分工？</li>
+<li><strong>D242</strong>：① model card 写什么（含局限）、为什么？② ★badge 的心理效应是什么？③ 为什么要 LICENSE(Apache-2.0)？</li>
+<li><strong>D243</strong>：① ★引流的核心是什么（提供价值 vs 自夸）？② 知乎/CSDN 各重什么（故事/教程）？③ ★为什么要守住“集中做、副线”？</li>
+<li><strong>D244</strong>：① 为什么要中英文双渠道？② Reddit/Twitter/小红书各自特点和角度？</li>
+<li><strong>D245</strong>：① star 增长的理性预期？慢了检查什么？② 给上游项目提 PR/Issue 的意义？③ ★★为什么说“运营是手段不是目的、要回归主线”？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>README没人看/没人star</td>
+<td>顶部不抓人</td>
+<td>30秒抓人（banner+一句话定位+3-5核心特性+一行命令跑通）</td>
+</tr>
+<tr>
+<td>仓库显得业余</td>
+<td>结构乱/没badge</td>
+<td>清晰结构(docs/models/configs/demo/assets)+顶部badge</td>
+</tr>
+<tr>
+<td>★公开了未发表核心代码</td>
+<td>缺保护意识</td>
+<td>第二篇核心等录用后开源，先放第一篇+工具+复现</td>
+</tr>
+<tr>
+<td>别人跑不通你的项目</td>
+<td>步骤含糊</td>
+<td>每步“复制粘贴就能跑”，自己在干净环境验证</td>
+</tr>
+<tr>
+<td>项目没人试</td>
+<td>试用门槛高</td>
+<td>Colab demo一键运行（无需本地GPU）+用户上传互动</td>
+</tr>
+<tr>
+<td>没人敢用你的代码</td>
+<td>没LICENSE</td>
+<td>加LICENSE(Apache-2.0)+CONTRIBUTING</td>
+</tr>
+<tr>
+<td>引流帖没人理</td>
+<td>只自夸&quot;看我项目&quot;</td>
+<td>★提供价值（&quot;我做了工具/教程可能对你有用&quot;），知乎重故事/CSDN重教程</td>
+</tr>
+<tr>
+<td>只在国内发/只在国外发</td>
+<td>渠道单一</td>
+<td>中英文双渠道（知乎/CSDN/微信/小红书+Reddit/Twitter）</td>
+</tr>
+<tr>
+<td>被star数绑架、持续刷数据</td>
+<td>把运营当目的</td>
+<td>★star是结果非目的，运营做到位即可，不被数字绑架</td>
+</tr>
+<tr>
+<td>运营变成主业、偏离研究</td>
+<td>没守住定位</td>
+<td>★★运营是放大强作品的副线，集中一周做到位后回归研究主线（第二篇M10）</td>
+</tr>
+<tr>
+<td>第一周star增长慢就焦虑</td>
+<td>预期不合理</td>
+<td>1周30-50合理，慢则检查README/引流标题/Colab，但好项目持续被发现</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>复盘</h4><p>月复盘用 <a href="../appendix-e.html">附录 E</a> 的模板。周复盘问"我做完了吗"，<b>月复盘问"方向对不对、节奏能不能持续"</b>。</p></section>
+<div class="pager"><a class="prev" href="w34.html"><span class="dir">← 上一篇</span><span class="nm">W34 第二课题消融 + 可视化</span></a><a class="next" href="w36.html"><span class="dir">下一篇 →</span><span class="nm">W36 响应审稿意见（如有）+ 第二篇论文启动</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d239">D239 周一</a><a class="sub" href="#d239-am">上午 仓库大改版（改名 + 设计仓库结</a><a class="sub" href="#d239-noon">中午 写 README 主体框架（中英</a><a class="sub" href="#d239-pm">晚上 制作核心展示图（架构图/结果对比</a><a href="#d240">D240 周二</a><a class="sub" href="#d240-am">上午 完善 README 细节（每步“</a><a class="sub" href="#d240-noon">中午 添加 Model Zoo 表格</a><a class="sub" href="#d240-pm">晚上 Model Zoo 完善 + 检</a><a href="#d241">D241 周三</a><a class="sub" href="#d241-am">上午 添加 Colab demo no</a><a class="sub" href="#d241-noon">中午 Colab 中加可视化（用户上传</a><a class="sub" href="#d241-pm">晚上 写 docs/GETTING_S</a><a href="#d242">D242 周四</a><a class="sub" href="#d242-am">上午 model card + 一键复</a><a class="sub" href="#d242-noon">中午 CONTRIBUTING.md </a><a class="sub" href="#d242-pm">晚上 README 顶部加 badge</a><a href="#d243">D243 周五</a><a class="sub" href="#d243-am">上午 知乎发帖（转型故事）</a><a class="sub" href="#d243-noon">中午 CSDN 发技术博客（教程）</a><a class="sub" href="#d243-pm">晚上 微信朋友圈 + 相关群分享</a><a href="#d244">D244 周六</a><a class="sub" href="#d244-am">上午 Reddit 发英文帖(r/ML</a><a class="sub" href="#d244-noon">中午 Twitter/X 发英文推</a><a class="sub" href="#d244-pm">晚上 小红书发干货帖（科普向）</a><a href="#d245">D245 周日</a><a class="sub" href="#d245-am">上午 联系遥感 CV 公众号转发</a><a class="sub" href="#d245-noon">中午 给上游项目提 PR/Issue（</a><a class="sub" href="#d245-pm">晚上 周复盘 W35（统计 star/</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

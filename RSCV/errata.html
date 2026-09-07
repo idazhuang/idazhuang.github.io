@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="" data-stage="4" data-week="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>校订说明 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="index.html">首页</a><a class="hide-sm" href="calendar.html">进度地图</a><a class="hide-sm" href="guide.html">使用指南</a><a class="hide-sm" href="glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="doc">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="index.html">首页</a><span>›</span><span class="chip">编辑说明</span></div><h1 class="title">校订说明</h1><p class="subtitle">做成网站时改了什么、没改什么，以及你自己需要再核实的地方。</p></div><p>这份手册原本是 106 个 Markdown 文件。做成网站时我通读了结构、核对了日历编号，
+下面是<strong>发现的问题</strong>和<strong>站内的处理方式</strong>。原文的判断、任务和内容一律照录，没有改写观点。</p>
+<h2>一、日历编号：三处对不齐</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>站内处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>W28、W44 没有独立周文件。</strong>102 个周文件要覆盖 104 周日历，这两周是原计划的缓冲周，被并进了相邻周。</td>
+<td>保留 W28 / W44 的位置，做成《<a href="buffer.html">缓冲周怎么用</a>》一页，把“缓冲周该干什么”补齐。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>M8（W29–W32）的 D 编号整体前移 7 天。</strong>W29 标注 D190–D196，按“周号 × 7”应为 D197–D203。连锁结果是 <strong>D218–D224 这 7 天在正文里没有对应内容</strong>。</td>
+<td>原文照录，在 M8 四个周页面顶部加了「编者注」。按周号顺着做即可，内容衔接不受影响。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>W48 覆盖 14 天（D323–D336）。</strong>这是一个“两周块”：D323–D329 是完整的 7 天三时段，D330–D336 是一段收尾说明，不是三时段结构。</td>
+<td>原文照录。W48 页面里那段收尾块单独成节，标题保留原样。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>天数口径</strong>：原计划按“24 个月 = 730 天”取整表述，但 104 周 × 7 天 = <strong>728 天</strong>；
+扣掉两个缓冲周后，正文实际带教 <strong>714 天 / 2142 个时段</strong>。站内统一用 728 / 2142 这两个数。</p>
+<h2>二、模块周数：不是每个模块都是 4 周</h2>
+<p>M7 和 M11 各只有 3 个周文件（W25–W27、W41–W43），M16、M18、M21 是 5 周，M24 是 9 周（W96–W104）。
+这是原计划的排布，不是缺文件。侧栏和进度地图按真实周数显示。</p>
+<h2>三、排版：统一了中文标点</h2>
+<p>原文里有约 <strong>13000 行</strong>存在中英标点混用（中文句子里用半角 <code>,</code> <code>;</code> <code>:</code> <code>?</code> <code>!</code>，以及用直引号
+<code>“…”</code> 而不是中文引号）。站内做了规范化：</p>
+<ul>
+<li>中文语境下的半角逗号/分号/冒号/问号/叹号 → 全角；</li>
+<li>成对直引号 → 中文弯引号「“ ”」；</li>
+<li>含中文的半角括号 → 全角括号。</li>
+</ul>
+<p><strong>代码块、行内代码、URL、英文书名与英文标题里的标点一律不动</strong>（例如
+<code>Object Detection in Optical RS Images: A Survey</code> 的冒号保持半角，<code>09:00</code>、<code>3:1</code>、<code>1,000</code> 也不动）。
+数字和事实没有任何改动。</p>
+<h2>四、代码块：补了语言标注</h2>
+<p>原文 584 个围栏代码块里有 <strong>836 处</strong>没写语言（有的一个文件里多次出现），
+站内按内容自动判定为 bash / python / markdown / yaml / text 并做了语法高亮。
+另外修了三类渲染问题：<strong>中文里&quot;</strong>加粗<strong>紧贴汉字&quot;时加粗标记失效</strong>（标准 Markdown 的规则对不加空格的中文很不友好）、
+<strong>列表紧跟段落时被吞进段落</strong>、<strong>列表内代码块带多余缩进</strong>。原文里个别没有配对的孤立 <code>**</code> 也一并去掉了。</p>
+<h2>五、内容层面的既有订正（原文已写明，这里汇总一次）</h2>
+<p>原手册在正文里已经做过几处事实订正，值得单独记住：</p>
+<ul>
+<li><strong>RingMo</strong> 归属<strong>空天院孙显组</strong>，不是自动化所；</li>
+<li><strong>SARCLIP</strong> 已替换为<strong>王超组 2025 TACMT</strong>；</li>
+<li><strong>天智杯</strong>并非空天院主办——练手可以，但不能当作“破冰”的理由。</li>
+</ul>
+<h2>六、还需要你自己核实的</h2>
+<p>手册写于 2026 年年中，下面这些会随时间变化，动手前请自己查一次最新的：</p>
+<ul>
+<li><strong>软件版本与安装命令</strong>：PyTorch / CUDA 轮子、MMCV / MMDetection / MMRotate 的版本匹配关系变动很快，
+以官方安装文档为准；手册里的 cu121 组合是当时的稳妥解。</li>
+<li><strong>数据集下载地址与协议</strong>：DOTA、DIOR、FAIR1M 等的官方入口、许可条款可能已调整。</li>
+<li><strong>期刊/会议的投稿系统、截稿时间、分区</strong>：以官网为准。</li>
+<li><strong>目标团队的人员与研究方向</strong>：老师的课题组构成、招生与合作方式会变，发邮件前先看最新主页与近两年论文。</li>
+<li><strong>竞赛信息</strong>：主办方、赛程、赛题每年不同。</li>
+</ul>
+<div class="pager"><a class="prev" href="log.html"><span class="dir">← 上一篇</span><span class="nm">学习日志</span></a><a class="next" href="buffer.html"><span class="dir">下一篇 →</span><span class="nm">缓冲与调整</span></a></div>
+
+</div>
+  </main>
+  
+</div>
+<script src="assets/nav-data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

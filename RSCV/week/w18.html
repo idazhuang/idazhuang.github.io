@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="18">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W18 · 主实验 Round 2（数据集 2 收尾 + 数 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M5 主实验全面铺开</span><span>·</span><span>Week 18</span><span>·</span><span>D120–D126</span></div><h1 class="title">主实验 Round 2（数据集 2 收尾 + 数据集 3）—— 多数据集验证泛化 + 跨数据集迁移</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M1-W1 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="120" data-k="am" title="D120 上午段"></i><i data-d="120" data-k="noon" title="D120 中午段"></i><i data-d="120" data-k="pm" title="D120 晚上段"></i></span><span class="sday"><i data-d="121" data-k="am" title="D121 上午段"></i><i data-d="121" data-k="noon" title="D121 中午段"></i><i data-d="121" data-k="pm" title="D121 晚上段"></i></span><span class="sday"><i data-d="122" data-k="am" title="D122 上午段"></i><i data-d="122" data-k="noon" title="D122 中午段"></i><i data-d="122" data-k="pm" title="D122 晚上段"></i></span><span class="sday"><i data-d="123" data-k="am" title="D123 上午段"></i><i data-d="123" data-k="noon" title="D123 中午段"></i><i data-d="123" data-k="pm" title="D123 晚上段"></i></span><span class="sday"><i data-d="124" data-k="am" title="D124 上午段"></i><i data-d="124" data-k="noon" title="D124 中午段"></i><i data-d="124" data-k="pm" title="D124 晚上段"></i></span><span class="sday"><i data-d="125" data-k="am" title="D125 上午段"></i><i data-d="125" data-k="noon" title="D125 中午段"></i><i data-d="125" data-k="pm" title="D125 晚上段"></i></span><span class="sday"><i data-d="126" data-k="am" title="D126 上午段"></i><i data-d="126" data-k="noon" title="D126 中午段"></i><i data-d="126" data-k="pm" title="D126 晚上段"></i></span></div></div>
+
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>:W17 你把数据集 1 跑透、建好了实验矩阵和 wandb。本周把战线推完——<strong>收尾数据集 2、跑完数据集 3</strong>，做出论文最重要的那张 <strong>三数据集整合大表</strong>，写主实验报告，再做一个 <strong>跨数据集迁移实验</strong>（加分项，能显著提升论文“完整度”）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：在多数据集上验证方法泛化性；学会跨数据集结果分析。
+<strong>先给你打个预防针</strong>：本周你会反复遇到&quot;<strong>换了数据集，代码就报错 / 效果就掉</strong>&quot;。别慌——这几乎都不是你方法不行，而是<strong>数据格式没适配</strong>（标注解析、类别数）或<strong>数据特性不同</strong>（分辨率、目标尺度）。前者是 bug、能修；后者恰恰是你论文 Discussion 的金矿（&quot;为什么我的方法在 A 上提升大、在 B 上小&quot;）。本周的核心心法：<strong>把&quot;换数据集掉点&quot;从'恐慌'变成'分析素材'</strong>。
+<strong>本周精力怎么分配</strong>：数据集 3 的 baseline+方法是“启动→挂机→评估”的体力活（用 W17 的矩阵和 wandb 套路即可）；真正烧脑、最值钱的是三件——<strong>三数据集整合大表、跨数据集差异分析、迁移实验的设计与解读</strong>。教学重头放这三件。</p>
+</blockquote>
+<hr />
+<h2>🧭 W18 总览：从“单数据集好”到“多数据集都好”</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它在论文里是什么</th>
+<th>为什么关键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据集 2 收尾 + 数据集 3 全跑</td>
+<td>各自完整大表(3-seed)</td>
+<td>主实验数据</td>
+<td>多数据集才证明泛化（非过拟合）</td>
+</tr>
+<tr>
+<td>三数据集整合大表</td>
+<td>竖表 + 平均排名 + 参数/FPS</td>
+<td><strong>论文 Table 1（主表）</strong></td>
+<td>一眼看出你方法的综合实力</td>
+</tr>
+<tr>
+<td>主实验完整报告（≥1500 字）</td>
+<td>结果 + 分析 + 讨论</td>
+<td>Experiment 章素材</td>
+<td>把数字“讲成故事”</td>
+</tr>
+<tr>
+<td>跨数据集迁移实验（加分）</td>
+<td>A 训 B 测，泛化证据</td>
+<td>Experiment / 附录加分项</td>
+<td>审稿人觉得你“考虑得全”</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：单数据集上好可能是运气或过拟合；<strong>三个数据集上都稳定领先，才是真本事</strong>——这正是审稿人判断“方法有没有泛化性”的核心依据。</p>
+<hr />
+</section>
+<article class="day" id="d120" data-d="120"><header class="day-head"><span class="dnum">D120</span><h2 class="day-t">周一 · 数据集 2 完整大表 + 数据集 3 准备</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天先把数据集 2 的结果“钉死”（3-seed 完整表 + 可视化），再把数据集 3 的数据接进来。<strong>接新数据集时务必先看一眼样本再训</strong>——这是 M1 就养成、本周更要守的习惯。</p>
+<p><strong>预期管理</strong>：今天钉死数据集 2 结果 + 接入数据集 3。提醒：数据集 2 的大表格式必须和数据集 1 完全一致（同列/同指标/同小数位）——D123 整合时才能零摩擦拼接；接数据集 3 务必先肉眼看一组“图+标注”画出来确认读对再训（标注解析错最隐蔽，读进来了但框全偏，跑半天白费）。3 个数据集是遥感 CV 论文的标配。</p>
+</blockquote>
+</div><section class="slot" id="d120-am" data-d="120" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D120 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 2 你的方法 seed 2–3 → 3-seed → 完整大表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li>补齐数据集 2 上你的方法的 <strong>seed 2、3</strong>，算 <strong>3-seed mean±std</strong>，做数据集 2 完整大表。</li>
+<li><strong>关键纪律——格式必须和数据集 1 完全一致</strong>（同列、同指标、同小数位、同呈现方式）。<strong>为什么</strong>：下周（其实就是 D123）要把三个数据集<strong>整合</strong>成一张大表，如果各表格式不一，整合时你会被对齐问题折磨；现在统一，后面零摩擦。这跟写代码统一接口是一个道理。</li>
+<li><strong>为什么“现在多花两分钟统一格式”能省后面几小时</strong>：如果数据集1的表是“方法|mAP|参数|FPS”、数据集2的表是“方法|参数|mAP±std”（列序不同、有的报std有的不报、小数位不同），等 D123 整合时，你要逐个核对、手动对齐、补算缺的std——又慢又容易出错。而如果三个表从一开始就用<strong>完全相同的表头和格式</strong>，整合就是简单的拼接（甚至代码自动合并）。<strong>这是“前期一点纪律换后期大量省心”的典型</strong>，也是专业研究者和新手的区别之一：专业的人在产出每个中间结果时就考虑了“它后面怎么被用”。</li>
+<li><strong>“统一格式”的具体清单</strong>:① 列的顺序和名称完全一致;② 指标的小数位一致（都保留1位或都2位）;③ 都报 mean±std（不能有的报有的不报）;④ 最优值的标记方式一致（都加粗）;⑤ baseline 和你的方法都整理进去（整合表的每一行都要有数据）。照这个清单产出每个数据集的表，D123 整合时零摩擦。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估数据集 2 的 seed 2、3（用 W17 的 eval 套路）。</li>
+<li>算 3-seed mean±std（用补充包的聚合函数）。</li>
+<li>整理数据集 2 完整大表，<strong>列结构直接复制数据集 1 的表头</strong>，只改数字：<figure class="code" data-lang="markdown"><pre><code>| 方法 | 主指标(mean±std) | 参数量 | FPS |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>最优加粗；baseline 也整理成同格式。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 完整大表(你的方法呈现为 <code>69.4±0.4</code> 这样的 mean±std)，列结构与数据集 1 一模一样。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>格式和数据集 1 不一致</strong>（列序不同、有的报 std 有的不报）→ 整合时对不齐，白费功夫。</li>
+<li><strong>只跑 1 个 seed 就当结果</strong> → 不可信。</li>
+<li><strong>忘了把 baseline 也整理成同格式</strong> → 整合大表里 baseline 行没法填。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>数据集 2 某个 seed 结果异常（明显偏离另两个）?→ 单独看那条 wandb 曲线，大概率是训练异常，重跑该 seed。格式忘了长啥样?→ 直接打开数据集 1 的大表，复制表头改数字。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>第二个数据集的完整结果，且与第一个格式严格统一</strong>。<strong>做了</strong>（数据集 2 完整表）、<strong>学了</strong>（跨数据集统一格式的重要性、为整合铺路）、<strong>会了</strong>（产出可信且可直接整合的第二数据集表）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜多数据集结果管理</strong>：每个数据集的大表<strong>用同一套表头</strong>（同列、同指标、同小数位），且 baseline 与你的方法都整理进去——整合大表时直接拼接，零对齐成本。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d120-noon" data-d="120" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D120 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">数据集 2 可视化对比图（5 张）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>论文里<strong>每个主数据集通常都配定性可视化</strong>。选案例的规矩和 W17 一样——<strong>不 cherry-pick</strong>，按“正面 / 负面 / 困难”配比挑（数据集 2 配 5 张：约 3 正 + 1 负 + 1 难）。</p>
+<ul>
+<li><strong>为什么“风格统一”对论文的专业感很重要</strong>：三个数据集的可视化图如果配色不同、图例不同、框的画法不同，论文读起来会显得<strong>杂乱、不专业</strong>（像东拼西凑）。而如果所有数据集的图都用<strong>同一套配色(如绿=GT、红=你、蓝=baseline)、同一种图例、同一种风格</strong>，整篇论文的图看起来统一、整洁、专业——审稿人对论文的整体印象会更好。<strong>这是细节，但细节体现专业度</strong>，而专业度影响审稿人对你工作的信任。</li>
+<li><strong>怎么保证风格统一（省力做法）</strong>：<strong>复用 W17 写的可视化脚本</strong>，只换输入（数据集2的图和结果），不改绘图逻辑——这样产出的图自然风格一致，还省了重写代码的时间。这又是“工程复用”的好处：一个写好的可视化脚本，服务所有数据集。<strong>别为每个数据集重新写一套绘图代码</strong>（既费时又会导致风格不一）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从数据集 2 结果里挑 5 个典型案例（含 1–2 个你输或都难的）。</li>
+<li>画 GT / 你的预测 / baseline 预测三方对比（<strong>复用 W17 的可视化脚本</strong>，保持风格统一）。</li>
+<li>每张配一句标注“它说明了什么”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 2 可视化 5 张（含负面），标注清晰，<strong>风格与数据集 1 的图统一</strong>（同配色、同图例）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只挑赢的</strong> → 老问题，审稿人不信。</li>
+<li><strong>风格和数据集 1 不统一</strong>（配色/图例不同）→ 论文图看着乱、不专业。</li>
+<li><strong>颜色/图例不清</strong> → 读者看不出哪个是 GT、哪个是你。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>找不到负面?→ 看数据集 2 的 per-class 最差类；风格不统一?→ 直接复用数据集 1 的可视化脚本，只换输入。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你为数据集 2 备齐了<strong>风格统一</strong>的定性证据。<strong>做了</strong>（数据集 2 可视化）、<strong>学了</strong>（每数据集配图、风格统一）、<strong>会了</strong>（为多个数据集产出风格一致的对比图）。</p>
+</div></section></section><section class="slot" id="d120-pm" data-d="120" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D120 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">数据集 3 数据准备 + config 修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li>接入<strong>第三个数据集</strong>——<strong>3 个数据集是遥感 CV 论文的标配</strong>（2 个偏少，3 个让泛化结论更稳）。</li>
+<li>复用 W11 的<strong>统一数据层</strong>，主要工作就三样：改 config 的<strong>数据路径</strong>、改<strong>类别数</strong>、必要时在数据层<strong>加一个该数据集的解析分支</strong>。</li>
+<li><strong>为什么先准备而不直接训</strong>：数据集 3 的标注格式可能和前两个不同（这是遥感数据集的常态——每家标注规则都不太一样），不先适配好、不先看样本，训了也是错的。</li>
+<li><strong>为什么 3 个数据集是“标配”而非“越多越好”</strong>:1 个数据集的好可能是过拟合（方法恰好适合那个数据集的特点）;2 个数据集稍好但泛化结论还不够稳（可能这两个碰巧相似）；<strong>3 个数据集（尤其特性有差异的3个）上都好，才比较有力地证明“方法是普遍有效的、不是过拟合某个数据集”</strong>。再多（4、5个）边际收益递减，且耗费大量算力——3 个是“证明泛化”和“成本可控”的平衡点，所以成了遥感 CV 论文的事实标配。你单卡资源有限，做满 3 个数据集（每个3 seed）已经是相当扎实的工作量了。</li>
+<li><strong>统一数据层让“接新数据集”几乎零成本（W11 的回报）</strong>：你 W11 写的统一数据层，把“不同数据集的格式差异”封装在一个解析层里——上层的训练/评估代码完全不用动，接新数据集只需在数据层加一个解析分支（把该数据集的标注格式转成统一的内部表示）。<strong>这就是当初花力气做统一数据层的回报</strong>：现在接第三个数据集，你改几行 config + 加一个解析分支就行，而不是为每个数据集重写一套 pipeline。良好的工程设计在这里省了你大量时间。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>检查数据集 3 的标注形式、类别列表。</li>
+<li>改 config：数据路径（用绝对路径）、类别数；格式不同就在统一数据层加解析分支（复用 M1 的解析经验）。</li>
+<li><strong>肉眼看一组样本</strong>（把图 + 标注画出来）确认读对——白色框/掩膜是不是落在该落的地方。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 就绪、config 改好、样本读取正确（你亲眼确认过一组）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>格式差异大没适配</strong> → 报错，或更隐蔽的：读进来了但<strong>标注解析错</strong>（框/掩膜全偏），训出来全是错的。</li>
+<li><strong>类别数没改</strong> → 输出维度不匹配，直接报错或学歪。</li>
+<li><strong>不看样本直接训</strong> → 解析错了你也不知道，跑半天白费。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>格式不同?→ 在统一数据层加一个该数据集的解析分支。读出来的框/掩膜对不上图?→ 检查标注解析（回想 M1 的 8 点旋转框解析坑、坐标系是否一致）。路径报错?→ 用绝对路径。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你为第三数据集做好了接入准备，并守住了“看样本再训”。<strong>做了</strong>（数据集 3 准备 + 看样本）、<strong>学了</strong>（3 数据集标配、新数据集适配三步、看样本验证）、<strong>会了</strong>（低成本且正确地接入第三数据集）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜接入新数据集三步 + 一验</strong>:① 改路径 ② 改类别数 ③ 必要时加解析分支 →（一验）<strong>肉眼看一组“图+标注”画出来</strong>确认读对，再开训。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 数据集 2 完整表 ✅ 数据集 2 可视化。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D120</summary><textarea data-note="d120" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d121" data-d="121"><header class="day-head"><span class="dnum">D121</span><h2 class="day-t">周二 · 数据集 3 baseline 启动 + 跨数据集差异分析</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把数据集 3 的 baseline 推上去，同时做本周第一件烧脑活——<strong>分析数据集 1 vs 2 的差异</strong>（这是 Discussion 的金矿）。</p>
+<p><strong>预期管理</strong>：今天起数据集 3 的 baseline + 做跨数据集差异分析。提醒：本周会反复遇到“换数据集就报错/掉点”，别慌——多半是数据格式没适配（bug，能修）或数据特性不同（分析素材，金矿）。核心心法是把“换数据集掉点”从恐慌变成 Discussion 素材：“为什么我方法在数据集1提升大、数据集2小”——归因到分辨率/类别/尺度/场景差异，就是学术深度。</p>
+</blockquote>
+</div><section class="slot" id="d121-am" data-d="121" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D121 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 3 baseline 1–6 启动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>在数据集 3 上把 6 个 baseline 推上去（GPU 够则并行，否则错峰）。同样固定 seed、记矩阵、独立 work_dir——这套 W17 已练熟的流程直接复用。</p>
+<ul>
+<li><strong>为什么“流程复用”让 W18 比 W17 轻松很多</strong>:W17 你是第一次搭这套大规模实验流程（矩阵、wandb、独立目录、错峰），花了不少力气摸索；到 W18，这套流程你已经练熟了，接数据集3只是“把同一套流程再走一遍”——启动命令、监控方式、评估登记全都一样，你只需换数据集和config。<strong>前期建好的“实验工程脚手架”现在持续产生复利</strong>：每多一个数据集，你的边际成本越来越低。这就是为什么 W17 强调把流程建扎实——它不是一次性的，而是后面每个实验都要用的基础设施。</li>
+<li><strong>协议统一是跨数据集复用的关键前提</strong>：复用流程时，有一点必须守住——<strong>所有数据集用同一套评测脚本/协议</strong>（同metric定义、同IoU阈值、同数据划分方式）。如果数据集3换了一套评测标准，那它的结果就和前两个不可比，D123整合大表时就出问题。所以“流程复用”不只是省力，更保证了三个数据集结果的<strong>可比性</strong>——这是后面整合成一张表的前提。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动数据集 3 的 baseline 1–6：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>scripts/train.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d3_base1.yaml<span class="w"> </span>--seed<span class="w"> </span><span class="m">0</span><span class="w"> </span>--work_dir<span class="w"> </span>work_dirs/D3-base1-s0
+<span class="c1"># 2–6 同理</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>矩阵状态改“进行中”。</li>
+<li>wandb 监控。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 baseline 启动，矩阵更新，各组独立目录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>并行太多 OOM；某 baseline 在数据集 3 上<strong>评测协议没沿用</strong>前两个数据集的统一标准（导致不可比）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>OOM → 错峰/降 batch；协议 → 沿用前两数据集的统一评测脚本，别每个数据集换一套。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把主实验扩到第三数据集的 baseline，复用了 W17 的全套流程。<strong>做了</strong>（数据集 3 baseline 启动）、<strong>学了</strong>（流程复用、协议统一）、<strong>会了</strong>（在第三数据集快速启动对比）。</p>
+</div></section></section><section class="slot" id="d121-noon" data-d="121" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D121 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">监控数据集 3 baseline</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>同 W17 的健康监控——看 loss 是否稳步下降，val 指标是否上升，异常早停。换了数据集，健康判断标准不变。<strong>一个易踩的点</strong>：不同数据集的 loss <strong>绝对量级可能不同</strong>（数据集3的初始loss可能比数据集1高或低），所以<strong>别拿数据集1的loss数值去套数据集3</strong>——看的是“趋势”（是否稳步下降），不是绝对数值。换数据集后loss曲线形状/量级变了不代表坏了，只要趋势向下、val指标在升，就是健康的。这个“看趋势不看绝对量级”的判断，在跨数据集监控时尤其要记住。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>wandb 看数据集 3 baseline 的曲线。</li>
+<li>异常立即排查（NaN→降 lr/查数据；不降→查加载）。</li>
+<li>正常则继续。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 baseline 训练健康。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不监控跑完才看；NaN 还傻等；以为“换数据集 loss 形状变了=坏了”（不同数据 loss 量级不同，看趋势）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>NaN → 降 lr / 查数据集 3 是否有脏标注；不降 → 确认数据集 3 真的读进来了（打印 batch）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你监控了第三数据集实验。<strong>做了</strong>（监控）、<strong>学了</strong>（健康监控跨数据集复用、看趋势不看绝对量级）、<strong>会了</strong>（盯多数据集实验并及时止损）。</p>
+</div></section></section><section class="slot" id="d121-pm" data-d="121" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D121 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">分析数据集 1 vs 2 的结果差异</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（本周第一件烧脑活——非常重要）</h4><div class="blk-b"><ul>
+<li>这是论文 <strong>Discussion 的核心素材之一</strong>。典型问题：“<strong>为什么我的方法在数据集 1 上 +3% 但数据集 2 上只 +1%？</strong>”</li>
+<li><strong>不同数据集的分辨率、类别分布、目标尺度、场景（城市 vs 农村）都不同</strong>，方法表现自然不同。<strong>把差异归因到这些数据特性上，就是学术深度</strong>——而不是简单说“数据集 2 更难”。</li>
+<li><strong>为什么现在做</strong>：趁数据集 1、2 结果都新鲜，分析最准；也为 D123 整合后的总分析打底。</li>
+<li><strong>为什么“跨数据集差异分析”是审稿人眼里的高级感</strong>：一个只会报“我的方法在三个数据集上都提升了”的作者，和一个能说清“我的方法在小目标多的数据集1上提升显著（+3%，因为我的多尺度模块专治小目标），但在大目标为主的数据集2上提升有限（+1%，这类样本本就不是我方法的强项）”的作者——后者明显<strong>更懂自己的方法、更有研究深度</strong>。审稿人通过这种分析判断你是“碰运气调出来的”还是“真正理解方法机理的”。差异分析做得好，直接提升论文档次。</li>
+<li><strong>“换数据集掉点”是金矿而非灾难（本周核心心法）</strong>：新手看到“我的方法在某数据集上提升很小甚至不如baseline”会慌、会怀疑方法不行。<strong>但这恰恰是最好的 Discussion 素材</strong>——你去分析“为什么在这个数据集上不行”，答案（数据特性和你方法强项不匹配）就是深刻的洞察。一篇只报“处处都好”的论文反而可疑（像 cherry-pick）；一篇能解释“在哪好、在哪一般、为什么”的论文更可信、更有价值。<strong>把掉点从恐慌变成分析素材，是这一周最重要的心态转变</strong>。</li>
+<li><strong>怎么做归因（可操作的四问）</strong>：对比两个数据集，逐一问:① 分辨率差多少?② 类别分布（哪类多哪类少）有何不同?③ 目标尺度（大目标多还是小目标多）?④ 场景（城市/农村/某类地物）有何差异？然后问“我的方法的强项（我的组件治什么）正好对应上面哪个差异？”——<strong>你方法强项对应的那个数据特性，就解释了提升幅度的差异</strong>。这个对应关系，就是你 Discussion 的逻辑。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>对比你的方法在数据集 1、2 上的<strong>提升幅度</strong>（总分 + per-class）。</li>
+<li>找原因：是分辨率差异？类别分布（数据集 2 是不是大目标多）？场景不同？</li>
+<li>写一段笔记（带数字 + 具体原因，联系数据特性）。</li>
+</ol>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 量化两数据集上你的方法相对最强baseline的提升幅度，找出差异最大的类</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gain_by_dataset</span><span class="p">(</span><span class="n">ours_percls</span><span class="p">,</span> <span class="n">base_percls</span><span class="p">):</span>   <span class="c1"># 两个 dict: 类别-&gt;AP</span>
+    <span class="n">gains</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">ours_percls</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">-</span> <span class="n">base_percls</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ours_percls</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;总提升 D:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">gains</span><span class="o">.</span><span class="n">values</span><span class="p">())</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">gains</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">top</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">gains</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;提升最大的类:&quot;</span><span class="p">,</span> <span class="n">top</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;| 提升最小/下降的类:&quot;</span><span class="p">,</span> <span class="n">top</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">gains</span>
+<span class="c1"># 对 D1、D2 各跑一遍，对比&quot;提升最大的类&quot;——往往揭示你方法的强项对应的数据特性</span>
+<span class="c1"># 如 D1(小目标多)提升大、D2(大目标多)提升小 → 你的多尺度模块专治小目标</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>跨数据集差异分析笔记，如“数据集 1 提升 +3.1（小目标占比高，我方法的多尺度模块强项），数据集 2 仅 +1.4（大目标为主，提升空间小）”——<strong>有数字、有归因</strong>。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只说“不一样”不给原因</strong> → 没有学术价值。</li>
+<li><strong>原因牵强</strong>（不联系数据特性，只说“数据集 2 难”）→ 要具体到分辨率/类别/尺度。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>说不清原因?→ 把“你的组件治什么问题”和“两数据集在分辨率/类别分布/目标尺度上的差异”对起来，差异常出在这。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>跨数据集差异分析（把表现差异归因到数据特性）</strong>——这是审稿人眼里“有深度”的标志。<strong>做了</strong>（跨数据集差异分析）、<strong>学了</strong>（归因到数据特性而非笼统说“难”）、<strong>会了</strong>（把跨数据集结果解读成有深度的讨论）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜跨数据集差异归因四问</strong>：两数据集的① 分辨率 ② 类别分布 ③ 目标尺度 ④ 场景 哪个不同？你的方法的强项正好对应哪个?——答案就是提升幅度差异的原因。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ baseline 启动 ✅ 跨数据集分析笔记。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D121</summary><textarea data-note="d121" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d122" data-d="122"><header class="day-head"><span class="dnum">D122</span><h2 class="day-t">周三 · 数据集 3 你的方法</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天让你的方法在数据集 3 上跑起来。<strong>先跑通 seed 1 确认无误，再铺开 3 个</strong>——别三个一起崩了还不知道哪出问题。等训练时不干等，先把整合大表模板搭好。</p>
+<p><strong>预期管理</strong>：今天你的方法在数据集 3 上跑起来（先 seed 1 跑通再铺开）。提醒：“小步验证再放量”——seed 1 确认数据/模块在新数据上都正常，再开 seed 2/3，避免一次三个因同一 bug 崩掉浪费 GPU；若数据集 3 上效果差，先排除 bug（print 模块输出确认生效）和数据问题（看样本），再下“方法在此数据有限”的结论。等训练时把整合大表模板搭好，别干等。</p>
+</blockquote>
+</div><section class="slot" id="d122-am" data-d="122" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D122 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 3 你的方法启动(seed 1–3)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据集 3 上跑你的方法(3 seed)，与 baseline 同设置。<strong>先 seed 1 跑通</strong>（确认数据/模块在新数据上都正常），<strong>再铺开 seed 2/3</strong>——这是“小步验证再放量”的稳妥做法，避免一次性三个都因同一个 bug 崩掉浪费 GPU。</p>
+<ul>
+<li><strong>为什么“先跑通一个再铺开”能省 GPU</strong>：如果你一上来三个 seed 同时启动，而代码里有个 bug（如数据集3的某个解析问题），那三个 seed 会<strong>同时崩掉或同时产出错误结果</strong>——你浪费了三份 GPU 时间才发现一个 bug。而如果先只跑 seed 1，几分钟/几十分钟就能确认“数据读对了、模块生效了、loss 正常”，确认无误后再铺开 seed 2/3，就只用一份 GPU 时间承担了“试错成本”。<strong>对算力有限的你，这种“小步验证再放量”的纪律能显著减少浪费</strong>。</li>
+<li><strong>这是一种通用的工程稳妥性思维</strong>：不只跑实验，做任何“要批量执行的事”（批量处理数据、批量跑任务）都适用——先用一个样本/一个小批验证流程正确，再放量执行全部。<strong>先验证后放量，而非一把梭哈</strong>，是减少返工的关键习惯。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动数据集 3 上你的方法 seed 1（设置与 baseline 一致，只改 model）。</li>
+<li>确认无报错、loss 正常下降后，再启动 seed 2、3。</li>
+<li>矩阵更新。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 你的方法启动（设置与 baseline 可比）,seed 1 已确认正常。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>跨数据集时偷偷调了设置</strong>（除了必要且记录的类别数适配）→ 不可比；<strong>seed 1 还没跑通就三个一起开</strong> → 同一 bug 浪费三份 GPU 时间。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>报错?→ 多半是数据维度/类别数，查 config；效果异常差?→ 先在小数据上过拟合验证代码通不通（排除 bug），再确认数据集 3 读对了（看样本）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>数据集 3 进入你的方法阶段，并练了“先跑通再放量”。<strong>做了</strong>（数据集 3 方法启动）、<strong>学了</strong>（小步验证再铺开、跨数据集保持可比）、<strong>会了</strong>（在第三数据集稳妥启动自己的方法）。</p>
+</div></section></section><section class="slot" id="d122-noon" data-d="122" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D122 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">监控 + 调试</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>监控数据集 3 上你的方法，<strong>重点确认你的创新模块在新数据上也生效</strong>（而不是因数据不同而失效）——区分“方法在数据集 3 上效果有限”（真实结论）和“模块根本没生效”(bug)。</p>
+<ul>
+<li><strong>为什么必须区分这两者（它们后果完全相反）</strong>:① “方法效果有限”是<strong>真实的科学结论</strong>——你的方法在数据集3的某些特点上确实帮助不大，这要如实写进论文（诚实分析为什么）;② “模块没生效”是<strong>bug</strong>——你的创新模块因为某个代码问题（没接进前向、参数没更新、数据维度错）根本没起作用，所以看起来“没效果”。<strong>这两者表面都是“数据集3上没提升”，但一个该写进论文、一个该去修代码</strong>。如果把 bug 当成“方法效果有限”写进论文，你就误报了一个错误结论；如果把真实的“效果有限”当 bug 一直瞎改，你浪费时间还可能改出问题。</li>
+<li><strong>怎么区分（可操作的排查）</strong>:① <strong>先在小数据上过拟合</strong>——拿你的方法在10张图上训，如果能过拟合到接近100%，说明“模型+你的模块”代码是通的（能学），那“数据集3上效果有限”就是真实结论；如果连过拟合都做不到，说明代码有bug;② <strong>print 你模块的中间输出</strong>——确认它真的接进了前向传播、形状对、有非平凡的输出;③ <strong>检查参数是否在更新</strong>——你模块的参数 requires_grad 是否为True、梯度是否非零。<strong>这三步排除了bug，剩下的“没提升”才是真实结论</strong>。</li>
+<li><strong>这个“先排bug再下结论”的纪律为什么重要</strong>：深度学习里，“效果不好”有两种可能（方法真不行 / 代码有bug），而<strong>新手最容易犯的错就是把bug当成“方法不行”而放弃一个其实可行的idea</strong>，或反过来把真实的局限当bug瞎调。养成“看到反常结果，先系统排除bug（过拟合测试+print+查梯度），再下科学结论”的习惯，能让你的判断可靠、不冤枉好idea也不误报假结论。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>看 loss 曲线。</li>
+<li>若异常：print 你模块的中间输出，确认它真的接进了前向、参数在更新；确认数据集 3 读对。</li>
+<li>修正后续跑。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 上你的方法训练正常、模块确认生效。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把“数据集 3 上效果差”<strong>误判为方法不行</strong>（实为 bug 或数据问题）→ 先排除这两个再下结论。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>效果异常?→ ① 小数据过拟合排除 bug ② 看样本确认数据读对 ③ 确认模块在数据集 3 的 config 下确实被启用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你保障了第三数据集实验健康，并守住“先排 bug 再下结论”。<strong>做了</strong>（监控调试）、<strong>学了</strong>（区分“方法有限”与“模块没生效”）、<strong>会了</strong>（确保创新模块在新数据集生效）。</p>
+</div></section></section><section class="slot" id="d122-pm" data-d="122" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D122 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">等结果（并行准备整合大表模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>训练要跑一阵，<strong>等待时间别浪费</strong>——把明天(D123)要做的“三数据集整合大表”<strong>模板先搭好</strong>(行=方法，列=3 个数据集 + 平均排名 + 参数/FPS)，结果一出就能往里填。这是“实验挂机时推进可做工作”的高效习惯。</p>
+<ul>
+<li><strong>为什么“实验挂机时间”是个容易被浪费的宝藏</strong>：深度学习实验动辄跑几小时，这段时间 GPU 在干活，但<strong>你的脑力是空闲的</strong>。新手往往就干等着看结果，几小时白白流逝。<strong>高效的研究者会把这段时间用来做不需要实验结果的工作</strong>：搭好下一步要用的模板、整理已有结果、读相关论文、写报告的框架、规划后续。这样实验跑完时，你的其他工作也推进了——相当于“并行”利用了时间。<strong>在算力有限、单卡只能串行跑实验的情况下，把挂机时间用满，是你提升整体效率的重要方式</strong>。</li>
+<li><strong>具体能在挂机时间做什么</strong>:① 搭下一步的模板（如今天搭整合大表模板，预填已有的D1/D2数据）;② 整理/复核已完成的结果;③ 读arXiv新论文（D124要做的）;④ 写报告框架;⑤ 规划后续实验。<strong>养成“启动实验后立刻问自己：这段时间我能并行推进什么？”的习惯</strong>，你会发现自己的产出明显变多。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>准备整合大表模板（竖表：方法 × D1/D2/D3 + 平均排名 + 参数/FPS）。</li>
+<li>把数据集 1、2 已有的数字先填进去（只差数据集 3）。</li>
+<li>复核 D1/D2 的数字无误。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>整合大表模板就绪、D1/D2 已填，数据集 3 在跑。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>干等浪费几小时；模板列和前面单数据集表不一致。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>模板拿不准?→ 仿 A 级论文主表的竖表式（方法为行、数据集为列）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用等待时间做了有效准备。<strong>做了</strong>（等结果 + 模板 + 预填 D1/D2）、<strong>学了</strong>（并行利用实验等待期）、<strong>会了</strong>（实验挂机时推进可做的整理工作）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 数据集 3 训练中。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D122</summary><textarea data-note="d122" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d123" data-d="123"><header class="day-head"><span class="dnum">D123</span><h2 class="day-t">周四 · 数据集 3 大表 + 三数据集整合大表</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天产出<strong>全论文最重要的一张表——三数据集整合大表(Table 1)</strong>。它一眼定你方法的综合实力，务必做到规范、可比、含效率维度。</p>
+<p><strong>预期管理</strong>：今天产出全论文最重要的表——三数据集整合大表（论文 Table 1）。提醒：用竖表（方法为行、数据集为列）+ 加“平均排名”列(平均排名 1.0=每个数据集都第一，极有说服力)+ 参数/FPS 列（你单卡的效率卖点），最优加粗。这是审稿人第一眼看的表之一，务必各数据集协议统一、可比。</p>
+</blockquote>
+</div><section class="slot" id="d123-am" data-d="123" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D123 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">数据集 3 结果 → 完整大表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据集 3 训完，评估并整理完整大表(3-seed)，格式与前两个一致。至此三个数据集结果齐了。<strong>这是整合大表的最后一块拼图</strong>——前两个数据集的表你已经在 D120/D117 做好了，今天补上数据集3，三个数据集的“零件”就齐了，晚上就能整合成论文 Table 1。所以今天产出数据集3表时，<strong>务必沿用前两个的完全相同的表头和格式</strong>（同列、同指标、同小数位、同加粗规则），这样晚上整合就是简单拼接，零摩擦。这再次印证了 D120 强调的“格式从一开始就统一”的价值——现在收获它。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>评估数据集 3(3-seed)。</li>
+<li>整理数据集 3 完整大表（同表头）。</li>
+<li>矩阵更新为完成。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 完整大表(3-seed mean±std)，与前两个格式一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>格式不一致；漏 seed；数据集 3 的 baseline 没全评估。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某 seed 缺 → 补跑；格式 → 复用前表头。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>三个数据集结果都齐了。<strong>做了</strong>（数据集 3 大表）、<strong>学了</strong>（完成三数据集结果）、<strong>会了</strong>（产出第三数据集表）。</p>
+</div></section></section><section class="slot" id="d123-noon" data-d="123" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D123 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">数据集 3 可视化（5 张）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据集 3 也配可视化（含负面），三数据集都有图，论文更完整、更可信。<strong>为什么三个数据集都要配图</strong>：如果只给一两个数据集配可视化，审稿人可能怀疑“是不是只有这几个数据集上效果看得出来、其他数据集不好所以不放图”。<strong>三个数据集都配上风格统一的定性图（都含负面案例），展示的是“我的方法在所有数据集上都经得起定性检验、且我对每个数据集都诚实（都放了失败案例）”</strong>——这种一致性和诚实大大增强论文的可信度。复用同一套可视化脚本，产出数据集3的图，保持和前两个完全一致的配色/图例/风格。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>挑 5 个典型案例（含负面）。</li>
+<li>画三方对比（复用脚本，风格统一）。</li>
+<li>标注。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据集 3 可视化 5 张（含负面），风格与前两个统一。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只挑赢的；风格不统一。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>找负面看最差类；风格用同一脚本。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>三数据集都有了可视化。<strong>做了</strong>（数据集 3 可视化）、<strong>学了</strong>（持续可视化）、<strong>会了</strong>（为每个数据集备风格统一的图）。</p>
+</div></section></section><section class="slot" id="d123-pm" data-d="123" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D123 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">三数据集整合大表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（论文主表——本周最关键产物）</h4><div class="blk-b"><ul>
+<li>推荐<strong>竖表</strong>：每行一个方法，每列一个数据集的主指标，<strong>最后一列加“平均排名”</strong>——一眼看出你的方法在所有数据集上的<strong>综合</strong>表现(平均排名 1.0 = 每个数据集都第一，极有说服力)。</li>
+<li>再加<strong>参数量 / FPS</strong> 列（效率维度，你单卡卖点）。<strong>最优加粗</strong>。</li>
+<li>这就是你<strong>论文的 Table 1</strong>，审稿人第一眼看的表之一。</li>
+<li><strong>为什么“平均排名”这一列如此有说服力</strong>：单看某个数据集，你的方法可能只领先一点点，说服力有限；但如果你在<strong>三个数据集上全部第一</strong>（平均排名 1.0），这就强多了——它证明你的方法<strong>不是在某个数据集上碰巧好（过拟合那个数据集），而是普遍有效（真泛化）</strong>。平均排名把“多数据集都好”这个最有价值的结论浓缩成一个数字，审稿人一眼就能 get。这正是为什么要做 3 个数据集——单数据集好可能是过拟合，多数据集都好（平均排名靠前）才证明方法真行。</li>
+<li><strong>为什么 Table 1 是论文的“门面”</strong>：审稿人时间有限，看论文往往先扫摘要、再看 Table 1（主结果表）和 teaser 图——这两样决定了他对你工作的第一印象。<strong>一张规范、清晰、结论有力的 Table 1，能让审稿人在 30 秒内 get 到“这个方法在多个数据集上综合最优、还更高效”</strong>。所以这张表的格式（竖表、加粗最优、带 mean±std、有平均排名和效率列）必须专业到位，它是你几个月工作的“封面”。</li>
+<li><strong>整合时的头号纪律：协议必须统一</strong>：三个数据集的结果要能放进一张表对比，前提是它们用了<strong>完全统一的评测协议</strong>（同 metric 定义、同数据划分方式、同 IoU 阈值等）。如果数据集1用了一套协议、数据集3用了另一套，那放在一起的数字就不可比，整张表失去意义。所以从 W17 开始就强调“所有数据集用统一评测脚本”——现在整合时就收获这个统一的红利。</li>
+<li><strong>效率列（参数/FPS）是你的差异化武器</strong>：整合大表里，你的方法可能精度领先不多，但如果<strong>参数量更小、FPS 更高</strong>，这张表就讲了一个更强的故事：“在三个数据集上综合最优，且更轻量更快”。配一张“平均精度 vs 参数量”的散点图（你在左上角），视觉冲击力强。<strong>别省略效率列——它是你单卡路线把“劣势（算力少）”转成“优势（高效）”的关键</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用模板把 3 数据集 × 7 方法的主指标填入（从各数据集完整表搬数字）。</li>
+<li><strong>计算每个方法的平均排名</strong>（每个数据集内排名，再对三个数据集求平均；代码见补充包）。</li>
+<li>加参数/FPS 列，最优加粗。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>（照这个排）：</p>
+<figure class="code" data-lang="markdown"><pre><code>| 方法 | D1 | D2 | D3 | 平均排名↓ | 参数 | FPS |
+|---|---|---|---|---|---|---|
+| baseline2(最强) | 76.3±0.2 | 68.1±0.3 | 71.0±0.3 | 2.3 | 41M | 19 |
+| <span class="gs">**Ours**</span> | <span class="gs">**78.1±0.3**</span> | <span class="gs">**69.4±0.4**</span> | <span class="gs">**72.6±0.3**</span> | <span class="gs">**1.0**</span> | 39M | 21 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>你的方法平均排名 1.0（三数据集全第一）+ 参数更小、FPS 更高。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>各数据集设置/协议不一致</strong> → 整合后不可比（务必统一）。</li>
+<li><strong>不加平均排名</strong> → 综合实力看不直观。</li>
+<li><strong>不列效率维度</strong> → 丢了单卡卖点。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>某格缺数据?→ 补跑或标“待补”。平均排名不会算?→ 每个数据集内按指标降序排名(1=最好)，三个排名取平均（用补充包代码）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>论文主实验表（三数据集整合，含平均排名与效率维度）</strong>。<strong>做了</strong>（三数据集整合大表）、<strong>学了</strong>（竖表 + 平均排名 + 效率维度）、<strong>会了</strong>（把跨数据集结果做成论文 Table 1）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜整合大表三要素</strong>:① 竖表（方法为行、数据集为列）② <strong>平均排名</strong>列（综合实力一目了然）③ 参数/FPS 列（效率卖点）。最优加粗。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>三数据集整合大表</strong>。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D123</summary><textarea data-note="d123" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d124" data-d="124"><header class="day-head"><span class="dnum">D124</span><h2 class="day-t">周五 · 主实验报告 + arXiv 跟踪</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天把三数据集的结果“讲成故事”（主实验报告），并跟进最新 arXiv 确保对比没漏新方法。</p>
+<p><strong>预期管理</strong>：今天把实验数字“讲成故事”（主实验报告≥1500字）+ 跟进 arXiv。提醒：报告不是把表读一遍（罗列数字），要有“为什么”（结果汇总→跨数据集分析→与SOTA对比→优劣讨论），劣势要诚实写（也是 Limitation 素材）；做实验这几个月一定有新论文，出了新 SOTA 要引用对比（说明你方向热，是好事），不跟进会被审稿人指“对比过时”。</p>
+</blockquote>
+</div><section class="slot" id="d124-am" data-d="124" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D124 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写《主实验完整报告》（≥1500 字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把三数据集结果汇成报告（结果汇总 + 跨数据集分析 + 与 SOTA 对比 + 优势/劣势讨论）——这是 Experiment 章的素材，也逼你把一堆数字“<strong>讲成有逻辑的故事</strong>”。光有表不够，要有“为什么”。</p>
+<ul>
+<li><strong>为什么“讲成故事”比“罗列数字”重要</strong>：一堆表格和数字是“原料”，不是“论文”。读者（审稿人）需要的是<strong>一个连贯的论证</strong>：“我的方法在三个数据集上都最优（结果）→ 提升主要来自我的某组件治了某痛点（机理）→ 在小目标数据集上提升尤其大（细分）→ 跨域迁移仍领先（泛化）→ 但在某类上仍有局限（诚实）”。<strong>把数字串成这样一条有因果、有层次的逻辑链，才叫“实验章”，而不是“数据堆”</strong>。写报告就是逼你现在就把这条逻辑想清楚、写出来，后面写论文 Experiment 章直接用。</li>
+<li><strong>报告的标准结构（照着写）</strong>:① <strong>结果汇总</strong>（三数据集你的方法 vs 最强 baseline，综合表现/平均排名）;② <strong>跨数据集分析</strong>（D121 的归因——在哪个数据集提升大/小、为什么，联系数据特性）;③ <strong>与 SOTA 对比</strong>（你相对当前最强方法的位置，含效率维度）;④ <strong>优劣势讨论</strong>（诚实写优势和局限）。≥1500 字，每个论断都带具体数字支撑。</li>
+<li><strong>劣势要诚实写——这是成熟的标志，也是 Limitation 的素材</strong>：很多新手回避写自己方法的不足，怕显得方法不行。<strong>恰恰相反</strong>：一篇好论文一定有 Limitation 章（诚实说明方法的边界）；你现在在报告里诚实分析“我的方法在 X 情况下提升有限/不如 baseline，因为 Y”，既显得你成熟、客观，又为论文的 Limitation 和 Future Work 准备了素材。<strong>审稿人信任“知道自己方法边界”的作者，远胜于“号称处处都好”的作者</strong>。</li>
+<li><strong>字数不够时补什么（不是灌水）</strong>：如果报告写不到 1500 字，不要靠重复或废话凑——而是去<strong>补充分析的深度</strong>：更细致的跨数据集归因、更具体的 per-class 讨论、对失败案例的分析、对效率优势的展开。<strong>这些是“补内容”而非“灌水”</strong>，让报告更有料，也让你对自己的结果理解更深。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>按结构写：三数据集结果汇总 → 跨数据集分析（D121 的归因）→ 与 SOTA 对比 → 优劣势讨论。</li>
+<li>≥1500 字，带具体数字。</li>
+<li><strong>劣势诚实写</strong>（这也是 Limitation 的素材）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>主实验报告（≥1500 字），有数据、有跨数据集分析、有与 SOTA 的对比、有诚实的优劣势讨论。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>只罗列数字</strong>（像把表读一遍）→ 要有分析与讨论；<strong>回避劣势</strong> → 诚实写（成熟的标志）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么组织?→ 按“结果是什么 → 为什么这样 → 和 SOTA 比如何 → 优劣”的线；字数不够?→ 补跨数据集分析与讨论（是补内容，不是灌水）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你把大规模实验<strong>写成了系统报告（讲成故事）</strong>。<strong>做了</strong>（主实验报告）、<strong>学了</strong>（结果→报告的组织、有“为什么”）、<strong>会了</strong>（把实验数字讲成有逻辑的故事）。</p>
+</div></section></section><section class="slot" id="d124-noon" data-d="124" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D124 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">读 2 篇最新 arXiv（确保对比不漏新方法）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（持续追踪 arXiv）</h4><div class="blk-b"><p>你做实验的这几个月，一定有新论文出来。若出了<strong>新 SOTA</strong>，你论文要引用并对比（这说明你方向热，是好事不是坏事）。不跟进的话，投稿时会被审稿人指“对比过时”。</p>
+<ul>
+<li><strong>为什么“出了新 SOTA”是好事而非坏事</strong>：新手看到自己方向出了更强的新方法会慌——“我还没投呢就被超越了”。<strong>但换个角度：你的方向有人持续投入、不断出新成果，恰恰证明这个方向是热点、是重要的、有受众的</strong>（冷门方向根本没人发新论文）。你只需在论文里引用这个新方法、加入对比、并说清你和它的差异（你的角度/卖点不同），反而显得你紧跟前沿。<strong>方向热是论文价值的加分项，别因为“被超越”而气馁</strong>。</li>
+<li><strong>为什么“不跟进”会出事</strong>：你投稿时，审稿人是这个方向的专家，他知道最新的工作。如果你的对比表里缺了最近半年的重要新方法，审稿人会直接质疑“作者对比过时、没跟上最新进展”——这是常见的拒稿理由。<strong>所以做实验期间要定期（如每周花半小时）扫一眼 arXiv 你方向的新论文</strong>，确保投稿时对比是最新的。这是低成本、高回报的习惯。</li>
+<li><strong>怎么处理新方法（决策）</strong>:① 如果新方法是<strong>强相关的新 SOTA</strong>（同任务、显著更强）→ 补进对比（开源就复现、没开源就引用其报告值并注明设置）;② 如果只是<strong>相关但不直接竞争</strong>→ 在 Related Work 里引用即可，不必补实验;③ 判断标准是“审稿人会不会觉得'你应该和它比'”。<strong>及时识别哪些必须对比、哪些只需引用</strong>，既保证对比完整，又不浪费时间在不必要的复现上。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>读 2 篇你方向最新 arXiv（差量阅读,~30min/篇）。</li>
+<li>判断是否有需要加入对比的新方法。</li>
+<li>记笔记 + 与你工作的差异点。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>2 篇 arXiv 笔记 + “是否需补对比”的明确判断。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p><strong>发现新 SOTA 就慌/想放弃</strong> → 引用+对比+强调差异即可；<strong>完全不跟进</strong> → 投稿被指对比过时。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定要不要补对比?→ 若它是你方向的<strong>强相关新 SOTA</strong>，就补（补跑或引用报告值）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你保持了对比的时效性。<strong>做了</strong>（arXiv 跟踪）、<strong>学了</strong>（对比要跟最新、新 SOTA 是机会不是威胁）、<strong>会了</strong>（及时识别需纳入的新方法）。</p>
+</div></section></section><section class="slot" id="d124-pm" data-d="124" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D124 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">若有新方法 → 补跑 baseline 对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>若有重要新方法，在主数据集上补跑它作为 baseline 加入对比（没开源则引用其报告值并注明设置差异）。让对比表既全又新。</p>
+<ul>
+<li><strong>补对比的两种方式（按情况选）</strong>:① <strong>新方法开源</strong>→ 在你的主数据集上<strong>复现它、跑出结果</strong>，作为一个新 baseline 行加入你的对比表（这是最有说服力的——同等条件下的公平对比）;② <strong>新方法没开源</strong>→ 直接<strong>引用它论文里报告的数值</strong>，但要<strong>注明“在其报告的设置下”</strong>（因为它的数据划分/协议可能和你不完全一致，不能完全公平比，要诚实标注这个差异）。两种方式都能让你的对比表跟上最新进展。</li>
+<li><strong>不必为每个新方法都复现（性价比判断）</strong>：复现一个新方法可能要花不少时间（配环境、调通、跑实验）。所以要判断：<strong>只对“强相关、可能被审稿人要求对比”的新 SOTA 才花力气复现</strong>；对相关性弱的，引用+讨论即可。<strong>别陷入“看到新方法就复现”的无底洞</strong>——你的时间有限，要花在刀刃上。引用其报告值（注明设置）在很多情况下已经够用。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>若需要，启动新方法的补跑（主数据集即可）。</li>
+<li>加入对比表。</li>
+<li>注明设置（尤其引用报告值时）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>新方法对比补齐（或确认无需补，并记录理由）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>新方法没开源硬复现失败浪费时间；引用报告值不注明设置差异。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>没开源?→ 引用其报告值并注明“在其报告设置下”；补跑来不及?→ 至少在文中讨论它。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你让对比更完整、更新。<strong>做了</strong>（补对比）、<strong>学了</strong>（补充最新 baseline 的两种方式：复现/引用）、<strong>会了</strong>（保持对比表完整且时效）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 主实验报告 ✅ arXiv 跟踪。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜把实验“讲成故事”（实验章四段式）</strong>:① 结果是什么（三数据集综合表现/平均排名）→ ② 为什么这样（机理：你的组件治了什么）→ ③ 和 SOTA 比如何（位置 + 效率维度）→ ④ 优劣势（诚实写局限）。每个论断带具体数字。<strong>光有表是“数据堆”，串成有因果的逻辑链才是“实验章”</strong>；劣势诚实写 = 成熟 + Limitation 素材。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D124</summary><textarea data-note="d124" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d125" data-d="125"><header class="day-head"><span class="dnum">D125</span><h2 class="day-t">周六 · （集中日）· 跨数据集迁移实验（加分项）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>今天做一个“加分实验”——跨数据集迁移（A 训 B 测）。它不是必需，但做了能让论文显得“考虑得很全”，审稿人好感度↑。重点学会<strong>看相对优势而非绝对值</strong>。</p>
+<p><strong>预期管理</strong>：今天做加分实验——跨数据集迁移（A训B测，评估泛化）。提醒：迁移设置下绝对分数通常明显下降（跨域本来就难），这是正常的——<strong>重点看你的方法相对 baseline 是否仍领先</strong>（相对优势），别盯绝对值。领先=泛化好（加分）；不领先=诚实写进 Limitation（也加分）。选类别可对应的两个数据集，否则评测无意义。</p>
+</blockquote>
+</div><section class="slot" id="d125-am" data-d="125" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D125 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">跨数据集迁移实验（A 训 B 测）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（迁移实验是加分项）</h4><div class="blk-b"><ul>
+<li><strong>在数据集 A 上训练 → 在数据集 B 上测试</strong>，评估<strong>泛化性</strong>（模型没见过 B 的训练数据，能做多好）。</li>
+<li><strong>不是所有论文都做，但做了显著提升“完整度”</strong>——审稿人会觉得“作者考虑得很全面”。时间不够可跳过，但建议做。</li>
+<li><strong>心理预期</strong>：迁移设置下<strong>绝对分数通常会明显下降</strong>（跨域本来就难），这正常；<strong>重点看你的方法相对 baseline 是否仍有优势</strong>。</li>
+<li><strong>为什么迁移实验能“加分”</strong>：常规实验是“在每个数据集上分别训练和测试”，而迁移实验测的是“模型在没见过的新数据上能不能用”——这更接近<strong>真实部署场景</strong>（你训好一个模型，拿去用在新地区/新传感器的数据上）。做了迁移实验，说明你考虑了方法的<strong>实用泛化性</strong>，而不只是在标准数据集上刷分。审稿人会觉得“这作者想得很全面、很实际”，好感度提升。这是一个性价比高的加分项（用已训好的权重直接测，不用重新训练）。</li>
+<li><strong>为什么“绝对分会降”是正常的、不必恐慌</strong>：跨域（在A上训、在B上测）本质上违反了“训练和测试同分布”的假设——B 的数据和 A 不同（分辨率、场景、传感器），模型在 A 上学的东西不完全适用于 B，所以分数下降是<strong>必然的、符合预期的</strong>。新手看到迁移分数比正常训练低一大截会以为方法崩了——错。<strong>跨域掉点是这个设置本身决定的，不是你方法的问题</strong>。</li>
+<li><strong>正确的解读方式：看相对优势，不看绝对值</strong>：迁移设置下，你的方法和 baseline <strong>都会掉点</strong>（都面对跨域难题）。关键看：<strong>在都掉点的情况下，你的方法是否仍然领先 baseline?</strong> 如果你 49.2、baseline 45.1（都比正常训练低，但你仍 +4.1），说明<strong>你的方法泛化性更好</strong>——这是很有价值的结论（你的方法不只在见过的数据上好，在新数据上也更robust）。如果你的方法迁移后不再领先，就诚实写进 Limitation（也是诚实加分）。<strong>永远比相对优势，不盯绝对值</strong>。</li>
+<li><strong>设计要点：类别要可对应</strong>:A 训 B 测，前提是 A 和 B 的<strong>类别能对应</strong>（否则模型输出的类别在 B 上没有对应的真值，评测无意义）。选两个类别体系相近的数据集，或只评估它们的共有类别。这是迁移实验有效的前提。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>设计迁移实验：A 训 B 测，你的方法 vs baseline,<strong>选类别可对应的两个数据集</strong>（否则评测无意义）。</li>
+<li>启动（用 A 训好的权重直接在 B 的测试集上评估）。</li>
+<li>记录设置。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>迁移实验设计清晰（选了类别可对应的 A、B）+ 启动。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>两数据集类别不一致没处理</strong> → 评测无意义。</li>
+<li><strong>看到迁移绝对分低就以为方法差</strong> → 跨域本难，<strong>看相对优势</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>两数据集类别不一致?→ 选可对应的类、或只评共有类。迁移掉点很大?→ 正常，作为“跨域仍有挑战”的讨论点（也是 Limitation）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>跨数据集迁移评估泛化</strong>。<strong>做了</strong>（迁移实验启动）、<strong>学了</strong>（迁移实验的价值与设计、绝对值会降是正常的）、<strong>会了</strong>（设计 A 训 B 测的泛化测试）。</p>
+</div></section></section><section class="slot" id="d125-noon" data-d="125" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D125 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">跑通 + 记录结果</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>跑迁移实验，记录“你的方法 vs baseline 在迁移设置下”的结果——<strong>重点算“相对优势”</strong>（你比 baseline 高多少），而不是盯绝对值。<strong>为什么“相对优势”才是迁移实验的正确读法</strong>：迁移设置下你和 baseline 都掉点（都面对跨域难题），所以绝对分都低——但如果你掉得比 baseline 少、仍然领先，这恰恰说明<strong>你的方法泛化性更好（在没见过的数据上更 robust）</strong>，这是很有价值的结论。把它写成“在跨域迁移设置下，我们的方法相对 baseline 仍保持 +X 的优势，表明更强的泛化能力”——这是论文的加分点。<strong>永远比相对优势，绝对值只是背景</strong>。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>跑迁移评估。</li>
+<li>记录你的方法 vs baseline 的迁移结果。</li>
+<li>算相对优势(Δ)。</li>
+</ol>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># 跨数据集迁移评估：用 A(数据集1)训好的权重，直接在 B(数据集2)的测试集上评估</span>
+<span class="c1"># 不重新训练，只 eval —— 所以很省，是性价比高的加分实验</span>
+python<span class="w"> </span>scripts/eval.py<span class="w"> </span>--cfg<span class="w"> </span>cfg/d1_ours.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--ckpt<span class="w"> </span>work_dirs/D1-ours-s0/best.pth<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--eval-dataset<span class="w"> </span>D2<span class="w"> </span>--eval-only<span class="w">      </span><span class="c1"># 关键：权重来自D1，测试集换成D2</span>
+<span class="c1"># 对 baseline 做同样的事（D1训→D2测），比&quot;相对优势&quot;</span>
+<span class="c1"># 注意：只评估 A、B 类别可对应的部分，否则评测无意义</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 相对优势 = 你的方法迁移分 - baseline迁移分（绝对值低没关系，看这个差）</span>
+<span class="n">ours_transfer</span><span class="p">,</span> <span class="n">base_transfer</span> <span class="o">=</span> <span class="mf">49.2</span><span class="p">,</span> <span class="mf">45.1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;迁移相对优势 Δ = </span><span class="si">{</span><span class="n">ours_transfer</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">base_transfer</span><span class="si">:</span><span class="s2">+.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># +4.1 → 你的方法泛化更好</span>
+<span class="c1"># 解读：绝对分都比正常训练低（跨域本难），但你仍领先 4.1 → 泛化性优势，加分项</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>迁移实验结果（如“Ours 49.2 vs baseline 45.1,+4.1”——绝对值低但相对仍领先）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只看绝对值低就否定（跨域本难，看相对优势）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>你的方法迁移也无优势?→ 诚实记并分析原因（写进 Limitation，这本身也是诚实加分）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你拿到了迁移泛化证据并学会正确解读。<strong>做了</strong>（迁移结果）、<strong>学了</strong>（看相对优势而非绝对值）、<strong>会了</strong>（评估并解读跨域泛化）。</p>
+</div></section></section><section class="slot" id="d125-pm" data-d="125" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D125 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">更新整合大表（加入迁移结果）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把迁移实验作为<strong>附加部分</strong>加入整合大表/报告（独立小节或 supplementary），丰富论文证据链。</p>
+<ul>
+<li><strong>为什么迁移结果要“作为附加部分”而非塞进主表</strong>：迁移实验是加分项、是补充证据，不是论文的主线（主线是三数据集上的正常对比）。把它作为一个<strong>独立小节</strong>（或放 supplementary 补充材料）呈现，既丰富了论文的证据链（显示你考虑了泛化），又不会喧宾夺主、打乱主实验的叙事。<strong>主次分明</strong>：主表是三数据集正常对比，迁移是“此外，我们还验证了跨域泛化”的加分内容。</li>
+<li><strong>迁移结果好不好都要诚实呈现</strong>:① 如果迁移结果好（你的方法跨域仍领先）→ 这是泛化性强的有力证据，大方展示;② 如果迁移结果一般（你的方法跨域不再明显领先）→ <strong>也要诚实写，并作为 Limitation/Future Work</strong>（&quot;我们的方法在跨域设置下优势减弱，这指向未来在域适应方向的改进空间&quot;）。<strong>藏起不好的迁移结果是不诚实的；诚实呈现+分析，反而显得你客观、成熟、了解方法边界</strong>——这本身也是加分。证据链的价值在于完整和诚实，不在于&quot;每个结果都漂亮&quot;。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把迁移结果以独立小节/小表加入。</li>
+<li>在报告里写一段迁移分析。</li>
+<li>诚实呈现（含相对优势/局限）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>整合大表/报告含迁移结果与一段分析。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>迁移结果不好就藏着 → 诚实呈现 + 分析，反而显成熟。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知放哪?→ 作为 Experiment 的补充小节，或放 supplementary。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你丰富了实验完整度。<strong>做了</strong>（更新整合大表）、<strong>学了</strong>（加分实验入证据链）、<strong>会了</strong>（把泛化证据纳入论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜迁移实验解读</strong>：跨域绝对分下降是常态；<strong>看你的方法相对 baseline 是否仍领先</strong>（相对优势）。领先=泛化好（加分）；不领先=诚实写进 Limitation（也加分）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 迁移实验结果。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D125</summary><textarea data-note="d125" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d126" data-d="126"><header class="day-head"><span class="dnum">D126</span><h2 class="day-t">周日 · （复盘日）· W18 复盘 + 实验矩阵更新</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾：复盘（沉淀多数据集管理经验）、用矩阵查漏、规划消融周。</p>
+<p><strong>预期管理</strong>:W18 收尾：周复盘（沉淀多数据集管理经验）+ 用矩阵查漏 + 规划 W19 消融周。提醒：用实验矩阵核对 63 组是否齐全（少跑了哪组一眼可见，立即补）；周复盘重点记接新数据集的坑和跨数据集分析的方法，记你的方法三数据集综合表现（平均排名）。W19 是消融周，可复用 W12 消融框架省力。</p>
+</blockquote>
+</div><section class="slot" id="d126-am" data-d="126" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D126 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W18 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“多数据集实验管理”经验（接新数据集的坑、跨数据集分析的方法）；记你的方法在三数据集的综合表现（平均排名）。<strong>为什么这周的复盘要重点沉淀“多数据集管理”</strong>：接新数据集的坑（标注解析、类别数、格式统一）、跨数据集分析的方法（归因到数据特性）、整合大表的规范——这些经验你<strong>下一篇论文还会用到</strong>（几乎每篇都要多数据集验证）。现在花十分钟把“这周哪些地方折腾、怎么解决的”记清楚，下次做多数据集实验就能直接复用，不必重新踩坑。复盘的价值就在于把一次性的经验变成可复用的资产。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（完成度/卡点/对策/健康）。</li>
+<li>记多数据集管理的卡点 + 对策。</li>
+<li>记三数据集综合表现（平均排名）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W18 周报（卡点+对策具体）+ 三数据集综合表现记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周最折腾的环节（多半是接数据集 3 或整合大表）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你复盘了主实验第二周。<strong>做了</strong>（W18 周报）、<strong>学了</strong>（多数据集复盘）、<strong>会了</strong>（沉淀多数据集实验经验）。</p>
+</div></section></section><section class="slot" id="d126-noon" data-d="126" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D126 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">更新实验矩阵（标记已完成）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把矩阵里所有已完成实验打勾，统计完成比例，<strong>确认主实验是否齐全</strong>（矩阵帮你查缺口——63 组里少跑了哪组一眼可见）。</p>
+<ul>
+<li><strong>为什么“查缺口”是矩阵最大的价值之一</strong>:63 组实验跑了一周多，你很可能记不清“到底每一组都跑了没”——某个 baseline 的某个 seed 可能因为某次 OOM 中断了没补、某个数据集的某个方法忘了跑。<strong>如果投稿前才发现某组缺失，补跑可能来不及</strong>（数据集大、训练慢）。而矩阵让你一眼看出“63 组里完成了哪些、缺哪些”，现在（W18末）查出来，还有充足时间补。<strong>这就是当初建矩阵的核心价值——它是你大规模实验的“完整性检查表”</strong>。</li>
+<li><strong>“完整”对论文的意义</strong>：论文的对比表如果某个数据集上缺了某个方法的结果（留空），审稿人会觉得“不严谨、不完整”。<strong>主实验必须是齐全的矩阵</strong>（每个数据集×每个方法×足够seed都有结果），这样你的对比才完整、结论才站得住。所以本周末用矩阵做一次彻底的完整性核对，把漏的补上，确保进入下一阶段（消融、写作）时主实验数据是完备的——别让一个遗漏的格子在投稿前给你制造麻烦。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>矩阵里把完成项标记。</li>
+<li>统计完成比例（如 58/63）。</li>
+<li>找出漏跑的组补上。</li>
+</ol>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 用脚本扫一遍矩阵，自动找出&quot;应跑但没跑&quot;的组（63组里漏哪个一眼可见）</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;D1&quot;</span><span class="p">,</span><span class="s2">&quot;D2&quot;</span><span class="p">,</span><span class="s2">&quot;D3&quot;</span><span class="p">];</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;base1&quot;</span><span class="p">,</span><span class="s2">&quot;base2&quot;</span><span class="p">,</span><span class="s2">&quot;base3&quot;</span><span class="p">,</span><span class="s2">&quot;base4&quot;</span><span class="p">,</span><span class="s2">&quot;base5&quot;</span><span class="p">,</span><span class="s2">&quot;base6&quot;</span><span class="p">,</span><span class="s2">&quot;ours&quot;</span><span class="p">];</span> <span class="n">seeds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">-s</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">d</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span> <span class="n">methods</span><span class="p">,</span> <span class="n">seeds</span><span class="p">)}</span>  <span class="c1"># 应有63组</span>
+<span class="n">done</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;experiments/done_list.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>   <span class="c1"># 已完成的实验ID(从矩阵导出)</span>
+<span class="n">missing</span> <span class="o">=</span> <span class="n">expected</span> <span class="o">-</span> <span class="n">done</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;完成 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">done</span><span class="p">)</span><span class="si">}</span><span class="s2">/63，缺 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2"> 组：&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">missing</span><span class="p">)[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="c1"># 把 missing 里的组补跑，确保主实验无遗漏</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>实验矩阵更新（完成项已标），无遗漏（或已列出待补清单）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>有漏跑的没发现；不更新状态导致矩阵失真。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>发现漏跑?→ 立即补；不确定齐没齐?→ 数一下 63 组完成了多少。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你用矩阵确认了主实验完整性。<strong>做了</strong>（矩阵更新）、<strong>学了</strong>（用矩阵查缺口）、<strong>会了</strong>（确保大规模实验无遗漏）。</p>
+</div></section></section><section class="slot" id="d126-pm" data-d="126" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D126 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">计划 W19（消融周）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>W19 = 8 类消融全面深化。提前排好（复用 W12 消融框架省力，8 类错峰跑）。</p>
+<ul>
+<li><strong>为什么消融(ablation)是论文不可或缺的一环</strong>：主实验证明了“我的方法整体上好”，但审稿人还会问“<strong>你的方法里那么多设计，到底是哪个组件起了作用？</strong>”——消融实验就是回答这个的。它逐个去掉/替换你方法的各个组件，看每个组件对最终效果的贡献。<strong>没有消融，审稿人无法确信你的提升来自你声称的创新点（而非别的偶然因素）</strong>，论文很可能被要求补充。所以 W19 专门做系统消融，是把你的方法“论证完整”的关键一步。</li>
+<li><strong>W19 提前规划的要点</strong>:① <strong>复用 W12 的消融框架</strong>（你 M4 时搭过消融的代码框架，现在直接用，省力）;② <strong>8 类消融错峰跑</strong>（消融实验组数也不少，要像主实验一样用矩阵管理、错峰调度）;③ 目标是产出“完整消融表 + 消融故事（每个组件贡献多少、为什么）”。提前在本周末把 W19 的任务顺序和 GPU 排程排好，下周就能高效执行——这种“实验周之间提前规划”的习惯，让你的研究节奏紧凑不空转。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制定 W19 计划（设计 8 类 → 全跑 → 完整消融表 + 故事 → 最终方法 + Proposal v3）。</li>
+<li>错峰排 8 类消融的 GPU 时间。</li>
+<li>标注“复用 W12 消融框架”。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W19 计划（任务 + 排程）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>8 类消融排太满无缓冲；不复用框架重造轮子。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>时间紧 → 错峰排；复用 W12 框架。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你规划了消融周。<strong>做了</strong>（W19 计划）、<strong>学了</strong>（承接排程、复用框架）、<strong>会了</strong>（规划系统消融）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W18 ✅ 实验矩阵更新。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W18 累计交付</h2><p>数据集 2/3 完整大表(3-seed)+ 可视化、<strong>三数据集整合大表（竖表 + 平均排名 + 参数/FPS）</strong>、主实验完整报告（≥1500 字）、跨数据集差异分析、跨数据集迁移实验结果、W18 周报、实验矩阵更新。本周你把主实验从“单数据集好”推到了“多数据集都好”——产出了论文最重要的 Table 1（三数据集整合，平均排名让你的综合优势一目了然），并学会了把跨数据集的表现差异<strong>变成 Discussion 的金矿</strong>(归因到数据特性=学术深度)。至此你的方法在三个数据集上的有效性、泛化性都有了扎实的实证支撑，主实验主体完成。</p>
+</section><section class="wtail"><h2>🎓 W18 你“长出来”的能力清单</h2><ul>
+<li>多数据集主实验收尾 + 三数据集整合大表（论文主表）</li>
+<li>接入新数据集三步一验（改路径/类别/解析分支 + 看样本）</li>
+<li>跨数据集差异分析（归因到分辨率/类别/尺度/场景）</li>
+<li>跨数据集迁移实验（加分，看相对优势）</li>
+<li>用实验矩阵确认大规模实验完整性</li>
+<li><strong>把实验“讲成故事”</strong>（实验章四段式：结果→机理→对比→优劣），而非罗列数字；劣势诚实写=成熟+Limitation素材</li>
+<li><strong>核心心法</strong>：把“换数据集掉点”从恐慌变成分析素材；“先排bug（过拟合测试+print+查梯度）再下科学结论”，不冤枉好idea也不误报假结论</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D126</summary><textarea data-note="d126" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W18 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例</h2>
+<h3>范例 A — 三数据集整合大表</h3>
+<figure class="code" data-lang="markdown"><pre><code>| 方法 | D1 | D2 | D3 | 平均排名↓ | 参数 | FPS |
+|---|---|---|---|---|---|---|
+| baseline1 | 75.0±0.3 | 67.0±0.4 | 70.0±0.3 | 5.7 | 36M | 25 |
+| baseline2(最强) | 76.3±0.2 | 68.1±0.3 | 71.0±0.3 | 2.3 | 41M | 19 |
+| ...(共6个) | ... | ... | ... | ... | ... | ... |
+| <span class="gs">**Ours**</span> | <span class="gs">**78.1±0.3**</span> | <span class="gs">**69.4±0.4**</span> | <span class="gs">**72.6±0.3**</span> | <span class="gs">**1.0**</span> | 39M | 21 |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 B — 跨数据集 / 迁移分析（Discussion 素材）</h3>
+<figure class="code" data-lang="markdown"><pre><code>跨数据集:D1 +3.1 vs D2 +1.4 —— D1 小目标占比高(我方法多尺度模块的强项),D2 大目标为主→提升空间小。
+迁移(D1训D2测):Ours 49.2 vs baseline 45.1(+4.1)。绝对值低(跨域本难),但相对仍领先 → 泛化性优于 baseline。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 — 三数据集整合表（含平均排名）</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">integrated_table</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">datasets</span><span class="p">):</span>   <span class="c1"># data={&quot;method&quot;:{&quot;D1&quot;:[3seed],...}}</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="p">{</span><span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">d</span><span class="p">]))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">}</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">}</span>
+    <span class="c1"># 每个数据集内排名(1=最好),再对各数据集求平均排名</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="p">{</span><span class="n">m</span><span class="p">:</span> <span class="mf">0.0</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">data</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">means</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">d</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">ranks</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">:</span>
+        <span class="n">ranks</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;| 方法 | &quot;</span> <span class="o">+</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; | 平均排名↓ |&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;|&quot;</span> <span class="o">+</span> <span class="s2">&quot;---|&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ranks</span><span class="p">[</span><span class="n">x</span><span class="p">]):</span>       <span class="c1"># 按平均排名升序(最好在上)</span>
+        <span class="n">cells</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">means</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">d</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">cells</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">ranks</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">integrated_table</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">&quot;baseline1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;D1&quot;</span><span class="p">:[</span><span class="mi">75</span><span class="p">,</span><span class="mf">74.7</span><span class="p">,</span><span class="mf">75.3</span><span class="p">],</span> <span class="s2">&quot;D2&quot;</span><span class="p">:[</span><span class="mi">67</span><span class="p">,</span><span class="mf">66.7</span><span class="p">,</span><span class="mf">67.3</span><span class="p">],</span> <span class="s2">&quot;D3&quot;</span><span class="p">:[</span><span class="mi">70</span><span class="p">,</span><span class="mf">69.8</span><span class="p">,</span><span class="mf">70.2</span><span class="p">]},</span>
+         <span class="s2">&quot;baseline2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;D1&quot;</span><span class="p">:[</span><span class="mf">76.3</span><span class="p">,</span><span class="mf">76.1</span><span class="p">,</span><span class="mf">76.5</span><span class="p">],</span> <span class="s2">&quot;D2&quot;</span><span class="p">:[</span><span class="mf">68.1</span><span class="p">,</span><span class="mf">67.9</span><span class="p">,</span><span class="mf">68.3</span><span class="p">],</span> <span class="s2">&quot;D3&quot;</span><span class="p">:[</span><span class="mi">71</span><span class="p">,</span><span class="mf">70.8</span><span class="p">,</span><span class="mf">71.2</span><span class="p">]},</span>
+         <span class="s2">&quot;Ours&quot;</span><span class="p">:</span>      <span class="p">{</span><span class="s2">&quot;D1&quot;</span><span class="p">:[</span><span class="mf">78.1</span><span class="p">,</span><span class="mf">77.9</span><span class="p">,</span><span class="mf">78.3</span><span class="p">],</span> <span class="s2">&quot;D2&quot;</span><span class="p">:[</span><span class="mf">69.4</span><span class="p">,</span><span class="mf">69.1</span><span class="p">,</span><span class="mf">69.7</span><span class="p">],</span> <span class="s2">&quot;D3&quot;</span><span class="p">:[</span><span class="mf">72.6</span><span class="p">,</span><span class="mf">72.4</span><span class="p">,</span><span class="mf">72.8</span><span class="p">]}},</span>
+        <span class="p">[</span><span class="s2">&quot;D1&quot;</span><span class="p">,</span><span class="s2">&quot;D2&quot;</span><span class="p">,</span><span class="s2">&quot;D3&quot;</span><span class="p">])</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>：输出竖表 + 自动算的平均排名，你的方法应排在最上（平均排名最小）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D120</strong>：① 各数据集大表为什么要统一格式（为后面什么铺路）？② 接入新数据集“三步一验”是什么？</li>
+<li><strong>D121</strong>：① 跨数据集表现不同该归因到哪些数据特性（四问）？② 为什么说“换数据集掉点”是金矿而非灾难？</li>
+<li><strong>D122</strong>：① 为什么先跑通 seed 1 再铺开 3 个？② 数据集 3 上效果差先排查什么（三步排bug）？</li>
+<li><strong>D123</strong>：① 整合大表为什么推荐竖表 + 平均排名 + 效率维度？平均排名 1.0 说明什么？</li>
+<li><strong>D124</strong>：① 做实验期间出了新 SOTA 怎么办（为什么是好事）？② 主实验报告为什么不能只罗列数字？</li>
+<li><strong>D125</strong>：① 迁移实验（A 训 B 测）证明什么？② 为什么看相对优势而非绝对值？迁移结果不好怎么办？</li>
+<li><strong>D126</strong>：① 实验矩阵在收尾阶段帮你查什么？为什么投稿前发现缺口才补可能来不及？</li>
+<li><strong>综合</strong>：① 本周核心心法“把换数据集掉点从恐慌变成分析素材”具体怎么操作？② “先排bug再下结论”的三步排查是什么（过拟合测试/print/查梯度）？③ 为什么“高效”（参数/FPS）是你单卡路线的卖点而非示弱？（提示：把“精度劣势”框成“效率-精度权衡优势”）</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整合大表不可比</td>
+<td>各数据集协议/设置不同</td>
+<td>统一设置/评测脚本；注明</td>
+</tr>
+<tr>
+<td>平均排名算错</td>
+<td>排名方向反了</td>
+<td>指标越高排名越靠前(1=最好)</td>
+</tr>
+<tr>
+<td>接数据集 3 框/掩膜全偏</td>
+<td>标注解析错</td>
+<td>加解析分支；看样本验证；核对坐标系</td>
+</tr>
+<tr>
+<td>数据集 3 上方法效果差</td>
+<td>bug/数据问题误判为方法差</td>
+<td>先小数据过拟合排 bug、看样本确认读对</td>
+</tr>
+<tr>
+<td>迁移实验类别对不上</td>
+<td>两数据集类别不同</td>
+<td>选可对应类别/只评共有类</td>
+</tr>
+<tr>
+<td>新 SOTA 没开源补不了对比</td>
+<td>无代码</td>
+<td>引用报告值，注明设置差异</td>
+</tr>
+<tr>
+<td>漏跑某些实验组</td>
+<td>没核对矩阵</td>
+<td>用矩阵查缺口并补</td>
+</tr>
+<tr>
+<td>主实验报告像流水账</td>
+<td>只罗列数字</td>
+<td>加跨数据集分析 + 优劣势讨论</td>
+</tr>
+<tr>
+<td>各数据集大表格式不一</td>
+<td>没从一开始统一表头</td>
+<td>复制数据集1表头改数字；统一列/小数位/加粗规则</td>
+</tr>
+<tr>
+<td>换数据集后 loss 量级变了以为坏了</td>
+<td>不同数据 loss 量级本就不同</td>
+<td>看趋势（是否稳步降）不看绝对量级</td>
+</tr>
+<tr>
+<td>三个 seed 同时崩</td>
+<td>没先跑通 seed 1 就铺开</td>
+<td>先验证 seed 1 正常再放量（小步验证再放量）</td>
+</tr>
+<tr>
+<td>迁移分数低就否定方法</td>
+<td>跨域绝对分下降是常态</td>
+<td>看相对优势（你 vs baseline 的差），不看绝对值</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>判断结果可不可信</h4><p>这一周会产生需要判断"有没有提升"的数字。<b>少于 3 个 seed 不下结论；看同 seed 的<u>配对差</u>，不要只看 mean±std</b>——只看边际方差会误杀真正有效的方法。判定工具见 <a href="w9.html">W9–W12</a>。</p><h4>接一个新数据集</h4><p>五步：<b>先 head 看标注长什么样</b>→查框架要什么格式→写转换脚本→<b>用可视化验证转换对不对</b>（转错不会报错）→小子集跑通再上全量。</p></section>
+<div class="pager"><a class="prev" href="w17.html"><span class="dir">← 上一篇</span><span class="nm">W17 主实验 Round 1（数据集 1）</span></a><a class="next" href="w19.html"><span class="dir">下一篇 →</span><span class="nm">W19 消融全面深化（8 类）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d120">D120 周一</a><a class="sub" href="#d120-am">上午 数据集 2 你的方法 seed </a><a class="sub" href="#d120-noon">中午 数据集 2 可视化对比图（5 张</a><a class="sub" href="#d120-pm">晚上 数据集 3 数据准备 + con</a><a href="#d121">D121 周二</a><a class="sub" href="#d121-am">上午 数据集 3 baseline 1</a><a class="sub" href="#d121-noon">中午 监控数据集 3 baseline</a><a class="sub" href="#d121-pm">晚上 分析数据集 1 vs 2 的结果</a><a href="#d122">D122 周三</a><a class="sub" href="#d122-am">上午 数据集 3 你的方法启动(see</a><a class="sub" href="#d122-noon">中午 监控 + 调试</a><a class="sub" href="#d122-pm">晚上 等结果（并行准备整合大表模板）</a><a href="#d123">D123 周四</a><a class="sub" href="#d123-am">上午 数据集 3 结果 → 完整大表</a><a class="sub" href="#d123-noon">中午 数据集 3 可视化（5 张）</a><a class="sub" href="#d123-pm">晚上 三数据集整合大表</a><a href="#d124">D124 周五</a><a class="sub" href="#d124-am">上午 写《主实验完整报告》（≥1500</a><a class="sub" href="#d124-noon">中午 读 2 篇最新 arXiv（确保</a><a class="sub" href="#d124-pm">晚上 若有新方法 → 补跑 basel</a><a href="#d125">D125 周六</a><a class="sub" href="#d125-am">上午 跨数据集迁移实验（A 训 B 测</a><a class="sub" href="#d125-noon">中午 跑通 + 记录结果</a><a class="sub" href="#d125-pm">晚上 更新整合大表（加入迁移结果）</a><a href="#d126">D126 周日</a><a class="sub" href="#d126-am">上午 W18 周复盘</a><a class="sub" href="#d126-noon">中午 更新实验矩阵（标记已完成）</a><a class="sub" href="#d126-pm">晚上 计划 W19（消融周）</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

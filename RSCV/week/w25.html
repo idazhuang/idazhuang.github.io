@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="25">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W25 · 投稿前最终打磨 + 加分补实验 + 竞赛冲刺 — · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M7 打磨 + 正式投稿</span><span>·</span><span>Week 25</span><span>·</span><span>D169–D175</span></div><h1 class="title">投稿前最终打磨 + 加分补实验 + 竞赛冲刺 —— 把论文里每一个数字都“审计”一遍</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="169" data-k="am" title="D169 上午段"></i><i data-d="169" data-k="noon" title="D169 中午段"></i><i data-d="169" data-k="pm" title="D169 晚上段"></i></span><span class="sday"><i data-d="170" data-k="am" title="D170 上午段"></i><i data-d="170" data-k="noon" title="D170 中午段"></i><i data-d="170" data-k="pm" title="D170 晚上段"></i></span><span class="sday"><i data-d="171" data-k="am" title="D171 上午段"></i><i data-d="171" data-k="noon" title="D171 中午段"></i><i data-d="171" data-k="pm" title="D171 晚上段"></i></span><span class="sday"><i data-d="172" data-k="am" title="D172 上午段"></i><i data-d="172" data-k="noon" title="D172 中午段"></i><i data-d="172" data-k="pm" title="D172 晚上段"></i></span><span class="sday"><i data-d="173" data-k="am" title="D173 上午段"></i><i data-d="173" data-k="noon" title="D173 中午段"></i><i data-d="173" data-k="pm" title="D173 晚上段"></i></span><span class="sday"><i data-d="174" data-k="am" title="D174 上午段"></i><i data-d="174" data-k="noon" title="D174 中午段"></i><i data-d="174" data-k="pm" title="D174 晚上段"></i></span><span class="sday"><i data-d="175" data-k="am" title="D175 上午段"></i><i data-d="175" data-k="noon" title="D175 中午段"></i><i data-d="175" data-k="pm" title="D175 晚上段"></i></span></div></div>
+
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>:M6 你的论文已经打磨到“可投稿”质量(v1.4)。M7 是<strong>投稿月</strong>，本周做<strong>投稿前的最后打磨</strong>——核心新动作是 <strong>“数字审计”</strong>（论文里每一个数字，都必须和实验日志/代码跑出来的完全一致），再加几个<strong>加分补实验</strong>（尤其“少数据也有效”的数据量曲线，贴合你小样本/高效的发力方向），竞赛继续冲刺（本周大招：5 模型差异化 Ensemble + WBF）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：论文数字 100% 准确 + 补齐加分实验，达到“可以放心点 Submit”的状态；竞赛继续提分。
+<strong>先给你打个预防针</strong>：很多人觉得“论文都写完了，投稿前就是走个形式”——<strong>大错特错</strong>。投稿前的数字审计、最后通读、检查清单，是拦截“会被直接 reject 的低级硬伤”的最后一道关。<strong>论文里数字对不上，是审稿人最容易抓、也最致命的硬伤之一</strong>（你 W19 删过组件、改过方法，数字变过好几轮，极易出现“正文写旧数字、表格是新数字”的不一致）。本周把这些低级风险一次性堵死。
+<em>（注：你计划里 M7 标题写 W25–W28，但正文实际是 W25–W27 三周，本带教遵循正文结构。）</em>
+<strong>本周精力怎么分配</strong>：论文侧烧脑的是“数字审计”（细致核对，不能错）和“加分补实验的设计”（补什么最有卖点）；竞赛侧是“理解 5 模型 Ensemble + WBF 的原理 + 复用已训模型”。教学按“双线”组织，每天上午论文、中午晚上竞赛/补实验。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d169" data-d="169"><header class="day-head"><span class="dnum">D169</span><h2 class="day-t">周一 · 数字审计（论文数字 vs 实验日志逐一交叉验证）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>投稿前最关键的一道关：把论文里每一个数字，和实验日志/代码跑出来的逐一核对——数字对不上会被直接 reject。</p>
+<p><strong>预期管理</strong>:M7 投稿月开始，本周做投稿前最后打磨。今天做“数字审计”（论文↔实验日志↔代码三处数字逐一交叉验证）。提醒：<strong>数字不一致是会被直接 reject 的致命硬伤</strong>——你 W19 删过组件、改过方法，数字变过好几轮，极易出现“正文写旧数字、表格是新数字”；不只核对表格，正文里散落的“我们提升了X%”这种数字也要核；数字太多手核易漏，写个小脚本从日志/LaTeX源码自动比对。</p>
+</blockquote>
+</div><section class="slot" id="d169-am" data-d="169" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D169 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">建立“数字清单”：列出论文里所有数字及其来源</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么数字审计是投稿前的头等大事）</h4><div class="blk-b"><ul>
+<li><strong>数字错误是论文的致命伤</strong>：如果审稿人（或读者复现时）发现你论文里写的数字，和你代码/checkpoint 实际跑出来的不一致，<strong>论文很可能被直接 reject</strong>——因为这动摇了审稿人对你<strong>全部结果</strong>的信任（一个数字假，其他的是不是也假?）。这不是“小错误”，是关乎可信度的硬伤。</li>
+<li><strong>为什么你的论文特别容易有数字不一致</strong>：回想你这一路——M5 你删过无效组件、改过方法（数字变了）、补跑过最终方法（数字又变了）;M6 你据 mock review 补过对比、改过实验（数字再变）。<strong>经过这么多轮迭代，论文里极易残留“旧数字”</strong>：比如 Abstract 里写的提升幅度是早期版本的、某个表格更新了但正文引用它的地方没改、Intro 贡献列表的数字和 Experiment 表对不上。这些“历史遗留的旧数字”就是定时炸弹。</li>
+<li><strong>数字审计 = 给论文的所有数字做一次“全面体检”</strong>：逐个表格、逐个正文引用，核对每个数字是否等于最终实验/代码跑出来的真实值。<strong>目标：论文里 100% 的数字都能在实验日志里找到对应来源，且正文数字 = 表格数字 = 日志数字，三处完全一致</strong>。</li>
+<li><strong>和“实验可复现”的关系</strong>：你 W19 归档了实验日志（config/seed/命令/结果）——那是数字的“唯一可信来源”。数字审计就是拿论文里的每个数字，回到实验日志去核对。<strong>实验日志是“事实”，论文里的数字必须忠实于这个事实</strong>。</li>
+<li><strong>数字审计也是对你诚信的保护</strong>：有时数字不一致不是造假，只是迭代中的疏忽（忘了同步旧数字）。但<strong>审稿人无法区分“疏忽”和“造假”——他看到的就是“数字对不上”</strong>，后果一样严重（质疑你全部结果）。所以数字审计不只是“改错”，更是<strong>保护你的学术诚信不被误解</strong>：确保你呈现的每个数字都经得起核对，审稿人复现时能对上，你的工作才可信、可立得住。这对一个要走学术路的人是底线。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>通读论文，把<strong>所有出现的数字</strong>列成一张清单（Abstract、Intro 贡献、Experiment 各表、正文里的“提升 X%”、Conclusion 的数字……一个不漏）。</li>
+<li>给每个数字标注<strong>它应该来自哪个实验</strong>（哪个 config/哪张日志表）。</li>
+<li>先建清单、不急着改——穷举所有数字及其来源，下一步再逐一核对。</li>
+</ol>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># 从 LaTeX 源码里 grep 出所有数字（辅助建清单，别漏正文散落的数字）</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="n">tex</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;paper/main.tex&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># 匹配形如 78.5 / 1.3% / 21.4 FPS 等数字（粗匹配，人工再筛）</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+\.\d+%?&#39;</span><span class="p">,</span> <span class="n">tex</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;论文里出现的数字共 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="si">}</span><span class="s2"> 处（含重复）：&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;× 出现&quot;</span><span class="p">,</span> <span class="n">nums</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="s2">&quot;次&quot;</span><span class="p">)</span>
+<span class="c1"># 输出后人工核对：每个数字来自哪个实验？正文/表格/摘要里是否一致？</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张“数字清单”——论文里每个数字 + 它的来源实验 + 出现位置（Abstract/表X/正文某段），为下一步逐一核对做准备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只想着核对表格，漏了正文散落的数字</strong> → 正文里“我们在 DOTA 上达到 78.5”“相比 baseline 提升 1.3 个点”这类散落数字，最容易残留旧值，必须一并列入清单。</li>
+<li><strong>数字清单建得不全</strong> → 用脚本 grep 辅助（上面的代码），确保不漏。</li>
+<li><strong>把“图里的数字”忘了</strong> → 柱状图/曲线图上标注的数值也要核对。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>数字太多、不知从哪开始?→ 先从最重要的（Abstract 的关键结果、主表 Table 1）开始，再到消融表、正文散落数字。不确定某数字该来自哪个实验?→ 回到实验日志（W19 归档的），按“这个数字对应哪个 config/哪次运行”追溯。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>系统地列出论文所有数字及其来源</strong>，为数字审计打基础。<strong>做了</strong>（建立数字清单 + 脚本辅助 grep）、<strong>学了</strong>(数字不一致=致命伤、要穷举所有数字含正文散落的)、<strong>会了</strong>（全面盘点论文里的每一个数字）。</p>
+</div></section></section><section class="slot" id="d169-noon" data-d="169" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D169 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">逐一交叉验证：论文数字 ↔ 实验日志</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>有了数字清单，现在<strong>逐一核对</strong>——把清单里的每个数字，和实验日志/wandb 里的真实值比对。一致就打勾，不一致就标红待改。<strong>核心是“以最终实验为准”</strong>：论文里的数字必须等于最终代码/最终实验跑出来的值，不是凭印象写的、不是早期版本的。</p>
+<ul>
+<li><strong>为什么要“自动提取 + 交叉比对”</strong>：手动核对几十个数字容易看花眼、漏掉。<strong>最可靠的做法是写个小脚本，从实验日志/wandb 自动提取最终数字，和论文表格（从 LaTeX 源码提取）做交叉比对</strong>，机器帮你找出不一致。这比纯人眼核对准得多。</li>
+<li><strong>“三处一致”的含义</strong>：同一个指标，可能在论文里出现在三个地方——Abstract、正文引用、Experiment 表格。<strong>这三处的数字必须完全相同</strong>（且都等于日志里的真值）。任何一处和其他不同，都是不一致，要改。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从实验日志/wandb 提取所有最终指标的真值（主实验、消融、迁移等）。</li>
+<li>和数字清单逐一比对：论文里的每个数字 = 日志真值？</li>
+<li>标出所有不一致处（待 D169 晚上修正）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数字清单逐项核对完毕，每个数字标注“✓一致”或“✗不一致（论文写X、日志是Y）”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>核对时只看小数点前、忽略精度（78.5 vs 78.46 取舍不一致）→ 统一精度规则（如都保留一位小数），全文一致；日志里有多次运行的值，不知用哪个 → 用最终方法的 3-seed 平均值（W19 锁定的）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>日志找不到某数字的来源?→ 说明这个数字可能是早期的/凭印象写的，要么重新跑确认、要么删掉这个声称；wandb 记录太多找不到?→ 按 run 名/tag 过滤到最终实验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把论文数字和实验日志逐一交叉验证</strong>。<strong>做了</strong>（逐项核对 + 标出不一致）、<strong>学了</strong>（以最终实验为准、三处一致、自动提取更可靠）、<strong>会了</strong>（系统核验数字的真实性）。</p>
+</div></section></section><section class="slot" id="d169-pm" data-d="169" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D169 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">修正所有不一致 + 锁定数字</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>把上午、中午标出的所有不一致<strong>逐一修正</strong>——统一改成最终实验的真值。改完再快速复核一遍，确保论文里的数字现在 100% 准确、三处一致。<strong>这一步完成后，“数字对不上”这个会被直接 reject 的风险就彻底堵死了</strong>。</p>
+<ul>
+<li><strong>修正原则</strong>：永远<strong>以最终代码/最终实验为准</strong>，把论文里的旧数字/错数字统一改成真值。一处都不能放过（尤其正文散落的）。</li>
+<li><strong>改完要复核</strong>：修正过程中可能改漏、或改一处引入新的不一致（如改了表格但正文又忘了同步）。改完后再过一遍数字清单，确认全部一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐一修正所有标红的不一致（改成日志真值）。</li>
+<li>特别注意“牵一发动全身”——改了主表某个数，要检查 Abstract/Intro/Conclusion 里引用它的地方都同步改。</li>
+<li>复核：再跑一遍 grep，确认全文数字一致。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文里每个数字都能在实验日志里找到对应来源；正文数字 = 表格数字 = 日志数字，三处完全一致。数字审计通过。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>改了主表忘了改 Abstract/正文引用 → 牵一发动全身，改完全局复核；不同表格用了不同精度 → 统一精度规则。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>改完还是有地方对不上?→ 再跑一遍数字清单核对脚本，锁定残留；实在拿不准某数字 → 以最终实验日志为唯一标准。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了<strong>投稿前的数字审计</strong>，堵住了“数字对不上=直接 reject”的致命伤。<strong>做了</strong>（修正所有不一致 + 锁定数字）、<strong>学了</strong>（以最终实验为准统一、改完全局复核）、<strong>会了</strong>（让论文数字 100% 准确可信）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜数字审计</strong>：投稿前必做——把论文里<strong>每个数字</strong>（含正文散落的“提升X%”）列清单 → 逐一和实验日志/代码真值交叉比对 → 不一致一律以<strong>最终实验</strong>为准统一。目标：正文=表格=日志，三处一致。数字对不上是会被直接 reject 的致命伤。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜脚本辅助核对</strong>：数字多手核易漏——写小脚本从 LaTeX 源码 grep 出所有数字、从 wandb/日志提取真值，机器交叉比对找不一致，比纯人眼可靠。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 数字交叉验证完成（论文↔日志↔代码三处一致）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D169</summary><textarea data-note="d169" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d170" data-d="170"><header class="day-head"><span class="dnum">D170</span><h2 class="day-t">周二 · 残余问题最终修复 + 论文 v2.0 + 竞赛换更强 backbone</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把历史 review 的所有残余问题一次清零、出投稿版 v2.0；中午晚上竞赛换更强 backbone 提分。</p>
+<p><strong>预期管理</strong>：今天清零残余问题出投稿版v2.0 + 竞赛换更强backbone。提醒：把之前所有review反馈（自审/两轮mock review/快审）的未尽事项集中到一个todo清单逐条勾销，别让历史欠账带进投稿版；v2.0标记为“准备投稿版”（里程碑版本，git commit）；竞赛换更强backbone(ConvNeXt-XL/InternImage)提分，但4090上大backbone易OOM，降batch/梯度累积/混合精度应对。</p>
+</blockquote>
+</div><section class="slot" id="d170-am" data-d="170" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D170 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">集中清理所有历史 review 的残余问题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（投稿前要“还清所有欠账”）</h4><div class="blk-b"><ul>
+<li>你这一路收过很多反馈：M6 的自审报告、两轮 mock review、第二轮快审——这些反馈里，有些问题当时改了，但可能<strong>有些标记为“以后改”的残余问题还没处理</strong>。投稿前，要把这些<strong>历史欠账一次性清零</strong>。</li>
+<li><strong>为什么投稿前清零残余问题</strong>：投稿版是要交给真审稿人的“最终版本”。如果带着已知的、本可以改的问题去投稿，等于主动给审稿人送拒稿理由。<strong>你自己（和朋友）已经发现的问题，一定要在投稿前改掉</strong>——别指望审稿人不会注意到（他们专业，大概率会注意到）。</li>
+<li><strong>怎么不遗漏</strong>：把散落在各处的残余问题（自审清单里没改的、mock review 里标“待定”的、通读时记的）<strong>集中到一个 <code>paper/todo.md</code></strong>，逐条勾销。集中管理才不会漏。</li>
+<li><strong>投稿前是“还欠账”的最后窗口</strong>：论文投出去后就进入审稿，你已知的小问题会被审稿人发现并写进意见（然后你还要在 rebuttal 里解释、在修订版里改）——<strong>与其让审稿人替你找出你早就知道的问题，不如投稿前自己改掉</strong>。投稿前是清理这些已知欠账的最后、也是成本最低的窗口（现在改只是改文档，投稿后改要走 rebuttal 流程）。所以别留“以后再说”的欠账，能在投稿前还清的都还清。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把所有历史 review 的未尽事项汇总到 <code>paper/todo.md</code>(从自审报告、mock review 整理、快审反馈、各次通读的残留清单里收集)。</li>
+<li>逐条处理、勾销。</li>
+<li>确认 todo 清单清零。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>paper/todo.md</code> 里所有历史残余问题逐条勾销、清零。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>残余问题散落各处、漏改 → 集中到一个 todo 清单统一管理；“这个问题以后再说”拖到投稿后 → 投稿前能改的都改掉，别留欠账。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某残余问题工作量大（如要补大实验）→ 评估能否用现有结果换种说法 + 在 Limitation 诚实说明；实在改不完的小问题 → 至少确保不是 A 级（影响录用）的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>投稿前集中清零残余问题</strong>。<strong>做了</strong>（汇总 todo + 逐条勾销）、<strong>学了</strong>（投稿前还清欠账、集中管理不遗漏）、<strong>会了</strong>（系统清理历史反馈的未尽事项）。</p>
+</div></section></section><section class="slot" id="d170-noon" data-d="170" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D170 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">出投稿版 v2.0（里程碑版本）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>残余问题清零后，把论文更新为 <strong>v2.0，标记为“准备投稿版”</strong>——这是一个里程碑版本（从 v1.x 的打磨阶段，进入 v2.0 的投稿准备阶段）。git commit 这个版本，清晰标注。</p>
+<ul>
+<li><strong>为什么标记“投稿版”很重要</strong>:v2.0 是你计划要投出去的版本。明确标记它（版本号 + git commit + 备注“准备投稿”），让你清楚“这就是要投的那一版”。后续如果还有小改(v2.1/v2.2)，都是在这个基础上微调。<strong>有明确的版本里程碑，投稿流程才不会乱</strong>（避免投错版本）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合残余问题的修改，更新论文为 v2.0。</li>
+<li>git commit，备注“v2.0 准备投稿版”。</li>
+<li>通读一遍确认 v2.0 完整、一致（残余问题已清、数字已审计）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>论文 v2.0（残余问题清零、数字已审计、标记为准备投稿版）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>版本管理混乱不知哪版是投稿版 → git 明确 commit + 备注；v2.0 还没通读就当定稿 → 通读确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定 v2.0 是否真的“准备好了”?→ 对照投稿前检查项（数字审计✓、残余问题✓、逻辑✓），逐项确认。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你产出了<strong>投稿版 v2.0</strong>。<strong>做了</strong>（整合修改 + 标记 v2.0）、<strong>学了</strong>（里程碑版本管理）、<strong>会了</strong>（把打磨稿升级为准备投稿版）。</p>
+</div></section></section><section class="slot" id="d170-pm" data-d="170" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D170 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛改进：换更强 backbone(ConvNeXt-XL / InternImage)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>竞赛冲刺阶段，<strong>换更强的 backbone</strong>（如 ConvNeXt-XL、InternImage）是常见的提分招——更强的特征提取器往往直接带来精度提升。但<strong>更大的 backbone 在你单张 4090(24GB)上容易 OOM</strong>，要用省显存技巧应对。</p>
+<ul>
+<li><strong>为什么换强 backbone 能提分</strong>:backbone 是模型的“特征提取主干”，更强的 backbone（更大、预训练更好）能提取更有判别力的特征，下游任务精度往往更高。竞赛冲刺时，换上当前最强的 backbone 是性价比不错的一招（虽然慢，但竞赛只看分数）。</li>
+<li><strong>4090 的显存约束（你的现实）</strong>:ConvNeXt-XL、InternImage 这类大 backbone 显存占用大，你单卡 24GB 可能 OOM。<strong>应对：降 batch size + 梯度累积（保持等效 batch）、混合精度训练(amp)、必要时降输入分辨率</strong>。这些是你一路练熟的单卡省显存技巧，继续用。<strong>注意：这里换大 backbone 是为竞赛冲分；你论文的主结果仍用高效的小模型（单卡高效是你论文的卖点），大 backbone 的结果归竞赛/附加，别混淆两条线的定位。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>竞赛模型换更强 backbone（ConvNeXt-XL 或 InternImage）。</li>
+<li>OOM 就降 batch + 梯度累积 + 混合精度。</li>
+<li>训练、提交，记入 Trick 日志（Δ分/是否保留）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛新 backbone 版训练完成、提交，排名变化记录在 Trick 日志。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>大 backbone OOM 直接放弃 → 降 batch + 梯度累积 + 混合精度先跑起来；一次换 backbone 又改别的 → 一次只改这一处，看清 backbone 的效果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>4090 实在跑不动 XL?→ 用次一级的强 backbone（如 ConvNeXt-L）、或降分辨率；没提升 → 记录，可能这个任务对 backbone 不敏感，换别的招。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>竞赛换更强 backbone 提分（并在单卡约束下跑通）</strong>。<strong>做了</strong>（换 backbone + 提交）、<strong>学了</strong>（强 backbone 提分、单卡省显存应对、区分竞赛/论文两条线）、<strong>会了</strong>（在 4090 上用大 backbone 冲分）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜投稿版里程碑</strong>：残余问题（历史所有review的欠账）集中到 todo.md 逐条清零 → 出 v2.0“准备投稿版” → git commit 标注。明确的版本里程碑让投稿不乱、不投错版本。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文 v2.0（残余问题清零） ✅ 竞赛新 backbone 提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D170</summary><textarea data-note="d170" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d171" data-d="171"><header class="day-head"><span class="dnum">D171</span><h2 class="day-t">周三 · 加分补实验（数据量曲线 / 效率曲线 / 最新对比）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午判断要补哪些加分实验、启动补跑（数据量曲线最有卖点）；中午晚上竞赛继续迭代。</p>
+<p><strong>预期管理</strong>：今天做加分补实验。提醒：三类常见加分实验——①效率对比（参数量vs精度曲线）②不同训练数据量(10%/30%/50%/100%)③与最新论文补充对比；<strong>数据量实验尤其有价值</strong>（遥感标注昂贵）——若你的方法在30%数据下就接近全量效果，这是绝佳卖点，正贴合你“小样本/高效”的发力方向；补实验设置必须和主实验一致（否则不可比），关键比例多跑几个seed防波动。</p>
+</blockquote>
+</div><section class="slot" id="d171-am" data-d="171" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D171 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">判断要补哪些加分实验（优先数据量 + 效率曲线）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（加分补实验：从“有效”到“高效且数据友好”）</h4><div class="blk-b"><ul>
+<li>论文主体已完整（方法有效已证明），<strong>加分补实验</strong>是锦上添花——让论文从“有效”提升到“更全面、更有卖点”。常见三类:① <strong>效率对比</strong>（参数量 vs 精度曲线，展示你“更小更快”）② <strong>不同训练数据量</strong>（10%/30%/50%/100% 训练集下的性能）③ <strong>与最新论文的补充对比</strong>。</li>
+<li><strong>数据量实验为什么“尤其有价值”（贴合你的定位）</strong>：遥感领域<strong>标注数据昂贵</strong>（标注遥感图像需要专业知识、耗时）。如果你的方法<strong>在少量数据（如 30%）下就能接近全量数据的效果</strong>，这是一个<strong>极有说服力的卖点</strong>——它意味着你的方法“数据友好”，在标注稀缺的遥感场景特别有用。<strong>这正贴合你“小样本/高效”的发力方向</strong>：你不是在拼“更大模型/更多数据”，而是在证明“我的方法用更少数据/更小模型就能打”。数据量曲线把这个卖点量化出来。</li>
+<li><strong>效率曲线也是你的卖点</strong>：参数量 vs 精度的散点/曲线，直观展示你的方法“参数更少但精度可比甚至更好”——这是你单卡高效路线的核心卖点的可视化。<strong>而且效率曲线几乎零成本</strong>：参数量、FPS 从你已有的实验里直接读，不用重跑。</li>
+<li><strong>为什么这些是“加分”而非“必须”</strong>：论文没有它们也能成立（主实验+消融已经证明方法有效），但有了它们，论文更全面、卖点更突出、更能打动审稿人。时间允许就补，尤其优先最有卖点的数据量曲线。</li>
+<li><strong>数据量曲线和你整体定位的呼应（战略意义）</strong>：回想你的整体定位——你不跟 RingMo/RingMoE 拼&quot;更大的基础模型&quot;，而是走&quot;下游特化 / 高效适配 / 小样本 / 单卡高效&quot;的差异化路线。<strong>数据量曲线正是这条路线的有力证据</strong>：它用数字证明&quot;我的方法用更少数据就能打&quot;，直接支撑你&quot;小样本友好&quot;的卖点。再配上效率曲线（&quot;我的方法用更少参数/更快速度就能达到可比精度&quot;），两条曲线共同把你&quot;精度持平但更小、更快、更省数据&quot;的差异化优势量化、可视化出来。<strong>这不是孤立的加分实验，而是你整个研究定位的实证落点</strong>——审稿人（尤其空天院方向的）看到这些，会理解你工作的独特价值不在&quot;更大&quot;，而在&quot;更高效、更实用&quot;。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>判断要补哪些（<strong>优先数据量曲线</strong>——最有卖点；效率曲线——几乎零成本）。</li>
+<li>设计数据量实验：在 10%/30%/50%/100% 训练集上分别训练你的方法，记录性能。</li>
+<li>启动补跑（数据量实验）；效率曲线从已有实验读参数量/FPS。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>确定要补的加分实验清单（数据量曲线 + 效率曲线优先），数据量实验已启动、效率数据已从已有实验提取。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>补实验和主实验设置不一致</strong> → 数据量实验的其他设置（backbone/超参/评测）必须和主实验完全一致，只变训练数据量，否则不可比。</li>
+<li><strong>数据量实验每个比例只跑 1 seed</strong> → 数据少时波动大，关键比例（如 30%）多跑几个 seed 取平均。</li>
+<li><strong>贪多补一堆实验</strong> → 优先最有卖点的（数据量），别为次要的耗时。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>补实验来不及全跑?→ 优先数据量曲线（最有卖点），效率曲线可从已有实验直接读（零成本）；数据量怎么采样?→ 从全量训练集随机采 10%/30%/50%（固定随机种子保证可复现）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>设计加分补实验（尤其数据量曲线）</strong>。<strong>做了</strong>（判断补什么 + 启动数据量实验）、<strong>学了</strong>(数据量曲线=小样本卖点、效率曲线=高效卖点、补实验要设置一致)、<strong>会了</strong>（用加分实验强化论文的“高效且数据友好”卖点）。</p>
+</div></section></section><section class="slot" id="d171-noon" data-d="171" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D171 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动补充实验 + 竞赛迭代</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>数据量实验要跑多个比例(10%/30%/50%/100%)、关键比例多 seed，是个批量任务——用你的实验矩阵/调度习惯管理。同时竞赛继续迭代（和补实验错峰用 GPU）。</p>
+<ul>
+<li><strong>批量管理数据量实验</strong>：类似你 M5 跑实验矩阵——把“数据量比例 × seed”组织成一批任务，统一启动、用 wandb 追踪。别一个个手动跑。</li>
+<li><strong>和竞赛错峰</strong>：补实验和竞赛都要 GPU，单卡资源有限，错峰安排（如补实验夜里挂机、竞赛白天迭代）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>批量启动数据量实验（各比例 × seed）,wandb 追踪。</li>
+<li>竞赛继续迭代（用前几天的有效 Trick 组合）。</li>
+<li>错峰分配 GPU。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据量实验批量运行中（wandb 可见）；竞赛有新提交。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>数据量实验和竞赛抢 GPU 互堵 → 错峰；数据量实验忘了固定采样种子 → 固定种子（可复现 + 各比例是嵌套子集更严谨）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>GPU 不够同时跑?→ 排队，补实验优先（投稿用）；时间紧 → 数据量比例减少到 3 个关键点(30%/50%/100%)。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>批量管理补实验 + 双线 GPU 调度</strong>。<strong>做了</strong>（批量启动数据量实验 + 竞赛迭代）、<strong>学了</strong>（批量管理、错峰调度）、<strong>会了</strong>（并行推进补实验和竞赛）。</p>
+</div></section></section><section class="slot" id="d171-pm" data-d="171" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D171 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">监控补实验 + 竞赛提交</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>监控数据量实验的进度和结果，竞赛生成新提交看排名。数据量实验出结果后，画成“数据量-性能曲线”（x 轴数据比例、y 轴指标），看你的方法在少数据下的表现——这是 D172 整合进论文的素材。</p>
+<ul>
+<li><strong>数据量曲线怎么看</strong>：理想情况是你的方法在少数据(30%)下就接近全量，曲线“快速上升后平缓”——说明数据友好。如果还能和 baseline 的数据量曲线对比（你在少数据下比 baseline 高更多），卖点更强。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>监控数据量实验，出结果后画数据量-性能曲线。</li>
+<li>竞赛生成提交、看排名、记 Trick 日志。</li>
+<li>记录数据量实验的初步发现。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>数据量实验有初步结果（或曲线雏形）；竞赛有新提交记录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>数据量实验跑完不画图 → 及时画曲线（直观看少数据表现）；竞赛提交不记 Trick 日志 → 记录（为 M8 攒料）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>数据量实验某比例异常（性能反常）?→ 检查采样是否正确、是否过拟合（少数据易过拟合）；竞赛没涨 → 记录换招。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了补实验并开始整理数据量曲线</strong>。<strong>做了</strong>（监控补实验 + 画曲线 + 竞赛提交）、<strong>学了</strong>（数据量曲线的解读、及时可视化）、<strong>会了</strong>（把补实验结果转成有卖点的图）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜数据量曲线（小样本卖点）</strong>：在10%/30%/50%/100%训练集上训你的方法，画“数据量-性能曲线”。若30%数据就接近全量→“数据友好”卖点（遥感标注昂贵，尤其有价值），贴合你小样本/高效定位。设置须与主实验一致、关键比例多seed。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜效率曲线（高效卖点）</strong>：参数量vs精度散点/曲线，直观展示“更小但精度可比”。几乎零成本——参数量/FPS从已有实验直接读。这是单卡高效路线的核心卖点可视化。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 加分补实验启动（数据量曲线 + 效率曲线） ✅ 竞赛提交。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D171</summary><textarea data-note="d171" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d172" data-d="172"><header class="day-head"><span class="dnum">D172</span><h2 class="day-t">周四 · 补实验整合 supplementary + 论文 v2.0 终检</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把补实验结果整合进 supplementary（核心放正文、扩展放附录）；中午晚上论文 v2.0 终检 + 竞赛。</p>
+<p><strong>预期管理</strong>：今天整合补实验进supplementary + v2.0终检。提醒：遵循“核心放正文、扩展放附录”的分工——主实验+消融+关键可视化放正文（审稿人必看），数据量曲线/效率曲线/额外细节放supplementary（感兴趣的深入读），保持正文聚焦；整合后v2.0要终检一遍（数字一致、补实验和正文呼应、引用supplementary的地方对）；竞赛继续迭代。</p>
+</blockquote>
+</div><section class="slot" id="d172-am" data-d="172" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D172 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">把补实验结果整合进 supplementary</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（&quot;核心放正文、扩展放附录&quot;的分工）</h4><div class="blk-b"><ul>
+<li>论文有篇幅限制（正文页数有限），不可能把所有实验都塞进正文。<strong>分工原则：核心结果放正文（主实验、消融、关键可视化——审稿人必看的），扩展/补充结果放 supplementary（数据量曲线、效率曲线、额外细节——感兴趣的审稿人深入读）</strong>。</li>
+<li><strong>为什么这样分工</strong>:① 正文聚焦核心论证（方法有效、每个组件有用），不被次要内容稀释;② supplementary 容纳丰富的补充证据（让论文更全面、更经得起推敲），又不占正文宝贵篇幅。<strong>审稿人先读正文（抓核心），需要时翻 supplementary（看细节）</strong>——这种分工符合审稿习惯。</li>
+<li><strong>你的补实验放哪</strong>：数据量曲线、效率曲线属于“加分的扩展实验”——<strong>通常放 supplementary</strong>（正文可以一句话提及“详见附录，我们的方法在30%数据下接近全量”，把曲线放附录）。如果某个加分实验卖点极强（如数据友好是你的核心卖点之一），也可以在正文 Experiment 里给一小节 + 曲线，附录放更详细的。<strong>根据卖点重要性决定放正文还是附录</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把数据量曲线、效率曲线等补实验整合进 supplementary（规范的图表 + 说明）。</li>
+<li>正文里加简短引用（&quot;我们进一步分析了数据效率，详见附录 X&quot;）。</li>
+<li>若某加分实验卖点极强，考虑在正文给一小节。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>补实验结果整合进 supplementary（图表规范、有说明），正文有简短引用指向附录。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把所有补实验硬塞正文 → 正文超页数/被稀释，扩展放附录；supplementary 的图表不规范（没说明） → 附录也要规范（审稿人会看）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定某实验放正文还是附录?→ 问“这是核心论证必需的吗”——是→正文，锦上添花→附录；正文超页数?→ 把次要内容移到附录。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你再次实践<strong>“核心放正文、扩展放附录”的分工</strong>。<strong>做了</strong>（补实验整合进 supplementary + 正文引用）、<strong>学了</strong>（正文聚焦核心、附录容纳扩展）、<strong>会了</strong>（合理安排正文与附录的内容分工）。</p>
+</div></section></section><section class="slot" id="d172-noon" data-d="172" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D172 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">论文 v2.0 最终检查（整合后通读）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>补实验整合进 supplementary 后，论文又有了改动——通读一遍 v2.0，确认:① 数字仍一致（补实验的新数字也要审计）② 正文对附录的引用正确（引用的附录编号对得上）③ 补实验和正文的论述呼应（正文说“数据友好”，附录的曲线确实支撑）。</p>
+<ul>
+<li><strong>为什么整合后要再检查</strong>：每次加内容都可能引入新的不一致（新数字没审计、引用编号错、论述和数据对不上）。整合补实验后，要把这些新内容也纳入检查，确保 v2.0 整体一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>通读 v2.0（含新整合的 supplementary）。</li>
+<li>检查：新数字审计了吗？附录引用对吗？论述和补实验呼应吗？</li>
+<li>标问题、修正。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v2.0 终检通过（含补实验的数字也审计了、附录引用正确、论述呼应）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>补实验的新数字忘了审计 → 新数字也要纳入数字审计；正文引用附录编号错（说“附录B”实际在“附录C”）→ 核对编号。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>附录引用乱?→ 用 LaTeX 的 \label/\ref 自动管理编号，避免手写错；论述和数据对不上 → 以数据为准改论述。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>终检了整合补实验后的 v2.0</strong>。<strong>做了</strong>（v2.0 通读 + 检查一致性）、<strong>学了</strong>（新内容也要纳入检查、引用编号要对）、<strong>会了</strong>（整合扩展后保持论文一致）。</p>
+</div></section></section><section class="slot" id="d172-pm" data-d="172" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D172 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛继续迭代</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>竞赛继续——用前几天验证有效的 Trick 组合，继续提交、爬榜，为周末的 5 模型 Ensemble 大招做准备（确认手里有几个不同 backbone 的好模型可用）。</p>
+<ul>
+<li><strong>为周末大招攒模型</strong>:D174 的 5 模型 Ensemble 需要几个不同 backbone 的训好的模型。这几天你换了不同 backbone（D170 的 ConvNeXt-XL 等）、跑了不同配置——<strong>把这些训好的、效果不错的不同 backbone 模型保存好</strong>，周末直接拿来组 Ensemble，不用临时重训。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>竞赛用有效 Trick 组合继续提交。</li>
+<li><strong>保存好几个不同 backbone 的好模型</strong>（为 D174 的 5 模型 Ensemble 备料）。</li>
+<li>记 Trick 日志。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛有新提交；手里有几个不同 backbone 的训好模型（为周末 Ensemble 备好）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>训好的模型不保存、周末要重训 → 及时保存 checkpoint（为 Ensemble 备料）；只用同 backbone → 周末 Ensemble 需要不同 backbone，现在就备齐多样的。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>模型太多管不过来?→ Trick 日志记每个模型的 backbone/分数/checkpoint 路径，周末按需取用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>继续竞赛迭代并为周末大招备料</strong>。<strong>做了</strong>（竞赛提交 + 保存多 backbone 模型）、<strong>学了</strong>（为后续 Ensemble 提前备多样模型）、<strong>会了</strong>（有规划地积累竞赛资源）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜正文vs附录分工</strong>：核心（主实验/消融/关键可视化）放正文聚焦论证；扩展（数据量/效率曲线/额外细节）放supplementary。正文一句话引用指向附录。新加内容的数字也要纳入审计、引用编号要对得上。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ supplementary 更新（补实验整合） ✅ v2.0 终检 ✅ 竞赛迭代。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D172</summary><textarea data-note="d172" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d173" data-d="173"><header class="day-head"><span class="dnum">D173</span><h2 class="day-t">周五 · 非专业读者测 Abstract/Intro + 微调</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午找非专业读者测 Abstract/Intro 的可读性（5分钟能懂吗）、据反馈微调到 v2.1；中午晚上竞赛。</p>
+<p><strong>预期管理</strong>：今天用“非专业读者5分钟测试”检验Abstract/Intro。提醒：Abstract+Intro是90%读者唯一会读的部分，必须人人能懂；找一个非专业读者（不懂你具体方向的）读，问他能否5分钟内理解你做了什么——读不懂说明写得不够清晰（这是“知识的诅咒”：你太懂，默认别人也懂）；据反馈把卡住的句子重写得更通俗，微调到v2.1。</p>
+</blockquote>
+</div><section class="slot" id="d173-am" data-d="173" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D173 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">非专业读者“5 分钟测试”</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（知识的诅咒 + 5分钟测试）</h4><div class="blk-b"><ul>
+<li><strong>Abstract 和 Introduction 是 90% 读者唯一会读的部分</strong>（很多人读完摘要和引言就决定要不要读全文、或直接引用）。所以这两部分<strong>必须人人能懂</strong>——清晰、好读、一看就明白你做了什么。</li>
+<li><strong>“知识的诅咒”是写作的大敌</strong>：你对自己的工作太熟悉了，写 Abstract/Intro 时会<strong>默认读者也懂很多背景</strong>——于是用了太多术语、跳过了必要的解释、表达得不够通俗。<strong>你觉得“这很清楚啊”，但对不那么熟悉的读者可能晦涩难懂</strong>。这就是“知识的诅咒”：懂得越多，越难想象不懂的人的视角。</li>
+<li><strong>“非专业读者5分钟测试”破解知识的诅咒</strong>：找一个<strong>不懂你具体方向的人</strong>（其他领域的同学、朋友），让他读你的 Abstract + Intro，问他：“你能在 5 分钟内说出我做了什么、解决什么问题吗？” <strong>如果他读不懂、说不出来，说明你写得不够清晰</strong>（不是他笨，是你没写明白）。这个“外行视角”能客观检验你的门面写得够不够通俗。</li>
+<li><strong>为什么“非专业”读者特别有用</strong>：专业的同行能看技术问题，但他们也懂背景、容易“脑补”；<strong>非专业读者最能暴露“表达不清晰”的问题</strong>——如果连他都能懂，说明你写得足够清楚；如果他卡住，那就是真的不清楚。</li>
+<li><strong>“知识的诅咒”在你身上格外重（零基础转型的特殊性）</strong>：你是从零基础转型遥感 CV 的——一年多下来，你已经从“完全不懂遥感”变成了“能写这个方向论文的人”，<strong>你脑子里装满了这一路学到的概念、术语、背景</strong>。正因为你“学得多、进步大”，反而更容易忘记“一年前的自己（或一个外行）是看不懂这些术语的”。<strong>这就是知识的诅咒对你格外重的地方</strong>：你太想把所有学到的专业内容都写进去，结果 Abstract/Intro 可能堆满了只有内行才懂的术语。非专业读者测试正好把你拉回“外行视角”，提醒你：门面要写得连一年前的自己都能懂。<strong>能把复杂的工作讲得连外行都明白，才是真懂、才是好的科研表达</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>找一个非专业读者（不懂你方向的人），请他读 Abstract + Introduction。</li>
+<li>问他：“能在 5 分钟内理解我做了什么、解决什么问题吗？”</li>
+<li>记录他卡住的地方、不懂的术语、读不下去的句子。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>非专业读者能用一两句话复述“你做了什么、解决什么问题”；记录了他卡住的具体地方。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>只找懂行的人测</strong>（他们会脑补，测不出“不清晰”） → 找非专业读者，最能暴露表达问题。</li>
+<li><strong>他读不懂就觉得是他的问题</strong> → 读者卡住就是你写得不够清楚的客观信号，要改。</li>
+<li><strong>不记录具体卡点，只听“还行”</strong> → 请他指出具体卡在哪句、哪个术语。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>找不到非专业读者?→ 隔一天自己以“陌生人”视角再读（放慢、不脑补）；他卡在某术语 → 那个术语第一次出现时加通俗解释或换更白的说法；他抓不住主线 → Abstract/Intro 的“问题→方法→结果”主线要更突出。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用“非专业读者5分钟测试”检验门面可读性</strong>。<strong>做了</strong>（非专业读者测 Abstract/Intro + 记录卡点）、<strong>学了</strong>（知识的诅咒、Abstract/Intro 必须人人能懂、外行视角最能暴露不清晰）、<strong>会了</strong>（客观检验论文门面的可读性）。</p>
+</div></section></section><section class="slot" id="d173-noon" data-d="173" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D173 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">据反馈微调 Abstract/Intro → v2.1</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据非专业读者的反馈，把 Abstract/Intro 微调得更清晰——<strong>他卡住的句子重写得更通俗、不懂的术语加解释或换说法、主线理得更顺</strong>。改完出 v2.1。</p>
+<ul>
+<li><strong>改的重点是&quot;通俗化&quot;</strong>：这一轮改的不是逻辑（逻辑早定了），而是<strong>表达的通俗度</strong>——让一个不那么熟悉的读者也能顺畅读懂。把晦涩的句子改白、把堆砌的术语精简、把主线（&quot;我解决什么问题、怎么解决、效果如何&quot;）理得一目了然。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据非专业读者反馈，逐一改卡点（重写晦涩句、解释/替换术语、突出主线）。</li>
+<li>改完让他再扫一眼（或自己以陌生视角读），确认更清楚了。</li>
+<li>出论文 v2.1。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Abstract/Intro 据反馈微调，更通俗易懂；论文更新到 v2.1。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>改得太学术又绕回去 → 以“非专业读者能懂”为标准；为通俗牺牲准确性 → 通俗但不失准（别为了好懂而说错）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>某概念怎么都难讲通俗?→ 用类比/例子（把抽象概念类比成日常事物）；主线还是不清?→ 用“问题一句、方法一句、结果一句”先搭骨架再扩。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>据反馈把门面微调得更通俗</strong>。<strong>做了</strong>（微调 Abstract/Intro + 出 v2.1）、<strong>学了</strong>（通俗化表达、以非专业读者能懂为标准）、<strong>会了</strong>（让论文门面人人能读懂）。</p>
+</div></section></section><section class="slot" id="d173-pm" data-d="173" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D173 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">竞赛迭代</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>竞赛继续迭代、提交，并最终确认手里为周末 5 模型 Ensemble 准备的几个不同 backbone 模型都就绪（backbone 结构差异要大，互补性才强）。</p>
+<ul>
+<li><strong>为周末 Ensemble 做最后准备</strong>：确认你有 5 个（或至少 3 个）<strong>backbone 结构差异大</strong>的训好模型（如 ResNet 系 + Swin 系 + ConvNeXt 系）——差异大才互补，Ensemble 收益才大。如果还缺某类，今晚补训。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>竞赛迭代、提交。</li>
+<li>清点为周末 Ensemble 准备的模型（确保 backbone 多样、都训好）。</li>
+<li>缺的补训。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>竞赛有新提交；5 模型（或至少 3 个）不同 backbone 的模型就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>准备的模型 backbone 太相似 → 凑结构差异大的（ResNet/Swin/ConvNeXt 不同系）；模型没训好就想 Ensemble → 先确保每个单模型质量过关。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>时间不够训 5 个?→ 先备 3 个差异大的，周末先 3 模型 Ensemble。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>为周末 Ensemble 大招备齐了多样模型</strong>。<strong>做了</strong>（竞赛迭代 + 清点/补齐多 backbone 模型）、<strong>学了</strong>（Ensemble 需 backbone 差异大才互补）、<strong>会了</strong>（有规划地准备 Ensemble 资源）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜非专业读者5分钟测试</strong>:Abstract/Intro是90%读者唯一会读的，必须人人能懂。找不懂你方向的人读、问“5分钟能说出你做了什么吗”——读不懂=你写得不清晰（知识的诅咒），据卡点通俗化重写。外行视角最能暴露表达问题。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 论文 v2.1（门面更通俗） ✅ 竞赛迭代。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D173</summary><textarea data-note="d173" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d174" data-d="174"><header class="day-head"><span class="dnum">D174</span><h2 class="day-t">周六 · （集中日）· 竞赛 5 模型 Ensemble + WBF（冲刺大招）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>集中日：用 5 个不同 backbone 的模型 + WBF 融合，这是竞赛冲刺的核心大招，排名通常大幅提升。</p>
+<p><strong>预期管理</strong>：今天竞赛冲刺大招——5模型差异化Ensemble + WBF。提醒：用5个不同backbone(ResNet-50/101、Swin-T/B、ConvNeXt-B)的模型，WBF融合；<strong>模型差异越大、互补性越强、融合越准</strong>（都ResNet系则互补弱）;WBF的IoU/skip阈值要调；4090训5个模型耗时——复用前几天/W19已训的不同backbone模型，时间紧先3模型Ensemble。这是竞赛冲刺常见大招，排名通常大幅提升。</p>
+</blockquote>
+</div><section class="slot" id="d174-am" data-d="174" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D174 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">准备 5 个差异化模型 + 理解 WBF</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（差异化 Ensemble + WBF）</h4><div class="blk-b"><ul>
+<li><strong>5 模型 Ensemble 是竞赛冲刺的“核心大招”</strong>：用 5 个<strong>不同 backbone</strong> 的模型（如 ResNet-50、ResNet-101、Swin-T、Swin-B、ConvNeXt-B）各自预测，再融合——通常比单模型大幅提升，是竞赛榜上 top 方案的标配。</li>
+<li><strong>为什么“差异化”是关键</strong>:Ensemble 的收益来自模型的<strong>互补性</strong>——不同模型犯不同的错，融合时相互纠正。<strong>模型差异越大（backbone 结构越不同），互补性越强，Ensemble 收益越大</strong>。如果 5 个模型都是 ResNet 系（结构相似），它们犯的错也相似，融合收益就小。所以要<strong>用结构差异大的 backbone</strong>（ResNet 系 + Swin 系 + ConvNeXt 系混搭）。</li>
+<li><strong>WBF(Weighted Box Fusion)是什么</strong>：对<strong>检测</strong>任务，多个模型的预测是一堆框（位置、数量都不同），不能简单平均。<strong>WBF 是专门融合多个模型检测框的算法</strong>——它把多个模型预测的、重叠的框，按置信度加权融合成一个更准的框（而非简单取一个或平均坐标）。<strong>检测任务的 Ensemble 必须用 WBF（或类似的框融合）</strong>，简单合并框效果差。</li>
+<li><strong>WBF 的关键参数</strong>:IoU threshold（判断两个框是否算“同一个目标”的重叠阈值）、skip threshold（置信度低于此的框丢弃）——<strong>这两个阈值要调</strong>，调好了融合效果才最佳。</li>
+<li><strong>WBF 为什么比 NMS 式合并更好（原理直觉）</strong>：传统融合多个框可能用 NMS（非极大值抑制）——保留置信度最高的框、抑制重叠的其他框，本质是“二选一”。<strong>WBF 不是丢弃，而是“加权融合”</strong>：把多个模型预测的、指向同一目标的重叠框，按各自置信度<strong>加权平均出一个更准的框</strong>（位置综合了多个模型的判断）。这样既利用了所有模型的信息（而非只取一个），融合出的框往往比任何单个模型的框更准。这就是为什么检测 Ensemble 用 WBF 效果好——它真正“融合”了多模型的定位，而非简单取舍。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>准备/确认 5 个不同 backbone 的训好模型（ResNet-50/101、Swin-T/B、ConvNeXt-B，或你手里差异大的几个）。</li>
+<li>理解 WBF 的原理和参数(IoU threshold、skip threshold)。</li>
+<li>准备 WBF 融合的代码（可用现成库，见补充包）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 个差异化模型就绪；WBF 融合代码准备好，理解了 IoU/skip 阈值的作用。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>5 个模型差异太小（都 ResNet 系）</strong> → 互补性弱、Ensemble 收益小，要 backbone 结构差异大（混搭不同系）。</li>
+<li><strong>检测任务用简单平均融合框</strong> → 框融合要用 WBF，简单合并效果差。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>4090 训 5 个模型耗时太久?→ <strong>复用前几天/W19/竞赛前期已训的不同 backbone 模型</strong>（不用重训），时间紧先 3 模型 Ensemble;WBF 不会实现?→ 用现成库（ensemble-boxes 的 weighted_boxes_fusion）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>准备差异化 Ensemble + 理解 WBF</strong>。<strong>做了</strong>（备 5 模型 + 理解 WBF）、<strong>学了</strong>（差异化是 Ensemble 收益关键、检测框融合用 WBF、阈值要调）、<strong>会了</strong>（组织大规模差异化 Ensemble）。</p>
+</div></section></section><section class="slot" id="d174-noon" data-d="174" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D174 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">跑 5 模型 Ensemble + WBF 融合推理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>5 个模型分别在测试集上推理，得到 5 套预测，用 WBF 融合成最终预测。调 WBF 的 IoU/skip 阈值找最佳融合效果。</p>
+<ul>
+<li><strong>流程</strong>:① 5 个模型各自推理（得 5 套框）;② WBF 融合（按置信度加权合并重叠框）;③ 调阈值(IoU/skip)看本地验证效果，选最佳。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>5 个模型各自在测试集推理。</li>
+<li>用 WBF 融合 5 套预测。</li>
+<li>调 IoU/skip 阈值，本地验证选最佳配置。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 模型 WBF 融合推理跑通，本地验证比单模型明显提升。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>WBF 阈值不调用默认 → 调 IoU/skip 找最佳；5 套预测格式不统一导致融合错 → 统一预测格式再融合。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>融合后反而变差?→ 检查框格式/坐标是否对齐、阈值是否合理；某个弱模型拖后腿 → 加权时降低它的权重，或剔除它。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跑通了 5 模型 WBF 融合</strong>。<strong>做了</strong>（5 模型推理 + WBF 融合 + 调阈值）、<strong>学了</strong>（融合流程、阈值调优）、<strong>会了</strong>（用 WBF 融合多模型检测结果）。</p>
+</div></section></section><section class="slot" id="d174-pm" data-d="174" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D174 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">提交 5 模型 Ensemble 版 → 看排名</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>提交 5 模型 Ensemble 版，看线上排名——通常相对单模型大幅提升。记入 Trick 日志（这是冲刺大招,Δ分通常最大）。</p>
+<ul>
+<li><strong>预期排名大幅提升</strong>:5 模型差异化 Ensemble + WBF 是竞赛冲刺最有效的招之一，线上排名通常明显上升。但仍以线上为准（本地涨要看线上确认）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>生成 5 模型 Ensemble 版提交。</li>
+<li>提交，看线上排名变化。</li>
+<li>记 Trick 日志（Ensemble 的 Δ分，通常是最大的一招）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>5 模型 Ensemble 版提交，排名相对单模型明显上升，记入 Trick 日志。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>本地涨就以为线上涨 → 以线上为准；推理太慢交不上 → Ensemble 推理慢但竞赛只看分数，提前留足时间。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>线上没有预期涨幅?→ 检查模型多样性是否足够、WBF 阈值是否最优；推理超时 → 减少模型数或优化推理。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了竞赛冲刺大招并验证效果</strong>。<strong>做了</strong>（5 模型 Ensemble 提交 + 看排名）、<strong>学了</strong>（差异化 Ensemble 是最有效冲刺招、以线上为准）、<strong>会了</strong>（用大规模 Ensemble 冲击排名）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜5模型差异化Ensemble + WBF</strong>：用backbone结构差异大的多个模型（ResNet/Swin/ConvNeXt混搭）各自预测→WBF融合（检测框按置信度加权合并，调IoU/skip阈值）。差异越大互补越强、提升越大，是竞赛冲刺核心大招。4090可复用已训模型、时间紧先3模型。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 5-model Ensemble 提交（排名明显上升）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D174</summary><textarea data-note="d174" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d175" data-d="175"><header class="day-head"><span class="dnum">D175</span><h2 class="day-t">周日 · （复盘日）· W25 复盘 + 投稿前检查清单</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾：复盘、列投稿前检查清单（格式/页数/图表编号/引用/拼写）逐项过，为下周投稿准备。</p>
+<p><strong>预期管理</strong>:W25收尾：周复盘 + 列投稿前检查清单。提醒：投稿前检查清单（格式符合期刊模板/页数不超限/图表编号连续/引用格式统一/拼写语法）逐项打勾，把“差点忘了的格式/编号问题”在投稿前全部拦截；这周完成了数字审计+残余清零+加分补实验+门面通俗化+竞赛大招，论文已接近“可放心Submit”；下周(W26)定稿v2.2、熟悉投稿系统但先不点Submit（留48h冷静期）。</p>
+</blockquote>
+</div><section class="slot" id="d175-am" data-d="175" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D175 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W25 周复盘</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 重点记“投稿前打磨”的经验（数字审计怎么做的、哪些加分实验最有卖点）。本周是投稿月的第一周，核心是<strong>把论文从“可投稿”打磨到“可放心点Submit”</strong>——经验值得沉淀：数字审计的方法（脚本辅助核对）、加分补实验的选择（数据量曲线最有卖点）、门面通俗化的检验（非专业读者测试）。这些“投稿前最后一公里”的功夫，以后每篇论文投稿前都要做。</p>
+<ul>
+<li><strong>本周成果回顾</strong>：数字审计（论文100%数字准确）、残余问题清零（v2.0投稿版）、加分补实验（数据量+效率曲线，强化高效+数据友好卖点）、门面通俗化(v2.1)、竞赛大招（5模型Ensemble）。论文已非常接近可投稿状态。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>用周报模板填（双线：论文打磨 + 竞赛）。</li>
+<li>记投稿前打磨的经验 + 竞赛排名进展。</li>
+<li>记论文到 v2.1 + 数据量/效率曲线的卖点。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W25 周报（论文打磨进展 + 竞赛 + 经验沉淀）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账 → 记关键经验（数字审计方法、加分实验选择）和卡点。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>卡点想不全 → 回看本周哪步最折腾（多半是数字审计的细致核对或补实验设计）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了投稿前打磨周</strong>。<strong>做了</strong>（W25 周报）、<strong>学了</strong>（投稿前打磨的经验沉淀）、<strong>会了</strong>（总结论文打磨 + 竞赛进展）。</p>
+</div></section></section><section class="slot" id="d175-noon" data-d="175" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D175 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">列投稿前检查清单（逐项过）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（投稿前检查清单）</h4><div class="blk-b"><p>投稿前，用一份<strong>检查清单</strong>把所有容易疏忽的格式/规范问题逐项核验——格式符合期刊模板？页数不超限？图表编号连续无误？引用格式统一？拼写语法？<strong>这些是“差点忘了”的低级问题，清单逐项打勾能在投稿前全部拦截</strong>，避免投出去才发现格式不对、图表编号乱、超页数等尴尬。</p>
+<ul>
+<li><strong>为什么要“清单化”</strong>：投稿前要核验的项目多而杂（格式、页数、编号、引用、拼写……），靠记忆容易漏。<strong>一份清单逐项打勾，确保每项都核验过，不遗漏</strong>。这是工程化的严谨——把“可能忘”的事变成“逐项核对”的流程。</li>
+<li><strong>清单包含什么（常见项）</strong>:① <strong>格式</strong>——符合目标期刊/会议的模板（字体、页边距、章节格式）;② <strong>页数</strong>——不超过限制（超了要精简）;③ <strong>图表编号</strong>——连续、无重复、无跳号，正文引用对得上;④ <strong>引用格式</strong>——统一(BibTeX)、无漏引;⑤ <strong>拼写语法</strong>——过一遍拼写检查;⑥ <strong>其他</strong>——作者信息、致谢、补充材料等齐全。</li>
+<li><strong>为什么这些“低级问题”值得专门设清单</strong>：这些问题（格式、编号、拼写）单看都很小、很“低级”，但<strong>它们恰恰是最容易在投稿前匆忙中漏掉、又最影响第一印象的</strong>——审稿人翻开一篇格式不规范、图表编号乱、有拼写错的论文，会下意识觉得“作者不认真”，对工作本身也打折扣。<strong>越是低级的问题，越不该出现在正式投稿里</strong>（因为本可以避免）。清单的意义就是把这些“明知道要做、但容易在投稿前的紧张中遗漏”的核验项固化下来，逐项打勾确保万无一失。这是工程师的严谨——重要的事不靠记忆，靠流程。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列一份投稿前检查清单（格式/页数/图表编号/引用格式/拼写/作者信息等）。</li>
+<li>逐项核验、打勾。</li>
+<li>发现问题立即修。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份逐项打勾的投稿前检查清单，所有项核验通过（或标记待修）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不用清单凭记忆 → 漏检某项；清单过了但没真核（走过场打勾） → 每项真核验。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知目标期刊的格式要求?→ 看目标期刊的 Author Guidelines / LaTeX 模板；页数超了 → 把次要内容移到 supplementary、精简冗余。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你养成<strong>“投稿前用清单逐项核验”的习惯</strong>。<strong>做了</strong>（列投稿前检查清单 + 逐项过）、<strong>学了</strong>（清单化拦截低级问题、不遗漏）、<strong>会了</strong>（系统核验投稿前的格式规范）。</p>
+</div></section></section><section class="slot" id="d175-pm" data-d="175" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D175 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">准备下周投稿</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>为下周(W26)的投稿做准备——明确下周要做什么：论文定稿 v2.2、熟悉投稿系统（IEEE 用 ScholarOne）、准备投稿所需的所有文件(PDF、Cover Letter、Supplementary)。<strong>心理上也做准备：下周要熟悉投稿系统、填信息，但会留48h冷静期再点Submit（不急于一时）。</strong></p>
+<ul>
+<li><strong>下周预告</strong>:W26 你会把论文最终定稿 v2.2（确认这就是要投的版本）、注册熟悉 ScholarOne 投稿系统、填好信息上传文件，但<strong>先不点 Submit（留 48h 冷静期，避免投出去才发现小错误）</strong>；竞赛上 Mean Teacher 半监督、模型蒸馏等高阶 trick。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>梳理下周投稿要做的事（定稿 v2.2、熟悉系统、备齐文件）。</li>
+<li>列投稿所需文件清单（PDF、Cover Letter、Supplementary、作者信息等）。</li>
+<li>确认 v2.1 已接近最终，下周小改即可定稿。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>下周投稿准备清单（要做的事 + 所需文件），心理和材料都为投稿做好准备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>以为下周直接投 → 下周熟悉系统+填信息，但留 48h 冷静期再 Submit;Cover Letter 还没准备 → 列入下周待办。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知要投哪个期刊?→ 回顾你的目标(GRSL &gt; JSTARS &gt; TGRS，按工作分量和把握选);Cover Letter 不会写 → 下周看模板（简述工作贡献 + 为何适合该刊）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>为下周投稿做好了准备</strong>。<strong>做了</strong>（梳理下周待办 + 文件清单）、<strong>学了</strong>（投稿前的材料和心理准备、留冷静期）、<strong>会了</strong>（有条理地筹备投稿）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜投稿前检查清单</strong>：格式（符合期刊模板）/页数（不超限）/图表编号（连续、引用对得上）/引用格式（统一无漏引）/拼写语法/作者信息——逐项打勾核验，把“差点忘了”的低级问题在投稿前全部拦截。清单化=不遗漏。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W25 ✅ 投稿前检查清单 ✅ 下周投稿准备。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W25 累计交付</h2><p>投稿前<strong>数字审计</strong>（论文↔实验日志↔代码三处一致）、残余问题清零 + 论文 v2.0（准备投稿版）、加分补实验（数据量曲线 + 效率曲线，整合进 supplementary）、非专业读者测可读性 + 论文 v2.1（门面通俗化）、投稿前检查清单 + 下周投稿准备、竞赛（换强 backbone + 5 模型差异化 Ensemble + WBF，排名明显上升）、W25 周报。本周你把论文从“可投稿”打磨到了“可放心点 Submit”的状态——核心是学会了<strong>投稿前数字审计</strong>（堵住会被直接 reject 的致命伤）、用<strong>数据量曲线/效率曲线</strong>强化你“高效且数据友好”的卖点（贴合小样本/单卡定位）、用<strong>非专业读者5分钟测试</strong>检验门面可读性；竞赛侧掌握了 5 模型差异化 Ensemble + WBF 这一冲刺核心大招。</p>
+</section><section class="wtail"><h2>🎓 W25 你“长出来”的能力清单</h2><ul>
+<li>投稿前<strong>数字审计</strong>（论文↔日志↔代码三处一致，脚本辅助核对，防直接 reject）</li>
+<li>残余问题集中清零出投稿版 v2.0（里程碑版本管理）</li>
+<li>加分补实验：<strong>数据量曲线</strong>(少数据也有效=小样本卖点)、<strong>效率曲线</strong>(参数-精度=高效卖点，几乎零成本)</li>
+<li>“核心放正文、扩展放附录”的内容分工（补实验进 supplementary）</li>
+<li><strong>非专业读者5分钟测试</strong>检验 Abstract/Intro 可读性（破解知识的诅咒）</li>
+<li>投稿前检查清单（格式/页数/编号/引用/拼写逐项核验）</li>
+<li>竞赛 <strong>5 模型差异化 Ensemble + WBF</strong>（冲刺核心大招，模型越互补提升越大）</li>
+<li><strong>核心认知</strong>：数字对不上是会被直接 reject 的致命伤、数据量/效率曲线把“高效且数据友好”的卖点量化（正是你单卡/小样本路线的卖点）、Abstract/Intro 必须人人能懂（知识的诅咒）、Ensemble 差异化才有收益</li>
+</ul>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D175</summary><textarea data-note="d175" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W25 加厚补充包（范例 / 实用工具+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 数字审计清单 + 数据量曲线 + 投稿前检查清单</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 数字审计清单（论文每个数字 → 来源 → 三处是否一致）</span>
+| 数字 | 出现位置 | 来源实验 | 日志真值 | 一致? |
+|---|---|---|---|---|
+| 78.5 mAP | Abstract/Intro贡献/Table1 | 最终方法3-seed | 78.5 | ✓ |
+| +1.3 | Abstract/正文4.2 | vs最强baseline | +1.3 | ✓ |
+| 21.4 FPS | Intro/Table3 | 单4090实测 | 21.4 | ✓ |
+| 75.9（旧） | 正文4.2残留 | 早期版本 | 应为76.2 | ✗→改 |
+
+<span class="gh"># 数据量曲线（少数据也有效=小样本卖点）</span>
+数据比例:  10%    30%    50%    100%
+你的方法:  68.2   74.8   77.1   78.5    ← 30%已接近全量
+baseline:  61.5   69.0   72.8   76.8    ← 少数据差距更大
+结论:我们的方法在30%数据下达74.8(接近全量78.5),且在少数据下相对baseline优势更大 → 数据友好
+
+<span class="gh"># 投稿前检查清单（逐项打勾）</span>
+□ 格式符合期刊模板  □ 页数不超限  □ 图表编号连续、引用对得上
+□ 引用格式统一(BibTeX)、无漏引  □ 拼写语法过一遍  □ 作者信息/致谢/补充材料齐全
+□ 数字审计通过(正文=表格=日志)  □ 残余问题清零
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 数字审计脚本 + WBF 融合骨架</h2>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="c1"># ① 数字审计：从 LaTeX 抓数字 + 和日志真值比对</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">audit_numbers</span><span class="p">(</span><span class="n">tex_path</span><span class="p">,</span> <span class="n">log_values</span><span class="p">):</span>  <span class="c1"># log_values={&quot;main_mAP&quot;:78.5,...}</span>
+    <span class="n">tex</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">tex_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">nums</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+\.\d+&#39;</span><span class="p">,</span> <span class="n">tex</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;论文数字 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">))</span><span class="si">}</span><span class="s2"> 种；请人工核对每个是否=日志真值：&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nums</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s2">&quot;⚠️核对来源&quot;</span> <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">log_values</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;✓在日志中&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">flag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;提醒:正文散落的&#39;提升X%&#39;也要核;改完全局复核三处一致&quot;</span><span class="p">)</span>
+
+<span class="c1"># ② WBF 融合（检测多模型集成，用现成库）</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wbf_ensemble</span><span class="p">(</span><span class="n">boxes_list</span><span class="p">,</span> <span class="n">scores_list</span><span class="p">,</span> <span class="n">labels_list</span><span class="p">,</span> <span class="n">iou_thr</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">skip_thr</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">ensemble_boxes</span><span class="w"> </span><span class="kn">import</span> <span class="n">weighted_boxes_fusion</span>   <span class="c1"># pip install ensemble-boxes</span>
+    <span class="c1"># boxes_list: 各模型的框（归一化坐标）; 返回融合后的框</span>
+    <span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">weighted_boxes_fusion</span><span class="p">(</span>
+        <span class="n">boxes_list</span><span class="p">,</span> <span class="n">scores_list</span><span class="p">,</span> <span class="n">labels_list</span><span class="p">,</span> <span class="n">iou_thr</span><span class="o">=</span><span class="n">iou_thr</span><span class="p">,</span> <span class="n">skip_box_thr</span><span class="o">=</span><span class="n">skip_thr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">labels</span>   <span class="c1"># 调 iou_thr/skip_thr 找最佳；模型差异越大收益越大</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">audit_numbers</span><span class="p">(</span><span class="s2">&quot;paper/main.tex&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;main_mAP&quot;</span><span class="p">:</span><span class="mf">78.5</span><span class="p">,</span> <span class="s2">&quot;delta&quot;</span><span class="p">:</span><span class="mf">1.3</span><span class="p">,</span> <span class="s2">&quot;fps&quot;</span><span class="p">:</span><span class="mf">21.4</span><span class="p">})</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 数字审计脚本辅助找出论文里所有数字、提示核对来源（防直接reject的致命伤）;② WBF 融合多模型检测框（调 IoU/skip 阈值、模型差异越大越好）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D169</strong>：① 为什么投稿前要做数字审计（数字对不上的后果）？② 为什么你的论文特别容易数字不一致？③ 不一致以哪个为准？④ 数字审计为什么也是对学术诚信的保护？④ 为什么说数字审计也是对学术诚信的保护？</li>
+<li><strong>D170</strong>：① 投稿版 v2.0 前要清零什么（残余问题）？② 4090 跑大 backbone OOM 怎么办？为什么论文主结果不用大 backbone？</li>
+<li><strong>D171</strong>：① 三类加分补实验是什么？② 为什么数据量曲线“尤其有价值”、贴合你什么定位（小样本/高效）？③ 效率曲线为什么几乎零成本？为什么说这两条曲线是你研究定位的实证落点？</li>
+<li><strong>D172</strong>：① “核心放正文、扩展放附录”怎么分工？② 整合补实验后要重新检查什么（新数字/引用编号）？</li>
+<li><strong>D173</strong>：① 为什么 Abstract/Intro 必须人人能懂？② “知识的诅咒”是什么、非专业读者测试怎么破解它？</li>
+<li><strong>D174</strong>：① 5 模型 Ensemble 为什么要 backbone 差异大（互补性）？② 检测任务融合框为什么用 WBF 而非简单平均/NMS？③ 4090 训不了 5 个怎么办（复用已训）？</li>
+<li><strong>D175</strong>：① 投稿前检查清单包含哪些项？② 为什么要清单化（而非凭记忆）？③ 为什么越低级的问题越不该出现在投稿里？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>论文数字对不上被质疑</td>
+<td>改方法后没全局更新</td>
+<td>数字审计：列清单逐一核对日志真值，以最终实验为准</td>
+</tr>
+<tr>
+<td>只核表格漏了正文数字</td>
+<td>正文散落数字易残留旧值</td>
+<td>脚本grep全文数字，正文“提升X%”也核</td>
+</tr>
+<tr>
+<td>大backbone OOM(4090)</td>
+<td>显存不足</td>
+<td>降batch+梯度累积+混合精度+降分辨率</td>
+</tr>
+<tr>
+<td>补实验和主实验不可比</td>
+<td>设置不一致</td>
+<td>补实验只变目标变量，其余与主实验一致</td>
+</tr>
+<tr>
+<td>数据量实验波动大</td>
+<td>少数据单seed</td>
+<td>关键比例多seed取平均</td>
+</tr>
+<tr>
+<td>Abstract非专业读者读不懂</td>
+<td>知识的诅咒</td>
+<td>非专业读者测试，卡点通俗化重写</td>
+</tr>
+<tr>
+<td>5模型Ensemble收益小</td>
+<td>模型太相似</td>
+<td>用backbone结构差异大的（ResNet/Swin/ConvNeXt混搭）</td>
+</tr>
+<tr>
+<td>检测Ensemble融合变差</td>
+<td>简单合并框</td>
+<td>用WBF，调IoU/skip阈值</td>
+</tr>
+<tr>
+<td>投稿前漏检格式/编号</td>
+<td>凭记忆没清单</td>
+<td>投稿前检查清单逐项打勾</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>判断结果可不可信</h4><p>这一周会产生需要判断"有没有提升"的数字。<b>少于 3 个 seed 不下结论；看同 seed 的<u>配对差</u>，不要只看 mean±std</b>——只看边际方差会误杀真正有效的方法。判定工具见 <a href="w9.html">W9–W12</a>。</p><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p><h4>竞赛</h4><p>每个 trick 单独记一行分数增量，并记<b>耗时</b>和<b>要不要保留</b>——诚实记录没用的 trick 比只报有用的更有参考价值。表格格式见 <a href="w29.html">W29</a>。</p></section>
+<div class="pager"><a class="prev" href="w24.html"><span class="dir">← 上一篇</span><span class="nm">W24 论文 v1 定稿 + 竞赛中期</span></a><a class="next" href="w26.html"><span class="dir">下一篇 →</span><span class="nm">W26 补实验收尾 + 进投稿系统 + 竞赛冲刺</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d169">D169 周一</a><a class="sub" href="#d169-am">上午 建立“数字清单”：列出论文里所有</a><a class="sub" href="#d169-noon">中午 逐一交叉验证：论文数字 ↔ 实验</a><a class="sub" href="#d169-pm">晚上 修正所有不一致 + 锁定数字</a><a href="#d170">D170 周二</a><a class="sub" href="#d170-am">上午 集中清理所有历史 review </a><a class="sub" href="#d170-noon">中午 出投稿版 v2.0（里程碑版本）</a><a class="sub" href="#d170-pm">晚上 竞赛改进：换更强 backbon</a><a href="#d171">D171 周三</a><a class="sub" href="#d171-am">上午 判断要补哪些加分实验（优先数据量</a><a class="sub" href="#d171-noon">中午 启动补充实验 + 竞赛迭代</a><a class="sub" href="#d171-pm">晚上 监控补实验 + 竞赛提交</a><a href="#d172">D172 周四</a><a class="sub" href="#d172-am">上午 把补实验结果整合进 supple</a><a class="sub" href="#d172-noon">中午 论文 v2.0 最终检查（整合后</a><a class="sub" href="#d172-pm">晚上 竞赛继续迭代</a><a href="#d173">D173 周五</a><a class="sub" href="#d173-am">上午 非专业读者“5 分钟测试”</a><a class="sub" href="#d173-noon">中午 据反馈微调 Abstract/I</a><a class="sub" href="#d173-pm">晚上 竞赛迭代</a><a href="#d174">D174 周六</a><a class="sub" href="#d174-am">上午 准备 5 个差异化模型 + 理解</a><a class="sub" href="#d174-noon">中午 跑 5 模型 Ensemble </a><a class="sub" href="#d174-pm">晚上 提交 5 模型 Ensemble</a><a href="#d175">D175 周日</a><a class="sub" href="#d175-am">上午 W25 周复盘</a><a class="sub" href="#d175-noon">中午 列投稿前检查清单（逐项过）</a><a class="sub" href="#d175-pm">晚上 准备下周投稿</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

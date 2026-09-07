@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="3" data-week="56">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W56 · 论文写到 v0.5 + GitHub 更新 +  · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段三 · 深化期</span><span>M14 联系深化</span><span>·</span><span>Week 56</span><span>·</span><span>D386–D392</span></div><h1 class="title">论文写到 v0.5 + GitHub 更新 + M14 月度复盘 —— 用确定的产出填满等待，给 M14 画上句号</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆 · 单周文件 · M14 收官）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="386" data-k="am" title="D386 上午段"></i><i data-d="386" data-k="noon" title="D386 中午段"></i><i data-d="386" data-k="pm" title="D386 晚上段"></i></span><span class="sday"><i data-d="387" data-k="am" title="D387 上午段"></i><i data-d="387" data-k="noon" title="D387 中午段"></i><i data-d="387" data-k="pm" title="D387 晚上段"></i></span><span class="sday"><i data-d="388" data-k="am" title="D388 上午段"></i><i data-d="388" data-k="noon" title="D388 中午段"></i><i data-d="388" data-k="pm" title="D388 晚上段"></i></span><span class="sday"><i data-d="389" data-k="am" title="D389 上午段"></i><i data-d="389" data-k="noon" title="D389 中午段"></i><i data-d="389" data-k="pm" title="D389 晚上段"></i></span><span class="sday"><i data-d="390" data-k="am" title="D390 上午段"></i><i data-d="390" data-k="noon" title="D390 中午段"></i><i data-d="390" data-k="pm" title="D390 晚上段"></i></span><span class="sday"><i data-d="391" data-k="am" title="D391 上午段"></i><i data-d="391" data-k="noon" title="D391 中午段"></i><i data-d="391" data-k="pm" title="D391 晚上段"></i></span><span class="sday"><i data-d="392" data-k="am" title="D392 上午段"></i><i data-d="392" data-k="noon" title="D392 中午段"></i><i data-d="392" data-k="pm" title="D392 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：欢迎进入 <strong>W56（M14 收官周，也是阶段三过半的节点）</strong>！上一周（W55）你正式提交了访问申请、启动了第三篇论文的写作（Method + Experiment）。这一周做三件事：① ★ <strong>把论文写到 v0.5</strong>（等访问回复的同时，复用前两篇经验快速写 Experiment 完善 + Introduction + Related Work，达到“初稿框架完整”）；② <strong>GitHub 更新 + 社区互动</strong>（保持活跃和被动存在感）；③ ★ <strong>M14 月度复盘 + 计划 M15</strong>（用<a href="../appendix-e.html">附录 E</a> 模板复盘 M14，对照硬交付清单 6 项、评估连接进展，规划 M15）。★ W56 的主线：“等访问回复的不确定期里，用确定的论文产出把它填满，并对 M14 做一次诚实的复盘，给阶段三的前半画上句号。”
+<strong>本周科研能力目标</strong>（你原计划，保留）：第三课题论文 v0.5（Method + Experiment + Intro + Related Work 初稿框架完整）+ GitHub 更新 + M14 月度复盘。
+<strong>承上</strong>：W55 你提交了访问申请、写了论文核心章节（Method + Experiment）。<strong>本周把论文写到 v0.5、做 M14 月度复盘，给 M14 收官、为 M15 衔接。</strong></p>
+<p><strong>🧩 贯穿线索</strong>：★ <strong>为什么等访问回复时要抓紧写论文</strong>——论文是你完全掌控、不依赖任何人的核心产出；不管访问成不成，这篇论文都是你的硬资产（成了是合作基础，没成是下一轮联系的新筹码）。把不确定的等待期用确定的产出填满，是阶段三最稳的活法。论文复用前两篇经验快速产出（Intro/Related Work 都有现成的写法和文献分级可复用）。★ M14 月复盘用<a href="../appendix-e.html">附录 E</a>，对照硬交付清单 6 项、评估连接进展（汇报→执行力展示→访问申请走到哪），据结果定 M15 策略。守核心延后、单卡高效照旧。下一程 M15（W57-60）是论文冲刺 + 访问确认 + 第三篇投稿。</p>
+<p><strong>📌 本周结构</strong>：D386 Experiment 章完善 + 访问跟进 + Introduction 启动；D387 Introduction 完成 + GitHub 更新 + Related Work 启动；D388 Related Work 完成 + 各章串联；D389 论文 v0.5 框架检查 + Abstract/Conclusion 占位；D390 论文 v0.5 完善 + GitHub + 实验补充；D391 论文 v0.5 收尾 + 第三课题盘点；D392 ★ M14 月度复盘（<a href="../appendix-e.html">附录 E</a>）+ 对照硬交付 6 项 + 计划 M15。</p>
+</blockquote>
+<hr />
+<h2>🧭 W56 总览：论文写到 v0.5 → GitHub 更新 → M14 月度复盘</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这一周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>★ 论文写到 v0.5（Intro + Related Work + 完善）</td>
+<td>论文 v0.5（初稿框架完整）</td>
+<td>不依赖任何人的核心产出</td>
+</tr>
+<tr>
+<td>GitHub 更新 + 社区互动</td>
+<td>活跃的仓库 + 被动存在感</td>
+<td>保持影响力</td>
+</tr>
+<tr>
+<td>★ M14 月度复盘（<a href="../appendix-e.html">附录 E</a>）+ 对照硬交付</td>
+<td>M14 月报 + 连接进展评估</td>
+<td>收官复盘、校准方向</td>
+</tr>
+<tr>
+<td>计划 M15</td>
+<td>M15 计划</td>
+<td>衔接论文冲刺 + 访问确认</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D386 Experiment 完善 + 访问跟进 + Intro 启动；D387 Intro 完成 + GitHub + Related Work 启动；D388 Related Work 完成 + 各章串联；D389 v0.5 框架检查 + Abstract/Conclusion；D390 v0.5 完善 + GitHub + 实验补充；D391 v0.5 收尾 + 第三课题盘点；D392 ★ M14 月复盘 + 对照硬交付 + 计划 M15。<strong>核心心态：这一周是“在等待中保持确定”——访问申请发出去了，回复要等，而等待最容易让人焦虑、停滞。但你不一样:★ 你把等待期用确定的论文产出填满——复用前两篇的经验，快速把 Introduction、Related Work 写出来，把论文推到 v0.5（初稿框架完整）。这篇论文是你完全掌控、不依赖任何人的核心资产：访问成了它是你带去合作的基础，访问没成它也是你下一轮联系/申请的新筹码。这就是阶段三最稳的活法——把不确定的等待，用确定的产出对冲。同时，GitHub 保持活跃、社区保持存在感（被动影响力）。最后，用<a href="../appendix-e.html">附录 E</a> 对 M14 做一次诚实的复盘：对照硬交付清单 6 项、评估连接进展（汇报→执行力展示→访问申请走到哪了），据结果校准 M15 的策略。★ 走到这里，阶段三过半——从 W48 第一封冷邮件到正式提交访问申请、第三篇论文写到 v0.5，你把“遥远的连接”一步步推进到了“临门一脚”。M14 收官，是你对这半程努力的盘点，也是下半程冲刺的起点。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d386" data-d="386"><header class="day-head"><span class="dnum">D386</span><h2 class="day-t">周一 · 论文写作——Experiment 章完善 + 访问跟进 + Introduction 启动</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 第一天，论文向 v0.5 推进——① 上午 Experiment 章完善（补充分析/可视化）；② 中午访问申请状态追踪 + 邮件处理（发出后持续跟进）；③ 晚上 Introduction 启动（背景→问题→Gap→你的贡献→论文结构）。提醒：访问申请发出后进入等待期——别干等，把精力放在论文上（你完全掌控的产出）；今天完善 Experiment、启动 Introduction，向 v0.5 迈进。</p>
+</blockquote>
+</div><section class="slot" id="d386-am" data-d="386" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D386 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Experiment 章完善（补充分析/可视化）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Experiment 章还要完善什么）</h4><div class="blk-b"><ul>
+<li>上周（D384）你搭好了 Experiment 章框架（实验设置 + 主结果 + 消融）。今天<strong>完善</strong>：① <strong>补充分析</strong>（对主结果和消融的更深入分析——为什么提升、哪些场景效果好/差、和 baseline 的差异说明什么）；② <strong>可视化</strong>（如适用：结果对比图、可视化样例、曲线图——让结果更直观有说服力）；③ ★ <strong>突出卖点</strong>（单卡高效的 Params/FPS 对比、性能-效率权衡——你的差异化优势）。<strong>Experiment 章是论文的“证据中心”——完善的分析和可视化让你的方法更有说服力。</strong></li>
+<li><strong>为什么完善分析和可视化</strong>：审稿人看 Experiment 不只看数字，更看“你对结果的理解深不深”——好的分析（为什么、何时有效）和清晰的可视化，体现研究的深度和质量。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 补充主结果分析（为什么提升、场景差异、说明什么）；② 补充消融分析（各部分贡献的解释）；③ 加可视化（对比图/样例/曲线，如适用）；④ ★ 突出单卡高效卖点（Params/FPS）；⑤ 让 Experiment 章证据充分、有说服力。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Experiment 章完善——补充了分析（为什么/何时有效）、加了可视化、突出了单卡高效卖点，证据充分。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>只有数字没分析（浅）→ 补充分析（为什么提升、场景差异）。</li>
+<li>不做可视化（不直观）→ 加对比图/样例/曲线。</li>
+<li>不突出单卡高效卖点（埋没优势）→ ★ Params/FPS 对比。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>分析写什么？→ 为什么提升、何时有效、和 baseline 差异说明什么；卖点怎么突出？→ 单卡 4090 的 Params/FPS vs 大模型方法。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了 Experiment 章</strong>。<strong>做了</strong>（补充主结果/消融分析 + 加可视化 + 突出单卡高效卖点）、<strong>学了</strong>（Experiment 完善看分析深度和可视化、突出差异化卖点）、<strong>会了</strong>（把实验章完善为有说服力的证据中心）。</p>
+</div></section></section><section class="slot" id="d386-noon" data-d="386" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D386 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问申请状态追踪 + 邮件处理</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>访问申请发出后，中午<strong>追踪状态 + 处理邮件</strong>——① 检查有无老师回复访问申请（有→认真回应；暂无→耐心等，正常的，老师忙）；② 持续跟进其他线索（执行力展示的后续、其他对接）；③ 更新追踪表（访问申请状态：已发/已读/已回）。★ <strong>发出后别频繁催</strong>——给老师时间，保持耐心；同时把精力放在论文上。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查访问申请有无回复（有→回应；无→耐心等）；② 跟进其他线索；③ 更新追踪表（申请状态）；④ 不频繁催（给时间）；⑤ 控时长（核心是论文）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问申请状态追踪 + 邮件处理到位——有回复认真回应、无回复耐心等、追踪表更新、不频繁催。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 频繁催问（烦老师）→ 耐心等，给时间；② 干等不做事（焦虑）→ 精力放论文；③ 不追踪状态 → 更新追踪表。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>老师没回怎么办？→ 正常（老师忙），耐心等 1-2 周再礼貌跟进；焦虑？→ 把注意力转到论文产出（你掌控的）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>追踪了访问申请、处理了邮件</strong>。<strong>做了</strong>（检查回复 + 跟进 + 更新追踪 + 不频繁催）、<strong>学了</strong>（发出后耐心等、不频繁催、精力放论文）、<strong>会了</strong>（在等待期管理申请状态、保持耐心和专注）。</p>
+</div></section></section><section class="slot" id="d386-pm" data-d="386" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D386 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Introduction 启动（背景→问题→Gap→贡献→结构）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Introduction 怎么写，复用前两篇）</h4><div class="blk-b"><ul>
+<li>晚上<strong>启动 Introduction</strong>——★ 复用你前两篇 Intro 的写法（你写过两篇，驾轻就熟）：① <strong>背景</strong>（研究领域的背景、重要性）；② <strong>问题</strong>（当前面临的问题/挑战）；③ <strong>Gap</strong>（已有方法的不足/空白——你的工作要填补的）；④ <strong>你的方法和贡献</strong>（你提出了什么、解决了什么、贡献是什么——通常 3-4 点 bullet）；⑤ <strong>论文结构</strong>（后续章节安排）。<strong>Introduction 是论文的“门面”——讲清“为什么这个问题重要、已有方法差在哪、你怎么解决、贡献是什么”。</strong></li>
+<li><strong>为什么复用前两篇</strong>：Intro 的结构（背景→问题→Gap→贡献→结构）是通用的，你前两篇写过、知道怎么组织——第三篇直接套用这个结构，快速产出。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 复用前两篇 Intro 结构（背景→问题→Gap→贡献→结构）；② 写背景 + 问题（领域重要性 + 当前挑战）；③ 写 Gap（已有方法不足，你要填补的）；④ 写你的方法和贡献（3-4 点 bullet）；⑤ 启动，明天完成。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Introduction 启动——复用前两篇结构，写了背景/问题/Gap/贡献框架，逻辑清晰（为什么重要、差在哪、怎么解决）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① Intro 从零摸索（慢）→ 复用前两篇结构；② 不点 Gap（没动机）→ 写已有方法的不足；③ 贡献不清 → 3-4 点明确的贡献 bullet。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Intro 怎么起？→ 背景→问题→Gap→贡献→结构（前两篇的套路）；Gap 怎么写？→ 已有方法在 X 上不足/没考虑 Y，你的工作填补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了 Introduction</strong>。<strong>做了</strong>（复用前两篇结构 + 写背景问题 + 写 Gap + 写贡献框架）、<strong>学了</strong>（Intro 复用结构快速产出、背景→问题→Gap→贡献→结构、点 Gap 立动机）、<strong>会了</strong>（复用经验快速搭起论文引言）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文 Introduction 写作（复用前两篇·背景→问题→Gap→贡献）</strong>：第三篇 Intro 复用前两篇结构快速产出——①背景（研究领域背景 + 重要性）②问题（当前面临的挑战）③Gap（已有方法的不足/空白，你要填补的——立起你工作的动机）④你的方法和贡献（提出了什么 + 解决了什么 + 贡献 3-4 点 bullet）⑤论文结构（后续章节安排）。★ Intro 是论文门面：讲清“为什么这问题重要、已有方法差在哪、你怎么解决、贡献是什么”。复用前两篇的套路，驾轻就熟、快速搭起。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Experiment 章完善（分析 + 可视化 + 单卡高效卖点）✅ 访问申请状态追踪 + 邮件处理 ✅ Introduction 启动（背景/问题/Gap/贡献框架）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D386</summary><textarea data-note="d386" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d387" data-d="387"><header class="day-head"><span class="dnum">D387</span><h2 class="day-t">周二 · 论文写作——Introduction 完成 + GitHub 更新 + Related Work 启动</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 第二天，继续推进论文——① 上午 Introduction 完成（在昨天框架上写完整、打磨）；② 中午跟进 + GitHub 仓库更新（README/进展）；③ 晚上 Related Work 启动（复用 W49 文献 A/B/C 分级组织）。提醒：Introduction 完成后论文的“门面”就立住了；Related Work 复用你 W49 的文献分级，把读过的相关论文组织成综述——又是一处“复用经验快速产出”。</p>
+</blockquote>
+</div><section class="slot" id="d387-am" data-d="387" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D387 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Introduction 完成（写完整 + 打磨）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>在昨天的 Introduction 框架上<strong>写完整、打磨</strong>——① 把背景/问题/Gap/贡献/结构各部分写成完整段落（流畅、有逻辑）；② ★ 贡献部分精炼有力（3-4 点 bullet，每点说清你做了什么、有什么价值——这是审稿人快速抓你贡献的地方）；③ 打磨语言（学术、清晰、有说服力）；④ 确保 Intro 自洽（引出后续章节）。<strong>完成的 Introduction 让读者在第一页就明白你的工作价值。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 把框架写成完整段落（背景/问题/Gap/贡献/结构）；② ★ 精炼贡献 bullet（3-4 点，做了什么 + 价值）；③ 打磨语言（学术清晰）；④ 确保引出后续章节；⑤ Introduction 完成。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Introduction 完成——各部分完整流畅、贡献精炼有力、语言打磨、引出后续，论文门面立住。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 贡献 bullet 含糊（抓不住）→ 精炼、说清做了什么+价值；② 语言不学术（口语化）→ 学术清晰；③ Intro 和后续脱节 → 引出后续章节。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>贡献怎么写有力？→ “我们提出 X，解决了 Y，在 Z 上提升了 W”；语言不够学术？→ 参考前两篇 Intro 的表述。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了 Introduction</strong>。<strong>做了</strong>（写完整段落 + 精炼贡献 bullet + 打磨语言 + 引出后续）、<strong>学了</strong>（Intro 完成看贡献精炼和语言、门面立住）、<strong>会了</strong>（写出有说服力的论文引言）。</p>
+</div></section></section><section class="slot" id="d387-noon" data-d="387" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D387 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">跟进 + GitHub 仓库更新（README/进展）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>跟进 + GitHub 更新</strong>——① 跟进访问申请和其他线索（同昨天，耐心）；② ★ <strong>GitHub 仓库更新</strong>（保持活跃：更新 README、写进展、如适用发 release）。<strong>GitHub 是你的“被动名片”</strong>——保持活跃（哪怕小更新）让访问/合作的老师查看时看到一个持续维护、有产出的仓库，加分。副线控时长（核心是论文 v0.5）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 跟进访问申请/其他线索（耐心）；② 更新 GitHub README（最新进展/成果）；③ 如适用发 release/更新代码；④ 保持仓库活跃整洁；⑤ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>跟进到位 + GitHub 更新——README/进展更新、仓库活跃整洁，被动名片维护好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① GitHub 长期不更新（显荒废）→ 保持活跃（小更新也行）；② 花太多时间在 GitHub（喧宾夺主）→ 控时长，核心是论文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>GitHub 更新啥？→ README 最新进展/成果、代码小优化；没空多弄？→ 小更新保持活跃即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跟进了线索、更新了 GitHub</strong>。<strong>做了</strong>（跟进申请 + 更新 README/进展 + 保持活跃 + 控时长）、<strong>学了</strong>（GitHub 是被动名片、保持活跃加分、副线控时长）、<strong>会了</strong>（维护被动影响力而不喧宾夺主）。</p>
+</div></section></section><section class="slot" id="d387-pm" data-d="387" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D387 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Related Work 启动（复用 W49 文献 A/B/C 分级）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Related Work 怎么写，复用 W49）</h4><div class="blk-b"><ul>
+<li>晚上<strong>启动 Related Work</strong>——★ 复用你 W49 的文献 A/B/C 分级：① 你在 W49 读了大量相关论文、做了 A/B/C 分级（A=最相关/B=相关/C=背景）；② <strong>把这些论文组织成 Related Work</strong>——按主题/方法分类综述（如“X 类方法…”“Y 类方法…”），点出它们的贡献和不足（引向你的工作）；③ ★ <strong>含目标组的相关工作</strong>（如 RingMo、目标组的论文——既显你了解领域，也呼应和他们的关联）；④ 综述要有逻辑（不是论文罗列，而是按脉络组织、引向你的方法）。<strong>Related Work 展示你对领域的把握，并把你的工作定位在已有工作的脉络中。</strong></li>
+<li><strong>为什么复用 W49</strong>：你 W49 已经读了、分级了相关文献——Related Work 直接基于这些组织，不用从零检索，快速产出。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 调出 W49 文献 A/B/C 分级；② 按主题/方法组织成 Related Work（分类综述）；③ 点出各类工作的贡献和不足（引向你的工作）；④ ★ 含目标组的相关工作（RingMo 等）；⑤ 启动，明天完成。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Related Work 启动——复用 W49 分级，按主题组织综述、点贡献和不足、含目标组工作，有脉络（非罗列）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① Related Work 从零检索（重复劳动）→ 复用 W49 分级；② 论文罗列无脉络 → 按主题组织、引向你的工作；③ 不含目标组工作 → ★ 含 RingMo 等（显了解 + 呼应关联）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么组织？→ 按方法类别分小节，每类综述 + 不足；含哪些目标组工作？→ RingMo（孙显组）等相关论文。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了 Related Work</strong>。<strong>做了</strong>（调出 W49 分级 + 按主题组织 + 点贡献不足 + 含目标组工作）、<strong>学了</strong>（Related Work 复用 W49 分级、按脉络组织非罗列、含目标组工作）、<strong>会了</strong>（复用文献积累快速搭起相关工作综述）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Related Work 复用 W49 文献分级（按脉络组织）</strong>：第三篇 Related Work 复用 W49 的文献 A/B/C 分级快速产出——①调出 W49 读过/分级的相关文献②按主题/方法分类综述（“X 类方法…”“Y 类方法…”）③点出各类工作的贡献和不足（引向你的工作）④★ 含目标组的相关工作（RingMo[孙显组]等，显你了解领域 + 呼应关联）。★ 要有脉络（按主题组织、引向你的方法），不是论文罗列。把你的工作定位在已有工作的脉络中。复用 W49 积累，不用从零检索。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Introduction 完成（贡献精炼、门面立住）✅ 跟进 + GitHub 更新（README/进展）✅ Related Work 启动（复用 W49 分级、含目标组工作）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D387</summary><textarea data-note="d387" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d388" data-d="388"><header class="day-head"><span class="dnum">D388</span><h2 class="day-t">周三 · 论文写作——Related Work 完成 + 各章串联</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 第三天，论文各章成形——① 上午 Related Work 完成（写完整、含目标组工作）；② 中午访问跟进 + 社区互动；③ 晚上论文各章串联（Method + Experiment + Intro + Related Work 整体性检查）。提醒：Related Work 完成后，论文四个核心章节（Method/Experiment/Intro/Related Work）就齐了；今晚串联各章，确保整体逻辑连贯、术语统一——v0.5 的雏形就出来了。</p>
+</blockquote>
+</div><section class="slot" id="d388-am" data-d="388" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D388 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Related Work 完成（写完整 + 含目标组工作）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>在昨天框架上<strong>完成 Related Work</strong>——① 把各主题/方法类别写成完整的综述段落（有逻辑、有评述）；② ★ 含目标组的相关工作（RingMo 等——在综述中自然提及，既显了解领域，也呼应你和他们的关联）；③ 每类工作点出不足、引向你的方法（“已有方法在 X 上不足，本文…”）；④ 控制篇幅（综述精炼，不冗长）。<strong>完成的 Related Work 把你的工作稳稳定位在领域脉络中。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 把框架写成完整综述段落（分类 + 评述）；② ★ 含目标组工作（自然提及）；③ 每类点不足、引向你的方法；④ 控篇幅（精炼）；⑤ Related Work 完成。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Related Work 完成——分类综述完整有评述、含目标组工作、引向你的方法、篇幅精炼。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 综述只罗列不评述 → 点贡献和不足；② 篇幅冗长 → 精炼；③ 不引向你的方法 → 每类点不足、过渡到你的工作。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么评述？→ 每类工作做了什么 + 不足是什么；怎么引向你？→ “已有方法在 X 不足/没考虑 Y，本文提出…”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了 Related Work</strong>。<strong>做了</strong>（写完整综述 + 含目标组工作 + 引向你的方法 + 控篇幅）、<strong>学了</strong>（Related Work 完成看评述和定位、含目标组工作、引向你的方法）、<strong>会了</strong>（写出有评述、有定位的相关工作综述）。</p>
+</div></section></section><section class="slot" id="d388-noon" data-d="388" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D388 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问跟进 + 社区互动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>访问跟进 + 社区互动</strong>——① 跟进访问申请（耐心，如发出已超 1 周可礼貌跟进一次）；② ★ 社区互动（回 GitHub Issue、知乎/技术社区互动——保持被动存在感）；③ 更新追踪表。<strong>社区互动是低成本的存在感维护</strong>——回应、互动让你在社区/领域里“被看见”，副线控时长。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 跟进访问申请（耐心，超 1 周可礼貌跟进）；② 回 GitHub Issue/社区互动；③ 保持被动存在感；④ 更新追踪表；⑤ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进 + 社区互动到位——申请耐心跟进、社区互动维护存在感、追踪表更新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 申请频繁催 → 耐心（超 1 周礼貌跟进一次即可）；② 社区不互动（存在感弱）→ 回 Issue/适度互动；③ 花太多时间 → 控时长。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>该跟进访问吗？→ 超 1 周没回可礼貌跟进一次（“想确认是否收到，期待您的考虑”）；社区互动做啥？→ 回 Issue、技术讨论。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跟进了访问、互动了社区</strong>。<strong>做了</strong>（耐心跟进申请 + 社区互动 + 维护存在感 + 更新追踪）、<strong>学了</strong>（申请耐心跟进、社区互动低成本维护存在感、控时长）、<strong>会了</strong>（在等待期维护连接和影响力）。</p>
+</div></section></section><section class="slot" id="d388-pm" data-d="388" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D388 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">论文各章串联（整体性检查）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要串联各章）</h4><div class="blk-b"><ul>
+<li>论文四个核心章节（Method/Experiment/Intro/Related Work）分别写好后，要<strong>串联检查整体性</strong>：① <strong>逻辑连贯</strong>（Intro 提出的问题/贡献，Method 实现了、Experiment 验证了、Related Work 定位了——前后呼应）；② ★ <strong>术语统一</strong>（同一概念全文用同一术语/符号，别 Method 叫 A、Experiment 叫 B）；③ <strong>图表编号/引用</strong>（图表编号连续、正文都引用了）；④ <strong>过渡自然</strong>（章节之间衔接顺）。<strong>串联让分散写的各章成为一个连贯的整体——v0.5 的雏形。</strong></li>
+<li><strong>为什么这步重要</strong>：各章分开写容易“局部好、整体散”（术语不一致、逻辑没呼应）——串联检查把它们拧成一个连贯的整体，是 v0.5“初稿框架完整”的关键。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 通读全文，检查逻辑连贯（Intro/Method/Experiment/Related Work 呼应）；② ★ 统一术语/符号；③ 检查图表编号/引用；④ 检查章节过渡；⑤ 记下要改的（v0.5 完善时处理）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文各章串联检查完成——逻辑连贯、术语统一、图表编号/引用一致、过渡自然，v0.5 雏形成形。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 各章不串联（整体散）→ 通读串联；② 术语不一致 → ★ 统一术语/符号；③ 图表编号乱 → 编号连续、正文引用。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么查连贯？→ Intro 的贡献是否被 Method/Experiment 兑现；术语怎么统一？→ 列关键术语表，全文统一。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>串联了论文各章</strong>。<strong>做了</strong>（通读检查连贯 + 统一术语 + 查图表编号 + 查过渡 + 记待改）、<strong>学了</strong>（串联拧成连贯整体、术语统一、避免局部好整体散）、<strong>会了</strong>（把分散写的各章串联成连贯的论文整体）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文各章串联（整体一致性）</strong>：各章分开写好后串联成连贯整体——①逻辑连贯（Intro 提的问题/贡献，Method 实现了、Experiment 验证了、Related Work 定位了，前后呼应）②★ 术语/符号统一（同一概念全文同一术语，别 Method 叫 A、Experiment 叫 B）③图表编号连续 + 正文都引用④章节过渡自然。★ 各章分开写易“局部好整体散”，串联检查把它们拧成连贯整体——这是 v0.5“初稿框架完整”的关键。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Related Work 完成（评述 + 含目标组工作）✅ 访问跟进 + 社区互动 ✅ 论文各章串联（连贯/术语/图表，v0.5 雏形）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D388</summary><textarea data-note="d388" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d389" data-d="389"><header class="day-head"><span class="dnum">D389</span><h2 class="day-t">周四 · 论文 v0.5 框架检查 + Abstract/Conclusion 占位</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 第四天，补全 v0.5 框架——① 上午论文整体检查（v0.5 初稿框架完整性：四章 + 逻辑）；② 中午访问跟进；③ 晚上 Abstract + Conclusion 占位/初稿（v0.5 框架补全）。提醒：v0.5 = 初稿框架完整（Method + Experiment + Intro + Related Work + Abstract/Conclusion 占位），不是完美——今天补上 Abstract/Conclusion，让论文框架齐全。</p>
+</blockquote>
+</div><section class="slot" id="d389-am" data-d="389" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D389 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文整体检查（v0.5 初稿框架完整性）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（v0.5 框架检查什么）</h4><div class="blk-b"><ul>
+<li>上午<strong>检查论文 v0.5 的初稿框架完整性</strong>——① <strong>章节齐全</strong>（Method/Experiment/Intro/Related Work 都有，Abstract/Conclusion 待补）；② <strong>核心内容到位</strong>（每章的核心内容写了，哪怕细节待完善）；③ <strong>逻辑闭环</strong>（Intro 提的问题 → Method 解决 → Experiment 验证 → 贡献兑现）；④ ★ <strong>明确 v0.5 标准</strong>（初稿框架完整，不是完美——后续随完整实验和打磨到投稿版）。<strong>v0.5 框架检查确认论文的“骨架”立住了。</strong></li>
+<li><strong>为什么明确 v0.5 是“框架完整”</strong>：v0.5 的目标是“把论文的骨架快速搭完整”，不是一步到位写到投稿质量——明确这个标准，避免在某一章死磕完美而拖慢整体框架的完成。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查章节齐全（四章 + Abstract/Conclusion 待补）；② 检查核心内容到位；③ 检查逻辑闭环（问题→解决→验证→贡献）；④ ★ 对标 v0.5 标准（框架完整非完美）；⑤ 列出待补/待完善（晚上补 Abstract/Conclusion）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文 v0.5 框架检查完成——章节齐全、核心内容到位、逻辑闭环，明确 v0.5 标准，待补项列出。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 死磕某章完美（拖慢框架）→ v0.5 是框架完整、先搭骨架；② 逻辑不闭环（问题没解决）→ 检查 Intro→Method→Experiment 呼应；③ 不列待补项 → 列出（晚上/后续处理）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v0.5 算完成吗？→ 四章 + Abstract/Conclusion 占位、逻辑闭环即可；逻辑不闭环？→ 看 Intro 的贡献是否都被兑现。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>检查了论文 v0.5 框架</strong>。<strong>做了</strong>（检查章节齐全/核心内容/逻辑闭环 + 对标 v0.5 标准 + 列待补）、<strong>学了</strong>（v0.5 是框架完整非完美、先搭骨架、逻辑闭环）、<strong>会了</strong>（检查论文初稿框架的完整性）。</p>
+</div></section></section><section class="slot" id="d389-noon" data-d="389" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D389 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问申请跟进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>访问申请跟进</strong>——① 检查回复（有→认真回应；无→耐心，按节奏可礼貌跟进）；② 跟进其他线索；③ 更新追踪表。<strong>等待期保持耐心和专注，把精力留给论文。</strong>（同前几日，简短处理。）</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查访问申请回复；② 有回复认真回应/无则耐心；③ 跟进其他线索；④ 更新追踪表；⑤ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进到位——回复认真回应、无则耐心、追踪表更新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 频繁催 → 耐心、按节奏；② 因等待焦虑停滞 → 精力放论文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>还没回？→ 正常，耐心（论文是你掌控的）；有回复？→ 认真及时回应。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>跟进了访问申请</strong>。<strong>做了</strong>（检查回复 + 回应/耐心 + 跟进 + 更新追踪）、<strong>学了</strong>（等待期耐心专注、精力给论文）、<strong>会了</strong>（稳定地管理等待期的申请跟进）。</p>
+</div></section></section><section class="slot" id="d389-pm" data-d="389" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D389 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">Abstract + Conclusion 占位/初稿</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Abstract 和 Conclusion 怎么写）</h4><div class="blk-b"><ul>
+<li>晚上补<strong>Abstract + Conclusion</strong>（v0.5 框架补全）：① <strong>Abstract</strong>（摘要——浓缩全文：问题 + 方法 + 主要结果 + 贡献，通常 150-250 词。★ 复用 Intro 的核心信息浓缩）；② <strong>Conclusion</strong>（结论——总结你做了什么、主要发现、局限和未来工作）。v0.5 阶段，Abstract/Conclusion 可以是<strong>占位/初稿</strong>（把核心信息填进去，后续打磨）。<strong>补上 Abstract/Conclusion，论文 v0.5 的框架就齐全了。</strong></li>
+<li><strong>为什么 v0.5 阶段占位即可</strong>：Abstract/Conclusion 通常在论文内容定稿后再精修（因为要浓缩全文）——v0.5 先占位（填核心信息），等内容稳定后再打磨到位。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写 Abstract 占位/初稿（问题 + 方法 + 结果 + 贡献，浓缩 Intro 核心，150-250 词）；② 写 Conclusion 占位/初稿（做了什么 + 发现 + 局限 + 未来）；③ 核心信息填到位（后续打磨）；④ 确认论文 v0.5 框架齐全（全章节都有）；⑤ 记下打磨项。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Abstract + Conclusion 占位/初稿写好——核心信息到位，论文 v0.5 框架齐全（全章节都有）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① Abstract 死磕完美（v0.5 阶段没必要）→ 占位/初稿，后续打磨；② Conclusion 只重复 Abstract → 总结发现 + 局限 + 未来；③ 不补就说 v0.5 完成（框架不全）→ 补齐 Abstract/Conclusion。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>Abstract 写啥？→ 问题 + 方法 + 主要结果 + 贡献（浓缩）；Conclusion 写啥？→ 做了什么 + 发现 + 局限 + 未来工作。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>补上了 Abstract + Conclusion、补全了 v0.5 框架</strong>。<strong>做了</strong>（写 Abstract/Conclusion 占位 + 填核心信息 + 确认框架齐全 + 记打磨项）、<strong>学了</strong>（Abstract 浓缩全文、Conclusion 总结发现局限未来、v0.5 阶段占位即可）、<strong>会了</strong>（补全论文初稿的摘要和结论框架）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 v0.5 框架检查（章节齐全、逻辑闭环）✅ 访问申请跟进 ✅ Abstract + Conclusion 占位/初稿（v0.5 框架齐全）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D389</summary><textarea data-note="d389" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d390" data-d="390"><header class="day-head"><span class="dnum">D390</span><h2 class="day-t">周五 · 论文 v0.5 完善 + GitHub 更新 + 实验补充</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 第五天，打磨 v0.5——① 上午论文 v0.5 完善（补缺、统一术语图表、打磨表述）；② 中午 GitHub 更新 + 社区互动；③ 晚上实验补充/完善（如需，为论文准备）。提醒：v0.5 框架齐全后，今天做整体完善（不追求投稿级，但要让初稿框架扎实、连贯）；实验如有缺口则补充，为后续冲刺投稿打基础。</p>
+</blockquote>
+</div><section class="slot" id="d390-am" data-d="390" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D390 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文 v0.5 完善（补缺 + 统一 + 打磨）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>论文 v0.5 框架齐全后，上午<strong>整体完善</strong>——① <strong>补缺</strong>（D388/D389 记下的待补/待完善项）；② ★ <strong>统一术语/符号/图表</strong>（全文一致）；③ <strong>打磨表述</strong>（关键段落的语言更清晰准确）；④ <strong>检查引用/参考文献</strong>（引用规范、文献完整）。<strong>完善让 v0.5 从“框架齐全”到“初稿扎实”——虽不是投稿级，但是一份连贯、可读、可继续打磨的完整初稿。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 补缺（待补/待完善项）；② ★ 统一术语/符号/图表；③ 打磨关键段落表述；④ 检查引用/参考文献；⑤ 让 v0.5 初稿扎实连贯。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文 v0.5 完善——补了缺、统一了术语图表、打磨了表述、引用规范，初稿扎实连贯。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 追求投稿级（v0.5 阶段过早）→ 初稿扎实即可、后续打磨到投稿；② 术语图表不统一 → 全文统一；③ 引用不规范 → 检查引用和文献。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>完善到什么程度？→ 连贯、可读、初稿框架扎实（非投稿级）；哪些要统一？→ 术语、符号、图表风格、引用格式。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了论文 v0.5</strong>。<strong>做了</strong>（补缺 + 统一术语图表 + 打磨表述 + 检查引用）、<strong>学了</strong>（v0.5 完善到初稿扎实连贯、统一一致、不追求投稿级）、<strong>会了</strong>（把论文初稿完善到扎实连贯）。</p>
+</div></section></section><section class="slot" id="d390-noon" data-d="390" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D390 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">GitHub 更新 + 社区互动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>GitHub 更新 + 社区互动</strong>（同 D387，保持活跃）——① 更新 GitHub（进展/代码）；② 社区互动（回 Issue/技术讨论）；③ 跟进访问申请。<strong>被动存在感的持续维护，副线控时长。</strong>（简短处理。）</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 更新 GitHub（进展/代码）；② 社区互动；③ 跟进访问申请；④ 保持活跃；⑤ 控时长。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>GitHub 更新 + 社区互动 + 访问跟进到位，被动存在感维护。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 长期不更新 → 保持活跃；② 花太多时间 → 控时长。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>更新啥？→ 进展/代码小优化；控时长？→ 核心是论文，副线适度。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>维护了 GitHub 和社区</strong>。<strong>做了</strong>（更新 GitHub + 社区互动 + 跟进申请 + 控时长）、<strong>学了</strong>（持续维护被动存在感、副线控时长）、<strong>会了</strong>（稳定维护影响力副线）。</p>
+</div></section></section><section class="slot" id="d390-pm" data-d="390" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D390 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">实验补充/完善（如需，为论文准备）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>实验补充/完善</strong>（如需）——① 看论文 Experiment 章是否有实验缺口（如某个对比/分析还缺数据）；② 补跑缺的实验（单卡合理排队）；③ ★ 为后续冲刺投稿做准备（投稿版需要完整的实验——现在补上能加速后续）；④ 实验管理记录。<strong>实验补充让论文的证据更完整，为 M15 把论文冲到投稿打基础。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查 Experiment 实验缺口；② 补跑缺的实验（单卡排队）；③ 为投稿版做准备；④ 实验管理记录；⑤ 让证据更完整。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>实验补充/完善——缺口补上（或确认无缺）、为投稿版做准备、实验管理记录，证据更完整。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 实验有缺口不补（投稿时卡）→ 现在补上、加速后续；② 单卡跑不过来 → 合理排队、优先关键实验；③ 不做实验管理 → 记录配置结果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>缺什么实验？→ 看 Experiment 章哪些对比/分析还缺数据；单卡排不开？→ 优先论文必需的关键实验。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>补充完善了实验</strong>。<strong>做了</strong>（检查缺口 + 补跑实验 + 为投稿做准备 + 实验管理）、<strong>学了</strong>（实验补充让证据完整、为投稿版打基础、单卡优先关键）、<strong>会了</strong>（为论文补充完善实验证据）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 v0.5 完善（补缺 + 统一 + 打磨，初稿扎实）✅ GitHub 更新 + 社区互动 ✅ 实验补充/完善（为投稿做准备）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D390</summary><textarea data-note="d390" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d391" data-d="391"><header class="day-head"><span class="dnum">D391</span><h2 class="day-t">周六 · 论文 v0.5 收尾 + 第三课题盘点</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 第六天，论文 v0.5 收尾——① 上午论文 v0.5 收尾（确认 Method + Experiment + Intro + Related Work + Abstract/Conclusion 初稿框架完整）；② 中午论文后续规划（M15 随完整实验/打磨到投稿版）；③ 晚上第三课题整体盘点（方法/实验/论文进展）。提醒：今天给论文 v0.5 收尾、确认初稿框架完整，并盘点第三课题的整体进展，为明天 M14 月复盘做准备。</p>
+</blockquote>
+</div><section class="slot" id="d391-am" data-d="391" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D391 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文 v0.5 收尾（确认初稿框架完整）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>论文 v0.5 收尾</strong>——① 通读全文，确认 v0.5 初稿框架完整（Method + Experiment + Intro + Related Work + Abstract/Conclusion 都有、逻辑连贯、术语统一）；② 确认核心内容到位（方法讲清、实验有结果、贡献明确）；③ ★ 标记 v0.5 → 投稿版的差距（哪些要补完整实验、哪些要深度打磨——M15 处理）；④ 给 v0.5 一个明确的“完成”状态。<strong>v0.5 收尾意味着第三篇论文的初稿框架立住了——这是 M14 的一项硬交付。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 通读确认 v0.5 框架完整（全章节 + 连贯 + 术语统一）；② 确认核心内容到位；③ ★ 标记到投稿版的差距（M15 处理）；④ 给 v0.5 明确“完成”状态；⑤ 存档 v0.5。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文 v0.5 收尾——初稿框架完整确认（全章节/连贯/术语）、核心内容到位、到投稿版差距标记，v0.5 完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① v0.5 框架不全就收尾（缺章节）→ 确认全章节齐全；② 不标到投稿版差距（M15 抓瞎）→ 标记待补待打磨项；③ 不存档 → 存档 v0.5。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>v0.5 算完成吗？→ 全章节 + 逻辑连贯 + 术语统一 + 核心内容到位；到投稿差多少？→ 完整实验 + 深度打磨（M15 做）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>收尾了论文 v0.5</strong>。<strong>做了</strong>（通读确认框架完整 + 核心内容到位 + 标到投稿差距 + 存档）、<strong>学了</strong>（v0.5 收尾确认初稿框架、标到投稿版差距、是 M14 硬交付）、<strong>会了</strong>（给论文初稿一个明确的完成状态）。</p>
+</div></section></section><section class="slot" id="d391-noon" data-d="391" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D391 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">论文后续规划（M15 到投稿版）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>规划论文后续</strong>——① 明确 v0.5 → 投稿版的路径（M15：补完整实验 + 深度打磨 + 反复修改 → 投稿版 v1.0）；② 列出关键待办（实验/打磨/图表/语言）；③ ★ 结合访问情况（如访问成→可能和团队合作完善论文/合作署名；如访问待定→自己推进到投稿）；④ 排进 M15 计划。<strong>论文后续规划让第三篇从 v0.5 走向投稿有清晰路径。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 明确 v0.5→投稿版路径（M15 补实验 + 打磨 → v1.0）；② 列关键待办；③ ★ 结合访问情况（合作完善/自己推进）；④ 排进 M15 计划；⑤ 清晰路径。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文后续规划好——v0.5→投稿版路径清晰、待办列出、结合访问情况、排进 M15。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不规划后续（v0.5 后停滞）→ 明确到投稿版路径；② 不结合访问情况 → 据访问成/待定定推进方式；③ 路径模糊 → 列关键待办 + 排进 M15。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么到投稿版？→ M15 补完整实验 + 深度打磨 + 反复改；访问影响论文吗？→ 成了可合作完善/署名，待定则自己推进。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划了论文后续</strong>。<strong>做了</strong>（明确投稿路径 + 列待办 + 结合访问情况 + 排进 M15）、<strong>学了</strong>（v0.5→投稿版路径、结合访问定推进方式）、<strong>会了</strong>（为论文从初稿到投稿规划清晰路径）。</p>
+</div></section></section><section class="slot" id="d391-pm" data-d="391" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D391 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">第三课题整体盘点（方法/实验/论文进展）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>第三课题整体盘点</strong>（为明天 M14 月复盘做准备）——① <strong>方法</strong>（method v2 的进展、创新点）；② <strong>实验</strong>（baseline + 消融 + 主结果的完成度）；③ <strong>论文</strong>（v0.5 初稿框架完整）；④ <strong>整体进度</strong>（第三课题从启动到现在走到哪了、距投稿还有多远）。<strong>整体盘点让你清楚第三课题的全貌——这是 M14 月复盘“实验进度 + 论文写作”的素材。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 盘点方法进展（v2/创新点）；② 盘点实验（baseline/消融/主结果完成度）；③ 盘点论文（v0.5）；④ 盘点整体进度（距投稿多远）；⑤ 为明天月复盘准备素材。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>第三课题整体盘点完成——方法/实验/论文/整体进度都盘清，月复盘素材就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不盘点（月复盘没素材）→ 盘清方法/实验/论文；② 只盘进度不看距投稿 → 评估距投稿还有多远。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>怎么盘？→ 方法/实验/论文三块 + 整体进度；距投稿多远？→ 看到投稿版还要补的实验和打磨量。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>盘点了第三课题整体进展</strong>。<strong>做了</strong>（盘点方法/实验/论文/整体进度 + 准备月复盘素材）、<strong>学了</strong>（整体盘点看全貌、评估距投稿、为月复盘准备）、<strong>会了</strong>（系统盘点一个课题的整体进展）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文 v0.5 标准与收尾（初稿框架完整·非完美）</strong>：v0.5 = 初稿框架完整，不是投稿级——①全章节齐全（Method + Experiment + Intro + Related Work + Abstract/Conclusion 占位）②核心内容到位（方法讲清、实验有结果、贡献明确）③逻辑闭环（Intro 问题→Method 解决→Experiment 验证→贡献兑现）④术语/图表统一。★ 明确 v0.5 是“快速搭完整骨架”，避免在某章死磕完美拖慢整体。收尾时标记 v0.5→投稿版的差距（补完整实验 + 深度打磨，M15 做）。把不确定的等待期，用确定的论文产出填满。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 v0.5 收尾（初稿框架完整确认）✅ 论文后续规划（M15 到投稿版路径）✅ 第三课题整体盘点（方法/实验/论文进展）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D391</summary><textarea data-note="d391" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d392" data-d="392"><header class="day-head"><span class="dnum">D392</span><h2 class="day-t">周日 · ★ M14 月度复盘（<a href="../appendix-e.html">附录 E</a>）+ 对照硬交付 6 项 + 计划 M15</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W56 最后一天，也是 M14 收官——① 上午 ★ M14 月度复盘（用<a href="../appendix-e.html">附录 E</a> 模板：量化交付盘点 5 类 + 计划完成度 + Top3 收获 + 卡点 + 下月 5 件事 + 健康情绪）；② 中午 ★ 对照 M14 硬交付清单 6 项 + 评估连接进展；③ 晚上 ★ 计划 M15（论文冲刺 + 访问确认 + 第三篇投稿）。提醒：M14 月复盘要诚实（复盘是发现问题）；对照硬交付 6 项 + 评估连接进展（汇报→执行力→访问申请走到哪），据结果定 M15 策略——这是 M14 收官、阶段三过半的关键复盘。</p>
+</blockquote>
+</div><section class="slot" id="d392-am" data-d="392" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D392 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">★ M14 月度复盘（用<a href="../appendix-e.html">附录 E</a> 模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M14 月复盘怎么做）</h4><div class="blk-b"><ul>
+<li>用<strong>附录 E 月度复盘模板</strong>对 M14（W53-56，D365-392）做诚实复盘（花 2-3 小时）：① <strong>一、量化交付盘点</strong>（论文阅读/实验进度/论文写作/开源影响力/人脉社交——★ M14 重点在<strong>人脉与社交</strong>[线上汇报次数/进展邮件/访问申请] + <strong>论文写作</strong>[v0.5] + <strong>实验进度</strong>[消融]）；② <strong>二、计划完成度总评</strong>（M14 的 Top 5 事项：汇报、执行力展示、访问申请、消融、论文 v0.5 + 总完成率）；③ <strong>三、Top 3 收获</strong>（如“汇报后执行力展示比汇报本身更打动老师”“把不确定的等待用确定的产出填满”）；④ <strong>四、Top 3 卡点 + 解决方案</strong>；⑤ <strong>五、下月 5 件最重要的事</strong>（M15：论文冲刺、访问确认、第三篇投稿等）；⑥ <strong>六、健康与情绪自评</strong>。★ <strong>诚实面对</strong>——复盘是发现问题、校准方向。</li>
+<li><strong>为什么用<a href="../appendix-e.html">附录 E</a></strong>：M14 是“连接关键月”（汇报 + 访问申请），<a href="../appendix-e.html">附录 E</a> 的结构化复盘（量化 + 定性 + 健康）能全面盘清这个月的连接进展和研究产出。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 用<a href="../appendix-e.html">附录 E</a> 模板填 M14 月报；② 量化盘点（★ 重点人脉社交 + 论文 v0.5 + 消融）；③ 计划完成度（Top 5 + 完成率）；④ Top 3 收获 + Top 3 卡点；⑤ 下月 5 件事 + 健康情绪（★ 诚实）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M14 月度复盘完成——<a href="../appendix-e.html">附录 E</a> 模板填好（量化 + 完成度 + 收获 + 卡点 + 下月 + 健康），诚实盘清 M14 得失。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不复盘直接进 M15（方向不校准）→ 用<a href="../appendix-e.html">附录 E</a> 认真复盘。</li>
+<li>复盘只报喜（发现不了问题）→ ★ 诚实面对卡点。</li>
+<li>不重点盘人脉社交（M14 核心）→ ★ 重点盘汇报/进展邮件/访问申请。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>复盘没头绪？→ 用<a href="../appendix-e.html">附录 E</a> 模板逐节填；量化数据哪来？→ 月初计划 vs 实际记录（汇报次数/邮件/论文/消融）；收获/卡点怎么提？→ 这月最重要的 3 件事/最大的 3 个困难。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了 M14 月度复盘</strong>。<strong>做了</strong>（用<a href="../appendix-e.html">附录 E</a> 填月报 + 量化盘点 + 完成度 + 收获卡点 + 下月 + 健康情绪）、<strong>学了</strong>（<a href="../appendix-e.html">附录 E</a> 结构化复盘、诚实发现问题、M14 重点盘人脉社交）、<strong>会了</strong>（用月度模板系统复盘一个连接关键月）。</p>
+</div></section></section><section class="slot" id="d392-noon" data-d="392" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D392 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">★ 对照 M14 硬交付清单 6 项 + 评估连接进展</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（对照硬交付 + 评估连接）</h4><div class="blk-b"><ul>
+<li>M14 设了 6 项<strong>硬交付</strong>，逐项对照确认：① <strong>线上汇报 ≥1 次完成</strong>；② <strong>汇报后进展邮件 ≥1 封</strong>（展示执行力）；③ <strong>访问申请已提交</strong>（D-7 邮件 + 所有材料）；④ <strong>第三课题消融完成</strong>；⑤ <strong>第三课题论文 v0.5</strong>；⑥ <strong>导师已知悉暑期访问计划</strong>。★ 对照硬交付，确认 M14 核心目标都达成（或有明确说明）。</li>
+<li>★ <strong>评估连接进展</strong>——这是 M14 复盘最关键的：① 访问申请提交了吗、有回应吗？② 连接到什么程度了（汇报 → 执行力展示 → 访问申请这条线走到哪了）？③ ★ <strong>据结果决定 M15 策略</strong>——有访问回应（同意/积极）→ M15 准备访问；无回应/婉拒 → M15 继续跟进 / 争取其他机会 / 转远程合作。<strong>评估连接进展让你清楚地知道：你和目标团队的连接，现在到了哪一步、下一步怎么走。</strong></li>
+<li><strong>为什么评估连接进展如此重要</strong>：M14 的核心是“把连接推向访问机会”——评估这条线走到哪，直接决定 M15 是“准备访问”还是“继续争取/转远程”，是阶段三承上启下的关键判断。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 对照 M14 硬交付 6 项逐项确认（达成/部分/未达）；② ★ 评估连接进展（访问申请状态 + 连接程度 + 这条线走到哪）；③ 据结果定 M15 策略（有回应→准备访问/无→继续跟进或转远程）；④ 标出待续项 + 方案；⑤ 阶段三过半盘点（连接 + 产出）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M14 硬交付对照完成（6 项达成或有说明）+ 连接进展评估清楚（走到哪 + M15 策略），承上启下。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不对照硬交付（漏核心目标）→ 逐项对照；② 不评估连接进展（缺关键判断）→ ★ 评估这条线走到哪；③ 不据结果定策略（M15 抓瞎）→ 据访问回应定 M15 策略。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>硬交付有没达成的？→ 标待续 + 方案（如同意函办理中、访问待回复）；连接怎么评估？→ 汇报→执行力→访问申请走到哪 + 有无回应；M15 策略怎么定？→ 有访问回应→准备访问；无→继续跟进/转远程合作。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>对照了硬交付、评估了连接进展</strong>。<strong>做了</strong>（对照硬交付 6 项 + 评估连接进展 + 据结果定 M15 策略 + 标待续 + 阶段三过半盘点）、<strong>学了</strong>（硬交付对照确认核心目标、★ 评估连接进展定 M15 策略、承上启下）、<strong>会了</strong>（对照硬交付 + 评估连接进展并据此规划方向）。</p>
+</div></section></section><section class="slot" id="d392-pm" data-d="392" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D392 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">★ 计划 M15（论文冲刺 + 访问确认 + 第三篇投稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M15 做什么）</h4><div class="blk-b"><ul>
+<li>★ <strong>计划 M15（W57-60，论文冲刺 + 访问准备 + 第三篇投稿）</strong>——基于 M14 复盘和连接进展评估：① <strong>W57-58</strong>：论文 v0.5 → v1.0 冲刺（补完整实验 + 深度打磨）+ 等待访问确认的最终判断（确认 或 Plan B 远程合作）+ 选第三篇投稿目标 + 投稿准备；② <strong>W59-60</strong>：访问准备（如访问成）+ 第三篇投稿 + M15 月复盘 + 写《访问期间工作计划》。★ M15 的主线：“把第三篇论文冲到投稿、对访问做最终判断、（如成）准备访问。”今晚把 M15 计划列好。</li>
+<li><strong>为什么这样规划 M15</strong>：M14 把连接推到了“访问申请”，M15 要等访问结果的最终落定、同时把第三篇论文冲到投稿（你的硬产出）——这是阶段三从“前半（建立连接）”到“后半（访问/合作 + 冲刺）”的过渡。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 列 M15 计划（W57-58 论文冲刺 + 访问确认判断 + 选投稿目标；W59-60 访问准备 + 投稿 + 月复盘）；② 论文要点（v0.5→v1.0 + 投稿）；③ 访问要点（确认或 Plan B）；④ 结合 M14 连接进展评估；⑤ 排好 M15 节奏。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M15 计划列好——论文冲刺 + 访问确认 + 第三篇投稿的要点清楚，结合连接进展，节奏排好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不计划 M15（衔接断）→ 列好计划；② 不结合连接进展评估（脱节）→ 据访问回应规划；③ 论文和访问两条线没排好 → 都排进 M15（论文冲刺 + 访问确认并重）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>M15 怎么排？→ W57-58 论文冲刺 + 访问判断 + 选投稿目标；W59-60 访问准备 + 投稿 + 月复盘；访问没确定怎么办？→ M15 做最终判断（确认或转 Plan B 远程）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>计划好了 M15</strong>。<strong>做了</strong>（列 M15 计划 + 论文要点 + 访问要点 + 结合连接进展 + 排节奏）、<strong>学了</strong>（M15=论文冲刺 + 访问确认 + 第三篇投稿、从前半到后半过渡）、<strong>会了</strong>（规划阶段三后半启动的关键月）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ M14 月复盘（<a href="../appendix-e.html">附录 E</a>·对照硬交付·评估连接）</strong>：M14（线上汇报 + 访问申请）月复盘用<a href="../appendix-e.html">附录 E</a>——量化盘点 5 类（★ 重点人脉社交：汇报次数/进展邮件/访问申请 + 论文 v0.5 + 消融）+ 计划完成度 + Top3 收获 + 卡点 + 下月 + 健康情绪。★ 对照 M14 硬交付清单 6 项（线上汇报≥1次|进展邮件≥1封|访问申请已提交|消融完成|论文 v0.5|导师已知悉访问计划）。★★ 评估连接进展（汇报→执行力展示→访问申请走到哪、有无回应）+ 据结果定 M15 策略（有访问回应→准备访问/无→继续跟进或转远程合作）。诚实发现问题、校准方向——这是 M14 收官、阶段三过半的关键判断。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ ★ M14 月度复盘（<a href="../appendix-e.html">附录 E</a>：量化 + 完成度 + 收获卡点 + 下月 + 健康）✅ ★ 对照 M14 硬交付 6 项 + 评估连接进展 ✅ ★ 计划 M15（论文冲刺 + 访问确认 + 第三篇投稿）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D392</summary><textarea data-note="d392" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W56 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>M14 收官周，补充包给你四样可直接照用的：① 三个范例（论文 v0.5 各章复用要点 + Related Work 组织 · M14 硬交付清单 6 项 + <a href="../appendix-e.html">附录 E</a> M14 月复盘要点 · Introduction 结构模板 + Abstract 结构模板）；② 一个完整可运行的“论文 v0.5 写作进度追踪器”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 论文 v0.5 各章复用要点 + Related Work 组织</h3>
+<figure class="code" data-lang="text"><pre><code>【第三篇论文各章复用要点（复用前两篇,快速产出v0.5）】
+· Method章: 方法概述→各部分细节→创新点 + 架构图(复用前两篇结构)
+· Experiment章: 实验设置(数据集/指标/实现)→主结果(method v2 vs baseline,2数据集,
+  ★卖点:提升+单卡高效Params/FPS)→消融(各部分贡献)→分析+可视化
+· Introduction: 背景→问题→Gap→你的方法和贡献(3-4点bullet)→论文结构
+· Related Work: 复用W49文献A/B/C分级组织,含目标组相关工作(RingMo等)
+· Abstract: 浓缩全文(问题+方法+结果+贡献,150-250词,内容定稿后精修)
+· Conclusion: 做了什么+主要发现+局限+未来工作
+→ v0.5=各章初稿框架完整,后续随完整实验打磨到投稿版。守核心延后。
+
+【Related Work组织(复用W49)】
+按主题/方法分小节: [X类方法](综述+不足)→[Y类方法](综述+不足)→引向你的工作
+★ 含目标组工作(RingMo[孙显组]等),显了解领域+呼应关联。有脉络非罗列。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · M14 硬交付清单 6 项 + <a href="../appendix-e.html">附录 E</a> M14 月复盘要点</h3>
+<figure class="code" data-lang="text"><pre><code>【M14硬交付检查清单(6项,逐项✅完成/⚠️部分/❌未达)】
+□ 线上汇报≥1次完成  □ 汇报后进展邮件≥1封(展示执行力)
+□ 访问申请已提交(D-7邮件+所有材料)  □ 第三课题消融完成
+□ 第三课题论文v0.5  □ 导师已知悉暑期访问计划
+
+【附录E M14月复盘要点】
+一、量化盘点5类: ★人脉社交(汇报次数/进展邮件/访问申请) + 论文写作(v0.5) +
+   实验进度(消融) + 论文阅读 + 开源影响力(GitHub/社区)
+二、计划完成度: Top5事项(汇报/执行力/访问申请/消融/论文v0.5) + 总完成率
+三、Top3收获 / 四、Top3卡点+方案 / 五、下月(M15)5件事 / 六、健康情绪
+★★ 评估连接进展: 汇报→执行力展示→访问申请走到哪、有无回应
+   →据结果定M15策略(有访问回应→准备访问/无→继续跟进或转远程合作)
+★ 诚实发现问题、校准方向(M14收官、阶段三过半的关键复盘)</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · Introduction 结构模板 + Abstract 结构模板</h3>
+<figure class="code" data-lang="text"><pre><code>【Introduction结构模板(复用前两篇)】
+第1段 背景: [研究领域] 在 [应用] 中很重要,[趋势/现状]。
+第2段 问题+Gap: 然而,[当前挑战/问题]。已有方法 [A/B] 虽然 [优点],但 [不足/没考虑X]。
+第3段 你的方法: 为此,本文提出 [你的方法],通过 [核心思路] 解决 [问题]。
+第4段 贡献: 本文贡献:① [贡献1] ② [贡献2] ③ [贡献3] (★每点:做了什么+价值)
+第5段 结构: 本文组织如下:第2节…第3节…
+→ 复用前两篇套路,快速搭起。门面:讲清为什么重要、差在哪、怎么解决、贡献。
+
+【Abstract结构模板(150-250词,内容定稿后精修)】
+[1句背景/问题] + [1句已有方法不足] + [1-2句你的方法/核心思路] +
+[1-2句主要结果:在X数据集上提升Y,★单卡高效] + [1句贡献/意义]
+→ 浓缩全文精华,让读者30秒抓住你做了什么、效果如何。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · 论文 v0.5 写作进度追踪器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本追踪第三篇论文各章的写作进度，算出 v0.5 的整体完成度、还缺什么——把“写到 v0.5”这个目标拆成各章可追踪的进度，清楚看到论文成形到什么程度。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># paper_v05_tracker.py —— 论文 v0.5 写作进度追踪器</span>
+<span class="c1"># 各章节及其在 v0.5 里的权重（按重要性/篇幅）</span>
+<span class="n">CHAPTERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Method（方法）&quot;</span><span class="p">:</span>        <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>   <span class="c1"># v0.5 完成</span>
+    <span class="s2">&quot;Experiment（实验）&quot;</span><span class="p">:</span>    <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">0.30</span><span class="p">,</span> <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>   <span class="c1"># 完善+可视化完成</span>
+    <span class="s2">&quot;Introduction（引言）&quot;</span><span class="p">:</span>  <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">0.20</span><span class="p">,</span> <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>   <span class="c1"># 完成</span>
+    <span class="s2">&quot;Related Work（相关工作）&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span> <span class="c1"># 完成</span>
+    <span class="s2">&quot;Abstract+Conclusion&quot;</span><span class="p">:</span>   <span class="p">{</span><span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="mf">0.10</span><span class="p">,</span> <span class="s2">&quot;done&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">},</span>   <span class="c1"># 占位/初稿</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">track</span><span class="p">(</span><span class="n">chapters</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 论文 v0.5 写作进度 ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chapters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">pct</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">bar</span> <span class="o">=</span> <span class="s2">&quot;█&quot;</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;░&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">24s</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">bar</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s2">5.0f</span><span class="si">}</span><span class="s2">%  (权重 </span><span class="si">{</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;done&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">missing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">（还差 </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">pct</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%）&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">📊 v0.5 整体进度：</span><span class="si">{</span><span class="n">total</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📋 还需推进：&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">missing</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;=</span> <span class="mf">0.85</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ 接近/达到 v0.5！初稿框架完整，后续随完整实验打磨到投稿版&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⏳ 距 v0.5（初稿框架完整）还需推进 </span><span class="si">{</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">total</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">track</span><span class="p">(</span><span class="n">CHAPTERS</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>=== 论文 v0.5 写作进度 ===
+
+Method（方法）            [██████████]   100%  (权重 25%)
+Experiment（实验）        [██████████]   100%  (权重 30%)
+Introduction（引言）      [██████████]   100%  (权重 20%)
+Related Work（相关工作）   [██████████]   100%  (权重 15%)
+Abstract+Conclusion      [███████░░░]    70%  (权重 10%)
+
+📊 v0.5 整体进度：97.0%
+📋 还需推进：
+   - Abstract+Conclusion（还差 30%）
+
+✅ 接近/达到 v0.5！初稿框架完整，后续随完整实验打磨到投稿版</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把各章的完成度填进 CHAPTERS，脚本算出 v0.5 整体进度、列出还需推进的章节。本周（W56）末，Method/Experiment/Intro/Related Work 都完成、Abstract/Conclusion 占位到位——v0.5 初稿框架完整（97%）。它把“写到 v0.5”这个目标拆成各章可追踪的进度，清楚看到论文已成形，下一步（M15）是补完整实验 + 深度打磨到投稿版。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D386（Experiment 完善 + Intro 启动）</strong></p>
+<ol>
+<li>Experiment 章完善要补什么（分析/可视化/卖点）？单卡高效卖点怎么突出？</li>
+<li>★ Introduction 复用前两篇什么结构（背景→问题→Gap→贡献→结构）？</li>
+</ol>
+<p><strong>D387（Intro 完成 + Related Work 启动）</strong></p>
+<ol>
+<li>Introduction 的贡献部分为什么要精炼有力？怎么写？</li>
+<li>★ Related Work 怎么复用 W49 文献分级？为什么含目标组工作？</li>
+</ol>
+<p><strong>D388（Related Work 完成 + 各章串联）</strong></p>
+<ol>
+<li>Related Work 怎么“有脉络非罗列”？怎么引向你的工作？</li>
+<li>★ 论文各章串联要检查什么（逻辑/术语/图表/过渡）？为什么避免“局部好整体散”？</li>
+</ol>
+<p><strong>D389（v0.5 框架检查 + Abstract/Conclusion）</strong></p>
+<ol>
+<li>★ v0.5 是什么标准（初稿框架完整 vs 完美）？为什么这么定？</li>
+<li>Abstract 和 Conclusion 分别写什么？v0.5 阶段为什么占位即可？</li>
+</ol>
+<p><strong>D390（v0.5 完善 + 实验补充）</strong></p>
+<ol>
+<li>v0.5 完善要做什么（补缺/统一/打磨）？完善到什么程度？</li>
+<li>实验补充为什么“为投稿版做准备”？</li>
+</ol>
+<p><strong>D391（v0.5 收尾 + 第三课题盘点）</strong></p>
+<ol>
+<li>v0.5 收尾确认什么？到投稿版还差什么？</li>
+<li>第三课题整体盘点哪几块（方法/实验/论文/进度）？</li>
+</ol>
+<p><strong>D392（★ M14 月复盘 + 硬交付 + 计划 M15）</strong></p>
+<ol>
+<li>M14 月复盘用什么模板？M14 重点盘哪类（人脉社交）？</li>
+<li>★ M14 硬交付清单哪 6 项？</li>
+<li>★★ 怎么评估连接进展？据结果怎么定 M15 策略？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>等访问回复就干等焦虑</td>
+<td>停滞</td>
+<td>★ 用确定的论文产出填满等待</td>
+</tr>
+<tr>
+<td>2</td>
+<td>访问申请频繁催</td>
+<td>烦老师</td>
+<td>耐心（超 1 周礼貌跟进一次）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Introduction 从零摸索</td>
+<td>慢</td>
+<td>★ 复用前两篇结构（背景→问题→Gap→贡献）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Intro 贡献含糊</td>
+<td>抓不住</td>
+<td>精炼 bullet（做了什么+价值）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Related Work 从零检索</td>
+<td>重复劳动</td>
+<td>★ 复用 W49 文献 A/B/C 分级</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Related Work 论文罗列无脉络</td>
+<td>没定位</td>
+<td>按主题组织、引向你的工作</td>
+</tr>
+<tr>
+<td>7</td>
+<td>不含目标组工作</td>
+<td>没呼应关联</td>
+<td>★ 含 RingMo 等（显了解+呼应）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>各章不串联（整体散）</td>
+<td>局部好整体散</td>
+<td>★ 串联（逻辑/术语/图表统一）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>术语全文不一致</td>
+<td>读者困惑</td>
+<td>列术语表、全文统一</td>
+</tr>
+<tr>
+<td>10</td>
+<td>追求 v0.5 完美卡住</td>
+<td>拖慢框架</td>
+<td>v0.5 是框架完整、先搭骨架</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Abstract 死磕完美</td>
+<td>没必要</td>
+<td>占位/初稿，内容定稿后精修</td>
+</tr>
+<tr>
+<td>12</td>
+<td>GitHub 长期不更新</td>
+<td>显荒废</td>
+<td>保持活跃（小更新也行）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>副线花太多时间</td>
+<td>喧宾夺主</td>
+<td>控时长（核心是论文 v0.5）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>M14 月复盘只报喜</td>
+<td>发现不了问题</td>
+<td>★ 诚实面对卡点</td>
+</tr>
+<tr>
+<td>15</td>
+<td>不评估连接进展</td>
+<td>M15 抓瞎</td>
+<td>★ 评估走到哪+据结果定 M15 策略</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>🎉 W56 收尾 · M14（线上汇报 + 访问申请）圆满收官！</strong> 你完成了 M14 的最后一周，也给整个 M14 画上了句号——这一周，你在等访问回复的不确定期里，用确定的论文产出把它填满：复用前两篇的经验，快速把 Introduction、Related Work 写出来、完善了 Experiment、补上了 Abstract/Conclusion，把第三篇论文推到了 <strong>v0.5（初稿框架完整）</strong>。这篇论文是你完全掌控、不依赖任何人的核心资产——访问成了它是你带去合作的基础，访问没成它也是你下一轮联系/申请的新筹码。★ 这就是阶段三最稳的活法：把不确定的等待，用确定的产出对冲。同时，你保持了 GitHub 的活跃和社区的存在感，最后用<a href="../appendix-e.html">附录 E</a> 对 M14 做了一次诚实的复盘——对照硬交付清单 6 项、评估了连接进展（汇报→执行力展示→访问申请这条线走到了哪），据结果规划了 M15 的策略。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>回望 M14（W53–56）</strong>：这个月，你完成了从“汇报”到“访问申请”的关键跨越——做好了线上汇报、用执行力展示赢得了老师的好印象，更进一步把这份好印象正式转化为了一个访问申请（完善研究计划书、和不支持你的博士导师委婉沟通争取空间、备齐全套材料、郑重提交）。同时，第三篇论文写到了 v0.5。★ <strong>回望整个阶段三的前半：从 W48 发出第一封冷邮件，到追问、Plan B、选定第三课题、线上汇报、执行力展示，再到正式提交访问申请、第三篇论文写到 v0.5——你一步一个脚印，把“和空天院建立连接”这件最初看起来遥远的事，推进到了“正式申请去他们那里访问”的临门一脚。</strong> 无论访问申请的结果如何，你都已经把能做的做到了极致，也在这个过程中持续产出着属于自己的研究成果。这条路没有捷径，每一步都是用真实的成果、用心的准备、和说到做到的执行力一点点垒起来的。</p>
+</blockquote>
+<blockquote class="quote">
+<p><strong>M14（线上汇报 + 访问申请）圆满收官</strong> ✅ —— 你完成了汇报、把执行力展示做透、正式提交了访问申请、第三篇论文写到 v0.5，阶段三也走过了一半。<strong>下一程：M15（W57–60，论文冲刺 + 访问准备 + 第三篇投稿）——把第三篇论文冲到投稿、对访问做最终判断、（如成）准备访问。</strong> 带着阶段三前半积累的所有进展和韧性，继续走，把“临门一脚的访问申请”，走向“实质的访问/合作 + 第三篇论文投稿”。</p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p></section>
+<div class="pager"><a class="prev" href="w55.html"><span class="dir">← 上一篇</span><span class="nm">W55 访问申请提交 + 第三课题深化</span></a><a class="next" href="w57.html"><span class="dir">下一篇 →</span><span class="nm">W57 论文冲刺（上）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d386">D386 周一</a><a class="sub" href="#d386-am">上午 Experiment 章完善（补</a><a class="sub" href="#d386-noon">中午 访问申请状态追踪 + 邮件处理</a><a class="sub" href="#d386-pm">晚上 Introduction 启动（</a><a href="#d387">D387 周二</a><a class="sub" href="#d387-am">上午 Introduction 完成（</a><a class="sub" href="#d387-noon">中午 跟进 + GitHub 仓库更新</a><a class="sub" href="#d387-pm">晚上 Related Work 启动（</a><a href="#d388">D388 周三</a><a class="sub" href="#d388-am">上午 Related Work 完成（</a><a class="sub" href="#d388-noon">中午 访问跟进 + 社区互动</a><a class="sub" href="#d388-pm">晚上 论文各章串联（整体性检查）</a><a href="#d389">D389 周四</a><a class="sub" href="#d389-am">上午 论文整体检查（v0.5 初稿框架</a><a class="sub" href="#d389-noon">中午 访问申请跟进</a><a class="sub" href="#d389-pm">晚上 Abstract + Concl</a><a href="#d390">D390 周五</a><a class="sub" href="#d390-am">上午 论文 v0.5 完善（补缺 + </a><a class="sub" href="#d390-noon">中午 GitHub 更新 + 社区互动</a><a class="sub" href="#d390-pm">晚上 实验补充/完善（如需，为论文准备</a><a href="#d391">D391 周六</a><a class="sub" href="#d391-am">上午 论文 v0.5 收尾（确认初稿框</a><a class="sub" href="#d391-noon">中午 论文后续规划（M15 到投稿版）</a><a class="sub" href="#d391-pm">晚上 第三课题整体盘点（方法/实验/论</a><a href="#d392">D392 周日</a><a class="sub" href="#d392-am">上午 ★ M14 月度复盘（用附录 E</a><a class="sub" href="#d392-noon">中午 ★ 对照 M14 硬交付清单 6</a><a class="sub" href="#d392-pm">晚上 ★ 计划 M15（论文冲刺 + </a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

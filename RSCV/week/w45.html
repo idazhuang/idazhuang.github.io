@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="45">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W45 · 作品集 PDF 制作 —— 把 12 个月成果整 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M12 阶段二收尾 + 首批冷邮件</span><span>·</span><span>Week 45</span><span>·</span><span>D302–D308</span></div><h1 class="title">作品集 PDF 制作 —— 把 12 个月成果整合成一份有冲击力的“战绩展示板”</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="302" data-k="am" title="D302 上午段"></i><i data-d="302" data-k="noon" title="D302 中午段"></i><i data-d="302" data-k="pm" title="D302 晚上段"></i></span><span class="sday"><i data-d="303" data-k="am" title="D303 上午段"></i><i data-d="303" data-k="noon" title="D303 中午段"></i><i data-d="303" data-k="pm" title="D303 晚上段"></i></span><span class="sday"><i data-d="304" data-k="am" title="D304 上午段"></i><i data-d="304" data-k="noon" title="D304 中午段"></i><i data-d="304" data-k="pm" title="D304 晚上段"></i></span><span class="sday"><i data-d="305" data-k="am" title="D305 上午段"></i><i data-d="305" data-k="noon" title="D305 中午段"></i><i data-d="305" data-k="pm" title="D305 晚上段"></i></span><span class="sday"><i data-d="306" data-k="am" title="D306 上午段"></i><i data-d="306" data-k="noon" title="D306 中午段"></i><i data-d="306" data-k="pm" title="D306 晚上段"></i></span><span class="sday"><i data-d="307" data-k="am" title="D307 上午段"></i><i data-d="307" data-k="noon" title="D307 中午段"></i><i data-d="307" data-k="pm" title="D307 晚上段"></i></span><span class="sday"><i data-d="308" data-k="am" title="D308 上午段"></i><i data-d="308" data-k="noon" title="D308 中午段"></i><i data-d="308" data-k="pm" title="D308 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：M11 你备齐了对接的“软材料”（价值卡片、定制邮件草稿）。M12 开篇这一周做一份<strong>集大成的硬材料：作品集 PDF</strong>——把 12 个月的成果（两篇论文 + 爆款 repo + 竞赛 + 可视化）整合成一份 10 页、有冲击力的“战绩展示板”，再顺势出<strong>简历最终版</strong>（中英）、更新主页、写一篇<strong>12 个月转型博客</strong>。★ 这周的核心能力是“<strong>自我包装</strong>”——同样的工作，整合成一份专业作品集，能让对方 2 分钟内了解你的全部实力。作品集是 W48 发邮件的核心附件，也是面试/主页的利器。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会“自我包装”——把 12 个月的成果整合成一份有冲击力的作品集。
+<strong>承上</strong>：W40 收过作品集素材、W42 做了 PPT/简历初稿、W43 整理了成果清单/素材页。<strong>本周把这些整合升级成成品</strong>——作品集 PDF（素材页→完整 PDF）、简历最终版（初稿→定稿）、主页更新（加作品集链接）。连接期的材料到本周全部成品化。</p>
+<p><strong>🧩 贯穿线索</strong>：作品集围绕你的两条主线展示——第一篇（DOTA 旋转检测，mAP + 高效）、第二篇（SAR speckle-aware，对接王超组）+ repo（stars）+ 竞赛。差异化定位贯穿每一页：<strong>单卡 4090 高效 / 下游特化 / SAR 难题 / 跨域</strong>。守核心延后：作品集展示问题/方法/结果，第二篇未发表核心代码继续标“接收后开源”。</p>
+</blockquote>
+<hr />
+<h2>🧭 W45 总览：把 12 个月成果包装成成品</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这周做什么</th>
+<th>产物</th>
+<th>它的用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设计 + 制作作品集 PDF（10 页）</td>
+<td>作品集 PDF 定稿（≤5MB）</td>
+<td>邮件附件 / 面试展示 / 主页下载</td>
+</tr>
+<tr>
+<td>简历最终版（中英文）</td>
+<td>基于作品集素材完善</td>
+<td>对接 / 申请 / 面试</td>
+</tr>
+<tr>
+<td>更新个人主页</td>
+<td>加作品集下载链接 + 最新论文状态</td>
+<td>邮件附链接，老师一站式了解</td>
+</tr>
+<tr>
+<td>GitHub 年终更新 + 转型博客</td>
+<td>Year in Review + 12 个月转型博客</td>
+<td>持续存在感 + 里程碑沉淀</td>
+</tr>
+<tr>
+<td>W45 复盘</td>
+<td>周报</td>
+<td>阶段性确认</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D302–304 做作品集 PDF（设计→制作→朋友反馈→定稿）；D305 简历最终版；D306 主页更新 + 读论文；D307 GitHub 年终更新 + 写转型博客；D308 复盘。注意本周很多产出是“把已有材料整合升级”（W40 素材→作品集 PDF、W42 简历初稿→最终版、W42 主页→加作品集链接）——不是从零做，而是把散落的硬成果拧成成品，效率会比你预想的高。<strong>核心心态：这周是把“散落的硬成果”整合成“一份让人 2 分钟震撼到的展示板”。你的工作本身已经很扎实——作品集要做的是让这份扎实“被一眼看见”。每页一个亮点、突出差异化（单卡高效）、设计专业，让对方翻完就记住“这个人零基础一年做出了两篇论文 + 爆款 repo”。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d302" data-d="302"><header class="day-head"><span class="dnum">D302</span><h2 class="day-t">周一 · 设计作品集 PDF 结构（10 页）+ 收集素材 + 开始制作</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天设计作品集 PDF 的结构（10 页）、收集所有素材、启动制作。提醒：★ 作品集是你的“<strong>战绩展示板</strong>”——邮件附件、面试展示、或放主页。<strong>10 页以内，每页一个亮点，让对方 2 分钟内了解你的全部实力</strong>。今天先把“放什么、怎么排”设计好，把素材凑齐，再选工具开做（不求今天做完）。</p>
+</blockquote>
+</div><section class="slot" id="d302-am" data-d="302" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D302 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计作品集 PDF 的 10 页结构</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（作品集 PDF 的标准结构）</h4><div class="blk-b"><ul>
+<li><strong>作品集 PDF = 一份图文并茂、集中展示你全部成果的 PDF</strong>（区别于简历的纯文字、PPT 的汇报）。标准 10 页结构：Page 1 封面（姓名 + 方向 + 联系 + 标语）；Page 2 个人简介（300 字）；Page 3–4 论文 1（摘要 + 核心图 + 结果亮点）；Page 5–6 论文 2（同）；Page 7 竞赛成果；Page 8 开源项目（GitHub 截图 + star + Colab）；Page 9 技能 + 学术活动；Page 10 未来规划 + 联系方式。<strong>每页一个亮点</strong>，整体 2 分钟可读完。</li>
+<li><strong>和简历/PPT 的不同</strong>：简历=纯文字速览（招聘/申请用）；PPT=口头汇报的视觉辅助（你讲）；<strong>作品集 PDF=自带说明的图文展示板（对方自己翻，看图就懂）</strong>。它最直观、最适合作邮件附件（对方点开就被“成果墙”震撼到）。对你这种没有名校光环、没有现成人脉的人，作品集尤其重要：当对方对你一无所知时，一份制作精良、成果扎实的作品集，能在 2 分钟内把“这个人靠谱、能干、有特点”的印象建立起来——它替你完成了“自我证明”这件最难的事。很多有真本事的人吃亏，恰恰是因为不会展示；作品集就是把你的真本事，变成对方一眼能识别的形式。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>设计作品集 10 页结构（见补充包范例 1 逐页骨架）——按标准结构规划每页放什么：封面（标语突出定位）、简介（复用 W43 的 1 页自我介绍）、两篇论文（各 2 页：摘要精简 + 核心架构图 + 结果亮点 + 单卡高效卖点）、竞赛（排名 + 报告截图）、开源（repo 截图 + star + Colab）、技能 + 学术活动（poster/知乎）、未来规划 + 联系；确定每页的“一个亮点”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>作品集 10 页结构设计完成，每页明确放什么、突出什么亮点，逻辑顺（你是谁→两篇论文→竞赛→开源→技能→未来）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>每页塞太多（像论文/报告）→ 每页一个亮点、图文并茂、2 分钟可读完。</li>
+<li>没突出差异化 → 每页（尤其论文页）突出单卡高效/SOTA（你的卖点）。</li>
+<li>结构混乱无主线 → 按“你是谁→成果→未来”主线，逻辑清晰。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知每页放什么？→ 按标准 10 页结构（封面/简介/论文×2/竞赛/开源/技能/未来），参考补充包骨架；内容多 10 页放不下？→ 精选最亮的，每页一个核心亮点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>设计出了作品集 PDF 的 10 页结构</strong>。<strong>做了</strong>（10 页结构 + 每页定亮点 + 主线清晰）、<strong>学了</strong>（作品集是图文展示板、每页一亮点 2 分钟可读、和简历/PPT 不同、突出差异化）、<strong>会了</strong>（把全部成果组织成一份有冲击力的展示结构）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜作品集 PDF（10 页·每页一亮点）</strong>：图文并茂的成果展示板（区别于简历纯文字、PPT 汇报辅助）。10 页结构：封面（标语）/简介 300 字/论文 1（摘要+图+亮点）/论文 2/竞赛/开源（截图+star+Colab）/技能+学术活动/未来+联系。每页一个亮点、2 分钟可读完、突出差异化（单卡高效）。用途：邮件附件（对方点开被成果墙震撼）/面试/主页下载。守核心延后（第二篇核心标“接收后开源”）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d302-noon" data-d="302" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D302 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">收集所有素材（高清图/截图/数据）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>作品集靠图说话，<strong>素材质量决定观感</strong>——高清的架构图、结果可视化、GitHub 截图、竞赛证书、数据统计。你 W40/W43 收过素材，今天补齐到“作品集级”（高清、齐全、最新）。<strong>素材凑齐了，制作就快。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>收集/补齐素材——① 论文核心图（架构图 + 最亮结果图，高清）；② GitHub 截图（repo 首页 + star 数 + Colab）；③ 竞赛证书/排名截图；④ 可视化精选（两个课题最直观的几张 + 单卡高效对比）；⑤ 数据统计（star/知乎阅读量/Colab 使用量）；⑥ 简介/自我介绍文字（复用 W43）；按页归类放好。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>作品集所有素材齐备（高清图/截图/数据/文字），按页归类，制作可直接取用。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 用低清/模糊图 → 作品集靠观感，用高清图；② 素材不齐就开做 → 先凑齐（边做边找效率低）；③ 数据过时 → 用最新数据（star/阅读量等）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>图不够高清？→ 重新导出矢量图/高 DPI；缺某素材？→ 对照 10 页结构逐项补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>凑齐了作品集级的全部素材</strong>。<strong>做了</strong>（补齐高清图/截图/数据/文字 + 按页归类）、<strong>学了</strong>（素材质量决定观感、凑齐再做更高效、用最新数据）、<strong>会了</strong>（为作品集准备齐备优质的素材）。</p>
+</div></section></section><section class="slot" id="d302-pm" data-d="302" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D302 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">开始制作（选工具：LaTeX Beamer / Canva / PowerPoint）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（作品集制作工具的选择）</h4><div class="blk-b"><ul>
+<li>作品集 PDF 可以用多种工具做：<strong>LaTeX Beamer</strong>（专业、适合学术、排版精细但上手稍慢）、<strong>Canva</strong>（模板丰富、好看、上手快、适合视觉化）、<strong>PowerPoint</strong>（熟悉、灵活、导出 PDF）。<strong>选你顺手、能做出专业观感的即可</strong>——重点是内容和设计，不是工具本身。最后都导出为 PDF。一个实用建议：如果你已经做了 W42 的汇报 PPT，直接在 PPT 基础上改版式、补内容做作品集是最省力的（PPT 导出 PDF 即可），还能保证作品集和 PPT 风格统一。不必为“用更专业的工具”而从头再来——复用已有的、做出专业观感才是目的。</li>
+<li><strong>建议</strong>：若要快速做出好看的，Canva（模板）或 PPT（熟悉）更快；若追求学术精致排版，Beamer。<strong>够用就好，别在选工具上纠结。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>选一个工具开始制作——① 选模板/设定统一的版式（配色简洁专业、字体统一）；② 按设计好的结构搭页面框架（10 页占位）；③ 开始往里填素材（先填封面 + 简介 + 论文页）；④ 保持每页“一个亮点 + 图文并茂”；今天启动、搭好框架 + 填几页即可（D303 继续做完）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>选定工具、设好统一版式、10 页框架搭好、开始填内容（已填几页），制作正式启动。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 在选工具上纠结半天 → 选顺手的即可（Canva/PPT/Beamer 都行）；② 版式不统一（每页不同风格）→ 设定统一模板/配色/字体；③ 一上来抠细节 → 先搭框架填内容，细节后调。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不会用 Beamer？→ 用 Canva/PPT（更快）；没有设计感？→ 用现成专业模板（简洁学术风）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>选定工具、启动了作品集制作</strong>。<strong>做了</strong>（选工具 + 设统一版式 + 搭 10 页框架 + 填几页）、<strong>学了</strong>（工具选顺手的、统一版式、先框架后细节）、<strong>会了</strong>（启动一份专业作品集的制作）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 作品集 10 页结构设计 ✅ 全部素材收集（高清图/截图/数据）✅ 制作启动（选定工具 + 框架搭好 + 填了几页）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D302</summary><textarea data-note="d302" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d303" data-d="303"><header class="day-head"><span class="dnum">D303</span><h2 class="day-t">周二 · 制作作品集 Page 1–10 + 通读检查（v1）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把作品集 10 页全部做出来（v1），并通读检查设计一致性（字体统一、配色和谐）。提醒：今天是“产出页面”的主力日——把昨天的框架和素材填成完整的 10 页。重点是<strong>每页都做到“一个亮点 + 图文并茂 + 专业观感”</strong>，最后整体通读确保风格统一。</p>
+</blockquote>
+</div><section class="slot" id="d303-am" data-d="303" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D303 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">制作 Page 1–5（封面/简介/论文 1）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>前 5 页是作品集的“门面 + 第一篇”——封面（第一印象，标语要抓人）、简介（300 字讲清你是谁）、论文 1（2 页：摘要 + 核心图 + 结果亮点）。<strong>这几页定调</strong>（专业度、你的定位），要做扎实。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>做 Page 1–5——① 封面（姓名 + 方向 + 联系 + 一句抓人标语，如“遥感 CV｜单卡高效与 SAR 难题攻坚”）；② 简介（复用 W43 自我介绍，300 字，排版美观）；③–④ 论文 1（DOTA 旋转检测：精简摘要 + 架构图 + 结果亮点表 + 单卡高效卖点）；保持图文并茂、每页一亮点。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Page 1–5 制作完成，封面抓人、简介清晰、论文 1 突出（图 + 亮点 + 卖点），专业美观。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>封面标语平淡（“个人作品集”）→ 用突出定位的标语（方向 + 差异化）。</li>
+<li>论文页堆满摘要文字 → 精简摘要 + 大图 + 亮点（图文并茂）。</li>
+<li>不标卖点 → 论文页标单卡高效/SOTA。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>标语想不出？→ “方向 + 你的差异化”（如“高效遥感检测 / SAR 难题”）；论文页放不下？→ 摘要精简到 2-3 句，重点放图和亮点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做出了作品集的门面和第一篇展示</strong>。<strong>做了</strong>（封面 + 简介 + 论文 1 两页 + 图文并茂 + 标卖点）、<strong>学了</strong>（封面定第一印象、论文页图文并茂精简摘要、标差异化）、<strong>会了</strong>（制作有冲击力的作品集核心页）。</p>
+</div></section></section><section class="slot" id="d303-noon" data-d="303" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D303 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">制作 Page 6–10（论文 2/竞赛/开源/技能/未来）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>后 5 页是“第二篇 + 其他实力”——论文 2（2 页）、竞赛（排名）、开源（GitHub + star + Colab）、技能 + 学术活动、未来规划 + 联系。<strong>这几页展示你的广度</strong>（不只论文，还有竞赛、开源、社区活动），让“成果墙”更厚实。一个常见误区是觉得“我就两篇论文，内容不够撑 10 页”——其实你的成果远不止论文：竞赛、开源（star/Colab/一键复现）、内容矩阵（5+ 篇长文）、poster、可视化……把这些都摆出来，对方看到的是一个“全面、活跃、能产出”的研究者形象，而不只是“发了两篇论文的人”。广度本身就是实力的一部分。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>做 Page 6–10——① 论文 2（SAR speckle-aware：摘要 + 架构图 + 结果 + 单卡卖点，守核心延后）；② 竞赛（排名/Top X% + 报告截图）；③ 开源（repo 截图 + star 数 + Colab 链接，体现工程力+影响力）；④ 技能 + 学术活动（方法/工具 + poster + 知乎内容矩阵）；⑤ 未来规划（暗合第三课题/对接方向）+ 联系方式；保持图文并茂、一页一亮点。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Page 6–10 完成，论文 2 + 竞赛 + 开源 + 技能 + 未来都有亮点展示，“成果墙”厚实完整。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 开源页只写文字不放截图 → 放 GitHub 截图 + star 数（视觉冲击）；② 技能页堆术语 → 突出核心 + 配学术活动（poster/知乎）；③ 第二篇泄露核心 → 守延后（展示问题/方法/结果，核心标“接收后开源”）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>开源页放什么？→ repo 首页截图 + star/Colab + 一句亮点；未来规划写什么？→ 你想做的方向（暗合对接组），简短。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做出了作品集的广度展示页</strong>。<strong>做了</strong>（论文 2 + 竞赛 + 开源 + 技能 + 未来 + 图文并茂 + 守延后）、<strong>学了</strong>（后 5 页展示广度、开源页放截图+star、守核心延后）、<strong>会了</strong>（用多维成果填厚作品集）。</p>
+</div></section></section><section class="slot" id="d303-pm" data-d="303" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D303 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">通读检查（设计一致性、字体统一、配色和谐）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>10 页做完要<strong>整体通读检查设计一致性</strong>——字体是否统一、配色是否和谐、版式是否一致、整体是否专业。<strong>设计的一致性=专业度</strong>：东一个字体西一个配色会显得业余，统一的视觉风格让作品集专业可信。这是 v1 完成前的整体把关。有个朴素的判断：把 10 页缩略图并排放在一起看——如果它们“像一套”（字体、配色、版式一脉相承），就专业；如果看着像东拼西凑的几张图，就业余。专业的视觉一致性会潜移默化地传递“这个人做事认真、有品味”，而这正是你希望老师对你形成的第一印象。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>整体通读 10 页——① 字体统一（标题/正文各一种，全篇一致）；② 配色和谐（主色 + 点缀色，不花哨）；③ 版式一致（页边距、对齐、图注格式统一）；④ 整体专业感（像一份用心做的展示册）；⑤ 逻辑流畅（10 页连起来是个完整故事）；修掉不一致处；存为作品集 v1。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>作品集 v1 完成——10 页设计一致（字体/配色/版式统一）、专业、逻辑流畅。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 字体/配色不统一 → 全篇统一（专业度）；② 只看单页不看整体 → 整体通读看一致性和故事性；③ 配色花哨 → 简洁专业（学术风）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>设计不一致难调？→ 设一套模板规则（字体/配色/版式）套用全篇；不确定专业不专业？→ 对比专业作品集模板。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了设计一致的作品集 v1</strong>。<strong>做了</strong>（通读检查字体/配色/版式 + 修不一致 + 存 v1）、<strong>学了</strong>（设计一致性=专业度、整体通读看一致性和故事、简洁专业）、<strong>会了</strong>（把作品集打磨到视觉统一专业）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 作品集 v1（10 页全部制作完成 + 设计一致性检查）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D303</summary><textarea data-note="d303" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d304" data-d="304"><header class="day-head"><span class="dnum">D304</span><h2 class="day-t">周三 · 朋友看作品集 + 反馈 + 定稿导出 PDF（≤5MB）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天找 2 位朋友看作品集、收集反馈（设计感/信息量/吸引力），据反馈修改，然后定稿导出 PDF（确保 ≤5MB，方便邮件附件）。提醒：作品集最终是给老师/面试官看的，<strong>外部视角能发现你看不到的问题</strong>（哪页没吸引力、信息量不当、设计感不足）。定稿时注意文件大小（≤5MB 才方便作邮件附件）。</p>
+</blockquote>
+</div><section class="slot" id="d304-am" data-d="304" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D304 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">让 2 位朋友看作品集 + 收集反馈</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么找人看作品集）</h4><div class="blk-b"><ul>
+<li>作品集是给“别人”看的，<strong>你自己做久了会有盲区</strong>（觉得清楚的别人未必，觉得亮的别人未必 get）。找 2 位朋友看，从三个角度收集反馈：① <strong>设计感</strong>（专业吗？好看吗？）；② <strong>信息量</strong>（够吗？多吗？少吗？哪页空/挤？）；③ <strong>吸引力</strong>（翻完记住什么？哪页最/最不吸引？整体印象？）。<strong>2 个人的反馈交叉，更可靠。</strong></li>
+<li><strong>和模拟汇报（W42）类似</strong>：都是用外部视角检验“对方的真实感受”。作品集要让陌生人 2 分钟看懂并记住，先让朋友试看最能发现问题。这里有个关键认知：作品集的“读者”是没耐心、注意力有限的——老师每天可能收到很多邮件、看很多材料，给你的作品集大概率只有“快速翻一遍”的时间。所以“朋友 2 分钟翻完记住了什么”这个测试极其重要：如果朋友翻完只记住一两个点，那老师也只会记住一两个点——你要确保被记住的，恰好是你最想传递的（两篇论文 + 单卡高效）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把作品集 v1 给 2 位朋友看（最好一位懂科研、一位普通视角）→ 让他们 2 分钟翻一遍 → 收集反馈：① 设计感（专业/好看吗）；② 信息量（够/多/少，哪页空或挤）；③ 吸引力（记住了什么、哪页最/最不吸引、整体印象）；逐条记录（先记不辩解）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>2 位朋友的反馈逐条记录（设计感/信息量/吸引力 + 整体印象），清楚知道要改什么。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不找人看、自我感觉良好 → 外部视角发现盲区。</li>
+<li>只找懂科研的 → 也找普通视角（老师/面试官第一眼也是“普通人式”的扫读）。</li>
+<li>反馈不记/辩解 → 逐条记、先别解释（他没 get 就是没做好）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>朋友反馈太客气？→ 追问“哪页最不想看/最没记住”；没人懂科研？→ 普通视角也很有用（看设计感/吸引力/能否 2 分钟看懂）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用外部视角检验了作品集</strong>。<strong>做了</strong>（2 位朋友 2 分钟翻 + 收集设计感/信息量/吸引力反馈 + 逐条记）、<strong>学了</strong>（自己做有盲区、三角度反馈、交叉更可靠、普通视角也有用）、<strong>会了</strong>（在定稿前用外部视角发现作品集的问题）。</p>
+</div></section></section><section class="slot" id="d304-noon" data-d="304" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D304 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">据反馈修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>据 2 位朋友的反馈<strong>修改作品集</strong>——设计感不足的优化版式/配色、信息量不当的增删、吸引力弱的页重做。<strong>重点改“多人都指出的”和“影响吸引力/理解的”。</strong> 这是定稿前的最后打磨。判断“改不改”有个简单标准：如果一个反馈来自单个人的个人审美偏好（“我喜欢蓝色多一点”），可以斟酌；但如果是“看不懂/没记住/觉得空”这类影响理解和吸引力的，且不止一人提到，就一定要改——前者是口味，后者是硬伤。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>据反馈逐项改——① 设计感问题（统一/美化版式配色）；② 信息量问题（空的页补、挤的页删/拆）；③ 吸引力弱的页（重做亮点呈现/换更好的图）；④ 多人都指出的优先改；改完整体再过一遍。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>作品集据反馈改好——设计感/信息量/吸引力问题已优化，多人指出的已改。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不据反馈改 → 反馈要落实；② 只改个别人的偏好 → 多人都指出的、影响整体的优先；③ 改崩了一致性 → 改后再过一遍设计一致性。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>反馈矛盾（一个说多一个说少）？→ 按“2 分钟能否看懂 + 是否突出亮点”权衡；某页总不满意？→ 聚焦“这页的一个亮点是什么”重做。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>据反馈把作品集改到更好</strong>。<strong>做了</strong>（据三角度反馈逐项改 + 多人指出的优先 + 再过一遍）、<strong>学了</strong>（落实反馈、优先多人/影响整体的、改后保一致性）、<strong>会了</strong>（据外部反馈打磨作品集到定稿前状态）。</p>
+</div></section></section><section class="slot" id="d304-pm" data-d="304" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D304 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">定稿 + 导出 PDF（≤5MB）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么要控制 ≤5MB）</h4><div class="blk-b"><ul>
+<li>作品集定稿后<strong>导出为 PDF</strong>，并<strong>控制文件大小 ≤5MB</strong>——因为它主要作<strong>邮件附件</strong>，太大（如几十 MB）可能：① 超邮箱附件限制（发不出/被退回）；② 老师下载慢、体验差。<strong>≤5MB 是邮件友好的大小</strong>。压缩方法：图片适当压缩（保持清晰但不过大）、用 PDF 压缩工具。</li>
+<li><strong>为什么 PDF 格式</strong>：PDF 跨平台一致（对方看到的和你做的一样，不会乱版）、适合附件和打印。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 最终通读确认（无错别字、链接对、设计统一）；② 导出 PDF；③ <strong>检查文件大小</strong>——若 &gt;5MB，压缩（图片压缩到合适清晰度、或用 PDF 压缩工具，可借补充包的图片/大小检查思路）；④ 确认压缩后仍清晰、≤5MB；⑤ 命名清晰（如“姓名_作品集_2025.pdf”）；存为作品集 PDF 定稿。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>作品集 PDF 定稿——导出为 PDF、≤5MB、清晰、命名规范，可直接作邮件附件。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不控大小（几十 MB）→ 压缩到 ≤5MB（邮件友好）；② 压缩过度图糊 → 平衡清晰度和大小；③ 导出后不检查（乱版/链接失效）→ 导出后通读确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>文件太大？→ 压缩图片（300 DPI 足够）、用 PDF 压缩工具；压缩后糊？→ 关键图保清晰、次要图多压一点。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>导出了邮件友好的作品集 PDF 定稿</strong>。<strong>做了</strong>（最终通读 + 导出 PDF + 控制 ≤5MB + 命名规范）、<strong>学了</strong>（≤5MB 邮件友好、PDF 跨平台一致、压缩平衡清晰度）、<strong>会了</strong>（产出一份可直接作附件的专业作品集 PDF）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜作品集定稿与文件大小</strong>：定稿前最终通读（错别字/链接/设计统一）→ 导出 PDF → ★ 控制 ≤5MB（主要作邮件附件，太大可能超附件限制/下载慢）。压缩：图片压到合适清晰度（300 DPI 足够）、用 PDF 压缩工具，平衡清晰度与大小。PDF 格式=跨平台一致（对方看到的和你做的一样）。命名规范（姓名_作品集_年份）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ <strong>作品集 PDF 定稿</strong>（10 页、设计专业、≤5MB、可作邮件附件）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D304</summary><textarea data-note="d304" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d305" data-d="305"><header class="day-head"><span class="dnum">D305</span><h2 class="day-t">周四 · 更新简历最终版（中英文）+ 朋友审阅</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把简历从初稿（W42）升级到最终版——基于作品集素材完善每一条经历，出中英文各一版，再让朋友审阅。提醒：你 W42 写过简历初稿（量化 + 遥感话术），这周做作品集时素材更全、表述更精炼，正好<strong>回头把简历每一条再完善</strong>（更准的数字、更精炼的表述），定稿成中英文最终版。</p>
+</blockquote>
+</div><section class="slot" id="d305-am" data-d="305" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D305 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">基于作品集素材完善简历每一条</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么作品集之后回头完善简历）</h4><div class="blk-b"><ul>
+<li>你 W42 的简历是初稿。做完作品集后，你对“如何精炼地展示每个成果”更熟练了（作品集逼你提炼每页的亮点），<strong>正好回头把简历的每一条用最精炼、最量化的方式重写</strong>。简历和作品集是配套的：作品集是图文详展，简历是文字速览，两者的成果表述应一致（数字、亮点对齐）。可以这样理解三件材料的分工：作品集是“图文详展”（对方有时间细看时用，2 分钟震撼）、简历是“文字速览”（HR/老师快速筛选时用，30 秒抓重点）、邮件正文是“敲门砖”（≤300 字勾起兴趣）。三者由浅入深、互相印证，且核心成果表述完全一致——这种一致性本身就传递专业和可信。</li>
+<li><strong>完善的方向</strong>：① 数字更准/更新（star、mAP、排名等用最新）；② 表述更精炼（作品集提炼的亮点句可复用）；③ 突出差异化（单卡高效）；④ 确保和作品集一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>基于作品集素材逐条完善简历——① 用最新/最准的数字（star、mAP、阅读量等）；② 把作品集提炼的亮点句用进简历（精炼有力）；③ 每条仍是“动作 + 量化结果 + 卖点”；④ 确保简历和作品集的成果表述一致；⑤ 用 W42 的 resume_checker 思路再过一遍量化率。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>简历每条都完善（数字最新、表述精炼、量化、与作品集一致），整体专业有力。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>简历和作品集数字/表述不一致 → 对齐（两者配套）。</li>
+<li>还用初稿的旧数字 → 用最新（star/阅读量等会增长）。</li>
+<li>完善变啰嗦 → 简历要精炼（一条一两行），亮点突出。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知怎么完善？→ 把作品集每页的亮点句压缩进简历对应条目；某条没数字？→ 找量化（指标/star/排名/数量）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>基于作品集完善了简历每一条</strong>。<strong>做了</strong>（逐条更新数字 + 复用作品集亮点句 + 量化 + 与作品集一致）、<strong>学了</strong>（作品集后回头完善简历、两者配套一致、精炼有力）、<strong>会了</strong>（把简历打磨到与作品集对齐的最终质量）。</p>
+</div></section></section><section class="slot" id="d305-noon" data-d="305" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D305 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">简历中英文各一版</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>简历做<strong>中英文各一版</strong>——中文版给国内（空天院）、英文版备用（国际/英文场合）。两版内容一致、语言不同。<strong>英文版要地道</strong>（避免中式英语、用学术简历的标准英文表述），可借工具初筛但人工确认。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 中文版定稿（完善后的）；② 译英文版——用学术简历标准英文（动作动词开头、量化结果、专业术语准确），地道（工具初筛 + 人工核对）；③ 两版内容一致、格式统一；④ 确保英文专业术语、数字、表述都对。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>简历中英文各一版定稿——内容一致、英文地道、格式统一、专业。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 英文中式表达 → 用学术简历标准英文、人工核对；② 中英文内容不一致 → 对齐；③ 英文术语错 → 用领域标准术语（你论文里的英文表述可参考）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>英文没把握？→ 参考你论文的英文表述（你论文就是英文写的）+ Grammarly 初筛 + 人工核对；术语不确定？→ 用论文/领域标准术语。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做出了中英文简历最终版</strong>。<strong>做了</strong>（中文定稿 + 英文地道版 + 两版一致 + 术语准确）、<strong>学了</strong>（中英各一版用途、英文地道用标准表述、参考论文英文）、<strong>会了</strong>（产出专业的中英文双版简历）。</p>
+</div></section></section><section class="slot" id="d305-pm" data-d="305" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D305 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">让朋友审阅简历</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>简历定稿前<strong>让朋友审阅</strong>——查表述是否清楚、数字是否突出、整体是否专业、英文是否地道、有无笔误。<strong>外部视角能发现你看不到的小问题</strong>（笔误、表述不清、格式瑕疵）。这是简历最终版的最后把关。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>把中英文简历给朋友（最好一位懂科研/英文好的）审阅 → 查：① 表述清楚吗、数字突出吗；② 整体专业吗；③ 英文地道吗、有无笔误；④ 有无格式瑕疵；据反馈修掉问题，定稿简历最终版（中英文）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>简历最终版（中英文）经朋友审阅、问题已修——表述清楚、量化突出、专业、英文地道、无笔误。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不审阅就定稿 → 外部视角查笔误/不清处；② 反馈不改 → 落实；③ 只查中文忽略英文 → 英文也要审（地道/笔误）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>没人审英文？→ Grammarly + 多读几遍 + 对照论文英文；朋友反馈笼统？→ 追问具体哪条/哪处。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了经审阅的简历最终版</strong>。<strong>做了</strong>（朋友审阅中英文 + 修问题 + 定稿）、<strong>学了</strong>（外部视角查笔误/不清、英文也要审、落实反馈）、<strong>会了</strong>（交付一份打磨到位的中英文简历最终版）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜简历最终版（中英·与作品集对齐）</strong>：做完作品集后回头完善简历——数字更新到最新、复用作品集提炼的亮点句、每条仍“动作+量化结果+卖点”、与作品集成果表述一致。中英文各一版（中文给国内、英文备用，英文用学术标准表述、参考你论文的英文、人工核对地道）。三件材料分工：作品集（图文详展/2 分钟震撼）+简历（文字速览/30 秒筛）+邮件（敲门砖/≤300 字），核心成果一致。朋友审阅查笔误/表述/英文。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ <strong>简历最终版（中英文各一版）</strong>（基于作品集素材完善 + 朋友审阅）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D305</summary><textarea data-note="d305" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d306" data-d="306"><header class="day-head"><span class="dnum">D306</span><h2 class="day-t">周五 · 更新个人学术主页（加作品集下载链接 + 最新论文状态）+ 检查链接 + 读 2 篇</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天更新个人主页——加上作品集 PDF 的下载链接、更新最新的论文状态，再检查所有链接，最后读 2 篇新论文。提醒：你 W42 搭了主页，本周做了作品集、简历最终版，正好把这些<strong>挂到主页上</strong>（作品集下载、最新论文状态），让主页成为“邮件附链接，老师一站式了解你”的最新入口。</p>
+</blockquote>
+</div><section class="slot" id="d306-am" data-d="306" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D306 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">更新主页（作品集下载链接 + 最新论文状态）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么持续更新主页）</h4><div class="blk-b"><ul>
+<li>主页是你的“线上学术名片”，<strong>内容要保持最新</strong>——你这周新增了作品集 PDF、简历最终版、论文可能有新状态（如第一篇被接收）。把这些更新到主页：① 加作品集 PDF 下载链接（访客可下载完整成果集）；② 更新论文状态（投稿→在审→接收）；③ 加简历下载（如愿意）；④ 更新成果数据（star/内容）。<strong>主页是 W48 邮件附的链接，发出前要确保它是最新、最全的。</strong></li>
+<li><strong>为什么主页要“一站式”</strong>：老师点开主页，应该能看到你的全部最新成果（论文/代码/作品集/简历），不用再找。主页越完整、越新，邮件附链接的效果越好。设身处地想：老师收到你的邮件，可能会顺手点一下主页链接看看你是谁——这一眼，主页要能立刻呈现“两篇论文 + 开源 + 作品集”的完整面貌，让他几秒钟内判断“这个人值得回”。如果主页内容残缺或过时，这宝贵的一眼就浪费了。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>更新主页——① 加作品集 PDF 下载链接（醒目位置）；② 更新论文状态（每篇最新：投稿/在审/接收 + arXiv 链接）；③ 加简历下载链接（可选）；④ 更新成果数据（star/release/内容）；⑤ 保持守核心延后（第二篇核心标“接收后开源”）；commit + 部署更新。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>主页更新到最新——有作品集下载、最新论文状态、最新数据，一站式展示你的全部成果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>主页内容过时（旧论文状态/旧数据）→ 更新到最新（论文状态/star 等）。</li>
+<li>作品集做了不挂主页 → 加下载链接（主页是成果的集中入口）。</li>
+<li>忘了守延后 → 第二篇核心仍标“接收后开源”。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知加哪些？→ 作品集下载 + 最新论文状态 + 最新数据；部署不生效？→ commit+push 后等几分钟，查 Pages 设置。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把主页更新成了最新最全的成果入口</strong>。<strong>做了</strong>（加作品集下载 + 更新论文状态/数据 + 守延后 + 部署）、<strong>学了</strong>（主页要保持最新、一站式展示、是邮件附的链接）、<strong>会了</strong>（持续维护一个完整最新的线上学术名片）。</p>
+</div></section></section><section class="slot" id="d306-noon" data-d="306" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D306 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">检查所有链接正常</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>更新后<strong>逐一检查所有链接</strong>——作品集下载、arXiv、GitHub、简历下载、图片，确保都能打开。<strong>一个坏链接显不专业</strong>（老师点了打不开，第一印象打折）。尤其新加的作品集下载链接要重点测（能正常下载）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>逐项测——① 作品集 PDF 下载链接（能下载、文件对、≤5MB）；② arXiv/论文链接；③ GitHub/Colab 链接；④ 简历下载（如有）；⑤ 图片显示；⑥ 电脑手机双端；修掉所有坏链接。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>主页所有链接测试通过（含新加的作品集下载）、电脑手机正常——一个可放心作邮件附链接的最新主页。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不测新加的下载链接 → 重点测（能正常下载）；② 只电脑测 → 手机也测；③ 图裂不发现 → 检查图片；④ 作品集放在仓库里但下载链接指向的是预览页而非文件本身 → 用 Release 附件或直链，确保点击即下载/打开，别让老师还要再点一次找文件。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>下载链接打不开？→ 查文件路径/是否公开/Release 附件设置；图裂？→ 查路径/是否提交。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了主页的链接把关</strong>。<strong>做了</strong>（测所有链接含作品集下载 + 双端 + 修坏链）、<strong>学了</strong>（坏链接显不专业、重点测新加的、双端检查）、<strong>会了</strong>（确保主页所有链接可靠）。</p>
+</div></section></section><section class="slot" id="d306-pm" data-d="306" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D306 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读 2 篇新论文（持续追踪）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>保持读论文（持续追踪 + 为第三课题/综述更新埋线索）。轻量泛读。M12 临近阶段二尾声，也要开始为阶段三的第三课题攒方向。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>从 alert/清单挑 2 篇相关论文 → 泛读抓主线 + 简要笔记 → 更新清单 → 留意第三课题线索/目标组新作（标进知识库，第三课题方向尤其留意）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>2 篇泛读笔记 + 清单更新 + 第三课题线索标记。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 完全停读 → 保持轻量追踪；② 不记 → 简要笔记。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>时间紧？→ 读摘要+图表+结论。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>保持了轻量追踪、为第三课题攒线索</strong>。<strong>做了</strong>（泛读 2 篇 + 笔记 + 标第三课题线索）、<strong>学了</strong>（持续追踪、阶段二尾声为阶段三攒方向）、<strong>会了</strong>（维持领域敏感度并前瞻第三课题）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 主页更新（作品集下载链接 + 最新论文状态 + 链接检查通过）✅ 2 篇新论文笔记。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D306</summary><textarea data-note="d306" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d307" data-d="307"><header class="day-head"><span class="dnum">D307</span><h2 class="day-t">周六 · GitHub 年终大更新（Year in Review）+ 统计仓库数据 + 写转型博客</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天做 GitHub 仓库的“年终大更新”（README 加 “Year in Review” 部分）、统计仓库数据，并写一篇重磅博客——《我的 12 个月遥感 CV 转型——从零到 2 篇论文》。提醒：转型博客是一篇<strong>里程碑式的内容</strong>——回顾你 12 个月的完整历程，既是给同路人的分享（高共鸣、被动存在感），也是对自己的总结。这可能成为你内容矩阵里最有传播力的一篇。</p>
+</blockquote>
+</div><section class="slot" id="d307-am" data-d="307" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D307 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">GitHub 仓库年终大更新（README 加 “Year in Review”）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Year in Review 是什么、为什么加）</h4><div class="blk-b"><ul>
+<li><strong>“Year in Review”（年度回顾）= 在 README 里加一段总结这一年仓库/项目进展的内容</strong>：发布了什么、达到多少 star、有哪些里程碑（两个课题、release、Colab demo）。它让访客<strong>一眼看到项目的成长轨迹和活跃度</strong>，也是给关注者的“年度汇报”。</li>
+<li><strong>为什么对你有价值</strong>：① 体现项目持续成长（不是死仓库）；② 集中展示这一年的成果（两篇论文相关代码、star 增长、功能迭代）；③ 配合转型博客，形成“代码 + 故事”的年度展示。<strong>活跃且有总结的仓库，对人脉预热期的你是加分项。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 README 加 “Year in Review” 部分（见补充包范例 3）——① 这一年的里程碑（两个课题框架、v1.0→v2.0 release、Colab demo、Model Zoo）；② 数据（star 增长、关注者）；③ 主要更新时间线；④ 致谢关注者/贡献者；⑤ 未来计划（第三课题方向，简短）；保持守核心延后（第二篇核心标接收后开源）；commit 更新。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>README 的 “Year in Review” 部分完成——里程碑/数据/时间线清晰，展示项目一年的成长。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>年度回顾只列功能不提里程碑/数据 → 突出里程碑（两课题/release）+ 数据（star 增长）。</li>
+<li>写得平淡像 changelog → 有总结感（这一年做成了什么），可适当有温度。</li>
+<li>泄露第二篇核心 → 守延后。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知写什么？→ 列这一年的里程碑 + star 增长 + 时间线；太流水账？→ 突出几个关键里程碑（两课题、爆款、demo）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>给仓库做了年度回顾、展示了成长</strong>。<strong>做了</strong>（README 加 Year in Review + 里程碑/数据/时间线 + 守延后）、<strong>学了</strong>（年度回顾展示项目成长、里程碑+数据、有总结感）、<strong>会了</strong>（为开源项目做有吸引力的年度总结）。</p>
+</div></section></section><section class="slot" id="d307-noon" data-d="307" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D307 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">统计仓库数据（star / fork / clone / issue）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>统计仓库的多维数据——<strong>star</strong>（受欢迎度）、<strong>fork</strong>（被复用/二次开发）、<strong>clone</strong>（被下载使用）、<strong>issue</strong>（互动/被关注问题数）。这些数据比单看 star 更全面地反映项目影响力（fork/clone 说明真有人用，issue 说明有互动）。用于 Year in Review、作品集、博客。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>在 GitHub 查仓库数据——star/fork/watch 数（仓库首页）、clone/traffic（Insights→Traffic）、issue/PR 数；记录并对比趋势（这一年的增长）；把关键数据用进 Year in Review、作品集、博客（量化影响力）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>仓库多维数据已统计（star/fork/clone/issue + 趋势），用于年度回顾和成果展示。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只看 star 忽略 fork/clone → fork/clone 说明真有人用（更实在的影响力）；② 数据不记不用 → 用进 Year in Review/作品集/博客（量化影响力）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>clone 数在哪看？→ Insights→Traffic（近两周数据）；数据一般？→ 多维看（有 fork/clone 就说明有人用，不只看 star 绝对值）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>多维统计了仓库影响力</strong>。<strong>做了</strong>（统计 star/fork/clone/issue + 记趋势 + 用进展示）、<strong>学了</strong>（多维数据比单看 star 全面、fork/clone 说明真有人用）、<strong>会了</strong>（用多维数据客观评估开源影响力）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜GitHub 年度回顾（Year in Review）+ 多维数据</strong>：README 加 “Year in Review” 段——里程碑（两课题/v1.0→v2.0 release/Colab demo）+ 数据 + 时间线 + 致谢 + 未来（守核心延后）。统计多维数据：star（受欢迎）/fork（被复用）/clone（被使用，看 Insights→Traffic）/issue（互动）——fork/clone 比单看 star 更能说明“真有人用”。数据用进年度回顾/作品集/博客（量化影响力）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d307-pm" data-d="307" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D307 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写转型博客《我的 12 个月遥感 CV 转型——从零到 2 篇论文》</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（转型博客写什么、为什么是重磅内容）</h4><div class="blk-b"><ul>
+<li>转型博客 = <strong>回顾你 12 个月完整转型历程的故事</strong>：从零基础起步，到入门、找 Gap、第一篇、第二篇、开源、连接……一路的探索、踩坑、成果、心得。它是一篇<strong>里程碑式的内容</strong>，价值高在：① <strong>高共鸣</strong>（同样想转型/做研究的人极有代入感→广泛传播）；② <strong>被动存在感的最强一篇</strong>（你的完整故事最能让人记住你、了解你）；③ <strong>对自己的总结</strong>（梳理这一年，看清成长、沉淀方法论）。</li>
+<li><strong>和方法解读帖（W41）的不同</strong>：方法解读讲“一个课题怎么做出来”（单点深度）；转型博客讲“12 个月整条路怎么走过来”（全程广度 + 心路）。后者更宏观、更有故事性、更能打动“同路人”。而且它有一个独特价值：它是你这条路的“叙事锚”——当别人（包括未来的老师、面试官、合作者）想了解“你是个什么样的人”时，这篇博客给出的不是冷冰冰的成果列表，而是一个有血有肉的奋斗故事。一个零基础、单卡、无人指导却做出两篇论文的故事，本身就极具说服力和感染力——它讲的是你的特质（学习力、韧性、自驱），而特质比成果更能打动人。</li>
+<li><strong>守核心延后</strong>：可讲历程/成果/心得，但未发表的第二篇核心实现细节不泄露。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写转型博客（见补充包范例 2）——① <strong>起点</strong>（零基础、单卡、导师不支持的处境，真实）；② <strong>历程</strong>（按阶段讲：入门→找 Gap→第一篇从 idea 到投稿→第二课题→开源运营→连接准备，每段讲关键事 + 踩坑 + 突破）；③ <strong>成果</strong>（两篇论文 + 爆款 repo + 竞赛，量化）；④ <strong>心得/方法论</strong>（怎么坚持下来、单卡高效路线、可持续性、给同路人的建议）；⑤ <strong>引流</strong>（主页/作品集/GitHub）；语言真诚、有故事性、有干货；守核心延后。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>一篇有故事性、有干货、高共鸣的转型博客草稿——讲清 12 个月历程、成果、心得，引流，不泄核心。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>写成成果罗列（流水账）→ 要有故事性（起点→历程→成果→心得）、有心路和踩坑。</li>
+<li>只报喜不讲难 → 讲真实的困难/踩坑（导师不支持、单卡限制、迁移遇阻等），更真实更有共鸣。</li>
+<li>泄露未发表核心 → 守延后（讲历程/思路，不讲第二篇核心实现）。</li>
+<li>通篇自夸 → 真诚分享（含失败/困惑），给同路人价值，少自夸。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>不知怎么组织？→ 按“起点→各阶段历程→成果→心得”时间线 + 故事性；担心太长？→ 这类博客可以长（有故事），但每段要有干货/共鸣点；不知写什么干货？→ 你的方法论（单卡高效、可持续、找 Gap、复用经验）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写出了里程碑式的转型博客</strong>。<strong>做了</strong>（写 12 个月历程博客 + 起点/历程/成果/心得 + 引流 + 守延后）、<strong>学了</strong>（转型博客全程广度+心路、高共鸣最强存在感、讲真实困难、守延后）、<strong>会了</strong>（把完整转型历程讲成打动同路人的故事）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜转型博客（里程碑 + 最强存在感）</strong>：回顾完整转型历程的故事（起点→各阶段历程→成果→心得）。价值：高共鸣（同路人代入感强→广泛传播）、被动存在感最强一篇（完整故事让人记住你）、对自己的总结。和方法解读帖不同：全程广度+心路 vs 单点深度。要点：有故事性、讲真实困难/踩坑（更有共鸣）、量化成果、给干货（你的方法论）、引流、★守核心延后（不泄第二篇核心）。少自夸、真诚分享。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ GitHub 仓库年终大更新（README Year in Review）✅ 仓库多维数据统计（star/fork/clone/issue）✅ 转型博客草稿（《我的 12 个月遥感 CV 转型》）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D307</summary><textarea data-note="d307" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d308" data-d="308"><header class="day-head"><span class="dnum">D308</span><h2 class="day-t">周日 · 周复盘 W45 + 修改转型博客 + 计划 W46</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：本周最后一天——复盘 W45、打磨转型博客、规划 W46。提醒：W45 是“自我包装”周，复盘要确认成品材料齐了（作品集 PDF、简历最终版、主页更新、转型博客）。W46 按计划是“社区曝光 + 博客发布”——把这周写的转型博客和内容矩阵推出去，扩大曝光。本周的作品集/材料是 W48 发邮件的核心弹药，离阶段二收尾（W47 总复盘、W48 发邮件）越来越近。</p>
+</blockquote>
+</div><section class="slot" id="d308-am" data-d="308" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D308 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">周复盘 W45</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（自我包装周复盘什么）</h4><div class="blk-b"><ul>
+<li>W45 复盘重点：① <strong>成品材料是否齐</strong>（作品集 PDF 定稿、简历最终版中英、主页更新、转型博客、GitHub 年终更新）——连接期的硬材料全部成品化；② <strong>质量自检</strong>（作品集 2 分钟能看懂并震撼吗？简历精炼有力吗？博客有共鸣吗？）；③ <strong>W48 弹药齐备度</strong>（作品集作附件 ✓、简历 ✓、主页链接 ✓ 都成品了吗）。<strong>连接期“材料成品化”到本周完成。</strong></li>
+<li><strong>和 W43 复盘的不同</strong>：W43 盘“软材料”（价值卡片/邮件草稿）；W45 盘“硬材料成品”（作品集/简历/主页/博客）。两者合起来，W48 发邮件的全套弹药（草稿 + 附件 + 链接）齐了。值得停下来意识到：你在 M11-M12 这几周学会的“自我包装”（价值卡片、定制邮件、作品集、简历、主页、博客），是一项会跟随你很久的能力——不只是为了这次对接空天院，未来求职、申请、合作、乃至带学生，“把自己/工作清晰有力地展示出来”都是核心竞争力。很多技术很强的人止步于“做得好但说不清”，你正在补上这一课。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 W45 周报——① 硬交付逐项打勾（作品集 PDF/简历最终版/主页更新/转型博客/GitHub 年终）；② 质量自检（作品集震撼吗？简历有力吗？博客有共鸣吗？）；③ W48 弹药齐备度（草稿[W43]+附件[作品集/简历]+链接[主页]都成品了吗）；④ 量化（作品集页数、简历版本、仓库数据）；⑤ 心态（材料全部成品的踏实、对 W46 曝光和 W48 发出的准备）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W45 周报——成品材料齐备确认、质量自检、明确 W48 全套弹药（草稿+附件+链接）成品了。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只盘“做完了”不盘“质量/弹药齐备” → 自检质量 + W48 是否齐；② 觉得“又是做材料没做研究”而倦怠 → 自我包装是连接期关键能力，材料是 W48 发出的前提。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不确定材料够不够好？→ 自检“作品集 2 分钟震撼 + 简历精炼 + 博客共鸣”；担心倦怠？→ 阶段二只剩 W46/W47/W48，坚持把收尾做漂亮。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘确认了硬材料成品、W48 弹药齐备</strong>。<strong>做了</strong>（W45 周报 + 成品材料确认 + 质量自检 + W48 弹药齐备度）、<strong>学了</strong>（自我包装周盘硬材料成品、连接期材料成品化完成、软+硬材料合起来就是 W48 弹药）、<strong>会了</strong>（系统复盘连接期材料的成品化）。</p>
+</div></section></section><section class="slot" id="d308-noon" data-d="308" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D308 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">修改转型博客</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>转型博客昨天写了草稿，今天<strong>打磨</strong>——通读、优化故事性和逻辑、补共鸣点/干货、配图（历程时间线/成果图）、确保守核心延后、引流到位。<strong>这篇要传播，值得多打磨一遍</strong>（它可能是你最有传播力的内容）。下周（W46）就发布。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>打磨转型博客——① 通读优化（故事流畅、逻辑清晰）；② 补共鸣点/干货（同路人最关心的：怎么坚持、单卡怎么做、踩坑教训）；③ 配图（历程时间线、成果图、可视化精选）；④ 守核心延后；⑤ 引流（主页/作品集/GitHub 链接）；存为博客 v2（W46 发布）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>转型博客 v2——故事性强、有干货、配图、引流、守延后，打磨到可发布。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 草稿不打磨直接发 → 多打磨（这篇要传播）；② 没配图 → 配历程图/成果图（提升可读性）；③ 改时泄露核心 → 守延后。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>哪里需要打磨？→ 故事不流畅处、干货不够处、共鸣弱处；配什么图？→ 12 个月时间线、成果数据图、可视化精选。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把转型博客打磨到可发布</strong>。<strong>做了</strong>（通读优化 + 补干货/共鸣 + 配图 + 守延后 + 引流 + 存 v2）、<strong>学了</strong>（要传播的内容值得多打磨、配图提升可读、守延后）、<strong>会了</strong>（把里程碑博客打磨到发布质量）。</p>
+</div></section></section><section class="slot" id="d308-pm" data-d="308" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D308 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W46（社区曝光 + 博客发布）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W46 该规划什么）</h4><div class="blk-b"><ul>
+<li>W46 按计划是“<strong>社区曝光 + 博客发布</strong>”——把这周写的转型博客发布出去，并在多个社区曝光你的内容矩阵（综述/方法/观察/教程/转型博客）+ 作品集/主页，扩大被动存在感。这是连接期“被动建立存在感”的集中发力周（W48 发邮件前让尽可能多对的人“听说过你”）。</li>
+<li><strong>为什么 W46 集中曝光</strong>：你已积累了丰富的内容（5+ 篇知乎长文 + 作品集 + 主页）和成果，W46 集中推出去，能在 W48 发邮件前最大化“对方对你的熟悉度”——让冷邮件变“早有耳闻”。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>制定 W46 规划——① 发布转型博客（多平台：知乎/CSDN/公众号等）；② 社区曝光（在相关社区/群分享内容矩阵 + 作品集 + 主页，对口不刷屏）；③ 整理内容矩阵的总曝光数据；④ 持续人脉预热（读老师近作）+ 论文跟进；明确 W46 核心=集中曝光、扩大被动存在感，为 W48 发出铺最后的路。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W46 规划——博客发布 + 社区曝光 + 数据整理的安排清晰，明确为 W48 发出最大化被动存在感。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① W46 只发博客忘了整体曝光 → 集中曝光整个内容矩阵+作品集+主页；② 刷屏式曝光 → 对口、有价值地分享（不刷屏）；③ 忘了持续人脉预热 → 功课不断（向 W48 铺路）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知曝光到哪？→ 你建过的渠道（知乎/CSDN/公众号/群/Reddit 等）；担心曝光过度？→ 对口、有价值即可，质量优先。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划好了 W46、向“集中曝光”推进</strong>。<strong>做了</strong>（W46 规划 + 博客发布 + 社区曝光 + 数据整理 + 持续人脉预热）、<strong>学了</strong>（W46 集中曝光最大化被动存在感、为 W48 铺路、对口不刷屏）、<strong>会了</strong>（规划好连接期的集中曝光发力）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 周报 W45（成品材料齐备 + W48 弹药齐备度）✅ 转型博客 v2（打磨到可发布）✅ W46 计划（社区曝光 + 博客发布）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D308</summary><textarea data-note="d308" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W45 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>本周是“作品集 PDF 制作（自我包装）”周，补充包给你四样可直接照用的：① 三个范例（10 页作品集 PDF 逐页骨架 · 简历最终版中英要点 + 转型博客结构 · GitHub “Year in Review” 模板 + 制作工具对比）；② 一个完整可运行的“年度数据汇总器”（生成 Year in Review 摘要）+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 10 页作品集 PDF 逐页骨架</h3>
+<figure class="code" data-lang="text"><pre><code>P1  封面：姓名 + 方向（遥感CV/SAR难题/高效下游）+ 联系方式 + 一句标语
+       （如&quot;零基础到 2 篇论文 | 单卡高效遥感检测&quot;）
+P2  个人简介：300 字（复用 W43 自我介绍）——背景/两课题/定位/方向
+P3-4 论文 1（DOTA 旋转检测）：精简摘要 + 架构图 + 结果亮点表
+       （mAP 78.5 / +1.3 vs SOTA / 高分辨率小目标分支 / 单卡高效）
+P5-6 论文 2（SAR speckle-aware）：精简摘要 + 架构图 + 结果
+       （N 数据集 SOTA / 单卡 4090 / 守核心延后）
+P7  竞赛成果：排名/Top X% + 技术报告截图 + 主导的方案（Ensemble/WBF）
+P8  开源项目：GitHub 截图 + star 数 + Colab 链接 + 一键复现/Model Zoo
+P9  技能 + 学术活动：方法/工具清单 + poster + 知乎内容矩阵（5+篇）
+P10 未来规划 + 联系方式：想做的方向（暗合对接组）+ 邮箱/主页/GitHub
+原则：每页一个亮点、图文并茂、2 分钟可读完、突出差异化、≤5MB。
+工具：LaTeX Beamer / Canva / PowerPoint → 导出 PDF。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 1b · 作品集封面标语 + 简介开头示例（供参考改写）</h3>
+<figure class="code" data-lang="text"><pre><code>【封面标语候选（突出定位+差异化，选一句改写）】
+· &quot;零基础到 2 篇论文 ｜ 单卡高效遥感检测与 SAR 难题攻坚&quot;
+· &quot;遥感 CV ｜ 用通用 CV 巧技攻 SAR 难题 ｜ 单卡 4090 路线&quot;
+· &quot;12 个月，从读不懂论文到独立产出 2 篇 ｜ 高效·务实·能落地&quot;
+
+【个人简介开头示例（300 字的前两句，定调）】
+&quot;我是一名专注遥感计算机视觉的研究者，从通用 CV 转入，专注高效下游
+特化与 SAR 特有难题（speckle/跨域）。过去约一年，我在单张 RTX 4090 上
+独立完成两个课题、产出两篇论文与一个开源项目……&quot;
+→ 一句话定位 + 一句话战绩，开头就让对方抓住&quot;你是谁、强在哪&quot;。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · 简历最终版（中英）要点 + 转型博客结构</h3>
+<figure class="code" data-lang="text"><pre><code>【简历最终版要点（基于 W42 初稿完善）】
+· 数字更新到最新（star/mAP/阅读量）、与作品集一致
+· 每条&quot;动作动词 + 量化结果 + 卖点&quot;（独立设计…，DOTA mAP 78.5(+1.3)，开源60+stars）
+· 中英文各一版，英文用学术简历标准表述（参考你论文的英文）
+· 朋友审阅（笔误/表述/英文地道）
+
+【转型博客结构《我的12个月遥感CV转型——从零到2篇论文》】
+一、起点：零基础 + 单卡 4090 + 导师不支持的真实处境
+二、历程（按阶段，每段：关键事 + 踩坑 + 突破）：
+    入门 → 找Gap → 第一篇(idea→投稿) → 第二课题 → 开源运营 → 连接准备
+三、成果：两篇论文 + 爆款repo(stars) + 竞赛（量化）
+四、心得/方法论：怎么坚持(可持续性) / 单卡高效路线 / 找Gap / 复用经验
+五、引流：主页 / 作品集 / GitHub
+★ 真诚、讲真实困难、给同路人干货、守核心延后、少自夸。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · GitHub “Year in Review” README 模板 + 制作工具对比</h3>
+<figure class="code" data-lang="markdown"><pre><code>【README · Year in Review 模板】
+<span class="gu">## 🎉 Year in Review (12 个月)</span>
+<span class="k">-</span><span class="w"> </span>📄 发表/投稿：2 篇论文（旋转检测 / SAR speckle-aware，arXiv 链接）
+<span class="k">-</span><span class="w"> </span>⭐ Stars：从 0 增长到 [N]+；Forks [F]；被 clone [C] 次
+<span class="k">-</span><span class="w"> </span>🚀 Releases：v1.0（第一课题）→ v2.0（含第二课题框架）
+<span class="k">-</span><span class="w"> </span>🧪 功能：一键复现 / Model Zoo / Colab demo
+<span class="k">-</span><span class="w"> </span>📝 内容：5+ 篇技术长文（综述/方法/观察/教程/转型博客）
+<span class="k">-</span><span class="w"> </span>🔭 未来：第三课题（SAR难题/跨域）方向探索
+  （第二篇核心模块将在论文接收后开源）
+感谢所有 star/关注/贡献的朋友 🙏
+
+【作品集制作工具对比】
+| 工具 | 优点 | 适合 |
+|---|---|---|
+| LaTeX Beamer | 学术精致、排版精细 | 追求学术专业排版 |
+| Canva | 模板丰富、好看、上手快 | 快速做出视觉化作品集 |
+| PowerPoint | 熟悉、灵活、易导出PDF | 已熟悉PPT、想灵活控制 |
+→ 选顺手、能做出专业观感的即可；最后都导出 PDF（≤5MB）。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · 年度数据汇总器（生成 Year in Review，+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本把你这一年的关键数据（论文/star/release/内容/竞赛）汇总成一段格式化的 “Year in Review” 摘要，可直接用于 README、作品集封面/简介、转型博客的成果段。填入真实数字即可。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># year_in_review.py —— 年度数据汇总器（生成 Year in Review 摘要）</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;papers&quot;</span><span class="p">:</span>      <span class="p">[(</span><span class="s2">&quot;旋转检测(DOTA)&quot;</span><span class="p">,</span> <span class="s2">&quot;投稿/arXiv&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;SAR speckle-aware&quot;</span><span class="p">,</span> <span class="s2">&quot;投稿/arXiv&quot;</span><span class="p">)],</span>
+    <span class="s2">&quot;stars&quot;</span><span class="p">:</span>       <span class="mi">70</span><span class="p">,</span>      <span class="c1"># 填真实数</span>
+    <span class="s2">&quot;forks&quot;</span><span class="p">:</span>       <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">&quot;clones&quot;</span><span class="p">:</span>      <span class="mi">300</span><span class="p">,</span>
+    <span class="s2">&quot;releases&quot;</span><span class="p">:</span>    <span class="p">[</span><span class="s2">&quot;v1.0 第一课题&quot;</span><span class="p">,</span> <span class="s2">&quot;v2.0 含第二课题框架&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;blog_posts&quot;</span><span class="p">:</span>  <span class="mi">5</span><span class="p">,</span>       <span class="c1"># 知乎长文数</span>
+    <span class="s2">&quot;competition&quot;</span><span class="p">:</span> <span class="s2">&quot;Top 5%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;months&quot;</span><span class="p">:</span>      <span class="mi">12</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;## 🎉 Year in Review（</span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;months&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> 个月）</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- 📄 论文：</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;papers&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> 篇&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;papers&#39;</span><span class="p">]:</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    · </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">（</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">）&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- ⭐ Stars </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;stars&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">+ ｜ 🍴 Forks </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;forks&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> ｜ ⬇️ Clones </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;clones&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- 🚀 Releases：</span><span class="si">{</span><span class="s1">&#39; → &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;releases&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- 📝 技术长文：</span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;blog_posts&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">+ 篇（综述/方法/观察/教程/转型）&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- 🏆 竞赛：</span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;competition&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- 🔭 未来：第三课题（SAR难题/跨域）；第二篇核心接收后开源&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">headline</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="c1"># 一句话战绩（作品集封面/简介用）</span>
+    <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;months&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> 个月：从零基础到 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;papers&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> 篇论文 + &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;开源 </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;stars&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">+ stars + 竞赛 </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;competition&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">render</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- 一句话战绩（封面/简介用）---&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">headline</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="markdown"><pre><code><span class="gu">## 🎉 Year in Review（12 个月）</span>
+
+<span class="k">-</span><span class="w"> </span>📄 论文：2 篇
+    · 旋转检测(DOTA)（投稿/arXiv）
+    · SAR speckle-aware（投稿/arXiv）
+<span class="k">-</span><span class="w"> </span>⭐ Stars 70+ ｜ 🍴 Forks 12 ｜ ⬇️ Clones 300
+<span class="k">-</span><span class="w"> </span>🚀 Releases：v1.0 第一课题 → v2.0 含第二课题框架
+<span class="k">-</span><span class="w"> </span>📝 技术长文：5+ 篇（综述/方法/观察/教程/转型）
+<span class="k">-</span><span class="w"> </span>🏆 竞赛：Top 5%
+<span class="k">-</span><span class="w"> </span>🔭 未来：第三课题（SAR难题/跨域）；第二篇核心接收后开源
+
+--- 一句话战绩（封面/简介用）---
+12 个月：从零基础到 2 篇论文 + 开源 70+ stars + 竞赛 Top 5%
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：填入真实数字，脚本生成 Year in Review 摘要（用于 README/作品集/博客）和一句话战绩（用于作品集封面/简介/邮件）。“一句话战绩”尤其有用——它把你 12 个月的成果浓缩成一句话，震撼且好记。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D302（作品集结构 + 素材 + 启动）</strong></p>
+<ol>
+<li>作品集 PDF 的 10 页标准结构是什么？和简历/PPT 有何不同？</li>
+<li>为什么“每页一个亮点、2 分钟可读完”？</li>
+<li>制作工具有哪几个选择？选择原则是什么？</li>
+</ol>
+<p><strong>D303（制作 10 页 + 通读）</strong></p>
+<ol>
+<li>前 5 页和后 5 页各展示什么？为什么后 5 页重要？</li>
+<li>为什么要通读检查设计一致性？设计一致性=什么？</li>
+</ol>
+<p><strong>D304（朋友反馈 + 定稿 PDF）</strong></p>
+<ol>
+<li>找朋友看作品集从哪三个角度收集反馈？为什么也找普通视角？</li>
+<li>为什么定稿 PDF 要 ≤5MB？怎么压缩？</li>
+</ol>
+<p><strong>D305（简历最终版）</strong></p>
+<ol>
+<li>为什么做完作品集后回头完善简历？两者要怎样一致？</li>
+<li>简历为什么中英文各一版？英文怎么保证地道？</li>
+</ol>
+<p><strong>D306（主页更新）</strong></p>
+<ol>
+<li>主页要更新什么？为什么主页要保持“最新+一站式”？</li>
+<li>更新后为什么重点测作品集下载链接？</li>
+</ol>
+<p><strong>D307（GitHub 年终 + 转型博客）</strong></p>
+<ol>
+<li>Year in Review 是什么？为什么 fork/clone 比单看 star 更全面？</li>
+<li>转型博客和方法解读帖（W41）有何不同？为什么是“最强存在感”的一篇？</li>
+<li>写转型博客为什么要“讲真实困难”？怎么守核心延后？</li>
+</ol>
+<p><strong>D308（复盘 + 改博客 + W46 计划）</strong></p>
+<ol>
+<li>自我包装周复盘要确认什么？软材料+硬材料合起来是什么？</li>
+<li>W46 要做什么？为什么 W46 集中曝光（和 W48 的关系）？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>作品集每页塞太多像论文</td>
+<td>定位错</td>
+<td>每页一个亮点、图文并茂、2 分钟可读完</td>
+</tr>
+<tr>
+<td>2</td>
+<td>没突出差异化</td>
+<td>漏卖点</td>
+<td>每页（尤其论文页）突出单卡高效/SOTA</td>
+</tr>
+<tr>
+<td>3</td>
+<td>用低清/模糊图</td>
+<td>素材质量差</td>
+<td>用高清图（作品集靠观感）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>在选工具上纠结半天</td>
+<td>本末倒置</td>
+<td>选顺手的（Canva/PPT/Beamer），重内容</td>
+</tr>
+<tr>
+<td>5</td>
+<td>版式不统一（每页不同风格）</td>
+<td>不专业</td>
+<td>设统一模板/配色/字体</td>
+</tr>
+<tr>
+<td>6</td>
+<td>封面标语平淡</td>
+<td>没抓住第一印象</td>
+<td>用突出定位的标语（方向+差异化）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>开源页只文字不放截图</td>
+<td>不直观</td>
+<td>放 GitHub 截图+star（视觉冲击）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>第二篇泄露未发表核心</td>
+<td>没守延后</td>
+<td>展示问题/方法/结果，核心标“接收后开源”</td>
+</tr>
+<tr>
+<td>9</td>
+<td>作品集 PDF 几十 MB</td>
+<td>没控大小</td>
+<td>压缩到 ≤5MB（邮件友好）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>压缩过度图糊</td>
+<td>没平衡</td>
+<td>关键图保清晰、次要图多压</td>
+</tr>
+<tr>
+<td>11</td>
+<td>简历和作品集数字/表述不一致</td>
+<td>没对齐</td>
+<td>两者配套，数字/亮点对齐</td>
+</tr>
+<tr>
+<td>12</td>
+<td>英文简历中式表达</td>
+<td>不地道</td>
+<td>用学术标准表述、参考论文英文、人工核对</td>
+</tr>
+<tr>
+<td>13</td>
+<td>主页内容过时（旧状态/数据）</td>
+<td>没更新</td>
+<td>更新到最新（论文状态/star）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>转型博客写成成果罗列流水账</td>
+<td>没故事性</td>
+<td>起点→历程→成果→心得，讲心路和踩坑</td>
+</tr>
+<tr>
+<td>15</td>
+<td>博客只报喜不讲难</td>
+<td>不真实</td>
+<td>讲真实困难/踩坑（更有共鸣）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>W45 收尾</strong>：你完成了一次漂亮的“自我包装”——把 12 个月的成果整合成了一份 10 页、有冲击力的<strong>作品集 PDF</strong>（每页一个亮点、突出单卡高效、≤5MB 可作邮件附件），出了<strong>简历最终版</strong>（中英、与作品集对齐），更新了主页（挂上作品集下载），还写了一篇里程碑式的<strong>转型博客</strong>《我的 12 个月遥感 CV 转型——从零到 2 篇论文》（你内容矩阵里最有传播力的一篇）。★ 至此，连接期的全套弹药——软材料（价值卡片、定制邮件草稿，W43）+ 硬材料（作品集、简历、主页、博客，W45）——基本备齐，就等 W48 发出。回看这一周，你学会的是一项关键能力：<strong>让扎实的工作“被一眼看见”</strong>。同样的成果，包装成一份专业作品集，老师 2 分钟就能记住“这个人零基础一年做出了两篇论文 + 爆款 repo”。下周（W46）把这些集中曝光出去（博客发布 + 社区），让 W48 的冷邮件变成“早有耳闻”。<strong>阶段二只剩 W46（曝光）、W47（总复盘）、W48（发出第一封邮件 + 收尾）——终点在望，把收尾走漂亮。再坚持几周，你就会从“准备敲门”真正走到“敲门”——而当你敲门时，手里握着的是两篇论文、一个爆款 repo、一份精良的作品集，和一个零基础逆袭的故事。这不是侥幸，是你一天天攒出来的底气。</strong></p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>对外连接</h4><p>邮件模板见 <a href="../appendix-d.html">附录 D</a>。三条要点：<b>主题要具体</b>、<b>第 2 段必须证明你真读过对方论文</b>、<b>请求要低门槛</b>。不回复是最常见结果，三封有一封回复就算成功，<b>追问最多一次</b>。</p></section>
+<div class="pager"><a class="prev" href="w43.html"><span class="dir">← 上一篇</span><span class="nm">W43 人脉预热（不发邮件，只做准备）</span></a><a class="next" href="w46.html"><span class="dir">下一篇 →</span><span class="nm">W46 社区曝光 + 博客发布</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d302">D302 周一</a><a class="sub" href="#d302-am">上午 设计作品集 PDF 的 10 页</a><a class="sub" href="#d302-noon">中午 收集所有素材（高清图/截图/数据</a><a class="sub" href="#d302-pm">晚上 开始制作（选工具：LaTeX B</a><a href="#d303">D303 周二</a><a class="sub" href="#d303-am">上午 制作 Page 1–5（封面/简</a><a class="sub" href="#d303-noon">中午 制作 Page 6–10（论文 </a><a class="sub" href="#d303-pm">晚上 通读检查（设计一致性、字体统一、</a><a href="#d304">D304 周三</a><a class="sub" href="#d304-am">上午 让 2 位朋友看作品集 + 收集</a><a class="sub" href="#d304-noon">中午 据反馈修改</a><a class="sub" href="#d304-pm">晚上 定稿 + 导出 PDF（≤5MB</a><a href="#d305">D305 周四</a><a class="sub" href="#d305-am">上午 基于作品集素材完善简历每一条</a><a class="sub" href="#d305-noon">中午 简历中英文各一版</a><a class="sub" href="#d305-pm">晚上 让朋友审阅简历</a><a href="#d306">D306 周五</a><a class="sub" href="#d306-am">上午 更新主页（作品集下载链接 + 最</a><a class="sub" href="#d306-noon">中午 检查所有链接正常</a><a class="sub" href="#d306-pm">晚上 读 2 篇新论文（持续追踪）</a><a href="#d307">D307 周六</a><a class="sub" href="#d307-am">上午 GitHub 仓库年终大更新（R</a><a class="sub" href="#d307-noon">中午 统计仓库数据（star / fo</a><a class="sub" href="#d307-pm">晚上 写转型博客《我的 12 个月遥感</a><a href="#d308">D308 周日</a><a class="sub" href="#d308-am">上午 周复盘 W45</a><a class="sub" href="#d308-noon">中午 修改转型博客</a><a class="sub" href="#d308-pm">晚上 计划 W46（社区曝光 + 博客</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

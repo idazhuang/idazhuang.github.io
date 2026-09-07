@@ -1,0 +1,3449 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="1" data-week="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W1 · 环境搭建 + 概念扫盲 —— 把一个零基础的人真 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段一 · 奠基期</span><span>M1 入门与环境</span><span>·</span><span>Week 1</span><span>·</span><span>D1–D7</span></div><h1 class="title">环境搭建 + 概念扫盲 —— 把一个零基础的人真正带进门的第一周</h1><p class="subtitle">「教-学-做」带教版</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="1" data-k="am" title="D1 上午段"></i><i data-d="1" data-k="noon" title="D1 中午段"></i><i data-d="1" data-k="pm" title="D1 晚上段"></i></span><span class="sday"><i data-d="2" data-k="am" title="D2 上午段"></i><i data-d="2" data-k="noon" title="D2 中午段"></i><i data-d="2" data-k="pm" title="D2 晚上段"></i></span><span class="sday"><i data-d="3" data-k="am" title="D3 上午段"></i><i data-d="3" data-k="noon" title="D3 中午段"></i><i data-d="3" data-k="pm" title="D3 晚上段"></i></span><span class="sday"><i data-d="4" data-k="am" title="D4 上午段"></i><i data-d="4" data-k="noon" title="D4 中午段"></i><i data-d="4" data-k="pm" title="D4 晚上段"></i></span><span class="sday"><i data-d="5" data-k="am" title="D5 上午段"></i><i data-d="5" data-k="noon" title="D5 中午段"></i><i data-d="5" data-k="pm" title="D5 晚上段"></i></span><span class="sday"><i data-d="6" data-k="am" title="D6 上午段"></i><i data-d="6" data-k="noon" title="D6 中午段"></i><i data-d="6" data-k="pm" title="D6 晚上段"></i></span><span class="sday"><i data-d="7" data-k="am" title="D7 上午段"></i><i data-d="7" data-k="noon" title="D7 中午段"></i><i data-d="7" data-k="pm" title="D7 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周怎么用（30 秒读完，之后别再回看）</strong></p>
+<ul>
+<li>你的原计划这一格只写了“做什么”+ 一句“为什么”。本版在<strong>不改动你日历任务</strong>的前提下，把每一个关键步骤重写成<strong>牵着你做</strong>的脚本。</li>
+<li>每个关键步骤固定 6 块：<strong>①先垫概念 ②手把手带做 ③合格样例 ④常踩的坑 ⑤卡住自救 ⑥今天你同时学会了什么</strong>（末尾偶尔附一张“技能卡”供回查）。</li>
+<li>三条铁律，贴墙上：<strong>(1) 第一遍/第一次看不懂是正常的，允许自己只懂 30%；(2) 每天只对“今天这一格”负责，不去想 730 天；(3) 记下来的“不懂”是任务不是失败，后面会被一个个解决。</strong></li>
+<li>同一项能力后面会反复出现、<strong>逐级加深</strong>：第一次只教最基础动作，做过几次再教更高阶判断。所以本周很多步骤教得很细，后面会越来越简。</li>
+</ul>
+</blockquote>
+<hr />
+<h2>🧭 W1 总览：这一周你要从“什么都没有”变成什么</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>周一早上的你</th>
+<th>周日晚上的你</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电脑</td>
+<td>没有深度学习环境</td>
+<td>一套能跑 GPU 的 <code>rs</code> 环境 + 跑通一张 DOTA demo</td>
+</tr>
+<tr>
+<td>知识</td>
+<td>不知道遥感/SAR/检测是什么</td>
+<td>读完 3 篇论文，手里有领域“地图”</td>
+</tr>
+<tr>
+<td>技能</td>
+<td>没读过论文、没写过 CV 脚本</td>
+<td>会用“精读 5 遍法”、会写解析旋转框并可视化的脚本</td>
+</tr>
+<tr>
+<td>心态</td>
+<td>“我一个外行能行吗”</td>
+<td>“我已经动手做出东西了”</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>本周科研能力目标</strong>（你原计划写的，保留）：学会搭深度学习实验环境；掌握论文精读“5 遍法”；建立知识管理系统。</p>
+<hr />
+</section>
+<article class="day" id="d1" data-d="1"><header class="day-head"><span class="dnum">D1</span><h2 class="day-t">周一 · 把“能跑代码 + 能记笔记”的地基打下来</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：第一周第一天，只干两件打地基的事——搭通深度学习环境、建起知识库。提醒：环境搭建是新手最容易丢时间的地方，卡一整天甚至溢出到明天都正常，不是你笨；今天真正的及格线不是“全装完”，而是“<code>torch.cuda.is_available()</code> 返回 <code>True</code>”——做到那一步今天就赢了。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天<strong>不读论文、不想 idea</strong>，只干两件让你后面 729 天都受益的事：把深度学习环境搭通（让电脑“能跑代码”），把知识库搭起来（让大脑“记得住”）。
+<strong>先给你打个预防针</strong>：环境搭建是<strong>所有新手丢时间最多的地方</strong>，卡一整天甚至溢出到明天都是常态，不是你笨。今天的真正及格线不是“全装完”，而是“<strong>让 <code>torch.cuda.is_available()</code> 返回 <code>True</code></strong>”——那一刻你就赢了一大半。</p>
+</blockquote>
+<hr />
+</div><section class="slot" id="d1-am" data-d="1" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D1 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">先把知识库的“骨架”立起来（配合你计划：建 4 个顶层文件夹 + 5 段式模板）</h3></div>
+<section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（假设你完全没听过）</h4><div class="blk-b"><ul>
+<li><strong>知识库</strong>：就是你这两年读的几百篇论文、跑的实验、踩的坑的“外接硬盘”。研究是信息密集型长跑，<strong>没有系统的笔记，3 个月后你会彻底忘掉读过什么</strong>（这不是吓你，是几乎所有人都踩过的）。</li>
+<li>工具二选一即可：<strong>Obsidian</strong>（本地 Markdown，推荐，数据在你自己电脑上）或 <strong>Notion</strong>（云端，多设备同步好）。<strong>今天别纠结选哪个</strong>——选一个，5 分钟装好，立刻开工。半年后你自然知道要不要换。</li>
+</ul>
+<h6 id="08w1d1md1cept-1">① 先垫概念</h6>
+<h6 id="08w1d1md1cept-2">为什么必须有知识库</h6>
+<p>原文说“3 个月后你会彻底忘掉读过什么”。<strong>把这句话变具体一点</strong>：</p>
+<p>你两年要读大约 <strong>200–300 篇论文</strong>。假设你读一篇花 2 小时，那就是 500 小时。<strong>如果没有笔记系统，这 500 小时里能留在脑子里的不到 10%。</strong> 更要命的是，到 M3（第 9–12 周）你要“找 Gap”时，需要的正是“我在第 3 周读的那篇里，作者说了一句某方法在小目标上不行”——<strong>这种细节人脑绝对记不住，但笔记能。</strong></p>
+<p><strong>知识库不是为了好看，是为了让你在 6 个月后还能用上今天读的东西。</strong></p>
+<h6 id="08w1d1md1cept-3">为什么选 Obsidian（不是随便二选一）</h6>
+<p>原文说“Obsidian 或 Notion，别纠结”。<strong>方向对，但理由该说清</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Obsidian</th>
+<th>Notion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据在哪</td>
+<td><strong>你自己电脑上的一堆 .md 文件</strong></td>
+<td>云端服务器</td>
+</tr>
+<tr>
+<td>断网能用吗</td>
+<td>能</td>
+<td>基本不能</td>
+</tr>
+<tr>
+<td>能用 git 备份吗</td>
+<td><strong>能</strong>（就是普通文本文件）</td>
+<td>不能</td>
+</tr>
+<tr>
+<td>公司倒闭了怎么办</td>
+<td><strong>笔记还在，任何编辑器都能开</strong></td>
+<td>需要导出</td>
+</tr>
+<tr>
+<td>双向链接</td>
+<td><strong>原生，核心功能</strong></td>
+<td>有，但弱</td>
+</tr>
+<tr>
+<td>中国大陆访问</td>
+<td>本地软件，无障碍</td>
+<td>时快时慢</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>推荐 Obsidian，理由就一条：你的科研笔记是两年的资产，必须存成你能永远打开的格式。</strong></p></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>装 Obsidian（官网下载，免费），新建一个仓库(Vault)，命名 <code>RS-CV</code>。</li>
+<li>在里面建 4 个顶层文件夹（<strong>严格用你计划里的命名，后面所有任务都引用它们</strong>）：
+<ul>
+<li><code>00-基础理论</code>(放遥感物理概念、CV 基础、术语表)</li>
+<li><code>10-论文笔记</code>(每篇论文一个 <code>.md</code>)</li>
+<li><code>20-代码实验</code>(脚本、实验记录、复现报告)</li>
+<li><code>30-数据集</code>(每个数据集一个子文件夹 + README)</li>
+</ul>
+</li>
+<li>在 <code>10-论文笔记</code> 下新建一个文件 <code>_模板_5段式.md</code>，<strong>先把空模板放进去</strong>（明天 D2 读 Zhu 2017 时，我会带你逐段填、逐段讲它为什么这样设计）。模板内容直接抄下面这段：</li>
+</ol>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># {年份}_{第一作者}_{关键词}</span>
+<span class="k">-</span><span class="w"> </span><span class="gs">**出处**</span>：{期刊/会议} {年份} ｜ <span class="gs">**标签**</span>：#综述/#方法/#数据集 <span class="ni">#检测/#SAR/</span>...
+<span class="k">-</span><span class="w"> </span><span class="gs">**我的评级**</span>：A（必读经典）/ B（有用）/ C（泛读即可）
+<span class="k">-</span><span class="w"> </span><span class="gs">**链接**</span>：{arXiv / IEEE 链接}
+
+<span class="gu">## 1. 它解决什么问题（动机）</span>
+（之前的做法差在哪？这篇为什么值得做？——1–3 句）
+
+<span class="gu">## 2. 怎么做的（方法/核心 idea）</span>
+（用你自己的话说清它的关键招数，配一句话画出 pipeline）
+
+<span class="gu">## 3. 实验与结果</span>
+（在哪些数据集、用什么指标、关键数字是多少、消融说明了什么）
+
+<span class="gu">## 4. 启发 / 可借鉴 / 没解决的</span>
+（★最值钱的一段：哪里可改进？还有什么没解决？我能接哪个口子？）
+
+<span class="gu">## 5. 我没看懂的 / 待查</span>
+（记下来的疑问 = 后面的任务，不是失败）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>注：你计划里“5 段式”对应附录 F §2.4。上面这版是它的标准落地形态——第 4 段“启发/没解决的”是你未来所有原创 idea 的<strong>矿脉</strong>，务必每篇都认真写。</p>
+</blockquote>
+<h6 id="08w1d1md1k-do-1">② 手把手带做</h6>
+<h6 id="08w1d1md1k-do-2">第 1 步：下载安装 Obsidian</h6>
+<p><strong>官网</strong>：<code>https://obsidian.md</code></p>
+<p>打开后点页面上的 <strong>Download</strong> 按钮，它会自动识别你的系统。个人使用<strong>完全免费</strong>，不需要注册账号。</p>
+<p>装完第一次打开，你会看到一个欢迎界面，上面有几个选项：</p>
+<figure class="code" data-lang="text"><pre><code>Create new vault        ← 点这个
+Open folder as vault
+Open vault from Obsidian Sync
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="08w1d1md1k-do-3">第 2 步：搞懂 Vault 是什么</h6>
+<p><strong>Vault（仓库）= 一个普通的文件夹。</strong> Obsidian 没有任何数据库，它只是一个“能好看地显示某个文件夹里所有 .md 文件”的编辑器。</p>
+<p>点 <strong>Create new vault</strong> 后：</p>
+<ul>
+<li><strong>Vault name</strong> 填 <code>RS-CV</code></li>
+<li><strong>Location</strong> 选一个你能记住的位置，比如 <code>D:\</code> 或 <code>~/Documents</code></li>
+<li><strong>★ 路径里不要有中文和空格</strong>（前置 1 讲过为什么）</li>
+</ul>
+<p>点 Create。你现在有了一个空仓库。</p>
+<blockquote class="quote">
+<p><strong>这意味着什么</strong>：你磁盘上出现了一个叫 <code>RS-CV</code> 的普通文件夹。你可以用文件资源管理器直接打开它、用 git 管理它、拷到 U 盘带走。<strong>Obsidian 只是个窗口，你的数据从来不在它手里。</strong></p>
+</blockquote>
+<h6 id="08w1d1md1k-do-4">第 3 步：建 4 个顶层文件夹</h6>
+<p>在 Obsidian 左侧文件栏，<strong>右键空白处 → New folder</strong>，依次建：</p>
+<figure class="code" data-lang="text"><pre><code>00-基础理论      放遥感物理概念、CV 基础、术语卡片
+10-论文笔记      每篇论文一个 .md
+20-代码实验      脚本、实验日志、复现报告、环境 SOP
+30-数据集        每个数据集一个子文件夹 + README
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么用 <code>00- / 10- / 20-</code> 这种数字前缀？</strong>（原文没说，但这个设计有讲究）</p>
+<ol>
+<li><strong>强制排序</strong>：文件管理器按字典序排，数字前缀让它们永远按你要的逻辑顺序排列，而不是拼音顺序。</li>
+<li><strong>留空隙</strong>：用 00/10/20/30 而不是 1/2/3/4，是为了<strong>以后能往中间插</strong>。比如后面你要加“15-会议投稿”，插进去不用重命名其他所有文件夹。</li>
+<li>这是工程界通用的编号习惯，你以后看开源项目的 <code>configs/</code> 目录也常见。</li>
+</ol>
+<h6 id="08w1d1md1k-do-5">第 4 步：★ Obsidian 的三个核心功能（原文完全没提，但这是它的全部意义）</h6>
+<p><strong>功能一：新建笔记</strong> —— <code>Ctrl/Cmd + N</code>，或右键文件夹 → New note。</p>
+<p><strong>功能二：双向链接 <code>[[ ]]</code></strong> ← <strong>这是 Obsidian 存在的理由</strong></p>
+<p>在任何笔记里输入 <code>[[</code>，会弹出补全菜单。比如你在实验日志里写：</p>
+<figure class="code" data-lang="markdown"><pre><code>今天跑的 baseline 用的方法来自 [[2021_Xie_Oriented-RCNN]]，
+它的角度编码方式见 [[术语卡片#le90]]。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>这样做的好处：<strong>半年后你打开那篇论文笔记，Obsidian 会在页面底部的 “Backlinks” 里告诉你“有 3 个实验引用了这篇论文”</strong>。你的笔记从一堆孤立文件变成一张网。</p>
+<p><strong>这正是科研笔记和普通笔记的区别</strong>：科研的价值在于“A 和 B 的联系”，而不是 A 或 B 本身。<strong>从今天起，写笔记时想到相关的东西就用 <code>[[]]</code> 链上，哪怕那个文件还不存在</strong>（Obsidian 允许链接到不存在的笔记，等你真去建时它自动接上）。</p>
+<p><strong>功能三：全局搜索</strong> —— <code>Ctrl/Cmd + Shift + F</code>，搜全库。这是你半年后找回“我在哪见过 speckle 这个词”的方式。</p>
+<h6 id="08w1d1md1k-do-6">第 5 步：建 5 段式模板</h6>
+<p>在 <code>10-论文笔记</code> 下新建 <code>_模板_5段式.md</code>，内容：</p>
+<figure class="code" data-lang="markdown"><pre><code># {年份}_{第一作者}_{关键词}
+- **出处**：{期刊/会议} {年份} ｜ **标签**：#综述/#方法/#数据集 #检测/#SAR/...
+- **我的评级**：A（必读经典）/ B（有用）/ C（泛读即可）
+- **链接**：{DOI / arXiv / 免费 PDF 地址}
+
+## 1. 它解决什么问题（动机）
+（之前的做法差在哪？这篇为什么值得做？——1–3 句）
+
+## 2. 怎么做的（方法/核心 idea）
+（用你自己的话说清它的关键招数，配一句话画出 pipeline）
+
+## 3. 实验与结果
+（在哪些数据集、用什么指标、关键数字是多少、消融说明了什么）
+
+## 4. 启发 / 可借鉴 / 没解决的
+（★最值钱的一段：哪里可改进？还有什么没解决？我能接哪个口子？）
+
+## 5. 我没看懂的 / 待查
+（记下来的疑问 = 后面的任务，不是失败）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="08w1d1md1k-do-7">第 6 步：★★ 一份填满的范例（原文最缺的东西）</h6>
+<p><strong>光看空模板，你不知道每段该写多长、写到什么颗粒度。</strong> 下面是 D2 你要读的那篇（Zhu 2017）填完之后应该长的样子——<strong>现在就把它抄进 <code>10-论文笔记/2017_Zhu_DL-survey.md</code>，明天读的时候对照着改。</strong></p>
+<figure class="code" data-lang="markdown"><pre><code># 2017_Zhu_遥感深度学习综述
+- **出处**：IEEE GRSM 2017, 5(4):8-36 ｜ **标签**：#综述 #遥感 #深度学习
+- **我的评级**：A（这是我入门的地图，必读）
+- **链接**：DOI 10.1109/MGRS.2017.2762307
+  免费全文：北卡大学仓库 cdr.lib.unc.edu 上有公开 PDF（搜标题即可）
+
+## 1. 它解决什么问题（动机）
+深度学习 2012 年后在通用 CV 上爆发，但遥感界当时还在观望：遥感数据和自然图像
+差别很大（多光谱/SAR/大尺寸/标注贵），直接搬 CNN 到底行不行、行在哪、不行在哪，
+没人系统梳理过。这篇就是把&quot;遥感 + 深度学习&quot;这件事第一次完整盘了一遍。
+
+## 2. 怎么做的（方法/核心 idea）
+它不是提方法，是**分类学 + 资源清单**：
+- 先按**数据类型**切：光学（全色/多光谱/高光谱）、SAR、以及它们的组合
+- 再按**任务**切：图像预处理、像素级分类、目标检测、场景分类、时序分析、数据融合
+- 每个格子里列代表工作 + 说清&quot;这里深度学习赢在哪、还差什么&quot;
+- 最后给了一份公开数据集和代码资源清单（这部分现在已过时，看看就好）
+
+## 3. 实验与结果
+综述没有自己的实验。有价值的是它汇总的对比表——记住一个结论就够：
+**在标注充足的场景（如高光谱分类、场景分类）深度学习明显赢；
+在标注稀缺、物理机理强的场景（如 SAR 定量反演）当时优势不明显。**
+
+## 4. 启发 / 可借鉴 / 没解决的  ★
+- 它反复强调的三个&quot;遥感特有难点&quot;，正好是我未来找 Gap 的方向：
+  ① 标注昂贵 → 指向自监督/半监督（对应我 W7 要看的方向）
+  ② 数据是多模态多分辨率的 → 指向融合
+  ③ 物理机理该不该进模型 → 这个问题到今天也没解决，是个大口子
+- 它写于 2017，Transformer/基础模型/VLM 全都还没有。
+  **我可以做的事：拿它的分类框架，看这 8 年每个格子里发生了什么变化。**
+  这个动作本身就能让我快速建立&quot;领域现在长什么样&quot;的地图。
+
+## 5. 我没看懂的 / 待查
+- [ ] 高光谱的&quot;光谱维&quot;和 RGB 的通道到底差在哪？（→ 记进术语卡片）
+- [ ] 它提到 SAR 的 speckle 是核心难点，具体难在哪？（→ 见 [[名词逐个讲透]] §1）
+- [ ] &quot;domain adaptation&quot; 这个词反复出现，是什么？（→ 待查清单）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>对照这份范例，你现在知道了</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>该写多长</th>
+<th>判断标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 动机</td>
+<td>2–4 句</td>
+<td>能对别人说清“这篇为什么该被写出来”</td>
+</tr>
+<tr>
+<td>2. 方法</td>
+<td>一小段 + 分点</td>
+<td><strong>必须是你自己的话</strong>，抄摘要不算</td>
+</tr>
+<tr>
+<td>3. 实验</td>
+<td>3–5 句，抓一个核心结论</td>
+<td>记住一个数字或一个结论就够</td>
+</tr>
+<tr>
+<td>4. 启发 ★</td>
+<td><strong>越长越好，可以超过前面所有段之和</strong></td>
+<td>有没有至少一条“我能接的口子”</td>
+</tr>
+<tr>
+<td>5. 待查</td>
+<td>逐条列，带 <code>[ ]</code> 复选框</td>
+<td>每条都是一个后续任务</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>纪律</strong>：<strong>第 4 段写不出东西的论文，等于白读。</strong> 如果读完一篇实在写不出第 4 段，说明你还没读懂它的动机，回去重读 Introduction 的最后一段（论文的 contribution 通常写在那）。</p>
+</blockquote>
+<h6 id="08w1d1md1k-do-8">第 7 步：再建两个文件（今天就会用到）</h6>
+<p>在 <code>00-基础理论</code> 下建：</p>
+<ul>
+<li><strong><code>术语卡片.md</code></strong> —— 每遇到一个不懂的词就填一张卡（模板见 <a href="../start/rs-basics.html#deep-03">《学习资料地图》§6.4</a>）</li>
+<li><strong><code>待查清单.md</code></strong> —— 20 分钟查不明白的东西丢这里，每周复盘时清一次</li>
+</ul>
+<p>在 <code>20-代码实验</code> 下建：</p>
+<ul>
+<li><strong><code>环境SOP.md</code></strong> —— 今天中午段和晚上段的产物都写进它</li>
+</ul></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>RS-CV</code> 仓库里有 4 个空文件夹 + 1 个 <code>_模板_5段式.md</code>。能在 Obsidian 里点开模板、看到 5 段标题。<strong>不要求有任何论文内容</strong>（那是明天的事）。</p>
+<h6 id="08w1d1md1heck-1">③ 合格样例</h6>
+<p>打开 Obsidian，你应该看到：</p>
+<figure class="code" data-lang="text"><pre><code>RS-CV/
+├── 00-基础理论/
+│   ├── 术语卡片.md
+│   └── 待查清单.md
+├── 10-论文笔记/
+│   ├── _模板_5段式.md
+│   └── 2017_Zhu_DL-survey.md      ← 已经填好范例，明天照着改
+├── 20-代码实验/
+│   └── 环境SOP.md
+└── 30-数据集/
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>自测三问</strong>（答不上就回去补）：
+1. Vault 在物理上是什么？（答：一个普通文件夹）
+2. <code>[[ ]]</code> 是干什么的？为什么它比普通笔记强？
+3. 5 段式里哪一段最值钱？为什么？</p></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>工具洁癖</strong>：花一上午对比 Obsidian/Notion/思源——错。今天目标是“能用”，不是“最优”。</li>
+<li><strong>只建库不立规矩</strong>：很多人建完文件夹就完了。规矩从今天起钉死——<strong>每存一篇论文，必有一个对应笔记文件</strong>（哪怕先空着），否则三个月后又是一堆“存了没读”。</li>
+</ul>
+<h6 id="08w1d1md1-pit-1">④ 常踩的坑</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>后果</th>
+<th>怎么避免</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工具洁癖：花一上午比较 Obsidian/Notion/思源/Logseq</td>
+<td>今天什么都没干成</td>
+<td><strong>选 Obsidian，5 分钟装完，开工。</strong> 半年后想换随时能换（都是纯文本）</td>
+</tr>
+<tr>
+<td>只建库不立规矩</td>
+<td>三个月后一堆“存了没读”</td>
+<td>纪律：<strong>存一篇论文必建一个笔记文件</strong>，哪怕先只填标题</td>
+</tr>
+<tr>
+<td>从不用 <code>[[ ]]</code></td>
+<td>笔记变成一堆孤岛，等于一个更难用的文件夹</td>
+<td>每篇笔记至少链出去一次</td>
+</tr>
+<tr>
+<td>笔记全用“复制粘贴摘要”</td>
+<td>半年后看不懂自己的笔记</td>
+<td>第 2 段<strong>必须</strong>是自己的话</td>
+</tr>
+<tr>
+<td>Vault 路径带中文/空格</td>
+<td>后面用命令行处理笔记时踩坑</td>
+<td>现在就改</td>
+</tr>
+</tbody>
+</table></div></div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><ul>
+<li>Obsidian 装不上 / 网络问题 → 别卡这，<strong>先用系统自带文本编辑器在桌面建同名文件夹结构</strong>照样开工，Obsidian 后面补。工具是为笔记服务的，不能反过来挡住你。</li>
+</ul>
+<h6 id="08w1d1md1scue-1">⑤ 卡住自救</h6>
+<ul>
+<li><strong>Obsidian 官网打不开 / 下载慢</strong> → 不影响开工。用系统的文件管理器手动建那 4 个文件夹，用记事本/VS Code 写 <code>.md</code>。<strong>Obsidian 只是个查看器，你的笔记本来就是纯文本。</strong> 网络好的时候再装。</li>
+<li><strong>不知道该不该开 Obsidian Sync（付费同步）</strong> → 不用。用 git 或任何网盘同步这个文件夹就够了。<strong>M3-W11 会正式教你用 git 管理它。</strong></li>
+</ul></div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你搭起了自己的<strong>科研基础设施</strong>，并立下了&quot;存一篇必记一篇&quot;的纪律。这套东西会在你读到第 200 篇论文时救命。<strong>做了</strong>（可用的知识库）、<strong>学了</strong>（为什么研究必须靠系统而非记忆）、<strong>会了</strong>(&quot;存=记&quot;的纪律)。</p>
+<hr />
+<blockquote class="quote">
+<p><strong>这一页和原 D1 的关系</strong>：原 D1 的结构（六块教学法）我完全保留，<strong>内容全部重写到“自足”</strong>——凡是原文提到但没解释的，这里都补上；凡是原文给了骨架没给范例的，这里都填满。</p>
+<p><strong>覆盖</strong>：D1 <strong>上午段</strong>（知识库）+ <strong>中午段</strong>（Python 环境）。<strong>晚上段</strong>（MMRotate）见 《MMRotate 保姆级实操》，那一篇已经是详注版了。</p>
+<p><strong>时间预算</strong>：前置知识 40 分钟（如果你从没用过命令行，这 40 分钟是今天最值的投资）+ 上午段 90 分钟 + 中午段 60 分钟。</p>
+<p><strong>今天的及格线不变</strong>：<code>torch.cuda.is_available()</code> 返回 <code>True</code>。</p>
+</blockquote>
+<hr />
+<h5 id="08w1d1md0-1">前置 · 三件全书都默认你会、却从没讲过的事</h5>
+<p>原手册第一天就让你“打开终端”、写 <code>.md</code> 文件、<code>pip install</code>。<strong>对科班出身的人这是常识，对转行的人这是三道墙。</strong> 全书 312 万字没有一处解释它们。先用 40 分钟拆掉这三道墙，后面 729 天都受益。</p>
+<h6 id="08w1d1md0-2">前置 1 · 终端（命令行）</h6>
+<h6 id="08w1d1md0-3">它是什么</h6>
+<p><strong>终端 = 用打字代替点鼠标来操作电脑。</strong> 你敲一行字，电脑执行一个动作。</p>
+<p><strong>为什么科研必须用它</strong>：① 深度学习的工具绝大多数没有图形界面；② 你做的操作要能<strong>被记录、被重复</strong>——鼠标点击没法写进日志，命令可以；③ 远程服务器上根本没有桌面。</p>
+<h6 id="08w1d1md0-4">怎么打开</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>系统</th>
+<th>怎么开</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Windows</strong></td>
+<td>装完 Miniconda 后，开始菜单里搜 <strong>Anaconda Prompt</strong>，用它（不要用 CMD 或 PowerShell，conda 命令可能不认）</td>
+</tr>
+<tr>
+<td><strong>macOS</strong></td>
+<td><code>Command + 空格</code>，输入 <code>Terminal</code>，回车</td>
+</tr>
+<tr>
+<td><strong>Linux</strong></td>
+<td><code>Ctrl + Alt + T</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>给 Windows 用户的一句真心话</strong>：深度学习的绝大多数教程、报错、issue 都是按 Linux 写的。<strong>如果你打算认真做两年，现在就装 WSL2</strong>（Windows 里的真 Linux 子系统），微软官方支持，一条命令：管理员权限打开 PowerShell，运行 <code>wsl --install</code>，重启即可。<strong>今天可以先不装，但 W2 之前一定要装。</strong> 这能帮你避开后面几十次“教程里的命令在我这跑不了”。</p>
+</blockquote>
+<h6 id="08w1d1md0-5">打开后你看到什么</h6>
+<figure class="code" data-lang="text"><pre><code>(base) C:\Users\你的用户名&gt;
+  ↑        ↑                ↑
+  当前环境  当前所在目录      光标在这敲命令
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>Linux/Mac 上长这样：</p>
+<figure class="code" data-lang="text"><pre><code>(base) yourname@computer:~$
+                        ↑ ~ 表示你的用户主目录（家目录）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong><code>(base)</code> 是关键</strong>——它告诉你当前处在哪个 Python 环境里。中午段建完环境后，它会变成 <code>(rs)</code>。<strong>每次敲命令前先瞄一眼这个括号</strong>，这个习惯能帮你避开“装错环境”这个最常见的错误。</p>
+<h6 id="08w1d1md0-6">五个必会命令（今天只需要这五个）</h6>
+<figure class="code" data-lang="bash"><pre><code>pwd              # print working directory：我现在在哪个文件夹
+ls               # list：列出当前文件夹里有什么（Windows CMD 用 dir，Anaconda Prompt 里 ls 通常可用）
+cd 文件夹名       # change directory：进入某个文件夹
+cd ..            # 回到上一层
+mkdir 新文件夹名  # 新建文件夹
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>现在就练一遍</strong>（30 秒，别跳过）：</p>
+<figure class="code" data-lang="bash"><pre><code>pwd
+mkdir test_folder
+cd test_folder
+pwd
+cd ..
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>你会看到第二次 <code>pwd</code> 的输出比第一次多了一层 <code>/test_folder</code>。<strong>这就是“当前目录”的含义</strong>——后面所有命令都是相对于你此刻所在的位置执行的。<strong>新手最常见的报错“找不到文件”，八成是因为不在正确的目录里。</strong></p>
+<h6 id="08w1d1md0-7">路径：绝对与相对</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>例子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>绝对路径</strong></td>
+<td><code>/home/zhang/RS-CV/data</code></td>
+<td>从根目录写全，在哪敲都指同一个地方</td>
+</tr>
+<tr>
+<td><strong>相对路径</strong></td>
+<td><code>data/DOTA</code></td>
+<td>相对于你<strong>当前所在目录</strong></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td><code>~/RS-CV</code></td>
+<td>你的家目录，Linux/Mac 常用</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td><code>./train.py</code></td>
+<td>当前目录</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td><code>../configs</code></td>
+<td>上一层目录</td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="08w1d1md0-8">终端里的三个小坑</h6>
+<ol>
+<li><strong>复制粘贴</strong>：终端里 <code>Ctrl+V</code> 常常没用。Linux 终端用 <strong><code>Ctrl+Shift+V</code></strong>；Windows 的 Anaconda Prompt 里直接<strong>点鼠标右键</strong>就是粘贴。</li>
+<li><strong>路径里有空格</strong>：<code>cd My Folder</code> 会失败，要写 <code>cd "My Folder"</code>。<strong>所以你的项目路径里永远不要有空格和中文</strong>——这条会帮你省掉很多莫名其妙的报错。</li>
+<li><strong>命令卡住了</strong>：按 <code>Ctrl+C</code> 中断。这是终端的“取消键”。</li>
+</ol>
+<h6 id="08w1d1md0-9">前置 2 · Markdown（10 分钟学会）</h6>
+<h6 id="08w1d1md0-10">为什么笔记要用 Markdown 而不是 Word</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Word</th>
+<th>Markdown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件本质</td>
+<td>二进制，只能用 Word 打开</td>
+<td><strong>纯文本</strong>，任何编辑器都能开</td>
+</tr>
+<tr>
+<td>十年后还能打开吗</td>
+<td>看软件</td>
+<td><strong>一定能</strong></td>
+</tr>
+<tr>
+<td>能被 grep 全文搜索吗</td>
+<td>不能</td>
+<td>能</td>
+</tr>
+<tr>
+<td>能用 git 做版本管理吗</td>
+<td>不能（看不出改了什么）</td>
+<td>能</td>
+</tr>
+<tr>
+<td>写公式和代码</td>
+<td>麻烦</td>
+<td>天然支持</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>一句话</strong>：你两年会攒下几百篇笔记，<strong>Markdown 保证它们永远属于你，不被任何软件绑架。</strong></p>
+<h6 id="08w1d1md0-11">全部语法（真的就这些，10 分钟）</h6>
+<figure class="code" data-lang="markdown"><pre><code># 一级标题
+## 二级标题
+### 三级标题
+
+普通段落。**粗体**、*斜体*、`行内代码`。
+
+- 无序列表项
+- 另一项
+  - 缩进两格 = 子项
+
+1. 有序列表
+2. 第二项
+
+&gt; 引用块，用来放重点提醒
+
+[链接文字](https://example.com)
+
+| 表头1 | 表头2 |
+|-------|-------|
+| 单元格 | 单元格 |
+
+```python
+# 代码块，三个反引号包起来，后面写语言名
+print(“hello”)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>---（三个减号 = 分隔线）</p>
+<ul>
+<li>[ ] 未完成的待办</li>
+<li>[x] 已完成的待办</li>
+</ul>
+<figure class="code" data-lang="text"><pre><code>
+**就这些。** 你笔记里 95% 的内容只会用到：标题、列表、粗体、代码块、表格。
+
+### 立刻练手
+
+在桌面新建一个 `test.md`，把上面这段抄进去，用 Obsidian 打开看效果。**看到渲染后的样子，你就学会 Markdown 了。**
+
+## 前置 3 · 包、pip、conda 的分工（★ 原文最大的概念缺口）
+
+原文把 conda 比作“无菌实验室”，比喻很好，**但没说它到底是什么**。结果你后面一定会遇到这个问题：**“这个包我该用 conda install 还是 pip install？”** —— 全书没有答案。现在补上。
+
+### 什么是“包”
+
+**包（package）= 别人写好的、可以直接拿来用的代码库。** `numpy` 是包，`torch` 是包，`mmrotate` 也是包。你的研究 90% 建立在别人的包上。
+
+### pip 和 conda 都是“装包的工具”，但来源和能力不同
+
+| | **pip** | **conda** |
+|---|---|---|
+| 包从哪来 | **PyPI**（Python 官方包仓库，`pypi.org`） | Anaconda / conda-forge 等**渠道（channel）** |
+| 能装什么 | **只能装 Python 包** | Python 包 **+ 非 Python 的东西**（CUDA 运行时、编译器、ffmpeg…） |
+| 包的数量 | **多得多**（几十万） | 少一些，但更“整装” |
+| 依赖冲突处理 | 较弱 | 较强（会解算整体依赖） |
+| 谁自带 | Python 自带 | 装 Miniconda 才有 |
+
+### 虚拟环境物理上到底是什么
+
+**就是一个文件夹。** 当你运行 `conda create -n rs python=3.10`，conda 在磁盘上建了一个目录，大致长这样：
+
+```text
+~/miniconda3/envs/rs/
+├── bin/python          ← 这个环境专属的 Python 解释器
+└── lib/python3.10/site-packages/    ← 你 pip install 的所有包都装到这里
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><code>conda activate rs</code> 做的事情，<strong>就是修改 <code>PATH</code> 环境变量，让你敲 <code>python</code> 时找到的是 <code>envs/rs/bin/python</code> 而不是系统的那个</strong>。</p>
+<p><strong>理解这一点，你就理解了三件事</strong>：
+1. 为什么忘了 <code>activate</code> 就装包会“白装”——装到别的目录去了。
+2. 为什么删环境只要 <code>conda env remove -n rs</code>——就是删个文件夹，不会污染系统。
+3. 怎么确认自己在哪个环境：<code>which python</code>（Windows：<code>where python</code>），看输出路径里有没有 <code>envs/rs</code>。</p>
+<h6 id="08w1d1md0-12">实操规则（背下来，后面天天用）</h6>
+<figure class="code" data-lang="text"><pre><code>① 建环境、装 Python 本身        → conda
+② 装 PyTorch                    → 用 PyTorch 官网给的那条命令（通常是 pip）
+③ 其他所有 Python 包             → pip
+④ 千万不要在同一个环境里，
+   对同一个包一会儿 conda 一会儿 pip → 这是依赖地狱的头号成因
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>一条纪律</strong>：<strong>每个项目一个环境，环境用完即弃。</strong> 环境搞坏了不要修，<code>conda env remove -n rs</code> 删掉重建，五分钟的事。<strong>新手最大的时间浪费是修一个坏掉的环境。</strong></p>
+</blockquote>
+<hr /><h5 id="08w1d1md1L-1">上午段 · 把知识库的骨架立起来（90 分钟）</h5><h6 id="08w1d1md1gain-1">⑥ 你同时学会了什么</h6>
+<p><strong>做了</strong>：一个能用的知识库骨架 + 一份填好的论文笔记范例。
+<strong>学了</strong>：Markdown 是什么、为什么科研笔记必须用纯文本、双向链接的价值。
+<strong>会了</strong>：“存一篇必记一篇”的纪律，以及<strong>一份合格的论文笔记该写到什么颗粒度</strong>——这一条比建文件夹重要一百倍。</p>
+<hr /></div></section></section><section class="slot" id="d1-noon" data-d="1" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D1 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">装 Anaconda + 建虚拟环境 + 装 PyTorch（让电脑“能算”）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（这几个词你后面天天见，现在一次讲清）</h4><div class="blk-b"><ul>
+<li><strong>Anaconda / conda</strong>：一个“环境管理器”。把它想成“给每个项目单独开一间无菌实验室”——A 项目要 PyTorch 2.1,B 项目要 1.10，<strong>装在同一个系统里会打架</strong>，虚拟环境让它们互不污染。</li>
+<li><strong>虚拟环境(virtual environment)</strong>：就是上面说的“一间无菌实验室”。<code>conda create -n rs</code> 就是开一间叫 <code>rs</code> 的房间;<code>conda activate rs</code> 是走进这间房；之后你装的所有包都只在这间房里。</li>
+<li><strong>GPU / CUDA</strong>：你的 <strong>4090 显卡</strong>是专门做大规模并行计算的硬件，训练神经网络比 CPU 快几十倍。<strong>CUDA</strong> 是 NVIDIA 让代码能调用 GPU 的“驱动+工具包”。<strong>PyTorch</strong> 是你写模型用的框架，它要装“对应 CUDA 版本”的那一版，才能真正用上你的 4090。</li>
+<li><strong>为什么现在需要</strong>：科研第一步是“能跑代码”；而“能跑代码”的硬门槛，就是“PyTorch 能看见你的 GPU”。</li>
+</ul>
+<h6 id="08w1d1md2cept-1">① 先垫概念</h6>
+<p>前置 3 已经讲了 pip/conda/虚拟环境。这里补 GPU 那一侧的三个词，<strong>原文讲了但没讲透</strong>。</p>
+<h6 id="08w1d1md2cept-2">GPU / 驱动 / CUDA 运行时 / PyTorch —— 四层关系</h6>
+<p>新手最大的困惑是“我到底要不要单独装 CUDA”。把这四层画清楚就不困惑了：</p>
+<figure class="code" data-lang="text"><pre><code>第 4 层  PyTorch              ← 你写代码用的框架（pip 装）
+         ↓ 调用
+第 3 层  CUDA 运行时           ← ★ 装 PyTorch 时自带，不用你管
+         ↓ 调用
+第 2 层  NVIDIA 显卡驱动        ← 要你自己装/更新（去 NVIDIA 官网）
+         ↓ 驱动
+第 1 层  GPU 硬件（你的 4090）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>结论（记住这三条，能省你半天）</strong>：</p>
+<ol>
+<li><strong>你不需要单独装 CUDA Toolkit。</strong> 带 <code>cu121</code> 的 PyTorch 轮子里已经打包了运行时。</li>
+<li><strong>你需要保证显卡驱动够新。</strong> 驱动版本 ≥ 你要用的 CUDA 版本要求即可。</li>
+<li><strong><code>nvidia-smi</code> 右上角显示的 <code>CUDA Version</code> 不是“你装了 CUDA”</strong>，它是“<strong>你的驱动最高能支持到哪个 CUDA</strong>”。显示 12.4 的机器完全可以跑 cu118 的 PyTorch。</li>
+</ol>
+<blockquote class="quote">
+<p><strong>这第 3 条是新手劝退率最高的误解</strong>。原文一句“以为装了驱动=有 CUDA”点到了，但没说清方向，很多人反而更糊涂了。</p>
+</blockquote>
+<h6 id="08w1d1md2cept-3">为什么 Python 用 3.10（原文说“稳”，这里说为什么）</h6>
+<p><strong>深度学习生态永远滞后于 Python 官方版本半年到两年。</strong> 判断规则：</p>
+<figure class="code" data-lang="text"><pre><code>挑一个「不是最新、也不是最老」的版本 —— 通常是当前最新版往回数 2–3 个小版本。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>具体到今天：Python 3.10 / 3.11 都很安全，3.9 也行（老框架兼容性最好）。<strong>3.12+ 现在还会遇到某些包没有预编译轮子。</strong> 这也是为什么晚上段装 MMRotate 时我建议用 3.9——那套框架更老。</p>
+<p><strong>这个判断方法你要学会</strong>，因为具体数字每年都在变，方法不变。</p></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>（按顺序，一步一步来）</p>
+<ol>
+<li>装 <strong>Miniconda</strong>（比完整版 Anaconda 更轻，够用；官网下 Windows/Linux 版）。装完打开终端（Windows 用 “Anaconda Prompt”）。</li>
+<li>建环境（<strong>Python 用 3.10，稳</strong>）：<figure class="code" data-lang="bash"><pre><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>rs<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10<span class="w"> </span>-y
+conda<span class="w"> </span>activate<span class="w"> </span>rs
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+看到命令行最前面变成 <code>(rs)</code> 就说明你“进房间”了。</li>
+<li>装 PyTorch（<strong>你是 4090，用 CUDA 12.1 的轮子</strong>）：<figure class="code" data-lang="bash"><pre><code>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li><strong>立刻验证</strong>（这是今天最重要的一行命令）：<figure class="code" data-lang="bash"><pre><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import torch; print(torch.__version__); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0))&quot;</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+</ol>
+<h6 id="08w1d1md2k-do-1">② 手把手带做</h6>
+<h6 id="08w1d1md2k-do-2">第 1 步：装 Miniconda</h6>
+<p><strong>下载地址</strong>：<code>https://repo.anaconda.com/miniconda/</code></p>
+<p>这是官方的文件列表页，按系统挑：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>系统</th>
+<th>挑这个文件名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows 64 位</td>
+<td><code>Miniconda3-latest-Windows-x86_64.exe</code></td>
+</tr>
+<tr>
+<td>macOS（M 系列芯片）</td>
+<td><code>Miniconda3-latest-MacOSX-arm64.sh</code></td>
+</tr>
+<tr>
+<td>macOS（Intel 芯片）</td>
+<td><code>Miniconda3-latest-MacOSX-x86_64.sh</code></td>
+</tr>
+<tr>
+<td>Linux 64 位</td>
+<td><code>Miniconda3-latest-Linux-x86_64.sh</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>为什么是 Miniconda 而不是完整版 Anaconda</strong>：完整版预装了几百个你用不到的包，占 3 GB 还拖慢环境解算。Miniconda 只有 conda 本身，<strong>几十 MB，够用</strong>。</p>
+<p><strong>Windows 安装时的关键一步</strong>（原文完全没提，但选错了会踩坑）：</p>
+<p>安装向导走到 “Advanced Options” 时，会有几个勾选框：</p>
+<figure class="code" data-lang="text"><pre><code>[ ] Add Miniconda3 to my PATH environment variable   ← 保持不勾（官方推荐）
+[✓] Register Miniconda3 as my default Python         ← 勾上
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>不勾 PATH 的原因</strong>：勾了容易和系统里其他 Python 打架。<strong>代价是你必须用“Anaconda Prompt”而不是普通 CMD</strong>——这没问题，从开始菜单搜就行。</p>
+<p><strong>Linux/Mac 安装</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>bash Miniconda3-latest-Linux-x86_64.sh
+# 一路回车看协议，问 yes/no 时输 yes
+# 最后问 &quot;initialize Miniconda3?&quot; → 输 yes
+# 装完关掉终端重开，或运行：
+source ~/.bashrc
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证装好了</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>conda --version
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>：<code>conda 2x.x.x</code>（版本号是多少无所谓，能打印出来就行）。</p>
+<p>如果提示 <code>conda: command not found</code>：Windows 用户请用 Anaconda Prompt；Linux/Mac 用户执行 <code>source ~/.bashrc</code> 或重开终端。</p>
+<h6 id="08w1d1md2k-do-3">第 2 步：建环境</h6>
+<figure class="code" data-lang="bash"><pre><code>conda create -n rs python=3.10 -y
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>逐个拆开看</strong>（原文只给命令没解释参数）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>conda create</code></td>
+<td>建一个新环境</td>
+</tr>
+<tr>
+<td><code>-n rs</code></td>
+<td><code>-n</code> = name，环境叫 <code>rs</code></td>
+</tr>
+<tr>
+<td><code>python=3.10</code></td>
+<td>这个环境里装 Python 3.10</td>
+</tr>
+<tr>
+<td><code>-y</code></td>
+<td>所有确认自动回答 yes，省得手动敲</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>期望输出</strong>：一段包列表，最后是 <code>done</code> 和一段提示 <code>To activate this environment, use: conda activate rs</code>。</p>
+<figure class="code" data-lang="bash"><pre><code>conda activate rs
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>成功标志</strong>：命令行提示符最前面从 <code>(base)</code> 变成 <strong><code>(rs)</code></strong>。</p>
+<blockquote class="quote">
+<p><strong>★ 如果没有变</strong>：这是最常见的第一个坑。执行 <code>conda init</code> 后<strong>关掉终端重新打开</strong>，再 activate 一次。</p>
+</blockquote>
+<p><strong>再确认一次你真的进对了环境</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>which python      # Windows: where python
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>里应该包含 <code>envs/rs</code>，比如 <code>/home/你/miniconda3/envs/rs/bin/python</code>。<strong>看到这个路径，你就真正理解了前置 3 说的“环境就是个文件夹”。</strong></p>
+<h6 id="08w1d1md2k-do-4">第 3 步：装 PyTorch —— 教你自己去官网选命令</h6>
+<p>原文直接给了 <code>cu121</code> 那条命令。<strong>能用，但半年后会过期。</strong> 更重要的是教你怎么自己选：</p>
+<p><strong>打开 <code>https://pytorch.org/get-started/locally/</code></strong></p>
+<p>页面上有一个选择器，你依次点：</p>
+<figure class="code" data-lang="text"><pre><code>PyTorch Build : Stable          ← 选稳定版，别选 Preview
+Your OS       : Linux / Windows / Mac
+Package       : Pip             ← 选 Pip
+Language      : Python
+Compute Platform : CUDA 12.1    ← ★ 关键，见下
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>Compute Platform 怎么选</strong>：先运行 <code>nvidia-smi</code>，看右上角的 <code>CUDA Version</code>。<strong>选一个不超过它的版本</strong>。比如驱动显示 12.4，你选 CUDA 12.1 或 11.8 都行；显示 11.7，那就只能选 11.8 以下。</p>
+<p>选完，页面下方会生成一条命令，<strong>复制它</strong>。对 4090 + CUDA 12.1，生成的是：</p>
+<figure class="code" data-lang="bash"><pre><code>pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong><code>--index-url</code> 是什么、为什么不能丢</strong>（原文提醒了“不带会装成 CPU 版”，但没说为什么）：</p>
+<p>pip 默认从 PyPI 下载。<strong>PyPI 上的 <code>torch</code> 是 CPU 版</strong>（因为 GPU 版太大）。<code>--index-url</code> 告诉 pip：“别去 PyPI，去 PyTorch 官方这个专门放 GPU 版轮子的地址下”。<strong>丢了它，你会装到一个能跑但用不了显卡的 PyTorch，而且不报错</strong>——这是最坑的地方，你要跑起来才发现慢得离谱。</p>
+<h6 id="08w1d1md2k-do-5">第 4 步：验证（今天最重要的一步）</h6>
+<figure class="code" data-lang="bash"><pre><code>python -c &quot;import torch; print(torch.__version__); print(torch.cuda.is_available()); print(torch.cuda.get_device_name(0))&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>2.x.x+cu121
+True
+NVIDIA GeForce RTX 4090
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>逐行怎么读</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>行</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 行</td>
+<td>版本号后面<strong>必须有 <code>+cu121</code> 之类的后缀</strong>。如果是纯 <code>2.x.x</code> 或 <code>+cpu</code>，你装的是 CPU 版</td>
+</tr>
+<tr>
+<td>第 2 行</td>
+<td><strong><code>True</code> 就是今天的及格线</strong></td>
+</tr>
+<tr>
+<td>第 3 行</td>
+<td>认出了你的显卡 = 全链路通了</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>再跑一个 30 秒的真实测试</strong>（原文没有，但这一步能确认 GPU 真的在算，而不只是“能看见”）：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c &quot;
+import torch, time
+x = torch.randn(4000, 4000, device='cuda')
+torch.cuda.synchronize(); t = time.time()
+for _ in range(50): y = x @ x
+torch.cuda.synchronize()
+print(f'GPU 矩阵乘 50 次耗时 {time.time()-t:.2f} 秒')
+print(f'显存占用 {torch.cuda.memory_allocated()/1024**2:.0f} MB')
+&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望</strong>：4090 上大约 0.3–1 秒，显存占用一两百 MB。<strong>如果超过 10 秒，说明它在用 CPU 装样子。</strong></p>
+<h6 id="08w1d1md2k-do-6">第 5 步：国内网络加速（原文提了一句，这里给完整配置）</h6>
+<p><strong>pip 换源</strong>（一次配置，永久生效）：</p>
+<figure class="code" data-lang="bash"><pre><code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip config set global.trusted-host pypi.tuna.tsinghua.edu.cn
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 注意</strong>：换源之后，装 PyTorch 那条命令里的 <code>--index-url</code> <strong>依然要保留</strong>——它会临时覆盖全局配置，指向 PyTorch 官方源。<strong>两者不冲突。</strong></p>
+<p><strong>conda 换源</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+conda config --set show_channel_urls yes
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证换源生效</strong>：<code>pip config list</code>，应该看到你设的清华地址。</p></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第 4 步输出形如</p>
+<figure class="code" data-lang="text"><pre><code>2.x.x+cu121
+True
+NVIDIA GeForce RTX 4090</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>只要 <code>True</code> 出现 + 显示出你的 4090，中午段就满分了。</strong> 截图存进 <code>20-代码实验/环境SOP.md</code>。</p>
+<h6 id="08w1d1md2heck-1">③ 合格样例</h6>
+<ul>
+<li><code>conda --version</code> 有输出</li>
+<li>提示符是 <code>(rs)</code></li>
+<li><code>which python</code> 指向 <code>envs/rs</code></li>
+<li><code>torch.cuda.is_available()</code> → <strong><code>True</code></strong></li>
+<li>矩阵乘测试在 1 秒内跑完</li>
+</ul>
+<p><strong>截图存进 <code>20-代码实验/环境SOP.md</code>。</strong></p></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>忘了 <code>conda activate rs</code></strong> 就装包：结果装进了 base 环境，白装。每次开新终端都要先 activate。</li>
+<li><strong>装成 CPU 版 PyTorch</strong>：如果你 <code>pip install torch</code> 不带 <code>--index-url</code>，很可能装到 CPU 版,<code>cuda.is_available()</code> 会是 <code>False</code>。务必带上 cu121 的源。</li>
+<li><strong>以为“装了驱动”=有 CUDA</strong>：你只要装对 PyTorch 的 cu121 轮子即可，<strong>不需要</strong>单独手动装 CUDA Toolkit（轮子自带运行时）。但你的 NVIDIA 显卡驱动要够新（支持 CUDA 12.1,4090 出厂驱动一般都够）。</li>
+</ul>
+<h6 id="08w1d1md2-pit-1">④⑤ 常踩的坑与自救</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>症状</th>
+<th>原因</th>
+<th>解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>conda: command not found</code></td>
+<td>没加 PATH / 没重开终端</td>
+<td>Windows 用 Anaconda Prompt；Linux <code>source ~/.bashrc</code></td>
+</tr>
+<tr>
+<td>activate 后提示符没变成 <code>(rs)</code></td>
+<td>没 <code>conda init</code></td>
+<td>运行 <code>conda init</code>，<strong>关掉终端重开</strong></td>
+</tr>
+<tr>
+<td><code>cuda.is_available()</code> 是 <code>False</code>，<code>nvidia-smi</code> 也看不到显卡</td>
+<td>驱动问题</td>
+<td>去 NVIDIA 官网装最新驱动，重启</td>
+</tr>
+<tr>
+<td><code>cuda.is_available()</code> 是 <code>False</code>，但 <code>nvidia-smi</code> 能看到 4090</td>
+<td>装成了 CPU 版</td>
+<td><code>pip uninstall torch torchvision -y</code>，带 <code>--index-url</code> 重装</td>
+</tr>
+<tr>
+<td>版本号是 <code>2.x.x+cpu</code></td>
+<td>同上</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>pip 下载龟速/超时</td>
+<td>网络</td>
+<td>见上面换源；PyTorch 那条保留官方 <code>--index-url</code>，实在不行多试几次</td>
+</tr>
+<tr>
+<td>装到一半磁盘满</td>
+<td>PyTorch 轮子约 2 GB+</td>
+<td><code>df -h</code> 检查，留 20 GB</td>
+</tr>
+<tr>
+<td>一个环境搞乱了想重来</td>
+<td>—</td>
+<td><code>conda deactivate</code> → <code>conda env remove -n rs</code> → 从第 2 步重建。<strong>五分钟的事，不要修</strong></td>
+</tr>
+</tbody>
+</table></div></div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li><code>cuda.is_available()</code> 返回 <code>False</code>？
+<ul>
+<li>→ 先 <code>nvidia-smi</code>(终端运行)，能看到 4090 和驱动版本吗？<strong>看不到</strong> = 驱动问题，去 NVIDIA 官网装最新 Game Ready/Studio 驱动。</li>
+<li>→ 能看到 4090 但仍 <code>False</code> = 多半装了 CPU 版，卸了重装:<code>pip uninstall torch torchvision -y</code> 再用 cu121 源重装。</li>
+</ul>
+</li>
+<li><code>pip install</code> 巨慢 / 超时?→ 换国内镜像加速，例:<code>pip install ... -i https://pypi.tuna.tsinghua.edu.cn/simple</code>(但 torch 那条要保留官方 <code>--index-url</code>，可改用清华的 pytorch 镜像源)。</li>
+<li>实在搞不定?→ <strong>今天到此为止也算赢</strong>：只要 PyTorch + <code>True</code> 拿到了，MMRotate（晚上段）可以挪到明天。<strong>不要让晚上段的难活，毁掉中午段已经到手的胜利。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你掌握了<strong>&quot;建隔离环境 + 装框架 + 验证 GPU 可用&quot;这套深度学习的开机仪式</strong>。以后每复现一份别人的代码，第一件事都是这套。<strong>做了</strong>(可用的 <code>rs</code> 环境)、<strong>学了</strong>（conda/虚拟环境/CUDA/PyTorch 各自是什么、怎么咬合）、<strong>会了</strong>（&quot;先验证 GPU 再干活&quot;的习惯）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜深度学习环境四步</strong>:① <code>conda create -n xxx python=3.10</code> → ② <code>conda activate xxx</code> → ③ 装对 CUDA 版本的 PyTorch → ④ <code>torch.cuda.is_available()</code> 必须为 <code>True</code> 才算开机成功。</p>
+</blockquote>
+<hr />
+<h5 id="08w1d1md2L-1">中午段 · 装 conda + 建环境 + 装 PyTorch（60 分钟）</h5><h6 id="08w1d1md2gain-1">⑥ 你同时学会了什么</h6>
+<p><strong>做了</strong>：一个能调用 4090 的 <code>rs</code> 环境。
+<strong>学了</strong>：pip 与 conda 的分工、虚拟环境物理上是什么、GPU 四层架构、驱动版本与 CUDA 运行时的区别、<code>--index-url</code> 为什么不能丢。
+<strong>会了</strong>：<strong>自己去 PyTorch 官网选安装命令</strong>（而不是抄一条会过期的），以及“验证 GPU 真的在算”这个动作。</p>
+<blockquote class="quote">
+<p><strong>技能卡｜深度学习开机四步（升级版）</strong>
+① <code>conda create -n xxx python=3.10</code> → ② <code>conda activate xxx</code>，用 <code>which python</code> 确认 → ③ 去 PyTorch 官网按 <code>nvidia-smi</code> 的 CUDA 版本选命令装 → ④ 三行验证：版本带 <code>+cuXXX</code>、<code>is_available()</code> 为 <code>True</code>、矩阵乘测试 1 秒内跑完。
+<strong>第 ④ 步的矩阵乘测试是原手册没有的</strong>，但它能抓出“能看见 GPU 却在用 CPU 跑”这种隐蔽故障。</p>
+</blockquote>
+<hr />
+<h5 id="08w1d1md2gain-2">今天真正的收获（元技能）</h5>
+<p>抛开具体工具，今天你其实学会了三件后面 729 天天天用的事：</p>
+<ol>
+<li><strong>“隔离”的思维</strong> —— 每个项目一个环境，坏了删掉重建而不是修。这个思维后面会扩展到：每个实验一个 <code>work_dir</code>、每个想法一个分支。</li>
+<li><strong>“验证”的习惯</strong> —— 每装完一步立刻验证，不要一口气装完再一起试。<strong>这是所有工程排错的第一原则：让失败尽早暴露、范围尽量小。</strong></li>
+<li><strong>“资产”的意识</strong> —— 笔记要存成十年后还能打开的格式，命令要记进 SOP 以便重放。<strong>科研的产出不只是论文，还包括这些能复用的东西。</strong></li>
+</ol>
+<p><strong>明天（D2）</strong>：读第一篇论文。今天建好的 <code>2017_Zhu_DL-survey.md</code> 范例，明天你会照着它把真正读到的内容替换进去。<strong>范例的作用是让你知道“合格长什么样”，明天不用再猜。</strong></p><h5 id="01w1d1mmrota1-1">环境搭建 SOP · v1（W1-D1）</h5>
+<h6 id="01w1d1mmrota1-2">0. 我的机器</h6>
+<ul>
+<li>系统 / 显卡 / 驱动版本 / nvidia-smi 显示的 CUDA：</li>
+<li>Python：3.9   conda 环境名：mmrot</li>
+</ul>
+<h6 id="01w1d1mmrota1-3">1. 最终成功的版本组合（★下次直接照抄这一段）</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>版本</th>
+<th>装法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>torch / torchvision</td>
+<td>2.0.1 / 0.15.2</td>
+<td>pip + --index-url cu118</td>
+</tr>
+<tr>
+<td>numpy / yapf / setuptools</td>
+<td>&lt;2 / 0.40.1 / &lt;70</td>
+<td>先按住再装 mm 系列</td>
+</tr>
+<tr>
+<td>mmcv-full</td>
+<td>1.7.2</td>
+<td>pip + -f 预编译索引</td>
+</tr>
+<tr>
+<td>mmdet</td>
+<td>2.28.2</td>
+<td>pip</td>
+</tr>
+<tr>
+<td>mmrotate</td>
+<td>0.3.4</td>
+<td>git clone + pip install -v -e .</td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="01w1d1mmrota1-4">2. 完整命令流水（可直接复制重放）</h6>
+<p>（把 4.11 的脚本贴进来，改成你实际用的版本号）</p>
+<h6 id="01w1d1mmrota1-5">3. 我今晚踩的坑（★最值钱的一段，每条按下面格式写）</h6>
+<h6 id="01w1d1mmrota1-6">坑 1：&lt;报错最后一行原文&gt;</h6>
+<ul>
+<li>出现在哪一步：</li>
+<li>我一开始以为是：</li>
+<li>实际原因：</li>
+<li>解决命令：</li>
+<li>花了多久：</li>
+<li>下次怎么避免：</li>
+</ul>
+<h6 id="01w1d1mmrota1-7">坑 2：…</h6>
+<h6 id="01w1d1mmrota1-8">4. 验证四连（换机器后按这个顺序自查）</h6>
+<ol>
+<li>torch.cuda.is_available() → True</li>
+<li>from mmcv.ops import nms_rotated → 不报错</li>
+<li>import mmdet, mmrotate → 版本号对得上兼容表</li>
+<li>demo 出图 → result.jpg 有斜框</li>
+</ol>
+<h6 id="01w1d1mmrota1-9">5. 遗留问题 / 待办</h6>
+<p>-</p>
+<h6 id="01w1d1mmrota1-10">6. 关键文件在哪</h6>
+<ul>
+<li>代码：~/mmrotate</li>
+<li>权重：~/mmrotate/*.pth（158 MB，已加进 .gitignore）</li>
+<li>结果图：~/mmrotate/result.jpg
+```</li>
+</ul>
+<blockquote class="quote">
+<p><strong>一个小纪律</strong>：<code>.pth</code> 权重、数据集<strong>永远不要提交进 git</strong>。现在就在 <code>mmrotate/.gitignore</code> 里确认有 <code>*.pth</code>。这个习惯在 M3-W11 正式学 git 时会再讲一次，但今天就该有。</p>
+</blockquote>
+<hr />
+<h6 id="01w1d1mmrota1-11">8. ⑥ 今晚你同时学会了什么 + 验收清单</h6>
+<p><strong>你以为你在装软件，其实你练的是这四件事</strong>：</p>
+<ol>
+<li><strong>分清“代码 / 配置 / 权重”三件套</strong> —— 这是所有深度学习项目复现的通用结构，换成任何框架都成立。</li>
+<li><strong>版本代际的概念</strong> —— 以后看到任何项目的 README 写着“本代码基于 X 1.5、Y 2.3”，你会先对表再动手，而不是无脑装最新。</li>
+<li><strong>预编译包 vs 源码编译</strong> —— 知道 pip 输出里 <code>.whl</code> 和 <code>.tar.gz</code> 的区别意味着什么，这一条能帮你省下无数个小时。</li>
+<li><strong>报错的检索方法</strong> —— 从下往上读、去掉个人路径、去 issue 搜原文（含已关闭的）。</li>
+</ol>
+<p><strong>今晚验收清单</strong>（三个都打勾才算结束）：</p>
+<ul>
+<li>[ ] <code>python -c "import torch;print(torch.cuda.is_available())"</code> → <code>True</code>（没 N 卡则跳过）</li>
+<li>[ ] <code>result.jpg</code> 存在，图上有斜框（路线 A 或 C 都算）</li>
+<li>[ ] 《环境搭建 SOP》写完，其中“我今晚踩的坑”至少有 1 条</li>
+</ul>
+<blockquote class="quote">
+<p><strong>技能卡｜复现任何一份深度学习代码的六步</strong>
+① 看 README 的版本要求（代际）→ ② 建独立环境 → ③ 装对 CUDA 的 torch 并验证 → ④ 按住老旧依赖（numpy/setuptools 等）→ ⑤ 装框架，优先预编译包 → ⑥ <strong>单独下载 config 和权重</strong>，跑 demo 验证。
+这六步你后面两年会用几十次。今晚是第一次。</p>
+</blockquote>
+<p><strong>明天怎么接</strong>：D2 早上读论文（Zhu 2017），和今晚的环境无关，正常进行。如果今晚走的是路线 C，把路线 A 排进 D2 或 D3 的晚上段——<strong>别让它拖过 W1</strong>，因为 W2-D8 的 Oriented R-CNN baseline 要用它。</p></div></section></section><section class="slot" id="d1-pm" data-d="1" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D1 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">装 MMRotate 工具链 + 跑通第一张 DOTA demo + 写《环境 SOP》</h3></div>
+<div class="free"><blockquote class="quote callout callout-expect">
+<p><strong>重要预期管理</strong>：你计划里“晚上装 MMCV + MMDetection + MMRotate 并跑 demo”是<strong>整个第一周最容易吃掉一整天甚至两天的一格</strong>。原因：MMRotate 是一套较老的框架，<strong>它和最新的 PyTorch/CUDA 经常版本打架</strong>。这不是你的问题，是这套生态的历史包袱。下面我给你“<strong>最省事路径 + 打不通时的退路</strong>”，你照着走，卡住别慌。</p>
+</blockquote>
+</div>
+<section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>MMxx 全家桶</strong>:<code>MMCV</code>(底层算子库，旋转框这类特殊操作就在这)、<code>MMDetection</code>(通用目标检测框架)、<code>MMRotate</code>(在前两者之上、专做<strong>旋转框检测</strong>的库——遥感目标常常是斜着的飞机、船，需要旋转框)。三者是<strong>地基→楼房→精装修</strong>的依赖关系。</li>
+<li><strong>demo 推理</strong>：用别人<strong>训练好的模型权重</strong>，对一张图跑一次预测、把框画出来。它不训练、几秒钟出结果，是验证“工具链装通了”的最快方式。</li>
+<li><strong>为什么现在需要</strong>:W2 你要在这套工具链上跑你人生第一个 baseline(Oriented R-CNN on DOTA)。今晚先把房子盖好、用 demo 验房。</li>
+</ul>
+<h5 id="01w1d1mmrota0cept-1">① 有没有 N 卡、驱动是什么、显存多大</h5>
+<p>nvidia-smi</p></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>(用 <code>mim</code> 装，能自动帮你匹配版本，<strong>比手动 pip 省一半的坑</strong>)</p>
+<ol>
+<li>确认你在 <code>rs</code> 环境里(<code>conda activate rs</code>)。</li>
+<li>装 openmim（MM 系列官方安装器）：<figure class="code" data-lang="bash"><pre><code>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>openmim
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li><strong>先去 MMRotate 的 GitHub README / 官方文档，看它当前版本“钦定”的 mmcv/mmdet 版本号</strong>（这一步<strong>必须做</strong>，因为版本搭配会随时间变，我不能给你一个写死、半年后就过期的数字）。然后用 mim 按文档装，形如：<figure class="code" data-lang="bash"><pre><code>mim<span class="w"> </span>install<span class="w"> </span>mmcv-full<span class="w">        </span><span class="c1"># 或文档指定的 mmcv 版本</span>
+mim<span class="w"> </span>install<span class="w"> </span>mmdet<span class="w">            </span><span class="c1"># 文档指定版本</span>
+<span class="c1"># 再按 MMRotate 文档：git clone 它的仓库后 pip install -v -e .</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>跑自带 demo(命令以 MMRotate 文档里的 <code>demo/image_demo.py</code> 为准)，对一张 DOTA 样例图做推理，得到一张画了旋转框的输出图。</li>
+</ol>
+<h5 id="01w1d1mmrota0k-do-1">② Python 在哪、什么版本</h5>
+<p>python --version</p></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>你得到一张 demo 输出图——原图上套着一圈<strong>斜着的彩色框</strong>，框住了飞机/车/船之类目标。看到这张图 = 工具链通了。把它连同上午、中午的截图一起，写进《环境搭建 SOP》（≥800 字，见下）。</p>
+<h5 id="01w1d1mmrota0heck-1">③ conda 在不在</h5>
+<p>conda --version</p>
+<figure class="code" data-lang="text"><pre><code>
+**怎么读 `nvidia-smi` 的输出**（这是新手第一个大误区）：
+
+```text
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 535.104.05   Driver Version: 535.104.05   CUDA Version: 12.2      |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+|   0  NVIDIA GeForce RTX 3090  | 00000000:01:00.0 Off |                  N/A |
+|  0%   35C    P8    25W / 350W |      0MiB / 24576MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>⚠️ <strong>右上角那个 <code>CUDA Version: 12.2</code> 不是"你装了 CUDA 12.2"</strong>，它是"<strong>你的驱动最高能支持到 CUDA 12.2</strong>"。你完全可以在这台机器上装 CUDA 11.8 版本的 PyTorch。<strong>驱动版本 ≥ 你要用的 CUDA 版本就行。</strong></p>
+<p>新手最常见的自我劝退是："我这里显示 12.2，可 mmcv 只支持到 11.8，是不是没救了？"——没这回事，往下走。</p>
+</blockquote>
+<p><strong>体检判定表</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>体检结果</th>
+<th>判定</th>
+<th>今晚怎么走</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有 N 卡，驱动 ≥ 520</td>
+<td>✅ 最顺</td>
+<td>路线 A，CUDA 11.8</td>
+</tr>
+<tr>
+<td>有 N 卡，驱动 450–520</td>
+<td>✅ 可以</td>
+<td>路线 A，把 cu118 换成 cu111/cu113（见 4.2）</td>
+</tr>
+<tr>
+<td>有 N 卡，但是 RTX 40/50 系新卡</td>
+<td>⚠️ 注意</td>
+<td>路线 A，但可能遇到 <code>no kernel image</code> 报错，见第 5 节第 8 条</td>
+</tr>
+<tr>
+<td>没有 N 卡（核显 / A 卡 / Mac）</td>
+<td>⚠️ 能出图</td>
+<td>路线 A 全程可做，只是 demo 加 <code>--device cpu</code>，慢几秒而已</td>
+</tr>
+<tr>
+<td>Windows 原生</td>
+<td>⚠️ 麻烦</td>
+<td><strong>强烈建议先装 WSL2 + Ubuntu</strong>，在 Linux 里做。今晚在 Windows 硬扛大概率是浪费一晚上</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>⑥ 这一步你学会了什么</strong>：你学会了区分<strong>驱动版本</strong>和 <strong>CUDA 运行时版本</strong>——这个区分你后面两年每换一台机器都要用一次。</p>
+<hr />
+<h6 id="01w1d1mmrota0heck-2">3. 三条路线，先选一条</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>路线 A（推荐）</th>
+<th>路线 B</th>
+<th>路线 C（保底）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>装什么</td>
+<td>MMRotate <strong>0.3.4</strong> 代</td>
+<td>MMRotate <strong>1.0.0rc1</strong> 代</td>
+<td><strong>Ultralytics YOLO-OBB</strong></td>
+</tr>
+<tr>
+<td>难度</td>
+<td>中</td>
+<td>高</td>
+<td><strong>极低</strong></td>
+</tr>
+<tr>
+<td>耗时</td>
+<td>40 分钟 – 2 小时</td>
+<td>1–3 小时</td>
+<td><strong>10 分钟</strong></td>
+</tr>
+<tr>
+<td>预训练权重</td>
+<td>齐全</td>
+<td>部分</td>
+<td>齐全，自动下载</td>
+</tr>
+<tr>
+<td>W2 baseline 能用吗</td>
+<td>✅ 就是它</td>
+<td>⚠️ config 名字全变了</td>
+<td>❌ 只能当对照组</td>
+</tr>
+<tr>
+<td>什么时候选</td>
+<td><strong>默认走这条</strong></td>
+<td>你就是想用新版</td>
+<td><strong>A 打不通 / 今晚只剩一小时</strong></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>决策规则</strong>：先走 A。<strong>A 卡满 2 小时就切 C</strong>，今晚必须有一张出图。C 出图之后，A 挪到明天 D2 的晚上段收尾——原手册已经允许"环境溢出 1–2 天"，这在计划内。</p>
+</blockquote>
+<hr />
+<h6 id="01w1d1mmrota0heck-3">4. 路线 A 全流程（逐条命令 + 期望输出）</h6>
+<h6 id="01w1d1mmrota0heck-4">4.1 建一个干净的环境</h6>
+<figure class="code" data-lang="bash"><pre><code>conda create -n mmrot python=3.9 -y
+conda activate mmrot
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>为什么是 3.9</strong>：<code>mmcv-full 1.7.2</code> 的预编译包覆盖 Python 3.7–3.10。<strong>3.9 是命中率最高的</strong>。
+<strong>⛔ 不要用 Python 3.11/3.12</strong> —— 没有预编译包，pip 会转去本地编译，几十分钟后大概率失败。
+<strong>为什么不复用中午段建的 <code>rs</code> 环境</strong>：可以复用，但 MMRotate 会把 <code>numpy</code>、<code>yapf</code> 往低版本按。<strong>单开一个 <code>mmrot</code> 更干净</strong>，把 <code>rs</code> 留给你自己写脚本用。这也是"一个项目一间无菌实验室"的实践。</p>
+</blockquote>
+<h6 id="01w1d1mmrota0heck-5">4.2 装 PyTorch（版本要和后面的 mmcv 对齐）</h6>
+<figure class="code" data-lang="bash"><pre><code>pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证（这一步不过不许往下走）</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c “import torch; print(torch.__version__, torch.version.cuda, torch.cuda.is_available())”
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>2.0.1+cu118 11.8 True
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<ul>
+<li>最后是 <code>True</code> → 继续。</li>
+<li>最后是 <code>False</code> 但你有 N 卡 → 多半是装成了 CPU 版。<code>pip uninstall torch torchvision -y</code> 后重来，注意 <code>--index-url</code> 不能丢。</li>
+<li>没有 N 卡 → <code>False</code> 是正常的，继续走，后面 demo 加 <code>--device cpu</code>。</li>
+</ul>
+<p><strong>驱动老一点的对照表</strong>（把上面命令里的 <code>cu118</code> 和版本号替换掉）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>你的驱动</th>
+<th>用这组</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≥ 520</td>
+<td><code>torch==2.0.1 torchvision==0.15.2</code> + <code>cu118</code></td>
+</tr>
+<tr>
+<td>470–520</td>
+<td><code>torch==1.13.1 torchvision==0.14.1</code> + <code>cu117</code></td>
+</tr>
+<tr>
+<td>450–470</td>
+<td><code>torch==1.10.1 torchvision==0.11.2</code> + <code>cu113</code></td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="01w1d1mmrota0heck-6">4.3 ★ 先按住三个"地雷依赖"（原手册完全没提，今晚最大的坑）</h6>
+<p>MMRotate 0.x 写于 2022 年。它之后，Python 生态有三个包发生了<strong>破坏性升级</strong>，会让你在明明版本"对"的情况下报出莫名其妙的错。<strong>先按住它们，比事后排查省一小时</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>pip install “numpy&lt;2” “yapf==0.40.1” “setuptools&lt;70”
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>包</th>
+<th>不按住会怎样</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>numpy</code></td>
+<td>导入时 ABI 报错，或 <code>module 'numpy' has no attribute 'float'</code></td>
+<td>numpy 2.0 是破坏性大版本，mmcv 1.x / mmdet 2.x 都是 numpy 1.x 时代的产物</td>
+</tr>
+<tr>
+<td><code>yapf</code></td>
+<td><code>TypeError: FormatCode() got an unexpected keyword argument 'verify'</code></td>
+<td>yapf 0.40.2（2023-09-22 发布）删掉了 <code>verify</code> 参数，而 mmcv 的 <code>Config.pretty_text</code> 还在传它</td>
+</tr>
+<tr>
+<td><code>setuptools</code></td>
+<td>装 mmrotate 时 <code>error: each element of 'ext_modules' ...</code> 之类的构建错误</td>
+<td>新版 setuptools 移除了老的构建接口</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>⑥ 这一步你学会了什么</strong>：<strong>"依赖地狱"不只发生在直接依赖之间，更常发生在"依赖的依赖"悄悄升级时</strong>。以后复现任何两年前的代码，第一反应就是把 numpy / setuptools / 格式化工具按回当年的版本。</p>
+</blockquote>
+<h6 id="01w1d1mmrota0heck-7">4.4 装 mmcv-full（★ 今晚最关键的一条命令）</h6>
+<figure class="code" data-lang="bash"><pre><code>pip install mmcv-full==1.7.2 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这条命令为什么长成这样</strong>：</p>
+<ul>
+<li><code>mmcv-full</code> ≠ <code>mmcv</code>。0.x 代要的是 <strong><code>mmcv-full</code></strong>（带编译好的 CUDA 算子）。装成 <code>mmcv</code> 或 <code>mmcv-lite</code> 会报 <code>No module named 'mmcv._ext'</code>。</li>
+<li><code>-f</code> 后面那个地址是 OpenMMLab 的<strong>预编译包索引</strong>。URL 的构造规则是：
+  <code>text
+  https://download.openmmlab.com/mmcv/dist/{cu版本}/{torch版本}/index.html</code>
+  你把 4.2 里的 CUDA 和 torch 填进去即可（<code>cu118</code> / <code>torch2.0</code>）。</li>
+<li><strong>不带 <code>-f</code> 的后果</strong>：pip 找不到预编译包 → 下载源码包 → 在你机器上现场编译 CUDA 算子 → 二三十分钟后大概率因为缺 nvcc 或 GCC 版本不对而失败。<strong>这是新手在这一步崩掉的头号原因。</strong></li>
+</ul>
+<p><strong>★ 怎么判断这条命令有没有走对</strong>：盯 pip 的输出。</p>
+<figure class="code" data-lang="text"><pre><code>✅ 对了：Downloading https://download.openmmlab.com/.../mmcv_full-1.7.2-cp39-cp39-manylinux1_x86_64.whl (60.2 MB)
+❌ 错了：Downloading mmcv-full-1.7.2.tar.gz (...)   ← 出现 .tar.gz 就是要现场编译，立刻 Ctrl+C
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>看到 <code>.tar.gz</code> 就 Ctrl+C，回头检查：Python 是不是 3.11+？<code>-f</code> 的 URL 里 cu/torch 版本填对了吗？（若 <code>torch2.0</code> 无效，试 <code>torch2.0.0</code>。）</p>
+<p><strong>验证</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c “import mmcv; from mmcv.ops import nms_rotated; print(mmcv.__version__, 'ops ok')”
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>：<code>1.7.2 ops ok</code>。能 <code>import mmcv.ops</code> 才算真装成了，只 <code>import mmcv</code> 不算。</p>
+<h6 id="01w1d1mmrota0heck-8">4.5 装 mmdet（必须是 2.x）</h6>
+<figure class="code" data-lang="bash"><pre><code>pip install mmdet==2.28.2
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c “import mmdet; print(mmdet.__version__)”    # 期望：2.28.2
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>⛔ <code>pip install mmdet</code> 不写版本号会装到 <strong>3.x</strong>，与 mmrotate 0.x 不兼容，直接白干。</p>
+</blockquote>
+<h6 id="01w1d1mmrota0heck-9">4.6 装 mmrotate</h6>
+<figure class="code" data-lang="bash"><pre><code>cd ~            # 或你放代码的地方
+git clone https://github.com/open-mmlab/mmrotate.git
+cd mmrotate
+pip install -v -e .
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<ul>
+<li><code>-e</code> = editable（可编辑安装）：<strong>装的是一个指向这个目录的软链接</strong>。你以后改 <code>mmrotate/</code> 里的代码，立刻生效，不用重装。W2 之后你会天天改它，所以现在就用 <code>-e</code>。</li>
+<li><code>-v</code> = verbose，出错时能看到更多信息。</li>
+</ul>
+<p><strong>验证</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c “import mmrotate; print(mmrotate.__version__)”   # 期望：0.3.4
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="01w1d1mmrota0heck-10">4.7 三代版本对账（跑 demo 前的最后一道关）</h6>
+<figure class="code" data-lang="bash"><pre><code>python -c “import mmcv, mmdet, mmrotate; print('mmcv',mmcv.__version__,'| mmdet',mmdet.__version__,'| mmrotate',mmrotate.__version__)”
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>期望输出</strong>：<code>mmcv 1.7.2 | mmdet 2.28.2 | mmrotate 0.3.4</code></p>
+<p>对照官方兼容表（来源：MMRotate 仓库 <code>docs/en/faq.md</code>）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>MMRotate</th>
+<th>需要 MMCV</th>
+<th>需要 MMDetection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0.3.4 / main</strong></td>
+<td><code>mmcv-full&gt;=1.5.3, &lt;1.8.0</code></td>
+<td><code>mmdet&gt;=2.25.1, &lt;3.0.0</code></td>
+</tr>
+<tr>
+<td>0.3.3 / 0.3.2</td>
+<td><code>mmcv-full&gt;=1.5.3, &lt;1.7.0</code></td>
+<td><code>mmdet&gt;=2.25.1, &lt;3.0.0</code></td>
+</tr>
+<tr>
+<td>0.3.1 / 0.3.0</td>
+<td><code>mmcv-full&gt;=1.4.5, &lt;1.6.0</code></td>
+<td><code>mmdet&gt;=2.22.0, &lt;3.0.0</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>半年后这张表过期了怎么办</strong>（原手册想让你做、但没教你怎么做的那一步）：
+打开 <code>https://github.com/open-mmlab/mmrotate</code> → 点 <code>docs/</code> → <code>en/</code> → <code>faq.md</code> → 页面开头第一张表就是它。<strong>不用读英文正文，只看那张表的第一行（main 行）。</strong></p>
+</blockquote>
+<h6 id="01w1d1mmrota0heck-11">4.8 ★★ 拿 config 和权重（原手册整段漏掉的一步）</h6>
+<p><strong>方式一：一条命令搞定（推荐）</strong></p>
+<figure class="code" data-lang="bash"><pre><code>mim download mmrotate --config oriented_rcnn_r50_fpn_1x_dota_le90 --dest .
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>（如果提示 <code>mim: command not found</code>，先 <code>pip install -U openmim</code>。）</p>
+<p>跑完当前目录会多出<strong>两个</strong>文件：</p>
+<figure class="code" data-lang="text"><pre><code>oriented_rcnn_r50_fpn_1x_dota_le90.py      ← config，几 KB
+oriented_rcnn_r50_fpn_1x_dota_le90-6d2b2ce0.pth   ← 权重，约 158 MB
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>方式二：手动下（mim 抽风时用）</strong></p>
+<p>config 其实仓库里就有，不用下：<code>configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py</code></p>
+<p>权重必须下，完整地址是：</p>
+<figure class="code" data-lang="bash"><pre><code>wget -c https://download.openmmlab.com/mmrotate/v0.1.0/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90/oriented_rcnn_r50_fpn_1x_dota_le90-6d2b2ce0.pth
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<ul>
+<li><code>-c</code> = 断点续传。国内下这个站容易断，断了重跑同一条命令即可接着下。</li>
+<li><strong>文件大小应为 165,749,436 字节（约 158 MB）</strong>。下完用 <code>ls -l</code> 核对——<strong>如果只有几 KB，那是下到了一个 HTML 错误页，不是权重</strong>。这个坑非常常见。</li>
+</ul>
+<p><strong>怎么自己找别的模型的权重</strong>（授人以渔）：</p>
+<blockquote class="quote">
+<p>进 <code>https://github.com/open-mmlab/mmrotate</code> → <code>configs/</code> → 选一个方法目录（如 <code>oriented_rcnn/</code>）→ 打开里面的 <code>README.md</code> → 表格里每一行末尾都有 <strong>model</strong> 链接，那就是 <code>.pth</code> 地址；同一行的 config 列就是配套的 <code>.py</code>。<strong>config 和权重必须成对使用，张冠李戴会报 <code>size mismatch</code>。</strong></p>
+</blockquote>
+<h6 id="01w1d1mmrota0heck-12">4.9 跑 demo</h6>
+<p>确认你在 <code>mmrotate</code> 目录下，然后：</p>
+<figure class="code" data-lang="bash"><pre><code>python demo/image_demo.py \
+  demo/demo.jpg \
+  configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py \
+  oriented_rcnn_r50_fpn_1x_dota_le90-6d2b2ce0.pth \
+  --out-file result.jpg
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>四个位置参数的含义，对照第 1 节的三样东西：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>是什么</th>
+<th>对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>demo/demo.jpg</code></td>
+<td>输入图（仓库自带，不用下）</td>
+<td>数据</td>
+</tr>
+<tr>
+<td><code>configs/.../oriented_rcnn_r50_fpn_1x_dota_le90.py</code></td>
+<td>图纸</td>
+<td>② config</td>
+</tr>
+<tr>
+<td><code>oriented_rcnn_..._le90-6d2b2ce0.pth</code></td>
+<td>调校好的参数</td>
+<td>③ checkpoint</td>
+</tr>
+<tr>
+<td><code>--out-file result.jpg</code></td>
+<td>输出画到哪</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>没有 GPU 就加一句</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>  --device cpu
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>想看更多框（默认阈值 0.3）</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>  --score-thr 0.1
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="01w1d1mmrota0heck-13">4.10 ③ 合格样例</h6>
+<ul>
+<li>终端<strong>没有红色 Traceback</strong>，安静地结束（中间可能有几行 UserWarning，<strong>警告不是错误，忽略</strong>）。</li>
+<li>当前目录出现 <code>result.jpg</code>。</li>
+<li>打开它：一张俯视的停车场/街区图，上面套着一圈<strong>斜着的彩色框</strong>，框住车辆等目标。</li>
+</ul>
+<p><strong>看到这张图 = 今晚赢了。</strong> 立刻做两件事：</p>
+<ol>
+<li>截图存进 <code>RS-CV/20-代码实验/W1D1-环境SOP/</code> （上午段建的知识库派上用场了）。</li>
+<li>顺手换一张你自己的图试试（任何俯拍图都行）：
+   <code>bash
+   python demo/image_demo.py 你的图.jpg configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py oriented_rcnn_r50_fpn_1x_dota_le90-6d2b2ce0.pth --out-file my_result.jpg</code>
+   <strong>换图不换 config/权重</strong> —— 这一下你就真懂三者的分工了。</li>
+</ol>
+<h6 id="01w1d1mmrota0heck-14">4.11 一键脚本（存下来，换机器时直接跑）</h6>
+<figure class="code" data-lang="bash"><pre><code>#!/usr/bin/env bash
+# install_mmrotate.sh —— MMRotate 0.3.4 一键环境（示例配置：CUDA 11.8 / torch 2.0.1 / Python 3.9）
+set -e
+
+conda create -n mmrot python=3.9 -y
+source activate mmrot
+
+pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
+python -c “import torch; assert torch.__version__.startswith('2.0.1'); print('torch ok', torch.cuda.is_available())”
+
+pip install “numpy&lt;2” “yapf==0.40.1” “setuptools&lt;70”
+pip install mmcv-full==1.7.2 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+python -c “from mmcv.ops import nms_rotated; print('mmcv ops ok')”
+
+pip install mmdet==2.28.2
+pip install -U openmim
+
+git clone https://github.com/open-mmlab/mmrotate.git
+cd mmrotate
+pip install -v -e .
+
+mim download mmrotate --config oriented_rcnn_r50_fpn_1x_dota_le90 --dest .
+
+python demo/image_demo.py demo/demo.jpg \
+  configs/oriented_rcnn/oriented_rcnn_r50_fpn_1x_dota_le90.py \
+  oriented_rcnn_r50_fpn_1x_dota_le90-6d2b2ce0.pth \
+  --out-file result.jpg
+
+echo “全部完成，看 $(pwd)/result.jpg”
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>用法：<code>chmod +x install_mmrotate.sh &amp;&amp; ./install_mmrotate.sh</code></p>
+<hr />
+<h6 id="01w1d1mmrota0heck-15">5. ④⑤ 报错急救手册</h6>
+<h6 id="01w1d1mmrota0heck-16">5.0 先学会读报错（这个技能比这张表值钱）</h6>
+<ol>
+<li><strong>从下往上读。</strong> Traceback 最后一行 <code>XxxError: 具体信息</code> 才是真正的错，上面几十行是调用路径。</li>
+<li><strong>提取"可搜索的那一句"。</strong> 把最后一行里<strong>你自己的路径、文件名、数字</strong>删掉，只留通用部分。
+   - 原始：<code>FileNotFoundError: [Errno 2] No such file: '/home/zhang/mmrotate/oriented_rcnn_xxx.pth'</code>
+   - 拿去搜：<code>mmrotate FileNotFoundError checkpoint No such file</code></li>
+<li><strong>搜索的地方按顺序</strong>：① 本页第 5.1 节表格 → ② <code>https://github.com/open-mmlab/mmrotate/issues</code> 右上 Search（<strong>记得把过滤器从 <code>is:open</code> 删掉，很多答案在已关闭的 issue 里</strong>）→ ③ Google 加英文报错原文 → ④ CSDN / 知乎搜中文报错。</li>
+<li><strong>一个错查 20 分钟没解决就止损</strong>，记进 SOP 的"待解决"，走保底路线。</li>
+</ol>
+<h6 id="01w1d1mmrota0heck-17">5.1 症状 → 原因 → 解药</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>报错原文（关键部分）</th>
+<th>真正原因</th>
+<th>解药</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>AssertionError: MMCV==2.x.x is used but incompatible. Please install mmcv&gt;=1.x, &lt;1.x</code></td>
+<td>装了 1.x 代的 mmcv，mmrotate 是 0.x 代</td>
+<td><code>pip uninstall mmcv mmcv-full -y</code>，重做 4.4</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>ModuleNotFoundError: No module named 'mmcv._ext'</code> 或 <code>No module named 'mmcv.ops'</code></td>
+<td>装成了 <code>mmcv</code> / <code>mmcv-lite</code>（无 CUDA 算子），或源码编译失败</td>
+<td>卸干净后<strong>必须</strong>装 <code>mmcv-full</code>，且带 <code>-f</code> 索引</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pip 在下载 <code>mmcv-full-1.7.2.tar.gz</code> 而不是 <code>.whl</code></td>
+<td><code>-f</code> 索引里没有匹配你 torch/Python 的预编译包</td>
+<td>Ctrl+C。检查 Python 是否 3.11+；核对 <code>-f</code> URL 里的 cu/torch；把 <code>torch2.0</code> 试成 <code>torch2.0.0</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>TypeError: FormatCode() got an unexpected keyword argument 'verify'</code></td>
+<td>yapf ≥ 0.40.2 删了 <code>verify</code> 参数</td>
+<td><code>pip install yapf==0.40.1</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>AttributeError: module 'numpy' has no attribute 'float'</code> / numpy ABI 报错</td>
+<td>numpy 2.x</td>
+<td><code>pip install "numpy&lt;2"</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>KeyError: 'OrientedRCNN is not in the models registry'</code></td>
+<td>没装 mmrotate，或用 API 时忘了 <code>import mmrotate</code></td>
+<td>确认 4.6 成功；Python 里<strong>必须</strong>有 <code>import mmrotate</code> 这一行来触发注册</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>FileNotFoundError: ... .pth</code></td>
+<td><strong>权重根本没下</strong>（原手册漏掉的那步）或路径写错</td>
+<td>回到 4.8。<code>ls -l *.pth</code> 确认存在且约 158 MB</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>RuntimeError: CUDA error: no kernel image is available for execution on the device</code></td>
+<td>预编译的 mmcv 不含你显卡的架构（常见于 RTX 40/50 系配老 CUDA）</td>
+<td>换更高 CUDA 的组合（cu118 起）；或最后手段本地编译：<code>TORCH_CUDA_ARCH_LIST="8.9" pip install mmcv-full==1.7.2</code>（8.9 是 40 系；50 系用 9.0）</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>ImportError: ... undefined symbol: _ZN3c10...</code></td>
+<td>mmcv 编译时的 torch 版本 ≠ 当前 torch</td>
+<td>两者对齐重装；<strong>先卸 mmcv-full 再换 torch</strong>，顺序反了还会错</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>AssertionError: MMDetection 3.x is incompatible</code></td>
+<td>mmdet 装成 3.x</td>
+<td><code>pip install mmdet==2.28.2</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>ImportError: libGL.so.1: cannot open shared object file</code></td>
+<td>无桌面的服务器缺 OpenCV 的图形库</td>
+<td><code>pip install opencv-python-headless</code>；有 root 则 <code>apt install -y libgl1 libglib2.0-0</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td>下载 <code>.pth</code> 极慢 / 中断 / 下完只有几 KB</td>
+<td>网络问题；几 KB 的是错误页不是权重</td>
+<td><code>wget -c</code> 续传；或用浏览器直接打开那个 URL 下载后拷进目录</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>Microsoft Visual C++ 14.0 or greater is required</code></td>
+<td>Windows 原生缺编译器</td>
+<td><strong>别装 VS 了，去装 WSL2 + Ubuntu</strong>，在里面重做，省几小时</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>size mismatch for ... : copying a param with shape ...</code></td>
+<td>config 和权重不配套（张冠李戴）</td>
+<td>回 4.8，从同一个 README 表格的<strong>同一行</strong>取 config 和 model</td>
+</tr>
+<tr>
+<td>15</td>
+<td>大量 <code>UserWarning</code> / <code>DeprecationWarning</code>，但没有 Traceback</td>
+<td>不是错误</td>
+<td><strong>忽略。</strong> 老框架配新 Python 必然一堆警告，只要 <code>result.jpg</code> 出来了就是成功</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h6 id="01w1d1mmrota0heck-18">6. 路线 C：保底方案（10 分钟出旋转框结果图）</h6>
+<p><strong>什么时候用</strong>：路线 A 卡满 2 小时，或今晚只剩一小时。</p>
+<p>Ultralytics 的 YOLO-OBB 系列自带在 <strong>DOTAv1 上预训练的旋转框模型</strong>，权重首次运行<strong>自动下载</strong>，没有 mmcv 那套编译依赖。</p>
+<figure class="code" data-lang="bash"><pre><code>conda create -n obb python=3.10 -y
+conda activate obb
+pip install ultralytics
+
+# 用任意一张俯拍图（航拍/卫星截图都行），权重会自动下载
+yolo obb predict model=yolo11n-obb.pt source=你的图.jpg save=True
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>结果默认存在 <code>runs/obb/predict/</code> 下。打开就能看到斜框。</p>
+<p><strong>必须说清楚的三件事，别自己骗自己</strong>：</p>
+<ol>
+<li><strong>这不算作弊</strong>。今晚的目标是"亲眼看到旋转框检测的输出、理解 config+权重+推理这条链路"，路线 C 同样达成。</li>
+<li><strong>但它替代不了路线 A</strong>。W2 要复现的 Oriented R-CNN、后面所有和论文对齐的实验，学术界都以 MMRotate 为准。<strong>路线 A 必须补上</strong>，只是可以挪到明后天。</li>
+<li><strong>Ultralytics 是 AGPL-3.0 协议</strong>。自己学习、写论文没问题；将来若涉及闭源商用要另外买授权。现在知道有这回事就行。</li>
+</ol>
+<p><strong>⑥ 这一步你学会了什么</strong>：<strong>任何一个技术目标都该准备 Plan B</strong>。研究里最贵的不是走错路，是在一条路上耗到失去信心。</p>
+<hr />
+<h6 id="01w1d1mmrota0heck-19">7. 今晚的《环境搭建 SOP》怎么写（≥800 字，直接套这个骨架）</h6>
+<p>原手册说"SOP 不是流水账，是遇到 X 报错 → 用 Y 解决的可复用手册"。但没给模板。用下面这个，填完自然超过 800 字：</p>
+<p>```markdown</p></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>直接 <code>pip install mmcv</code> 最新版</strong>：极可能和你的 torch/cuda 不匹配，编译报错或运行时崩。<strong>务必用 mim + 文档指定版本</strong>。</li>
+<li><strong>MMRotate 版本与 mmcv/mmdet 错配</strong>:MMRotate 0.x 系 ↔ mmcv 1.x + mmdet 2.x;MMRotate 1.x 系 ↔ mmcv 2.x + mmengine。<strong>三者必须同代</strong>，跨代必崩。这是今晚 80% 报错的根源。</li>
+<li><strong>把 SOP 写成流水账</strong>:SOP 不是“我装了 A 又装了 B”，而是“<strong>遇到 X 报错 → 用 Y 解决</strong>”的可复用手册——下次重装/换机直接照着来。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>mmcv 编译/导入报错 → ① 先确认 torch 版本 + cuda 版本(<code>python -c &quot;import torch;print(torch.__version__, torch.version.cuda)&quot;</code>);② 拿这两个数字去 mmcv 官方“版本对应表”找匹配的预编译包，用 mim 指定版本装，<strong>避免现场编译</strong>。</li>
+<li>demo 报 <code>KeyError</code>/找不到 config 或权重 → 多半是路径/版本不对，去对应 GitHub 的 <strong>Issues 页搜你的报错原文</strong>（90% 的坑别人踩过且有答案）。</li>
+<li>折腾 2 小时仍打不通 MMRotate → <strong>果断止损，今晚到此</strong>。把 PyTorch+GPU 已通这件事写进 SOP,MMRotate 标成“待续”，明天 D2 早读论文、午/晚再花一段把它收尾。<strong>记住：第一周允许环境溢出 1–2 天，这是计划内的，不是失败。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你第一次走完了<strong>“装一套有版本依赖的复杂框架 + 用 demo 验证 + 写成 SOP”</strong>的完整流程，而且学会了排查版本冲突的核心套路（查 torch/cuda 版本 → 对照官方表 → mim 指定版本 → 翻 Issues）。这套“装框架 + 排冲突”的能力，你后面复现每一份代码都要用。<strong>做了</strong>（MMRotate 通 + demo 图 + SOP）、<strong>学了</strong>（MM 全家桶依赖关系、版本同代原则）、<strong>会了</strong>（版本冲突的排查决策树）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物对照你原计划</strong>:✅ 环境跑通截图(<code>cuda.is_available()=True</code> + demo 图) ✅《环境搭建 SOP》（≥800 字） ✅ 知识库框架（4 文件夹 + 5 段式模板）。</p>
+</blockquote>
+<hr />
+<blockquote class="quote">
+<p><strong>这一页替代什么</strong>：替代原 W1-D1「晚上段 · 装 MMRotate 工具链 + 跑通第一张 DOTA demo」的第 ②③④⑤ 块。原文让你“先去 GitHub README 看它钦定的版本号”——那恰恰是新手最做不到的一步。这一页把版本号写死、把权重地址给全、把报错列成表。</p>
+<p><strong>今晚的及格线（写在最前面）</strong>：终端里出现 <code>result.jpg</code>，打开它能看到一张俯视图上套着一圈<strong>斜着的彩色框</strong>。做到这一步今晚就结束，不要顺手去训练。</p>
+<p><strong>时间预算</strong>：顺利 40 分钟；踩两个坑 2 小时；完全打不通 —— 走第 6 节的保底路线，30 分钟内照样出图。<strong>卡住不是你笨，是这套框架有历史包袱</strong>，第 1 节会讲清楚为什么。</p>
+</blockquote>
+<hr />
+<h6 id="01w1d1mmrota0L-1">1. 先垫概念：为什么「代码下下来根本跑不通」</h6>
+<p>新手默认“clone 下来 → python 一跑 → 出结果”。深度学习框架不是这样的。你缺的是三样东西，它们<strong>分别存放、分别下载</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>你以为只需要</th>
+<th>实际需要三样</th>
+<th>它是什么</th>
+<th>从哪来</th>
+<th>有多大</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>代码</td>
+<td><strong>① 代码</strong></td>
+<td>模型怎么搭、怎么前向、怎么画框的 Python 实现</td>
+<td><code>git clone</code> 仓库</td>
+<td>几十 MB</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>② config 配置文件</strong></td>
+<td>一个 <code>.py</code>，写死了“用哪个骨干网、输入多大、有几类、框怎么编码”。<strong>代码是通用的，config 才决定你跑的是哪个模型</strong></td>
+<td>仓库里的 <code>configs/</code> 目录，或单独下载</td>
+<td>几 KB</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>③ checkpoint 权重</strong></td>
+<td>一个 <code>.pth</code>，别人在 DOTA 上训练几十小时得到的几千万个参数。<strong>没有它，模型是个随机初始化的空壳，输出全是噪声</strong></td>
+<td>官方下载站，<strong>必须单独下</strong></td>
+<td>100–300 MB</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>这就是你卡住的根本原因</strong>：仓库里只有 ①②，<code>.pth</code> 因为太大<strong>不会</strong>跟着 <code>git clone</code> 下来。原手册那句“跑自带 demo”跳过了整个 ③。</p>
+<p>三者的关系，记住这一句：</p>
+<blockquote class="quote">
+<p><strong>代码是引擎，config 是图纸，checkpoint 是已经调校好的参数。三样凑齐，<code>demo/image_demo.py</code> 才能出图。</strong></p>
+</blockquote>
+<p>再补两个今晚会反复见到的词：</p>
+<ul>
+<li><strong>MM 全家桶的依赖链</strong>：<code>mmcv-full</code>（底层 CUDA 算子，旋转框的 IoU、NMS 都在这）→ <code>mmdet</code>（通用检测框架）→ <code>mmrotate</code>（旋转框检测）。地基 → 楼房 → 精装修。</li>
+<li><strong>“代际”</strong>：这套生态有两代，<strong>不能混用</strong>。</li>
+<li><strong>0.x 代</strong>：<code>mmcv-full 1.x</code> + <code>mmdet 2.x</code> + <code>mmrotate 0.x</code></li>
+<li><strong>1.x 代</strong>：<code>mmengine</code> + <code>mmcv 2.x</code> + <code>mmdet 3.x</code> + <code>mmrotate 1.x</code></li>
+</ul>
+<p>跨代必崩，报错是 <code>AssertionError: MMCV==2.x.x is used but incompatible</code>。<strong>今晚 80% 的报错来源于此。</strong></p>
+<p><strong>为什么推荐走 0.x 代</strong>：MMRotate 的主分支（main）到今天仍是 <strong>0.3.4</strong>，1.x 停在 <code>1.0.0rc1</code> 预览版。0.x 的模型权重最全、网上踩坑记录最多、你 W2 要复现的 Oriented R-CNN baseline 也在这一代。<strong>用老的那个，不是保守，是选文档和 issue 最多的那条路。</strong></p>
+<hr />
+<h6 id="01w1d1mmrota0L-2">2. 手把手带做（第 0 步）：开工前的 5 分钟体检</h6>
+<p><strong>别急着装。先搞清楚你的机器是什么配置</strong>，因为后面每条命令里的版本号都由它决定。</p>
+<p>```bash</p></div></section></section><details class="notes"><summary>我的笔记 · D1</summary><textarea data-note="d1" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d2" data-d="2"><header class="day-head"><span class="dnum">D2</span><h2 class="day-t">周二 · 读你人生第一篇科研论文（Zhu 2017 综述）+ 学会“精读 5 遍法”</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读人生第一篇科研论文。提醒：你可能从没读过论文、不知从哪下嘴，完全正常；我带你用这一篇真论文，边读边学会“怎么读论文”这件事本身，顺手第一次填满你的5段式笔记模板；目标不是读懂每个细节，而是掌握读论文的方法。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天你读第一篇论文。你可能从没读过论文、不知道从哪下嘴——没关系。我带你用<strong>这一篇真论文</strong>，边读边<strong>学会“怎么读论文”这件事本身</strong>，顺手把你的 5 段式笔记模板<strong>第一次填满</strong>。
+今天读的是：<strong>Zhu et al. 2017，《Deep Learning in Remote Sensing: A Comprehensive Review and List of Resources》(IEEE GRSM)</strong>——遥感深度学习的&quot;地图&quot;。</p>
+</blockquote>
+<hr />
+</div><section class="slot" id="d2-am" data-d="2" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D2 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读第 1–3 遍（只走前三遍，别贪）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（30 秒，必须先懂）</h4><div class="blk-b"><ul>
+<li><strong>综述(survey)</strong>= 把一个领域已有工作梳理打包的文章。<strong>第一篇就读它</strong>，是因为你现在两眼一抹黑，需要先拿到这个领域的“地图”，而不是一头扎进某个具体方法。</li>
+<li><strong>精读“5 遍法”</strong>（你计划的核心读法，今天先用前 3 遍）：
+<ul>
+<li>第 1 遍(5min)：<strong>只看</strong>标题 + 摘要 + 所有图表。目的：30 秒知道“这篇在干嘛”。</li>
+<li>第 2 遍(20min)：读 Introduction + Conclusion。目的：知道“为什么做、最后结论是什么”。</li>
+<li>第 3 遍(30min)：读 Method/核心章节。目的：知道“具体怎么做的”。</li>
+<li>（第 4、5 遍读 Experiment / Related Work，明天 D3 再走。）</li>
+<li><strong>不是每篇都读 5 遍</strong>：综述 5 遍、方法论文 3 遍、应用/数据集论文 2 遍。</li>
+</ul>
+</li>
+<li>你会反复撞见两个词，现在记个大概即可：<strong>backbone</strong>（主干网络，负责从图像里“提特征”的那部分）、<strong>task</strong>（任务，如分类/检测/分割）。</li>
+</ul>
+<h6 id="10w1d2md1cept-1">① 先垫概念</h6>
+<h6 id="10w1d2md1cept-2">什么是综述，为什么第一篇读它</h6>
+<p><strong>综述（survey / review）= 不提新方法，而是把一个领域已有的工作梳理、分类、打包的文章。</strong></p>
+<p><strong>为什么第一篇读综述</strong>：你现在两眼一抹黑。直接读一篇具体方法的论文，你会陷进细节却不知道它在整个领域的什么位置。<strong>综述给你的是地图，方法论文给你的是某一条路。先看地图。</strong></p>
+<p><strong>综述的三个典型部分</strong>（读任何综述都先找这三块）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>在哪</th>
+<th>对你的价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>分类框架</strong></td>
+<td>通常是 Section 2 或一张大图</td>
+<td><strong>这个领域被切成了哪几块</strong> —— 最值钱</td>
+</tr>
+<tr>
+<td><strong>方法对比表</strong></td>
+<td>中后部</td>
+<td>谁比谁强、用什么指标比的</td>
+</tr>
+<tr>
+<td><strong>Future Directions</strong></td>
+<td>倒数第二节</td>
+<td><strong>别人替你列好的选题清单</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="10w1d2md1cept-3">精读 5 遍法（原文给了，这里补“为什么这样设计”）</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>遍</th>
+<th>读什么</th>
+<th>时长</th>
+<th><strong>为什么是这个顺序</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>标题 + 摘要 + 所有图表</td>
+<td>5 min</td>
+<td>图表是论文信息密度最高的部分。<strong>先看图能让你建立框架，之后读正文是“往框架里填”,而不是“在黑暗里摸索”</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Introduction + Conclusion</td>
+<td>20 min</td>
+<td>Intro 讲“为什么做”，Conclusion 讲“做成了什么”。<strong>这两头夹住，中间就好懂了</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Method / 核心章节</td>
+<td>30 min</td>
+<td>有了前两遍的框架，这时候读细节才有地方挂</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Experiment</td>
+<td>30 min</td>
+<td>验证它说的是不是真的</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Related Work</td>
+<td>可选</td>
+<td>用来顺藤摸瓜找更多论文</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>读几遍看类型</strong>：综述 5 遍 / 方法论文 3 遍 / 应用与数据集论文 2 遍。</p>
+<blockquote class="quote">
+<p><strong>这个方法不是这套手册发明的</strong>，它是学术界流传很广的 “three-pass approach”（S. Keshav 的经典短文）的变体。<strong>知道它有出处，你会更信任它。</strong></p>
+</blockquote>
+<h6 id="10w1d2md1cept-4">今天会撞见的六个词（原文只给了两个）</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>词</th>
+<th>一句话</th>
+<th>在这篇里出现在哪</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>backbone</strong></td>
+<td>负责从图像里提取特征的那部分网络（如 ResNet）</td>
+<td>Section 3 反复出现</td>
+</tr>
+<tr>
+<td><strong>task</strong></td>
+<td>任务：分类 / 检测 / 分割 / 变化检测</td>
+<td>全篇的组织维度之一</td>
+</tr>
+<tr>
+<td><strong>benchmark</strong></td>
+<td>公认的标准数据集 + 评测协议，用来公平比较不同方法</td>
+<td>Section 5 资源清单</td>
+</tr>
+<tr>
+<td><strong>end-to-end</strong></td>
+<td>端到端：从原始输入直接出最终结果，中间不用人工设计的步骤</td>
+<td>Intro 里作为深度学习的卖点</td>
+</tr>
+<tr>
+<td><strong>transfer learning</strong></td>
+<td>迁移学习：拿在大数据集上训好的模型，改一改用到你的小数据上</td>
+<td>Section 3，遥感标注贵，这招很重要</td>
+</tr>
+<tr>
+<td><strong>domain adaptation</strong></td>
+<td>域适应：训练数据和实际使用数据分布不同时，怎么让模型还能用</td>
+<td>Section 5 挑战部分</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>不认识的词就记进 <code>00-基础理论/术语卡片.md</code></strong>，别停下来查——这是 5 遍法的设计前提。</p></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ul>
+<li><strong>第 1 遍(5min)</strong>：打开 PDF,<strong>只看</strong>标题、摘要、和<strong>所有图</strong>。盯住它的 <strong>Figure 1</strong>（画的是“遥感数据有哪些类型”）——你能从图里看出遥感数据被分成哪几大类吗？把看到的写进笔记第 1 段。读完摘要，用<strong>一句话</strong>回答：“这篇综述在讲什么？覆盖了哪些任务？”写不出就再看一遍摘要。</li>
+<li><strong>第 2 遍(20min)</strong>：读 Section 1 Introduction + Section 6 Conclusion。边读边在笔记第 1 段补全：作者认为遥感深度学习<strong>为什么重要、难在哪</strong>。</li>
+<li><strong>第 3 遍(30min)</strong>：读 Section 2（遥感数据类型）+ Section 3.1–3.3（图像分类方法）。在笔记<strong>第 2 段</strong>用你自己的话写：它把遥感深度学习方法大致怎么分类的。</li>
+<li>同时：把 <strong>Figure 1</strong> 翻译成中文版，存进 <code>00-基础理论/遥感数据类型.md</code>。新建笔记文件 <code>10-论文笔记/2017_Zhu_DL-survey.md</code>(套用 5 段式模板)，填好前 3 段。</li>
+</ul>
+<h6 id="10w1d2md1k-do-1">② 手把手带做</h6>
+<h6 id="10w1d2md1k-do-2">第 1 遍（5 分钟）：只看标题、摘要、所有图</h6>
+<p><strong>动作</strong>：打开 PDF，<strong>从头翻到尾，只看图和图的标题（caption），不读正文</strong>。然后读一遍摘要。</p>
+<p><strong>★ 读完自问三个问题</strong>（写进笔记第 1 段）：</p>
+<ol>
+<li>这篇在讲什么？</li>
+<li>它覆盖了哪些任务？</li>
+<li>它是提方法的，还是梳理领域的？</li>
+</ol>
+<h6 id="10w1d2md1k-do-3">★★ 对答案 · Figure 1 到底是什么</h6>
+<p>原文说“盯住 Figure 1（画的是遥感数据有哪些类型）”，<strong>但没说图上有什么，你没法自检</strong>。补上：</p>
+<p><strong>Figure 1 展示的是遥感数据的几种主要类型和它们的差异</strong>，你应该从图里读出这几类：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>特点</th>
+<th>后面和你什么关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>全色（Panchromatic）</strong></td>
+<td>单波段，空间分辨率最高</td>
+<td>常用来做 pan-sharpening</td>
+</tr>
+<tr>
+<td><strong>多光谱（Multispectral）</strong></td>
+<td>几个到十几个波段</td>
+<td>Sentinel-2、高分系列，最常用</td>
+</tr>
+<tr>
+<td><strong>高光谱（Hyperspectral）</strong></td>
+<td>上百个连续窄波段</td>
+<td>光谱信息极丰富，数据量大</td>
+</tr>
+<tr>
+<td><strong>SAR</strong></td>
+<td>主动微波，穿云透雨，有 speckle</td>
+<td><strong>你的可能方向</strong>，见 <a href="../start/rs-basics.html#deep-02">《名词逐个讲透》</a></td>
+</tr>
+<tr>
+<td><strong>LiDAR / DSM</strong></td>
+<td>高程信息</td>
+<td>融合任务里会用到</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>自检</strong>：如果你从 Figure 1 里读出了“遥感数据不是一种东西，而是好几种成像原理完全不同的数据”，<strong>你就看对了</strong>。如果你只看到一堆图片，回去再看一遍图的 caption。</p>
+<h6 id="10w1d2md1k-do-4">★★ 对答案 · 摘要在说什么</h6>
+<p>摘要的核心是一个<strong>设问句结构</strong>（这是这篇写得好的地方）：</p>
+<figure class="code" data-lang="text"><pre><code>深度学习在通用领域已经是重大突破 →
+   那么，遥感界该不该全盘拥抱它？
+   还是该抵制这种&quot;黑箱&quot;方案？
+→ 这在遥感圈是有争议的。本文系统梳理，给出我们的看法。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>你的一句话主旨应该长这样</strong>（写进笔记第 1 段）：</p>
+<blockquote class="quote">
+<p>这篇综述系统梳理了深度学习在遥感各类数据（光学/高光谱/SAR）和各类任务（分类/检测/分割/融合/时序）上的进展，讨论了它带来的机会和遥感特有的挑战，并附了一份资源清单。</p>
+</blockquote>
+<p><strong>如果你写出来的和这个意思差不多，第 1 遍就成功了。</strong> 不用一字不差。</p>
+<h6 id="10w1d2md1k-do-5">第 2 遍（20 分钟）：Introduction + Conclusion</h6>
+<p><strong>动作</strong>：读 Section 1 和最后的结论部分。<strong>重点找“作者认为难在哪”。</strong></p>
+<p><strong>★ 对答案 · 这篇反复强调的“遥感 vs 通用 CV”的核心差异</strong>（这也是你晚上段要写的那张卡片的骨架）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>差异</th>
+<th>具体是什么</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据维度不同</strong></td>
+<td>通用 CV 是 RGB 三通道；遥感有几十上百个波段，还有 SAR 的复数数据</td>
+<td>现成网络结构不能直接搬</td>
+</tr>
+<tr>
+<td><strong>标注极其昂贵</strong></td>
+<td>标一张遥感图要专家、要实地核实</td>
+<td>→ 指向自监督/半监督/迁移学习</td>
+</tr>
+<tr>
+<td><strong>图像尺寸极大</strong></td>
+<td>一景动辄上万像素</td>
+<td>→ 必须切图（W2 你会亲手做）</td>
+</tr>
+<tr>
+<td><strong>目标尺度极端</strong></td>
+<td>一辆车几个像素，一个机场几千像素</td>
+<td>→ 多尺度是硬需求</td>
+</tr>
+<tr>
+<td><strong>有物理机理</strong></td>
+<td>每个像素值背后有电磁波物理，不是“好看的图”</td>
+<td>→ 该不该把物理知识塞进模型？<strong>至今没有定论，是大口子</strong></td>
+</tr>
+<tr>
+<td><strong>地理与时序属性</strong></td>
+<td>数据有坐标、有时间序列</td>
+<td>→ 变化检测、时序分析是遥感特有任务</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>自检</strong>：你在 Intro 或 Conclusion 里应该能找到其中至少 3 条。<strong>找到 3 条以上，第 2 遍就到位了。</strong></p>
+<h6 id="10w1d2md1k-do-6">第 3 遍（30 分钟）：Section 2 + Section 3.1–3.3</h6>
+<p><strong>动作</strong>：读数据类型那节和图像分类方法那几节。<strong>目标是搞清它的分类框架。</strong></p>
+<p><strong>★ 对答案 · 这篇的分类框架</strong></p>
+<p>它其实是用<strong>两个维度</strong>在切这个领域：</p>
+<figure class="code" data-lang="text"><pre><code>              ┌─ 图像预处理（去噪、超分、pan-sharpening）
+              ├─ 像素级分类（语义分割 / 地物分类）
+   按 任务 切 ─┼─ 目标检测              ← ★ 你的方向
+              ├─ 场景分类
+              ├─ 变化检测
+              └─ 数据融合 / 时序分析
+
+              ┌─ 全色 / 多光谱
+   按 数据 切 ─┼─ 高光谱
+              └─ SAR                  ← ★ 你可能的方向
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>每个格子里，它做的事都是</strong>：列代表工作 → 说深度学习在这里赢在哪 → 说还差什么。</p>
+<p><strong>自检三问</strong>（答不出就回去看 Section 2 的小标题）：
+1. 它把遥感任务分成了大约几类？（答：六七类，见上图）
+2. “像素级分类”和“场景分类”有什么区别？（答：前者给每个像素一个类别，后者给整张图一个类别）
+3. 目标检测在这个框架里的位置？（答：任务维度里的一个，和分割、场景分类并列）</p></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>笔记里有“<strong>这篇讲遥感深度学习全景，覆盖分类/检测/分割/变化检测等任务</strong>”这类<strong>一句话主旨</strong>，加上从 Figure 1 抄下的数据类型分类（光学/多光谱/高光谱/SAR/...）。<strong>写不出主旨 = 还没抓住，回去再看摘要。</strong></p>
+<h6 id="10w1d2md1heck-1">③ 合格样例</h6>
+<p>打开 <code>10-论文笔记/2017_Zhu_DL-survey.md</code>（你 D1 已经建好并填了范例），现在应该：</p>
+<ul>
+<li><strong>第 1 段（动机）</strong>：已经填好，是你自己的话</li>
+<li><strong>第 2 段（方法）</strong>：填了它的分类框架</li>
+<li><strong>第 5 段（待查）</strong>：至少 3 条你看不懂的词</li>
+</ul>
+<p><strong>不要求填第 3、4 段</strong>——那是明天 D3 走完第 4、5 遍之后的事。</p>
+<blockquote class="quote">
+<p><strong>和 D1 那份范例的关系</strong>：D1 我给了你一份<strong>填满的范例</strong>，让你知道“合格长什么样”。<strong>今天你要做的是把范例里的内容，换成你自己读出来的东西。</strong> 如果发现你写的和范例差不多——很好，说明你读对了；如果差很多——回去对照上面几处“对答案”。</p>
+</blockquote></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>一上来逐字读正文</strong>，被术语淹没——错。第 1 遍只看摘要+图表，先建全局。</li>
+<li><strong>看不懂图就跳过</strong>——错。遥感论文的图信息量最大，<strong>看图比抠字高效 10 倍</strong>。</li>
+<li><strong>追求第一遍就全懂</strong>——错。第一遍懂 30% 就够，这是 5 遍法的设计前提。</li>
+</ul>
+<h6 id="10w1d2md1-pit-1">④ 常踩的坑</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>为什么错</th>
+<th>正解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一上来逐字读正文</td>
+<td>被术语淹没，读到第 3 页就放弃</td>
+<td>第 1 遍只看摘要 + 图</td>
+</tr>
+<tr>
+<td>看不懂图就跳过</td>
+<td><strong>遥感论文的图信息量最大</strong></td>
+<td>看图比抠字高效 10 倍。看不懂就读 caption</td>
+</tr>
+<tr>
+<td>追求第一遍全懂</td>
+<td>违反 5 遍法的设计前提</td>
+<td>第 1 遍懂 30% 就够</td>
+</tr>
+<tr>
+<td>笔记复制粘贴摘要</td>
+<td>半年后看不懂自己的笔记</td>
+<td>第 2 段必须是自己的话</td>
+</tr>
+<tr>
+<td><strong>先看这一页的“对答案”再去读</strong></td>
+<td><strong>练不到技能</strong></td>
+<td>先自己读，再对答案</td>
+</tr>
+<tr>
+<td>卡在某个词上查半小时</td>
+<td>打断阅读节奏</td>
+<td>记进术语卡片，继续往下读</td>
+</tr>
+</tbody>
+</table></div></div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><ul>
+<li>摘要全是生词、读不下去 → 别硬扛，<strong>先用翻译工具过一遍摘要建立大意</strong>，把不懂的术语记到 <code>00-基础理论/术语表.md</code>(今天起慢慢攒，先记 backbone、task、feature、benchmark)。重点是先抓住“这篇在干嘛”，不是逐词看懂。</li>
+</ul>
+<h6 id="10w1d2md1scue-1">⑤ 卡住自救</h6>
+<ul>
+<li><strong>摘要全是生词读不下去</strong> → 用翻译工具过一遍摘要建立大意，<strong>但正文别全文翻译</strong>（翻译会丢掉术语的精确含义）。重点是抓住“这篇在干嘛”。</li>
+<li><strong>PDF 里的图看不清</strong> → 大多数 PDF 阅读器可以放大到 400% 不失真；实在不行去 arXiv 版看，通常图更清楚。</li>
+<li><strong>读了两小时还在第 1 遍</strong> → 你在逐字读。<strong>强制自己 5 分钟翻完全篇</strong>，哪怕什么都没记住——先建立“这篇有多长、长什么样”的体感。</li>
+</ul></div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你刚用的“先只看摘要+图表→再读 Intro/Conclusion→再读 Method”就是<strong>论文精读的前 3 遍</strong>。走完你<strong>同时拿到三样</strong>：这篇的笔记（<strong>做了</strong>）、对遥感领域的初步地图（<strong>学了</strong>）、“怎么读综述”这项技能（<strong>会了</strong>）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜精读 5 遍法</strong>:1 遍 标题+摘要+图表(5min) → 2 遍 Intro+Conclusion(20min) → 3 遍 Method(30min) → 4 遍 Experiment(30min) → 5 遍 Related Work（可选）。综述 5 遍 / 方法 3 遍 / 应用 2 遍。</p>
+</blockquote>
+<hr />
+<blockquote class="quote">
+<p><strong>这一页解决什么</strong>：原 D2 告诉你“盯住 Figure 1”、“读 Section 3.1–3.3”，<strong>这是导航，不是导读</strong>。你看完 Figure 1，怎么知道自己看对了？没有对照，只能去搜别人的博客——<strong>这正是你说的“还得另外找资料”</strong>。</p>
+<p><strong>这一页的做法</strong>：先给你这篇论文的<strong>完整地图和结论</strong>，你带着它去读，读完能自己对答案。</p>
+<p><strong>重要提醒</strong>：<strong>先自己读一遍，再看我的导读对答案。</strong> 顺序反了，你练不到“读论文”这项技能——而 D2 的真正目标是技能，不是这篇论文的内容。</p>
+<p><strong>今天的及格线</strong>：<code>10-论文笔记/2017_Zhu_DL-survey.md</code> 里，第 1、2 段是你自己的话写的，第 5 段至少有 3 条待查。</p>
+</blockquote>
+<hr />
+<h5 id="10w1d2md0-1">0. 先拿到论文（原文没说，但这是第一步）</h5>
+<p><strong>这篇的完整信息</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>Zhu, X.X., Tuia, D., Mou, L., Xia, G.-S., Zhang, L., Xu, F., Fraundorfer, F.
+&quot;Deep Learning in Remote Sensing: A Comprehensive Review and List of Resources&quot;
+IEEE Geoscience and Remote Sensing Magazine (GRSM), 2017, 5(4): 8-36
+DOI: 10.1109/MGRS.2017.2762307
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>三条获取途径，按顺序试</strong>：</p>
+<ol>
+<li><strong>有学校 VPN</strong> → IEEE Xplore 搜 DOI，直接下。</li>
+<li><strong>没有 VPN</strong> → 北卡大学的公开仓库 <code>cdr.lib.unc.edu</code> 上有这篇的免费全文 PDF，搜标题即可。</li>
+<li><strong>都不行</strong> → Google Scholar 搜完整标题（<strong>加英文引号做精确匹配</strong>），结果右侧常有 <code>[PDF]</code> 直链。</li>
+</ol>
+<p><strong>拿到后先做一件事</strong>：看页码是不是 <code>8-36</code>（29 页）。<strong>如果你下到的只有几页，那是摘要页不是全文。</strong></p>
+<blockquote class="quote">
+<p><strong>顺手学会的技能</strong>：以后遇到任何“读某某论文”，都走这四步（第 4 步是给通讯作者发邮件要）。完整版见 <a href="../resources-master.html">《全书资源总表》§1.4</a>。</p>
+</blockquote>
+<hr /><h5 id="10w1d2md1L-1">1. 上午段 · 精读第 1–3 遍</h5><h6 id="10w1d2md1gain-1">⑥ 你同时学会了什么</h6>
+<p><strong>做了</strong>：一份填了三段的论文笔记。
+<strong>学了</strong>：综述的三个典型部分、这个领域的分类框架、遥感与通用 CV 的六大差异。
+<strong>会了</strong>：<strong>5 遍法</strong>，以及“先看图建框架、再读正文填细节”这个顺序。这个顺序你后面 200 多篇论文都会用。</p>
+<hr /></div></section></section><section class="slot" id="d2-noon" data-d="2" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D2 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">把“5 段式笔记模板”真正学会（逐段讲它为什么这样设计）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>昨天你建了空模板，今天用 Zhu 2017 填它。模板不是表格作业，<strong>每一段都对应“未来你会用到它的某个时刻”</strong>——理解了这层，你才会认真写。</p>
+<h6 id="10w1d2md2cept-1">① 先垫概念：每段为什么这样设计</h6>
+<p>原文说“逐段讲它为什么这样设计”，但只给了模板。<strong>补上设计意图</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>为什么要有这一段</th>
+<th>不写会怎样</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. 动机</strong></td>
+<td>论文的价值取决于它解决的问题值不值得解决</td>
+<td>半年后你只记得“有这么个方法”，不记得它为什么存在</td>
+</tr>
+<tr>
+<td><strong>2. 方法</strong></td>
+<td><strong>强制你用自己的话复述</strong> = 检验有没有真懂</td>
+<td>抄摘要 = 没读</td>
+</tr>
+<tr>
+<td><strong>3. 实验</strong></td>
+<td>记住关键数字，将来对比时有基准</td>
+<td>复现时不知道该冲什么数</td>
+</tr>
+<tr>
+<td><strong>4. 启发 ★</strong></td>
+<td><strong>你未来所有 idea 的矿脉</strong></td>
+<td>读 200 篇也产生不了一个自己的想法</td>
+</tr>
+<tr>
+<td><strong>5. 待查</strong></td>
+<td>把“不懂”变成可执行的任务</td>
+<td>不懂的东西永远不懂</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>一句话总结</strong>：<strong>前 3 段是“记录”，第 4 段是“生产”。</strong> 很多人只做前 3 段，所以读了很多却产不出东西。</p>
+</blockquote></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>（逐段填，我同时告诉你“这段以后干嘛用”）：</p>
+<ul>
+<li><strong>第 1 段 它解决什么问题</strong>：写“以前遥感分析靠人工特征，深度学习能自动学特征”→ <strong>以后用处</strong>：这是你写论文 Introduction“背景”段的素材。</li>
+<li><strong>第 2 段 怎么做的</strong>：写它对方法的分类框架 → <strong>以后用处</strong>：你写 Related Work 时的骨架。</li>
+<li><strong>第 3 段 实验与结果</strong>：综述没有自己的实验，就写“它列举了哪些任务的代表数据集/指标”→ <strong>以后用处</strong>：你建数据集表、选评测指标的索引。</li>
+<li><strong>第 4 段 启发/没解决的（★最重要）</strong>：把它 Section 5“挑战与趋势”里<strong>到今天还没解决的点</strong>抄下来（如：小目标、多模态融合、标注稀缺）→ <strong>以后用处</strong>：这是你<strong>找选题</strong>的第一桶金。</li>
+<li><strong>第 5 段 没看懂的/待查</strong>：老实记下你没懂的词和概念。</li>
+</ul>
+<h6 id="10w1d2md2k-do-1">② 手把手带做：第 4 段怎么写（原文最缺的部分）</h6>
+<p>第 4 段最难，因为它要求你<strong>从“读者”变成“研究者”</strong>。给你四个可以套的提问模板：</p>
+<figure class="code" data-lang="markdown"><pre><code>## 4. 启发 / 可借鉴 / 没解决的
+
+### 模板 A：它自己承认的局限
+（论文的 Conclusion 或 Limitation 段落里，作者自己说&quot;未来工作&quot;的地方）
+→ 本篇：作者说 2017 年时深度学习在 SAR 定量反演上优势不明显，因为物理机理强、
+   数据少。这个问题今天解决了吗？→ 这是一个可以查证的口子。
+
+### 模板 B：时代局限
+（这篇写于哪一年？之后领域发生了什么它没赶上的事？）
+→ 本篇写于 2017，Transformer（2017 底才出）、基础模型、VLM 全都没有。
+   **我可以拿它的分类框架，逐格检查这 8 年发生了什么** —— 这个动作本身
+   就能让我快速建立&quot;领域现在长什么样&quot;的地图。
+
+### 模板 C：跨格子迁移
+（它的分类框架里，A 格子的方法能不能用到 B 格子？）
+→ 本篇：光学检测里成熟的做法，能不能迁到 SAR 检测？差异在哪？
+   （提示：speckle 是乘性噪声，通用增强策略可能失效）
+
+### 模板 D：评测本身有没有问题
+（大家都在用的指标/数据集，公平吗？合理吗？）
+→ 本篇提到遥感缺统一 benchmark。今天有 DOTA 了，但评测协议还是很乱
+   （单尺度/多尺度、mAP07/mAP12 混用）→ 这本身可能是个可做的点。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>用法</strong>：<strong>每读完一篇，至少套一个模板写出一条。</strong> 写不出来说明还没读懂动机，回去重读 Introduction 的最后一段（论文的 contribution 通常写在那）。</p></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2017_Zhu_DL-survey.md</code> 五段都有内容，第 4 段至少有 3 条“尚未解决的挑战”。</p>
+<h6 id="10w1d2md2heck-1">③ 合格样例 + 每段的长度标准</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>长度</th>
+<th>判断“写够了”的标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 动机</td>
+<td>2–4 句</td>
+<td>能对别人说清“这篇为什么该被写出来”</td>
+</tr>
+<tr>
+<td>2. 方法</td>
+<td>一小段 + 分点</td>
+<td><strong>必须是自己的话</strong>；能画出一句话的 pipeline</td>
+</tr>
+<tr>
+<td>3. 实验</td>
+<td>3–5 句</td>
+<td>记住<strong>一个</strong>核心数字或结论就够</td>
+</tr>
+<tr>
+<td>4. 启发 ★</td>
+<td><strong>可以比前面加起来还长</strong></td>
+<td>有至少一条“我能接的口子”</td>
+</tr>
+<tr>
+<td>5. 待查</td>
+<td>逐条 <code>- [ ]</code></td>
+<td>每条都能变成一个具体动作</td>
+</tr>
+</tbody>
+</table></div></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把笔记写成<strong>原文翻译/摘抄</strong>——错。笔记的价值在“<strong>用你自己的话重述</strong>”，抄原文等于没记。第 4 段尤其不能偷懒。</p>
+<h6 id="10w1d2md2-pit-1">④⑤ 坑与自救</h6>
+<ul>
+<li><strong>坑：第 4 段写成“这篇很好，启发很大”</strong> → 这是废话。<strong>必须具体到“哪一处可以怎么改”。</strong></li>
+<li><strong>坑：待查清单只记不清</strong> → 每周复盘时必须清一次，用 <a href="../start/rs-basics.html#deep-03">《学习资料地图》§6.1 的三层查法</a>。</li>
+<li><strong>自救：第 4 段实在写不出</strong> → 先只写模板 B（时代局限），这个最容易——<strong>看发表年份，想想之后发生了什么</strong>。</li>
+</ul></div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>第 4 段实在写不出“没解决的” → 去看综述的“Future Directions/Challenges”那一节，作者通常直接列给你了，挑你看得懂的抄。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会了一套<strong>能复用到未来每一篇论文</strong>的结构化笔记法，而且理解了“笔记是为未来的写作和选题服务的”。<strong>做了</strong>（第一篇完整 5 段笔记）、<strong>学了</strong>（每段对应的下游用途）、<strong>会了</strong>（用自己的话重述而非摘抄）。</p>
+<hr />
+<h5 id="10w1d2md2L-1">2. 中午段 · 把 5 段式笔记模板真正学会</h5><h6 id="10w1d2md2gain-1">⑥ 你同时学会了什么</h6>
+<p>你把一个“记笔记模板”升级成了<strong>一套从阅读到产出的流程</strong>。第 4 段的四个提问模板，是你 M3 找 Gap 时的直接工具。</p>
+<hr /></div></section></section><section class="slot" id="d2-pm" data-d="2" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D2 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读完 Section 3.4–3.6 + 写“遥感 CV vs 通用 CV 十大差异”卡片</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>你（大概率）对<strong>通用 CV</strong>（在自然照片/ImageNet 上做分类检测）比对遥感熟。要快速入门遥感，最高效的方式是<strong>“对比着学”</strong>——只记“遥感和你已会的通用 CV 有哪些不一样”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>读 Section 3.4–3.6（检测/分割/变化检测），用自己的话补完笔记第 3 段。然后做一张 <strong>“遥感 CV vs 通用 CV 十大差异”卡片</strong>(A4 一张，电子版存 <code>00-基础理论/遥感vs通用CV.md</code>)。起步给你 5 条，其余 5 条今天读到/想到就补：</p>
+<ol>
+<li><strong>俯视视角</strong>：遥感是垂直向下拍，目标无固定朝向 → 引出“旋转框检测”。</li>
+<li><strong>目标极小</strong>：一辆车可能只有十几个像素 → “小目标”是核心难题。</li>
+<li><strong>尺度悬殊</strong>：同图里有机场（大）也有车（小）。</li>
+<li><strong>图幅巨大</strong>：一张原图可能 4000×4000+，要切块才能训练。</li>
+<li><strong>多/高光谱、SAR 等非 RGB 模态</strong>：通道远不止 3 个，SAR 还有复数与极化。</li>
+</ol>
+<h6 id="10w1d2md3k-do-1">② 手把手带做</h6>
+<p>上午段的对答案里我已经给了 6 条差异。<strong>晚上段的任务是补足到 10 条，并且每条都要写“所以呢”。</strong></p>
+<h6 id="10w1d2md3k-do-2">差异卡片模板（原文只说“写卡片”，没给格式）</h6>
+<figure class="code" data-lang="markdown"><pre><code># 遥感 CV vs 通用 CV · 十大差异
+
+## 差异 N：&lt;一句话说清差异&gt;
+- **通用 CV 是**：
+- **遥感是**：
+- **★ 所以呢**：（这个差异导致遥感必须做什么额外的事 / 不能直接用什么）
+- **在哪见过**：（Zhu 2017 Section X / 我在 W2 亲手遇到）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>“所以呢”这一栏是关键</strong>——差异本身不值钱，<strong>差异导致的技术后果才值钱</strong>。</p>
+<h6 id="10w1d2md3k-do-3">补足到 10 条（上午 6 条 + 下面 4 条）</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>差异</th>
+<th>所以呢</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td><strong>目标任意朝向</strong></td>
+<td>通用 CV 用水平框就够；遥感必须用<strong>旋转框</strong> → 这就是 MMRotate 存在的理由，也是你 W2 要复现的方向</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>类别极度不平衡</strong></td>
+<td>一张图里可能有 500 辆小车、1 个足球场 → 训练时要处理长尾</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>背景占比极高</strong></td>
+<td>通用 CV 的目标常占画面很大比例；遥感一张图 99% 是背景 → 正负样本失衡严重</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>数据有地理坐标和时间</strong></td>
+<td>通用 CV 的图是孤立的；遥感图能对齐、能做时序 → 变化检测这个任务在通用 CV 里根本不存在</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>第 7 条特别重要</strong>：它是你整个方向的立足点。<strong>如果有人问你“遥感目标检测和普通目标检测有什么不一样”，第 7 条是你的第一个答案。</strong></p></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>卡片上有 ≥5 条差异，每条一句话 +（可选）一句“它带来什么研究问题”。</p>
+<h6 id="10w1d2md3heck-1">③ 合格样例</h6>
+<p><code>00-基础理论/遥感CV与通用CV十大差异.md</code>，10 条，每条都有“所以呢”。</p>
+<p><strong>自测</strong>：合上文件，能不能连着说出 5 条？说不出的回去看。<strong>这张卡片你后面写论文 Introduction 时会直接用到</strong>——遥感论文的 Intro 第一段，基本都是在讲这些差异中的某一条。</p></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>差异写得太空（如“遥感更难”）——要<strong>具体到能引出一个研究方向</strong>，如“小目标→需要高分辨率特征→FPN/高分支路”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>想不满 10 条 → 没关系，先写 5 条，这张卡片本周后面每天都会再加，到 D7 自然攒满。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你掌握了<strong>“对比学习法”</strong>——用已知锚定未知，这是跨领域转型最省力的入门姿势。而且这张差异卡片<strong>就是你未来论文 Introduction“遥感的独特挑战”那一段的弹药库</strong>。<strong>做了</strong>（差异卡片 v1 + 完整 Zhu 笔记）、<strong>学了</strong>（遥感相对通用 CV 的结构性区别）、<strong>会了</strong>（对比学习 + 把“差异”转成“研究问题”的思维）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ Zhu2017 笔记 v1（≥800 字，5 段填好前 3 段+第 4 段） ✅ 遥感 vs 通用 CV 差异卡片（≥5 条）。</p>
+</blockquote>
+<hr />
+<h5 id="10w1d2md3L-1">3. 晚上段 · 读 Section 3.4–3.6 + 写「遥感 CV vs 通用 CV 十大差异」卡片</h5><h6 id="10w1d2md3gain-1">⑥ 你同时学会了什么</h6>
+<p>你今天做的不只是读一篇论文，而是<strong>建立了这个领域的第一张地图</strong>，并且把地图上最关键的一条边（遥感 ≠ 通用 CV）画清楚了。</p>
+<blockquote class="quote">
+<p><strong>技能卡｜读任何一篇论文的完整流程</strong>
+① <strong>先拿到全文</strong>（Scholar 精确搜标题 → arXiv → openaccess → 要邮件）→ ② 5 遍法，第 1 遍只看图 → ③ 边读边填 5 段式，<strong>第 2 段必须自己的话</strong> → ④ <strong>第 4 段套四个提问模板，至少产出一条口子</strong> → ⑤ 不懂的进待查清单，不要停下来查。</p>
+</blockquote>
+<p><strong>明天（D3）</strong>：走完 Zhu 2017 的第 4、5 遍（Section 4 预处理 + Section 5 挑战与趋势）。<strong>Section 5 是这篇最值钱的一节</strong>——它就是“别人替你列好的选题清单”，明天重点读它。</p></div></section></section><details class="notes"><summary>我的笔记 · D2</summary><textarea data-note="d2" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d3" data-d="3"><header class="day-head"><span class="dnum">D3</span><h2 class="day-t">周三 · 走完 Zhu 2017 后两遍 + 第一节遥感物理 MOOC + 思维导图</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天把第一篇论文读透（第4、5遍）+ 第一次接触遥感物理底子（电磁波/传感器，通用CV没有但读遥感论文绕不开）。提醒：读论文的基本动作昨天已学会，今天只在其上加一点（读Experiment、把论文画成一张图）；物理部分只求“是什么、为什么需要”，不懂的公式可跳过。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天把第一篇论文“读透”（第 4、5 遍），并第一次接触<strong>遥感的物理底子</strong>（电磁波、传感器——这些是通用 CV 完全没有、但读遥感论文绕不开的）。读论文这件事你昨天已学会基本动作，今天<strong>只在它基础上加一点</strong>：学会读 Experiment、学会把一篇论文画成一张图。</p>
+</blockquote>
+</div><section class="slot" id="d3-am" data-d="3" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D3 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">Zhu 2017 第 4–5 遍（Section 4 预处理 + Section 5 挑战趋势）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>第 4 遍读 Experiment/方法细节、第 5 遍读你之前跳过的部分。对综述而言，Section 4（数据源与预处理）+ Section 5（挑战与趋势）是“地图上的注记”。</p>
+<h6 id="11w1d3d7md2cept-1">① 先垫概念</h6>
+<p><strong>第 4 遍读 Experiment，第 5 遍读 Related Work</strong>——但<strong>综述没有实验章节</strong>，所以这篇的“后两遍”读的是它的应用章节和展望章节。</p>
+<p><strong>★ Section 5（挑战与趋势）是这篇最值钱的一节</strong>，原文只说“读它”，没说为什么。理由：</p>
+<blockquote class="quote">
+<p><strong>综述的 Future Directions = 领域内专家替你列好的选题清单。</strong>
+一篇高引综述的展望部分，往往会在之后几年被大量后续工作照着做。<strong>你现在读它，等于站在 2017 年的作者肩上看之后 8 年发生了什么。</strong></p>
+</blockquote></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>读 Section 4 + 5，<strong>重点标注“哪些挑战到今天(2026)还没被解决”</strong>——在笔记第 4 段把这些挑战<strong>逐条编号</strong>。</p>
+<h6 id="11w1d3d7md2k-do-1">② 手把手带做 + ★ 对答案</h6>
+<p><strong>读 Section 4（各类应用）时，只做一件事</strong>：确认它的分类框架和你 D2 记下来的一致。<strong>不用细读每个应用。</strong></p>
+<p><strong>读 Section 5 时，逐条抄下它列的挑战。</strong> 你应该能找到这几类（<strong>这是自检对照</strong>）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>它提的挑战</th>
+<th>8 年后的今天怎么样了</th>
+<th>★ 对你意味着什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标注数据稀缺</strong></td>
+<td>部分缓解：自监督/基础模型（SatMAE、Scale-MAE、RingMo）大量出现</td>
+<td><strong>仍然是活跃方向</strong>，你 W7 会专门看</td>
+</tr>
+<tr>
+<td><strong>缺统一 benchmark</strong></td>
+<td>大幅改善：DOTA、DIOR 等成为标准</td>
+<td><strong>但评测协议依然混乱</strong>（mAP07/12、单尺度/多尺度混用）→ 这本身是个口子</td>
+</tr>
+<tr>
+<td><strong>多模态融合难</strong></td>
+<td>有进展但远未解决</td>
+<td>光学+SAR 融合仍是硬骨头</td>
+</tr>
+<tr>
+<td><strong>物理机理与数据驱动怎么结合</strong></td>
+<td><strong>基本还是开放问题</strong></td>
+<td>★ 最大的口子，也最难</td>
+</tr>
+<tr>
+<td><strong>模型可解释性</strong></td>
+<td>有一些工作，但遥感领域较少</td>
+<td>中等机会</td>
+</tr>
+<tr>
+<td><strong>计算资源需求大</strong></td>
+<td>反而更严重了（基础模型动辄上亿参数）</td>
+<td>★ <strong>对单卡的你，“轻量化”是天然的差异化角度</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>★ 今天的关键动作</strong>（原文没有，但这是把综述读出价值的一步）：</p>
+<p>在笔记第 4 段写下这句话，并逐条填：</p>
+<figure class="code" data-lang="markdown"><pre><code>### 这篇 2017 年提的挑战，今天的状态
+| 它说的挑战 | 我查到的现状 | 还有空间吗 |
+|---|---|---|
+| 标注稀缺 | | |
+| ... | | |
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>“还有空间吗”这一列现在填不出来很正常</strong>——W7 之后你会回来填。<strong>但坑要现在挖好。</strong></p></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>笔记第 4 段有一份编号的“未解决挑战清单”（如 ①小目标 ②跨域泛化 ③标注稀缺 ④多模态对齐 ⑤SAR 解译难）。</p>
+<h6 id="11w1d3d7md2heck-1">③ 合格样例</h6>
+<p><code>2017_Zhu_DL-survey.md</code> 五段全部填满，第 4 段里有上面那张表。</p></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>把 2017 年的“趋势”当成今天的前沿——错。这是 9 年前的综述，它说的“趋势”很多已成熟甚至饱和；你要带着“<strong>哪些到今天仍是真问题</strong>”的眼光读（这正是你后面选题要回答的）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>分不清哪些挑战“已解决/未解决” → 现在不必精确判断，先全抄下来，M2–M3 读完更多论文后你自然能划掉已解决的。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你第一次完整走完一篇论文的 5 遍，并练了“<strong>带着时间差批判地读老综述</strong>”——区分“作者当年说的”和“今天实际怎样”。这是科研判断力的雏形。</p>
+<blockquote class="quote">
+<p><strong>覆盖</strong>：D3（Zhu 2017 后两遍 + MOOC）、D4（Cheng/Li 2020 综述）、D5（DOTA 论文 + 下载）、D6（<strong>写 <code>vis_dota.py</code></strong>）、D7（周复盘）。</p>
+<p><strong>这一批补了什么</strong>：论文全部给了获取途径和“对答案”；MOOC 说清看哪几讲；DOTA 标注格式逐字段讲透；<strong>D6 的脚本给出完整可运行代码</strong>（原文只说“从零写”，一行代码都没给）；周复盘给出<strong>填好的范例</strong>。</p>
+</blockquote>
+<hr /><h5 id="11w1d3d7md1-1">D3 · 走完 Zhu 2017 后两遍 + 第一节 MOOC</h5><h6 id="11w1d3d7md2L-1">上午段 · 第 4–5 遍（Section 4 预处理 + Section 5 挑战趋势）</h6></div></section></section><section class="slot" id="d3-noon" data-d="3" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D3 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">武大《遥感原理》MOOC 第 1 讲（绪论：什么是遥感）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>遥感有一堆<strong>物理概念</strong>（电磁波、传感器、成像原理）是通用 CV 没有的。你不需要精通，但必须“知道”，否则读遥感论文会卡在最基础的词上。每天 1 讲，积少成多。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>B 站搜“武汉大学 遥感原理”，选播放量最高的，看第 1 讲。看完写<strong>3 句话总结</strong>存进 <code>00-基础理论/遥感物理_MOOC.md</code>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 句话能回答“遥感是什么？靠什么成像？和普通照相有何不同？”。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>想把 MOOC 当成“先学完物理再开始”——错。物理是<strong>伴随</strong>读论文慢慢补的背景音，不是前置关卡。每天就 1 讲，别贪。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>听不懂电磁波那段 → 跳过细节，只记住“不同物体反射/辐射不同波段的电磁波，传感器据此成像”这一句即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你建立了“<strong>用碎片时间补领域物理背景</strong>”的习惯，并知道了背景知识“够用即可、伴随补”的正确姿势。</p>
+<h6 id="11w1d3d7md3-1">中午段 · 武大 MOOC 第 1 讲</h6>
+<h6 id="11w1d3d7md3-2">去哪找（原文没说）</h6>
+<p><strong>中国大学 MOOC</strong>：<code>icourse163.org</code>，搜索框输入 <strong><code>遥感原理</code></strong>。</p>
+<p>会搜到几个学校的版本，<strong>选哪个都行</strong>。判断标准只有两条：① 有没有正在开课或可回看；② 试听 3 分钟，语速和画风你受不受得了。</p>
+<h6 id="11w1d3d7md3-3">只看这 5 讲，其余跳过</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>主题</th>
+<th>必看</th>
+<th>对应你的什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>绪论：什么是遥感</td>
+<td>✅ <strong>今天这讲</strong></td>
+<td>M0 §1</td>
+</tr>
+<tr>
+<td>电磁波与地物波谱</td>
+<td>✅ D6 上午</td>
+<td>M0 §2</td>
+</tr>
+<tr>
+<td>传感器与成像原理</td>
+<td>✅ D6 上午</td>
+<td>M0 §3</td>
+</tr>
+<tr>
+<td>几何校正 / 辐射校正</td>
+<td>✅ D7 前</td>
+<td>M0 §6</td>
+</tr>
+<tr>
+<td>图像分类（传统方法）</td>
+<td>✅ 快看</td>
+<td>知道深度学习之前大家在干嘛</td>
+</tr>
+<tr>
+<td>农业/林业/水文应用</td>
+<td>❌ 跳过</td>
+<td>与你无关</td>
+</tr>
+<tr>
+<td>ENVI/ERDAS 软件操作</td>
+<td>❌ 跳过</td>
+<td>你用 Python</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>怎么看</strong>：<strong>1.5 倍速，一遍过。</strong> 只在听到 M0 里出现过的词时暂停，把 MOOC 的讲法补进术语卡片。<strong>目标是“混个耳熟”，不是掌握。</strong></p></div></section></section><section class="slot" id="d3-pm" data-d="3" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D3 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整理 Zhu 2017 完整笔记 + 画思维导图 + 差异卡片数字化</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>思维导图</strong>= 把一篇论文/一个主题的结构画成一张树状图。画图会逼你想清楚“这篇论文各部分怎么咬合”，比单纯读更深。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>用 Xmind 或手绘，把 Zhu 2017 画成一张导图：中心=遥感深度学习，主干=数据类型/分类/检测/分割/变化检测/挑战。把昨天的“十大差异”卡片补到 10 条并存入 <code>00-基础理论/遥感vs通用CV.md</code>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张能“一眼看懂这篇综述讲了什么”的导图 + 差异卡片满 10 条。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>导图照抄目录——要<strong>按逻辑重组</strong>（如把“挑战”和对应“方法”连起来），不是复制章节标题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>导图画太细画不完 → 只画到二级节点即可，导图是为抓结构，不是誊抄全文。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>用可视化（导图）逼自己理解结构</strong>，这招以后读复杂方法论文、理清一个子领域脉络都用得上。<strong>做了</strong>（完整笔记+导图）、<strong>学了</strong>（Zhu 2017 全貌）、<strong>会了</strong>（思维导图法）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ Zhu2017 完整笔记 ✅ 思维导图 ✅ 差异卡片（10 条）✅ MOOC 第 1 讲笔记。</p>
+</blockquote>
+<hr />
+<h6 id="11w1d3d7md4-1">晚上段 · 整理 + 思维导图</h6>
+<p><strong>思维导图画什么</strong>（原文没说）：把 D2 对答案里那张“两个维度切分”的图，用你自己的方式画一遍。工具用 Obsidian 的 Canvas、XMind、或者纸笔拍照都行——<strong>不要在工具上花超过 10 分钟。</strong></p>
+<hr /></div></section></section><details class="notes"><summary>我的笔记 · D3</summary><textarea data-note="d3" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d4" data-d="4"><header class="day-head"><span class="dnum">D4</span><h2 class="day-t">周四 · 第二篇综述（Cheng 2020 检测综述）+ 建“遥感检测数据集表”</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读第二篇综述。提醒：读法你已会（精读4遍），所以“读”这件事教得很轻；今天的新技能是“怎么快速读第二篇同类综述（不再从零、用差量阅读）”+ “建一张以后反复用的数据集索引表”；读同类第二篇应明显比第一篇快，这是正常的。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天读第二篇论文。读法你已会（精读 4 遍），所以<strong>读这件事教得很轻</strong>；今天的<strong>新技能</strong>是：<strong>怎么快速读第二篇同类综述（不再从零）</strong>，以及<strong>怎么建一张以后反复用的数据集索引表</strong>。</p>
+</blockquote>
+</div><section class="slot" id="d4-am" data-d="4" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D4 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 Cheng &amp; Han 2020《Object Detection in Optical RS Images: A Survey》</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>这是聚焦“光学遥感目标检测”的专题综述。你已读过 Zhu 2017 的全景，<strong>读第二篇同领域综述会快很多</strong>——因为很多概念第一篇已铺垫。这就是“地图越读越省”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>第 1+2 遍(25min)标题+摘要+Intro+Conclusion；第 3 遍(30min)读 Section 3（检测方法分类）。<strong>读的时候和 Zhu 2017 对照</strong>:Cheng 在“检测”这一块比 Zhu 细在哪？</p>
+<h6 id="11w1d3d7md6k-do-1">② 带做 + ★ 对答案</h6>
+<p><strong>读法</strong>：方法论文读 3 遍，但这篇是综述，走 4 遍（跳过 Related Work）。</p>
+<p><strong>★ 这篇你要带走的三样东西</strong>：</p>
+<ol>
+<li><strong>光学遥感检测的方法演进线</strong>：手工特征 → 基于 CNN 的两阶段 → 一阶段 → 旋转框。<strong>你 W2 要复现的 Oriented R-CNN 在这条线的末端。</strong></li>
+<li><strong>它总结的五大挑战</strong>：尺度变化剧烈、任意朝向、类内差异大、背景复杂、小目标密集。<strong>对照你 D2 写的“十大差异”，你会发现重合度很高——这说明你 D2 的卡片抓对了。</strong></li>
+<li><strong>DIOR 数据集的设计</strong>：20 类、23463 张图、192472 个实例。注意它是<strong>水平框</strong>标注，和 DOTA 的旋转框不同。</li>
+</ol></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2020_Cheng_detection-survey.md</code> 笔记，第 2 段能说清它把检测方法分成哪几类（如两阶段/一阶段/anchor-free）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>把第二篇也当第一篇逐字啃——错。同领域第二篇要<strong>“差量阅读”</strong>：只重点读它<strong>比上一篇多/新</strong>的部分。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>遇到“anchor”“two-stage”等检测术语不懂 → 记进术语表，大意是“检测器的两种范式”，细节 W2 读 Oriented R-CNN 时会彻底搞懂。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>“差量阅读”</strong>——读同领域第 N 篇时只补增量，这让你后面读论文的速度指数级提升。</p>
+<h6 id="11w1d3d7md6L-1">上午段 · 精读</h6>
+<h6 id="11w1d3d7md6L-2">★ 先纠正原文一处引用错误</h6>
+<p>原文写的是“<strong>Cheng &amp; Han 2020</strong>《Object Detection in Optical RS Images: A Survey》”。</p>
+<p><strong>按这个作者名去搜，你会搜到 Cheng &amp; Han 2016 那篇</strong>（也是好文章，但不是这里要读的）。</p>
+<p><strong>正确的文献信息</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>Li, K., Wan, G., Cheng, G., Meng, L., Han, J.
+&quot;Object Detection in Optical Remote Sensing Images: A Survey and A New Benchmark&quot;
+ISPRS Journal of Photogrammetry and Remote Sensing, 2020, 159: 296-307
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>第一作者是 Li Ke。搜标题，不要搜作者。</strong> arXiv 上有公开预印本。</p>
+<p><strong>这篇的双重身份</strong>（原文没说，但很重要）：它<strong>既是综述，也是 DIOR 数据集的出处</strong>。DIOR 是你 M2 会用到的第二个数据集。</p></div></section></section><section class="slot" id="d4-noon" data-d="4" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D4 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">建“遥感目标检测 11 大数据集”表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>遥感数据集<strong>又多又乱</strong>(DOTA/DIOR/FAIR1M/HRSC...)，名字相似、规格各异。<strong>提前建一张索引表</strong>，后面选题、做实验、写论文反复要查，一次建好省无数时间。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>在 <code>30-数据集/数据集总表.md</code> 建表，列:<code>数据集名 | 图像数 | 类别数 | 分辨率 | 旋转框/水平框 | 年份 | 链接</code>。至少覆盖你计划点名的 11 个：DOTA-v1.0、DOTA-v2.0、DIOR、HRSC2016、NWPU VHR-10、FAIR1M、UCAS-AOD、LEVIR、xView、VEDAI、iSAID。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张 11 行的表，每行关键字段填全（查不到的标“待查”也行）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>贪多求全、为凑字段查半天——核心字段（类别数、旋转/水平框、图像数）填上即可，链接和细节用时再补。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>某数据集查不到分辨率 → 标“待查”，别卡住，这是活文档。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你建立了第一份<strong>领域资源索引</strong>，并养成“把零散信息沉淀成可复用表格”的习惯——研究者和搬运工的区别就在这。</p>
+<h5 id="11w1d3d7md5-1">D4 · 第二篇综述（检测综述）+ 建数据集表</h5><h6 id="11w1d3d7md7-1">中午段 · 建「遥感目标检测数据集表」</h6>
+<p><strong>原文说建 11 大数据集表，但没给表该有哪些列。</strong> 用这个（每列都是你后面真会用到的）：</p>
+<figure class="code" data-lang="markdown"><pre><code>| 数据集 | 年份 | 图像数 | 实例数 | 类别数 | 框类型 | GSD | 影像来源 | 下载地址 | 我用不用 |
+|--------|------|--------|--------|--------|--------|-----|----------|----------|----------|
+| DOTA-v1.0 | 2018 | 2806 | 188,282 | 15 | 旋转框 | 0.1-4.5m | Google Earth+GF-2 | captain-whu.github.io/DOTA/ | ✅ W2 主力 |
+| DIOR | 2020 | 23,463 | 192,472 | 20 | 水平框 | 0.5-30m | Google Earth | 见论文 | M2 |
+| ...
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>“框类型”和“GSD”这两列最容易被忽略，但最重要</strong>：
+- <strong>框类型</strong>决定你能不能用它训旋转框模型；
+- <strong>GSD</strong> 决定“小目标”在这个数据集里到底多小（见 <a href="../start/rs-basics.html#deep-02">《名词逐个讲透》§4.1</a>）。</p>
+<p>完整下载地址见 <a href="../resources-master.html">《全书资源总表》§3</a>。</p>
+<hr /></div></section></section><section class="slot" id="d4-pm" data-d="4" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D4 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读 Cheng 2020 Section 4–5 + 写完整笔记</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>Section 4–5 是“实验对比 + 挑战趋势”，是综述里最接近“前沿地图”的部分。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>读完，用 5 段式补全笔记；第 4 段记下“光学遥感检测<strong>到今天仍难</strong>的点”（如小目标、密集排列、任意朝向），和 Zhu 2017 的挑战清单<strong>合并去重</strong>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Cheng 2020 完整 5 段笔记 + 一份合并后的“检测领域未解决挑战”清单。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>两篇综述的挑战清单各记一份、不合并——要合并成<strong>一份主清单</strong>，它就是你未来的选题池雏形。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>合并时不知如何归类 → 简单按“小目标/朝向/尺度/数据”分组即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你开始<strong>跨论文综合</strong>（把多篇的洞见汇成一份主清单），这是从“读单篇”升级到“读领域”的关键一步。<strong>做了</strong>（第二篇综述笔记+数据集表）、<strong>学了</strong>（光学检测方法谱系+数据集全貌）、<strong>会了</strong>（差量阅读+跨论文综合）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ Cheng2020 笔记 ✅ 数据集表（11 行）。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜建领域数据集对照表</strong>：读综述/数据集论文时，边读边把每个数据集记进一张表:<code>名称 | 任务 | 图像数 | 类别数 | 标注形式(水平框/旋转框/分割) | 典型难点 | 常用评测</code>。这张表是你选数据集、设计实验、写论文 Related/Experiment 的速查地图——一次建好，长期复用，比每次回去翻论文高效得多。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D4</summary><textarea data-note="d4" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d5" data-d="5"><header class="day-head"><span class="dnum">D5</span><h2 class="day-t">周五 · 读你的第一篇“数据集/基准”论文(DOTA)+ 启动数据集下载</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天读第一篇数据集/基准论文(DOTA)+ 启动数据集下载。提醒：读数据集论文重点抓规模/类别/标注形式/评测协议；把它落成一份“给自己用的中文格式文档”，因为明天你要照着它写第一个解析脚本；数据集下载慢可以后台挂着，别等。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天读的不是“方法”而是“<strong>数据集/基准(benchmark)</strong>”论文——它定义了一个任务怎么标注、怎么评测。<strong>读法不一样</strong>：重点不在“它用了什么网络”，而在“<strong>它的游戏规则</strong>”。这是今天的新技能。
+论文：<strong>Xia et al. 2018，《DOTA: A Large-scale Dataset for Object Detection in Aerial Images》(CVPR 2018)</strong>。</p>
+</blockquote>
+</div><section class="slot" id="d5-am" data-d="5" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D5 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">精读 DOTA 论文（重点：标注格式 + 任务定义 + 评测协议）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><ul>
+<li><strong>数据集/基准论文</strong>：它的价值是定义“<strong>任务规则</strong>”——数据怎么来、怎么标、用什么指标评分。所有在这个数据集上做的方法论文都得遵守它的规则，所以<strong>吃透规则 = 拿到这个赛道的“通用语言”</strong>。</li>
+<li><strong>旋转框(oriented/rotated bbox)</strong>：通用 CV 用“水平框”（4 个数：左上+右下）；遥感目标斜着放，水平框框不准，于是用<strong>旋转框</strong>。DOTA 用 <strong>8 点表示</strong>（4 个角点的 x,y，共 8 个数）。</li>
+<li><strong>mAP</strong>：目标检测的总分，所有类别 AP（平均精度）的平均。现在记住“<strong>mAP 越高检测越好</strong>”即可，D11 评估时细讲。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>精读 3 遍，<strong>专门回答三个问题</strong>并写进笔记:① DOTA 的标注格式长啥样（8 点旋转框，文件里一行是什么）?② 它定义了哪些任务（水平框检测 / 旋转框检测）?③ 它用什么指标、怎么算分（评测协议）？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>2018_Xia_DOTA.md</code> 笔记能用一句话各自回答上面三问；能手画一个“8 点旋转框”示意。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>用读方法论文的方式找“它的创新网络”——错，数据集论文重点是<strong>数据与规则</strong>，不是模型。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>看不懂标注格式的文字描述 → 去 DOTA 官网看 <code>annotation</code> 示例文件，<strong>看一行真实标注</strong>比读十句描述清楚（明天 D6 你会亲手解析它）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>读“数据集/基准”论文的专属姿势</strong>（抓标注格式+任务定义+评测协议），并理解了“规则定义者”在一个赛道里的地位。</p>
+<h5 id="11w1d3d7md8-1">D5 · DOTA 论文 + 启动下载</h5><h6 id="11w1d3d7md9-1">上午段 · 精读 DOTA 论文</h6>
+<p><strong>获取</strong>：<strong>arXiv:1711.10398</strong>，或 <code>openaccess.thecvf.com</code> 的 CVPR 2018 论文页（免费官方 PDF）。</p>
+<h6 id="11w1d3d7md9-2">★ 数据集论文该怎么读（和方法论文不一样）</h6>
+<p>数据集论文读 2 遍就够，但<strong>读的重点完全不同</strong>：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>读方法论文你关心</th>
+<th>读数据集论文你关心</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>它的创新点是什么</td>
+<td><strong>标注格式长什么样</strong>（你要写解析代码）</td>
+</tr>
+<tr>
+<td>网络结构</td>
+<td><strong>任务怎么定义</strong>（水平框 / 旋转框 / 都有）</td>
+</tr>
+<tr>
+<td>消融</td>
+<td><strong>评测协议</strong>（用哪种 mAP、test 标注公不公开）</td>
+</tr>
+<tr>
+<td>SOTA 数字</td>
+<td><strong>数据怎么划分</strong>（train/val/test 各多少）</td>
+</tr>
+</tbody>
+</table></div>
+<h6 id="11w1d3d7md9-3">★ 对答案 · DOTA 的关键事实（这几条 W2 天天用）</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>事实</th>
+<th>数值</th>
+<th>为什么重要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图像数</td>
+<td><strong>2806</strong> 张</td>
+<td>不多，但每张巨大</td>
+</tr>
+<tr>
+<td>图像尺寸</td>
+<td>约 <strong>4000×4000</strong></td>
+<td><strong>所以必须切图</strong>（W2-D9 你会做）</td>
+</tr>
+<tr>
+<td>实例数</td>
+<td><strong>188,282</strong></td>
+<td>平均每张 67 个目标，很密集</td>
+</tr>
+<tr>
+<td>类别数</td>
+<td><strong>15</strong></td>
+<td>config 里的 <code>num_classes=15</code> 就是它</td>
+</tr>
+<tr>
+<td>标注</td>
+<td><strong>四点旋转框</strong> + difficult 标志</td>
+<td>你 D6 要写代码解析它</td>
+</tr>
+<tr>
+<td>划分</td>
+<td>train / val / <strong>test</strong></td>
+<td><strong>★ test 标注不公开</strong>，评测要提交官方服务器</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>最后一条是全书没提、但会让你 W2 白忙半天的坑</strong>，详见 W2 实操 §6.1。</p>
+<h6 id="11w1d3d7md9-4">★ 标注格式逐字段讲透（原文说“重点看标注格式”但没展开）</h6>
+<p>一个 <code>.txt</code> 标注文件长这样：</p>
+<figure class="code" data-lang="text"><pre><code>imagesource:GoogleEarth
+gsd:0.146343590398
+2753.0 2408.0 2861.0 2385.0 2888.0 2468.0 2805.0 2493.0 plane 0
+1234.0 567.0 1300.0 580.0 1290.0 640.0 1224.0 627.0 small-vehicle 1
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 行 <code>imagesource</code></td>
+<td>影像来源（GoogleEarth / GF-2 / JL-1），<strong>元信息，解析时跳过</strong></td>
+</tr>
+<tr>
+<td>第 2 行 <code>gsd</code></td>
+<td>地面采样距离，单位米/像素。<strong>有些图这行是 <code>null</code>，代码要处理</strong></td>
+</tr>
+<tr>
+<td>第 3 行起，前 8 个数</td>
+<td><strong>四个角点</strong> <code>x1 y1 x2 y2 x3 y3 x4 y4</code>，<strong>按顺时针或逆时针顺序</strong></td>
+</tr>
+<tr>
+<td>第 9 个字段</td>
+<td>类别名（15 类之一）</td>
+</tr>
+<tr>
+<td>第 10 个字段</td>
+<td><strong>difficult</strong>：<code>1</code> = 难样本，官方评测时通常忽略</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>★ 为什么用四点而不是 (x, y, w, h, θ)</strong>：四点表示<strong>没有角度周期性问题</strong>（见 <a href="../start/rs-basics.html#deep-02">《名词逐个讲透》§5.2</a>），也不用纠结“哪条边算宽”。代价是需要转换成模型要的格式——<strong>这个转换你 D6 就会写。</strong></p>
+</blockquote></div></section></section><section class="slot" id="d5-noon" data-d="5" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D5 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 DOTA-v1.0 下载（约 15 GB）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>深度学习的“燃料”是数据，大数据集动辄几十 GB,<strong>下载本身要花时间</strong>，要学会“<strong>让它在后台下，你同时干别的</strong>”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>去官网 <code>https://captain-whu.github.io/DOTA/</code> 启动 DOTA-v1.0 下载(train/val/test)。网慢就分批/用镜像/挂后台。下载的同时<strong>不要干等</strong>——继续晚上段的阅读。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>下载任务已启动并在进行（进度条在动）;<code>30-数据集/DOTA/</code> 文件夹已建好等待解压。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>盯着进度条干等——浪费时间。下载是后台任务，你该并行读论文。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>官网下载极慢/失败 → 找学术镜像或网盘转存（很多遥感社区有 DOTA 镜像）；今天下不完没关系，W2 周一才真正要用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你学会了<strong>“大数据集后台下载 + 并行干活”</strong>的工程习惯，这在你后面下几十 GB 的 SAR、跨模态数据集时天天用。</p>
+<h6 id="11w1d3d7md10-1">中午段 · 启动下载</h6>
+<p><strong>去哪下</strong>：<code>captain-whu.github.io/DOTA/dataset.html</code>，页面上 train/val/test 三块各有 Google Drive 和百度网盘两个入口。<strong>国内用百度网盘那列。</strong></p>
+<p><strong>★ 策略（原文没说，但能救你两天）</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>先只下 val（约 450 张，1–2 GB）→ D6 写脚本用它就够 → train 挂后台慢慢下
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>解压后目录必须摆成</strong>（W2 切图脚本硬性要求，大小写不能错）：</p>
+<figure class="code" data-lang="text"><pre><code>data/DOTA/
+├── train/{images, labelTxt}
+├── val/{images, labelTxt}
+└── test/images          ← 只有图，没有标注
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>磁盘预留 100 GB</strong>（原始 20 GB + 切图后 30–40 GB + checkpoint）。</p>
+<hr /><h6 id="04w2dotabase1-1">2. 闸一：DOTA 数据集（W1-D5 就该开始下，原文没给地址）</h6>
+<h6 id="04w2dotabase1-2">2.1 去哪下</h6>
+<p><strong>官网</strong>：<code>https://captain-whu.github.io/DOTA/dataset.html</code></p>
+<p>页面上 DOTA-v1.0 分成 <strong>train / val / test</strong> 三块，每块都给了 Google Drive 和百度网盘两个入口。<strong>国内用百度网盘那一列。</strong></p>
+<p><strong>★ 先下 val，不要等 train。</strong> val 只有约 450 张原图（1–2 GB），<strong>足够你把整条流程跑通</strong>。train 有 1400+ 张、十几 GB，让它在后台慢慢下。</p>
+<blockquote class="quote">
+<p><strong>这是原手册没教、但能救你两天的策略</strong>：<strong>用小数据先打通流程，再换大数据。</strong> 你后面两年每次接触新数据集都该这么干。</p>
+</blockquote>
+<h6 id="04w2dotabase1-3">2.2 解压成什么目录结构（★ 切图脚本硬性要求）</h6>
+<p>下下来是若干个分卷压缩包。解压后<strong>必须</strong>摆成这个样子，一个字母都不能差：</p>
+<figure class="code" data-lang="text"><pre><code>data/DOTA/
+├── train/
+│   ├── images/          ← 全部 .png 原图
+│   └── labelTxt/        ← 同名 .txt 标注，注意大小写：labelTxt
+├── val/
+│   ├── images/
+│   └── labelTxt/
+└── test/
+    └── images/          ← 只有图，没有 labelTxt（见 §6，这点很重要）
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证目录摆对了没有</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>cd data/DOTA
+ls train/images | wc -l      # 期望：1411 左右
+ls train/labelTxt | wc -l    # 期望：和上面同一个数
+ls val/images | wc -l        # 期望：458 左右
+ls test/images | wc -l       # 期望：937 左右
+head -3 train/labelTxt/$(ls train/labelTxt | head -1)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>最后一条应打印出类似：</p>
+<figure class="code" data-lang="text"><pre><code>imagesource:GoogleEarth
+gsd:0.146343590398
+2753.0 2408.0 2861.0 2385.0 2888.0 2468.0 2805.0 2493.0 plane 0
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>读懂这一行</strong>（W1-D6 写解析脚本时正是解析它）：<strong>8 个数 = 旋转框的四个角点 (x1,y1,x2,y2,x3,y3,x4,y4)</strong>，然后是<strong>类别名</strong>，最后一个 <code>0/1</code> 是 <strong>difficult 标志</strong>（1 = 难样本，评测时通常忽略）。前两行是元信息，<code>gsd</code> 就是《名词逐个讲透》里说的地面采样距离。</p>
+<h6 id="04w2dotabase1-4">2.3 磁盘预算（原文完全没提，很多人切到一半磁盘满）</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DOTA-v1.0 原始（train+val+test）</td>
+<td>约 20 GB</td>
+</tr>
+<tr>
+<td>切图后（1024×1024, gap 200, 单尺度）</td>
+<td><strong>约 30–40 GB</strong></td>
+</tr>
+<tr>
+<td>训练产生的 checkpoint（12 epoch，每 epoch 存一个）</td>
+<td>约 12 × 160 MB ≈ 2 GB</td>
+</tr>
+<tr>
+<td><strong>建议预留</strong></td>
+<td><strong>100 GB</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>省空间的两招</strong>：① config 里设 <code>checkpoint_config = dict(interval=4, max_keep_ckpts=2)</code>，别每个 epoch 都存；② 切图只切 train+val，test 等真要提交榜单时再切。</p>
+<hr />
+<h6 id="04w2dotabase1-5">3. 闸二：切图（原文给了命令，但漏了“必须先改 json”）</h6>
+<h6 id="04w2dotabase1-6">3.1 为什么必须改 json</h6>
+<p>原文那条命令：</p>
+<figure class="code" data-lang="bash"><pre><code>python tools/data/dota/split/img_split.py --base-json tools/data/dota/split/split_configs/ss_trainval.json
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>这条命令本身没错，但直接跑一定失败</strong>——因为那个 json 里写的是作者机器上的路径。你必须先打开它改成你的。原文注释里有一句“改 json 里的路径指向你的 DOTA”，但<strong>没说改哪几个字段、改成什么样</strong>。</p>
+<h6 id="04w2dotabase1-7">3.2 具体改什么</h6>
+<figure class="code" data-lang="bash"><pre><code>cat tools/data/dota/split/split_configs/ss_trainval.json
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p>改成下面这样（<strong>只有 <code>img_dirs</code> / <code>ann_dirs</code> / <code>save_dir</code> 三处要动，其余保持原样</strong>）：</p>
+<figure class="code" data-lang="json"><pre><code>{
+  &quot;nproc&quot;: 8,
+  &quot;img_dirs&quot;: [
+    &quot;data/DOTA/train/images/&quot;,
+    &quot;data/DOTA/val/images/&quot;
+  ],
+  &quot;ann_dirs&quot;: [
+    &quot;data/DOTA/train/labelTxt/&quot;,
+    &quot;data/DOTA/val/labelTxt/&quot;
+  ],
+  &quot;sizes&quot;: [1024],
+  &quot;gaps&quot;: [200],
+  &quot;rates&quot;: [1.0],
+  &quot;img_rate_thr&quot;: 0.6,
+  &quot;iof_thr&quot;: 0.7,
+  &quot;no_padding&quot;: false,
+  &quot;padding_value&quot;: [104, 116, 124],
+  &quot;save_dir&quot;: &quot;data/split_ss_dota/trainval/&quot;,
+  &quot;save_ext&quot;: &quot;.png&quot;
+}
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>每个字段在干什么</strong>（原文一个都没解释）：</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>动不动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>img_dirs</code> / <code>ann_dirs</code></td>
+<td>输入图和标注目录，<strong>必须一一对应、末尾带斜杠</strong></td>
+<td>★改</td>
+</tr>
+<tr>
+<td><code>save_dir</code></td>
+<td>切完存哪</td>
+<td>★改</td>
+</tr>
+<tr>
+<td><code>sizes</code></td>
+<td>patch 边长，1024</td>
+<td>别动</td>
+</tr>
+<tr>
+<td><code>gaps</code></td>
+<td>相邻 patch 的重叠像素 = 原文说的 overlap</td>
+<td>别动</td>
+</tr>
+<tr>
+<td><code>rates</code></td>
+<td>缩放倍率。<code>[1.0]</code> = 单尺度；多尺度是 <code>[0.5,1.0,1.5]</code>，<strong>图会多 3 倍，先别用</strong></td>
+<td>别动</td>
+</tr>
+<tr>
+<td><code>img_rate_thr</code></td>
+<td>patch 里有效像素占比低于它就丢弃（边角空白块）</td>
+<td>别动</td>
+</tr>
+<tr>
+<td><code>iof_thr</code></td>
+<td>目标被切掉多少就不再算这个 patch 的标注</td>
+<td>别动</td>
+</tr>
+<tr>
+<td><code>nproc</code></td>
+<td>并行进程数，按你的 CPU 核数调</td>
+<td>可调</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>再准备一份只切 test 的</strong>（test 没有标注，<code>ann_dirs</code> 要留空）：</p>
+<figure class="code" data-lang="bash"><pre><code>cat tools/data/dota/split/split_configs/ss_test.json   # 同理改 img_dirs 和 save_dir，ann_dirs 保持 []
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="04w2dotabase1-8">3.3 跑起来 + 期望输出</h6>
+<figure class="code" data-lang="bash"><pre><code>cd ~/mmrotate
+python tools/data/dota/split/img_split.py \
+    --base-json tools/data/dota/split/split_configs/ss_trainval.json
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>你应该看到</strong>：进度条跑完，最后打印处理了多少张。然后：</p>
+<figure class="code" data-lang="bash"><pre><code>ls data/split_ss_dota/trainval/images | wc -l     # 期望：约 21000–22000 张
+ls data/split_ss_dota/trainval/annfiles | wc -l   # 期望：和上面同一个数
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>注意输出目录里标注文件夹叫 <code>annfiles</code>，不是 <code>labelTxt</code>。</strong> 这是切图脚本的输出约定，后面写 config 时要用对名字。<strong>这是新手在闸三卡住的常见原因。</strong></p>
+</blockquote>
+<h6 id="04w2dotabase1-9">3.4 抽查一张（务必做，别跳）</h6>
+<p>用 W1-D6 写的 <code>vis_dota.py</code>，随便挑一张切块可视化，<strong>确认框还套在目标上</strong>。切图脚本会重算坐标，如果目录摆错、或者你用了错误的 <code>ann_dirs</code>，切出来的框会整体错位——<strong>这时候框是错的但脚本不报错</strong>，你会一路训练到周四才发现。</p>
+<h6 id="04w2dotabase1-10">3.5 常踩的坑</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>症状</th>
+<th>解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路径末尾漏斜杠</td>
+<td>找不到文件</td>
+<td><code>img_dirs</code> 每项末尾都要 <code>/</code></td>
+</tr>
+<tr>
+<td><code>labelTxt</code> 大小写写错</td>
+<td>切出图但没有标注</td>
+<td>严格照 §2.2 的大小写</td>
+</tr>
+<tr>
+<td>把 test 也放进 <code>ss_trainval.json</code></td>
+<td>报错找不到 test 的 labelTxt</td>
+<td>test 单独用 <code>ss_test.json</code></td>
+</tr>
+<tr>
+<td>磁盘满，切到一半停</td>
+<td>进程被杀</td>
+<td><code>df -h</code> 看剩余空间，见 §2.3</td>
+</tr>
+<tr>
+<td>用了多尺度 <code>rates</code></td>
+<td>切出 6 万多张、磁盘爆</td>
+<td>第一次复现坚持 <code>[1.0]</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr /></div></section></section><section class="slot" id="d5-pm" data-d="5" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D5 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读 DOTA-v2.0 摘要 + 写 Xia2018 笔记 + 整理标注格式文档</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>同一数据集常有 v1/v2（v2 更大更难）。读 v2 摘要，知道“它在 v1 基础上扩了什么”即可。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>读 DOTA-v2.0 摘要（泛读，记 2 句）；写完 Xia2018 的 5 段笔记；在 <code>30-数据集/DOTA/README.md</code> 整理一份<strong>DOTA 标注格式说明</strong>（一行标注的每个字段是什么：8 个坐标 + 类别名 + difficult 标志）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Xia2018 完整笔记 + 一份你自己写的、看一眼就懂的 DOTA 标注格式文档。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>格式文档只抄官网英文——要<strong>用中文写清“一行 = 8 坐标 + 类别 + 难度位”</strong>，因为明天你要照着它写解析脚本。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>不确定字段顺序 → 直接打开一个真实 <code>.txt</code> 标注文件看，实物为准。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你完成了“<strong>读基准论文 → 落地成一份给自己用的数据格式文档</strong>”的闭环，为明天写第一个脚本铺好了路。<strong>做了</strong>（DOTA 笔记+格式文档+下载启动）、<strong>学了</strong>（DOTA 规则+8 点框）、<strong>会了</strong>（读数据集论文+整理数据格式文档）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ Xia2018 笔记 ✅ DOTA 下载启动 ✅ DOTA 格式文档。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜读数据集/基准论文看什么</strong>：读一篇数据集论文（如 DOTA），重点抓五样——① 规模（图像数/实例数）;② 类别（哪些、是否长尾）;③ 标注形式（这里是 8 坐标的旋转框）及其格式细节;④ 评测协议（mAP 的 07/12 版本、IoU 阈值）;⑤ 它相对已有数据集解决了什么痛点（为什么需要它）。把这五样落成一份“给自己用的中文格式文档”，下一步写解析脚本/做实验直接照着用。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D5</summary><textarea data-note="d5" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d6" data-d="6"><header class="day-head"><span class="dnum">D6</span><h2 class="day-t">周六 · （集中日）· 写你人生第一个遥感 CV 脚本（解析 + 可视化旋转框）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：集中日，写人生第一个遥感CV脚本（解析DOTA标注 + 可视化旋转框）。提醒：第一次写可能磕磕绊绊（路径/坐标reshape/画框），都正常；今天的赢法是“脚本跑通 + 亲眼看到框画在目标上”——那一刻你第一次把抽象的数据“看见”了；卡住就对照报错速查表逐条排。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天是周末集中日，也是你<strong>第一次真正写 CV 代码</strong>的日子。你计划里要写 <code>vis_dota.py</code>：读 DOTA 标注 → 解析 8 点旋转框 → 在图上画出来 → 存图。这是<strong>整个第一周最重要的“做”</strong>——“动手”比“看懂”有效 10 倍。我会从零带你写。</p>
+</blockquote>
+</div><section class="slot" id="d6-am" data-d="6" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D6 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">武大 MOOC 第 2–3 讲（电磁波 + 传感器）+ 韦玉春第 1 章选读</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>今天的脚本要处理图像，先补两讲物理背景（电磁波怎么被传感器记成图像）。<code>韦玉春《遥感数字图像处理》</code>是经典教材，选读不求全。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>看 MOOC 第 2–3 讲，各记 2 句；韦玉春第 1 章（绪论）选读 20 页，记 3 句“遥感数字图像和普通数字图像的区别”。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>遥感物理_MOOC.md</code> 累计到第 3 讲；韦玉春第 1 章 3 句笔记。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤ 坑与自救</h4><div class="blk-b"><p>同 D3——只求“知道”，不懂的跳过记一句即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>继续积累遥感物理背景（伴随式，不前置）。</p>
+</div></section></section><section class="slot" id="d6-noon" data-d="6" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D6 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">MOOC 第 4 讲（成像原理）+ 检查 DOTA 下载并解压验证</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>数据下完要<strong>验证完整性</strong>（图片数对不对、标注文件能不能打开），否则后面训练会莫名报错。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>看 MOOC 第 4 讲；DOTA 下完后解压，<strong>清点</strong>：图片数量是否与官网一致？随便打开一个 <code>.txt</code> 标注，字段是不是你 D5 写的格式？</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>DOTA 解压完成，图片数核对无误，标注格式与文档一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>不验证直接用——半路报“文件缺失/格式错”再回头排查，更费时。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>图片数对不上 → 多半没下全，补下缺失部分；标注打不开 → 检查编码（用 UTF-8）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你养成了<strong>“数据到手先验完整性”</strong>的习惯，这能挡掉后面一大半“莫名其妙的训练报错”。</p>
+</div></section></section><section class="slot" id="d6-pm" data-d="6" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D6 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">从零写 `vis_dota.py`(读标注 → 解析旋转框 → 画框 → 存图)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>为什么自己写而不用现成工具</strong>：手写脚本会<strong>逼你理解数据格式的每个细节</strong>（坐标系、标注编码、图像通道）——这是你后续所有实验的基础。</li>
+<li>你会用到的 3 个轮子：<strong>OpenCV(<code>cv2</code>)</strong> 读图/画图、<strong>NumPy</strong> 处理坐标数组、Python 文件读写。一个旋转框在代码里就是 <strong>4 个角点 = 一个 (4,2) 的数组</strong>；画它用 <code>cv2.polylines</code>(把 4 个点连成闭合多边形)。</li>
+</ul>
+<h6 id="11w1d3d7md11cept-1">① 先垫概念</h6>
+<h6 id="11w1d3d7md11cept-2">这个脚本为什么值得写</h6>
+<p>你可以直接下载别人的可视化工具。<strong>但亲手写一遍的价值在于</strong>：</p>
+<ol>
+<li><strong>你会真正搞懂标注格式</strong> —— 这是后面所有数据处理的基础。</li>
+<li><strong>W2 切完图之后，你要用它抽查框有没有错位</strong> —— 这是唯一能发现“切图坏了”的手段。</li>
+<li><strong>W2-D13 你要把它升级成 <code>vis_results.py</code></strong>（画预测框 vs GT 框），那是在这个基础上加东西。</li>
+</ol>
+<h6 id="11w1d3d7md11cept-3">三个必须先懂的概念</h6>
+<p><strong>① OpenCV 的坐标系</strong>：<code>img[y, x]</code>，<strong>先行后列</strong>。而标注文件里是 <code>x y</code> 顺序。<strong>这个错位是新手画框错位的头号原因。</strong></p>
+<p><strong>② 多边形绘制</strong>：旋转框是四个点，用 <code>cv2.polylines</code> 画闭合多边形，不是 <code>cv2.rectangle</code>。</p>
+<p><strong>③ 四点 ↔ (cx, cy, w, h, θ)</strong>：<code>cv2.minAreaRect</code> 能把四点转成中心+宽高+角度。<strong>W2 用到的模型吃的是后一种格式</strong>，所以这个转换要会。</p></div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>（照着这个结构写，变量名可改）：</p>
+<ol>
+<li>先装轮子(在 <code>rs</code> 环境):<code>pip install opencv-python numpy</code>。</li>
+<li>在 <code>20-代码实验/utils/vis_dota.py</code> 里，按这个骨架写（<strong>我给结构和关键行，你来补全、跑通</strong>）：<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_dota_ann</span><span class="p">(</span><span class="n">txt_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;读一张图的 DOTA 标注，返回 [(poly(4x2), cls), ...]&quot;&quot;&quot;</span>
+    <span class="n">objs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">txt_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">:</span>          <span class="c1"># 跳过表头/空行</span>
+                <span class="k">continue</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">parts</span><span class="p">[:</span><span class="mi">8</span><span class="p">]))</span>   <span class="c1"># 8 个坐标</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>                          <span class="c1"># 类别名</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">objs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">poly</span><span class="p">,</span> <span class="bp">cls</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">objs</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">txt_path</span><span class="p">,</span> <span class="n">out_path</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">poly</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">load_dota_ann</span><span class="p">(</span><span class="n">txt_path</span><span class="p">):</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">polylines</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="n">poly</span><span class="p">],</span> <span class="n">isClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">poly</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;saved:&quot;</span><span class="p">,</span> <span class="n">out_path</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">draw</span><span class="p">(</span><span class="s2">&quot;样例图.png&quot;</span><span class="p">,</span> <span class="s2">&quot;样例标注.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;vis_out.png&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</li>
+<li>拿 DOTA 里<strong>一张真实图 + 它的标注</strong>跑一次，打开 <code>vis_out.png</code> 看框对不对。</li>
+</ol>
+<h6 id="11w1d3d7md11k-do-1">② 手把手带做</h6>
+<h6 id="11w1d3d7md11k-do-2">第 1 步：装依赖</h6>
+<figure class="code" data-lang="bash"><pre><code>conda activate rs
+pip install opencv-python numpy
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>验证</strong>：</p>
+<figure class="code" data-lang="bash"><pre><code>python -c &quot;import cv2, numpy; print(cv2.__version__, numpy.__version__)&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p><strong>如果报 <code>ImportError: libGL.so.1</code></strong>（无桌面的服务器常见）：<code>pip install opencv-python-headless</code> 替代，或有 root 权限则 <code>apt install -y libgl1 libglib2.0-0</code>。</p>
+</blockquote>
+<h6 id="11w1d3d7md11k-do-3">第 2 步：完整代码</h6>
+<p>新建 <code>20-代码实验/vis_dota.py</code>：</p>
+<figure class="code" data-lang="python"><pre><code>&quot;&quot;&quot;vis_dota.py —— 读 DOTA 标注，画旋转框，存图。
+
+用法：
+    python vis_dota.py --img P0001.png --label P0001.txt --out vis.jpg
+&quot;&quot;&quot;
+import argparse
+import cv2
+import numpy as np
+
+# DOTA-v1.0 的 15 个类别（顺序就是官方顺序，W2 的 config 里也是这个顺序）
+CLASSES = ['plane', 'baseball-diamond', 'bridge', 'ground-track-field',
+           'small-vehicle', 'large-vehicle', 'ship', 'tennis-court',
+           'basketball-court', 'storage-tank', 'soccer-ball-field',
+           'roundabout', 'harbor', 'swimming-pool', 'helicopter']
+
+# 给每个类别固定一个颜色（固定随机种子 → 每次运行颜色一致，方便对比）
+np.random.seed(42)
+COLORS = {c: tuple(int(v) for v in np.random.randint(60, 255, 3)) for c in CLASSES}
+
+
+def parse_dota_label(txt_path):
+    &quot;&quot;&quot;解析 DOTA 标注文件，返回目标列表。
+
+    每个目标是一个 dict：
+        points   : (4, 2) 的 float32 数组，四个角点
+        cls      : 类别名字符串
+        difficult: 0 或 1
+    &quot;&quot;&quot;
+    objs = []
+    with open(txt_path, encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            # 跳过空行和前两行元信息
+            if not line or line.startswith(('imagesource', 'gsd')):
+                continue
+            parts = line.split()
+            if len(parts) &lt; 9:          # 有些文件末尾有残缺行，跳过
+                continue
+            pts = np.array([float(x) for x in parts[:8]],
+                           dtype=np.float32).reshape(4, 2)
+            objs.append(dict(
+                points=pts,
+                cls=parts[8],
+                difficult=int(parts[9]) if len(parts) &gt; 9 else 0,
+            ))
+    return objs
+
+
+def draw(img, objs, thickness=2, show_difficult=True):
+    &quot;&quot;&quot;在图上画出所有旋转框 + 类别名。&quot;&quot;&quot;
+    for o in objs:
+        if o['difficult'] and not show_difficult:
+            continue
+        color = COLORS.get(o['cls'], (0, 255, 0))   # 未知类别用绿色兜底
+        pts = o['points'].astype(np.int32).reshape(-1, 1, 2)
+        cv2.polylines(img, [pts], isClosed=True, color=color, thickness=thickness)
+        # 类别名画在第一个角点旁边
+        x, y = o['points'][0].astype(int)
+        cv2.putText(img, o['cls'], (x, max(y - 5, 12)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 1, cv2.LINE_AA)
+    return img
+
+
+def poly_to_xywha(pts):
+    &quot;&quot;&quot;四点 → (cx, cy, w, h, angle)。W2 的模型吃的就是这种格式。&quot;&quot;&quot;
+    (cx, cy), (w, h), angle = cv2.minAreaRect(pts.astype(np.float32))
+    return cx, cy, w, h, angle
+
+
+if __name__ == '__main__':
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--img', required=True, help='图像路径')
+    ap.add_argument('--label', required=True, help='标注 txt 路径')
+    ap.add_argument('--out', default='vis.jpg', help='输出图路径')
+    ap.add_argument('--no-difficult', action='store_true', help='不画 difficult 目标')
+    args = ap.parse_args()
+
+    img = cv2.imread(args.img)
+    if img is None:
+        raise FileNotFoundError(f'读不到图：{args.img}')
+
+    objs = parse_dota_label(args.label)
+    print(f'读到 {len(objs)} 个目标')
+
+    # 顺手统计每类多少个 —— 这个统计 D5 建数据集表时用得上
+    from collections import Counter
+    for cls, n in Counter(o['cls'] for o in objs).most_common():
+        print(f'  {cls:&lt;20} {n}')
+
+    img = draw(img, objs, show_difficult=not args.no_difficult)
+    cv2.imwrite(args.out, img)
+    print(f'已保存到 {args.out}')
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="11w1d3d7md11k-do-4">第 3 步：跑起来</h6>
+<figure class="code" data-lang="bash"><pre><code>cd 到你的 DOTA 目录
+python vis_dota.py \
+    --img data/DOTA/val/images/P0003.png \
+    --label data/DOTA/val/labelTxt/P0003.txt \
+    --out vis.jpg
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure></div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>vis_out.png</code> 上，<strong>绿色旋转框准确套住了图里的飞机/车/船</strong>，左上角有红色类别名。框的角度、位置和图里目标吻合 = 你解析对了。</p>
+<h6 id="11w1d3d7md11heck-1">③ 合格样例</h6>
+<p><strong>终端应该打印</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>读到 87 个目标
+  small-vehicle        52
+  large-vehicle        21
+  plane                9
+  storage-tank         5
+已保存到 vis.jpg
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>打开 <code>vis.jpg</code></strong>：原图上套着一圈<strong>斜着的彩色框</strong>，每个框旁边有类别名，<strong>同一类别颜色相同</strong>。</p>
+<p><strong>★ 三条自检</strong>（这才是“跑通”和“跑对”的区别）：</p>
+<ol>
+<li><strong>框套在目标上，不是随机位置</strong> —— 如果框整体偏移，检查是不是把 <code>x y</code> 读成了 <code>y x</code>。</li>
+<li><strong>框是斜的，不是全部水平</strong> —— 如果全是水平的，说明你误用了 <code>cv2.rectangle</code>。</li>
+<li><strong>类别数和目标数对得上</strong> —— 打印的统计求和 = 总目标数。</li>
+</ol>
+<h6 id="11w1d3d7md11heck-2">第 4 步：加一个 30 秒的小实验（原文没有，但很值）</h6>
+<figure class="code" data-lang="bash"><pre><code>python -c &quot;
+import vis_dota
+objs = vis_dota.parse_dota_label('data/DOTA/val/labelTxt/P0003.txt')
+for o in objs[:5]:
+    cx, cy, w, h, ang = vis_dota.poly_to_xywha(o['points'])
+    print(f\&quot;{o['cls']:&lt;15} 中心=({cx:.0f},{cy:.0f}) 宽高=({w:.0f},{h:.0f}) 角度={ang:.1f}°\&quot;)
+&quot;
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>你会看到类似</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>plane           中心=(140,160) 宽高=(92,111) 角度=-73.3°
+ship            中心=(455,350) 宽高=(81,125) 角度=-80.5°
+small-vehicle   中心=(650,130) 宽高=(60,100) 角度=-90.0°
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>★ 注意角度的取值范围</strong> —— OpenCV 的 <code>minAreaRect</code> 返回的角度落在特定区间内，<strong>这就是 <a href="../start/rs-basics.html#deep-02">《名词逐个讲透》§5.1</a> 说的 <code>oc</code> 定义</strong>。W2 的 config 文件名里那个 <code>le90</code> 是另一套定义。<strong>亲手打印出这些数字，你对“三种角度定义”这件事就有实感了</strong>，不再是抽象概念。</p></div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>坐标顺序/类型错</strong>:8 个数要 <code>reshape(4,2)</code>，且画图前转 <code>int32</code>，否则 <code>polylines</code> 报错或框乱。</li>
+<li><strong><code>cv2.imread</code> 返回 <code>None</code></strong>:99% 是<strong>路径错</strong>（中文路径/相对路径问题），先 <code>print(img.shape)</code> 验证读到了图。</li>
+<li><strong>框画歪了</strong>：多半是把“中心+宽高+角度”格式和“8 点角点”格式搞混——DOTA 是 8 点角点，直接连点即可，<strong>不要</strong>自己再算角度。</li>
+</ul>
+<h6 id="11w1d3d7md11-pit-1">④ 常踩的坑</h6>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>坑</th>
+<th>症状</th>
+<th>解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x y</code> 读成 <code>y x</code></td>
+<td>框整体错位/转置</td>
+<td>标注是 <code>x y</code> 顺序，OpenCV 索引是 <code>[y, x]</code>，别混</td>
+</tr>
+<tr>
+<td>用 <code>cv2.rectangle</code></td>
+<td>框全是水平的</td>
+<td>旋转框必须用 <code>polylines</code></td>
+</tr>
+<tr>
+<td>忘了跳过前两行</td>
+<td>报 <code>ValueError: could not convert string to float</code></td>
+<td><code>startswith(('imagesource','gsd'))</code></td>
+</tr>
+<tr>
+<td><code>gsd:null</code> 的图</td>
+<td>同上</td>
+<td>上面的写法已经跳过整行，不受影响</td>
+</tr>
+<tr>
+<td>中文路径</td>
+<td><code>cv2.imread</code> 返回 <code>None</code></td>
+<td><strong>路径不要有中文</strong>（D1 前置讲过）</td>
+</tr>
+<tr>
+<td>图太大看不清</td>
+<td>4000×4000 打开很卡</td>
+<td>加一句 <code>img = cv2.resize(img, None, fx=0.25, fy=0.25)</code> 再存</td>
+</tr>
+</tbody>
+</table></div></div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>报 <code>None has no attribute shape</code> → 路径错，换绝对路径、确认文件名；</li>
+<li>框对不上目标 → 打印前几行 <code>parts</code> 看解析出的数对不对；只画第 1 个框 debug;</li>
+<li><code>cv2</code> 装不上 → 用 <code>pip install opencv-python-headless</code>(无 GUI 依赖那版)。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你写出了<strong>人生第一个能跑的遥感 CV 脚本</strong>，并真正搞懂了“旋转框在数据里到底是什么、在代码里怎么表示和绘制”。这份“亲手解析+可视化数据”的能力，是你后面看模型预测、做定性分析的基础。<strong>做了</strong>(<code>vis_dota.py</code> + 一张验证图)、<strong>学了</strong>（8 点旋转框的数据↔代码表示、OpenCV 画图）、<strong>会了</strong>(从数据格式文档→落地成可运行脚本，以及 <code>imread None</code>/路径这类基础 debug)。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜CV 脚本起手三件套</strong>:<code>cv2.imread</code> 读图（先 print shape 验证）→ NumPy reshape 处理坐标 → <code>cv2.polylines/putText</code> 画框标注 → <code>cv2.imwrite</code> 存图肉眼检查。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ MOOC 笔记（第 1–4 讲）✅ 韦玉春第 1 章笔记 ✅ <code>vis_dota.py</code>(跑通)。</p>
+</blockquote>
+<hr />
+<h5 id="11w1d3d7md11L-1">D6 · 写你人生第一个遥感 CV 脚本</h5>
+<blockquote class="quote">
+<p><strong>原文只说“从零写 <code>vis_dota.py</code>（读标注 → 解析旋转框 → 画框 → 存图）“，一行代码都没给。</strong> 这一节给完整可运行版本 —— <strong>下面的代码我实测跑过</strong>。</p>
+</blockquote><h6 id="11w1d3d7md11gain-1">⑥ 你同时学会了什么</h6>
+<p><strong>做了</strong>：一个后面天天用的可视化工具。
+<strong>学了</strong>：DOTA 标注格式每个字段、四点与 (cx,cy,w,h,θ) 的互转、OpenCV 坐标系。
+<strong>会了</strong>：<strong>“写完必须肉眼验证”</strong> —— 这个习惯在 W2 会救你一次（切图后框错位但脚本不报错，只有可视化能发现）。</p>
+<hr /></div></section></section><details class="notes"><summary>我的笔记 · D6</summary><textarea data-note="d6" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d7" data-d="7"><header class="day-head"><span class="dnum">D7</span><h2 class="day-t">周日 · （复盘日）· 韦玉春第 3 章 + 整理 + 你的第一次“周复盘”</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：第一周收尾日，新技能只有一个但极重要——怎么做“周复盘”。提醒：读论文/写代码你已上手，今天教你“回头看”；周复盘是你这两年最重要的自我管理工具（不是形式主义）；第一周环境溢出、进度打折绝对正常，复盘重点是把“累/慢”翻译成具体的“卡点→对策”。</p>
+</blockquote>
+<blockquote class="quote">
+<p>今天收尾第一周。新技能只有一个，但极重要：<strong>怎么做“周复盘”</strong>——它是你这两年最重要的自我管理工具。读论文/写代码你已上手，今天教你<strong>回头看</strong>。</p>
+</blockquote>
+</div><section class="slot" id="d7-am" data-d="7" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D7 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">韦玉春第 3 章（图像校正）选读</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p>遥感图像在用之前常要做<strong>几何校正</strong>（纠正卫星视角/地形造成的几何变形）和<strong>辐射校正</strong>（纠正大气/光照影响）——<strong>这是通用 CV 完全不需要的</strong>，但读遥感数据处理类论文会遇到。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>选读 15 页，重点回答一句话：“<strong>为什么遥感图像需要几何/辐射校正，而手机照片不需要？</strong>”写进 <code>00-基础理论</code>。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>能用一两句话说清两种校正各纠正什么。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>/⑤</h4><div class="blk-b"><p>不懂公式跳过，只记“是什么、为什么需要”。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>又补一块通用 CV 没有的遥感专属背景，并把它<strong>记成“差异卡片”的新条目</strong>。</p>
+<h5 id="11w1d3d7md12-1">D7 · 韦玉春第 3 章 + 第一次周复盘</h5><h6 id="11w1d3d7md13-1">上午段 · 韦玉春第 3 章（图像校正）</h6>
+<p><strong>这一章讲什么</strong>：几何校正（把因地形和视角造成的位置偏移拉正）和辐射校正（去掉大气与传感器的影响）。</p>
+<p><strong>只读这几节，其余跳过</strong>：几何校正的原理与控制点、重采样方法（最近邻/双线性/三次卷积）、辐射定标的概念。</p>
+<p><strong>★ 带着这个问题读</strong>：<strong>为什么 CV 里没有这两步，遥感里必须有？</strong></p>
+<p>答案（读完自己应该能说出来）：<strong>因为遥感要的是“可跨时间、跨传感器比较的物理量”，不是“好看的图”。</strong> 一张没做辐射校正的影像，今天和明天拍的同一块地，数值可以差很多——那就没法做变化检测。</p>
+<p><strong>配合看</strong>：MOOC 里“几何校正/辐射校正”两讲，先看视频再读书，效率高一倍。</p></div></section></section><section class="slot" id="d7-noon" data-d="7" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D7 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">整理本周笔记 + 打标签 + 更新差异卡片</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>概念</h4><div class="blk-b"><p><strong>标签(tag)</strong>让你以后能按主题检索笔记(如点 <code>#检测</code> 看到所有检测论文)。整理 = 让本周积累“可被未来的你搜到”。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>带做</h4><div class="blk-b"><p>给本周每篇笔记加标签(<code>#综述</code> <code>#检测</code> <code>#数据集</code>)；检查 4 个文件夹是否都有内容；把本周新增的遥感/通用 CV 差异补进卡片。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>3 篇论文笔记 + 物理/差异笔记齐整、带标签；知识库 4 文件夹非空。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>攒一周不整理→以后翻不到。养成“周末必整理”。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住</h4><div class="blk-b"><p>标签体系想太复杂→就用 <code>#综述/#方法/#数据集</code> + <code>#检测/#SAR/#跨模态</code> 两维即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>同时学会了什么</h4><div class="blk-b"><p>你建立了<strong>“周末整理沉淀”</strong>的节律，让知识库始终可检索。</p>
+</div></section></section><section class="slot" id="d7-pm" data-d="7" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D7 晚上段"><span class="slot-tag">晚上段·2h</span><h3 class="slot-t">你的第一次周复盘 + 制定 W2 详细计划</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><ul>
+<li><strong>周复盘</strong>：每周花 ~2h 回答“做了什么/学到什么/卡在哪/下周做什么”。<strong>科研是长跑不是冲刺</strong>，复盘防止你闷头跑偏。它<strong>不是形式主义</strong>，是你最重要的自我管理工具。</li>
+<li>复盘的核心不是“记录”，而是<strong>两个反思</strong>:① 我这周卡最久的是哪一步?② 下次怎么避免？</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>用你计划里的 W1 模板（下方）逐项填，<strong>第 5、6 项（最大卡点+解决方案）要写实、写具体</strong>，这是复盘的灵魂。填完，把下周 D8–D14 的目标确认一遍(W2 = 跑通你第一个 baseline)。</p>
+<figure class="code" data-lang="text"><pre><code>【第 1 周复盘】
+1. 本周计划完成度：__%
+2. 论文阅读：精读 3 篇（Zhu2017、Cheng2020、Xia2018）/ 泛读 0 篇
+3. 代码进度：环境搭建完成、vis_dota.py 完成
+4. 写作字数：笔记约 _____ 字
+5. 本周最大卡点：____（例：CUDA / MMRotate 版本冲突 / DOTA 下载慢）
+6. 解决方案：____
+7. 下周 3 件最重要的事：
+   ① 跑通 Oriented R-CNN baseline（mAP ~75）
+   ② 精读 5 篇旋转检测论文
+   ③ 完成 MOOC 第 5–6 讲
+8. 健康/情绪自评（1-10）：__
+9. 时间偏差：实际投入 __h（提醒：低于 21h 不必自责，连续 3 周才需切“减配模式”）</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份填满的周报，第 5/6 项是具体的“卡点→怎么解决”，不是空话。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>① 复盘写成“感觉还行/有点累”的流水账（要量化+具体卡点）;② 完成度低就自我否定——<strong>第一周环境溢出、进度打折是绝对正常的</strong>，你计划的導读②也明说：连续 3 周 &lt;21h 才需调整，单周波动无所谓。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知道“最大卡点”写什么 → 回想这周哪一步让你最想摔电脑（大概率是 MMRotate 版本），那就是它。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你完成了第一次结构化复盘，学会了<strong>“用卡点→对策驱动改进”</strong>的自我管理法。这套节律会贯穿你 104 周。<strong>做了</strong>（W1 周报+W2 计划）、<strong>学了</strong>（复盘的两个核心反思）、<strong>会了</strong>（把模糊的“累/慢”翻译成具体的“卡点+对策”）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付物</strong>:✅ 韦玉春第 3 章笔记 ✅ 周报 W1 ✅ W2 计划。</p>
+</blockquote>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜周复盘四问（贯穿104周的自我管理）</strong>：每周花约2h回答四问——① 本周做了什么（对照计划，量化完成度）;② 学到/长出什么能力;③ 最大卡点是哪一步、为什么卡（写实写具体，这是灵魂）;④ 下周3件最重要的事。核心不是“记录”而是“卡点→对策”的改进闭环。配一个健康/情绪自评防过载。★单周投入波动无所谓（连续3周低于目标才需调整），别因一周打折就自我否定——可持续比单周冲刺重要。</p>
+</blockquote>
+<hr />
+<h6 id="11w1d3d7md14L-1">晚上段 · 你的第一次周复盘</h6>
+<h6 id="11w1d3d7md14L-2">★ 复盘模板 + 填好的范例（原文只说“写周复盘”，没给格式）</h6>
+<p>新建 <code>20-代码实验/周复盘-W1.md</code>：</p>
+<figure class="code" data-lang="markdown"><pre><code># W1 周复盘（2026-XX-XX ～ XX-XX）
+
+## 1. 计划 vs 实际
+| 天 | 计划 | 实际 | 达成 |
+|---|---|---|---|
+| D1 | 环境 + 知识库 | 环境通了；MMRotate 溢出到 D2 | 🟡 |
+| D2 | Zhu 2017 前 3 遍 | 完成 | ✅ |
+| D3 | 后 2 遍 + MOOC 第 1 讲 | 完成 | ✅ |
+| D4 | 检测综述 + 数据集表 | 综述完成；表只填了 5 个 | 🟡 |
+| D5 | DOTA 论文 + 下载 | 论文完成；val 下完，train 还在下 | 🟡 |
+| D6 | vis_dota.py | 完成，能画框 | ✅ |
+| D7 | 韦玉春 + 复盘 | — | — |
+
+## 2. 交付物清单（可验证的东西，不是感受）
+- [x] `rs` 环境，`cuda.is_available()=True`
+- [x] MMRotate demo 出图
+- [x] 知识库 4 文件夹 + 3 篇论文笔记
+- [x] 遥感CV vs 通用CV 十大差异卡片
+- [x] `vis_dota.py`，实测能画框
+- [ ] 数据集表（只完成 5/11）
+
+## 3. 本周最大的三个收获
+1. 搞懂了&quot;代码/config/权重&quot;三件套 —— 这是复现任何代码的通用结构
+2. 5 遍法：先看图建框架，再读正文填细节
+3. 旋转框是遥感检测和通用检测的核心分野
+
+## 4. 本周踩的坑（★ 最值钱，写清&quot;下次怎么避免&quot;）
+| 坑 | 花了多久 | 根因 | 下次怎么避免 |
+|---|---|---|---|
+| mmcv 现场编译失败 | 2h | pip 命令漏了 -f 预编译索引 | 盯 pip 输出：出现 .tar.gz 立刻 Ctrl+C |
+| demo 报找不到 .pth | 40min | 不知道权重要单独下载 | 记住三件套：代码≠config≠权重 |
+
+## 5. 待查清单（本周攒下的&quot;不懂&quot;）
+- [ ] speckle 为什么是乘性噪声 → 已解决，见名词讲透 §1
+- [ ] le90 和 oc 到底差在哪 → D6 打印角度时有了实感，但还没完全清楚
+- [ ] domain adaptation 是什么
+
+## 6. 下周（W2）计划
+- 主线：跑通 Oriented R-CNN on DOTA，拿到一个 mAP 数字
+- 风险：train 集还没下完 → 先用 val 跑通流程
+- 时间分配：上午读论文（5 篇方法论文），中午/晚上做实验
+
+## 7. 一句话心得
+环境搭建确实吃掉了一天半，但&quot;卡住是正常的&quot;这个预期让我没有慌。
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h6 id="11w1d3d7md14L-3">复盘的三条纪律（原文没说）</h6>
+<ol>
+<li><strong>只写可验证的东西</strong>。“我学了很多”不算交付物，“<code>vis_dota.py</code> 能画框“才算。</li>
+<li><strong>坑的那一栏必须写”下次怎么避免“</strong>。没有这一句，复盘就退化成了流水账。</li>
+<li><strong>待查清单必须清一次</strong>。用 <a href="../start/rs-basics.html#deep-03">三层查法</a>，20 分钟搞不定的留到下周。</li>
+</ol><h6 id="11w1d3d7md14gain-1">⑥ 这一周你真正学会了什么</h6>
+<p>抛开具体内容，W1 教给你的是<strong>三个可迁移的动作</strong>：</p>
+<ol>
+<li><strong>复现任何代码的六步</strong>（见 MMRotate 实操结尾的技能卡）</li>
+<li><strong>读任何论文的五步</strong>（见 D2 结尾的技能卡）</li>
+<li><strong>写任何脚本后必须肉眼验证</strong>（D6）</li>
+</ol>
+<p><strong>这三个动作你后面 103 周会一直用。W1 的内容会忘，这三个动作不会。</strong></p>
+<blockquote class="quote">
+<p><strong>进 W2 之前的检查</strong>：<code>vis_dota.py</code> 能画框、DOTA 至少 val 下完并摆好目录、MMRotate demo 出过图。<strong>三项缺一项，先补，别硬进 W2</strong> —— W2 每一天都建立在这三项之上。W2 的完整实操见 《W2 DOTA baseline 保姆级实操》。</p>
+</blockquote></div></section></section><section class="wtail"><h2>✅ W1 累计交付（对照你原计划）</h2><p>3 篇论文笔记(Zhu2017 / Cheng2020 / Xia2018)、1 个可视化脚本(<code>vis_dota.py</code>)、MOOC 第 1–4 讲笔记、韦玉春第 1+3 章笔记、遥感 vs 通用 CV 差异卡片（10 条）、检测数据集表（11 行）、环境就绪（GPU 可用 + DOTA demo）、知识库成型。</p>
+</section><section class="wtail"><h2>🎓 W1 你“长出来”的能力清单（把这周学会的技能盘一遍）</h2><ul>
+<li>搭深度学习环境（conda 环境 / CUDA / PyTorch / 验证 GPU / 排版本冲突）</li>
+<li>精读 5 遍法 + 5 段式结构化笔记 + 差量阅读 + 跨论文综合</li>
+<li>读三类论文的不同姿势（综述 / 数据集基准 / 后面 W2 的方法）</li>
+<li>写第一个 CV 脚本（解析旋转框 + OpenCV 可视化 + 基础 debug）</li>
+<li>周复盘（卡点→对策的自我管理）</li>
+<li>用“对比学习法”快速建立遥感 vs 通用 CV 的认知地图</li>
+</ul>
+<blockquote class="quote">
+<p><strong>下一格预告(W2)</strong>：你将在已搭好的工具链上，跑通<strong>人生第一个 baseline</strong>——Oriented R-CNN 在 DOTA 上（目标 mAP ~75）。我会从“读懂 config 文件”开始，一路带你完成“训练→监控→评估→第一个消融”，让你真正体会一次完整的科研实验闭环。</p>
+</blockquote>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D7</summary><textarea data-note="d7" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W1 加厚补充包（配合上面每天使用，原文没有、这里补全）</h2><blockquote class="quote">
+<p>这一部分把 W1 里“该有但容易缺”的东西补成<strong>可直接抄/可直接跑</strong>的料:① 一份<strong>填好的范例笔记</strong>（对照它写你自己的）② <strong>完整可运行的 <code>vis_dota.py</code></strong>（含中文路径安全读图 + 预期输出）③ <strong>每天的“今日自测”</strong>(不看笔记能答=真学会)④ <strong>本周报错速查表</strong>。</p>
+</blockquote>
+<h2>一、合格范例 ① — Zhu 2017 的 5 段式笔记长这样（D2/D3 对照着写）</h2>
+<blockquote class="quote">
+<p>你 D2/D3 要填 Zhu2017 的笔记，但“合格的笔记到底什么样”很多人没概念。下面是一份<strong>达标范例</strong>（你写自己的时候，深浅可不同，但<strong>第 4 段必须像这样具体</strong>）：</p>
+</blockquote>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 2017_Zhu_遥感深度学习综述</span>
+<span class="k">-</span><span class="w"> </span>出处：IEEE GRSM 2017 ｜ 标签：#综述 <span class="ni">#遥感DL总览</span>
+<span class="k">-</span><span class="w"> </span>我的评级：A（入门必读地图）
+<span class="k">-</span><span class="w"> </span>链接：（IEEE / 课程页）
+
+<span class="gu">## 1. 它解决什么问题（动机）</span>
+传统遥感分析靠人工设计特征(纹理/光谱指数等),迁移性差、上限低。深度学习能从数据自动学特征,作者系统梳理了 DL 在遥感各任务上的进展,给后来者一张&quot;全景地图&quot;。
+
+<span class="gu">## 2. 怎么做的（方法/核心 idea）</span>
+不是单一方法,而是一个分类框架:按数据类型(光学/多光谱/高光谱/SAR)× 任务(图像分类/目标检测/语义分割/变化检测/数据融合)组织,逐格介绍代表性 DL 做法与公开资源。
+
+<span class="gu">## 3. 实验与结果</span>
+综述本身无实验;价值在于列出各任务的代表数据集与常用指标(如分类用 OA/Kappa、检测用 mAP),是我后面建&quot;数据集表&quot;&quot;选指标&quot;的索引。
+
+<span class="gu">## 4. 启发 / 可借鉴 / 没解决的（★最值钱）</span>
+作者列出的、到今天(2026)仍是真问题的挑战:
+① 小目标检测难(遥感目标常仅十几像素)
+② 跨域/跨传感器泛化差(换卫星/换地区就掉点)
+③ 标注稀缺(遥感标注昂贵,亟需半/自监督、少样本)
+④ 多模态融合(光学-SAR-高光谱如何有效对齐互补)
+⑤ SAR 解译难(speckle、复数/极化没被充分利用)
+→ 我能接的口子(初判):②③⑤ 都偏&quot;靠方法/评测取胜、不靠海量算力&quot;,适合我单卡做。
+
+<span class="gu">## 5. 我没看懂的 / 待查</span>
+<span class="k">-</span><span class="w"> </span>&quot;条件随机场后处理&quot;具体怎么接进分割网络?(待查)
+<span class="k">-</span><span class="w"> </span>高光谱的&quot;光谱-空间联合&quot;到底指什么?(待 M2 补)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>为什么给你这个范例</strong>：你照着它就知道——笔记要<strong>用自己的话</strong>、第 4 段要<strong>编号列出“今天仍未解决”的点并标出“我能接哪个”</strong>（这是你未来选题的第一桶金）。<strong>第 1-3 段可以简，第 4 段绝不能简。</strong></p>
+<h2>二、D6 完整可运行代码 — <code>vis_dota.py</code>（增强版：中文路径安全 + 预期输出）</h2>
+<blockquote class="quote">
+<p>上面 D6 给了骨架，这里给<strong>可直接跑、且处理了两个新手必踩的坑</strong>（中文路径读图返回 None、坐标越界）的完整版。把它存进 <code>20-代码实验/utils/vis_dota.py</code>：</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">imread_safe</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;中文/特殊路径安全读图：cv2.imread 遇中文路径会返回 None，用 imdecode 绕过。&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>      <span class="c1"># 先按字节读（支持中文路径）</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>    <span class="c1"># 再解码成图像</span>
+    <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;读不到图，请检查路径：</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">imwrite_safe</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;中文路径安全写图。&quot;&quot;&quot;</span>
+    <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>               <span class="c1"># 如 &quot;.png&quot;</span>
+    <span class="n">ok</span><span class="p">,</span> <span class="n">buf</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imencode</span><span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ok</span><span class="p">:</span>
+        <span class="n">buf</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_dota_ann</span><span class="p">(</span><span class="n">txt_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;读一张图的 DOTA 标注，返回 [(poly(4x2), cls), ...]&quot;&quot;&quot;</span>
+    <span class="n">objs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">txt_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">:</span>                    <span class="c1"># 跳过表头(如 &#39;imagesource:...&#39;)/空行</span>
+                <span class="k">continue</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">coords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">parts</span><span class="p">[:</span><span class="mi">8</span><span class="p">]))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>                    <span class="c1"># 第一行可能是元信息，转 float 失败就跳过</span>
+                <span class="k">continue</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">objs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">poly</span><span class="p">,</span> <span class="bp">cls</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">objs</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">txt_path</span><span class="p">,</span> <span class="n">out_path</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">imread_safe</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+    <span class="n">objs</span> <span class="o">=</span> <span class="n">load_dota_ann</span><span class="p">(</span><span class="n">txt_path</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">poly</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">:</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">polylines</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="n">poly</span><span class="p">],</span> <span class="n">isClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">poly</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">imwrite_safe</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;共解析 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">objs</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个目标，已保存：</span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># 改成你 DOTA 里真实的一对 图/标注 路径</span>
+    <span class="n">draw</span><span class="p">(</span><span class="s2">&quot;DOTA/train/images/P0000.png&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;DOTA/train/labelTxt/P0000.txt&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;vis_out.png&quot;</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期终端输出</strong>（类似）：</p>
+<figure class="code" data-lang="text"><pre><code>共解析 137 个目标，已保存：vis_out.png</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期图像</strong>:<code>vis_out.png</code> 上，飞机/车/船被<strong>绿色斜框</strong>准确套住，每个框左上角有<strong>红色类别名</strong>(plane/small-vehicle/ship…)。框的角度和目标朝向一致 = 你解析对了。
+<strong>自测</strong>：把 <code>thickness=2</code> 改成 <code>4</code>、<code>color</code> 改成 <code>(255,0,0)</code>(蓝)，重跑看框变粗变蓝——能改动并预测结果，说明你真看懂了这段代码。</p>
+<h2>三、每日“今日自测”（合上笔记能答出 = 今天真学会了）</h2>
+<ul>
+<li><strong>D1 自测</strong>:① 不看笔记，说出“建深度学习环境四步”是哪四步?② <code>torch.cuda.is_available()</code> 返回 <code>False</code>，你的前两步排查是什么?③ MMRotate 装不通的最常见根因是什么（一句话）？</li>
+<li><strong>D2 自测</strong>:① 精读 5 遍法的前 3 遍各看论文的哪部分、各花多久?② 综述/方法/数据集论文分别读几遍?③ 5 段式笔记里“最值钱”的是第几段、它为你未来的什么环节服务？</li>
+<li><strong>D3 自测</strong>:① 为什么读 2017 年的综述要“带着时间差批判地读”?② 用一句话说清“遥感靠什么成像、和手机拍照的本质区别”。</li>
+<li><strong>D4 自测</strong>:① 什么是“差量阅读”？读同领域第二篇综述该怎么读?② 你的数据集表里，DOTA 用的是旋转框还是水平框、几点表示？</li>
+<li><strong>D5 自测</strong>:① 读“数据集/基准”论文要重点抓哪三样（不是抓网络）?② DOTA 一行标注里有哪些字段？</li>
+<li><strong>D6 自测</strong>:① 一个旋转框在代码里是什么形状的数组？用什么函数画?② <code>cv2.imread</code> 返回 <code>None</code> 最常见的原因和解决办法？</li>
+<li><strong>D7 自测</strong>:① 周复盘最关键的是哪两项反思?② 单周投入低于 21h 要不要自责、什么情况才需切“减配模式”？</li>
+</ul>
+<blockquote class="quote">
+<p>用法：每天结束花 3 分钟口头/默写回答。<strong>有答不出的，就是今天没真学透的点，翻回去补</strong>——这比“感觉学会了”可靠得多。</p>
+</blockquote>
+<h2>四、本周报错速查表（环境/代码踩坑 → 一句话解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>torch.cuda.is_available()</code> = False</td>
+<td>装了 CPU 版 torch</td>
+<td>卸载重装，带 <code>--index-url .../cu121</code></td>
+</tr>
+<tr>
+<td><code>nvidia-smi</code> 都看不到显卡</td>
+<td>显卡驱动太旧/没装</td>
+<td>装最新 NVIDIA 驱动（支持 CUDA 12.1）</td>
+</tr>
+<tr>
+<td><code>pip install torch</code> 极慢/超时</td>
+<td>默认源在国外</td>
+<td>torch 用官方 cu121 源；其它包用清华镜像 <code>-i</code></td>
+</tr>
+<tr>
+<td>mmcv 导入/编译报错</td>
+<td>mmcv 与 torch/cuda 版本不匹配</td>
+<td>查 torch+cuda 版本→对照 mmcv 官方表→mim 装预编译包，别现场编译</td>
+</tr>
+<tr>
+<td>MMRotate demo <code>KeyError</code>/找不到 config</td>
+<td>MMRotate 与 mmcv/mmdet 跨代错配</td>
+<td>三者必须同代(0.x↔mmcv1.x+mmdet2.x;1.x↔mmcv2.x+mmengine)</td>
+</tr>
+<tr>
+<td><code>cv2.imread</code> 返回 None</td>
+<td>路径错/含中文</td>
+<td>用上面的 <code>imread_safe</code>(np.fromfile + imdecode)</td>
+</tr>
+<tr>
+<td><code>polylines</code> 报错/框乱</td>
+<td>坐标没 reshape(4,2)/没转 int32</td>
+<td><code>np.array(coords).reshape(4,2).astype(np.int32)</code></td>
+</tr>
+<tr>
+<td>解析出的目标数=0</td>
+<td>第一行元信息被当数据/编码问题</td>
+<td>跳过非 9 字段行；文件用 UTF-8 打开</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p>这张表本周天天可查；以后换机重装、复现别人代码，也是它救场。</p>
+</blockquote>
+</section>
+<div class="pager"><a class="prev" href="../start/prerequisites.html"><span class="dir">← 上一篇</span><span class="nm">M0 必备前置知识</span></a><a class="next" href="w2.html"><span class="dir">下一篇 →</span><span class="nm">W2 DOTA + 旋转检测 baseline</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d1">D1 周一</a><a class="sub" href="#d1-am">上午 先把知识库的“骨架”立起来（配合</a><a class="sub" href="#d1-noon">中午 装 Anaconda + 建虚拟</a><a class="sub" href="#d1-pm">晚上 装 MMRotate 工具链 +</a><a href="#d2">D2 周二</a><a class="sub" href="#d2-am">上午 精读第 1–3 遍（只走前三遍，</a><a class="sub" href="#d2-noon">中午 把“5 段式笔记模板”真正学会（</a><a class="sub" href="#d2-pm">晚上 读完 Section 3.4–3</a><a href="#d3">D3 周三</a><a class="sub" href="#d3-am">上午 Zhu 2017 第 4–5 遍</a><a class="sub" href="#d3-noon">中午 武大《遥感原理》MOOC 第 1</a><a class="sub" href="#d3-pm">晚上 整理 Zhu 2017 完整笔记</a><a href="#d4">D4 周四</a><a class="sub" href="#d4-am">上午 精读 Cheng &amp; Han 2</a><a class="sub" href="#d4-noon">中午 建“遥感目标检测 11 大数据集</a><a class="sub" href="#d4-pm">晚上 读 Cheng 2020 Sec</a><a href="#d5">D5 周五</a><a class="sub" href="#d5-am">上午 精读 DOTA 论文（重点：标注</a><a class="sub" href="#d5-noon">中午 启动 DOTA-v1.0 下载（</a><a class="sub" href="#d5-pm">晚上 读 DOTA-v2.0 摘要 +</a><a href="#d6">D6 周六</a><a class="sub" href="#d6-am">上午 武大 MOOC 第 2–3 讲（</a><a class="sub" href="#d6-noon">中午 MOOC 第 4 讲（成像原理）</a><a class="sub" href="#d6-pm">晚上 从零写 `vis_dota.py</a><a href="#d7">D7 周日</a><a class="sub" href="#d7-am">上午 韦玉春第 3 章（图像校正）选读</a><a class="sub" href="#d7-noon">中午 整理本周笔记 + 打标签 + 更</a><a class="sub" href="#d7-pm">晚上 你的第一次周复盘 + 制定 W2</a><a href="#supp">加厚补充包</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

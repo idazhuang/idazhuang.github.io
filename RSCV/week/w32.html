@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="32">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W32 · 第二课题深化 + GitHub 仓库正式公开运营 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M8 竞赛收口 + 第二课题立项</span><span>·</span><span>Week 32</span><span>·</span><span>D211–D217</span></div><h1 class="title">第二课题深化 + GitHub 仓库正式公开运营 + M8 月复盘 —— 阶段二前半(M5–M8)收官</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="211" data-k="am" title="D211 上午段"></i><i data-d="211" data-k="noon" title="D211 中午段"></i><i data-d="211" data-k="pm" title="D211 晚上段"></i></span><span class="sday"><i data-d="212" data-k="am" title="D212 上午段"></i><i data-d="212" data-k="noon" title="D212 中午段"></i><i data-d="212" data-k="pm" title="D212 晚上段"></i></span><span class="sday"><i data-d="213" data-k="am" title="D213 上午段"></i><i data-d="213" data-k="noon" title="D213 中午段"></i><i data-d="213" data-k="pm" title="D213 晚上段"></i></span><span class="sday"><i data-d="214" data-k="am" title="D214 上午段"></i><i data-d="214" data-k="noon" title="D214 中午段"></i><i data-d="214" data-k="pm" title="D214 晚上段"></i></span><span class="sday"><i data-d="215" data-k="am" title="D215 上午段"></i><i data-d="215" data-k="noon" title="D215 中午段"></i><i data-d="215" data-k="pm" title="D215 晚上段"></i></span><span class="sday"><i data-d="216" data-k="am" title="D216 上午段"></i><i data-d="216" data-k="noon" title="D216 中午段"></i><i data-d="216" data-k="pm" title="D216 晚上段"></i></span><span class="sday"><i data-d="217" data-k="am" title="D217 上午段"></i><i data-d="217" data-k="noon" title="D217 中午段"></i><i data-d="217" data-k="pm" title="D217 晚上段"></i></span></div></div>
+<div class="note"><b>编者注 · 日号</b>　本模块（M8）各周的 D 编号相对「周号 × 7」的标准映射整体前移了 7 天（W29 标注为 D190–D196，按周号推算应为 D197–D203），因此 D218–D224 在正文中没有对应内容。原文照录未改，按顺序做即可，不影响内容衔接。详见<a href="../errata.html">校订说明</a>。</div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：<strong>阶段二前半(M5–M8)的最后一周，也是 M8 的收官周</strong>。本周三件事:① 第二课题继续深化（方法 v3 + 三数据集大表 + 写第二篇 Experiment 骨架）;② 把你第一篇的开源仓库<strong>正式公开运营</strong>（门面级 README、Colab demo、引流帖——让强作品被更多人看见）;③ 做 <strong>M8 月复盘 + 制定 M9–M12 计划</strong>（进入产出期下半场）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：第二课题深化；GitHub 仓库公开运营启动。
+<strong>★ 优先级提醒（你的定位 6.5，本周尤其要守住）</strong>:GitHub 运营/引流是“<strong>强作品的自然放大</strong>”——你现在已经有了实打实的硬成果（第一篇论文投稿 + 第二课题 v1–v3 + 竞赛代码），公开运营是顺势而为、把好东西让更多人看到。<strong>但它是副线，核心仍是研究产出</strong>。本周运营相关的事（README/Colab/引流帖）要<strong>集中、高效完成，严格控制在副线时间内</strong>，别变成“写爆款、追涨粉”的主业。M8 的核心硬成果是“竞赛收口 + 第二课题 v1–v3 + 仓库公开”，别本末倒置。
+<strong>先给你打个预防针</strong>:① <strong>公开未发表论文的核心方法代码有被抢发的风险</strong>——本周公开仓库时，<strong>核心方法代码可以等论文录用后再放</strong>，先放工具/baseline/复现脚本/已发表部分（保护意识）;② <strong>引流帖的传播力来自“故事性”而非“自夸方法”</strong>——人们爱看“你怎么从零做到的”转型故事，而非“我的方法多好”，这恰恰是你真实经历（零基础转型）的天然优势;③ <strong>M8 月复盘不只是盘点，更要做“战略检视”</strong>——第一篇审稿到哪了、第二篇进度如何、整体是否在通往空天院的轨道上。
+<strong>本周精力怎么分配</strong>：前半周(D211-213)第二课题深化（主线：v3+三数据集大表+Experiment骨架，复用更快）;D214-216 GitHub 公开运营（副线：仓库公开+Colab+引流帖，集中高效）;D217 联系公众号（副线）+ M8 月复盘 + M9-M12 规划。教学按“主线深化 + 副线运营 + 收官复盘”组织。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d211" data-d="211"><header class="day-head"><span class="dnum">D211</span><h2 class="day-t">周一 · 第二课题方法 v3 设计 + 实现</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午设计实现第二课题方法 v3；中午晚上训练、监控（复用流程，第三版迭代已驾轻就熟）。</p>
+<p><strong>预期管理</strong>：今天做第二课题方法v3。提醒：v3是在v2基础上的进一步改进（据v2还存在的不足/新场景难点继续优化），也可能是把v2的几个有效改进整合优化；第三版迭代你已能快速“设计→实现→训练”一条龙（复用红利，比第一篇快得多）;v3不追求颠覆，是把方法打磨到更优（为第二篇拿到有竞争力的最终结果）。</p>
+</blockquote>
+</div><section class="slot" id="d211-am" data-d="211" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D211 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">设计 + 实现方法 v3</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（v3：把方法打磨到最优）</h4><div class="blk-b"><ul>
+<li>上周(W31)你做到了 v2，本周做 v3——<strong>在 v2 基础上的进一步改进/优化</strong>。v3 通常是:① 据 v2 仍存在的不足（尤其新场景难点上还差的地方）继续针对性改进;② 或把前面验证有效的几个改进整合、调优到更好的配合;③ 或针对 v2 的某个瓶颈做更深入的设计。</li>
+<li><strong>v3 的定位（打磨到最优，不追求颠覆）</strong>：到 v3，你的方法核心思路已经成型（v1 迁移 + v2 针对新场景改进）,v3 是<strong>把它打磨到更优</strong>——拿到一个有竞争力的最终结果，作为第二篇的主结果。不需要颠覆性的新东西，而是精益求精（就像第一篇你也迭代了好几版到最优）。</li>
+<li><strong>第三版迭代你已“一条龙”（复用红利的极致体现）</strong>：到第三次做“设计改进→实现→训练→对比”这个循环，你已经非常熟练——<strong>能快速地设计一个改进、实现它、跑起来、看结果</strong>，整个循环行云流水。这是复用红利累积到第三轮的体现：不仅复用代码框架，连“怎么迭代方法”这件事本身你都已内化成肌肉记忆。<strong>享受这种熟练带来的高效。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>据 v2 的不足/新场景难点，设计 v3 改进（或整合调优已有改进）。</li>
+<li>复用代码框架实现 v3（改动集中）。</li>
+<li>准备启动 v3 训练。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>方法 v3 设计 + 实现（针对 v2 不足的进一步改进/整合优化），改动集中可控。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>v3 追求颠覆性大改 → v3 是打磨到最优（精益求精），不必颠覆；v3 脱离 v2 的实际不足 → 针对 v2 对比暴露的具体瓶颈。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><p>不知 v3 怎么改?→ 看 v2 还在哪类样本/场景上差（尤其新场景难点），针对性改；v2 已经够好、想不出 v3?→ 可以整合调优已有改进、或微调超参到最优，v3 不必有大新意。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>设计实现了方法 v3（打磨到最优）</strong>。<strong>做了</strong>（设计+实现 v3）、<strong>学了</strong>(v3 是精益求精打磨到最优、第三版迭代已一条龙=复用红利极致)、<strong>会了</strong>（把方法迭代打磨到有竞争力的最终版）。</p>
+</div></section></section><section class="slot" id="d211-noon" data-d="211" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D211 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">启动 v3 训练</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>启动 v3 训练，用复用的实验管理(config/seed/wandb)。v3 训练完，明天(D212)做 v1/v2/v3 三版对比，看 v3 是否是最优。</p>
+<ul>
+<li><strong>v3 验证什么</strong>：验证 v3 相对 v2 是否进一步提升（打磨是否有效）。理想是 v3 ≥ v2 &gt; v1 &gt; baseline,v3 作为最终方法。如果 v3 没比 v2 好，说明 v2 可能已是该方向的较优点，用 v2 作最终方法即可（不必为了“有 v3”而硬上）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>启动 v3 训练（复用实验管理）。</li>
+<li>监控正常（loss 下降、无报错）。</li>
+<li>明天做三版对比。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v3 训练启动、运行正常，等明天三版对比。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>v3 和 v1/v2 实验设置不一致 → 保持一致（公平对比）；启动不监控 → 看 loss 正常。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v3 训练异常?→ 检查 v3 改动处；单卡慢 → 用熟练的单卡技巧 + 错峰。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动 v3 验证最终打磨</strong>。<strong>做了</strong>（启动 v3 + 监控）、<strong>学了</strong>（v3 验证打磨有效性、不为有 v3 而硬上）、<strong>会了</strong>（推进方法的最终迭代）。</p>
+</div></section></section><section class="slot" id="d211-pm" data-d="211" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D211 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">监控 v3 + 准备三版对比</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>监控 v3 训练，准备明天的三版对比(v1/v2/v3)。同时可以先把 v1/v2 的结果整理好，明天 v3 出来直接对比。提前准备，明天对比顺畅。</p>
+<ul>
+<li><strong>提前整理 v1/v2 结果</strong>：三版对比需要 v1、v2、v3 的结果。v1/v2 已有（W31 做的），先整理成对比表的格式，明天 v3 一出就能直接填入对比。<strong>这种“提前准备”的工作习惯，让明天的对比高效。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>监控 v3 训练（正常？初步结果?）。</li>
+<li>提前整理 v1/v2 结果（对比表格式）。</li>
+<li>准备明天三版对比 + 第三数据集验证。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v3 训练监控中；v1/v2 结果整理好，三版对比表框架就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>不提前准备、明天手忙脚乱 → 提前整理 v1/v2 结果；v3 跑完不及时看 → 出结果及时分析。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v3 训练慢、明天出不来?→ 合理排期，或先用 v3 的中间 checkpoint 看趋势；结果整理乱 → 用第一篇的对比表格式（复用）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>监控 v3 并提前准备对比</strong>。<strong>做了</strong>（监控 v3 + 整理 v1/v2）、<strong>学了</strong>（提前准备让对比高效、复用对比表格式）、<strong>会了</strong>（有规划地推进方法对比）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜方法v3打磨到最优</strong>:v3是在v2基础上精益求精（针对v2不足继续改/整合调优已有改进），打磨到有竞争力的最终结果作第二篇主结果，不必颠覆。第三版迭代已“设计→实现→训练→对比”一条龙(复用红利累积到第三轮=肌肉记忆)。v3没比v2好就用v2，别为有v3而硬上。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 方法 v3 设计 + 训练启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D211</summary><textarea data-note="d211" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d212" data-d="212"><header class="day-head"><span class="dnum">D212</span><h2 class="day-t">周二 · v3 三版对比 + 第三数据集验证 + 三数据集大表</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午 v3 结果分析、v1/v2/v3 三版对比；中午第三个数据集验证；晚上整合三数据集大表。</p>
+<p><strong>预期管理</strong>：今天做三版对比 + 三数据集大表。提醒：v1/v2/v3三版对比展示你方法的迭代提升（讲清每版改进的贡献）；第三个数据集验证进一步强化泛化性证据(三个数据集=跨域泛化更有说服力)；整合三数据集大表是第二篇的核心实验证据——<strong>第二次产出“三版对比+三数据集大表”，比第一篇快得多</strong>（复用红利）；三数据集大表是你“跨域泛化”发力线的有力实证。</p>
+</blockquote>
+</div><section class="slot" id="d212-am" data-d="212" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D212 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">v3 结果分析 + 三版对比(v1/v2/v3)</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（三版对比讲清迭代贡献）</h4><div class="blk-b"><p>v3 训练完，做 <strong>v1/v2/v3 三版对比</strong>——展示你方法的迭代提升轨迹。</p>
+<ul>
+<li><strong>三版对比展示什么</strong>:① <strong>迭代提升轨迹</strong>（v1→v2→v3 逐步提升，每版改进贡献多少）——这讲清了你方法的演进逻辑（&quot;先迁移得 v1、针对新场景难点改进得 v2、进一步打磨得 v3&quot;）;② <strong>最终方法的优势</strong>（v3/最优版相对 baseline 的总提升）;③ <strong>每版改进的价值</strong>（类似消融，展示每步改进的必要性）。<strong>三版对比 = 你方法迭代过程的完整呈现，既是结果也是故事。</strong></li>
+<li><strong>确定最终主方法</strong>：三版对比后，确定哪一版作为论文的主方法（通常是最优的 v3，或 v2/v3 中更优的）。这个版本的结果就是第二篇的主结果。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>分析 v3 结果。</li>
+<li>做 v1/v2/v3 三版对比（迭代提升轨迹 + 每版贡献）。</li>
+<li>确定最终主方法版本。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v1/v2/v3 三版对比表（迭代提升清晰）+ 确定的最终主方法。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只报最优版、不展示迭代 → 三版对比讲清演进逻辑（故事性）；三版设置不一致 → 公平对比。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>v3 没比 v2 好?→ 用 v2 作主方法（三版对比展示 v3 尝试也是诚实的），或分析 v3 为何没提升；迭代贡献不明显 → 看分场景表现（可能在特定难点上有提升）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了三版对比（展示迭代）</strong>。<strong>做了</strong>（v3 分析 + 三版对比 + 定主方法）、<strong>学了</strong>（三版对比展示迭代提升轨迹和故事、定最终主方法）、<strong>会了</strong>（完整呈现方法的迭代演进）。</p>
+</div></section></section><section class="slot" id="d212-noon" data-d="212" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D212 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">第三个数据集验证</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(三个数据集=泛化性更强的证据)</h4><div class="blk-b"><p>在第三个数据集上验证最终方法——<strong>三个数据集的泛化性证据，比两个更有说服力</strong>（W31 已验证第二个数据集，本周加第三个）。</p>
+<ul>
+<li><strong>为什么加到三个数据集</strong>：跨域泛化是你的发力线，<strong>验证的数据集越多，泛化性的证据越扎实</strong>。两个数据集证明“不是单数据集过拟合”，三个数据集进一步证明“方法在多种数据分布下都稳定有效”。这对你“跨域泛化”的卖点是强化。复用第一篇/W31 的跨数据集流程，加第三个数据集成本低。</li>
+<li><strong>三个数据集的选择</strong>：通常是相关但有差异的数据集（如旋转检测的 DOTA/DIOR-R/HRSC，或第二课题对应领域的多个数据集），覆盖不同的数据分布/场景，才能体现泛化性。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在第三个数据集上验证最终方法（复用跨数据集流程）。</li>
+<li>保持评测一致（公平对比）。</li>
+<li>看三个数据集的泛化性（都有效吗）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第三个数据集验证结果，三个数据集共同证明泛化性。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>第三数据集评测协议不一致 → 保持一致；三个数据集太相似 → 选有差异的（才体现泛化）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>第三数据集效果差?→ 分析数据集差异（可在论文讨论）或方法局限；数据接入问题 → 复用统一数据层加分支。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了第三数据集验证（强化泛化证据）</strong>。<strong>做了</strong>（第三数据集验证）、<strong>学了</strong>（三数据集泛化证据更强、契合跨域泛化卖点）、<strong>会了</strong>（用多数据集扎实证明泛化性）。</p>
+</div></section></section><section class="slot" id="d212-pm" data-d="212" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D212 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整合三数据集大表</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(三数据集大表=第二篇核心证据)</h4><div class="blk-b"><p>把三个数据集 + 三版对比 + 消融的结果，整合成<strong>三数据集大表</strong>——这是第二篇论文 Experiment 的核心证据，展示你方法的有效性（主对比）、迭代（三版）、泛化性（三数据集）、组件贡献（消融）。</p>
+<ul>
+<li><strong>大表整合什么</strong>:① 主对比（你的方法 vs baseline/SOTA，在三个数据集上）;② 三版迭代(v1/v2/v3);③ 跨数据集泛化（三个数据集的表现）;④ 消融（组件贡献）。整合成规范的表格（可能拆成主表+消融表+泛化表）。复用第一篇的表格式。</li>
+<li><strong>第二次产出更快（复用红利）</strong>：“三版对比 + 三数据集大表”这套第二篇的核心证据，你第一篇做过类似的（三数据集主实验 + 消融），<strong>第二次产出明显更快</strong>——格式复用、流程熟练。这是复用红利的又一次体现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>整合三数据集 + 三版对比 + 消融到大表（复用第一篇表格式）。</li>
+<li>数字准确（数字审计的习惯）、标注最优。</li>
+<li>大表清晰呈现有效性/迭代/泛化/组件贡献。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二篇的三数据集大表（主对比+三版+泛化+消融，规范、数字准确）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>结果散乱不整合 → 整合成大表（核心证据）；大表数字不准 → 数字审计习惯确保准确。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>大表太复杂?→ 拆成主表+消融表+泛化表（复用第一篇拆分）；某结果缺 → 补跑或标注。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整合了第二篇核心证据（三数据集大表）</strong>。<strong>做了</strong>（整合三数据集大表）、<strong>学了</strong>(大表呈现有效性/迭代/泛化/组件贡献、第二次更快=复用红利)、<strong>会了</strong>（整合第二篇的核心实验证据）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜三数据集大表（第二篇核心证据）</strong>：整合主对比(vs baseline/SOTA)+三版迭代(v1/v2/v3)+跨数据集泛化（三数据集）+消融（组件贡献），复用第一篇表格式。三数据集泛化证据比两个更强（契合跨域泛化卖点）。第二次产出明显更快=复用红利。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 三版对比 ✅ 第三数据集验证 ✅ 三数据集大表。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D212</summary><textarea data-note="d212" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d213" data-d="213"><header class="day-head"><span class="dnum">D213</span><h2 class="day-t">周三 · 第二篇 Experiment 骨架 + 可视化对比图</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写第二篇 Experiment 章骨架（复用第一篇 4.1–4.5 结构）；中午制作可视化对比图（含正面/负面/困难案例）；晚上继续写论文。</p>
+<p><strong>预期管理</strong>：今天写Experiment骨架 + 可视化。提醒：<strong>复用第一篇Experiment的结构</strong>（4.1实验设置/4.2主结果/4.3消融/4.4跨数据集/4.5可视化分析）搭第二篇骨架，又快又规范；可视化对比图要含正面案例（方法好的）+负面案例（还不足的，诚实）+困难案例（新场景难点上的表现），体现严谨；边写边把三数据集大表的结果填入Experiment。</p>
+</blockquote>
+</div><section class="slot" id="d213-am" data-d="213" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D213 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写第二篇 Experiment 骨架（复用结构）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（复用 Experiment 结构，又快又规范）</h4><div class="blk-b"><p>开始写第二篇的 Experiment 章——<strong>复用第一篇 Experiment 的结构</strong>（如 4.1 实验设置 → 4.2 主结果 → 4.3 消融 → 4.4 跨数据集泛化 → 4.5 可视化分析）。你第一篇写过完整 Experiment，这个结构直接套用。</p>
+<ul>
+<li><strong>为什么复用 Experiment 结构</strong>:Experiment 章的组织（先说设置、再主结果、再消融、再泛化、再可视化）是有套路的，你第一篇摸索并实践过。第二篇直接复用这个结构，<strong>填入第二课题的内容（三数据集大表、消融、可视化）即可</strong>，又快又规范。不用再想“Experiment 该怎么组织”。</li>
+<li><strong>Experiment 骨架先搭框架</strong>：和写 Method 一样，先搭 Experiment 的骨架（各小节标题 + 每节要放什么），再填入结果和分析。骨架清晰了，填内容顺畅。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复用第一篇 Experiment 结构，搭第二篇 Experiment 骨架（4.1 设置/4.2 主结果/4.3 消融/4.4 泛化/4.5 可视化）。</li>
+<li>把三数据集大表的结果填入对应小节。</li>
+<li>每节先搭框架再填分析。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二篇 Experiment 章骨架（复用结构，各小节清晰），三数据集大表结果已填入。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>从零摸索 Experiment 结构 → 复用第一篇 4.1-4.5 结构；只贴表不写分析 → 每个结果要有分析（说明它证明了什么）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知 Experiment 怎么组织?→ 复用第一篇的小节结构；分析写不出?→ 每张表问“它证明了什么”（主表证有效、消融证组件、泛化证通用）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复用结构写 Experiment 骨架</strong>。<strong>做了</strong>（搭 Experiment 骨架 + 填结果）、<strong>学了</strong>（复用 Experiment 结构又快又规范、先搭框架再填分析）、<strong>会了</strong>（高效撰写第二篇实验章）。</p>
+</div></section></section><section class="slot" id="d213-noon" data-d="213" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D213 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">制作可视化对比图（正面/负面/困难案例）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（可视化含正面+负面+困难案例，体现严谨）</h4><div class="blk-b"><p>制作可视化对比图——<strong>不只放方法表现好的正面案例，还要放负面案例（方法还不足的）和困难案例（新场景难点上的表现）</strong>。</p>
+<ul>
+<li><strong>为什么要放负面/困难案例(诚实=严谨=可信)</strong>：只放“我的方法预测得很完美”的正面案例，会显得不客观（审稿人知道没有方法是完美的）。<strong>放一些负面案例（方法失败的）和困难案例（在难点上的表现），反而体现你的诚实和对方法的清醒认识</strong>——你知道方法的边界在哪。这种诚实增加可信度，也呼应你写 Limitation 的能力。<strong>尤其困难案例（如 SAR 强 speckle 区域、密集小目标）的可视化，直观展示了新场景的难点和你方法的应对</strong>，是第二篇故事的有力补充。</li>
+<li><strong>可视化对比怎么做</strong>：并排展示 baseline vs 你的方法在同一样本上的预测（让读者直观看到你方法好在哪）；选取有代表性的案例（正面体现优势、负面体现诚实、困难体现对难点的应对）。复用第一篇的可视化风格。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制作可视化对比图（baseline vs 你的方法，并排）。</li>
+<li>含正面案例（优势）+ 负面案例（诚实）+ 困难案例（新场景难点应对）。</li>
+<li>复用第一篇可视化风格。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>可视化对比图（正面/负面/困难案例齐全，baseline vs 你的方法并排），体现严谨。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>只放完美的正面案例 → 放负面/困难案例体现诚实和严谨；可视化粗糙 → 复用第一篇的规范风格。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知选哪些案例?→ 正面（明显改善的）+ 负面（还失败的）+ 困难（新场景难点上的）；可视化工具不熟 → 复用第一篇的可视化代码。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>制作了诚实严谨的可视化对比</strong>。<strong>做了</strong>（可视化对比图含正面/负面/困难案例）、<strong>学了</strong>（负面/困难案例体现诚实严谨、困难案例展示难点应对）、<strong>会了</strong>（用可视化客观呈现方法的优势和边界）。</p>
+</div></section></section><section class="slot" id="d213-pm" data-d="213" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D213 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">继续写第二篇论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续写第二篇论文（完善 Experiment 分析、推进其他章节）。第二篇此时已有 Method(W31)+ Experiment 骨架（本周），稳步成形。保持边做边写的节奏。</p>
+<ul>
+<li><strong>第二篇成形进度</strong>:Method（W31 写了骨架+内容）+ Experiment（本周骨架+结果+可视化），第二篇的主体（方法+实验）正稳步成形。后续(M9)会完善其他章节(Intro/Related Work/Conclusion)、打磨投稿。<strong>第二篇比第一篇成形快（复用红利贯穿）。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>继续写第二篇（完善 Experiment 分析、推进其他章节）。</li>
+<li>把可视化、结果分析融入论文。</li>
+<li>保持边做边写。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二篇论文稳步推进（Method + Experiment 主体成形）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>实验全做完才写 → 边做边写；章节脱节 → 保持整体连贯（复用第一篇的写作节奏）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>写作卡住?→ 复用第一篇对应部分；不知写哪 → 优先完善 Experiment（本周结果）,Intro/Related 等可 M9 展开。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进第二篇稳步成形</strong>。<strong>做了</strong>（继续写论文 + 融入可视化/分析）、<strong>学了</strong>（第二篇主体成形、复用写作节奏更快）、<strong>会了</strong>（持续推进第二篇撰写）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复用Experiment结构+诚实可视化</strong>：第二篇Experiment复用第一篇4.1-4.5结构（设置/主结果/消融/泛化/可视化），又快又规范。可视化对比含正面（优势）+负面（诚实）+困难案例（新场景难点应对）——诚实=严谨=可信，呼应写Limitation的能力。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Experiment 骨架 ✅ 可视化对比图。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D213</summary><textarea data-note="d213" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d214" data-d="214"><header class="day-head"><span class="dnum">D214</span><h2 class="day-t">周四 · GitHub 仓库正式公开化 + 双语 README</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午把仓库改名、公开化；中午完善 README（中英双语+架构图+演示GIF）；晚上加 Quick Start 一键复现指南。</p>
+<p><strong>预期管理</strong>：今天GitHub仓库正式公开运营。提醒：仓库公开后<strong>第一周是“引流黄金期”</strong>——24h内把链接发到≥3个社区（D216 集中发）；门面级仓库=清晰README（中英双语）+架构图+演示GIF+Quick Start（一键复现）；<strong>★保护意识：未发表论文的核心方法代码可等录用后再放</strong>，先放工具/baseline/复现脚本/已发表部分;★定位6.5：这是强作品的放大，集中高效完成，核心仍是研究。</p>
+</blockquote>
+</div><section class="slot" id="d214-am" data-d="214" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D214 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">仓库改名 + 公开化（★保护意识）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（公开化 + 未发表代码的保护意识）</h4><div class="blk-b"><p>把你的开源仓库<strong>改名为有信息量的名字</strong>(如 <code>Awesome-RemoteSensing-CV-from-General-CV</code>，清楚表达“用通用 CV 做遥感”的定位)并<strong>正式公开化</strong>。但公开时要有<strong>保护意识</strong>。</p>
+<ul>
+<li><strong>改个有信息量的名字</strong>：好的仓库名让人一看就知道是什么、能被搜索到。<code>Awesome-RemoteSensing-CV-from-General-CV</code> 这种名字，既表达了你的定位（从通用 CV 迁移到遥感），又包含关键词(RemoteSensing、CV)，利于被搜索发现。</li>
+<li><strong>★ 未发表论文的核心方法代码，可等录用后再放（重要的保护意识）</strong>：这是一个关键的判断。<strong>你第二篇论文还没发表（还在做），如果现在就把第二篇的核心方法代码完全公开，有被别人抢先发表的风险</strong>（别人看到你的方法、抢在你前面发）。所以公开仓库时:① <strong>第一篇（已投稿）的代码可以放</strong>（已投稿，有时间戳保护，且 arXiv 已挂）;② <strong>第二篇（未发表）的核心方法代码，先不放或只放部分</strong>，等论文录用后再完整开源;③ 可以先放<strong>通用工具、baseline、复现脚本、数据处理代码</strong>等不涉及核心创新的部分。<strong>保护好未发表工作的核心，是学术常识。</strong></li>
+<li><strong>“开放”与“保护”要平衡（一个成熟研究者的判断）</strong>：你可能会觉得“开源就该全部公开，藏着掖着不大方”——但这是把两件事混淆了。<strong>开源精神鼓励的是“分享已完成、已确权的工作以推动领域进步”，而不是“把还没确权的成果暴露给竞争对手”</strong>。在学术界，论文的发表（或至少 arXiv 挂出 + 投稿时间戳）是你对一个想法“确权”的方式；在此之前把核心方法公开，等于放弃了保护、把你辛苦做的创新拱手让人抢发。<strong>真正成熟的做法是分阶段开放</strong>：已发表/已确权的，大方完整地开源（利人利己）；未发表的核心，先保护，等确权（录用）后再开源。这不是小气，而是对自己劳动成果负责、也符合学术规范。这种“既会做、也会保护和经营自己工作”的判断力，是你走向成熟研究者的标志。</li>
+<li><strong>公开化是“强作品的放大”（★定位6.5）</strong>：公开仓库是把你已有的硬成果（第一篇 + 工具）让更多人看到，是顺势而为的放大。<strong>集中高效完成，别花过多时间，核心仍是研究产出。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把仓库改名为有信息量的名字（如 Awesome-RemoteSensing-CV-from-General-CV）。</li>
+<li>公开化——但★只放第一篇（已投稿）+ 工具/baseline/复现脚本，第二篇核心方法代码等录用后再放。</li>
+<li>确认公开的内容不涉及未发表工作的核心创新。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>仓库公开化（名字有信息量），公开内容为第一篇 + 工具（未发表的第二篇核心代码已保护）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★保护意识）</h4><div class="blk-b"><ul>
+<li><strong>公开了未发表论文（第二篇）的核心方法代码</strong> → 可能被抢发！核心方法代码等论文录用后再放，先放工具/baseline/已发表部分。</li>
+<li><strong>仓库名太随意没信息量</strong> → 用有关键词、表达定位的名字（利于被搜索）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定哪些能放?→ 已投稿/已发表的能放、未发表的核心方法保护；担心抢发?→ 第二篇核心代码等录用后放，现在放第一篇+工具足够引流。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>公开化仓库 + 保护未发表工作</strong>。<strong>做了</strong>（改名 + 公开化 + 保护第二篇核心代码）、<strong>学了</strong>（有信息量的命名、未发表核心代码延后开源的保护意识、公开是放大）、<strong>会了</strong>（在开源引流和保护创新间把握平衡）。</p>
+</div></section></section><section class="slot" id="d214-noon" data-d="214" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D214 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">完善 README（中英双语 + 架构图 + 演示 GIF）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（门面级 README）</h4><div class="blk-b"><p>仓库的门面是 README——完善成<strong>门面级</strong>：中英双语（受众更广）+ 架构图（一图讲清方法）+ 演示 GIF（直观展示效果）+ 清晰的结构。<strong>README 的质量直接决定别人会不会用、会不会 star。</strong></p>
+<ul>
+<li><strong>门面级 README 的要素</strong>:① <strong>中英双语</strong>——英文受众更广（国际），中文方便国内读者，双语覆盖更多人;② <strong>架构图</strong>——一张方法/系统的架构图，让人一眼看懂你做了什么;③ <strong>演示 GIF</strong>——一段推理效果的动图（如检测结果的可视化），直观、吸引人;④ <strong>清晰结构</strong>——简介、特性、安装、使用、结果、引用等板块齐全。<strong>一个门面级 README，让仓库显得专业、可信、好用。</strong></li>
+<li><strong>为什么 README 这么重要</strong>：别人发现你的仓库（从搜索/引流帖），第一眼看的就是 README。<strong>README 清晰专业 → 觉得靠谱 → 愿意试用/star;README 简陋 → 觉得不靠谱 → 关掉</strong>。README 是仓库的“第一印象”，值得认真做。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>完善 README：中英双语 + 架构图 + 演示 GIF + 清晰结构（简介/特性/安装/使用/结果/引用）。</li>
+<li>架构图复用论文的方法图；演示 GIF 录一段推理 demo。</li>
+<li>确保门面专业、信息齐全。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>门面级 README（中英双语、架构图、演示 GIF、结构清晰），显得专业可信。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>README 太简陋 → 门面级要双语+架构图+GIF+清晰结构；只有英文/只有中文 → 双语覆盖更多受众。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>GIF 不会做?→ 用屏幕录制工具录一段推理 demo，转 GIF（在线工具）；双语来不及?→ 先英文（受众更广）再补中文。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了门面级 README</strong>。<strong>做了</strong>（完善 README：双语+架构图+GIF+结构）、<strong>学了</strong>（README 是仓库门面和第一印象、门面级要素）、<strong>会了</strong>（打造专业可信的仓库门面）。</p>
+</div></section></section><section class="slot" id="d214-pm" data-d="214" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D214 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">加 Quick Start（一键复现指南）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Quick Start 降低复现门槛）</h4><div class="blk-b"><p>在 README 加 <strong>“Quick Start”一键复现指南</strong>——让陌生人能照着几步就把你的方法跑起来。<strong>复现门槛越低，用的人越多、star 越多。</strong></p>
+<ul>
+<li><strong>Quick Start 写什么</strong>：几步搞定的复现指南——① clone 仓库;② 装环境(<code>pip install -r requirements.txt</code>);③ 下载数据/模型（给链接）;④ 一键运行(<code>bash reproduce.sh</code> 或几条命令)。<strong>让“想试用的人”能在几分钟内跑起来，而非折腾半天。</strong></li>
+<li><strong>为什么 Quick Start 关键</strong>：很多人看到一个仓库想试，但如果复现复杂（不知道怎么装环境、怎么跑），就放弃了。<strong>清晰的 Quick Start = 别人能轻松跑起来 = 更愿意用和 star</strong>。这是把“看到”转化为“用上”的关键一步。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>在 README 加 Quick Start（clone → 装环境 → 下数据/模型 → 一键运行）。</li>
+<li>确保步骤清晰、陌生人能照着跑。</li>
+<li>自己照着 Quick Start 走一遍验证（能跑通）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>README 有清晰的 Quick Start，陌生人能照着几步跑起来。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Quick Start 步骤不全/不清 → 完整清晰（clone/环境/数据/运行），自己验证能跑；假设别人有背景知识 → 写给零基础也能跟着做。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>Quick Start 写完不确定能跑?→ 自己（或找人）照着走一遍验证；步骤太复杂?→ 用 reproduce.sh 封装成一键（D215 做）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>加了 Quick Start 降低复现门槛</strong>。<strong>做了</strong>（写 Quick Start + 验证）、<strong>学了</strong>（Quick Start 降门槛、把“看到”转化为“用上”）、<strong>会了</strong>（让仓库零门槛可复现）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜门面级仓库公开运营</strong>：改有信息量的名字+公开化（★未发表核心代码延后开源保护）。门面级README：中英双语+架构图+演示GIF+Quick Start一键复现。复现门槛越低用的人越多。公开后第一周是引流黄金期（24h内发≥3社区）。★定位6.5：集中高效，核心仍是研究。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>GitHub 仓库公开化</strong> ✅ 双语 README + Quick Start。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D214</summary><textarea data-note="d214" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d215" data-d="215"><header class="day-head"><span class="dnum">D215</span><h2 class="day-t">周五 · Colab demo + model card + 一键复现脚本</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午加 Colab demo notebook（零门槛在线跑）；中午加 model card；晚上加一键复现脚本 reproduce.sh。</p>
+<p><strong>预期管理</strong>：今天加Colab demo + model card + 一键脚本。提醒：<strong>Colab demo让任何人不需本地GPU、一键在线跑你的方法</strong>（极大降低试用门槛，是吸引star的关键）;model card描述模型（训练数据/评估结果/用途/局限）;reproduce.sh一键复现；门槛越低、用的人越多——这是开源项目“被用起来”的关键。</p>
+</blockquote>
+</div><section class="slot" id="d215-am" data-d="215" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D215 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">加 Colab demo notebook（零门槛在线跑）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Colab demo：零门槛试用）</h4><div class="blk-b"><p>加一个 <strong>Google Colab demo notebook</strong>——让任何人<strong>不需要本地 GPU、点开就能在线跑你的方法</strong>。这是降低试用门槛的“杀手锏”。</p>
+<ul>
+<li><strong>为什么 Colab demo 是“杀手锏”</strong>：别人想试你的方法，最大的障碍是“没有 GPU/不想配环境”。<strong>Colab 提供免费 GPU，一个 Colab notebook 让别人点开链接就能在线跑你的 demo（看推理效果）</strong>，完全不需要本地环境。<strong>门槛降到最低 = 最多人能试 = 最多人 star/认可</strong>。一个好的 Colab demo，往往是开源项目获得关注的关键。</li>
+<li><strong>Colab demo 放什么</strong>：一个能跑通的推理 demo——加载你的模型、对示例图像推理、可视化结果。让人点开就能看到“你的方法在做什么、效果如何”。简洁、能跑、直观。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制作 Colab demo notebook（加载模型 → 示例推理 → 可视化结果）。</li>
+<li>确保在 Colab 上能一键跑通（用 Colab 免费 GPU）。</li>
+<li>在 README 加 Colab demo 的链接/徽章。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Colab demo notebook（别人点开就能在线跑你的方法、看效果）,README 有链接。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Colab demo 跑不通 → 自己在 Colab 上验证能一键跑；demo 太复杂 → 简洁（加载+推理+可视化），让人快速看到效果。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>Colab 环境配置问题?→ 在 notebook 开头写好 pip install；模型太大 Colab 跑不动?→ 用小模型/示例，或提供下载。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用 Colab demo 实现零门槛试用</strong>。<strong>做了</strong>（制作 Colab demo + 验证）、<strong>学了</strong>（Colab 零门槛试用是吸引 star 关键、门槛越低用的人越多）、<strong>会了</strong>（让任何人无需 GPU 就能试用你的方法）。</p>
+</div></section></section><section class="slot" id="d215-noon" data-d="215" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D215 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">加 model card</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（model card：模型的“说明书”）</h4><div class="blk-b"><p>加一个 <strong>model card</strong>——描述你的模型：训练数据、评估结果、用途、局限。<strong>model card 是模型的“说明书”，让别人清楚知道这个模型是什么、能做什么、不能做什么。</strong></p>
+<ul>
+<li><strong>model card 写什么</strong>:① <strong>模型描述</strong>（什么模型、解决什么任务）;② <strong>训练数据</strong>（用什么数据训的）;③ <strong>评估结果</strong>（在哪些数据集上、什么指标）;④ <strong>用途</strong>（适合做什么）;⑤ <strong>局限</strong>（在什么情况下不适用/表现差）。<strong>model card 让别人负责任地使用你的模型（知道它的能力和边界）。</strong></li>
+<li><strong>为什么写 model card（专业性 + 负责任）</strong>:model card 是负责任开源的标志——<strong>让用户清楚模型的能力边界，避免误用</strong>（如把在某数据集上训的模型用到完全不同的场景）。这体现你的专业性和负责任的态度。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 model card（模型描述/训练数据/评估结果/用途/局限）。</li>
+<li>信息齐全、诚实（包括局限）。</li>
+<li>放进仓库（如 MODEL_CARD.md）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>model card（模型描述/训练数据/评估/用途/局限齐全），让人负责任地使用。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>model card 只写优点不写局限 → 诚实写局限（负责任、专业）；信息不全 → 五要素齐全。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知 model card 格式?→ 参考 HuggingFace 的 model card 模板；局限不知怎么写?→ 从你方法的失败案例/适用范围总结。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写 model card（负责任开源）</strong>。<strong>做了</strong>（写 model card）、<strong>学了</strong>（model card 是模型说明书、让人负责任使用、体现专业性）、<strong>会了</strong>（清晰描述模型的能力和边界）。</p>
+</div></section></section><section class="slot" id="d215-pm" data-d="215" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D215 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">加一键复现脚本 reproduce.sh</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（reproduce.sh：一键复现）</h4><div class="blk-b"><p>加一个 <strong><code>scripts/reproduce.sh</code></strong> 一键复现脚本——把“下数据 → 训练/加载 → 评测 → 出结果”封装成一条命令。<strong>配合 Quick Start，让复现真正一键化。</strong></p>
+<ul>
+<li><strong>reproduce.sh 封装什么</strong>：把复现你论文结果的完整流程（数据准备 → 训练或加载预训练模型 → 评测 → 输出结果）封装成一个脚本，别人 <code>bash scripts/reproduce.sh</code> 一条命令就能复现。<strong>这是可复现性的最高体现——别人不用一步步手动操作，一键搞定。</strong></li>
+<li><strong>可复现性是开源的核心价值</strong>：一个能一键复现的仓库，别人能验证你的结果、能在此基础上做自己的工作——这才是开源的真正价值（而非只是把代码堆上去）。reproduce.sh 让你的仓库达到“一键可复现”的高标准。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 <code>scripts/reproduce.sh</code>(数据 → 训练/加载 → 评测 → 结果，一键化)。</li>
+<li>关键参数可配，别硬编码。</li>
+<li>自己跑一遍验证能复现。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p><code>scripts/reproduce.sh</code> 一键复现脚本（一条命令复现结果），验证能跑通。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>脚本硬编码路径别人没法用 → 用参数/配置；脚本没验证 → 自己跑一遍确认能复现。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>复现流程复杂?→ 分步封装（下数据/训练/评测各一个函数，主脚本串起来）；某步耗时久?→ 提供预训练模型选项（跳过训练直接评测）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写一键复现脚本（可复现性最高体现）</strong>。<strong>做了</strong>（写 reproduce.sh + 验证）、<strong>学了</strong>（一键复现、可复现性是开源核心价值）、<strong>会了</strong>（让仓库达到一键可复现的高标准）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜零门槛开源（Colab+model card+一键复现）</strong>:Colab demo（无需本地GPU点开就跑，吸引star关键）+model card（模型说明书：数据/评估/用途/局限，负责任开源）+reproduce.sh（一键复现，可复现性最高体现）。门槛越低用的人越多，一键可复现是开源核心价值。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Colab demo ✅ model card ✅ 一键复现脚本。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D215</summary><textarea data-note="d215" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d216" data-d="216"><header class="day-head"><span class="dnum">D216</span><h2 class="day-t">周六 · （集中日）· 引流帖（中英文多平台）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>集中日：写有故事性的引流帖，发知乎（方法解读）、Reddit（英文）、小红书/Twitter/公众号，都带仓库/论文链接。</p>
+<p><strong>预期管理</strong>：今天集中发引流帖（★一天搞定，别变主业）。提醒：<strong>引流帖标题要有吸引力</strong>——不是“我的论文”，而是有故事性的（如“从零基础到遥感CV论文——我的12个月转型记录”）；内容要讲“你怎么做到的”（读者爱看转型故事）而非“方法多好”；知乎发方法解读、Reddit发英文帖、小红书/Twitter/公众号发帖，都带链接;★定位6.5：引流帖集中一天高效完成，别投入大量时间追爆款涨粉，偏离研究主线。</p>
+</blockquote>
+</div><section class="slot" id="d216-am" data-d="216" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D216 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写知乎“方法解读”帖（故事性标题）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(引流帖的灵魂：故事性 &gt; 自夸方法)</h4><div class="blk-b"><p>写引流帖（知乎方法解读），<strong>标题要有吸引力、内容要有故事性</strong>。这是引流帖能不能传播的关键。</p>
+<ul>
+<li><strong>标题要有吸引力（故事性而非自夸）</strong>：<strong>不是 “我的论文：XX 方法”（没人关心你的论文），而是 “从零基础到遥感 CV 论文——我的 12 个月转型记录”（有故事、有共鸣）</strong>。前者是自夸，后者是故事——人们对“一个人怎么从零做到的”远比“某个方法多好”感兴趣。好标题决定了帖子有没有人点开。</li>
+<li><strong>内容要有故事性（读者关心“你怎么做到的”）</strong>：帖子内容的核心，<strong>不是“我的方法多厉害”（技术细节读者未必关心），而是“你怎么一步步做到的”（转型历程、踩过的坑、关键的转折）</strong>。人们爱看真实的成长故事——它有代入感、有启发、有共鸣。<strong>把技术内容（方法、结果）编织进你的转型故事里</strong>（如“为了解决 XX 问题，我学了 YY、试了 ZZ、最终做出了 WW”），既讲了技术，又有故事性。</li>
+<li><strong>这恰恰是你的天然优势（真实的转型经历）</strong>：你是从零基础转型遥感 CV 的——<strong>这本身就是一个有共鸣、有故事性的真实经历</strong>。你不用编故事，你的真实历程（零基础→自学→第一篇论文→竞赛→第二课题）就是最好的素材。<strong>真诚地讲你的故事，比任何包装都打动人。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写知乎“方法解读”帖，标题有故事性（如“从零基础到遥感 CV 论文——我的转型记录”）。</li>
+<li>内容编织技术与故事（怎么做到的：历程+坑+转折+方法+结果）。</li>
+<li>带仓库/论文链接。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>知乎帖（标题有吸引力、内容有故事性、技术与故事结合、带链接）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★定位）</h4><div class="blk-b"><ul>
+<li><strong>标题/内容只自夸方法（没故事）</strong> → 故事性是传播关键，讲“你怎么做到的”。</li>
+<li><strong>把大量时间投到“写爆款/追涨粉”</strong> → 引流帖集中一天搞定，别偏离研究主线。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不知怎么写出故事性?→ 真诚讲你的真实历程（零基础转型本身就是好故事）；技术怎么融入?→ 把方法/结果作为故事里“你解决问题”的部分。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写有故事性的引流帖</strong>。<strong>做了</strong>（写知乎帖：故事性标题+内容）、<strong>学了</strong>(故事性&gt;自夸方法、读者爱看转型故事、你的真实经历是天然优势)、<strong>会了</strong>（用故事性让技术工作获得传播）。</p>
+</div></section></section><section class="slot" id="d216-noon" data-d="216" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D216 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">发 Reddit 英文帖 + 其他平台</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（多平台触及不同受众）</h4><div class="blk-b"><p>在 Reddit r/MachineLearning 发英文帖（国际受众）+ 小红书/Twitter/公众号发帖（不同平台的受众）。<strong>多平台覆盖更广，但都是从你的核心内容改写，集中高效。</strong></p>
+<ul>
+<li><strong>不同平台的侧重</strong>:① <strong>Reddit r/MachineLearning</strong>（国际技术社区）——英文，侧重技术/项目分享;② <strong>Twitter/X</strong>（国际）——英文，简短+链接;③ <strong>小红书/公众号</strong>（国内）——中文，可侧重转型故事。<strong>从你的知乎帖/技术报告核心内容改写适配各平台，别从零写每个。</strong></li>
+<li><strong>都带链接</strong>：每个帖子都带仓库/论文链接（引流的目的）。让感兴趣的人能找到你的工作。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>Reddit r/ML 发英文帖（从核心内容改写）。</li>
+<li>小红书/Twitter/公众号发帖（适配各平台）。</li>
+<li>都带仓库/论文链接。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>≥3 个平台的引流帖（Reddit 英文 + 其他平台），都带链接，从核心内容高效改写。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>每个平台从零写 → 从核心内容改写适配；帖子不带链接 → 都带仓库/论文链接（引流目的）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>多平台耗时?→ 核心内容改写适配，集中高效；英文帖不熟?→ 用你的 Abstract/技术报告英文改写。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>多平台发引流帖（高效覆盖）</strong>。<strong>做了</strong>（Reddit + 其他平台发帖）、<strong>学了</strong>（多平台覆盖不同受众、从核心内容改写高效、都带链接）、<strong>会了</strong>（让工作在多个平台获得曝光）。</p>
+</div></section></section><section class="slot" id="d216-pm" data-d="216" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D216 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">引流收尾 + 回归主线</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（引流到此为止，回归研究主线）</h4><div class="blk-b"><p>引流帖发完，<strong>本周的 GitHub 公开运营基本完成</strong>。提醒自己：<strong>引流是副线，到此为止——接下来（D217 及 M9）的重心是研究主线（第二篇完稿、M9-M12 规划）</strong>。别让运营/社区互动持续占用研究时间。</p>
+<ul>
+<li><strong>★ 守住定位（运营是放大，不是主业）</strong>：这几天的公开运营（仓库公开、Colab、引流帖）是把强作品放大，做完就收手。<strong>你的核心竞争力始终是研究产出（论文、课题），不是 star 数或粉丝数</strong>。引流帖发完，把注意力收回到第二篇和后续规划上。<strong>适度回应社区反馈（可能有有价值的交流），但别沉迷。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>确认引流帖发完（≥3 平台），仓库公开运营完成。</li>
+<li>适度回应社区反馈（有价值的交流记下来）。</li>
+<li>提醒自己：引流到此为止，重心回归研究主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>GitHub 公开运营完成（仓库公开+Colab+引流帖），明确收尾、回归主线。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>沉迷社区互动/刷数据 → 适度回应，重心是研究；运营后没回归主线 → 明确收尾，D217+M9 转向研究。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>社区互动停不下来?→ 设时间限制，到点回归；有价值的反馈?→ 记下来（可能对研究有启发），但别沉迷。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成运营并回归主线</strong>。<strong>做了</strong>（引流收尾 + 适度回应）、<strong>学了</strong>（运营是放大非主业、做完收手回归研究、别沉迷数据）、<strong>会了</strong>（平衡运营与研究、守住核心）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜引流帖（故事性+多平台+控时）</strong>：标题/内容要有故事性(讲“你怎么从零做到的”转型故事&gt;自夸方法，你的真实经历是天然优势)。多平台（知乎/Reddit英文/小红书/公众号）从核心内容改写、都带链接。★定位6.5：集中一天搞定，别追爆款涨粉偏离主线，做完回归研究。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 知乎帖 ✅ Reddit 帖 ✅ 其他平台引流帖。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D216</summary><textarea data-note="d216" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d217" data-d="217"><header class="day-head"><span class="dnum">D217</span><h2 class="day-t">周日 · （月复盘日）· 联系公众号 + W32 复盘 + M8 月复盘 + M9–M12 计划</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周收尾、M8 收官：联系1-2个遥感公众号转发（副线）;W32周报 + M8月度复盘（战略检视）；制定M9-M12计划。</p>
+<p><strong>预期管理</strong>:M8收官日：联系公众号 + W32复盘 + M8月复盘 + M9-M12计划。提醒：联系1-2个遥感CV公众号看是否愿转发（副线、可选）；<strong>M8月复盘要做“战略检视”</strong>——不只盘点产出（竞赛收口+第二课题v1-v3+仓库公开），还要检视第一篇审稿进展、第二篇进度、整体是否在通往空天院的轨道上；制定M9-M12计划（第二篇完稿投稿+第三课题酝酿+首批联系老师的准备）；这是阶段二前半(M5-M8)的收官，你已从“能独立做研究”迈向“能持续产出+有对外作品集”。</p>
+</blockquote>
+</div><section class="slot" id="d217-am" data-d="217" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D217 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">联系遥感公众号（副线）+ W32 周报</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（联系公众号是副线）</h4><div class="blk-b"><p>联系 1–2 个遥感 CV 相关的公众号，看他们是否愿意转发你的工作（进一步引流）。<strong>这是副线、可选</strong>——愿意转最好，不愿意也无妨，别花太多精力。然后做 W32 周报。</p>
+<ul>
+<li><strong>联系公众号（轻量、可选）</strong>：遥感 CV 领域有一些公众号会分享好的工作/项目，礼貌地联系 1-2 个、附上你的仓库/帖子链接，看是否愿转发。<strong>这是顺手的引流尝试，成了是锦上添花，不成也没关系</strong>——别为此投入过多。</li>
+<li><strong>W32 周报</strong>：记本周产出（第二课题深化 + GitHub 公开运营）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>联系 1-2 个遥感 CV 公众号（礼貌+链接，看是否愿转发）。副线、可选。</li>
+<li>做 W32 周报（第二课题深化 + 运营）。</li>
+<li>别为联系公众号投入过多。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>联系了 1-2 个公众号（副线）;W32 周报完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>把联系公众号/运营当 M8 重点 → 它是副线；M8 核心是竞赛收口+第二课题 v1-v3+仓库公开；周报流水账 → 记关键产出。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>公众号不回/不愿转?→ 正常，副线不强求，你的核心是研究产出；不知联系哪些?→ 你关注的遥感 CV 公众号。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>轻量联系公众号 + 周报</strong>。<strong>做了</strong>（联系公众号 + W32 周报）、<strong>学了</strong>（联系公众号是副线可选、别本末倒置）、<strong>会了</strong>（把对外连接摆在副线位置）。</p>
+</div></section></section><section class="slot" id="d217-noon" data-d="217" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D217 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">M8 月度复盘（战略检视）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(M8 月复盘 = 盘点产出 + 战略检视)</h4><div class="blk-b"><p>做 <strong>M8 月度复盘</strong>——这是阶段二前半(M5-M8)的收官。<strong>不只盘点本月产出，更要做“战略检视”</strong>。</p>
+<ul>
+<li><strong>盘点本月产出(M8)</strong>:① 竞赛收口（技术报告 + 开源 + 适度分享）;② 第二课题立项 + 推进（从 Limitation 挖题 → Proposal → v1-v3 → 三数据集 → 第二篇骨架）;③ GitHub 仓库公开运营（门面级 README + Colab + 引流）。<strong>M8 你完成了竞赛的圆满收口和第二课题的快速推进。</strong></li>
+<li><strong>★ 战略检视（更重要）</strong>：盘点产出之外，<strong>检视你整体是否在通往目标（空天院）的轨道上</strong>——① <strong>第一篇审稿进展</strong>（投稿后到哪了？Under Review / Revision?）;② <strong>第二篇进度</strong>（已到 Method + Experiment 骨架，M9 能否完稿投稿?）;③ <strong>整体定位</strong>(你的“系列工作”[第一篇 + 第二篇]是否在围绕你的发力线[旋转检测/跨域泛化/SAR 难题]深耕、对接空天院方向?);④ <strong>能力成长</strong>（你已从“能独立做研究”到“能持续产出+有作品集”，下一步该补什么?）。<strong>战略检视让你不只是埋头做，而是定期抬头看路、确认方向。</strong></li>
+<li><strong>阶段二前半(M5-M8)的意义</strong>：这 4 个月你完成了<strong>第一篇完整论文并投稿 + 一个竞赛收口 + 第二课题推进到 v1-v3 + 开源仓库公开</strong>——你已从“能独立做研究”迈向“<strong>能持续产出可投稿成果 + 有对外可见的作品集</strong>”。这是质的跨越。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>盘点 M8 产出（竞赛收口 + 第二课题 v1-v3 + 仓库公开）。</li>
+<li>★战略检视：第一篇审稿进展、第二篇进度、整体定位是否在轨、能力成长。</li>
+<li>写 M8 月报（总账 + 战略检视）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M8 月报（阶段二前半总账 + 战略检视：审稿/第二篇/定位/成长）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>月复盘只盘点不战略检视 → 战略检视（是否在通往空天院的轨道上）更重要；不检视方向 → 定期抬头看路，确认定位。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>战略检视无从下手?→ 问四个问题（第一篇审稿？第二篇进度？定位在轨？该补什么?）；觉得进度慢?→ 对照你的起点（零基础），你已完成第一篇投稿+第二课题，是巨大进步。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了 M8 月复盘 + 战略检视</strong>。<strong>做了</strong>（盘点产出 + 战略检视 + M8 月报）、<strong>学了</strong>（月复盘要战略检视、定期抬头看路、阶段二前半的质变）、<strong>会了</strong>（从战略高度检视自己的科研进展）。</p>
+</div></section></section><section class="slot" id="d217-pm" data-d="217" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D217 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">制定 M9–M12 计划</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M9-M12：产出期下半场）</h4><div class="blk-b"><p>制定 <strong>M9–M12 计划</strong>（阶段二后半）——核心方向：<strong>第二篇论文完稿投稿 + 第三课题酝酿 + 开源持续运营 + 首批联系老师的准备（围绕你已有的硬成果联系空天院方向）</strong>。</p>
+<ul>
+<li><strong>M9-M12 的核心任务</strong>:① <strong>第二篇完稿投稿</strong>（M9 完善第二篇 Intro/Related/Conclusion → 打磨 → 投稿，复用第一篇投稿经验，更快）;② <strong>第三课题酝酿</strong>（继续从你的研究线延伸，可能更深入 SAR 难题/跨域泛化）;③ <strong>开源持续运营</strong>（维护仓库，副线）;④ <strong>★首批联系老师的准备</strong>——你现在已有“第一篇论文（投稿/可能录用）+ 第二篇（在做）+ 开源作品集”这些硬成果，M9-M12 可以<strong>开始准备围绕这些成果联系空天院方向的老师</strong>（孙显/付琨/王超组）。<strong>真正的破冰是“围绕他们方向、用你的硬成果建立联系”，而非空泛的自我介绍。</strong></li>
+<li><strong>首批联系老师的逻辑（★重要）</strong>：你联系空天院老师的底气，来自你<strong>实打实的、与他们方向相关的工作</strong>——你做了旋转检测（系列）、在往 SAR 难题/跨域泛化方向深耕（对接王超组）、有开源作品集。<strong>带着这些具体成果联系（&quot;我做了 XX 工作，和您 YY 方向相关，开源在此，想请教/探讨&quot;），比&quot;我很想加入您的组&quot;有说服力得多</strong>。M9-M12 准备这个（明确你的成果亮点、找准对接点），是为后续真正联系打基础。</li>
+<li><strong>为什么“用成果说话”对你这种背景尤其重要</strong>：你没有名校光环、没有强力推荐人（导师不支持）、是跨专业转型——<strong>在传统的“看出身/看推荐”的筛选下，你可能不占优势。但“用硬成果说话”恰恰能绕过这些劣势</strong>：一个空天院的老师看到“这个人虽然背景普通，但独立做出了两篇相关方向的论文、有清晰可复现的开源工作、还在往我们关心的 SAR 难题深耕”，会被你的实力和潜力打动——成果是不看出身的硬通货。<strong>这正是你这条“用扎实工作建立连接”的路线最有力的地方</strong>：你把命运的主动权，从“别人是否赏识我的背景”，转移到了“我能否做出让人无法忽视的工作”上。M9-M12 开始准备联系，不是去“求”someone 收留，而是带着你的作品集去“展示和探讨”——这种底气，是你过去一年一篇篇论文、一行行代码挣来的。</li>
+<li><strong>M9-M12 是产出期收官</strong>：这 4 个月把第二篇做完投出去、酝酿第三课题、开始对接空天院——产出期(M5-M12)圆满收官，为阶段三（M13-M18 冲刺更高目标）打基础。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制定 M9-M12 计划框架（第二篇完稿投稿 + 第三课题酝酿 + 开源运营 + ★首批联系老师准备）。</li>
+<li>明确各月重点（M9 第二篇完稿、M10-11 投稿+第三课题、M12 联系准备+阶段小结）。</li>
+<li>★梳理你联系空天院的成果亮点和对接点。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M9-M12 计划框架（第二篇投稿 + 第三课题 + 开源 + 联系老师准备），各月重点明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>M9-M12 没规划联系老师 → 你已有硬成果，该开始准备对接空天院（围绕成果）；联系逻辑空泛 → 带具体成果+对接点（而非空泛自我介绍）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>M9-M12 不知怎么排?→ 第二篇完稿投稿（主线）+ 第三课题 + 联系准备；联系老师没底气?→ 你有第一篇+第二篇+开源作品集，这就是底气，围绕成果联系。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>制定了 M9-M12 计划（含联系老师准备）</strong>。<strong>做了</strong>（M9-M12 计划 + 梳理联系成果）、<strong>学了</strong>（产出期下半场任务、首批联系老师要围绕硬成果、对接空天院方向）、<strong>会了</strong>（规划产出期收官和向空天院对接）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜M8月复盘+战略检视+M9-M12规划</strong>：月复盘不只盘点产出，更要战略检视（第一篇审稿？第二篇进度？定位在轨？该补什么?）。阶段二前半(M5-M8)：从“能独立做研究”到“能持续产出+有作品集”。M9-M12：第二篇完稿投稿+第三课题+★首批联系空天院老师准备（围绕你的硬成果和对接点，而非空泛自我介绍）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ <strong>M8 月报</strong>（战略检视） ✅ M9–M12 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ M8-W32 累计交付</h2><p>第二课题深化（方法 v3 + v1/v2/v3 三版对比 + 第三数据集验证 + 三数据集大表 + 第二篇 Experiment 骨架 + 诚实可视化）、GitHub 仓库正式公开运营(改名公开化 + 门面级双语 README + 架构图 + 演示 GIF + Quick Start + Colab demo + model card + 一键复现脚本)、引流帖（知乎方法解读 + Reddit 英文 + 其他平台，故事性）、联系公众号（副线）、W32 周报 + <strong>M8 月报（战略检视）</strong> + M9–M12 计划。本周你完成了 <strong>M8 收官、阶段二前半(M5-M8)收官</strong>——核心是把第二课题快速推进到有完整证据（三数据集大表 + 第二篇骨架，复用红利贯穿）、把开源仓库做到<strong>门面级、零门槛、正式公开运营</strong>（同时守住“运营是放大非主业、未发表核心代码延后开源”的原则）、并做了 <strong>M8 月复盘的战略检视 + M9-M12 规划</strong>（含首批联系空天院老师的准备）。</p>
+</section><section class="wtail"><h2>🎓 M8-W32 + M8 全月能力总览</h2><p><strong>本周新增能力</strong>：</p>
+<ul>
+<li>第二课题深化(v3 打磨到最优、三版对比展示迭代、三数据集大表=跨域泛化扎实证据)</li>
+<li>第二篇 Experiment（复用结构）+ 诚实可视化（正面/负面/困难案例）</li>
+<li><strong>门面级开源运营</strong>：双语 README + 架构图 + GIF + Quick Start + Colab demo + model card + 一键复现</li>
+<li><strong>有故事性的引流帖</strong>(转型故事 &gt; 自夸方法，你的真实经历是天然优势，多平台，控时)</li>
+<li>★<strong>未发表核心代码延后开源</strong>的保护意识</li>
+<li><strong>M8 月复盘的战略检视</strong> + M9-M12 规划（含首批联系空天院老师准备）</li>
+</ul>
+<p><strong>M8 全月能力总览</strong>：</p>
+<ul>
+<li><strong>竞赛收口</strong>：技术报告、开源仓库、社区分享（副线）</li>
+<li><strong>第二课题</strong>：从 Limitation 挖题成“系列”、复用框架加速（4 个月 vs 8 个月）、v1–v3 + 三数据集 + 第二篇骨架</li>
+<li><strong>开源运营</strong>：门面级仓库（双语/架构图/GIF/Colab/model card/一键复现）、引流帖（故事性）</li>
+<li><strong>★定位与心态</strong>：运营/引流是强作品的自然放大（副线、控时）、未发表核心代码延后开源、节制跟进审稿、可持续性</li>
+</ul>
+<hr />
+</section><section class="wtail"><h2>🏁 阶段二前半（M5–M8）收官小结</h2><p>你在产出期前 4 个月完成了：<strong>三数据集大规模主实验 + 8 类消融 → 第一篇完整论文并正式投稿（IEEE 期刊）+ arXiv；一个竞赛从进场到冲刺、收口并开源技术报告；第二课题从 Limitation 立项并推进到 v1–v3 + 三数据集 + 第二篇骨架；GitHub 仓库门面级公开运营。</strong> 你已从“能独立做研究”迈向“<strong>能持续产出可投稿成果 + 有对外可见的作品集</strong>”——这是质的跨越。更重要的是，你在这个过程中内化了一整套研究能力（选题/实验/写作/投稿/开源），并验证了“复利效应”（第二篇明显快于第一篇），这意味着你后续的产出会越来越高效。</p>
+<blockquote class="quote">
+<p><strong>下一阶段预告（M9–M12，阶段二后半）</strong>：<strong>第二篇论文完稿投稿 + 第三课题酝酿 + 开源持续运营 + 首批冷邮件（围绕你已有的硬成果联系空天院方向的老师）</strong>。带教手册会继续把 M9–M12 逐周重写成「教-学-做」，补齐整个阶段二，然后进入阶段三(M13–M18)、阶段四(M19–M24)，最终合成全程总包。<strong>你已经走完了从“零基础”到“有两篇论文在手、有开源作品集、准备对接空天院”的关键一程——继续往前，目标在望。</strong></p>
+</blockquote>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D217</summary><textarea data-note="d217" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 M8-W32 加厚补充包（范例 / 实用工具+代码 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — 门面级README + model card + 引流帖 + M8月复盘</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># 门面级 README 结构（仓库门面）</span>
+<span class="gh"># Awesome-RemoteSensing-CV-from-General-CV  ←有信息量的名字</span>
+[English] | [中文]  ←双语
+<span class="k">&gt; </span><span class="ge">一句话定位 + 演示GIF + Colab徽章</span>
+<span class="gu">## ✨ Features  ## 🏗️ Architecture（架构图）</span>
+<span class="gu">## 🚀 Quick Start（clone→pip install→下数据→bash reproduce.sh）</span>
+<span class="gu">## 📊 Results（三数据集大表）  ## 📝 Citation</span>
+★未发表的第二篇核心方法代码：等论文录用后再放，先放第一篇+工具
+
+<span class="gh"># model card（模型说明书）</span>
+模型：遥感旋转检测器 | 训练数据：DOTA等 | 评估：3数据集mAP
+用途：光学/SAR遥感旋转目标检测 | 局限：极端speckle/超密集场景表现下降
+
+<span class="gh"># 引流帖标题对比（故事性 &gt; 自夸）</span>
+✗ &quot;我的遥感旋转检测论文方法介绍&quot;（自夸，没人点）
+✅ &quot;从零基础到遥感CV论文——我的12个月转型记录&quot;（故事，有共鸣）
+内容：讲&quot;怎么做到的&quot;(历程+坑+转折)，技术编织进故事，带链接
+
+<span class="gh"># M8月复盘（盘点产出 + ★战略检视）</span>
+产出：竞赛收口 + 第二课题v1-v3+三数据集 + 仓库公开运营
+战略检视：①第一篇审稿到哪？②第二篇M9能完稿投稿吗？
+         ③系列工作是否对接空天院方向(旋转检测/跨域泛化/SAR)？④该补什么？
+M9-M12：第二篇完稿投稿 + 第三课题 + ★首批联系空天院老师准备(围绕硬成果)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 一键复现脚本 + Colab demo 骨架</h2>
+<figure class="code" data-lang="bash"><pre><code><span class="c1"># scripts/reproduce.sh（一键复现，可复现性最高体现）</span>
+<span class="c1">#!/bin/bash</span>
+<span class="nb">set</span><span class="w"> </span>-e
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[1/4] 安装依赖&quot;</span><span class="p">;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[2/4] 下载数据/模型&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>tools/download.py<span class="w"> </span>--data<span class="w"> </span>dota<span class="w"> </span>--ckpt<span class="w"> </span>best
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[3/4] 评测（或加 --train 从头训练）&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>tools/test.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--config<span class="w"> </span>configs/final.py<span class="w"> </span>--ckpt<span class="w"> </span>checkpoints/best.pth<span class="w"> </span>--out<span class="w"> </span>results/
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;[4/4] 汇总结果&quot;</span><span class="p">;</span><span class="w"> </span>python<span class="w"> </span>tools/summarize.py<span class="w"> </span>results/
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ 复现完成，结果见 results/（应与论文Table一致）&quot;</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># Colab demo notebook 骨架（零门槛在线跑，无需本地GPU）</span>
+<span class="c1"># !pip install -q -r requirements.txt          # Colab安装</span>
+<span class="c1"># !wget -q &lt;model_url&gt; -O best.pth             # 下预训练模型</span>
+<span class="c1"># from infer import load_model, predict, visualize</span>
+<span class="c1"># model = load_model(&quot;best.pth&quot;)</span>
+<span class="c1"># img = &quot;examples/demo.png&quot;                     # 示例图</span>
+<span class="c1"># result = predict(model, img); visualize(img, result)  # 推理+可视化</span>
+<span class="c1"># → 别人点开Colab徽章就能跑，看到你方法的效果（吸引star关键）</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① reproduce.sh 一条命令复现论文结果（可复现性最高体现）;② Colab demo 让任何人无需 GPU 点开就跑、看效果（门槛越低用的人越多）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D211</strong>：① v3 的定位是什么（打磨到最优还是颠覆）？② 为什么第三版迭代已“一条龙”（复用红利）？③ v3 没比 v2 好怎么办？</li>
+<li><strong>D212</strong>：① 三版对比展示什么（迭代轨迹+故事）？② 为什么验证到三个数据集（泛化证据）？③ 三数据集大表整合哪四部分？</li>
+<li><strong>D213</strong>：① Experiment 复用第一篇什么结构(4.1-4.5)？② 可视化为什么要含负面/困难案例(诚实=严谨)？</li>
+<li><strong>D214</strong>：① 仓库公开后“引流黄金期”是什么、怎么做（24h内3社区）？② ★为什么未发表核心代码要延后开源？③ 门面级 README 有哪些要素？</li>
+<li><strong>D215</strong>：① 为什么 Colab demo 是吸引 star 的“杀手锏”（零门槛）？② model card 写什么（五要素）？③ reproduce.sh 的价值（可复现性）？</li>
+<li><strong>D216</strong>：① 引流帖标题为什么要故事性而非自夸方法？② 内容要讲什么（你怎么做到的）、为什么这是你的优势（真实转型经历）？③ ★为什么要控时（定位6.5）？</li>
+<li><strong>D217</strong>：① M8 月复盘除了盘点还要做什么（★战略检视：哪四点）？② 阶段二前半(M5-M8)你达成了什么质变？③ ★M9-M12 联系空天院老师的逻辑是什么（围绕硬成果而非空泛自我介绍）？为什么“用成果说话”对你的背景尤其重要？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v3为求颠覆大改翻车</td>
+<td>定位错</td>
+<td>v3是精益求精打磨到最优，不必颠覆；没比v2好就用v2</td>
+</tr>
+<tr>
+<td>只报最优版不展示迭代</td>
+<td>缺故事性</td>
+<td>三版对比(v1/v2/v3)展示迭代轨迹和演进逻辑</td>
+</tr>
+<tr>
+<td>可视化只放完美正面案例</td>
+<td>不够诚实</td>
+<td>含负面/困难案例=诚实=严谨=可信</td>
+</tr>
+<tr>
+<td>公开了未发表核心代码</td>
+<td>缺保护意识</td>
+<td>★第二篇核心代码等录用后放，先放第一篇+工具</td>
+</tr>
+<tr>
+<td>README简陋没人star</td>
+<td>门面差</td>
+<td>门面级：双语+架构图+GIF+Quick Start+Colab</td>
+</tr>
+<tr>
+<td>开源项目没人用</td>
+<td>复现门槛高</td>
+<td>Colab demo（零门槛）+一键reproduce.sh+model card</td>
+</tr>
+<tr>
+<td>引流帖没传播</td>
+<td>只自夸方法</td>
+<td>故事性标题+讲“你怎么做到的”（转型故事有共鸣）</td>
+</tr>
+<tr>
+<td>运营/引流变成主业</td>
+<td>本末倒置</td>
+<td>★定位6.5：副线控时（集中一天），核心是研究产出</td>
+</tr>
+<tr>
+<td>月复盘只盘点不看路</td>
+<td>缺战略视角</td>
+<td>★战略检视：审稿/第二篇/定位在轨/该补什么</td>
+</tr>
+<tr>
+<td>联系空天院老师没底气</td>
+<td>逻辑空泛</td>
+<td>围绕你的硬成果（两篇+开源）和对接点联系，而非空泛自我介绍</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>复盘</h4><p>月复盘用 <a href="../appendix-e.html">附录 E</a> 的模板。周复盘问"我做完了吗"，<b>月复盘问"方向对不对、节奏能不能持续"</b>。</p></section>
+<div class="pager"><a class="prev" href="w31.html"><span class="dir">← 上一篇</span><span class="nm">W31 第二课题快速推进</span></a><a class="next" href="w33.html"><span class="dir">下一篇 →</span><span class="nm">W33 第二课题 baseline 全面铺开 —</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d211">D211 周一</a><a class="sub" href="#d211-am">上午 设计 + 实现方法 v3</a><a class="sub" href="#d211-noon">中午 启动 v3 训练</a><a class="sub" href="#d211-pm">晚上 监控 v3 + 准备三版对比</a><a href="#d212">D212 周二</a><a class="sub" href="#d212-am">上午 v3 结果分析 + 三版对比(v</a><a class="sub" href="#d212-noon">中午 第三个数据集验证</a><a class="sub" href="#d212-pm">晚上 整合三数据集大表</a><a href="#d213">D213 周三</a><a class="sub" href="#d213-am">上午 写第二篇 Experiment </a><a class="sub" href="#d213-noon">中午 制作可视化对比图（正面/负面/困</a><a class="sub" href="#d213-pm">晚上 继续写第二篇论文</a><a href="#d214">D214 周四</a><a class="sub" href="#d214-am">上午 仓库改名 + 公开化（★保护意识</a><a class="sub" href="#d214-noon">中午 完善 README（中英双语 +</a><a class="sub" href="#d214-pm">晚上 加 Quick Start（一键</a><a href="#d215">D215 周五</a><a class="sub" href="#d215-am">上午 加 Colab demo not</a><a class="sub" href="#d215-noon">中午 加 model card</a><a class="sub" href="#d215-pm">晚上 加一键复现脚本 reproduc</a><a href="#d216">D216 周六</a><a class="sub" href="#d216-am">上午 写知乎“方法解读”帖（故事性标题</a><a class="sub" href="#d216-noon">中午 发 Reddit 英文帖 + 其</a><a class="sub" href="#d216-pm">晚上 引流收尾 + 回归主线</a><a href="#d217">D217 周日</a><a class="sub" href="#d217-am">上午 联系遥感公众号（副线）+ W32</a><a class="sub" href="#d217-noon">中午 M8 月度复盘（战略检视）</a><a class="sub" href="#d217-pm">晚上 制定 M9–M12 计划</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

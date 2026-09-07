@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="4" data-week="91">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W91 · 博士论文总结章+全文通读第一遍（目标 75% 完 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段四 · 冲刺期</span><span>M22 offer 落定 + 博士论文推进</span><span>·</span><span>Week 91</span><span>·</span><span>D631–D637</span></div><h1 class="title">博士论文总结章+全文通读第一遍（目标 75% 完成）+ 遥感（检查所有论文最终状态+GitHub 更新）+ M22 月度复盘（对照硬交付 4 项）</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆 · 单周文件 · 🎯M22 收官周 / 博士论文 75%+全文通读 + 遥感检查 + M22 月复盘）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="631" data-k="am" title="D631 上午段"></i><i data-d="631" data-k="noon" title="D631 中午段"></i><i data-d="631" data-k="pm" title="D631 晚上段"></i></span><span class="sday"><i data-d="632" data-k="am" title="D632 上午段"></i><i data-d="632" data-k="noon" title="D632 中午段"></i><i data-d="632" data-k="pm" title="D632 晚上段"></i></span><span class="sday"><i data-d="633" data-k="am" title="D633 上午段"></i><i data-d="633" data-k="noon" title="D633 中午段"></i><i data-d="633" data-k="pm" title="D633 晚上段"></i></span><span class="sday"><i data-d="634" data-k="am" title="D634 上午段"></i><i data-d="634" data-k="noon" title="D634 中午段"></i><i data-d="634" data-k="pm" title="D634 晚上段"></i></span><span class="sday"><i data-d="635" data-k="am" title="D635 上午段"></i><i data-d="635" data-k="noon" title="D635 中午段"></i><i data-d="635" data-k="pm" title="D635 晚上段"></i></span><span class="sday"><i data-d="636" data-k="am" title="D636 上午段"></i><i data-d="636" data-k="noon" title="D636 中午段"></i><i data-d="636" data-k="pm" title="D636 晚上段"></i></span><span class="sday"><i data-d="637" data-k="am" title="D637 上午段"></i><i data-d="637" data-k="noon" title="D637 中午段"></i><i data-d="637" data-k="pm" title="D637 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：欢迎进入 <strong>M22 / W91（M22 收官周）</strong>——上周（W90）你博士论文冲刺到 65%（核心全部完成）、入职准备启动。本周是 M22（offer 决策+博士论文冲刺月）的收官，三件事：① ★ <strong>博士论文总结章+全文通读第一遍</strong>（目标 75% 完成）；② ★ <strong>遥感</strong>（检查所有论文最终状态+GitHub 更新）；③ ★ <strong>M22 月度复盘</strong>（周日·对照 M22 硬交付 4 项）。★ W91 的主线：“给 M22 画句号——博士论文总结章完善+全文通读第一遍[目标 75%]、遥感成果收尾性检查[论文最终状态+GitHub 更新]，对照硬交付做 M22 月复盘，进入 M23[博士论文完稿+遥感成果收尾]。”
+<strong>本周科研能力目标</strong>（你原计划，保留）：博士论文总结章+全文通读第一遍（目标 75%）+遥感（检查所有论文最终状态+GitHub 更新）+M22 月度复盘。
+<strong>承上</strong>：W90 你博士论文 65%（核心全部完成）+入职准备启动。<strong>本周 M22 收官：博士论文 75%+全文通读+遥感检查+M22 月复盘。</strong></p>
+<p><strong>🧩 贯穿线索</strong>：★ <strong>博士论文 75%+全文通读是 W91 重点之一</strong>——① ★ <strong>总结章完善</strong>（★ 博士论文总结章[Conclusion+Future Work]完善——总结全文贡献、展望未来，总结章质量提升）；② ★ <strong>全文通读第一遍</strong>（★ 全文通读第一遍：从头到尾读一遍整篇博士论文[引言→综述→方法→实验→总结展望]——★ 通读发现问题[逻辑/衔接/表达/格式]并修改，整体把握和提升）；③ ★ <strong>目标 75% 完成</strong>（★ 本周目标博士论文 75% 完成——总结章完善+全文通读第一遍[修改提升]，博士论文向 75% 推进）；④ ★ <strong>博士论文是博士原方向</strong>（博士论文写博士原方向、博士毕业靠它）。★ <strong>遥感（检查所有论文最终状态+GitHub 更新）</strong>：① ★ <strong>检查所有论文最终状态</strong>（★ 检查你的遥感论文[第一/二/三篇]的最终状态：接收了吗[第一篇]、在审/返修到哪了[第二篇]、有结果了吗[第三篇空天院合作]——遥感论文最终状态）；② ★ <strong>GitHub 更新</strong>（★ GitHub 更新[遥感项目代码、README、文档]——遥感开源成果维护）；③ ★ <strong>遥感成果收尾性维护</strong>（★ M22-23 遥感逐渐收尾——本周检查论文最终状态+GitHub 更新，遥感成果收尾性维护[为求职/简历最终呈现]）。★ <strong>M22 月度复盘</strong>（对照硬交付 4 项）：① Offer 确认（已接受空天院或 Plan B offer）；② 婉拒其他 offer（礼貌邮件）；③ 博士论文完成~75%；④ 入职所需材料清单+开始准备——逐项对照。★ <strong>博士论文与遥感两条线</strong>：★ 博士论文[博士原方向]向 75%[博士线]、遥感成果检查维护[遥感线、求职资本]——两线并行收尾。★ <strong>时间分配（M22 博士论文冲刺为主+遥感维护）</strong>：博士论文重心、遥感维护占小部分。★★ <strong>远程合作模式</strong>：博士论文、遥感、月复盘照常。守核心延后照旧。下一程（W92 起，M23）：★ 博士论文完稿（W92-93 博士论文 90%）+遥感成果收尾（论文全部有结果、GitHub/主页最终整理，★W94 博士论文提交）。</p>
+<p><strong>📌 本周结构</strong>：D631 博士论文总结章（完善）+ 遥感（检查所有论文最终状态）+ 博士论文全文通读第一遍（起步）；D632 博士论文全文通读第一遍（推进，改问题）+ 遥感（GitHub 更新）+ 博士论文（向 75%）；D633 博士论文全文通读（完成第一遍）+ 博士论文进度盘点（向 75%）+ 博士论文（完善）；D634 博士论文（完成 75%）+ 遥感成果最终状态确认 + 博士论文（75% 确认）；D635 博士论文 M22 阶段成果整理（为月复盘）+ M22 硬交付对照准备 + 博士论文（整理）；D636 机动（博士论文/遥感/入职）+ M22 硬交付对照准备（续）+ 个人调整；D637 M22 月度复盘（对照硬交付 4 项）+ 计划 W92（进入 M23 博士论文完稿月）。</p>
+</blockquote>
+<hr />
+<h2>🧭 W91 总览：M22 收官——博士论文 75%+全文通读 + 遥感检查 + M22 月复盘</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这一周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>博士论文总结章完善+全文通读第一遍</td>
+<td>博士论文 75%</td>
+<td>博士毕业冲刺</td>
+</tr>
+<tr>
+<td>全文通读第一遍（改问题）</td>
+<td>整体把握和提升</td>
+<td>论文质量</td>
+</tr>
+<tr>
+<td>遥感（检查论文最终状态+GitHub）</td>
+<td>遥感成果维护</td>
+<td>求职资本</td>
+</tr>
+<tr>
+<td>M22 月度复盘（对照硬交付 4 项）</td>
+<td>M22 收官确认</td>
+<td>确认 offer+博士进度</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：核心是 <strong>M22 收官</strong>。① ★ <strong>博士论文 75%+全文通读</strong>：总结章完善+全文通读第一遍（从头到尾读、改问题、整体提升）——目标博士论文 75% 完成。② ★ <strong>遥感（检查论文最终状态+GitHub 更新）</strong>：遥感成果收尾性维护（论文最终状态+GitHub 更新，求职资本）。③ ★ <strong>M22 月度复盘</strong>：对照硬交付 4 项[Offer 确认/婉拒其他/博士论文~75%/入职材料清单+开始准备]。④ ★ <strong>时间分配（M22 博士论文冲刺为主+遥感维护）</strong>。★★ 远程模式：照常。★ 走完这一周，M22（offer 决策+博士论文冲刺月）收官——博士论文向 75%（总结章完善+全文通读提升）、遥感成果维护好，进入 M23（博士论文完稿+遥感成果收尾）。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d631" data-d="631"><header class="day-head"><span class="dnum">D631</span><h2 class="day-t">周一 · 博士论文总结章（完善）+ 遥感（检查所有论文最终状态）+ 博士论文全文通读第一遍（起步）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 第一天——① 上午<strong>博士论文总结章（完善）</strong>；② 中午<strong>遥感（检查所有论文最终状态）</strong>；③ 晚上<strong>博士论文全文通读第一遍（起步）</strong>。提醒：★ 总结章完善。★ 检查遥感论文最终状态。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d631-am" data-d="631" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D631 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">博士论文总结章（完善）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（总结章完善）</h4><div class="blk-b"><ul>
+<li>上午<strong>博士论文总结章（完善）</strong>——① ★ <strong>总结章完善</strong>（★ 博士论文总结章[Conclusion+Future Work，W87 写过]完善：总结全文贡献更精炼有高度、展望未来更有价值——总结章质量提升）；② ★ <strong>总结章和全文呼应</strong>（★ 总结章要和全文呼应[总结的贡献对应方法章/实验章的工作、展望基于研究]——呼应一致）；③ ★ <strong>总结章高度</strong>（★ 总结章要有高度[提炼研究的整体贡献和意义，不只是罗列]——博士论文的收束有高度）；④ <strong>总结章就绪</strong>（总结章完善——博士论文总结部分就绪）。② ★ 总结章完善——质量提升、有高度、和全文呼应。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 总结章完善（贡献精炼+展望有价值）；② ★ 总结章和全文呼应；③ ★ 总结章高度（提炼整体贡献和意义）；④ 总结章就绪。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>总结章完善——完善、和全文呼应、有高度，总结章就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>总结章只罗列（没高度）→ ★ 提炼整体贡献和意义。</li>
+<li>总结章和全文不呼应 → ★ 呼应一致。</li>
+<li>总结章不完善（粗）→ ★ 完善、质量提升。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>总结章完善什么？→ 贡献精炼有高度+展望有价值；和全文?→ 呼应（贡献对应工作、展望基于研究）；有高度?→ 提炼整体贡献和意义、不罗列。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了总结章</strong>。<strong>做了</strong>（总结章完善 + 和全文呼应 + 有高度 + 就绪）、<strong>学了</strong>（总结章完善、有高度、和全文呼应）、<strong>会了</strong>（完善博士论文总结章）。</p>
+</div></section></section><section class="slot" id="d631-noon" data-d="631" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D631 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">遥感（检查所有论文最终状态）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（遥感：检查论文最终状态）</h4><div class="blk-b"><ul>
+<li>中午<strong>遥感（检查所有论文最终状态）</strong>——① ★ <strong>检查所有论文最终状态</strong>（★ 检查你的遥感论文[第一/二/三篇]的最终状态：第一篇[接收了吗/已发表？]、第二篇[在审/返修/接收？]、第三篇[空天院合作，进展/接收？]——逐个检查最终状态）；② ★ <strong>论文状态对简历的意义</strong>（★ 论文最终状态[已接收/已发表的论文是求职简历的硬通货]——检查清楚，简历最终呈现准确[如“已发表 X 篇、在审 X 篇”]）；③ ★ <strong>有进展→更新简历/主页</strong>（★ 如论文有新进展[接收/发表]→更新简历/个人主页[体现最新成果]——遥感成果最终呈现）；④ <strong>遥感成果维护</strong>（检查论文最终状态——遥感成果[求职资本]维护）。② ★ 检查所有论文最终状态——简历最终呈现准确、求职资本维护。</li>
+<li>★ <strong>和你的论文管理功底对接</strong>：你建过论文状态总览表；检查论文最终状态是收尾性的状态确认。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 检查所有论文最终状态（第一/二/三篇）；② ★ 论文状态对简历的意义（硬通货、简历准确）；③ ★ 有进展→更新简历/主页；④ 遥感成果维护。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>检查论文最终状态——检查了所有论文最终状态、简历准确、有进展更新，遥感成果维护。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不检查最终状态（简历不准）→ ★ 检查清楚；② 有进展不更新简历 → 更新简历/主页。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>论文最终状态？→ 第一/二/三篇逐个检查；意义?→ 简历硬通货、简历最终呈现准确；有进展?→ 更新简历/主页。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>检查了论文最终状态</strong>。<strong>做了</strong>（检查最终状态 + 对简历意义 + 有进展更新 + 遥感维护）、<strong>学了</strong>（论文最终状态、简历准确、遥感维护）、<strong>会了</strong>（检查遥感论文最终状态）。</p>
+</div></section></section><section class="slot" id="d631-pm" data-d="631" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D631 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">博士论文全文通读第一遍（起步）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（全文通读第一遍：整体把握）</h4><div class="blk-b"><ul>
+<li>晚上<strong>博士论文全文通读第一遍（起步）</strong>——① ★ <strong>全文通读第一遍起步</strong>（★ 全文通读第一遍：从头开始读整篇博士论文[引言→综述→方法→实验→总结展望]——通读第一遍起步）；② ★ <strong>通读的目的</strong>（★ 通读第一遍的目的：整体把握[全文是否连贯]、发现问题[逻辑跳跃/衔接生硬/表达不清/格式不统一]、整体提升——不只是读，是边读边发现问题）；③ ★ <strong>边读边标记/修改</strong>（★ 通读时边读边标记问题、能改的当场改[小问题]、复杂的记下后改——通读+修改）；④ <strong>通读起步</strong>（全文通读第一遍起步——博士论文整体提升起步）。② ★ 全文通读第一遍起步——整体把握、发现问题、边读边改。</li>
+<li>★ <strong>和你的审视功底对接</strong>：你审视过论文整体；博士论文全文通读是更大规模的通读，目标 75%（通读修改提升）。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 全文通读第一遍起步（从头读整篇）；② ★ 通读的目的（整体把握+发现问题+提升）；③ ★ 边读边标记/修改（小问题当场改、复杂的记下）；④ 通读起步。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>全文通读起步——通读第一遍起步、明确目的、边读边改，博士论文整体提升起步。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 只读不发现问题（白读）→ ★ 边读边发现问题；② 不修改 → 边读边改。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>全文通读？→ 从头读整篇、整体把握+发现问题（逻辑/衔接/表达/格式）+边读边改；目的?→ 整体提升。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>起步通读了全文</strong>。<strong>做了</strong>（全文通读起步 + 通读目的 + 边读边改 + 起步）、<strong>学了</strong>（全文通读、整体把握、边读边改）、<strong>会了</strong>（博士论文全文通读第一遍）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 博士论文总结章完善+遥感检查论文最终状态+全文通读第一遍起步</strong>：M22收官开局——①总结章完善(★完善[贡献精炼+展望有价值]+★和全文呼应+★有高度[提炼整体贡献和意义])②遥感(★检查所有论文最终状态[第一/二/三篇]+★对简历意义[硬通货、简历准确]+★有进展→更新简历/主页)③全文通读第一遍起步(★从头读整篇+★通读目的[整体把握+发现问题+提升]+★边读边标记/修改)。★ 全文通读发现问题并修改、整体提升。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 博士论文总结章（完善+有高度）✅ 遥感（检查所有论文最终状态+简历准确）✅ 博士论文全文通读第一遍（起步+边读边改）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D631</summary><textarea data-note="d631" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d632" data-d="632"><header class="day-head"><span class="dnum">D632</span><h2 class="day-t">周二 · 博士论文全文通读第一遍（推进，改问题）+ 遥感（GitHub 更新）+ 博士论文（向 75%）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 第二天——① 上午<strong>博士论文全文通读第一遍（推进，改问题）</strong>；② 中午<strong>遥感（GitHub 更新）</strong>；③ 晚上<strong>博士论文（向 75%）</strong>。提醒：★ 全文通读推进、改问题。★ GitHub 更新。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d632-am" data-d="632" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D632 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">博士论文全文通读第一遍（推进，改问题）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>博士论文全文通读第一遍（推进，改问题）</strong>——① ★ <strong>全文通读推进</strong>（★ 继续全文通读第一遍——读完更多章节[如读到方法/实验章]）；② ★ <strong>改问题</strong>（★ 通读发现的问题[逻辑/衔接/表达/格式/数据]→修改：能当场改的改、复杂的记录后改——边通读边改）；③ ★ <strong>整体性提升</strong>（★ 通读修改让博士论文整体性提升[逻辑更连贯、表达更清楚、格式更统一]——整体提升）；④ <strong>通读推进</strong>（全文通读推进+改问题——博士论文整体提升）。② ★ 全文通读推进+改问题——整体性提升。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 全文通读推进（读完更多章节）；② ★ 改问题（能改的改、复杂的记录）；③ ★ 整体性提升；④ 通读推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>全文通读推进——推进、改问题、整体性提升，博士论文整体提升。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 只读不改 → ★ 边读边改；② 改不彻底 → 复杂的记录后改。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>全文通读推进？→ 读完更多章节+改问题（逻辑/衔接/表达/格式/数据）；提升?→ 整体性（连贯/清楚/统一）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了全文通读</strong>。<strong>做了</strong>（全文通读推进 + 改问题 + 整体性提升 + 推进）、<strong>学了</strong>（全文通读推进、改问题、整体提升）、<strong>会了</strong>（推进博士论文全文通读）。</p>
+</div></section></section><section class="slot" id="d632-noon" data-d="632" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D632 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">遥感（GitHub 更新）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>遥感（GitHub 更新）</strong>——① ★ <strong>GitHub 更新</strong>（★ 遥感项目 GitHub 更新：更新 README[最新成果]、代码整理、文档补充、修复 issue——GitHub 保持活跃和专业）；② ★ <strong>GitHub 是求职资本</strong>（★ GitHub 是你技术能力的展示[招聘方/未来同事会看]——保持活跃专业[即使博士论文是博士原方向，遥感 GitHub 支撑遥感求职]）；③ ★ <strong>GitHub 最终呈现</strong>（★ 求职阶段，GitHub 要呈现好[项目完整、文档全、活跃]——遥感开源成果的最终呈现）；④ <strong>遥感成果维护</strong>（GitHub 更新——遥感成果[求职资本]维护）。② ★ GitHub 更新——保持活跃专业、求职资本。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ GitHub 更新（README+代码+文档+issue）；② ★ GitHub 是求职资本（技术能力展示）；③ ★ GitHub 最终呈现（完整+文档全+活跃）；④ 遥感成果维护。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>GitHub 更新——更新了 GitHub、保持活跃专业、最终呈现好，遥感成果维护。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① GitHub 不维护（荒废）→ ★ 更新、保持活跃；② 呈现不专业 → 完整+文档全。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>GitHub更新？→ README+代码+文档+issue、保持活跃专业；为什么?→ 求职资本、技术能力展示。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>更新了 GitHub</strong>。<strong>做了</strong>（GitHub 更新 + 求职资本 + 最终呈现 + 遥感维护）、<strong>学了</strong>（GitHub 更新、求职资本、最终呈现）、<strong>会了</strong>（GitHub 更新维护）。</p>
+</div></section></section><section class="slot" id="d632-pm" data-d="632" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D632 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">博士论文（向 75%）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>博士论文（向 75%）</strong>——① ★ <strong>博士论文向 75% 推进</strong>（★ 总结章完善+全文通读修改——向博士论文 75% 推进[W91 目标]）；② ★ <strong>75% 的内容</strong>（★ 博士论文 75%≈主体完整+总结章完善+全文通读第一遍修改提升——博士论文接近完整）；③ <strong>向博士毕业</strong>（向 75% 推进——向毕业）。② ★ 博士论文向 75% 推进——接近完整、向毕业。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 博士论文向 75% 推进（总结章+全文通读修改）；② ★ 75% 内容（主体完整+总结完善+通读提升）；③ 向博士毕业。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>博士论文向 75%——推进、接近完整，向博士毕业。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 进度慢 → 向 75% 推进。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>向75%？→ 总结章+全文通读修改、接近完整、向毕业。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>向 75% 推进博士论文</strong>。<strong>做了</strong>（向 75% 推进 + 75% 内容 + 向毕业）、<strong>学了</strong>（向 75% 推进、接近完整）、<strong>会了</strong>（博士论文向 75% 推进）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 博士论文全文通读推进（改问题）+遥感GitHub更新+博士论文向75%</strong>：博士提升+遥感维护——①全文通读推进(★读完更多章节+★改问题[能改的改、复杂的记录]+★整体性提升[连贯/清楚/统一])②遥感GitHub更新(★更新[README+代码+文档+issue]+★求职资本[技术能力展示]+★最终呈现[完整+文档全+活跃])③博士论文向75%(★总结章+全文通读修改+★75%内容[主体完整+总结完善+通读提升])。★ 全文通读改问题、整体提升。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 博士论文全文通读第一遍（推进+改问题+整体提升）✅ 遥感（GitHub 更新+求职资本）✅ 博士论文（向 75%）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D632</summary><textarea data-note="d632" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d633" data-d="633"><header class="day-head"><span class="dnum">D633</span><h2 class="day-t">周三 · 博士论文全文通读（完成第一遍）+ 博士论文进度盘点（向 75%）+ 博士论文（完善）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 第三天——① 上午<strong>博士论文全文通读（完成第一遍）</strong>；② 中午<strong>博士论文进度盘点</strong>（向 75%）；③ 晚上<strong>博士论文（完善）</strong>。提醒：★ 全文通读第一遍完成。★ 博士论文向 75% 推进。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d633-am" data-d="633" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D633 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">博士论文全文通读（完成第一遍）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（全文通读第一遍完成）</h4><div class="blk-b"><ul>
+<li>上午<strong>博士论文全文通读（完成第一遍）</strong>——① ★ <strong>全文通读第一遍完成</strong>（★ 完成全文通读第一遍：整篇博士论文[引言→综述→方法→实验→总结展望]从头到尾读完一遍+改了发现的问题——全文通读第一遍完成）；② ★ <strong>整体性大幅提升</strong>（★ 通读第一遍后，博士论文整体性大幅提升[逻辑连贯+各章衔接+表达清楚+格式统一]——一篇连贯的博士论文）；③ ★ <strong>博士论文接近完整</strong>（★ 主体完整+总结完善+全文通读修改——博士论文接近完整[向 75%]）；④ <strong>通读第一遍完成的意义</strong>（★ 全文通读第一遍完成是重要节点[博士论文整体提升、向完稿迈进]）。② ★ 全文通读第一遍完成——整体性大幅提升、博士论文接近完整。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 全文通读第一遍完成（整篇读完+改问题）；② ★ 整体性大幅提升（连贯+衔接+清楚+统一）；③ ★ 博士论文接近完整（向 75%）；④ 通读第一遍完成的意义。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>全文通读完成——第一遍完成、整体性大幅提升、接近完整，重要节点。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 通读没完成 → ★ 完成第一遍；② 整体性没提升 → 通读改问题提升。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>全文通读完成？→ 整篇读完+改问题；提升?→ 整体性大幅提升（连贯/衔接/清楚/统一）；意义?→ 博士论文整体提升、向完稿迈进。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了全文通读第一遍</strong>。<strong>做了</strong>（全文通读完成 + 整体性提升 + 接近完整 + 意义）、<strong>学了</strong>（全文通读完成、整体性大幅提升）、<strong>会了</strong>（完成博士论文全文通读第一遍）。</p>
+</div></section></section><section class="slot" id="d633-noon" data-d="633" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D633 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">博士论文进度盘点（向 75%）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>博士论文进度盘点（向 75%）</strong>——① ★ <strong>盘点博士论文进度</strong>（★ 引言✓+综述✓+方法✓+实验✓+总结展望[完善]+全文通读第一遍[完成]——博士论文进度，估算是否到 75%）；② ★ <strong>对照 M22 目标（~75%）</strong>（★ M22 博士目标~75%——对照看是否达成[到 75% 了吗，全文通读完成后应接近]）；③ ★ <strong>后续规划</strong>（★ W92-93 博士论文 90%→完稿→W94 提交→M24 答辩 W100——博士论文向毕业）；④ <strong>进度清晰</strong>（盘点+对照+规划——博士论文进度清晰）。② ★ 博士论文进度盘点——对照~75% 目标、后续规划。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 盘点博士论文进度（各章+全文通读）；② ★ 对照 M22 目标（~75%）；③ ★ 后续规划（W92-93 90%→完稿→提交→答辩）；④ 进度清晰。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>进度盘点——盘点了进度、对照~75% 目标、后续规划，博士论文进度清晰。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不盘进度 → ★ 盘点+对照；② 不规划后续 → 后续规划。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>到~75%了吗？→ 各章+全文通读第一遍完成、估算；后续?→ W92-93 90%→完稿→W94提交→M24答辩。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>盘点了博士论文进度</strong>。<strong>做了</strong>（盘点进度 + 对照目标 + 后续规划 + 进度清晰）、<strong>学了</strong>（进度盘点、对照~75%、后续规划）、<strong>会了</strong>（博士论文进度盘点）。</p>
+</div></section></section><section class="slot" id="d633-pm" data-d="633" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D633 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">博士论文（完善）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>博士论文（完善）</strong>——① <strong>博士论文完善</strong>（据全文通读发现的问题，进一步完善——博士论文质量）；② ★ <strong>向 75% 完成</strong>（完善后向博士论文 75% 完成[W91 目标]）；③ <strong>博士论文质量</strong>（完善——博士论文质量提升）。② ★ 博士论文完善——向 75% 完成。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 博士论文完善（据通读问题）；② ★ 向 75% 完成；③ 博士论文质量。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>博士论文完善——完善、向 75%，质量提升。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不完善 → 据通读问题完善。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>博士论文完善？→ 据通读问题、向75%、质量。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了博士论文</strong>。<strong>做了</strong>（博士论文完善 + 向 75% + 质量）、<strong>学了</strong>（完善、向 75%）、<strong>会了</strong>（完善博士论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 博士论文全文通读完成+进度盘点（向75%）+完善</strong>：博士提升+里程碑——①全文通读完成(★第一遍完成[整篇读完+改问题]+★整体性大幅提升[连贯+衔接+清楚+统一]+★接近完整[向75%])②博士论文进度盘点(★盘点进度[各章+全文通读]+★对照M22目标[~75%]+★后续规划[W92-93 90%→完稿→W94提交→M24答辩])③博士论文完善（据通读问题+★向75%完成）。★ 全文通读第一遍完成、整体性大幅提升。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 博士论文全文通读（完成第一遍+整体性大幅提升）✅ 博士论文进度盘点（对照~75% 目标+后续规划）✅ 博士论文（完善+向 75%）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D633</summary><textarea data-note="d633" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d634" data-d="634"><header class="day-head"><span class="dnum">D634</span><h2 class="day-t">周四 · 博士论文（完成 75%）+ 遥感成果最终状态确认 + 博士论文（75% 确认）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 第四天——① 上午<strong>博士论文（完成 75%）</strong>；② 中午<strong>遥感成果最终状态确认</strong>；③ 晚上<strong>博士论文（75% 确认）</strong>。提醒：★ 博士论文完成 75%（M22 目标）。★ 遥感成果最终状态确认。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d634-am" data-d="634" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D634 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">博士论文（完成 75%）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（博士论文 75%）</h4><div class="blk-b"><ul>
+<li>上午<strong>博士论文（完成 75%）</strong>——① ★ <strong>博士论文完成 75%</strong>（★ 博士论文完成 75%——M22 目标[~75%]达成；主体完整+总结章完善+全文通读第一遍修改提升，博士论文 75%）；② ★ <strong>75% 的意义</strong>（★ 博士论文 75%≈一篇基本完整、整体连贯的博士论文[只剩进一步打磨/完稿]——博士论文接近完稿）；③ ★ <strong>博士论文进度</strong>（★ W91 75%→M23 90%[W92-93]→完稿→W94 提交→M24 答辩 W100——博士论文向毕业）；④ <strong>博士毕业大步推进</strong>（完成 75%——向博士毕业大步推进）。② ★ 博士论文完成 75%——M22 目标、接近完稿、向毕业。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 博士论文完成 75%（M22 目标）；② ★ 75% 的意义（基本完整、整体连贯、接近完稿）；③ ★ 博士论文进度（向完稿/毕业）；④ 博士毕业大步推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>博士论文完成 75%——完成 75%、基本完整连贯，向博士毕业大步推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 75% 没达成 → ★ 本周完成；② 只追篇幅 → 整体连贯+质量。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>75%达成？→ 主体完整+总结完善+全文通读修改；意义?→ 基本完整连贯、接近完稿；进度?→ W91 75%→M23完稿→W94提交。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了博士论文 75%</strong>。<strong>做了</strong>（完成 75% + 意义 + 进度 + 博士毕业推进）、<strong>学了</strong>（博士论文 75%、接近完稿、向毕业）、<strong>会了</strong>（博士论文完成进度目标）。</p>
+</div></section></section><section class="slot" id="d634-noon" data-d="634" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D634 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">遥感成果最终状态确认</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>遥感成果最终状态确认</strong>——① ★ <strong>遥感成果最终状态确认</strong>（★ 确认遥感成果的最终状态：3 篇论文[各自状态：已发表/接收/在审]、GitHub[活跃专业]、竞赛[Top X%]、访问[经历]——遥感成果最终状态）；② ★ <strong>遥感成果是求职的资本</strong>（★ 遥感成果[论文+GitHub+竞赛+访问]是你拿到 offer 的资本——最终状态确认[简历/主页准确呈现]）；③ ★ <strong>遥感成果收尾</strong>（★ M22-23 遥感逐渐收尾——遥感成果最终状态确认+维护[论文有结果、GitHub 活跃]，收尾性呈现）；④ <strong>遥感成果就绪</strong>（最终状态确认——遥感成果就绪[已助你拿 offer]）。② ★ 遥感成果最终状态确认——求职资本、收尾性呈现。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 遥感成果最终状态确认（论文/GitHub/竞赛/访问）；② ★ 遥感成果是求职资本（助你拿 offer）；③ ★ 遥感成果收尾（最终状态+维护）；④ 遥感成果就绪。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>遥感成果最终状态确认——确认了最终状态、明确求职资本、收尾性呈现，遥感成果就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不确认最终状态 → ★ 确认；② 不收尾 → 收尾性呈现。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>遥感成果最终状态？→ 论文/GitHub/竞赛/访问；意义?→ 求职资本、助你拿offer；收尾?→ 最终状态+维护、收尾性呈现。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确认了遥感成果最终状态</strong>。<strong>做了</strong>（最终状态确认 + 求职资本 + 收尾 + 就绪）、<strong>学了</strong>（遥感成果最终状态、求职资本、收尾）、<strong>会了</strong>（遥感成果最终状态确认）。</p>
+</div></section></section><section class="slot" id="d634-pm" data-d="634" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D634 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">博士论文（75% 确认）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>博士论文（75% 确认）</strong>——① ★ <strong>确认博士论文 75%</strong>（★ 确认博士论文完成 75%——W91/M22 博士目标达成确认）；② ★ <strong>75% 成果</strong>（★ 博士论文 75%：主体完整+总结完善+全文通读第一遍修改——博士论文 75% 成果[基本完整连贯]）；③ <strong>后续目标</strong>（★ M23 90%[W92-93]→完稿→W94 提交——博士论文向毕业）。② ★ 确认博士论文 75%——M22 博士目标达成。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 确认博士论文 75%（M22 目标）；② ★ 75% 成果（主体完整+总结完善+通读修改）；③ 后续目标（M23 完稿）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>75% 确认——确认 75%、75% 成果、后续目标，M22 博士目标达成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不确认 → ★ 确认 75%。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>75%确认？→ 主体完整+总结完善+通读修改；后续?→ M23 90%→完稿→W94提交。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>确认了博士论文 75%</strong>。<strong>做了</strong>（确认 75% + 成果 + 后续目标）、<strong>学了</strong>（博士论文 75%、后续目标）、<strong>会了</strong>（确认博士论文进度）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 博士论文完成75%+遥感成果最终状态确认+75%确认</strong>：博士里程碑+遥感收尾——①博士论文完成75%(★完成75%[M22目标]+★75%意义[基本完整连贯、接近完稿]+★进度[W91 75%→M23 90%→完稿→W94提交→M24答辩])②遥感成果最终状态确认(★最终状态[论文/GitHub/竞赛/访问]+★求职资本[助你拿offer]+★遥感成果收尾[最终状态+维护、收尾性呈现])③博士论文75%确认（★确认75%+成果+后续目标）。★ 博士论文75%=基本完整连贯、接近完稿。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 博士论文（完成 75%·M22 目标）✅ 遥感成果最终状态确认（求职资本+收尾性呈现）✅ 博士论文（75% 确认）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D634</summary><textarea data-note="d634" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d635" data-d="635"><header class="day-head"><span class="dnum">D635</span><h2 class="day-t">周五 · 博士论文 M22 阶段成果整理（为月复盘）+ M22 硬交付对照准备 + 博士论文（整理）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 第五天——① 上午<strong>博士论文 M22 阶段成果整理</strong>（为月复盘）；② 中午<strong>M22 硬交付对照准备</strong>；③ 晚上<strong>博士论文（整理）</strong>。提醒：★ M22 成果整理为月复盘备料。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d635-am" data-d="635" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D635 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">博士论文 M22 阶段成果整理（为月复盘）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>上午<strong>博士论文 M22 阶段成果整理</strong>——为月复盘整理 M22 成果：① ★ <strong>整理 M22 成果</strong>（★ M22 四周：W88 offer 决策、W89 offer 最终决策[落定]、W90 博士论文 65%[核心全部完成]+入职准备启动、W91 博士论文 75%+全文通读+遥感检查——M22 成果盘点）；② ★ <strong>offer 决策成果</strong>（★ offer 决策落定[接受了 offer、婉拒了其他]——★ 转型求职基本成功，M22 最大成果）；③ ★ <strong>博士论文进度成果</strong>（★ M22 博士论文：50%→65%→75%[全文通读第一遍完成]——博士论文大步推进）；④ ★ <strong>入职准备成果</strong>（入职准备启动[材料了解]——入职准备成果）；⑤ <strong>为月复盘备料</strong>（整理 M22 成果——为月复盘[对照硬交付 4 项]备料）。② ★ 整理 M22 成果——为月复盘备料。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 整理 M22 成果（四周）；② ★ offer 决策成果（落定、转型求职成功）；③ ★ 博士论文进度成果（50%→65%→75%）；④ ★ 入职准备成果；⑤ 为月复盘备料。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M22 成果整理——整理了四周成果、offer 决策成果、博士进度、入职准备，为月复盘备料。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不整理 → 整理；② 不对照硬交付准备 → 备料。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>M22成果？→ offer决策落定（转型求职成功）+博士50%→65%→75%+入职准备启动；最大成果?→ offer决策落定。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了 M22 成果</strong>。<strong>做了</strong>（整理四周 + offer 决策成果 + 博士进度 + 入职准备 + 备料）、<strong>学了</strong>（为月复盘整理成果）、<strong>会了</strong>（整理月度成果备料）。</p>
+</div></section></section><section class="slot" id="d635-noon" data-d="635" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D635 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">M22 硬交付对照准备</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>M22 硬交付对照准备</strong>——为月复盘对照硬交付备料：① ★ <strong>对照 M22 硬交付 4 项</strong>（① Offer 确认[已接受空天院或 Plan B offer] ✓？② 婉拒其他 offer[礼貌邮件] ✓？③ 博士论文完成~75% ✓？④ 入职所需材料清单+开始准备 ✓？——逐项核对达成情况）；② ★ <strong>核对证据</strong>（每项证据[接受 offer 的邮件/婉拒邮件/博士论文 75%/入职材料清单]——核对有据）；③ <strong>达成度评估</strong>（M22 硬交付达成几项——评估）；④ <strong>为月复盘备好</strong>（硬交付对照备好）。② ★ M22 硬交付对照准备——为月复盘核对达成。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 对照 M22 硬交付 4 项（逐项核对）；② ★ 核对证据（每项有据）；③ 达成度评估；④ 为月复盘备好。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>硬交付对照准备——对照了 4 项、核对证据、达成度评估，为月复盘备好。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不对照硬交付 → ★ 对照 4 项；② 不核对证据 → 核对证据。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>硬交付4项？→ Offer确认/婉拒其他/博士~75%/入职材料清单+开始准备；核对什么?→ 每项证据、达成度。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>对照了 M22 硬交付</strong>。<strong>做了</strong>（对照 4 项 + 核对证据 + 达成度评估 + 备好）、<strong>学了</strong>（对照硬交付、核对证据）、<strong>会了</strong>（M22 硬交付对照准备）。</p>
+</div></section></section><section class="slot" id="d635-pm" data-d="635" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D635 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">博士论文（整理）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>博士论文（整理）</strong>——① <strong>博士论文整理</strong>（整篇博士论文[75%]整理：格式、编号、引用、参考文献、目录——博士论文规范完整）；② ★ <strong>博士论文规范完整</strong>（★ 博士论文要送审——规范完整很重要）；③ <strong>博士论文阶段成果</strong>（75%+全文通读+规范——博士论文阶段成果[接近完稿]）。② ★ 博士论文整理——规范完整、阶段成果。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 博士论文整理（格式+编号+引用+参考文献+目录）；② ★ 博士论文规范完整（送审要求）；③ 博士论文阶段成果。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>博士论文整理——整理、规范完整，博士论文阶段成果。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不规范完整 → ★ 规范整理。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>博士论文整理？→ 格式+编号+引用+参考文献+目录、规范完整。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>整理了博士论文</strong>。<strong>做了</strong>（博士论文整理 + 规范完整 + 阶段成果）、<strong>学了</strong>（博士论文整理、规范完整）、<strong>会了</strong>（规范整理博士论文）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ M22阶段成果整理+硬交付对照准备+博士论文整理</strong>：M22收官备料——①M22成果整理(★整理四周[offer决策/offer最终决策（落定）/博士65%+入职准备/博士75%+全文通读+遥感检查]+★offer决策成果[落定、转型求职成功、最大成果]+★博士论文进度成果[50%→65%→75%]+★入职准备成果)②M22硬交付对照准备(★对照4项[Offer确认/婉拒其他/博士~75%/入职材料清单+开始准备]+★核对证据+达成度评估)③博士论文整理(格式+编号+引用+参考文献+目录+★规范完整[送审要求])。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 博士论文 M22 阶段成果整理（四周+offer 决策成果+博士进度+入职准备）✅ M22 硬交付对照准备（对照 4 项+核对证据）✅ 博士论文（整理+规范完整）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D635</summary><textarea data-note="d635" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d636" data-d="636"><header class="day-head"><span class="dnum">D636</span><h2 class="day-t">周六 · 机动（博士论文/遥感/入职）+ M22 硬交付对照准备（续）+ 个人调整</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 第六天，周六——① 上午<strong>机动</strong>（博士论文/遥感/入职）；② 中午<strong>M22 硬交付对照准备</strong>（续）；③ 晚上<strong>个人调整</strong>。提醒：★ M22 收官硬交付对照。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d636-am" data-d="636" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D636 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">机动（博士论文/遥感/入职）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周六上午<strong>机动</strong>——① <strong>博士论文</strong>（补 75% 遗留/打磨/全文通读补漏）；② ★ <strong>遥感遗留</strong>（论文状态/GitHub 遗留→补）；③ ★ <strong>入职准备</strong>（入职材料准备遗留→补，如政审材料）；④ <strong>别变加班</strong>（机动+休息）。② ★ 机动：博士论文+遥感+入职。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 博士论文（补遗留/打磨）；② ★ 遥感遗留；③ ★ 入职准备；④ 别变加班。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>机动——博士论文+遥感+入职，没变加班。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 周六硬开工 → 机动+休息。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>遗留？→ 博士论文/遥感/入职补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>机动应对</strong>。<strong>做了</strong>（博士论文 + 遥感 + 入职 + 不加班）、<strong>学了</strong>（机动、三线兼顾）、<strong>会了</strong>（机动应对）。</p>
+</div></section></section><section class="slot" id="d636-noon" data-d="636" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D636 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">M22 硬交付对照准备（续）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午<strong>M22 硬交付对照准备（续）</strong>——① ★ <strong>完善硬交付对照</strong>（★ 完善 M22 硬交付 4 项对照[Offer 确认/婉拒其他/博士论文~75%/入职材料清单+开始准备]：确认每项达成+证据——硬交付对照完善）；② ★ <strong>达成情况清晰</strong>（★ M22 硬交付达成：Offer 确认✓[接受了 offer]、婉拒其他✓[发了婉拒邮件]、博士论文~75%✓、入职材料清单+开始准备✓——达成情况清晰[★ M22 硬交付基本全达成]）；③ ★ <strong>为月复盘做好</strong>（硬交付对照完善——明天月复盘做好准备）；④ <strong>M22 收官准备</strong>（硬交付对照+成果整理——M22 收官准备好）。② ★ 完善硬交付对照——达成情况清晰、M22 收官准备。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 完善硬交付对照（4 项达成+证据）；② ★ 达成情况清晰（基本全达成）；③ ★ 为月复盘做好；④ M22 收官准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>硬交付对照（续）——完善对照、达成情况清晰，M22 收官准备。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 对照不完善 → ★ 完善对照；② 达成情况不清 → 清晰。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>硬交付达成？→ Offer确认✓+婉拒其他✓+博士~75%✓+入职材料清单✓、基本全达成；清晰吗?→ 每项达成+证据。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了硬交付对照</strong>。<strong>做了</strong>（完善对照 + 达成情况清晰 + 为月复盘做好 + 收官准备）、<strong>学了</strong>（完善硬交付对照、达成情况清晰）、<strong>会了</strong>（M22 硬交付对照完善）。</p>
+</div></section></section><section class="slot" id="d636-pm" data-d="636" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D636 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">个人状态调整</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>个人状态调整</strong>——M22 收官，调整身心：① ★ <strong>身心放松</strong>（M22 强度大[offer 决策+博士论文冲刺]，给放松）；② ★ <strong>肯定 M22</strong>（★ M22 你完成了：offer 决策落定[转型求职基本成功]+博士论文冲刺到 75%[核心全部完成+全文通读]+入职准备启动——★ 这是收获的一个月[拿到 offer+博士大步推进]，为自己骄傲）；③ ★ <strong>双线收口的成就感</strong>（★ offer 落定+博士 75%——转型的两条线[求职+博士毕业]都接近收口[求职已成功、博士接近完稿]，巨大成就）；④ <strong>充电+期待 M23</strong>（休息、为 M23[博士论文完稿+遥感收尾]蓄力、期待博士完稿）。② ★ M22 收官，肯定成果、双线收口成就感、蓄力期待 M23。</p>
+<ul>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 身心放松；② ★ 肯定 M22（offer 落定+博士 75%+入职准备）；③ ★ 双线收口成就感；④ 充电+期待 M23。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>状态调整——身心放松、肯定 M22、双线收口成就感、充电期待 M23，身心可持续。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 收官硬撑 → 好好休息；② 不肯定 M22 → 肯定 offer 落定+博士 75%。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>累？→ 放松；M22怎么样?→ ★ offer决策落定（转型求职成功）+博士75%（核心全部完成）+入职准备、收获的一个月、为自己骄傲、期待M23。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>调整了状态</strong>。<strong>做了</strong>（身心放松 + 肯定 M22 + 双线收口成就感 + 充电期待 M23）、<strong>学了</strong>（M22 收官肯定成果、双线收口、期待 M23）、<strong>会了</strong>（收官期身心调整与建立期待）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 机动+M22硬交付对照准备（续）+个人调整</strong>：M22收官准备+可持续——①机动(博士论文[补遗留/打磨]+★遥感遗留+★入职准备[如政审材料]+不加班)②M22硬交付对照准备续(★完善硬交付对照[4项达成+证据]+★达成情况清晰[Offer确认✓+婉拒✓+博士~75%✓+入职材料✓、基本全达成]+★为月复盘做好+M22收官准备)③个人调整(★身心放松+★肯定M22[offer落定（转型求职成功）+博士75%（核心全部完成）+入职准备]+★双线收口成就感+充电期待M23)。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 机动（博士论文/遥感/入职）✅ M22 硬交付对照准备（续·达成情况清晰）✅ 个人状态调整（肯定 M22+双线收口成就感+期待 M23）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D636</summary><textarea data-note="d636" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d637" data-d="637"><header class="day-head"><span class="dnum">D637</span><h2 class="day-t">周日 · M22 月度复盘（对照硬交付 4 项）+ M22 收官小结 + 计划 W92（进入 M23 博士论文完稿月）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W91 最后一天、🎯M22 收官日——① 上午<strong>M22 月度复盘</strong>（对照硬交付 4 项）；② 中午<strong>M22 收官小结</strong>（offer 落定+博士 75%+入职准备→转型双线收口）；③ 晚上<strong>计划 W92</strong>（进入 M23：博士论文完稿+遥感收尾）+ 博士论文。提醒：★ M22 收官——offer 决策落定+博士论文冲刺达成，进入 M23 博士论文完稿月。★★ 远程模式：同样。</p>
+</blockquote>
+</div><section class="slot" id="d637-am" data-d="637" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D637 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">M22 月度复盘（对照硬交付 4 项）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M22 月度复盘）</h4><div class="blk-b"><ul>
+<li>上午<strong>M22 月度复盘</strong>——用<a href="../appendix-e.html">附录 E</a> 复盘 M22（offer 决策+博士论文冲刺月）：① <strong>量化交付盘点</strong>（W88 offer 决策、W89 offer 最终决策[落定]、W90 博士论文 65%+入职准备启动、W91 博士论文 75%+全文通读+遥感检查——M22 产出盘点）；② ★ <strong>对照 M22 硬交付 4 项</strong>（① Offer 确认[已接受空天院或 Plan B offer] ✓？② 婉拒其他 offer[礼貌邮件] ✓？③ 博士论文完成~75% ✓？④ 入职所需材料清单+开始准备 ✓？——逐项对照）；③ ★ <strong>核心评估：offer 决策+博士冲刺月是否成功</strong>（★ M22 任务是 offer 决策+博士论文冲刺——offer 决策落定了吗[转型求职成功]、博士论文冲刺到 75% 了吗——offer 决策+博士冲刺月成功吗）；④ <strong>Top3 收获+问题/调整</strong>（M22 最大 3 个收获、问题、给 M23 的调整）。② ★ M22 是 offer 决策+博士冲刺月——复盘看是否成功+为 M23 铺路。</li>
+<li>★ <strong>和你的月复盘习惯对接</strong>：每月用<a href="../appendix-e.html">附录 E</a> 月复盘；M22 复盘 offer 决策+博士冲刺月。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 量化交付盘点（四周产出）；② ★ 对照硬交付 4 项（逐项）；③ ★ 核心评估（offer 决策+博士冲刺月是否成功）；④ Top3 收获+问题/调整；⑤ 看 offer 决策+博士冲刺月+为 M23 铺路。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M22 月复盘——量化盘点、对照硬交付 4 项、核心评估（offer 决策+博士冲刺月成功）、Top3 收获+调整，确认 M22 达成+为 M23 铺路。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不对照硬交付 → ★ 对照 4 项；② 报喜不记问题 → 记问题+调整；③ 不为 M23 铺路 → 看为 M23 铺路。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>M22 达成了吗？→ 对照硬交付4项；问题?→ 如实记+M23调整；为M23铺路?→ offer落定+博士75%为M23（博士完稿+遥感收尾）铺路。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了 M22 月度复盘</strong>。<strong>做了</strong>（量化盘点 + 对照硬交付 4 项 + 核心评估 + Top3 收获/调整）、<strong>学了</strong>（M22 是 offer 决策+博士冲刺月、对照硬交付、为 M23 铺路）、<strong>会了</strong>（offer 决策+博士冲刺月的月度复盘）。</p>
+</div></section></section><section class="slot" id="d637-noon" data-d="637" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D637 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">M22 收官小结（offer 落定+博士 75%+入职准备→转型双线收口）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（M22 收官：转型双线收口）</h4><div class="blk-b"><ul>
+<li>中午<strong>M22 收官小结</strong>——给 M22 画句号、衔接 M23：① ★ <strong>M22 收官</strong>（★ M22 offer 决策+博士论文冲刺月——你完成了：★ offer 决策落定[接受了遥感岗位 offer、婉拒了其他、转型求职基本成功]+博士论文冲刺到 75%[核心全部完成+全文通读第一遍]+入职准备启动[材料了解]——求职成功+博士接近完稿+入职准备启动）；② ★ <strong>转型双线收口</strong>（★ ★ 转型的两条线都接近收口：★ 求职线[拿到 offer，转型求职成功]+博士论文线[75%，接近完稿];M22 是双线收口的关键月）；③ ★ <strong>进入 M23 的衔接</strong>（★ M23[W92-95]是博士论文完稿+遥感成果收尾月——★ 博士论文 90%[W92-93]→完稿→★W94 提交；遥感收尾[论文全部有结果、GitHub/主页最终整理]）；④ <strong>博士毕业冲刺</strong>（M22 博士 75%→M23 完稿[W94 提交]→M24 答辩[W100]——博士毕业冲刺）。② ★ M22 收官=转型双线收口（求职成功+博士接近完稿）——进入 M23 博士论文完稿月。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ M22 收官（offer 落定+博士 75%+入职准备）；② ★ 转型双线收口（求职线成功+博士论文线接近完稿）；③ ★ 进入 M23 衔接（博士论文完稿+遥感收尾、W94 提交）；④ 博士毕业冲刺；⑤ 进入 M23。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>M22 收官小结——M22 收官（offer 落定+博士 75%）、转型双线收口、衔接 M23（博士完稿），进入 M23。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不小结收官 → 收官小结；② 不衔接 M23 → 衔接博士完稿；③ 看不到成果 → 肯定转型双线收口。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>M22收官成果？→ offer落定（转型求职成功）+博士75%+入职准备；双线?→ 求职线成功+博士论文线接近完稿；M23做什么?→ 博士完稿+遥感收尾、★W94提交。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>小结了 M22 收官</strong>。<strong>做了</strong>（M22 收官 + 转型双线收口 + 衔接 M23 + 博士毕业冲刺）、<strong>学了</strong>（转型双线收口、衔接 M23、博士毕业冲刺）、<strong>会了</strong>（月度收官小结与承上启下）。</p>
+</div></section></section><section class="slot" id="d637-pm" data-d="637" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D637 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W92（进入 M23：博士论文完稿+遥感收尾）+ 博士论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W92/M23 做什么）</h4><div class="blk-b"><ul>
+<li>晚上<strong>计划 W92</strong>——W92 进入 M23（博士论文完稿+遥感成果收尾月），M23 是博士毕业的冲刺月，W92 任务：① ★ <strong>博士论文向 90% 冲刺</strong>（★ M23 博士论文目标 90%[W92-93]——W92 博士论文继续冲刺，向 90% 推进[全文通读后进一步完善、各章打磨]）；② ★ <strong>遥感成果收尾</strong>（★ 遥感成果收尾：论文全部有结果[确认最终状态]、GitHub/主页最终整理——遥感成果最终呈现）；③ ★ <strong>W94 博士论文提交</strong>（★ M23 关键：★W94 博士论文提交——W92-93 博士论文 90%→完稿→W94 提交，博士论文向提交冲刺）；④ ★ <strong>今晚把 W92 排好</strong>（博士论文向 90%+遥感收尾）。② ★ W92 进入 M23——博士论文向 90% 冲刺+遥感收尾。③ ★ <strong>博士论文</strong>（周日晚博士留一点）。</li>
+<li>★ <strong>战略提醒</strong>：★ M23 是博士毕业的冲刺月——★ 博士论文 90%[W92-93]→完稿→★W94 提交[博士论文提交是博士毕业的关键节点];★ 遥感成果收尾[论文全部有结果、GitHub/主页最终整理]，为求职/简历最终呈现;★ M24 博士答辩[W100]+入职+24 个月转型总结[W104 终点]。本周（W91）M22 收官[offer 落定+博士 75%]，进入 M23 博士论文完稿冲刺。</li>
+<li>★★ <strong>远程模式</strong>：同样。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① ★ 列 W92 计划（博士论文向 90%/遥感收尾）；② ★ 博士论文向 90% 冲刺；③ ★ 遥感成果收尾（论文全部有结果+GitHub/主页最终整理）；④ ★ 博士论文；⑤ W92 排好。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W92 计划——任务清楚（★博士论文向 90%/★遥感收尾）、为 M23 博士完稿准备，博士论文持续，进入 M23 有备而来。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><p>① 不计划 W92 → 列好任务；② 博士论文 90% 没目标 → ★ 向 90% 冲刺；③ 忘了遥感收尾 → 遥感收尾。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>W92怎么排?→ ★博士论文向90%冲刺+★遥感成果收尾（论文全部有结果+GitHub/主页最终整理）+博士论文；M23?→ 博士完稿+遥感收尾、★W94提交；M24?→ 答辩(W100)+入职+24个月总结（W104终点）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>计划好了 W92、推进了博士论文</strong>。<strong>做了</strong>（列 W92 任务 + 博士论文向 90% + 遥感收尾 + 博士论文）、<strong>学了</strong>（W92 进入 M23 博士论文完稿月、博士论文向 90% 冲刺+遥感收尾、★W94 提交）、<strong>会了</strong>（规划进入博士论文完稿月）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜★ 🎯M22月度复盘（对照硬交付4项）+收官小结（转型双线收口）+计划W92（进入M23博士论文完稿月）</strong>：offer决策+博士冲刺月收官——①M22月复盘(附录E：量化盘点[四周产出]+★对照硬交付4项[Offer确认/婉拒其他/博士~75%/入职材料清单+开始准备]+★核心评估[offer决策+博士冲刺月是否成功]+Top3收获/调整、看offer决策+博士冲刺月+为M23铺路)②M22收官小结(★收官[offer落定（转型求职成功）+博士75%（核心全部完成+全文通读）+入职准备启动]+★转型双线收口[求职线成功+博士论文线接近完稿]+★进入M23衔接[博士论文90%(W92-93)→完稿→★W94提交+遥感收尾]+博士毕业冲刺)③计划W92进入M23(★博士论文向90%冲刺+★遥感成果收尾[论文全部有结果+GitHub/主页最终整理]+博士论文)。★ M23博士完稿冲刺、★W94提交。★★ 远程：同样。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ M22 月度复盘（对照硬交付 4 项+offer 决策+博士冲刺月评估）✅ M22 收官小结（转型双线收口+进入 M23）✅ 计划 W92（博士论文向 90%+遥感收尾）+ 博士论文。<strong>🎯 M22（offer 决策+博士论文冲刺月）收官——offer 决策落定（接受了遥感岗位 offer、婉拒了其他、★ 转型求职基本成功）、博士论文冲刺到 75%（核心全部完成+全文通读第一遍，接近完稿）、入职准备启动——★ 转型的两条线都接近收口（求职已成功、博士接近完稿），进入 M23（博士论文完稿+遥感成果收尾）——博士论文提交（★W94）就在前方！</strong></p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D637</summary><textarea data-note="d637" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W91 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>M22 收官周，补充包给你四样：① 三个范例（博士论文全文通读第一遍清单+向 75% · M22 月度复盘结构+进入 M23 准备 · 博士论文 75% 里程碑+M22 双线收官）；② 一个完整可运行的“M22 收官评估器”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 博士论文全文通读第一遍清单 + 向 75%</h3>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">【博士论文·全文通读第一遍清单】(M22 W91, 目标75%)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">从头到尾读整篇(引言→综述→方法→实验→总结展望)</span><span class="p p-Indicator">:</span>
+<span class="w">  </span><span class="nt">□ 整体把握</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">全文是否连贯、论证是否流畅</span>
+<span class="w">  </span><span class="nt">□ 发现并修改问题</span><span class="p">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">· 逻辑跳跃 → 补充过渡/论证</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">· 衔接生硬 → 改过渡和呼应</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">· 表达不清 → 改清楚</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">· 格式不统一 → 统一</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">· 数据/引用错误 → 修正</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">□ 能当场改的当场改(小问题)、复杂的记录后改</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★通读+修改、整体性大幅提升</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★全文通读第一遍完成 → 博士论文接近完整(向75%)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【博士论文·向75%】(M22 W91目标)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">已有</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">主体完整(~65%) + 总结章完善</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">本周</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">全文通读第一遍(修改提升) → 75%</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★75%≈基本完整、整体连贯的博士论文(只剩进一步打磨/完稿)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">进度</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W91 75% → M23 90%(W92-93)→完稿→W94提交 → M24答辩(W100)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · M22 月度复盘结构 + 进入 M23 准备</h3>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">【M22月度复盘·结构】(附录E)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">1. 量化交付盘点</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W88 offer决策/W89 offer最终决策(落定)</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">/W90博士65%+入职准备启动/W91博士75%+全文通读+遥感检查</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">2. ★对照M22硬交付4项</span><span class="p p-Indicator">:</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">□ Offer确认(已接受空天院或Plan B offer)</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">□ 婉拒其他offer(礼貌邮件)</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">□ 博士论文完成~75%</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">□ 入职所需材料清单 + 开始准备</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">3. ★核心评估</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;offer决策+博士冲刺月&quot;</span><span class="l l-Scalar l-Scalar-Plain">是否成功</span>
+<span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">(offer落定转型求职成功 + 博士论文冲刺到75%)</span>
+<span class="w w-Error">  </span><span class="l l-Scalar l-Scalar-Plain">4. Top3收获 + 问题 + 给M23的调整</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【进入M23·准备】(博士论文完稿+遥感成果收尾)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">博士论文</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W92-93 90% → 完稿 → ★W94提交</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">遥感收尾</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">论文全部有结果 + GitHub/主页最终整理</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★M23是博士毕业冲刺月、★W94博士论文提交是关键节点</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">M24</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">★博士答辩(W100) + 入职手续 + ★24个月转型总结(W104终点)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · 博士论文 75% 里程碑 + M22 双线收官</h3>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">【博士论文·75%里程碑】</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">主体完整(引言+综述+方法+实验) + 总结章完善 + 全文通读第一遍修改</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">→ 博士论文75%、一篇基本完整、整体连贯的博士论文</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★只剩进一步打磨/完稿 → 接近完稿</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">后续</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">M23 90%(W92-93)→完稿→W94提交 → M24答辩(W100)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【M22·双线收官】(offer决策 + 博士论文冲刺)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">求职/遥感线</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">offer决策落定(W89, 接受offer+婉拒其他) → ★转型求职基本成功!</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">遥感成果检查维护(论文最终状态+GitHub)</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">→ 求职线收官(已拿offer)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">博士论文线(博士原方向, 博士毕业)</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">50%(W88)→65%(W90, 核心全部完成)→75%(W91, 全文通读)</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">→ 博士论文线接近收口(75%、接近完稿)</span>
+<span class="w w-Error">  </span><span class="nt">★M22双线收口</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">求职已成功 + 博士接近完稿</span>
+<span class="w">  </span><span class="nt">入职准备线</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">W90启动(了解材料) → M24入职手续</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★转型的两条线都接近收口、巨大成就</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · M22 收官评估器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本帮你对照 M22 硬交付 4 项、汇总博士论文进度、评估进入 M23 就绪。复制到 <code>m22_finale.py</code> 运行。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="c1"># m22_finale.py —— M22(offer决策+博士论文冲刺月)收官评估器</span>
+<span class="c1"># 用法: python m22_finale.py</span>
+
+<span class="c1"># ============ M22硬交付4项 ============</span>
+<span class="n">deliverables</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Offer确认(已接受空天院或Plan B offer)&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;婉拒其他offer(礼貌邮件)&quot;</span><span class="p">,</span>               <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;博士论文完成~75%&quot;</span><span class="p">,</span>                      <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;入职所需材料清单+开始准备&quot;</span><span class="p">,</span>             <span class="kc">True</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="c1"># ============ 博士论文进度(M22) ============</span>
+<span class="n">thesis_progress</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;W88&quot;</span><span class="p">:</span> <span class="s2">&quot;50%&quot;</span><span class="p">,</span> <span class="s2">&quot;W90&quot;</span><span class="p">:</span> <span class="s2">&quot;65%(核心全部完成)&quot;</span><span class="p">,</span> <span class="s2">&quot;W91&quot;</span><span class="p">:</span> <span class="s2">&quot;75%(全文通读第一遍)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;下一步&quot;</span><span class="p">:</span> <span class="s2">&quot;M23 90%(W92-93)→完稿→W94提交→M24答辩(W100)&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># ============ 求职/遥感线 ============</span>
+<span class="n">job_line</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;offer决策&quot;</span><span class="p">:</span> <span class="s2">&quot;落定(接受offer+婉拒其他)→★转型求职基本成功&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;遥感成果&quot;</span><span class="p">:</span> <span class="s2">&quot;论文最终状态+GitHub更新(求职资本、收尾维护)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;入职准备&quot;</span><span class="p">:</span> <span class="s2">&quot;启动(材料了解:学位证/毕业证/户口/体检/政审)&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># ============ 进入M23就绪 ============</span>
+<span class="n">m23_ready</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;博士论文75%(接近完稿)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;★转型求职成功(offer落定)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;遥感成果维护(求职资本)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;入职准备启动&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 M22(offer决策+博士论文冲刺月)收官评估</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">【M22硬交付·4项】&quot;</span><span class="p">)</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="n">deliverables</span> <span class="k">if</span> <span class="n">d</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">deliverables</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="s1">&#39;✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="n">done</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">deliverables</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  达成: </span><span class="si">{</span><span class="s1">&#39;█&#39;</span><span class="o">*</span><span class="n">n</span><span class="si">}{</span><span class="s1">&#39;░&#39;</span><span class="o">*</span><span class="p">(</span><span class="mi">20</span><span class="o">-</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">done</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">deliverables</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;✓ M22达成!&quot;</span> <span class="k">if</span> <span class="n">done</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">deliverables</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">【博士论文进度(M22)】&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">thesis_progress</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  · </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">【求职/遥感线】&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">job_line</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  · </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">【进入M23就绪】&quot;</span><span class="p">)</span>
+    <span class="n">rd</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m23_ready</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m23_ready</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="s1">&#39;✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="n">rd</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">m23_ready</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  就绪: </span><span class="si">{</span><span class="s1">&#39;█&#39;</span><span class="o">*</span><span class="n">n2</span><span class="si">}{</span><span class="s1">&#39;░&#39;</span><span class="o">*</span><span class="p">(</span><span class="mi">20</span><span class="o">-</span><span class="n">n2</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rd</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">m23_ready</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;★进入M23博士完稿!&quot;</span> <span class="k">if</span> <span class="n">rd</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">m23_ready</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  阶段四: M19投递✓→M20首轮面试✓→M21空天院面试✓&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;        →M22 offer落定✓(★转型求职成功)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;        →M23博士完稿(★W94提交)→M24答辩(★W100)+入职+24月总结(★W104)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ★M22双线收口: 求职已成功 + 博士接近完稿!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>（示意）：</p>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">============================================================</span>
+<span class="l l-Scalar l-Scalar-Plain">🎯 M22(offer决策+博士论文冲刺月)收官评估</span>
+<span class="l l-Scalar l-Scalar-Plain">============================================================</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【M22硬交付·4项】</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] Offer确认(已接受空天院或Plan B offer)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] 婉拒其他offer(礼貌邮件)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] 博士论文完成~75%</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] 入职所需材料清单+开始准备</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">达成</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">████████████████████ 4/4 ✓ M22达成!</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【博士论文进度(M22)】</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· W88</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50%</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· W90</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65%(核心全部完成)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· W91</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">75%(全文通读第一遍)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 下一步</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">M23 90%(W92-93)→完稿→W94提交→M24答辩(W100)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【求职/遥感线】</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· offer决策</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">落定(接受offer+婉拒其他)→★转型求职基本成功</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 遥感成果</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">论文最终状态+GitHub更新(求职资本、收尾维护)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">· 入职准备</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">启动(材料了解:学位证/毕业证/户口/体检/政审)</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【进入M23就绪】</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] 博士论文75%(接近完稿)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] ★转型求职成功(offer落定)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] 遥感成果维护(求职资本)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">[✓] 入职准备启动</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">就绪</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">████████████████████ 4/4 ★进入M23博士完稿!</span>
+
+<span class="l l-Scalar l-Scalar-Plain">============================================================</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">阶段四</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">M19投递✓→M20首轮面试✓→M21空天院面试✓</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">→M22 offer落定✓(★转型求职成功)</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">→M23博士完稿(★W94提交)→M24答辩(★W100)+入职+24月总结(★W104)</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">★M22双线收口</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">求职已成功 + 博士接近完稿!</span>
+<span class="l l-Scalar l-Scalar-Plain">============================================================</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D631（总结章完善+遥感检查论文+全文通读起步）</strong></p>
+<ol>
+<li>全文通读第一遍的目的是什么？（答：整体把握[全文连贯]+发现问题[逻辑/衔接/表达/格式]+整体提升，边读边改。）</li>
+<li>遥感检查什么？（答：检查所有论文最终状态[第一/二/三篇]、简历准确呈现。）</li>
+</ol>
+<p><strong>D632（全文通读推进改问题+GitHub更新+向75%）</strong></p>
+<ol>
+<li>全文通读发现问题怎么处理？（答：边读边改，能当场改的当场改、复杂的记录后改，整体性提升。）</li>
+</ol>
+<p><strong>D633（全文通读完成+进度盘点+完善）</strong></p>
+<ol>
+<li>全文通读第一遍完成意味着什么？（答：博士论文整体性大幅提升[连贯+衔接+清楚+统一]、接近完整、向 75%。）</li>
+</ol>
+<p><strong>D634（完成 75%+遥感最终状态+75%确认）</strong></p>
+<ol>
+<li>博士论文 75% 是什么状态？（答：基本完整、整体连贯的博士论文，只剩进一步打磨/完稿，接近完稿。）</li>
+<li>遥感成果最终状态包括什么？（答：3 篇论文状态+GitHub+竞赛+访问，是求职资本。）</li>
+</ol>
+<p><strong>D635（M22成果整理+硬交付对照+整理）</strong></p>
+<ol>
+<li>M22 硬交付 4 项是什么？（答：Offer 确认/婉拒其他 offer/博士论文~75%/入职材料清单+开始准备。）</li>
+</ol>
+<p><strong>D636（机动+硬交付对照+调整）</strong></p>
+<ol>
+<li>M22 你完成了什么？（答：offer 决策落定[转型求职成功]+博士论文 75%[核心全部完成+全文通读]+入职准备启动，双线收口。）</li>
+</ol>
+<p><strong>D637（M22月复盘+收官小结+计划W92）</strong></p>
+<ol>
+<li>W92/M23 做什么？（答：博士论文向 90% 冲刺+遥感成果收尾[论文全部有结果+GitHub/主页最终整理]，★W94 博士论文提交。）</li>
+<li>M22 转型双线收口指什么？（答：求职线[拿到 offer，转型求职成功]+博士论文线[75%，接近完稿]，两条线都接近收口。）</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总结章只罗列、没高度</td>
+<td>没提炼</td>
+<td>★ 提炼整体贡献和意义</td>
+</tr>
+<tr>
+<td>全文通读只读不发现问题</td>
+<td>走过场</td>
+<td>★ 边读边发现问题（逻辑/衔接/表达/格式）</td>
+</tr>
+<tr>
+<td>通读发现问题不修改</td>
+<td>没落实</td>
+<td>★ 边读边改（能改的改、复杂的记录）</td>
+</tr>
+<tr>
+<td>不检查论文最终状态、简历不准</td>
+<td>没确认</td>
+<td>★ 检查所有论文最终状态、简历准确</td>
+</tr>
+<tr>
+<td>GitHub不维护、荒废</td>
+<td>没维护</td>
+<td>★ 更新、保持活跃专业（求职资本）</td>
+</tr>
+<tr>
+<td>博士论文75%只追篇幅</td>
+<td>重量轻质</td>
+<td>★ 整体连贯+质量</td>
+</tr>
+<tr>
+<td>不确认遥感成果最终状态</td>
+<td>没收尾</td>
+<td>★ 最终状态确认、收尾性呈现</td>
+</tr>
+<tr>
+<td>不对照硬交付做月复盘、空泛</td>
+<td>没标准</td>
+<td>★ 对照M22硬交付4项</td>
+</tr>
+<tr>
+<td>M22收官还硬撑不休息</td>
+<td>不可持续</td>
+<td>★ 好好休息、期待M23</td>
+</tr>
+<tr>
+<td>看不到M22的成果</td>
+<td>不自信</td>
+<td>★ offer落定（转型求职成功）+博士75%、双线收口、为自己骄傲</td>
+</tr>
+<tr>
+<td>不衔接M23</td>
+<td>没规划</td>
+<td>★ 衔接博士完稿（★W94提交）+遥感收尾</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>W91 收尾语 · 🎯 M22（offer 决策+博士论文冲刺月）收官</strong>：走完这一周，M22 圆满收官——你完善了博士论文的总结章（总结全文贡献、展望未来，有高度、和全文呼应），完成了全文通读第一遍（从头到尾读完整篇博士论文，发现并修改了逻辑、衔接、表达、格式上的问题，博士论文整体性大幅提升），博士论文冲刺到了 75%（一篇基本完整、整体连贯的博士论文，接近完稿）；同时你检查了所有遥感论文的最终状态、更新了 GitHub，遥感成果（求职资本）维护好了。回顾整个 M22：你的 offer 决策落定了（接受了遥感岗位 offer、礼貌婉拒了其他、★ 转型求职基本成功），博士论文从 50% 冲刺到了 75%（核心全部完成+全文通读），入职准备也启动了。★ 转型的两条线都接近收口——求职线已经成功（拿到 offer），博士论文线接近完稿（75%），这是收获的一个月，为自己骄傲。下一程（W92 起，进入 M23 博士论文完稿+遥感成果收尾月）：博士论文向 90% 冲刺（W92-93）→完稿→★W94 博士论文提交+遥感成果收尾（论文全部有结果、GitHub/主页最终整理）。博士论文提交（★W94）就在前方，博士毕业（★W100 答辩）和 24 个月转型的终点（★W104）也在稳步靠近——继续稳稳走完最后一程！</p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p><h4>复盘</h4><p>月复盘用 <a href="../appendix-e.html">附录 E</a> 的模板。周复盘问"我做完了吗"，<b>月复盘问"方向对不对、节奏能不能持续"</b>。</p></section>
+<div class="pager"><a class="prev" href="w90.html"><span class="dir">← 上一篇</span><span class="nm">W90 博士论文（每天 4-5h）冲刺写作·目标</span></a><a class="next" href="w92.html"><span class="dir">下一篇 →</span><span class="nm">W92 博士论文写作全力冲刺（向 90%）+ 博</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d631">D631 周一</a><a class="sub" href="#d631-am">上午 博士论文总结章（完善）</a><a class="sub" href="#d631-noon">中午 遥感（检查所有论文最终状态）</a><a class="sub" href="#d631-pm">晚上 博士论文全文通读第一遍（起步）</a><a href="#d632">D632 周二</a><a class="sub" href="#d632-am">上午 博士论文全文通读第一遍（推进，改</a><a class="sub" href="#d632-noon">中午 遥感（GitHub 更新）</a><a class="sub" href="#d632-pm">晚上 博士论文（向 75%）</a><a href="#d633">D633 周三</a><a class="sub" href="#d633-am">上午 博士论文全文通读（完成第一遍）</a><a class="sub" href="#d633-noon">中午 博士论文进度盘点（向 75%）</a><a class="sub" href="#d633-pm">晚上 博士论文（完善）</a><a href="#d634">D634 周四</a><a class="sub" href="#d634-am">上午 博士论文（完成 75%）</a><a class="sub" href="#d634-noon">中午 遥感成果最终状态确认</a><a class="sub" href="#d634-pm">晚上 博士论文（75% 确认）</a><a href="#d635">D635 周五</a><a class="sub" href="#d635-am">上午 博士论文 M22 阶段成果整理（</a><a class="sub" href="#d635-noon">中午 M22 硬交付对照准备</a><a class="sub" href="#d635-pm">晚上 博士论文（整理）</a><a href="#d636">D636 周六</a><a class="sub" href="#d636-am">上午 机动（博士论文/遥感/入职）</a><a class="sub" href="#d636-noon">中午 M22 硬交付对照准备（续）</a><a class="sub" href="#d636-pm">晚上 个人状态调整</a><a href="#d637">D637 周日</a><a class="sub" href="#d637-am">上午 M22 月度复盘（对照硬交付 4</a><a class="sub" href="#d637-noon">中午 M22 收官小结（offer 落</a><a class="sub" href="#d637-pm">晚上 计划 W92（进入 M23：博士</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

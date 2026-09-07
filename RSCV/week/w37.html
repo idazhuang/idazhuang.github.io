@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="37">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W37 · 第二篇论文 Method + Experimen · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M10 第二篇完稿</span><span>·</span><span>Week 37</span><span>·</span><span>D253–D259</span></div><h1 class="title">第二篇论文 Method + Experiment —— M10 开篇：「一周写完第二篇 v0.5」的写作质变冲刺周</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="253" data-k="am" title="D253 上午段"></i><i data-d="253" data-k="noon" title="D253 中午段"></i><i data-d="253" data-k="pm" title="D253 晚上段"></i></span><span class="sday"><i data-d="254" data-k="am" title="D254 上午段"></i><i data-d="254" data-k="noon" title="D254 中午段"></i><i data-d="254" data-k="pm" title="D254 晚上段"></i></span><span class="sday"><i data-d="255" data-k="am" title="D255 上午段"></i><i data-d="255" data-k="noon" title="D255 中午段"></i><i data-d="255" data-k="pm" title="D255 晚上段"></i></span><span class="sday"><i data-d="256" data-k="am" title="D256 上午段"></i><i data-d="256" data-k="noon" title="D256 中午段"></i><i data-d="256" data-k="pm" title="D256 晚上段"></i></span><span class="sday"><i data-d="257" data-k="am" title="D257 上午段"></i><i data-d="257" data-k="noon" title="D257 中午段"></i><i data-d="257" data-k="pm" title="D257 晚上段"></i></span><span class="sday"><i data-d="258" data-k="am" title="D258 上午段"></i><i data-d="258" data-k="noon" title="D258 中午段"></i><i data-d="258" data-k="pm" title="D258 晚上段"></i></span><span class="sday"><i data-d="259" data-k="am" title="D259 上午段"></i><i data-d="259" data-k="noon" title="D259 中午段"></i><i data-d="259" data-k="pm" title="D259 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：<strong>M10 的第一周，也是阶段二后半（产出期收官）的关键加速周</strong>。你的第二课题在 M8–M9 已经做完了全部实验（最终版方法 + 多数据集大表 + 消融 + 可视化都齐了），本周要做的是<strong>把这些结果写成第二篇论文的 Method 章和 Experiment 章</strong>，并在周末整合出<strong>第二篇论文 v0.5 草稿</strong>。
+<strong>这一周真正的主题词是「写作质变」</strong>：第一篇论文你从开始写到 v1 用了整整 4 周（M6 的 W21–W24）；本周你要<strong>用 1 周写出第二篇的 v0.5</strong>。这不是因为第二篇更简单，而是因为<strong>你的写作能力已经质变了</strong>——句式模板、章节结构、图表规范、论文语言，第一篇都给你攒下了可复用的资产。本周你会亲身体会到：<strong>有了第一篇的经验，第二篇的写作速度应该是第一篇的 2 倍</strong>。
+<strong>本周科研能力目标</strong>（你原计划，保留）：复用第一篇论文的写作经验，加速第二篇论文的产出；一周内完成 Method + Experiment + Intro + RW + Conclusion + Abstract，整合出 v0.5。
+<strong>先给你打个预防针（关于「复用」的边界）</strong>：这周你会大量复用第一篇的模板——但<strong>复用的是「结构和句式骨架」，绝不是「内容」</strong>。比如 Method 的章节顺序（Overview → 组件 → 训练策略）、Experiment 的小节划分（数据集 → 主表 → 消融 → 可视化 → 讨论）、Intro 的四段结构——这些骨架照搬；但每一句的具体内容（你的方法是什么、在什么数据集上、提升了多少）必须是第二课题真实的、重新写的。<strong>模板复用 ≠ 内容抄袭</strong>，这条线本周要一直守住（自我抄袭 self-plagiarism 在学术界同样是问题）。
+<strong>本周精力怎么分配</strong>：D253 写 Method（Overview + 组件 1 + 架构图 + 组件 2 + 训练策略，目标 Method 60%）；D254 收尾 Method + 伪代码，开写 Experiment（4.1 数据集/实现 + 4.2 主表）；D255 写 Experiment 后半（4.3 消融 + 4.4 可视化 + 4.5 讨论/Limitation）+ 整合 Experiment 全章；D256 写 Intro + RW + Conclusion + Abstract（论文的「壳」）；D257 整合全文 → v0.5 + 通读自审 + 修改；D258 英文润色 + 图表最终版 + 读 2 篇新论文；D259 周复盘 + 发朋友 review + 计划 W38。教学按「复用第一篇经验、体会写作质变」组织。
+<strong>贯穿示例说明</strong>（与前序一致）：第一篇是「DOTA 旋转目标检测 + 高分辨率小目标分支」；<strong>第二课题是从第一篇 Limitation 延伸出的 SAR 域难题方向</strong>（speckle 乘性噪声 / 方位角敏感 / 跨域泛化这条发力线，对接王超组）。下文用「你的第二个方法（最终版）」「SAR 数据集」做具体讲解；<strong>换具体题目只替换数据集名/方法名/指标，写作流程完全一样</strong>。</p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d253" data-d="253"><header class="day-head"><span class="dnum">D253</span><h2 class="day-t">周一 · 写 Method 章（Overview + 组件 1 + 架构图 + 组件 2 + 训练策略）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写 Method 的 Overview + 核心组件 1；中午画架构图（复用第一篇的绘图工具和风格，保持系列感）；晚上写核心组件 2 + 训练策略。目标：Method 章 60%。</p>
+<p><strong>预期管理</strong>：M10 第一天，正式进入第二篇的写作。提醒：<strong>第二篇的写作速度应该是第一篇的 2 倍</strong>——很多句式模板可以直接复用（当然内容不能抄）；今天的目标不是「写完美」，是把 Method 的主体框架（Overview + 两个核心组件 + 训练策略）<strong>搭起来、填进去</strong>，达到 Method 章 60%。★ 关键心态：<strong>写 Method 不是创作，是「把你已经做出来的方法，准确、清楚地描述出来」</strong>——你方法都跑通了、结果都有了，写 Method 就是把脑子里的东西落到纸上，别有畏难情绪。</p>
+</blockquote>
+</div><section class="slot" id="d253-am" data-d="253" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D253 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Method 章的 Overview + 核心组件 1</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Method 章是什么 + 为什么先写 Overview）</h4><div class="blk-b"><ul>
+<li><strong>Method 章</strong>（通常是论文第 3 章）是论文的「技术核心」——它要把你的方法<strong>讲清楚到「别人能复现」的程度</strong>。它回答的问题是：你的方法长什么样？由哪些部分组成？每部分为什么这么设计？怎么训练？</li>
+<li><strong>Method 章的标准结构</strong>（第一篇你已经写过一遍，这套骨架直接复用）：① <strong>Overview</strong>（方法总览——一段话 + 一张架构图，让读者先看到全貌）；② <strong>核心组件逐个展开</strong>（你方法的每个创新模块，一个一个讲：是什么、怎么算、为什么这么设计）；③ <strong>训练策略 / 损失函数</strong>（怎么训、用什么 loss）；④（可选）<strong>Algorithm 伪代码</strong>（把整个前向流程写成伪代码，明天写）。</li>
+<li><strong>为什么先写 Overview（自顶向下 vs 自底向上）</strong>：写 Method 最容易犯的错是「一上来扎进某个组件的公式细节」，结果读者看了半天不知道这个组件在整个方法里的位置。<strong>正确顺序是先写 Overview——先给读者一张「地图」</strong>（方法整体是什么、输入输出是什么、有哪几个关键模块、它们怎么串起来），读者有了全局观，再看每个组件的细节才不会迷路。这和你给别人讲一个系统是一个道理：先讲架构，再讲模块。</li>
+<li><strong>★ 第二篇的复利在哪（写作质变的来源）</strong>：第一篇写 Method 时，你是「第一次摸索怎么描述一个方法」——光是「Overview 该写多少、组件该怎么组织、公式该怎么排版」就花了大量时间反复改。<strong>第二篇你已经有了第一篇这套成熟的 Method 写法</strong>：Overview 写几句、每个组件分几段（动机 → 公式 → 直觉解释）、符号怎么定义、图怎么配——这些「写作模式」全都现成。所以你今天写 Overview，本质是「往第一篇的 Overline 模板里换内容」，会快很多。<strong>这就是为什么第二篇该比第一篇快一倍：不是方法简单，是你不用再摸索「论文该怎么写」了。</strong></li>
+<li><strong>Overview 怎么写（一段话讲清四件事）</strong>：① 你的方法叫什么、解决什么任务（如「针对 SAR 图像旋转舰船检测中的 speckle 噪声敏感问题，我们提出 XXX」）；② 整体由哪几个关键模块组成（点名两个核心组件）；③ 这些模块怎么协同（数据从输入怎么流到输出）；④ 一句话点出和现有方法的关键不同（你的核心创新）。<strong>配一张架构图（中午画）</strong>，文字和图相互印证。</li>
+<li><strong>核心组件 1 怎么写（每个组件三段式：动机 → 方法 → 直觉）</strong>：写你的第一个核心组件——<strong>复用第一篇写组件的「三段式」</strong>：① <strong>动机段</strong>（为什么需要这个组件——现有方法在这里有什么问题，如「SAR 的 speckle 是乘性噪声，普通卷积会被噪声主导」）；② <strong>方法段</strong>（这个组件具体怎么算——给公式 + 符号定义 + 数据维度）；③ <strong>直觉解释段</strong>（为什么这么设计能解决动机里的问题——用通俗的话讲清 insight，不只是堆公式）。<strong>第三段（直觉）最容易被新手省略，但它恰恰是审稿人最看重的</strong>——它证明你「懂自己方法为什么work」，不是瞎凑的。</li>
+</ul>
+<blockquote class="quote">
+<p><strong>和通用 CV 论文写作对比</strong>：通用 CV（如普通图像分类/检测）的 Method 写法你可能更熟——其实<strong>遥感/SAR 论文的 Method 结构和通用 CV 完全一样</strong>（Overview + 组件 + 训练），差别只在「内容」：你的动机段要讲清遥感/SAR 特有的难点（speckle、方位角、跨域），你的方法段要体现你针对这些难点的设计。<strong>所以会写通用 CV 的 Method，就会写遥感的 Method——把领域特有的难点和你的针对性设计填进去即可。</strong> 这也是你做这个方向的优势：通用 CV 的写作范式你已掌握，迁过来只换内容。</p>
+</blockquote>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>打开第二篇论文的写作文档（建议复用第一篇的 LaTeX/Word 模板——章节框架、宏包、图表样式全现成）。</li>
+<li>写 Method 的 <strong>3.1 Overview</strong>：一段话讲清「方法叫什么 + 解决什么任务 + 由哪两个核心组件组成 + 怎么协同 + 核心创新」。预留架构图位置（<code>Figure 2: Overview of ...</code>）。</li>
+<li>写 <strong>3.2 核心组件 1</strong>（如「Speckle-aware 特征模块」）：按三段式——动机段（现有方法的问题）→ 方法段（公式 + 符号定义 + 维度）→ 直觉段（为什么这么设计 work）。</li>
+<li>给所有数学符号在首次出现时定义（如「令 ( F \in \mathbb{R}^{C \times H \times W} ) 为输入特征图……」）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>写好了 3.1 Overview（一段话 + 架构图占位）和 3.2 核心组件 1（动机/方法/直觉三段齐、公式有、符号都定义了）。判断标准：一个<strong>没看过你代码</strong>的同行，读完这两节能大致明白「你的方法整体长什么样、第一个组件是干嘛的、为什么这么设计」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>一上来扎进组件细节、没写 Overview</strong> → 读者没有全局观会迷路，必须先写 Overview 给地图。</li>
+<li><strong>只给公式、没有直觉解释段</strong> → 审稿人会觉得「不知道为什么 work」，第三段（直觉）必须写。</li>
+<li><strong>符号用了不定义</strong>（如直接写 (F) 不说它是什么）→ 所有符号首次出现必须定义，否则读者读不懂。</li>
+<li><strong>直接抄第一篇的句子改几个词</strong> → 这是自我抄袭，结构可复用、句子要重写。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>不知道 Overview 写多少？→ 看第一篇的 Overview 长度（通常半页一段 + 一张图），照那个体量。</li>
+<li>组件的「直觉段」不知道写什么？→ 问自己「如果用一句大白话向师弟解释这个模块为什么有用，我会怎么说」，把那句话展开。</li>
+<li>公式怎么排版？→ 复用第一篇的公式格式（编号、对齐），别重新折腾。</li>
+<li>不确定先写哪个组件？→ 先写最核心/最能体现创新的那个（通常是针对你这篇主打难点的模块）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用「Overview + 组件三段式」的标准结构写 Method 章</strong>。<strong>做了</strong>（写 3.1 Overview + 3.2 组件 1）、<strong>学了</strong>（Method 标准结构、自顶向下先写 Overview、组件三段式中「直觉段」最关键、符号必须定义、第二篇复利来自复用第一篇写作模式）、<strong>会了</strong>（把一个做好的方法准确清楚地描述成 Method 章）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜第二篇的写作复利（为什么该快一倍）</strong>：第一篇写到 v1 用 4 周（W21–W24），第二篇目标 1 周写到 v0.5——快的不是方法简单，是你不用再摸索「论文怎么写」。可复用资产：① 章节框架（Method/Exp 的小节顺序）；② 句式骨架（组件三段式、Intro 四段式）；③ 图表规范（架构图风格、表格样式、公式排版）；④ 论文语言（学术英语句式）。<strong>复用结构和句式，重写全部内容</strong>（自我抄袭同样违规）。一周写完 v0.5 = 你的写作能力已质变。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d253-noon" data-d="253" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D253 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">画架构图（复用第一篇绘图工具和风格，保持系列感）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（架构图的作用 + 为什么要「保持系列感」）</h4><div class="blk-b"><ul>
+<li><strong>架构图</strong>（通常是论文 Figure 2）是 Method 章的「门面」——审稿人和读者<strong>第一眼看的就是它</strong>。一张好的架构图能让人 30 秒看懂你方法的整体流程；一张乱的架构图会让人还没读文字就先困惑。</li>
+<li><strong>架构图要画清楚的三件事</strong>：① <strong>数据流</strong>（输入图 → 各模块 → 输出），用箭头串起来；② <strong>你的核心组件</strong>（用醒目的颜色/框标出，让人一眼看到「创新在哪」）；③ <strong>关键的维度/操作</strong>（如特征图尺寸、关键算子），标在图上辅助理解。</li>
+<li><strong>★ 为什么要「复用第一篇的绘图工具和风格，保持系列感」</strong>：这是一个容易被忽略但很有价值的细节。① <strong>效率</strong>：第一篇你已经摸索好了用什么工具画（如 draw.io / PowerPoint / TikZ）、用什么配色、模块框怎么画——第二篇直接复用这套，几小时就能画好，不用从零折腾工具；② <strong>系列感（个人品牌）</strong>：如果你两篇论文的架构图<strong>风格统一</strong>（同样的配色逻辑、同样的模块表示法、同样的排版气质），它们看起来就像「同一个研究者的系列工作」，专业、成体系。<strong>当空天院老师或同行看到你两篇风格一致的论文时，会形成「这个人有自己成熟的研究和表达体系」的印象</strong>——这种一致性本身就是一种隐性的专业信号。反之，如果两篇图风格迥异（一篇很精致一篇很潦草），会显得不够成熟。</li>
+<li><strong>从这件事看「表达的一致性」对长期的价值</strong>：你未来会有第三篇、第四篇，会有 GitHub 仓库、会有作品集 PDF、会有给老师汇报的 PPT——<strong>如果它们的视觉风格是统一的（同一套配色、同一种图表气质、同一种排版逻辑），你整个「作品集」就有了辨识度和专业度</strong>。这就像一个设计师的作品集有统一的视觉语言。对你这个要「用强作品说话、给空天院留下专业印象」的人，从第二篇开始有意识地维护「视觉系列感」，是在低成本地积累个人品牌资产。今天复用第一篇的绘图风格，就是这件事的起点。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>打开第一篇论文的架构图源文件（draw.io/PPT/TikZ 工程），<strong>另存为第二篇的图</strong>——保留配色、模块框样式、字体、箭头风格。</li>
+<li>改内容：把第一篇的模块换成第二篇的（输入改成 SAR 图、组件框改成你的两个核心组件、输出改成对应任务结果）。</li>
+<li>标出<strong>你的核心组件</strong>（用和第一篇一致的「高亮色」），让创新点一眼可见。</li>
+<li>标关键维度/算子（特征图尺寸、关键操作名），辅助读者理解数据流。</li>
+<li>导出高分辨率矢量图（PDF/SVG，确保论文里放大不糊）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一张和第一篇风格统一的架构图——数据流清晰（输入→模块→输出有箭头）、核心组件用一致的高亮色标出、关键维度有标注、矢量导出不糊。判断标准：让一个没读文字的人只看图，能说出「输入是 SAR 图、经过这两个模块、输出是检测结果，创新在被高亮的那两块」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>从零重画、不复用第一篇工程</strong> → 浪费时间且风格不统一，应另存第一篇的图改内容。</li>
+<li><strong>核心组件没高亮，混在普通模块里</strong> → 创新点看不出来，必须用醒目色标出。</li>
+<li><strong>导出位图（PNG 低分辨率）放进论文</strong> → 放大糊，必须矢量（PDF/SVG）。</li>
+<li><strong>图和正文 Overview 描述不一致</strong>（图里有的文字没提、文字提的图里没有）→ 图文必须对应。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>没有第一篇的图源文件了？→ 用同样的工具按同样的配色重建（至少保持风格一致）。</li>
+<li>图太复杂塞不下？→ 抓主干（核心数据流 + 两个核心组件），次要细节省略或放附录。</li>
+<li>不会画矢量图？→ draw.io 免费、能导 PDF/SVG，复用第一篇模板最省事。</li>
+<li>配色不知道选什么？→ 直接用第一篇的配色（这正是「保持系列感」的意义）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>画一张和已有论文风格统一的架构图</strong>。<strong>做了</strong>（复用第一篇图源、改内容、高亮核心组件、矢量导出）、<strong>学了</strong>（架构图要画清数据流/核心组件/关键维度、复用风格=效率+系列感、视觉一致性是个人品牌资产）、<strong>会了</strong>（高效产出专业、成体系的论文架构图）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文架构图（门面 + 系列感）</strong>：架构图是 Method 的门面（审稿人第一眼看）。画清三件事：数据流（箭头串输入→模块→输出）/核心组件（高亮色标出，创新一眼可见）/关键维度。★复用第一篇的绘图工具和配色——既省时间，又让两篇论文有「系列感」（同一研究者的成熟体系，隐性专业信号）。必须矢量导出（PDF/SVG，放大不糊），图文对应。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d253-pm" data-d="253" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D253 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写核心组件 2 + 训练策略</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（组件 2 + 训练策略怎么写）</h4><div class="blk-b"><ul>
+<li><strong>核心组件 2</strong>：写你方法的第二个核心模块——<strong>还是用三段式</strong>（动机 → 方法 → 直觉），和上午写组件 1 一模一样的结构。如果两个组件有协同关系（如组件 2 用了组件 1 的输出），在方法段里说清它们怎么衔接。</li>
+<li><strong>训练策略 / 损失函数（Method 的 3.4 节）</strong>：讲你怎么训练这个方法——① <strong>损失函数</strong>（用了什么 loss，如分类 loss + 回归 loss + 你可能加的针对性 loss，给公式）；② <strong>训练细节里属于「方法」的部分</strong>（如有特殊的训练流程、两阶段训练、特殊的数据处理策略——注意：纯粹的超参如 lr/batch size 不放这里，放 Experiment 的「实现细节」）。</li>
+<li><strong>★ 「方法细节」vs「实现细节」的分界（新手常混）</strong>：这是写论文要分清的一条线——<strong>Method 章写「方法本质」（损失设计、模块结构、训练策略这类「换个人复现也得这么做」的东西）；Experiment 章的「实现细节」写「具体配置」（lr=0.01、batch=8、训练 12 epoch、用 RTX 4090 这类「可调的工程参数」）</strong>。判断标准：如果这个细节是「你方法成立的一部分」，放 Method；如果是「跑实验时的具体设置」，放 Experiment。比如「我们用 Focal Loss 处理类别不平衡」是方法（放 Method），「Focal Loss 的 (\gamma=2)」是实现细节（放 Experiment）。</li>
+<li><strong>你的单卡 4090 卖点在哪体现</strong>：你的「单张 4090 高效训练」是论文卖点（效率），但它<strong>主要在 Experiment 的实现细节和效率对比里体现</strong>（如「所有实验在单张 RTX 4090 完成，参数量 X M，FPS Y」），Method 里如果有「为了单卡可训而做的高效设计」（如轻量模块），可以在组件的动机/直觉里点一句。<strong>这条「单卡高效」主线第二篇要继续打</strong>（和第一篇一致，是你区别于堆算力工作的差异化卖点）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 <strong>3.3 核心组件 2</strong>：三段式（动机 → 方法/公式/符号 → 直觉），如和组件 1 有衔接，说清协同关系。</li>
+<li>写 <strong>3.4 训练策略 / 损失函数</strong>：损失函数公式（各项 + 权重）+ 属于方法本质的训练策略。</li>
+<li>把「可调的工程配置」（lr、batch、epoch、硬件）<strong>先记在一个待办里</strong>，明天写 Experiment 的实现细节时放进去（别误塞进 Method）。</li>
+<li>通读今天写的 Method（3.1–3.4），检查：符号是否都定义了、图文是否一致、每个组件是否都有直觉段。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 章达到 60%——3.1 Overview + 3.2/3.3 两个核心组件（都三段式齐全）+ 3.4 训练策略/损失（公式齐）。判断标准：方法的「骨架」已经立住，剩下明天补 Algorithm 伪代码 + 收尾打磨。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>把超参（lr/batch）写进 Method</strong> → 那是实现细节，放 Experiment；Method 只写方法本质。</li>
+<li><strong>组件 2 没说和组件 1 怎么衔接</strong> → 有协同关系要讲清数据怎么流转。</li>
+<li><strong>损失函数只写名字不给公式/权重</strong> → loss 要给公式和各项权重（复现需要）。</li>
+<li><strong>组件 2 又省了直觉段</strong> → 每个组件都要有「为什么 work」的直觉解释。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>不确定某细节放 Method 还是 Experiment？→ 问「这是方法本质还是可调配置」，本质放 Method、配置放 Experiment。</li>
+<li>损失函数有多项不知道怎么组织？→ 列出每一项（说清各管什么）+ 总损失（加权和 + 权重），复用第一篇的 loss 写法。</li>
+<li>两个组件关系讲不清？→ 画个小数据流（组件 1 输出 → 组件 2 输入），按图描述。</li>
+<li>今天写不完 60%？→ 优先保证两个核心组件的三段式完整（这是方法的灵魂），训练策略可明天补。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写完 Method 主体（组件 2 + 训练策略）并分清「方法细节」与「实现细节」</strong>。<strong>做了</strong>（写组件 2 + 训练策略/损失、Method 达 60%）、<strong>学了</strong>（组件 2 同样三段式、损失要给公式权重、Method 写方法本质/Experiment 写可调配置、单卡高效卖点主要在 Experiment 体现）、<strong>会了</strong>（完整描述一个方法的核心模块与训练方式）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Method 章 60%（Overview + 核心组件 1 + 核心组件 2 + 训练策略）✅ 架构图（复用第一篇风格，保持系列感）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D253</summary><textarea data-note="d253" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d254" data-d="254"><header class="day-head"><span class="dnum">D254</span><h2 class="day-t">周二 · 完成 Method（+ Algorithm 伪代码）→ 开写 Experiment（4.1 数据集/实现 + 4.2 主表）</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午完成 Method 章 + Algorithm 伪代码；中午写 Experiment Sec 4.1（数据集 + 实现细节，模板从第一篇改造）；晚上写 Sec 4.2（主表 + 分析文字）。目标：Method 完成、Exp 4.1–4.2 完成。</p>
+<p><strong>预期管理</strong>：今天跨两章——上午收尾 Method（补伪代码），下午起进入 Experiment。提醒：<strong>Experiment 章是「报告事实」，比 Method 更好写</strong>——你所有实验结果（多数据集大表、消融、可视化）M8–M9 都做好了，写 Experiment 本质是「把表格和数字组织成有逻辑的叙述」；4.1 数据集/实现细节的模板<strong>直接从第一篇改造</strong>（换数据集名、换具体配置即可）；4.2 主表的「分析文字」要点出「你的方法赢在哪、赢多少、为什么」。★ 关键：<strong>Experiment 写的是已有的结果，别一边写一边想「要不要再补个实验」</strong>——补实验是 W38 的事（如审稿要求），本周先把现有结果写成完整章节。</p>
+</blockquote>
+</div><section class="slot" id="d254-am" data-d="254" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D254 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">完成 Method 章 + Algorithm 伪代码</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Algorithm 伪代码的作用 + Method 收尾自检）</h4><div class="blk-b"><ul>
+<li><strong>Algorithm 伪代码</strong>（论文里的 <code>Algorithm 1</code>）：把你方法的<strong>整个前向流程</strong>写成结构化的伪代码（输入 → 一步步操作 → 输出）。它的作用是：让读者<strong>不看正文也能照着复现整个流程</strong>，是 Method 的「可执行摘要」。</li>
+<li><strong>伪代码怎么写</strong>：① 开头声明 <code>Input:</code>（输入是什么，如图像、参数）和 <code>Output:</code>（输出是什么，如检测框）；② 中间用编号步骤描述流程（如「1: 提取多尺度特征」「2: 经过组件 1 处理」「3: 经过组件 2」「4: 解码得到检测结果」）；③ 关键步骤对应到你的组件（让伪代码和 Method 正文呼应）。<strong>复用第一篇的伪代码格式</strong>（用 <code>algorithm</code> / <code>algorithmic</code> 宏包，或 Word 里的标准格式）。</li>
+<li><strong>★ 伪代码必须和正文、代码三者一致</strong>：这是 Method 自检的关键——<strong>伪代码描述的流程，要和正文 Method 的描述一致，也要和你实际跑的代码逻辑一致</strong>。三者不一致是审稿人最容易抓的硬伤（如正文说「先 A 后 B」，伪代码写「先 B 后 A」）。写完伪代码，对照正文和代码核一遍。</li>
+<li><strong>Method 章收尾自检清单</strong>（第一篇你用过这套，复用）：① 所有符号在首次出现时定义了吗？② 公式和文字描述一致吗？③ 架构图和文字描述一致吗？④ 伪代码和实际代码逻辑一致吗？⑤ 每个设计有「为什么这么做」的解释（直觉段）吗，不只是「是什么」？<strong>逐条过一遍，Method 才算定稿。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 <strong>Algorithm 1</strong>：<code>Input</code> / <code>Output</code> 声明 + 编号步骤（覆盖整个前向流程，关键步对应你的组件）。复用第一篇的伪代码宏包/格式。</li>
+<li>对照核三处一致：伪代码 ↔ Method 正文 ↔ 实际代码逻辑（有不一致就改）。</li>
+<li>跑 <strong>Method 收尾自检清单</strong>（符号定义/公式文字一致/图文一致/伪代码代码一致/有直觉解释）逐条打勾。</li>
+<li>Method 章定稿（3.1–3.4 + Algorithm 1）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Method 章完成——Overview + 两个组件 + 训练策略 + Algorithm 1，自检清单 5 条全过。判断标准：一个同行只读你的 Method 章（含伪代码），能复现出你方法的整体流程。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>伪代码和正文/代码不一致</strong>（步骤顺序、操作对不上）→ 三者必须一致，写完核对。</li>
+<li><strong>伪代码写得太抽象</strong>（如只写「处理特征」不说怎么处理）→ 关键步要具体到能对应组件。</li>
+<li><strong>跳过自检清单直接说 Method 写完了</strong> → 5 条自检（符号/公式/图/伪代码/直觉）必须逐条过。</li>
+<li><strong>伪代码格式从零折腾</strong> → 复用第一篇的宏包/格式。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>伪代码粒度不知道写多细？→ 看第一篇的伪代码粒度，保持一致（通常 5–10 步覆盖主流程）。</li>
+<li>伪代码和代码对不上？→ 以「方法应该怎么做」为准（如代码有临时 hack，伪代码写干净的逻辑，但确保不偏离方法本质）。</li>
+<li>自检发现某符号没定义？→ 回到首次出现处补定义。</li>
+<li>Method 还是觉得哪里不对？→ 让自己「假装是审稿人」读一遍，标出「读不懂/不信服」的地方再补。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用伪代码 + 自检清单给 Method 章收尾定稿</strong>。<strong>做了</strong>（写 Algorithm 1 + 三处一致核对 + 自检清单 5 条 + Method 定稿）、<strong>学了</strong>（伪代码是可执行摘要、伪代码/正文/代码三者必须一致、Method 自检 5 条）、<strong>会了</strong>（产出一份可复现、自洽的 Method 章）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Method 章自检清单（5 条）</strong>：写完 Method 逐条过——①所有符号首次出现已定义；②公式与文字描述一致；③架构图与文字一致；④伪代码与实际代码逻辑一致；⑤每个设计有「为什么这么做」的直觉解释（不只「是什么」）。Algorithm 伪代码=方法的可执行摘要（Input/Output + 编号步骤，关键步对应组件）。伪代码↔正文↔代码三者一致是审稿人最爱抓的硬伤，必须核对。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d254-noon" data-d="254" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D254 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Experiment Sec 4.1（数据集 + 实现细节，模板从第一篇改造）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Experiment 章结构 + 4.1 怎么写）</h4><div class="blk-b"><ul>
+<li><strong>Experiment 章</strong>（论文第 4 章）是「用实验证明你的方法好」——它的<strong>标准结构</strong>（第一篇你写过，直接复用）：<strong>4.1 数据集 + 实现细节</strong> → <strong>4.2 主实验（主表 + 分析）</strong> → <strong>4.3 消融</strong> → <strong>4.4 可视化分析</strong> → <strong>4.5 讨论 / Limitation</strong>。这是 CV/遥感论文几乎通用的 Experiment 骨架。</li>
+<li><strong>4.1 数据集</strong>：介绍你用的 SAR 数据集——每个数据集说清：名字、规模（图像数/实例数）、类别、划分（train/val/test）、特点（如「SSDD 是 SAR 舰船检测常用 benchmark」）。<strong>复用第一篇的数据集介绍句式</strong>，换成第二课题的数据集。</li>
+<li><strong>4.1 实现细节</strong>：写「可调的工程配置」（这就是昨天从 Method 里分出来、记下的那些）——backbone、优化器、学习率、batch size、训练 epoch、数据增强、<strong>硬件（★ 单张 RTX 4090——你的效率卖点）</strong>、评测指标（mAP 等）。<strong>目的是让别人能复现你的具体设置。</strong></li>
+<li><strong>★ 实现细节里务必写「单张 RTX 4090」</strong>：这是你贯穿两篇论文的差异化卖点——<strong>「我们的所有实验在单张消费级 RTX 4090 上完成」</strong>这句话本身就是亮点：它说明你的方法高效、不依赖大算力，普通研究者也能复现。和那些「8×A100 训练 N 天」的工作形成对比。这条主线第一篇打了，第二篇继续打（一致性 + 强化你「高效遥感方法」的研究人设）。</li>
+<li><strong>模板从第一篇改造（具体怎么改）</strong>：把第一篇 4.1 的 LaTeX/文字<strong>复制过来</strong>，然后：① 数据集段——换成 SAR 数据集的名字/规模/特点；② 实现细节段——换成第二课题的具体配置（backbone 可能不同、超参可能不同），<strong>硬件「单张 4090」保留</strong>，评测指标按第二课题填。<strong>结构句式照搬，数字内容全换。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复制第一篇的 4.1 文字作为模板（结构句式参考）。</li>
+<li>写 <strong>4.1 数据集</strong>：逐个介绍第二课题的 SAR 数据集（名字/规模/类别/划分/特点），复用句式换内容。</li>
+<li>写 <strong>4.1 实现细节</strong>：backbone、优化器、lr、batch、epoch、增强、<strong>硬件（单张 RTX 4090）</strong>、评测指标——把昨天记下的「可调配置」全填进来。</li>
+<li>自查：别人照这节能复现你的实验设置吗？（数据集哪下、怎么划分、什么配置、什么硬件、什么指标都齐了吗）</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.1 完成——数据集介绍清楚（每个数据集规模/特点齐）、实现细节完整（含单张 4090 + 评测指标）、复用了第一篇句式但内容全是第二课题的。判断标准：一个同行照着 4.1 能配出和你一样的实验环境。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>数据集只写名字、不写规模/划分/特点</strong> → 要写清规模、train/val/test 划分、特点（复现 + 可信度需要）。</li>
+<li><strong>实现细节漏了硬件</strong> → 必须写「单张 RTX 4090」（这是你的效率卖点，且复现需要）。</li>
+<li><strong>直接抄第一篇 4.1 没换内容</strong>（数据集名/配置还是第一篇的）→ 结构复用、内容必须全换成第二课题的。</li>
+<li><strong>评测指标没说清</strong>（用 mAP 但没说 IoU 阈值/AP 计算方式）→ 指标定义要明确（可复现、可比较）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>数据集介绍写多详细？→ 看第一篇 4.1 的数据集段体量，保持一致。</li>
+<li>实现细节漏了什么？→ 对照「能不能复现」自查：数据/模型/训练/硬件/指标五类都齐了吗。</li>
+<li>不确定指标怎么描述？→ 复用第一篇的指标描述（旋转检测一般都是 mAP@0.5 等），换数据集对应的。</li>
+<li>第二课题某配置和第一篇差很多？→ 如实写第二课题的真实配置（别为了「像第一篇」而改数字）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写 Experiment 的 4.1（数据集 + 实现细节），用第一篇模板改造</strong>。<strong>做了</strong>（写 4.1 数据集 + 实现细节、复用第一篇句式换内容）、<strong>学了</strong>（Experiment 标准五节结构、数据集要写规模/划分/特点、实现细节要可复现且含单张 4090 卖点、模板改造=换内容不换结构）、<strong>会了</strong>（写出可复现的实验设置章节）。</p>
+</div></section></section><section class="slot" id="d254-pm" data-d="254" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D254 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Sec 4.2（主表 + 分析文字）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（主表 + 分析文字怎么写）</h4><div class="blk-b"><ul>
+<li><strong>4.2 主实验（Main Results）</strong>：这是 Experiment 的核心——<strong>一张主表 + 一段分析文字</strong>，证明「你的方法比 baseline 们好」。</li>
+<li><strong>主表怎么组织</strong>：行 = 各个方法（baseline 们 + 你的方法，你的方法通常放最后一行并<strong>加粗</strong>）；列 = 各数据集 × 各指标（如 SSDD-mAP、HRSID-mAP……）。<strong>最好的数字加粗</strong>，让「你赢了」一目了然。这张表你 M8–M9 已经做好了（多数据集大表），现在是把它<strong>排版进论文 + 配文字</strong>。</li>
+<li><strong>★ 「分析文字」才是 4.2 的灵魂（不是把表读一遍）</strong>：新手最常犯的错是「分析文字 = 把表格数字念一遍」（「我们的方法在 SSDD 上达到 X，在 HRSID 上达到 Y……」）——<strong>这是废话，读者自己会看表</strong>。好的分析文字要点出表格<strong>背后的 insight</strong>：① <strong>你赢了多少</strong>（「相比最强 baseline 提升 +X mAP」）；② <strong>在哪类情况赢得更多</strong>（「在 speckle 噪声更强的数据集上提升更明显，说明我们的 speckle-aware 模块确实起了作用」）——<strong>把结果和你的方法设计联系起来</strong>；③ <strong>效率优势</strong>（「在更少参数量/更高 FPS 下达到更优精度，且仅用单张 4090」）。<strong>分析文字的价值 = 帮读者从数字里看出「你的方法为什么好、好在哪」。</strong></li>
+<li><strong>从这件事理解「数据会说话，但要你帮它说」</strong>：同样一张表，平庸的论文只是把它放上去念一遍，优秀的论文会从中<strong>讲出一个有说服力的故事</strong>——「我们针对 speckle 设计了模块 → 所以在 speckle 强的场景提升更大 → 这印证了我们的 motivation」。这种「实验结果 ↔ 方法设计 ↔ 动机」的闭环叙述，是审稿人判断「这个工作是不是想清楚了」的关键。对你这个要把每篇论文都写扎实的人，养成「写分析文字时永远问『这个数字印证了我方法的什么』」的习惯，会让你的论文显著高于「只会堆实验」的水平。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把 M8–M9 做好的多数据集主表<strong>排版进论文</strong>（LaTeX/Word 表格，复用第一篇主表样式：行列结构、加粗规则、字号）。</li>
+<li>你的方法放最后一行，最优数字加粗。</li>
+<li>写<strong>分析文字</strong>：① 总体提升多少（vs 最强 baseline）；② 在哪类场景/数据集赢得更多 + <strong>联系到你的方法设计</strong>（为什么这个模块导致这里赢更多）；③ 效率优势（参数/FPS + 单张 4090）。</li>
+<li>检查：表里每个 baseline 的数字有出处（你 M8–M9 真跑的）、你的方法数字和表/正文一致。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.2 完成——主表排版规范（最优加粗、你的方法在最后一行）+ 分析文字有 insight（不只念数字，点出了赢多少/在哪赢更多/为什么/效率优势，并和方法设计闭环）。判断标准：读者看完 4.2，不仅知道「你赢了」，还知道「你为什么赢、赢在哪」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>分析文字只念数字、没 insight</strong> → 要点出赢多少/在哪赢更多/为什么/效率，和方法设计联系。</li>
+<li><strong>主表没加粗最优数字</strong> → 加粗让「你赢了」一目了然。</li>
+<li><strong>表里数字和正文/你的方法不一致</strong> → 全文数字必须一致（可信度的隐形门槛）。</li>
+<li><strong>一边写 4.2 一边想「再补个 baseline」</strong> → 现有结果先写完，补实验是 W38 的事。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>分析文字写不出 insight？→ 问「这张表里最值得说的一句话是什么」（通常是「在我针对的难点场景，我赢得更多」），围绕它展开。</li>
+<li>主表太大列太多？→ 主表放核心对比（关键 baseline × 主要数据集 × 主指标），完整版可进附录。</li>
+<li>baseline 数字哪来的？→ 用你 M8–M9 自己跑的（统一环境最公平），引用原文数字要注明。</li>
+<li>你的方法没在所有数据集都最好？→ 如实呈现 + 诚实分析（「在 X 上略低，因为……」），诚实比假装全赢更可信。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写 4.2 主表 + 有 insight 的分析文字</strong>。<strong>做了</strong>（排版主表 + 写分析文字、闭环到方法设计）、<strong>学了</strong>（主表组织与加粗规则、分析文字的灵魂是 insight 不是念数字、结果↔方法↔动机的闭环叙述、效率卖点要写）、<strong>会了</strong>（让实验数据「讲出有说服力的故事」）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜主表 + 分析文字（让数据讲故事）</strong>：主表=行（方法，你的放末行加粗）×列（数据集×指标，最优加粗）。★分析文字的灵魂不是念数字（读者会看表），是讲 insight：①赢多少（vs 最强 baseline）；②在哪类场景赢更多+联系你的方法设计（印证 motivation）；③效率优势（参数/FPS+单张 4090）。形成「结果↔方法↔动机」闭环=审稿人判断「想清楚没」的关键。全文数字必须一致。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Method 章完成（含 Algorithm 伪代码）✅ Experiment 4.1（数据集+实现细节）✅ Experiment 4.2（主表+分析）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D254</summary><textarea data-note="d254" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d255" data-d="255"><header class="day-head"><span class="dnum">D255</span><h2 class="day-t">周三 · 写 Experiment 后半（4.3 消融 + 4.4 可视化 + 4.5 讨论/Limitation）+ 整合 Experiment 全章</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写 Sec 4.3（消融）+ Sec 4.4（可视化分析）；中午写 Sec 4.5（Discussion + Limitation）；晚上整合 Experiment 全章。目标：Experiment 全章 v1。</p>
+<p><strong>预期管理</strong>：今天写完 Experiment 后半三节并整合成完整一章。提醒：4.3 消融的数据 M9 已做好（复用第一篇消融框架跑的），写就是「把消融表配上『每个组件贡献多少』的分析」；4.4 可视化也是 M9 做好的（正面/负面/困难案例），写就是「为每组图配解读」；<strong>4.5 Limitation 要诚实写</strong>——诚实承认局限不会减分，反而显得你清醒、且能为第三篇埋伏笔。★ 今天整合后你就有了<strong>完整的 Experiment 章</strong>——这是论文里最「硬」的一章（全是你真做出来的证据），写完它，论文的「肉」就齐了，明天补「壳」（Intro/RW/结论）。</p>
+</blockquote>
+</div><section class="slot" id="d255-am" data-d="255" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D255 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Sec 4.3（消融）+ Sec 4.4（可视化分析）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（消融 + 可视化怎么写）</h4><div class="blk-b"><ul>
+<li><strong>4.3 消融实验（Ablation Study）</strong>：证明「你方法的每个组件都有用」——<strong>一张消融表</strong>（逐个去掉/替换你的组件，看性能掉多少）+ <strong>分析文字</strong>（每个组件贡献多少、为什么）。这些数据 M9 你已经跑好了（复用第一篇消融框架），现在是排版 + 配文字。</li>
+<li><strong>消融表怎么读 + 配文</strong>：典型消融表是「baseline → +组件 1 → +组件 2 → 完整方法」逐行加，看每加一个组件涨多少。<strong>分析文字要点出</strong>：① 每个组件带来多少提升（「加入组件 1 后 +X mAP」）；② 哪个组件更关键；③ <strong>为什么这个组件有用</strong>（联系方法设计，如「组件 1 提升大，印证 speckle 处理是 SAR 检测的关键瓶颈」）。<strong>还是那个原则：不是念表，是讲『每个组件为什么 work』。</strong></li>
+<li><strong>4.4 可视化分析（Qualitative Results）</strong>：用图直观展示你方法的效果——<strong>你 M9 做的 8–10 张可视化（正面案例 / 负面案例 / 困难案例）</strong>派上用场。写法是<strong>为每组图配解读文字</strong>：① 正面案例（你的方法 vs baseline 在典型场景，你检得更准）；② <strong>困难案例</strong>（密集小目标、强 speckle 等，体现你方法的优势场景）；③ <strong>★ 负面案例（诚实展示失败）</strong>——这反而加分。</li>
+<li><strong>★ 为什么可视化要包含「负面/失败案例」（诚实可视化）</strong>：新手倾向只放「我方法表现好」的图。但<strong>只放成功案例会显得你在『挑好的展示』，审稿人见多了反而不信</strong>。放几张「你方法也失败/baseline 也对的」案例，配上诚实分析（「在 X 极端情况下我方法也漏检，原因是……」），传达三个信号：① 你对自己方法的边界很清楚（清醒）；② 你诚实（可信）；③ 失败原因的分析往往指向「下一步改进方向」（为第三篇/未来工作埋点）。<strong>诚实地展示局限，是成熟研究者的标志，不是示弱。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 <strong>4.3 消融</strong>：排版消融表（逐组件累加，复用第一篇消融表样式）+ 分析文字（每组件贡献多少/哪个关键/为什么，联系方法设计）。</li>
+<li>写 <strong>4.4 可视化</strong>：把 M9 的 8–10 张可视化排版进论文（正面/困难/负面分组）+ 为每组配解读文字。</li>
+<li><strong>诚实写负面案例</strong>：选 1–2 个你方法失败的案例，配诚实分析（为什么失败、指向什么改进）。</li>
+<li>检查：消融表数字和主表/正文一致、可视化图清晰有标注（哪个是你的方法、哪个是 GT）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.3 + 4.4 完成——消融表 + 「每组件贡献」分析（联系设计）；可视化含正面/困难/负面三类 + 解读，负面案例诚实分析。判断标准：读者看完，相信「你方法每个组件都有用」且「你清楚自己方法的优势场景和失败边界」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>消融只放表不配「为什么」</strong> → 要分析每个组件为什么有用（联系方法设计）。</li>
+<li><strong>可视化只放成功案例</strong> → 放几张诚实的失败案例反而加分（清醒+可信+埋伏笔）。</li>
+<li><strong>可视化图没标注</strong>（看不出哪个是你方法、哪个是 GT/baseline）→ 必须清晰标注。</li>
+<li><strong>消融数字和主表对不上</strong> → 全文数字一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>消融分析写不出「为什么」？→ 问「这个组件解决的是什么问题，去掉它为什么掉这么多」。</li>
+<li>可视化选哪些图？→ 正面（典型场景赢）+ 困难（你的优势场景）+ 负面（诚实失败）各几张。</li>
+<li>负面案例不知怎么分析？→ 诚实写「为什么失败」+「这指向什么改进」（别回避）。</li>
+<li>图太多塞不下？→ 正文放代表性的，完整版进附录/补充材料。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写消融（证明组件有用）+ 诚实的可视化分析</strong>。<strong>做了</strong>（写 4.3 消融表+分析、4.4 可视化+解读、诚实负面案例）、<strong>学了</strong>（消融配「每组件为什么 work」、可视化要含正面/困难/负面、诚实展示失败=清醒+可信+埋伏笔）、<strong>会了</strong>（用消融和可视化完整佐证方法的有效性与边界）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜消融 + 诚实可视化</strong>：4.3 消融=表（baseline→+组件1→+组件2→完整，看每步涨多少）+ 分析（每组件贡献多少/为什么，联系设计）。4.4 可视化=正面（典型场景赢）+困难（优势场景）+★负面（诚实失败案例）。负面案例不减分反加分：传达「清楚边界（清醒）+诚实（可信）+失败分析指向改进（埋伏笔）」。诚实展示局限是成熟研究者标志，不是示弱。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d255-noon" data-d="255" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D255 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Sec 4.5（Discussion + Limitation）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Discussion + Limitation 怎么写）</h4><div class="blk-b"><ul>
+<li><strong>4.5 Discussion + Limitation</strong>：Experiment 章的收尾——① <strong>Discussion</strong>（讨论：从所有实验里你能得出什么更高层的结论/洞察，如「实验表明针对 SAR 物理特性的设计比通用方法更有效」）；② <strong>Limitation</strong>（局限：诚实列出你方法的不足）。</li>
+<li><strong>★ Limitation 怎么写（诚实但有策略）</strong>：这是新手最纠结的——「写局限会不会让审稿人觉得我方法不行？」<strong>恰恰相反，不写或假装没有局限，才显得你不清醒、不可信</strong>。正确写法：① <strong>诚实列 2–3 个真实局限</strong>（如「我们的方法在 X 极端场景下提升有限」「计算量虽小但在超大图上仍需切片」「在 Y 数据集上的泛化有待进一步验证」）；② <strong>每个局限可以带一句「未来可以怎么解决」</strong>——这既显得你想得远，又<strong>为你的下一篇论文埋下伏笔</strong>（第三篇可能就是解决第二篇某个 Limitation 的）。<strong>Limitation 不是认输，是「清醒地知道边界 + 指明前路」。</strong></li>
+<li><strong>从这件事理解「论文是系列的，Limitation 是承上启下的接口」</strong>：你的研究是一个系列（第一篇 → 第二篇 → 第三篇……），而<strong>每一篇的 Limitation，往往就是下一篇的 Gap</strong>——第二篇就是从第一篇 Limitation（如「方法在 SAR 上没验证」）延伸出来的。所以你写第二篇的 Limitation 时，本质是在<strong>为第三篇选题</strong>。诚实写下「我这篇还没解决的问题」，既让当前论文显得清醒可信，又给自己留下了下一个明确的研究方向。对你这个要持续产出系列工作、最终对接空天院的人，把 Limitation 当作「系列研究的接口」来写，是一种很高阶的科研规划意识——你的每篇论文都在为下一篇铺路。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 <strong>Discussion</strong>：从全部实验中提炼 1–2 个高层洞察（不只是「方法好」，而是「实验揭示了什么规律」，如「物理先验驱动的设计在 SAR 上优于通用方法」）。</li>
+<li>写 <strong>Limitation</strong>：诚实列 2–3 个真实局限。</li>
+<li>每个 Limitation 带一句「未来工作可以怎么解决」（既显远见，又为第三篇埋点）。</li>
+<li>检查：Limitation 是真实的（不是假谦虚），Discussion 的洞察有实验支撑。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>4.5 完成——Discussion 有高层洞察（实验揭示的规律）+ Limitation 诚实列 2–3 个真实局限并各带未来方向。判断标准：读者觉得「这个作者很清醒——既知道方法的价值，也清楚它的边界和下一步」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>不写 Limitation 或假装没有局限</strong> → 反而显得不清醒不可信，要诚实列真实局限。</li>
+<li><strong>Limitation 写些无关痛痒的假局限</strong>（如「未来可以试更多数据集」）→ 写真实的、有分量的局限。</li>
+<li><strong>Discussion 只重复「方法好」</strong> → 要提炼更高层的洞察（实验揭示了什么）。</li>
+<li><strong>Limitation 不带未来方向</strong> → 带一句未来工作，显远见 + 为下篇埋点。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>不知道写什么 Limitation？→ 想「我方法在什么情况下表现差/没验证/有约束」，那就是真实局限。</li>
+<li>担心 Limitation 暴露弱点？→ 反过来想：审稿人本来就会发现，你主动诚实说明 + 给方向，比被他抓出来好得多。</li>
+<li>Discussion 提不出洞察？→ 问「我所有实验合起来，证明了一个什么样的更普适的道理」。</li>
+<li>Limitation 和 Conclusion 内容重复？→ Limitation 在 4.5（具体局限+方向），Conclusion 在结尾（总结全文，明天写），分工不同。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写 Discussion（提炼洞察）+ Limitation（诚实且有策略）</strong>。<strong>做了</strong>（写高层 Discussion + 诚实 Limitation + 未来方向）、<strong>学了</strong>（Limitation 诚实不减分反加分、每个局限带未来方向、Limitation 是「系列研究的接口」=下篇的 Gap）、<strong>会了</strong>（用清醒的讨论和诚实的局限收尾实验章，并为下篇铺路）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Discussion + Limitation（清醒 + 埋伏笔）</strong>：Discussion=从全部实验提炼高层洞察（揭示了什么规律，不只「方法好」）。★Limitation=诚实列 2–3 个真实局限+每个带「未来怎么解决」。不写局限才显得不清醒不可信；诚实写=清醒（知边界）+可信+为下篇埋点（每篇 Limitation 常是下篇 Gap，第二篇正是从第一篇 Limitation 延伸来的）。Limitation 是「系列研究的接口」，写它=为第三篇选题。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d255-pm" data-d="255" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D255 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">整合 Experiment 全章（4.1–4.5）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（整合 = 让五节读起来是「一篇」而不是「五块」）</h4><div class="blk-b"><ul>
+<li><strong>整合 Experiment 全章</strong>：把 4.1–4.5 五节<strong>串成一个连贯的整体</strong>——不是简单拼在一起，而是检查<strong>逻辑流和一致性</strong>，让读者顺着读下来有「层层递进」的感觉。</li>
+<li><strong>整合要检查的三件事</strong>：① <strong>逻辑流顺畅</strong>——4.1（在什么上测）→ 4.2（整体赢）→ 4.3（每个组件有用）→ 4.4（直观看效果）→ 4.5（讨论+局限），节与节之间有过渡句（如「在确认整体性能后，我们进一步通过消融分析各组件的贡献」）；② <strong>数字全文一致</strong>——主表、消融表、正文里提到的所有数字必须一致（这是可信度的隐形门槛，最常见的低级硬伤就是「正文说 78.5、表里写 78.3」）；③ <strong>图表编号/引用正确</strong>——每张图表都被正文引用了（<code>as shown in Table 2</code>），编号连续不重复。</li>
+<li><strong>★ 「数字全文一致」为什么是可信度的隐形门槛</strong>：审稿人如果发现你正文一个数、表里另一个数，会立刻怀疑「这人做实验/写论文是不是不严谨？数据可信吗？」——<strong>一个数字不一致的小错，可能让审稿人对整篇论文的可信度打折扣</strong>。所以整合时务必通查所有数字一致。这看似琐碎，却是「严谨」这个隐形评分项的直接体现。对你这个要把论文做扎实的人，养成「定稿前通查全文数字一致」的习惯，是把好可信度这道关。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>通读 4.1–4.5，在节与节之间加<strong>过渡句</strong>（让逻辑层层递进）。</li>
+<li><strong>通查全文数字一致</strong>：主表、消融表、正文提到的每个数字逐一核对（不一致就改到一致）。</li>
+<li>检查图表：每张图表都被正文引用、编号连续不重复、标题（caption）清楚。</li>
+<li>形成 <strong>Experiment 全章 v1</strong>（4.1–4.5 连贯、数字一致、图表规范）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Experiment 全章 v1——五节逻辑连贯（有过渡）、全文数字一致、图表引用/编号正确。判断标准：从头读到尾，像「一篇精心组织的实验报告」而非「五段拼凑」；随手抽查任一数字，全文一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>五节简单拼接、没过渡</strong> → 加过渡句让逻辑递进、读起来是一个整体。</li>
+<li><strong>数字不一致</strong>（正文 vs 表）→ 通查全文数字到一致（可信度硬伤）。</li>
+<li><strong>有图表没被正文引用</strong> → 每张图表都要在正文 <code>Table X/Figure Y</code> 引用。</li>
+<li><strong>图表编号乱/重复</strong> → 编号连续不重复。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>过渡句不会写？→ 用「在……之后，我们进一步……」的衔接句式（复用第一篇的过渡）。</li>
+<li>数字太多核不过来？→ 列一个「关键数字清单」（主结果、各组件提升），全文搜这些数字核对。</li>
+<li>不确定图表 caption 写多详细？→ 复用第一篇的 caption 风格（一句话说清图表内容）。</li>
+<li>Experiment 读着还是散？→ 检查是不是缺「承上启下」的句子，或某节内部逻辑没理顺。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把 Experiment 五节整合成连贯、一致、规范的完整一章</strong>。<strong>做了</strong>（加过渡、通查数字一致、查图表引用编号、成 Experiment v1）、<strong>学了</strong>（整合=查逻辑流/数字一致/图表规范、数字全文一致是可信度的隐形门槛、过渡句让五节成一篇）、<strong>会了</strong>（产出一份连贯严谨的完整 Experiment 章）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜整合 Experiment 全章（一致性 = 可信度）</strong>：整合不是拼接，是查三件事——①逻辑流（4.1测什么→4.2整体赢→4.3组件有用→4.4直观看→4.5讨论局限，节间有过渡句层层递进）；②★全文数字一致（主表/消融/正文每个数字逐一核对——正文78.5表里78.3这类不一致是审稿人对可信度打折的硬伤）；③图表规范（每张被正文引用、编号连续、caption 清楚）。定稿前通查数字一致=把好「严谨」这道隐形评分。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Experiment 全章 v1（4.1 数据集/实现 + 4.2 主表/分析 + 4.3 消融 + 4.4 可视化 + 4.5 讨论/Limitation，连贯且数字一致）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D255</summary><textarea data-note="d255" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d256" data-d="256"><header class="day-head"><span class="dnum">D256</span><h2 class="day-t">周四 · 写论文的「壳」：Introduction + Related Work + Conclusion + Abstract</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午写 Introduction（复用第一篇的「四段结构」模板，改内容）；中午写 Related Work（有第一篇的 RW 基础，第二篇只需增量更新）；晚上写 Conclusion + Abstract。目标：Intro + RW + Conclusion + Abstract 全部完成。</p>
+<p><strong>预期管理</strong>：昨天写完了论文的「肉」（Method + Experiment），今天写「壳」（Intro/RW/结论/摘要）。提醒：<strong>Intro 直接复用第一篇的「四段结构」模板</strong>（背景 → Gap → 你的方法 → 贡献），换成第二课题的内容；<strong>RW 在第一篇的基础上增量更新</strong>（第一篇引的相关工作很多还能用，加上第二课题特有的方向即可，不用从零写）；Abstract 最后写（因为它是全文的浓缩，全文齐了才好浓缩）。★ 今天写完，论文的所有章节就齐了——明天整合成 v0.5。<strong>「壳」虽然是最后写，却是审稿人最先读的（标题→摘要→Intro 决定第一印象），要认真。</strong></p>
+</blockquote>
+</div><section class="slot" id="d256-am" data-d="256" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D256 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">写 Introduction（复用第一篇「四段结构」模板）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Introduction 的作用 + 「四段结构」模板）</h4><div class="blk-b"><ul>
+<li><strong>Introduction</strong>（第 1 章）是论文的「门面 + 说服」——审稿人读完标题和摘要后，<strong>Intro 决定他对这篇论文的第一印象和基本判断</strong>（这个问题重要吗？这个 Gap 真实吗？这个方法有道理吗？）。Intro 写好了，审稿人会带着好感读下去。</li>
+<li><strong>★ Intro 的「四段结构」模板（第一篇你用过，直接复用）</strong>：这是一个非常通用、好用的 Intro 写法——① <strong>第一段：背景 + 重要性</strong>（你的任务是什么、为什么重要，如「SAR 图像舰船检测在海洋监测中至关重要……」）；② <strong>第二段：现有方法 + 它们的不足（Gap）</strong>（别人怎么做的、还有什么问题没解决，如「现有方法多直接套用光学图像的检测器，忽略了 SAR 的 speckle 噪声和方位角特性，导致……」）；③ <strong>第三段：你的方法（怎么填这个 Gap）</strong>（你提出了什么、核心 idea 是什么，如「为此我们提出 XXX，通过……」）；④ <strong>第四段：贡献列表（Contributions）</strong>（用 bullet 列 2–4 条你的贡献，如「• 我们提出了 speckle-aware 模块……• 在 N 个数据集上 SOTA……• 仅用单张 4090……」）。</li>
+<li><strong>★ 第二篇 Intro 的复利（这正是「四段结构」威力的体现）</strong>：第一篇写 Intro 时，你可能反复纠结「背景写多少、Gap 怎么引出、贡献怎么列」——光是摸索出这个「四段结构」就花了不少时间。<strong>第二篇你直接套这个结构</strong>：第一段背景（换成 SAR 检测的背景）、第二段 Gap（换成第二课题针对的问题——很可能就是第一篇 Limitation 提到的那个）、第三段你的方法、第四段贡献。<strong>结构现成，只换内容，一上午能写完。这就是写作质变最直观的体现——同样一篇 Intro，第一篇要磨好几天，第二篇半天搞定。</strong></li>
+<li><strong>Gap 段（第二段）是 Intro 的灵魂</strong>：审稿人最看重「你解决的问题是不是真问题」。所以第二段要把 Gap 讲<strong>清楚且真实</strong>——不是泛泛说「现有方法不够好」，而是具体指出「现有方法在 X 方面有什么具体缺陷，导致 Y 后果」。<strong>你的 Gap 来自第一篇的 Limitation 或真实调研</strong>（不是编的），这让它经得起推敲。</li>
+</ul>
+<blockquote class="quote">
+<p><strong>和通用 CV 论文的 Intro 对比</strong>：通用 CV 论文的 Intro 也是这个四段结构（背景→Gap→方法→贡献），<strong>完全一样</strong>。差别只在「背景和 Gap 要讲遥感/SAR 特有的」：你的背景要讲 SAR/遥感任务的重要性，你的 Gap 要讲「现有方法（很多是通用 CV 直接套用的）忽略了 SAR 的物理特性」——<strong>而「现有方法直接套用通用 CV、忽略遥感特性」恰恰常常就是你的 Gap 和卖点所在</strong>。这再次说明你做这个方向的优势：你既懂通用 CV（知道别人套用了什么），又在补遥感特性这块（你的创新），写 Gap 时这个对比天然成立。</p>
+</blockquote>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>复制第一篇 Intro 的四段结构作为骨架。</li>
+<li>写<strong>第一段</strong>（背景+重要性）：SAR/第二课题任务的重要性。</li>
+<li>写<strong>第二段</strong>（Gap）：现有方法的具体不足（来自第一篇 Limitation/调研，讲清「什么缺陷→什么后果」）。</li>
+<li>写<strong>第三段</strong>（你的方法）：你提出什么、核心 idea。</li>
+<li>写<strong>第四段</strong>（贡献列表）：bullet 列 2–4 条贡献（含「单张 4090 高效」这条卖点）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Introduction 完成——四段齐全（背景/Gap/方法/贡献），Gap 段具体真实（来自第一篇 Limitation 或调研），贡献列表清晰（含效率卖点）。判断标准：审稿人读完 Intro，认同「这是个真问题 + 这个方法有道理 + 贡献清楚」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>Gap 写得泛</strong>（只说「不够好」不说具体缺陷）→ 要具体指出「什么缺陷→什么后果」。</li>
+<li><strong>贡献列表写成「我做了什么」而非「我的贡献是什么」</strong>（如「我跑了实验」不是贡献）→ 贡献要是「提出了什么新东西/达到了什么效果」。</li>
+<li><strong>直接抄第一篇 Intro 改几个词</strong> → 结构复用、内容（尤其背景和 Gap）必须重写成第二课题的。</li>
+<li><strong>Intro 太长</strong>（背景铺垫一大堆）→ 四段精炼，重点在 Gap 和方法，背景别啰嗦。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>Gap 不知道怎么讲？→ 回到第一篇的 Limitation（第二篇很可能就是解决它的），那就是现成的、真实的 Gap。</li>
+<li>贡献列几条？→ 2–4 条（核心方法创新 + 实验效果 + 效率/其他亮点）。</li>
+<li>第一段背景写多少？→ 看第一篇第一段体量，别长篇大论。</li>
+<li>第三段和 Method 重复？→ Intro 第三段是「高层 idea 一句话」，Method 是「详细怎么做」，详略不同。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用「四段结构」模板写 Introduction</strong>。<strong>做了</strong>（写背景/Gap/方法/贡献四段）、<strong>学了</strong>（Intro 决定第一印象、四段结构模板、Gap 段是灵魂要具体真实、第二篇 Intro 复利来自复用结构、贡献是「新东西/效果」不是「做了什么」）、<strong>会了</strong>（高效写出有说服力的 Introduction）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Intro 四段结构模板（复用第一篇）</strong>：①背景+重要性（任务为什么重要）；②Gap（现有方法的具体缺陷→什么后果，灵魂段，来自第一篇 Limitation/调研，要真实）；③你的方法（核心 idea 一句话）；④贡献列表（bullet 2–4 条：方法创新/实验效果/效率卖点）。★第二篇直接套结构换内容，一上午写完=写作质变最直观体现。Gap 段务必具体（不泛说「不够好」），贡献写「新东西/效果」不是「做了什么」。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d256-noon" data-d="256" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D256 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">写 Related Work（在第一篇 RW 基础上增量更新）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Related Work 的作用 + 「增量更新」）</h4><div class="blk-b"><ul>
+<li><strong>Related Work</strong>（相关工作，第 2 章）：系统梳理与你工作相关的已有研究，<strong>说清「别人做到哪了、你和他们什么关系」</strong>。它的作用是：① 显示你了解领域（学术素养）；② 把你的工作定位在已有研究的版图上（你补了什么空白）。</li>
+<li><strong>RW 的典型组织</strong>：按主题分几小段（如「2.1 旋转目标检测」「2.2 SAR 图像检测」「2.3 你方法相关的技术，如去噪/跨域」），每段梳理该主题的代表工作 + 简评，<strong>最后点出你和它们的不同/你补的空白</strong>。</li>
+<li><strong>★ 第二篇 RW 的最大复利：增量更新（不用从零写）</strong>：这是第二篇省时间的大头——<strong>第一篇你已经写过一个 RW，里面梳理的相关工作（旋转检测、遥感检测等）很多在第二篇还能用</strong>。第二篇的 RW 写法是「<strong>在第一篇 RW 基础上增量更新</strong>」：① 第一篇已有的、第二篇还相关的部分——<strong>直接复用并适度精简/改写</strong>（注意改写避免自我抄袭）；② 第二课题<strong>特有的新方向</strong>（如 SAR speckle 处理、跨域检测的相关工作）——<strong>新增这部分的梳理</strong>；③ 加入这一年的<strong>最新工作</strong>（第一篇之后发表的新论文）。<strong>所以第二篇 RW = 复用第一篇大部分 + 新增第二课题特有方向 + 补最新——比第一篇从零写快得多。</strong></li>
+<li><strong>从这件事理解「文献积累是复利资产」</strong>：你读过的每一篇论文、写过的每一段 RW，都不是「一次性消耗」——它们沉淀成你的<strong>文献库</strong>，会在第二篇、第三篇反复复用。第一篇你认真梳理了旋转检测的相关工作，第二篇这部分几乎白送；第二篇你新增梳理 SAR 处理，第三篇可能又能复用。<strong>这就是为什么坚持读论文、认真做文献笔记是高复利的</strong>——你的「领域知识库」越积越厚，每篇新论文的 RW 成本越来越低，而且你对领域的全局把握越来越强（这对最终和空天院老师对话、找准研究定位也极有价值）。今天的「RW 增量更新」就是你前期文献积累在兑现复利。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>把第一篇 RW 复制过来作为基础。</li>
+<li><strong>复用 + 精简改写</strong>第一篇里第二篇仍相关的部分（如旋转检测、遥感检测——改写避免自我抄袭）。</li>
+<li><strong>新增</strong>第二课题特有方向的梳理（如 SAR speckle 处理 / 跨域泛化的相关工作）。</li>
+<li><strong>补最新工作</strong>（第一篇之后发表的、与第二课题相关的新论文，体现你在追踪前沿）。</li>
+<li>每个主题段末尾点出「你和这些工作的不同/你补的空白」。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Related Work 完成——复用了第一篇相关部分（已改写）+ 新增第二课题特有方向 + 补了最新工作 + 每段点出你的定位。判断标准：审稿人觉得「这个作者了解领域全貌，且清楚自己工作在版图上的位置」。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>直接整段复制第一篇 RW 不改写</strong> → 自我抄袭，复用的部分必须改写。</li>
+<li><strong>没新增第二课题特有方向</strong> → 第二课题有特有的相关工作（如 SAR 处理）必须新增梳理。</li>
+<li><strong>没补最新工作</strong> → 要加入第一篇之后的新论文，否则显得文献不更新。</li>
+<li><strong>只罗列工作、不点定位</strong>（光说别人做了啥，不说你和他们关系）→ 每段末要点出你的不同/空白。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>哪些第一篇的 RW 能复用？→ 与第二课题任务相关的（如都是旋转检测/遥感检测的）能复用，无关的删。</li>
+<li>第二课题特有方向不知道梳理哪些？→ 你 M8 立项、M9 做实验时调研过的相关工作（baseline 们、相关方法）。</li>
+<li>最新工作哪找？→ 你这几个月读的新论文 + Google Scholar Alert 推送的（D258 还会读 2 篇）。</li>
+<li>RW 多长合适？→ 看第一篇 RW 体量，第二篇通常相近或略增（多了新方向）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用「增量更新」高效写 Related Work</strong>。<strong>做了</strong>（复用第一篇相关部分+新增第二课题方向+补最新+点定位）、<strong>学了</strong>（RW 显素养+定位工作、增量更新=复用大部分+新增特有+补最新、文献积累是复利资产、每段要点出你的空白）、<strong>会了</strong>（基于已有积累快速写出体现领域把握的 RW）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Related Work 增量更新（文献复利）</strong>：RW=按主题梳理相关工作+点出你的定位（补了什么空白）。★第二篇最大复利：在第一篇 RW 基础上增量更新——①复用第一篇仍相关的部分（改写避免自我抄袭）；②新增第二课题特有方向（如 SAR 处理/跨域）；③补第一篇之后的最新工作。比从零写快得多。文献积累是复利资产：读过的论文/写过的 RW 反复复用，领域知识库越积越厚、每篇 RW 成本越来越低。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d256-pm" data-d="256" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D256 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">写 Conclusion + Abstract</h3></div><div class="free"><p><strong>① 先垫概念（Conclusion + Abstract 怎么写 + 为什么 Abstract 最后写）</strong>：</p>
+<ul>
+<li><strong>Conclusion</strong>（结论，论文最后一章）：<strong>总结全文</strong>——简要回顾你做了什么（问题 → 方法 → 主要结果），可呼应 Limitation 点一句未来工作。它和 Intro 首尾呼应（Intro 提出问题，Conclusion 总结解决）。<strong>比 Intro 短</strong>，是浓缩的收尾。</li>
+<li><strong>Abstract</strong>（摘要，放在最前面但<strong>最后写</strong>）：全文的「极致浓缩」——<strong>一段话（通常 150–250 词）讲清四件事</strong>：① 问题/背景（一句）；② 你的方法（一两句，核心 idea）；③ 主要结果（一两句，关键数字，如「在 N 个数据集上达到 X mAP，提升 +Y」）；④（可选）亮点（如单张 4090 高效）。</li>
+<li><strong>★ 为什么 Abstract 最后写</strong>：Abstract 是全文的浓缩——<strong>只有全文都写完了，你才知道「最值得浓缩进摘要的是什么」</strong>（最重要的方法点、最亮眼的结果数字）。如果一开始写 Abstract，往往写不准（还没定稿）。所以顺序是：先写完所有章节 → 最后浓缩出 Abstract。<strong>Abstract 虽然最后写，却是除标题外审稿人最先读、读得最仔细的部分</strong>（很多审稿人靠摘要决定要不要细读、给什么基调），所以要反复打磨到精准、有吸引力。</li>
+<li><strong>★ Abstract 是论文「传播」的关键（被检索、被引用的第一接口）</strong>：你的论文将来在 arXiv、在 Google Scholar、在数据库里，<strong>别人最先看到的就是标题和摘要</strong>——他们靠摘要决定「要不要点开读、要不要引用」。一个清楚、有亮点的摘要，能让更多人读你的论文、引用你的工作，<strong>也能让空天院的老师在检索时被吸引</strong>。所以摘要不只是「应付格式」，它是你论文触达更多人的第一接口。把四件事（问题/方法/结果/亮点）在一小段里讲得清楚有力，是一项要专门练的能力。对你这个要「用论文成果说话、扩大影响力」的人，写好摘要 = 让你的硬成果被更多人看见。</li>
+</ul>
+</div>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写 <strong>Conclusion</strong>：回顾问题→方法→主要结果（呼应 Intro）+ 一句未来工作（呼应 Limitation）。比 Intro 短。</li>
+<li>写 <strong>Abstract</strong>（最后写）：一段话讲清四件事——① 问题（一句）② 方法核心（一两句）③ 主要结果+关键数字（一两句）④ 亮点（单张 4090 等）。</li>
+<li>反复打磨 Abstract 到精准有力（控制在 150–250 词，每句都有信息量，无废话）。</li>
+<li>检查 Abstract 里的数字和正文一致、亮点和贡献列表呼应。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>Conclusion（总结全文+呼应 Intro/Limitation）+ Abstract（一段话讲清问题/方法/结果/亮点，数字准、有吸引力）。判断标准：只读 Abstract，读者就能准确知道「你解决了什么、怎么解决的、效果如何、亮点在哪」，并产生「想读全文」的兴趣。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>Abstract 一开始就写、没等全文定稿</strong> → 最后写才能浓缩准确。</li>
+<li><strong>Abstract 没有具体结果数字</strong>（只说「效果很好」）→ 要给关键数字（X mAP、+Y 提升）。</li>
+<li><strong>Abstract 太长/有废话</strong> → 控制 150–250 词，每句有信息量。</li>
+<li><strong>Conclusion 和 Abstract 内容雷同</strong> → Conclusion 是「全文回顾」（可展开些），Abstract 是「极致浓缩」（更短更密），且 Conclusion 在文末、Abstract 在文首。</li>
+<li><strong>Abstract 数字和正文不一致</strong> → 必须一致（这是全文数字一致检查的一部分）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>Abstract 写不下四件事？→ 砍废话（背景别铺垫太多），优先保证方法核心 + 结果数字。</li>
+<li>不知道摘要放哪个数字？→ 放最亮眼的主结果（最高 mAP / 最大提升 / 效率优势）。</li>
+<li>Conclusion 写什么？→ 三句话版：我们解决了 X 问题，提出了 Y 方法，达到了 Z 结果（+一句未来）。</li>
+<li>Abstract 不够吸引人？→ 突出「新意+效果+亮点」（你的方法新在哪、赢多少、单张 4090 高效）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写 Conclusion 和 Abstract（论文的浓缩与门面）</strong>。<strong>做了</strong>（写 Conclusion 总结+呼应、最后写 Abstract 浓缩四件事+打磨）、<strong>学了</strong>（Conclusion 首尾呼应 Intro、Abstract 最后写才浓缩准、Abstract 讲清问题/方法/结果/亮点、Abstract 是论文传播被引的第一接口）、<strong>会了</strong>（写出精准有吸引力的摘要和收尾全文的结论）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Abstract（最后写的「第一接口」）</strong>：Abstract 放最前但最后写（全文定稿才知道浓缩什么）。一段话（150–250词）讲清四件事：①问题（一句）②方法核心（一两句）③主要结果+关键数字（一两句）④亮点（单张 4090）。★它是除标题外审稿人最先、最仔细读的，也是论文被检索/被引用/被空天院老师看见的第一接口——要打磨到精准有力（每句有信息量、数字与正文一致）。Conclusion 则首尾呼应 Intro（问题→方法→结果+未来），比 Intro 短。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ Introduction（四段结构）✅ Related Work（增量更新）✅ Conclusion ✅ Abstract。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D256</summary><textarea data-note="d256" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d257" data-d="257"><header class="day-head"><span class="dnum">D257</span><h2 class="day-t">周五 · 整合全文 → 第二篇论文 v0.5 草稿 + 通读自审 + 修改</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午整合全文 → 第二篇论文 v0.5 草稿；中午通读自审——标记问题；晚上修改。目标：第二篇论文 v0.5。</p>
+<p><strong>预期管理</strong>：今天是本周的「里程碑日」——把这周写的所有章节（Abstract → Intro → RW → Method → Experiment → Conclusion）整合成<strong>完整的第二篇论文 v0.5 草稿</strong>，并通读自审、初步修改。提醒：v0.5 是「完整但粗糙」的草稿——<strong>目标是「完整」（所有章节齐、能从头读到尾），不是「完美」</strong>（润色是明天和 W38 的事）；通读自审用「假装审稿人」的视角标问题（逻辑断裂、数字不一致、表述不清），先标记、再修改。★ <strong>关键检验：如果今天能整合出 v0.5（哪怕粗糙），说明你的写作能力已经质变</strong>——第一篇从开始写到 v1 用了 4 周（M6 W21–W24），第二篇你只用 1 周写到 v0.5。这个对比，今天会让你真切感受到。</p>
+</blockquote>
+</div><section class="slot" id="d257-am" data-d="257" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D257 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">整合全文 → 第二篇论文 v0.5 草稿</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（整合全文 = 把章节拼成「一篇能从头读到尾的论文」）</h4><div class="blk-b"><ul>
+<li><strong>整合全文</strong>：把这周写的各章节按论文顺序（Abstract → 1. Intro → 2. RW → 3. Method → 4. Experiment → 5. Conclusion → References）<strong>组装成一个完整文档</strong>，并检查全局的连贯和一致——形成 <strong>v0.5 草稿</strong>（完整但待润色）。</li>
+<li><strong>整合时的全局检查</strong>：① <strong>章节顺序和编号正确</strong>（1/2/3……连续，图表 Figure/Table 编号全文连续）；② <strong>前后呼应</strong>（Intro 提的问题，Conclusion 有回应；Intro 的贡献列表，正文都兑现了）；③ <strong>全文数字一致</strong>（Abstract/Intro/Experiment 里的数字统一——这是第二次通查，务必）；④ <strong>术语统一</strong>（同一个东西全文用同一个词，别一会儿叫「模块」一会儿叫「组件」）；⑤ <strong>引用完整</strong>（每个 <code>[x]</code> 引用在 References 里有对应条目）。</li>
+<li><strong>★ v0.5 的定位：「完整」优先于「完美」</strong>：这是写论文的重要心态——<strong>先求完整（有一个能从头读到尾的全文），再求完美（逐步润色）</strong>。很多人卡在「想把每段都写到完美才往下写」，结果迟迟没有完整草稿。正确做法是<strong>先快速拉通一个完整的 v0.5（哪怕粗糙），再迭代打磨</strong>。有了完整草稿，你才能看到全局、知道哪里需要加强；零散的完美片段拼不出好论文。<strong>「先完整后完美」适用于一切大型写作（论文、报告、博客）。</strong></li>
+<li><strong>★ 写作质变的实证（今天最该体会的）</strong>：停下来对比一下——<strong>第一篇论文，你从开始写（M6 W21）到 v1（W24），用了整整 4 周</strong>；现在你<strong>用 1 周就写到了 v0.5</strong>。这中间发生了什么？不是第二个课题更简单，而是你的<strong>写作能力本身质变了</strong>：① 你不再摸索「论文该怎么写」（结构、句式、图表全有模板）；② 你的学术英语表达熟练了（不用每句都查怎么说）；③ 你对「一篇好论文长什么样」有了判断（知道每章该写什么、写多少）。<strong>这种「同样的工作量，时间减半」就是能力质变的硬指标</strong>——它意味着你已经从「第一次写论文的新手」成长为「能高效产出论文的研究者」。对你这个要持续产出系列工作的人，这个质变极其重要：它意味着你后续每篇论文的写作成本都会更低，你能把省下的时间投入到更有价值的研究上。今天整合出 v0.5 的这一刻，请认可自己的这个成长。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>按论文顺序组装全文（Abstract → Intro → RW → Method → Experiment → Conclusion → References）。</li>
+<li>全局检查：章节/图表编号连续、前后呼应（贡献都兑现、问题有回应）、<strong>全文数字一致</strong>（第二次通查）、术语统一、引用完整。</li>
+<li>形成 <strong>v0.5 草稿</strong>（完整文档，所有章节齐）。</li>
+<li>记下「整合时发现但还没改的问题」（留给中午自审 + 晚上修改）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>第二篇论文 v0.5 草稿——所有章节齐全、能从头读到尾、编号连续、数字一致、术语统一、引用完整。判断标准：这是一篇<strong>完整的</strong>（虽然粗糙的）论文，不是章节碎片的堆叠。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>追求每段完美导致没有完整草稿</strong> → 先求完整 v0.5，再迭代润色。</li>
+<li><strong>整合时漏查数字一致</strong> → 这是关键一次通查，务必（Abstract/Intro/Experiment 数字统一）。</li>
+<li><strong>术语不统一</strong>（同一东西多个叫法）→ 全文统一术语。</li>
+<li><strong>引用 <code>[x]</code> 在 References 里找不到</strong> → 引用必须完整对应。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>整合后读着不连贯？→ 检查章节衔接处是否缺过渡、是否有重复内容。</li>
+<li>数字又发现不一致？→ 以「你实验真实结果」为准，全文改到一致。</li>
+<li>某章感觉太弱？→ 标记下来（别现在纠结完美），v0.5 先完整，后续加强。</li>
+<li>引用格式乱？→ 用文献管理工具（Zotero/EndNote）统一格式，复用第一篇的引用风格。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把章节整合成完整的论文草稿（先完整后完美）</strong>。<strong>做了</strong>（组装全文+全局检查+成 v0.5）、<strong>学了</strong>（整合的全局检查项、「完整优先于完美」的写作心态、写作质变的硬指标=同样工作量时间减半）、<strong>会了</strong>（高效拉通一篇完整的论文草稿，并认可自己的能力成长）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜整合全文成 v0.5（先完整后完美）</strong>：按顺序组装（Abstract→Intro→RW→Method→Experiment→Conclusion→Ref）+ 全局检查（编号连续/前后呼应/全文数字一致（第二次通查）/术语统一/引用完整）。★心态：先求完整（能从头读到尾的 v0.5，哪怕粗糙）再求完美（迭代润色）——别卡在「每段写完美才往下」。★写作质变实证：第一篇写到 v1 用 4 周，第二篇 1 周到 v0.5=能力质变的硬指标（不再摸索怎么写+英语熟练+有判断），认可自己的成长。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d257-noon" data-d="257" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D257 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">通读自审——标记问题</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（通读自审的方法：假装审稿人）</h4><div class="blk-b"><ul>
+<li><strong>通读自审</strong>：把 v0.5 <strong>从头到尾完整读一遍</strong>，<strong>站在审稿人的视角</strong>找问题——并<strong>先只标记、不修改</strong>（标完再统一改，避免边读边改打断通读的全局感）。</li>
+<li><strong>★ 「假装审稿人」的视角（自审的关键心法）</strong>：自己写的东西很难看出问题（你太熟悉，会脑补缺失的逻辑）。<strong>所以要刻意切换到「一个挑剔的审稿人第一次读这篇论文」的视角</strong>，问这些问题：① <strong>动机可信吗</strong>（Gap 是真问题吗）？② <strong>方法讲清楚了吗</strong>（能复现吗、有没有没定义的符号）？③ <strong>实验充分吗</strong>（baseline 够吗、消融全吗、数字可信吗）？④ <strong>逻辑连贯吗</strong>（有没有断裂、跳跃、前后矛盾）？⑤ <strong>表述清楚吗</strong>（有没有看不懂的句子、有没有歧义）？⑥ <strong>图表清楚吗</strong>（看得懂吗、和正文一致吗）？<strong>把审稿人会挑的刺，自己先挑出来。</strong></li>
+<li><strong>标记的方法</strong>：用批注/高亮，在有问题的地方<strong>标记问题类型</strong>（如「逻辑断裂」「数字存疑」「表述不清」「缺引用」），先标完全文，晚上统一修改。</li>
+<li><strong>从这件事理解「自审是低成本的『预审稿』」</strong>：审稿人会挑的问题，如果你自己先挑出来改掉，就相当于<strong>提前消除了被审稿人 reject/质疑的理由</strong>。一篇经过认真自审的论文，比一篇没自审就投的论文，命中率高得多。<strong>自审本质是「花自己的时间，省审稿轮次」</strong>——你多花一两小时认真自审、改掉显眼的问题，可能就避免了一轮「major revision」甚至 reject。对你这个独自做研究、没有导师帮你把关的人，<strong>自审能力尤其重要——你得自己当自己的第一个审稿人</strong>。养成「投稿前必做严格自审」的习惯，是没有导师托底时保证论文质量的关键防线。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>从头到尾通读 v0.5（一口气读完，先获得全局感）。</li>
+<li>切换「挑剔审稿人」视角，逐项审：动机可信？方法清楚？实验充分？逻辑连贯？表述清楚？图表清楚？</li>
+<li><strong>只标记不修改</strong>：在问题处标注类型（逻辑断裂/数字存疑/表述不清/缺引用等）。</li>
+<li>整理出一份「问题清单」（按严重程度排序，晚上据此修改）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>一份通读自审的「问题清单」——覆盖动机/方法/实验/逻辑/表述/图表各方面、标注了问题类型和位置、按严重程度排序。判断标准：你已经像审稿人一样把全文的主要问题找出来了，晚上有明确的修改靶子。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>边读边改、没通读</strong> → 先通读获得全局感、只标记，再统一改（边读边改会丢全局）。</li>
+<li><strong>用作者视角读（脑补缺失逻辑）</strong> → 刻意切换「挑剔审稿人」视角才能发现问题。</li>
+<li><strong>只看小错（错别字）不看大问题（逻辑/实验）</strong> → 重点是动机/方法/实验/逻辑这些「硬问题」。</li>
+<li><strong>问题不分轻重</strong> → 按严重程度排序，先改硬问题。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>看不出问题（太熟悉）？→ 隔一会儿再读、或朗读出来、或想「如果这是别人的论文我会挑什么」。</li>
+<li>问题太多无从下手？→ 先标，按「影响接收的程度」排序（逻辑/实验问题 &gt; 表述问题 &gt; 错别字）。</li>
+<li>不确定某处是不是问题？→ 标个「存疑」，晚上重点看。</li>
+<li>自己实在审不出？→ 这也是为什么 D259 要发朋友 review（外部视角补充），但自审先尽力做。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>用「假装审稿人」视角通读自审、系统标记问题</strong>。<strong>做了</strong>（通读+审稿人视角逐项审+标记问题清单）、<strong>学了</strong>（自审要切换挑剔审稿人视角、先通读只标记再统一改、自审是低成本预审稿=花自己时间省审稿轮次、无导师时自审是质量防线）、<strong>会了</strong>（当自己论文的第一个审稿人，提前发现并消除问题）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜通读自审（假装审稿人）</strong>：把 v0.5 从头读完，切换「挑剔审稿人第一次读」的视角逐项审：动机可信？方法能复现？实验充分？逻辑连贯？表述清楚？图表清楚？★先只标记不修改（标问题类型+位置，按严重程度排序），通读完再统一改（边读边改丢全局）。自审=低成本「预审稿」：你先挑出审稿人会挑的刺，命中率大增。无导师托底时，自审是你保证质量的第一道防线——当自己的第一个审稿人。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d257-pm" data-d="257" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D257 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（按问题清单修改：先硬后软）</h4><div class="blk-b"><ul>
+<li><strong>修改</strong>：按中午整理的「问题清单」，<strong>逐条修改 v0.5</strong>——<strong>先改「硬问题」（影响接收的：逻辑断裂、数字不一致、方法没说清、实验有漏），再改「软问题」（表述、措辞、错别字）</strong>。改完得到一个比 v0.5 明显更好的版本（接近 v0.6，明天英文润色后正式叫 v0.6）。</li>
+<li><strong>修改的优先级（先硬后软）</strong>：① <strong>硬问题优先</strong>——逻辑断裂补过渡/重组、数字不一致统一、方法不清补说明/定义、实验漏洞补分析（注意：补「分析/说明」不是「补实验」，补实验是 W38 的事，今天先把现有内容讲清楚）；② <strong>软问题次之</strong>——表述不清重写句子、措辞优化、错别字。<strong>有限时间先投在硬问题上</strong>（它们决定论文能不能立住）。</li>
+<li><strong>修改时的克制</strong>：今天是「按清单改问题」，<strong>不是「推翻重写」</strong>——v0.5 的主体是好的，针对性改问题即可，别又陷入「全部重来」（那会没完没了）。<strong>迭代改进，不是推倒重来。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>按问题清单<strong>先改硬问题</strong>：逻辑（补过渡/重组）、数字（统一）、方法（补说明/定义）、实验（补分析说明，非补实验）。</li>
+<li><strong>再改软问题</strong>：表述（重写不清的句子）、措辞、错别字。</li>
+<li>每改一处，确认改对了（没引入新的不一致）。</li>
+<li>改完通览一遍，确认主要问题已解决，得到改进版（待明天英文润色成 v0.6）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>按问题清单修改后的论文——硬问题（逻辑/数字/方法/实验说明）基本解决、软问题（表述/措辞）改善，比 v0.5 明显更扎实。判断标准：中午标记的主要问题都处理了，全文更连贯、更清楚、数字一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>先抠软问题（错别字）、没改硬问题</strong> → 先改硬问题（逻辑/数字/方法/实验），它们决定论文成败。</li>
+<li><strong>改着改着变成推翻重写</strong> → 针对性改问题、迭代改进，不推倒重来。</li>
+<li><strong>改一处引入新的不一致</strong>（如改了正文数字没改表）→ 每改一处确认全局仍一致。</li>
+<li><strong>想现在补实验</strong> → 补实验是 W38 的事，今天先把现有内容讲清楚（补说明/分析）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>某硬问题不知怎么改？→ 回到「审稿人为什么会挑这里」，针对那个理由改（补逻辑/补数据/补说明）。</li>
+<li>改完不确定好没好？→ 重读那一段，问「现在审稿人还会挑吗」。</li>
+<li>时间不够改不完？→ 优先改硬问题，软问题（措辞/错别字）可留到明天润色。</li>
+<li>越改越乱？→ 停下，回到问题清单，一条一条来，别同时动多处。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>按问题清单「先硬后软」地修改论文（迭代改进）</strong>。<strong>做了</strong>（先改硬问题+再改软问题+逐处确认一致）、<strong>学了</strong>（修改优先级先硬后软、硬问题决定论文成败、迭代改进不推倒重来、补说明≠补实验）、<strong>会了</strong>（把粗糙草稿针对性打磨成更扎实的版本）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 第二篇论文 v0.5（完整草稿，已通读自审 + 按问题清单修改）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D257</summary><textarea data-note="d257" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d258" data-d="258"><header class="day-head"><span class="dnum">D258</span><h2 class="day-t">周六 · 英文润色 + 图表最终版 + 读 2 篇最新论文</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午英文润色；中午画图表最终版；晚上读 2 篇最新论文。目标：论文 v0.6 + 2 篇笔记。</p>
+<p><strong>预期管理</strong>：今天打磨「表达层」——英文润色 + 图表最终版，把昨天的草稿提升到 v0.6（语言通顺、图表精致）。提醒：英文润色重点是「让句子地道、清楚、无语法错」（<strong>复用第一篇积累的学术英语句式 + 善用工具</strong>，但工具辅助、你把关）；图表最终版是「统一风格、提清晰度、配好 caption」（延续第一篇的视觉系列感）；晚上读 2 篇最新论文既是持续追踪前沿，也可能补进 RW。★ 这是一个「打磨 + 输入」的平衡日——上午下午打磨论文，晚上读论文保持输入，可持续。</p>
+</blockquote>
+</div><section class="slot" id="d258-am" data-d="258" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D258 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">英文润色</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（英文润色的目标 + 方法）</h4><div class="blk-b"><ul>
+<li><strong>英文润色</strong>：把论文的英文表达提升到「地道、清楚、无语法错误」——<strong>目标不是「华丽」，是「准确清楚、读起来顺、符合学术规范」</strong>。学术英语贵在精确和简洁，不需要文学性。</li>
+<li><strong>润色的重点</strong>：① <strong>语法/拼写</strong>（无低级错误）；② <strong>句子清楚</strong>（一句话表达一个意思，别太长太绕）；③ <strong>学术句式地道</strong>（用学术论文常用的表达，如「We propose...」「Experiments demonstrate that...」「In contrast to...」）；④ <strong>时态一致</strong>（一般现在时描述方法/事实，过去时描述你做的实验，复用第一篇的时态惯例）；⑤ <strong>用词准确</strong>（术语用对、避免口语化）。</li>
+<li><strong>★ 第二篇英文润色的复利 + 工具的正确用法</strong>：① <strong>复利</strong>——第一篇你积累了大量学术英语句式（怎么说「我们提出」「实验表明」「相比之下」「值得注意的是」），第二篇直接复用这些句式模板，润色快很多；② <strong>工具辅助、你把关</strong>——可以用语法检查工具（如 Grammarly）辅助查语法，可以参考你读过的好论文的表达，但<strong>最终要你自己把关</strong>：工具能查语法，但<strong>不懂你的技术内容</strong>（可能把对的术语改错、把你的意思改偏）。<strong>所以：工具帮你查语法/提建议，你判断每个建议对不对、保留技术准确性。</strong> 不能盲目全盘接受工具的修改。</li>
+<li><strong>从这件事理解「英文是工具，内容才是核心」</strong>：作为非英语母语者，英文表达可能是你的相对短板，但<strong>别让它成为心理负担</strong>——审稿人评判论文，核心看「工作的质量」（idea、方法、实验），英文只要「清楚、无碍理解」即可，不需要母语级文采。<strong>很多优秀的论文出自非英语母语者，英文朴实但内容扎实</strong>。你要做的是：把英文打磨到「清楚、规范、无语法错」这个够用的水平（靠复用句式 + 工具辅助 + 多读多写），而不是追求文采。真正让你论文出彩的，永远是扎实的工作本身。对你这个持续产出的人，学术英语会随着写得越多越熟练（第二篇就比第一篇顺），这又是一项随产出积累的复利能力。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐段润色：查语法/拼写（工具辅助）、拆长句、换地道学术句式（复用第一篇句式库）、统一时态、校准用词。</li>
+<li>工具辅助时<strong>逐条判断</strong>建议是否正确（保留技术准确性，不盲目接受）。</li>
+<li>重点打磨「门面」部分（Abstract、Intro）的英文（审稿人读得最仔细）。</li>
+<li>通读一遍，确认全文英文清楚、规范、无明显错误 → 得到 v0.6。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>英文润色后的 v0.6——语法无误、句子清楚、学术句式地道、时态一致、术语准确，Abstract/Intro 尤其打磨到位。判断标准：母语或英文好的同行读起来「顺畅、专业、无语言障碍」，技术内容没被改偏。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>盲目全盘接受工具修改</strong> → 工具不懂技术内容，要逐条判断（保留术语和原意准确）。</li>
+<li><strong>追求华丽文采</strong> → 学术英语贵在准确清楚简洁，不需要文学性。</li>
+<li><strong>长难句一堆</strong> → 拆成短句，一句一个意思。</li>
+<li><strong>时态混乱</strong> → 方法/事实用现在时、你做的实验用过去时，全文一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>某句不知道怎么说地道？→ 参考你读过的论文里类似意思的表达（复用现成句式）。</li>
+<li>工具建议和你的意思冲突？→ 以「技术准确」为准（工具不懂内容，你判断）。</li>
+<li>英文整体没把握？→ 重点保证「清楚无歧义、无语法错」（够用），别苛求文采；D259 朋友 review 也能帮看。</li>
+<li>时间不够润色全文？→ 优先 Abstract + Intro（门面），其余 W38 继续。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>润色学术英文（够用即可、工具辅助你把关）</strong>。<strong>做了</strong>（逐段润色+工具辅助判断+重点打磨门面）、<strong>学了</strong>（学术英语贵在准确清楚不求文采、复用第一篇句式库、工具查语法你把关技术准确、英文是工具内容是核心）、<strong>会了</strong>（把论文英文打磨到清楚规范的够用水平）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜英文润色（够用 + 你把关）</strong>：目标=地道、清楚、无语法错（不求华丽，学术英语贵在准确简洁）。重点：语法/拆长句/地道学术句式（We propose.../Experiments demonstrate...）/时态一致（方法现在时、实验过去时）/术语准确。★复用第一篇积累的句式库（第二篇更快）；★工具（Grammarly 等）辅助查语法但你逐条把关（工具不懂技术内容，别盲目接受）。英文是工具、内容才是核心——非母语者论文英文朴实但内容扎实同样优秀。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d258-noon" data-d="258" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D258 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">画图表最终版</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（图表最终版要做什么）</h4><div class="blk-b"><ul>
+<li><strong>图表最终版</strong>：把论文里所有图（架构图、可视化图、曲线图）和表（主表、消融表）<strong>打磨到「出版级」</strong>——清晰、规范、风格统一、信息准确。图表是论文里「最先被看、最影响观感」的元素。</li>
+<li><strong>图表打磨清单</strong>：① <strong>清晰度</strong>（矢量图、字号够大放大不糊、线条/颜色清楚）；② <strong>风格统一</strong>（所有图表用一致的配色、字体、样式——延续第一篇的系列感）；③ <strong>caption 完整</strong>（每张图表的标题说清「这是什么、关键信息」，让人不看正文也大致懂）；④ <strong>标注清楚</strong>（图里的元素都有标注：哪个是你的方法/GT/baseline、坐标轴有标签和单位）；⑤ <strong>信息准确</strong>（图表里的数字和正文一致——又一次数字检查）。</li>
+<li><strong>★ 图表是「第一眼观感」，值得专门打磨</strong>：审稿人和读者翻论文时，<strong>眼睛先落在图表上</strong>——一组精致、清楚、风格统一的图表，会立刻给人「这篇论文做得很认真、很专业」的好印象；反之，糊的图、乱的表、风格不一的配色，会先拉低观感（哪怕内容不差）。<strong>图表的精致度，是论文「专业度」的直接体现，且性价比高</strong>（花点时间打磨图表，观感提升立竿见影）。延续第一篇的视觉风格，还能强化你两篇论文的「系列感」（个人品牌）。对你这个要用作品给空天院留下专业印象的人，把图表做精致，是低成本高回报的事。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>逐张过图：矢量化、字号调大、线条/配色清楚、风格统一（延续第一篇）。</li>
+<li>逐张过表：样式统一、最优数字加粗、对齐规整。</li>
+<li>为每张图表写/完善 <strong>caption</strong>（说清内容和关键信息，能脱离正文大致看懂）。</li>
+<li>检查标注（你的方法/GT/baseline 标清、坐标轴有标签单位）+ 图表数字和正文一致。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>所有图表的最终版——清晰（矢量、不糊）、风格统一（延续第一篇）、caption 完整、标注清楚、数字与正文一致。判断标准：只翻图表，就能感到「这是一篇认真、专业的论文」，且任一图表数字和正文都对得上。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>图糊/字小</strong>（位图、字号不够）→ 矢量化、字号调大（放大清楚）。</li>
+<li><strong>图表风格不统一</strong>（配色/字体各异）→ 统一风格（延续第一篇系列感）。</li>
+<li><strong>caption 太简略</strong>（只写「结果图」）→ caption 要说清内容和关键信息。</li>
+<li><strong>图表数字和正文不一致</strong> → 再次核对一致。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>图不够清楚？→ 重新矢量导出、加大字号、简化冗余元素。</li>
+<li>配色不知道怎么统一？→ 用第一篇的配色方案（系列感）。</li>
+<li>caption 写多详细？→ 一两句说清「图表是什么 + 最关键的信息/结论」。</li>
+<li>表格太宽排不下？→ 精简列（核心对比放正文、完整版进附录）或调整字号/布局。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>把图表打磨到出版级（清晰、统一、规范）</strong>。<strong>做了</strong>（逐张过图表+写 caption+查标注和数字）、<strong>学了</strong>（图表打磨清单、图表是第一眼观感和专业度的直接体现、延续第一篇风格强化系列感、图表数字也要和正文一致）、<strong>会了</strong>（产出专业、精致、成体系的论文图表）。</p>
+</div></section></section><section class="slot" id="d258-pm" data-d="258" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D258 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">读 2 篇最新论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么在写论文的周里还要读论文）</h4><div class="blk-b"><ul>
+<li><strong>读 2 篇最新论文</strong>：持续追踪你方向的前沿——即使在密集写论文的一周，也保持「输入」。这 2 篇可以是：① 你方向的最新工作（可能补进 RW）；② Google Scholar Alert 推送的相关新论文；③ 空天院老师的新作（为 M11 人脉预热做准备）。</li>
+<li><strong>为什么写论文的周也要读论文（输入与输出的平衡）</strong>：① <strong>保持前沿敏感</strong>——你在写的论文要和最新工作对话，读新论文能确保你没漏掉重要的相关工作（避免「投出去才发现有篇更新的相关工作没引」）；② <strong>可能补进 RW</strong>——读到强相关的新论文，加进你的 Related Work（让文献更新、更全）；③ <strong>可持续节奏</strong>——纯写一周容易枯竭，穿插读论文换换脑子，是可持续的工作方式；④ <strong>为后续铺垫</strong>——读到的新方法/新问题，可能是你第三篇的灵感或 M11 和老师对话的素材。<strong>输出（写）和输入（读）要平衡，长期才走得稳。</strong></li>
+<li><strong>读法（复用你的精读/泛读方法）</strong>：用你前期养成的论文阅读法——快速判断相关性，相关的精读（记笔记：解决什么问题、方法、和你的关系），可能补进 RW 的标记出来。<strong>复用第一篇阶段建立的文献笔记体系。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>选 2 篇最新论文（方向最新工作 / Scholar Alert 推送 / 空天院老师新作）。</li>
+<li>读 + 记笔记（解决什么问题、核心方法、和你工作的关系）。</li>
+<li>判断是否补进 RW（强相关的标记出来，下周/后续补）。</li>
+<li>归档到你的文献库（复用已有笔记体系）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>2 篇最新论文的笔记——每篇说清问题/方法/与你的关系，标记了是否需补进 RW，归档到文献库。判断标准：你对方向的最新动态保持了敏感，且这 2 篇若相关已纳入你的论文/知识库。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>写论文周完全停止读论文</strong> → 保持输入（前沿敏感+可能补 RW+可持续），别只输出。</li>
+<li><strong>读了不记笔记</strong> → 记笔记（问题/方法/关系）才能沉淀、才好补进 RW。</li>
+<li><strong>读到强相关新论文不补 RW</strong> → 标记并纳入（避免漏引重要工作）。</li>
+<li><strong>挑无关的论文凑数</strong> → 选和你方向/课题真正相关的（才有价值）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>不知道读哪 2 篇？→ Scholar Alert 推送的 / 你方向最新的 / 空天院老师新作 里选最相关的。</li>
+<li>时间只够读 1 篇？→ 读最相关的 1 篇精读（质量优先），另一篇泛读或顺延。</li>
+<li>读到的论文和你工作高度相似（担心撞车）？→ 仔细看差异（你的创新点还在吗），并在 RW 里明确区分你和它的不同。</li>
+<li>笔记记什么？→ 复用你的笔记模板（问题/方法/创新/与我的关系/可否引用）。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>在产出周也保持论文输入（输入输出平衡）</strong>。<strong>做了</strong>（读 2 篇最新论文+记笔记+判断补 RW+归档）、<strong>学了</strong>（写论文周也要读论文：前沿敏感/补 RW/可持续/为后续铺垫、输出与输入要平衡、复用文献笔记体系）、<strong>会了</strong>（在密集产出中维持可持续的前沿追踪）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜输入输出平衡（产出周也读论文）</strong>：即使密集写论文的周也读 2 篇最新论文。价值：①前沿敏感（确保没漏重要相关工作，避免投出去才发现漏引）；②可能补进 RW（文献更新更全）；③可持续（纯写易枯竭，穿插读换脑）；④为后续铺垫（第三篇灵感/和老师对话素材）。读法复用已有精读/泛读+笔记体系（问题/方法/与我的关系）。输出（写）与输入（读）平衡，长期才走得稳。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 v0.6（英文润色 + 图表最终版）✅ 2 篇最新论文笔记。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D258</summary><textarea data-note="d258" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d259" data-d="259"><header class="day-head"><span class="dnum">D259</span><h2 class="day-t">周日 · 周复盘 W37 + 发朋友快速 review + 计划 W38</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午周复盘 W37；中午发给 1 位朋友做快速 review；晚上计划 W38。目标：周报 W37 + review 发出。</p>
+<p><strong>预期管理</strong>：本周收尾——复盘这周「一周写完 v0.5」的写作冲刺（重点反思写作质变的体会），发朋友 review 引入外部视角，计划 W38（打磨论文）。提醒：W37 复盘的核心是<strong>确认「写作能力质变」这个里程碑</strong>（对比第一篇 4 周 vs 第二篇 1 周）；发朋友 review 是引入「你自己看不到的盲点」（外部视角）；W38 是打磨周（处理 review → v1.0 → 准备投稿）。★ 这周你完成了一个重要里程碑：<strong>1 周写出一篇完整论文草稿</strong>——这是科研能力进阶的标志，值得认真复盘和肯定。</p>
+</blockquote>
+</div><section class="slot" id="d259-am" data-d="259" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D259 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">周复盘 W37</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W37 复盘的重点：确认写作质变这个里程碑）</h4><div class="blk-b"><ul>
+<li><strong>周复盘 W37</strong>：回顾这一周——做了什么、完成度如何、<strong>最重要的：体会和确认「写作能力质变」</strong>。</li>
+<li><strong>本周复盘要特别记录的（写作质变的实证）</strong>：① <strong>对比数据</strong>——第一篇从写到 v1 用了 4 周（M6 W21–W24），第二篇 1 周写到 v0.5；② <strong>质变的具体来源</strong>——你不再摸索「论文怎么写」（结构/句式/图表模板全有）、学术英语更熟练、对「好论文」有判断；③ <strong>可复用资产盘点</strong>——这周复用了哪些第一篇的资产（Method 结构、Experiment 五节、Intro 四段、图表风格、英文句式、文献笔记），它们各省了多少时间。<strong>把这个里程碑明确记录下来，它是你科研能力进阶的硬证据。</strong></li>
+<li><strong>★ 为什么要郑重对待「能力质变」这件事（对长期信心和规划的意义）</strong>：你这条路是「独自、无导师、长跑」的，过程中很容易陷入自我怀疑（「我真的能做成吗」）。而<strong>「写作能力质变」这种可量化的进步（同样工作量时间减半），是对抗自我怀疑的最好武器</strong>——它是客观证据，证明你确实在成长、确实越来越强。郑重复盘、明确记录这些里程碑，能：① <strong>建立信心</strong>（看到自己的真实成长）；② <strong>指导规划</strong>（既然写作提速了，后续可以把省下的时间投入更难的研究/更多产出）；③ <strong>成为素材</strong>（这种「能力进阶」的故事，未来写转型博客、和空天院老师交流、甚至求职时，都是有说服力的成长证明）。对你而言，能感知并珍视自己的每一次能力跃迁，本身就是长跑路上的重要心理资源。今天的 W37 复盘，请认真记下这个里程碑。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>写<strong>周报 W37</strong>：本周完成（Method/Experiment/Intro/RW/结论/摘要 → v0.5 → v0.6）、完成度、问题、下周计划。</li>
+<li><strong>重点记录写作质变</strong>：对比数据（4 周 vs 1 周）+ 质变来源 + 复用资产盘点（各省了多少时间）。</li>
+<li>记录这周的体会和心理状态（完成「一周写一篇」里程碑的感受）。</li>
+<li>肯定自己的成长（这是科研能力进阶的硬证据）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>周报 W37——记录了本周产出、明确记录了「写作质变」里程碑（对比数据+来源+复用资产盘点）、有体会和自我肯定。判断标准：这份复盘既是工作记录，也是你「写作能力质变」的硬证据存档。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>复盘只流水账、没提炼写作质变</strong> → 重点记录这个里程碑（对比数据+来源），它是核心收获。</li>
+<li><strong>不盘点复用资产</strong> → 盘点（Method 结构/Intro 四段/图表/英文句式各省多少时间），看清复利。</li>
+<li><strong>完成里程碑却不肯定自己</strong> → 郑重对待能力质变（建信心+指导规划+成素材）。</li>
+<li><strong>复盘和实际脱节</strong>（写些套话）→ 基于本周真实经历和感受写。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>复盘写什么？→ 完成情况 + ★写作质变（4周vs1周+来源+复用盘点）+ 体会 + 下周计划。</li>
+<li>觉得「1 周写完没什么了不起」？→ 对比第一篇 4 周，这是实打实的能力翻倍，值得认可。</li>
+<li>这周也有没做好的地方？→ 如实记录（如某章还弱、英文还要打磨），W38 改进。</li>
+<li>心态有起伏？→ 复盘也记录心理状态，长跑要关注可持续性。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>复盘并郑重记录「能力质变」这个里程碑</strong>。<strong>做了</strong>（写周报+记录写作质变+盘点复用资产+自我肯定）、<strong>学了</strong>（W37 复盘核心是确认写作质变、对比数据是硬证据、郑重对待能力质变=建信心+指导规划+成素材、可量化进步是对抗自我怀疑的武器）、<strong>会了</strong>（在复盘中识别、记录、珍视自己的能力跃迁）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜复盘里程碑（能力质变是硬证据）</strong>：W37 复盘核心=确认「写作能力质变」。记录：①对比数据（第一篇 4 周到 v1 vs 第二篇 1 周到 v0.5）；②质变来源（不再摸索怎么写+英语熟练+有判断）；③复用资产盘点（Method 结构/Exp 五节/Intro 四段/图表风格/英文句式/文献笔记各省多少时间）。★郑重对待能力质变：可量化的进步是对抗「独自长跑自我怀疑」的最好武器（客观证据），也是建信心/指导规划/未来讲故事的素材。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d259-noon" data-d="259" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D259 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">发给 1 位朋友做快速 review</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（外部 review 的价值 + 怎么发）</h4><div class="blk-b"><ul>
+<li><strong>发给朋友快速 review</strong>：把 v0.6 发给 1 位（懂行的）朋友/同学/师兄，请他快速看一遍提意见——<strong>引入「你自己看不到的盲点」</strong>（外部视角）。</li>
+<li><strong>★ 为什么需要外部 review（你看不到自己的盲点）</strong>：你写了一周，对论文太熟悉，很多问题自己看不出来（脑补了缺失的逻辑、习惯了不清楚的表述）。<strong>一个第一次读的人，能立刻发现你「自以为讲清楚了其实没讲清楚」的地方</strong>——这是自审无法替代的。哪怕朋友不是你方向的专家，他「读不懂某段」本身就是有价值的信号（说明那段表述有问题）。<strong>外部视角是论文质量的重要补充，尤其对没有导师把关的你。</strong></li>
+<li><strong>怎么发（让 review 高效）</strong>：① <strong>明确请求</strong>（请他重点看什么，如「帮我看 Intro 的动机清不清楚、整体逻辑顺不顺、有没有读不懂的地方」）；② <strong>给时间预期</strong>（「快速看，不用细抠，半小时内的整体印象就很有帮助」）；③ <strong>降低对方负担</strong>（别要求逐字精校，先要「整体印象 + 明显问题」）。<strong>让朋友容易帮、帮得高效。</strong></li>
+<li><strong>从这件事理解「主动求反馈是高效成长的方式」+「建立同行互助」</strong>：① 主动把工作给别人看、求反馈，能让你快速发现盲点、少走弯路——<strong>不怕暴露不完美（草稿本就该被人看），早反馈早改进</strong>；② 这也是<strong>建立学术同行网络</strong>的方式——你请朋友帮看论文，将来也帮他看，这种互助关系是科研路上的宝贵支持（尤其对独自转型、没有课题组的你，主动建立几个能互相 review 的同行关系，能部分弥补「没有同门」的缺失）。对你这个独自做研究的人，主动求反馈 + 建立互助，是重要的成长加速器和支持系统。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>选 1 位（最好懂行的）朋友/同学/师兄。</li>
+<li>发 v0.6，<strong>明确请求</strong>（重点看动机清晰度/整体逻辑/有无读不懂处）+ <strong>给时间预期</strong>（快速看，整体印象即可）。</li>
+<li>降低对方负担（先要整体印象 + 明显问题，不要求逐字精校）。</li>
+<li>记下「正在等 review」（W38 收到后处理）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>v0.6 已发给 1 位朋友 review，请求明确（重点看什么）、预期合理（快速看）、负担低（要整体印象）。判断标准：朋友容易上手帮你看，且你给了他明确的关注点，反馈会更有针对性。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>不发外部 review、只靠自审</strong> → 外部视角能发现你看不到的盲点，务必引入。</li>
+<li><strong>不明确请求</strong>（只说「帮我看看」）→ 给明确关注点（动机/逻辑/读不懂处），反馈更有用。</li>
+<li><strong>要求对方逐字精校</strong> → 先要整体印象 + 明显问题，降低负担（精校负担大、对方难答应）。</li>
+<li><strong>怕暴露不完美不敢发</strong> → 草稿本就该被人看，早反馈早改进。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>没有懂行的朋友？→ 同方向同学/师兄/线上社区认识的同行都行；哪怕非专家，「读不懂哪」也是有效反馈。</li>
+<li>对方没空？→ 给低预期（半小时整体印象就好），或换人；W38 处理 review，时间上有缓冲。</li>
+<li>担心 idea 被人知道？→ 选信任的人，或先发部分（如方法已成形可发，但核心代码/未发表的延后——延续你的成果保护意识）。</li>
+<li>收到的意见很多？→ W38 集中处理（和「补充实验」一起），按重要性排序改。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>主动引入外部 review（求反馈 + 建互助）</strong>。<strong>做了</strong>（选人+发 v0.6+明确请求+给低预期）、<strong>学了</strong>（外部视角发现自己的盲点、明确请求让反馈有针对性、主动求反馈是成长加速器、建立同行互助弥补无课题组）、<strong>会了</strong>（高效地请他人帮看论文并建立互助关系）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜外部 review（求反馈+建互助）</strong>：把 v0.6 发懂行朋友快速看，引入你看不到的盲点（自审无法替代——你太熟悉会脑补）。怎么发：明确请求（重点看动机/逻辑/读不懂处）+给低预期（快速看、整体印象）+降负担（不要逐字精校）。★主动求反馈=高效成长（不怕暴露不完美、早反馈早改进）；★请人 review、也帮人 review=建立学术同行互助，对没课题组的你尤其重要（部分弥补「没同门」）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d259-pm" data-d="259" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D259 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W38</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W38 是什么 + 怎么计划）</h4><div class="blk-b"><ul>
+<li><strong>计划 W38</strong>：W38 是「第二篇论文打磨周」——核心是<strong>处理 review → 补充实验（如需）→ v1.0 定稿 → 准备投稿</strong>。今晚规划好 W38 的日程，让下周顺畅开工。</li>
+<li><strong>W38 的主要任务</strong>（基于 v5.0，提前心里有数）：① <strong>处理朋友 review</strong>（D260 收到后逐条处理 + 修改）；② <strong>补充实验（如 review 指出需要）</strong>——例如和更多最新方法对比（这是本周一直推迟的「补实验」，到 W38 做）；③ <strong>论文 v1.0 定稿</strong>（全文 self-check + 参考文献格式 + supplementary material）；④ <strong>选投稿目标 + 读 Author Guidelines + 格式调整</strong>（建议投和第一篇不同的期刊，扩大覆盖面）；⑤ <strong>写 Cover Letter + proofreading + 备齐投稿文件</strong>；⑥ GitHub 更新（加第二课题代码——注意未发表核心延后）+ 知乎帖（介绍第二课题）。<strong>W38 末，第二篇就准备好投稿了（W39 正式投）。</strong></li>
+<li><strong>计划的方法</strong>：把 W38 的任务按天排（复用你的周计划习惯），关键节点（如 v1.0 定稿、投稿文件齐）标出，给「补实验」预留缓冲（不确定 review 要不要补）。<strong>有计划地进入打磨周，不慌。</strong></li>
+<li><strong>从「写完 v0.5 → 打磨 → 投稿」看论文的完整生命周期</strong>：你现在走的是第二遍「论文从写到投」的完整流程（第一篇在 M6–M7 走过一遍）——<strong>而第二遍明显更快、更有把握</strong>（写作 1 周、打磨投稿流程也熟）。这再次印证你的成长：不只是写作提速，整个「做研究→写论文→投稿」的完整科研流程，你都越来越熟练。这种「全流程熟练度」是你作为独立研究者的核心能力，会支撑你后续持续、高效地产出系列成果——这正是你最终能拿出「多篇论文+开源作品」去对接空天院的底气所在。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>列 W38 主要任务（处理 review / 补实验如需 / v1.0 定稿 / 选投稿目标+格式 / Cover Letter+投稿文件 / GitHub+知乎）。</li>
+<li>按天排日程（复用周计划习惯），标出关键节点（v1.0 定稿、投稿文件齐）。</li>
+<li>给「补实验」预留缓冲（review 可能要补）。</li>
+<li>确认 W38 计划清晰，下周可顺畅开工。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W38 计划——主要任务列全、按天排好、关键节点标出、补实验有缓冲。判断标准：下周一打开计划就知道每天做什么，打磨周有条不紊。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><ul>
+<li><strong>不计划下周、临时抓瞎</strong> → 提前排好 W38 日程，开工顺畅。</li>
+<li><strong>没给补实验留缓冲</strong> → review 可能要补实验，预留时间。</li>
+<li><strong>忘了 GitHub/知乎（运营副线）</strong> → W38 也要适度更新（但守住副线、未发表核心延后）。</li>
+<li><strong>计划过满不留弹性</strong> → 留缓冲（review 数量、补实验量都有不确定性）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救（决策树）</h4><div class="blk-b"><ul>
+<li>W38 任务排不下？→ 优先核心（处理 review → v1.0 → 投稿准备），运营副线适度。</li>
+<li>不确定要不要补实验？→ 计划里留「补实验缓冲日」，D260 收到 review 后再定。</li>
+<li>投稿目标还没想好？→ W38 有 D263 专门选（建议和第一篇不同期刊），今晚先记下「待选」。</li>
+<li>担心 W38 太满？→ 它是打磨周（比写作周轻），且有缓冲，按计划走即可。</li>
+</ul>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>规划论文打磨周（W38）并理解论文完整生命周期</strong>。<strong>做了</strong>（列 W38 任务+按天排+标节点+留缓冲）、<strong>学了</strong>（W38=处理 review/补实验/v1.0/选投稿目标/Cover Letter/投稿准备、给不确定任务留缓冲、第二遍「写到投」全流程更快更熟）、<strong>会了</strong>（规划好打磨投稿周，并认识到自己全流程科研能力的成长）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 周报 W37（含写作质变里程碑记录）✅ review 已发出（待 W38 处理）✅ W38 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D259</summary><textarea data-note="d259" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="extra" id="extra1"><h2>🎉 W37 收官 · 你完成了一个重要里程碑</h2><p><strong>这一周（M10 开篇）你完成了什么</strong>：用<strong>整整 1 周</strong>，从零写出了<strong>第二篇论文的完整草稿（v0.5 → v0.6）</strong>——Method（含架构图+伪代码）、Experiment（数据集/主表/消融/可视化/讨论五节）、Introduction（四段结构）、Related Work（增量更新）、Conclusion、Abstract 全部齐全，并经过通读自审、修改、英文润色、图表打磨，还发出了外部 review。</p>
+<p><strong>最重要的收获——写作能力质变（请记住这个里程碑）</strong>：</p>
+<ul>
+<li><strong>第一篇</strong>论文：从开始写到 v1，用了 <strong>4 周</strong>（M6 的 W21–W24）。</li>
+<li><strong>第二篇</strong>论文：写到 v0.5，只用了 <strong>1 周</strong>（本周 W37）。</li>
+<li><strong>这不是因为第二篇更简单，而是你的写作能力质变了</strong>：你不再摸索「论文该怎么写」（Method 结构、Experiment 五节、Intro 四段、图表风格、英文句式、文献笔记体系——全是第一篇攒下的可复用资产），学术英语更熟练，对「好论文长什么样」有了判断。<strong>「同样的工作量，时间减半」就是能力质变的硬指标。</strong></li>
+</ul>
+<p><strong>本周一直守住的两条线</strong>：</p>
+<ul>
+<li><strong>复用 ≠ 抄袭</strong>：复用第一篇的结构和句式骨架（章节顺序、组件三段式、Intro 四段式、图表风格、英文句式），但每一句内容都是第二课题真实重写的（自我抄袭同样违规）。</li>
+<li><strong>单卡 4090 高效卖点</strong>：贯穿两篇论文的差异化主线，在 Experiment 实现细节、效率对比、贡献列表、Abstract 里继续打。</li>
+</ul>
+<p><strong>下周（W38）预告</strong>：第二篇论文打磨周——处理 review → 补充实验（如需）→ v1.0 定稿 → 选投稿目标 + 准备投稿文件。W39 第二篇就正式投稿了。</p>
+<hr />
+</section>
+<section class="supp" id="supp"><h2>📎 W37 加厚补充包（范例 / 实用模板 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — Method/Experiment/Intro/Abstract 写作范例（照着改）</h2>
+<blockquote class="quote">
+<p>说明：以下范例以「SAR 旋转舰船检测 + speckle-aware 模块」为具体例子演示<strong>写法和句式骨架</strong>（你换具体题目时，结构照搬、内容全换成你第二课题真实的）。<strong>复用结构，重写内容——别直接抄。</strong></p>
+</blockquote>
+<p><strong>【范例 1：Method Overview 段（3.1）】</strong></p>
+<blockquote class="quote">
+<p>Given a SAR image, our goal is to detect arbitrarily-oriented ships robustly under speckle noise. We propose <strong>XXX</strong>, which consists of two key components: (i) a <strong>speckle-aware feature module</strong> that suppresses multiplicative noise while preserving target structures, and (ii) an <strong>orientation-robust detection head</strong> that handles the azimuth sensitivity of SAR targets. Given an input image, multi-scale features are first extracted by the backbone, then refined by component (i) to obtain noise-robust representations, and finally decoded by component (ii) into oriented bounding boxes. In contrast to prior methods that directly adapt optical detectors and ignore SAR-specific physics, XXX explicitly models the speckle and orientation characteristics. An overview is shown in Figure 2.</p>
+</blockquote>
+<p><strong>【范例 2：核心组件「三段式」（动机→方法→直觉）】</strong></p>
+<blockquote class="quote">
+<p><em>（动机）</em> SAR images are corrupted by multiplicative speckle noise, which conventional convolutions—designed for additive-noise natural images—handle poorly, as the noise can dominate weak target signals.
+<em>（方法）</em> To address this, we design the speckle-aware module. Let (F \in \mathbb{R}^{C \times H \times W}) denote the input feature. We first estimate a noise-attentive map (M = \sigma(\text{Conv}(F))), then modulate the feature as (F' = F \odot (1 + M)), where (\odot) is element-wise multiplication and (\sigma) is the sigmoid function. ...
+<em>（直觉）</em> Intuitively, the module learns to <strong>amplify reliable target responses and suppress noise-dominated regions</strong>, so that downstream detection focuses on genuine target structures rather than speckle artifacts. This directly tackles the motivation above.</p>
+</blockquote>
+<p><strong>【范例 3：4.2 主表分析文字（有 insight，不是念数字）】</strong></p>
+<blockquote class="quote">
+<p>平庸写法（念数字，别这样）：<s>Our method achieves 78.5 mAP on SSDD and 71.2 on HRSID...</s>
+合格写法（有 insight）：As shown in Table 2, XXX consistently outperforms all baselines across the three SAR datasets, surpassing the strongest competitor by <strong>+1.8 mAP</strong> on average. Notably, the improvement is <strong>larger on datasets with stronger speckle noise</strong> (e.g., +2.6 on Dataset-B), which corroborates our motivation that explicitly modeling speckle is crucial for SAR detection. Moreover, XXX attains this accuracy with <strong>fewer parameters and higher FPS, using only a single RTX 4090</strong>, demonstrating its efficiency.</p>
+</blockquote>
+<p><strong>【范例 4：Introduction 四段结构骨架】</strong></p>
+<blockquote class="quote">
+<p><em>（段1 背景）</em> SAR ship detection plays a vital role in maritime surveillance, working day-and-night and through clouds...
+<em>（段2 Gap）</em> However, most existing methods directly adapt detectors designed for optical images, <strong>overlooking two SAR-specific challenges: the multiplicative speckle noise and the azimuth sensitivity of targets</strong>, which leads to degraded accuracy under strong noise...
+<em>（段3 方法）</em> To bridge this gap, we propose XXX, which explicitly models speckle and orientation via two dedicated components...
+<em>（段4 贡献）</em>
+• We propose a speckle-aware module that suppresses multiplicative noise while preserving target structures.
+• We design an orientation-robust head tailored to SAR azimuth sensitivity.
+• XXX achieves state-of-the-art results on three SAR benchmarks <strong>using only a single RTX 4090</strong>, demonstrating both effectiveness and efficiency.</p>
+</blockquote>
+<p><strong>【范例 5：Abstract 骨架（四件事，150–250 词）】</strong></p>
+<blockquote class="quote">
+<p><em>（问题）</em> SAR ship detection is crucial yet challenging due to speckle noise and azimuth sensitivity. <em>（方法）</em> We propose XXX, comprising a speckle-aware feature module and an orientation-robust detection head that explicitly model SAR-specific physics. <em>（结果）</em> Extensive experiments on three SAR benchmarks show that XXX surpasses the strongest baseline by +1.8 mAP on average, with the gains being most pronounced under heavy speckle. <em>（亮点）</em> Remarkably, all experiments are conducted on a single consumer-grade RTX 4090, highlighting the method's efficiency and accessibility.</p>
+</blockquote>
+<p><strong>【范例 6：Limitation 段（诚实 + 带未来方向）】</strong></p>
+<blockquote class="quote">
+<p>While XXX achieves strong results, it has limitations. First, the gains diminish on extremely low-resolution targets, where speckle and signal are hard to separate; <strong>a physically-grounded denoising prior may help in future work</strong>. Second, although efficient, processing very large SAR scenes still requires tiling; <strong>an end-to-end large-scene design is left for future exploration</strong>. （注：每条局限带一句未来方向——既显远见，又为你第三篇埋伏笔。）</p>
+</blockquote>
+<h2>二、实用模板 — 论文写作流程 SOP + 自检清单</h2>
+<p><strong>【模板 1：第二篇论文「一周写完 v0.5」的写作顺序 SOP】</strong></p>
+<ol>
+<li><strong>先写「肉」（D253–D255）</strong>：Method（Overview→组件→训练策略→伪代码）→ Experiment（4.1 数据集/实现 → 4.2 主表 → 4.3 消融 → 4.4 可视化 → 4.5 讨论/Limitation）。<strong>为什么先写肉</strong>：这是你已有结果的客观描述，最好写、最硬。</li>
+<li><strong>再写「壳」（D256）</strong>：Intro（四段）→ RW（增量更新）→ Conclusion → <strong>Abstract（最后写）</strong>。</li>
+<li><strong>整合（D257）</strong>：组装全文 → v0.5 → 通读自审（假装审稿人，先标记）→ 修改（先硬后软）。</li>
+<li><strong>打磨（D258）</strong>：英文润色（工具辅助你把关）+ 图表最终版 → v0.6。</li>
+<li><strong>收尾（D259）</strong>：复盘（记录写作质变）+ 发外部 review + 计划 W38。</li>
+</ol>
+<blockquote class="quote">
+<p>核心心态：<strong>复用结构重写内容</strong>；<strong>先完整后完美</strong>；<strong>全文数字始终一致</strong>。</p>
+</blockquote>
+<p><strong>【模板 2：投稿前论文全文 self-check 清单（W38 v1.0 定稿用，提前知道）】</strong></p>
+<ul>
+<li>[ ] Method：符号都定义 / 公式文字一致 / 图文一致 / 伪代码与代码一致 / 每个设计有直觉解释</li>
+<li>[ ] Experiment：数据集写清规模划分 / 实现细节可复现（含单张 4090）/ 主表加粗最优 / 消融配「为什么」/ 可视化含负面案例 / 讨论有洞察 / Limitation 诚实带方向</li>
+<li>[ ] <strong>全文数字一致</strong>（Abstract/Intro/Experiment 所有数字统一——通查）</li>
+<li>[ ] 术语统一（同一东西同一词）/ 章节图表编号连续 / 每图表被正文引用 / 引用 <code>[x]</code> 在 References 有对应</li>
+<li>[ ] Intro：四段齐 / Gap 具体真实 / 贡献是「新东西/效果」/ 含效率卖点</li>
+<li>[ ] Abstract：四件事齐（问题/方法/结果数字/亮点）/ 精准有吸引力 / 数字与正文一致</li>
+<li>[ ] 英文：无语法错 / 句子清楚 / 时态一致（方法现在时、实验过去时）/ 术语准确</li>
+<li>[ ] 复用 ≠ 抄袭：复用第一篇结构句式，但内容全部重写（无自我抄袭）</li>
+</ul>
+<p><strong>【模板 3：「方法细节」vs「实现细节」分界速查】</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>放哪</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模块结构、损失函数设计、训练策略</td>
+<td><strong>Method</strong></td>
+<td>「换个人复现也得这么做」的方法本质</td>
+</tr>
+<tr>
+<td>用了 Focal Loss 处理不平衡</td>
+<td><strong>Method</strong></td>
+<td>这是方法选择</td>
+</tr>
+<tr>
+<td>lr=0.01、batch=8、12 epoch、γ=2</td>
+<td><strong>Experiment 实现细节</strong></td>
+<td>可调的工程配置</td>
+</tr>
+<tr>
+<td>硬件：单张 RTX 4090</td>
+<td><strong>Experiment 实现细节</strong></td>
+<td>配置（且是你的效率卖点）</td>
+</tr>
+</tbody>
+</table></div>
+<h2>三、每日「今日自测」</h2>
+<ul>
+<li><strong>D253</strong>：① Method 的标准结构是哪几部分？② 组件「三段式」是哪三段，哪段最容易被省却最关键？③ 为什么架构图要「复用第一篇风格、保持系列感」？</li>
+<li><strong>D254</strong>：① Algorithm 伪代码要和哪两个东西保持一致？② Experiment 的标准五节是什么？③ 4.2 分析文字的「灵魂」是什么（不是什么）？</li>
+<li><strong>D255</strong>：① 消融表怎么组织、配文要点出什么？② 可视化为什么要包含「负面/失败案例」？③ Limitation 为什么「诚实写不减分反加分」，它和下一篇什么关系？</li>
+<li><strong>D256</strong>：① Intro 四段结构是哪四段，哪段是灵魂？② RW「增量更新」复用什么、新增什么？③ Abstract 为什么最后写、要讲清哪四件事？</li>
+<li><strong>D257</strong>：① 「先完整后完美」是什么意思、为什么重要？② 写作质变的硬指标是什么（第一篇 vs 第二篇用时）？③ 通读自审为什么要「假装审稿人」、为什么先标记不修改？</li>
+<li><strong>D258</strong>：① 英文润色用工具时为什么「工具辅助你把关」？② 图表最终版要打磨哪几项？③ 为什么写论文的周也要读论文？</li>
+<li><strong>D259</strong>：① W37 复盘的核心里程碑是什么？② 为什么需要外部 review（自审无法替代什么）？③ W38 的主要任务有哪些？</li>
+</ul>
+<h2>四、本周报错 / 坑 速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method 读者看不懂方法全貌</td>
+<td>没先写 Overview、一上来扎进组件细节</td>
+<td>先写 Overview 给「地图」，再展开组件</td>
+</tr>
+<tr>
+<td>审稿人觉得「不知道方法为什么 work」</td>
+<td>组件只给公式、省了「直觉解释段」</td>
+<td>每个组件三段式，必写「为什么这么设计 work」</td>
+</tr>
+<tr>
+<td>论文被指「自我抄袭」</td>
+<td>直接抄第一篇句子改几个词</td>
+<td>复用结构/句式骨架，内容全部重写</td>
+</tr>
+<tr>
+<td>把 lr/batch 写进了 Method</td>
+<td>没分清「方法细节」vs「实现细节」</td>
+<td>方法本质放 Method、可调配置放 Experiment 实现细节</td>
+</tr>
+<tr>
+<td>4.2 分析文字像废话</td>
+<td>只把表格数字念了一遍</td>
+<td>写 insight：赢多少/在哪赢更多+联系方法设计/效率</td>
+</tr>
+<tr>
+<td>审稿人怀疑数据可信度</td>
+<td>正文数字和表格不一致</td>
+<td>整合/图表/定稿三次通查全文数字一致</td>
+</tr>
+<tr>
+<td>可视化显得「在挑好的展示」</td>
+<td>只放成功案例</td>
+<td>放几张诚实的负面/失败案例 + 分析</td>
+</tr>
+<tr>
+<td>Intro 动机不可信</td>
+<td>Gap 写得泛（只说「不够好」）</td>
+<td>Gap 具体（什么缺陷→什么后果），来自第一篇 Limitation/调研</td>
+</tr>
+<tr>
+<td>Abstract 写不准</td>
+<td>一开始就写、还没定稿</td>
+<td>Abstract 最后写（全文齐了才好浓缩）</td>
+</tr>
+<tr>
+<td>卡在「每段写完美」、没有完整草稿</td>
+<td>没遵循「先完整后完美」</td>
+<td>先快速拉通 v0.5，再迭代打磨</td>
+</tr>
+<tr>
+<td>自己审不出问题</td>
+<td>用作者视角读（脑补缺失逻辑）</td>
+<td>切换「挑剔审稿人」视角；并发外部 review 补盲点</td>
+</tr>
+<tr>
+<td>英文被工具改偏了技术意思</td>
+<td>盲目全盘接受工具修改</td>
+<td>工具辅助查语法，你逐条把关技术准确性</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p></section>
+<div class="pager"><a class="prev" href="w36.html"><span class="dir">← 上一篇</span><span class="nm">W36 响应审稿意见（如有）+ 第二篇论文启动</span></a><a class="next" href="w38.html"><span class="dir">下一篇 →</span><span class="nm">W38 第二篇论文打磨</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d253">D253 周一</a><a class="sub" href="#d253-am">上午 写 Method 章的 Over</a><a class="sub" href="#d253-noon">中午 画架构图（复用第一篇绘图工具和风</a><a class="sub" href="#d253-pm">晚上 写核心组件 2 + 训练策略</a><a href="#d254">D254 周二</a><a class="sub" href="#d254-am">上午 完成 Method 章 + Al</a><a class="sub" href="#d254-noon">中午 写 Experiment Sec</a><a class="sub" href="#d254-pm">晚上 写 Sec 4.2（主表 + 分</a><a href="#d255">D255 周三</a><a class="sub" href="#d255-am">上午 写 Sec 4.3（消融）+ S</a><a class="sub" href="#d255-noon">中午 写 Sec 4.5（Discus</a><a class="sub" href="#d255-pm">晚上 整合 Experiment 全章</a><a href="#d256">D256 周四</a><a class="sub" href="#d256-am">上午 写 Introduction（复</a><a class="sub" href="#d256-noon">中午 写 Related Work（在</a><a class="sub" href="#d256-pm">晚上 写 Conclusion + A</a><a href="#d257">D257 周五</a><a class="sub" href="#d257-am">上午 整合全文 → 第二篇论文 v0.</a><a class="sub" href="#d257-noon">中午 通读自审——标记问题</a><a class="sub" href="#d257-pm">晚上 修改</a><a href="#d258">D258 周六</a><a class="sub" href="#d258-am">上午 英文润色</a><a class="sub" href="#d258-noon">中午 画图表最终版</a><a class="sub" href="#d258-pm">晚上 读 2 篇最新论文</a><a href="#d259">D259 周日</a><a class="sub" href="#d259-am">上午 周复盘 W37</a><a class="sub" href="#d259-noon">中午 发给 1 位朋友做快速 revi</a><a class="sub" href="#d259-pm">晚上 计划 W38</a><a href="#extra1">🎉 W37 收官 · 你完成</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

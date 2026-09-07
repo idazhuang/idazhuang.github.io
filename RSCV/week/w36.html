@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="2" data-week="36">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W36 · 响应审稿意见（如有）+ 第二篇论文启动 —— M · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段二 · 产出期</span><span>M9 第二篇推进</span><span>·</span><span>Week 36</span><span>·</span><span>D246–D252</span></div><h1 class="title">响应审稿意见（如有）+ 第二篇论文启动 —— M9 收官（含 M9 月报）</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="246" data-k="am" title="D246 上午段"></i><i data-d="246" data-k="noon" title="D246 中午段"></i><i data-d="246" data-k="pm" title="D246 晚上段"></i></span><span class="sday"><i data-d="247" data-k="am" title="D247 上午段"></i><i data-d="247" data-k="noon" title="D247 中午段"></i><i data-d="247" data-k="pm" title="D247 晚上段"></i></span><span class="sday"><i data-d="248" data-k="am" title="D248 上午段"></i><i data-d="248" data-k="noon" title="D248 中午段"></i><i data-d="248" data-k="pm" title="D248 晚上段"></i></span><span class="sday"><i data-d="249" data-k="am" title="D249 上午段"></i><i data-d="249" data-k="noon" title="D249 中午段"></i><i data-d="249" data-k="pm" title="D249 晚上段"></i></span><span class="sday"><i data-d="250" data-k="am" title="D250 上午段"></i><i data-d="250" data-k="noon" title="D250 中午段"></i><i data-d="250" data-k="pm" title="D250 晚上段"></i></span><span class="sday"><i data-d="251" data-k="am" title="D251 上午段"></i><i data-d="251" data-k="noon" title="D251 中午段"></i><i data-d="251" data-k="pm" title="D251 晚上段"></i></span><span class="sday"><i data-d="252" data-k="am" title="D252 上午段"></i><i data-d="252" data-k="noon" title="D252 中午段"></i><i data-d="252" data-k="pm" title="D252 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周的定位</strong>：<strong>M9 的最后一周，也是阶段二后半第一个月的收官周</strong>。本周是一个<strong>双线结构</strong>周，取决于第一篇论文的审稿意见有没有回来：</p>
+<ul>
+<li><strong>【审稿线】如果第一篇审稿意见收到了</strong> → 本周<strong>优先处理它</strong>（暂停第二篇写作）：读懂意见 → 补实验 → 写 Response Letter → 改稿 → 提交。响应审稿是有时限的（通常给几周），优先级最高。</li>
+<li><strong>【论文线】如果还没收到</strong> → 按正常节奏<strong>启动第二篇论文的系统写作</strong>:Introduction → Related Work → Method。
+因为你不知道哪条线会发生，<strong>本周教学两条线都讲</strong>——审稿来了你会处理，没来你能推进第二篇。本周末做 <strong>M9 月度复盘</strong>（检查 GitHub star 是否达 50、M9 硬交付清单）。
+<strong>本周科研能力目标</strong>（你原计划，保留）：学会处理审稿意见（如果收到了）；启动第二篇论文的系统写作。
+<strong>先给你打个心理预防针（关于审稿意见）</strong>：<strong>审稿意见经常措辞严厉，有时甚至让人难受——但这是学术界的常态，不是针对你个人</strong>。每个研究者（包括最顶尖的）都经历过被审稿人批评。<strong>收到意见先深呼吸，别被情绪带走</strong>；真正重要的是“审稿人说的对不对（有没有指出真问题）”，而不是“他说得好不好听”。本周如果走审稿线，你会学到如何专业、诚恳地处理审稿意见——这是科研生涯反复要用的硬技能。
+<strong>关于第二篇启动（论文线）</strong>：你 W34 已经写了 outline、有了完整的方法和实验结果——第二篇的写作是“往熟悉的结构里填内容”（复用第一篇经验），会比第一篇顺。
+<strong>本周精力怎么分配</strong>:D246 判断走哪条线（查审稿状态）+ 启动（审稿处理计划 或 第二篇 Intro）;D247-248 补实验/写 Intro;D249 Response Letter / 写 RW;D250 改稿 / 写 Method;D251 提交修改稿 / 继续 Method + GitHub 适度维护；D252 复盘 + M9 月报 + 计划 W37-40。教学按“双线并讲 + M9 收官”组织。</li>
+</ul>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d246" data-d="246"><header class="day-head"><span class="dnum">D246</span><h2 class="day-t">周一 · 查审稿状态 → 定走哪条线 + 启动</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午查第一篇审稿状态（收到意见→本周优先处理审稿线、中断第二篇；未收到→继续正常节奏）；中午【如收到】逐条读意见标三类+列需补实验；晚上【如收到】制定回复计划，【未收到】启动第二篇Intro写作。</p>
+<p><strong>预期管理</strong>:M9末周第一天，先定走哪条线。提醒：查第一篇审稿状态——<strong>收到审稿意见就本周优先处理（暂停第二篇，因为响应有时限）</strong>;★如何读审稿意见：先深呼吸（措辞常严厉是学术常态、不针对你个人）、读三遍（第一遍感受情绪→放下、第二遍提取实质问题、第三遍制定回复方案）、重点是“他说的对不对”而非“好不好听”；如未收到则正常启动第二篇Intro写作。</p>
+</blockquote>
+</div><section class="slot" id="d246-am" data-d="246" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D246 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">查审稿状态 + 决定走哪条线</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（优先级判断：审稿响应有时限，优先级最高）</h4><div class="blk-b"><ul>
+<li>查第一篇论文的审稿状态。<strong>如果收到审稿意见 → 本周优先处理（中断第二篇写作）；如果还没收到 → 继续正常节奏（启动第二篇）。</strong></li>
+<li><strong>为什么审稿意见来了要优先处理（中断第二篇）</strong>:① <strong>响应审稿有时限</strong>（期刊/会议通常给几周到一两个月改稿），错过时限可能影响录用;② 第一篇论文是你已有的成果，推进它录用的优先级高于刚启动的第二篇;③ 趁审稿意见新鲜、记忆清晰时处理效率高。<strong>所以审稿意见一来，它就是本周的最高优先级，第二篇写作让路。</strong> 这是科研中的优先级判断：已投出的论文的关键节点（审稿响应），优先于新工作的早期推进。</li>
+<li><strong>如果还没收到（常见）</strong>：审稿周期长（尤其期刊，可能 2-4 个月），很可能本周还没回来。<strong>那就按计划启动第二篇论文写作</strong>（论文线）——不必干等审稿。</li>
+<li><strong>两条线都要会</strong>：你现在不知道审稿什么时候回，所以本周两条线都学——审稿来了能处理，没来能推进第二篇。<strong>这种“根据情况灵活切换”也是科研的常态。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>查第一篇论文审稿状态（期刊/会议系统）。</li>
+<li>收到意见 → 走【审稿线】（本周优先，暂停第二篇）；未收到 → 走【论文线】（启动第二篇）。</li>
+<li>明确本周主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>查了审稿状态，明确本周走审稿线（优先处理）还是论文线（启动第二篇）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>收到审稿意见还按原计划写第二篇 → 审稿响应有时限，优先处理；干等审稿不启动第二篇 → 没收到就推进第二篇（不空等）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>不确定审稿状态?→ 查投稿系统(Under Review / Required Reviews Completed / Decision)；收到的是 Reject?→ 据意见改投（也是优先处理）;Major/Minor Revision → 优先按意见改。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>根据审稿状态判断优先级</strong>。<strong>做了</strong>（查状态 + 定主线）、<strong>学了</strong>（审稿响应有时限优先级最高、没收到不空等、灵活切换）、<strong>会了</strong>（根据情况决定本周主线）。</p>
+</div></section></section><section class="slot" id="d246-noon" data-d="246" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D246 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">【如收到】逐条读意见、标三类、列需补实验 / 【未收到】准备 Intro</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ 如何读审稿意见：情绪与实质分开）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】如果收到意见</strong>：逐条阅读，标记为“同意/部分同意/不同意”三类；列出所有需要补做的实验。</li>
+<li><strong>★ 如何读审稿意见（关键心法，管理情绪）</strong>：审稿意见经常措辞严厉，<strong>读三遍</strong>:① <strong>第一遍——感受情绪，然后放下</strong>（承认“看到批评会不舒服”是正常的，但别让情绪主导）;② <strong>第二遍——提取实质问题</strong>（他到底指出了什么具体问题？要补什么实验?）;③ <strong>第三遍——制定回复方案</strong>（每条怎么回应/怎么改）。<strong>核心：重要的是“他说的对不对（有没有指出真问题）”，而不是“他说得好不好听”</strong>——把审稿人的语气和他指出的实质问题分开，只关注实质。</li>
+<li><strong>为什么这个“情绪与实质分开”的能力对你的科研长跑特别重要</strong>：你要走学术这条路，意味着你这辈子会反复收到审稿意见——而审稿意见里相当一部分会让人不舒服（措辞尖锐、否定你的工作、有时甚至显得不耐烦或带偏见）。<strong>如果你每次都被审稿意见的语气伤到、陷入“他怎么能这么说我”的情绪内耗，你会非常痛苦，甚至可能因此对科研产生畏惧或自我怀疑</strong>。但如果你能练就“把语气和实质分开”的本事——承认看到批评不舒服（这很正常，不必假装无所谓），但迅速把情绪放到一边，冷静地问“抛开他说话的方式，他指出的问题成立吗？对我改进论文有用吗？”——你就能从每一次审稿（哪怕是被拒）中获得成长，而不是受伤。<strong>一个残酷但真实的事实是：很多审稿意见即使语气难听，指出的问题确实存在；而把这些问题解决了，你的论文会更好</strong>。所以审稿人某种意义上是在免费帮你改进工作（哪怕方式让人不爽）。把“对不对”和“好不好听”分开，你就能心平气和地吸收有用的、礼貌地回应不认同的——这种心态的成熟，和你的研究能力一样，是支撑你在学术路上走远的基本功。对你这个独自转型、没有导师托底的人，更要学会自己消化审稿压力、不被它击垮。</li>
+<li><strong>标三类的意义</strong>:① <strong>同意</strong>（他说得对 → 照改）;② <strong>部分同意</strong>（部分有理 → 部分改 + 解释）;③ <strong>不同意</strong>（他理解有误或要求不合理 → 礼貌反驳/澄清，但要有理有据）。<strong>不是所有意见都得无条件接受——同意的改、不同意的礼貌据理回应。</strong> 列出需补的实验（审稿线后两天补）。</li>
+<li><strong>【论文线】如果未收到</strong>：准备启动第二篇 Intro（基于 W34 的 outline），今晚开始写。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】逐条读意见，标“同意/部分同意/不同意”，读三遍（情绪→实质→方案）。</li>
+<li>【审稿线】列出所有需补的实验。</li>
+<li>【论文线】（如未收到）准备 Intro 写作（基于 outline）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】意见标三类 + 需补实验清单；或【论文线】Intro 写作准备就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>被审稿语气带走情绪 → 读三遍（情绪→实质），关注“对不对”非“好不好听”；无条件接受所有意见 → 标三类（同意改、不同意据理回应）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>意见看着很凶很沮丧?→ 正常（学术常态、不针对你），深呼吸放下情绪、提取实质；某条意见不知同不同意 → 想“他指出的是真问题吗”，是→同意，误解→澄清。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>专业地读审稿意见（情绪与实质分开）</strong>。<strong>做了</strong>（标三类 + 列补实验 / 准备 Intro）、<strong>学了</strong>（读三遍管理情绪、关注实质非语气、标三类分类回应）、<strong>会了</strong>（以专业心态处理审稿意见）。</p>
+</div></section></section><section class="slot" id="d246-pm" data-d="246" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D246 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">【审稿线】制定回复计划 / 【论文线】第二篇 Intro 启动</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（回复计划 / Intro 启动）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】制定回复计划</strong>：每条意见对应的修改方案 + 预计时间。把“标了三类的意见”变成“可执行的回复+修改计划”（哪条补什么实验、哪条怎么改文、哪条怎么回应）。<strong>有计划地、逐条地处理，不慌。</strong></li>
+<li><strong>【论文线】第二篇 Intro 写作启动</strong>：基于 W34 的 outline，开始写 Introduction。<strong>复用第一篇 Intro 的写法</strong>（背景 → Gap → 你的方法 → 贡献），填入第二课题的内容（从第一篇 Limitation 延伸的 Gap、新场景难点、你的解法）。</li>
+<li><strong>两条线的共同点（都复用经验）</strong>：审稿线复用你对自己工作的理解（怎么补实验、怎么解释）；论文线复用第一篇的写作经验。<strong>M9 是产出期，两条线都建立在你已有的积累上。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】制定回复计划（每条意见：修改方案 + 时间）。</li>
+<li>【论文线】（如未收到）写第二篇 Intro（复用第一篇写法，填第二课题内容）。</li>
+<li>明确本周后续节奏（补实验+改稿 / 继续写论文）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】回复计划（逐条：方案+时间）；或【论文线】第二篇 Intro 启动（复用结构）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>【审稿线】无计划乱改 → 逐条计划（方案+时间）；【论文线】Intro 从零想 → 复用第一篇写法 + 第二课题内容。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】计划怎么排?→ 按意见重要性/补实验耗时排；【论文线】Intro 卡壳?→ 复用第一篇 Intro 结构，换第二课题的 Gap/方法。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>启动了本周主线（审稿处理 或 第二篇写作）</strong>。<strong>做了</strong>（回复计划 / Intro 启动）、<strong>学了</strong>（逐条回复计划 / 复用写法启动 Intro、都建立在积累上）、<strong>会了</strong>（有计划地推进审稿响应或论文写作）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜读审稿意见的心法（情绪与实质分开）</strong>：审稿意见常措辞严厉（学术常态、不针对你个人）。读三遍:①感受情绪→放下 ②提取实质问题 ③制定回复方案。核心：重要的是“他说的对不对（指出真问题没）”而非“好不好听”。标三类：同意（照改）/部分同意（部分改+解释）/不同意（礼貌据理回应）——不无条件接受所有意见。审稿响应有时限，优先级最高（暂停其他）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 审稿意见处理计划（如有）或 ✅ 第二篇 Intro 启动。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D246</summary><textarea data-note="d246" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d247" data-d="247"><header class="day-head"><span class="dnum">D247</span><h2 class="day-t">周二 · 【审稿线】补实验 1（补 baseline）/ 【论文线】Intro 段 1-2</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午【审稿线】补实验1（最常见要求：补充更多baseline对比）、【论文线】写Intro第1-2段；中午晚上继续补实验或写论文。</p>
+<p><strong>预期管理</strong>：今天补实验1或写Intro段1-2。提醒：【审稿线】最常见的审稿要求是“补充更多baseline对比”（审稿人想看你和更多方法比），复用你的实验框架快速补；【论文线】写Intro第1-2段（研究背景→引出问题，复用第一篇Intro的开篇写法）；两条线都复用已有积累（框架/写作经验），推进高效。</p>
+</blockquote>
+</div><section class="slot" id="d247-am" data-d="247" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D247 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">【审稿线】补实验 1（补 baseline）/ 【论文线】写 Intro 段 1-2</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（补 baseline：最常见的审稿要求 / Intro 开篇）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】补实验 1——最常见的要求是“补充更多 baseline 对比”</strong>：审稿人常要求“和更多/更新的方法比”（确认你的方法相对更全面的对照有优势）。<strong>复用你的实验框架，快速补跑新的 baseline</strong>（框架已有，加 baseline 是低成本的）。</li>
+<li><strong>为什么“补 baseline”是最常见的审稿要求</strong>：审稿人想确认你的方法是真有竞争力（不是只赢了你选的几个 baseline）。<strong>补充更多、更新、更强的 baseline 对比，是回应“你和 SOTA 比怎么样”这类质疑的直接方式</strong>。好在你有现成的实验框架，补 baseline 很快（复用红利）。</li>
+<li><strong>【论文线】写 Intro 段 1-2</strong>:Introduction 的开篇——研究背景（遥感目标检测的重要性/应用）→ 引出问题领域。<strong>复用第一篇 Intro 的开篇写法</strong>（你知道怎么从大背景写到具体问题）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】补实验 1（补充更多 baseline，复用框架快速跑）。</li>
+<li>【论文线】写 Intro 段 1-2（背景 → 引出问题，复用第一篇写法）。</li>
+<li>推进本周主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】补 baseline 实验启动（复用框架）；或【论文线】Intro 段 1-2（背景+引出问题）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>【审稿线】补 baseline 设置不一致 → 和原实验同设置（公平）；【论文线】Intro 开篇太突兀 → 从大背景自然写到问题（复用第一篇）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】补哪些 baseline?→ 审稿人点名的 + 你方向更新/更强的；【论文线】开篇卡壳 → 复用第一篇 Intro 段 1-2 的结构，换第二课题背景。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进了主线（补 baseline / 写 Intro 开篇）</strong>。<strong>做了</strong>（补实验 1 / Intro 段 1-2）、<strong>学了</strong>（补 baseline 是最常见审稿要求/复用框架快、Intro 开篇复用写法）、<strong>会了</strong>（响应审稿或推进论文开篇）。</p>
+</div></section></section><section class="slot" id="d247-noon" data-d="247" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D247 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">继续补实验 / 写论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续推进本周主线——【审稿线】监控补的 baseline 实验、准备记录结果；【论文线】继续完善 Intro 段 1-2。延续上午的工作，保持节奏。</p>
+<ul>
+<li><strong>保持节奏</strong>：无论哪条线，M9 末周要稳步推进（审稿响应要按时、第二篇要启动）。利用碎片时间（中午）推进。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】监控补 baseline 实验，准备记录。</li>
+<li>【论文线】完善 Intro 段 1-2。</li>
+<li>保持推进节奏。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>主线稳步推进（补实验监控中 / Intro 段 1-2 完善）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>节奏松散 → 稳步推进（审稿有时限/第二篇要启动）；中午时间浪费 → 利用碎片推进。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>补实验慢?→ 错峰排期；Intro 写不动 → 先列要点再填。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>保持了主线推进节奏</strong>。<strong>做了</strong>（继续补实验 / 写论文）、<strong>学了</strong>（M9 末周稳步推进、利用碎片）、<strong>会了</strong>（持续推进审稿响应或论文）。</p>
+</div></section></section><section class="slot" id="d247-pm" data-d="247" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D247 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">继续补实验 / 写论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上的主要工作时段，集中推进——【审稿线】补的 baseline 出结果则记录、分析（是否仍证明你的方法优势）；【论文线】继续写 Intro 或开始下一段。充分利用晚上时段。</p>
+<ul>
+<li><strong>审稿线的心态</strong>：补 baseline 后，你的方法通常仍有优势（你选题时就考虑过竞争力）；即使某个新 baseline 接近，也可以在 Response 里诚实讨论（你的方法在效率/泛化等方面的优势）。<strong>补实验是为了更全面、更有说服力，不是怕输。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】补 baseline 出结果 → 记录、分析（仍证明优势?）。</li>
+<li>【论文线】继续写 Intro。</li>
+<li>充分利用晚上时段推进。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】补 baseline 结果记录分析；或【论文线】Intro 进展。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>【审稿线】补 baseline 结果不如预期就慌 → 诚实分析（效率/泛化等优势）,Response 里说明；【论文线】晚上时段没利用好 → 集中推进。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】新 baseline 接近你的方法?→ 强调你的其他优势（效率/泛化/简洁），诚实讨论；【论文线】写累了 → 完成一段即可，明天继续。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>充分利用时段推进主线</strong>。<strong>做了</strong>（补实验结果分析 / 写 Intro）、<strong>学了</strong>（补实验为更全面非怕输/诚实讨论、集中推进）、<strong>会了</strong>（高效推进审稿响应或论文写作）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜补实验响应审稿（最常见：补baseline）</strong>：审稿最常见要求是“补更多baseline对比”（确认你方法真有竞争力）——复用实验框架快速补（框架已有，低成本）。补后你的方法通常仍有优势（选题时已考虑竞争力）；即使新baseline接近，在Response里诚实讨论你的其他优势（效率/泛化/简洁）。补实验是为更全面有说服力，不是怕输。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 补实验启动 或 ✅ Intro 进展。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D247</summary><textarea data-note="d247" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d248" data-d="248"><header class="day-head"><span class="dnum">D248</span><h2 class="day-t">周三 · 【审稿线】补实验 2（补数据集）/ 【论文线】Intro 段 3-4</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午【审稿线】补实验2（常见要求：在更多数据集上验证）、【论文线】写Intro第3-4段；中午晚上继续。</p>
+<p><strong>预期管理</strong>：今天补实验2或写Intro段3-4。提醒：【审稿线】另一常见要求是“在更多数据集上验证”（审稿人想看泛化性），复用跨数据集流程快速补；【论文线】写Intro第3-4段（指出现有方法的不足/Gap→引出你的解法和贡献，这是Intro的核心）；两条线继续复用积累推进。</p>
+</blockquote>
+</div><section class="slot" id="d248-am" data-d="248" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D248 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">【审稿线】补实验 2（补数据集）/ 【论文线】写 Intro 段 3-4</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（补数据集：另一常见要求 / Intro 的核心 Gap）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】补实验 2——另一常见要求是“在更多数据集上验证”</strong>：审稿人想看你的方法泛化性（在更多数据集上是否仍有效）。<strong>复用你的跨数据集流程，快速补在新数据集上的验证</strong>（你做过跨数据集，流程熟）。</li>
+<li><strong>为什么“补数据集”常见</strong>：泛化性是审稿人关心的（你的方法换数据集还行吗）。补在更多数据集上验证，直接回应泛化性质疑。<strong>这也契合你“跨域泛化”的卖点</strong>——补数据集验证强化了你的泛化优势。</li>
+<li><strong>【论文线】写 Intro 段 3-4——Intro 的核心（Gap + 你的解法）</strong>：指出现有方法的不足/Gap → 引出你的解法和贡献。<strong>这是 Introduction 最核心的部分</strong>（说清“为什么需要你的工作”）。复用第一篇 Intro 讲 Gap 和贡献的写法，填入第二课题的 Gap（从第一篇 Limitation 延伸/新场景难点）和你的解法。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】补实验 2（在更多数据集上验证，复用跨数据集流程）。</li>
+<li>【论文线】写 Intro 段 3-4（Gap → 你的解法和贡献，核心部分）。</li>
+<li>推进主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】补数据集验证启动；或【论文线】Intro 段 3-4（Gap + 解法 + 贡献）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>【审稿线】补数据集评测不一致 → 保持一致（公平）；【论文线】Gap 不清晰 → 清楚说“现有方法缺什么、你补什么”（Intro 核心）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】补哪个数据集?→ 审稿人建议的 + 你方向相关的；【论文线】Gap 怎么写?→ 从第一篇 Limitation/新场景难点提炼，说清现有方法的不足。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进主线（补数据集 / 写 Intro 核心）</strong>。<strong>做了</strong>（补实验 2 / Intro 段 3-4）、<strong>学了</strong>（补数据集回应泛化质疑/契合卖点、Intro 核心是 Gap+解法）、<strong>会了</strong>（响应泛化质疑或写清论文核心动机）。</p>
+</div></section></section><section class="slot" id="d248-noon" data-d="248" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D248 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">继续补实验 / 写论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续推进——【审稿线】监控补数据集实验；【论文线】完善 Intro（段 3-4 是核心，打磨清楚）。Intro 写完（4 段）,Introduction 章基本成形。</p>
+<ul>
+<li><strong>Intro 完成的标志</strong>：背景（段 1-2）+ Gap 和解法贡献（段 3-4）= 完整的 Introduction。读者读完 Intro 应清楚：这个领域、现有不足、你做了什么、贡献是什么。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】监控补数据集实验。</li>
+<li>【论文线】完善 Intro（打磨段 3-4 的 Gap 和贡献）。</li>
+<li>Intro 章基本成形。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】补实验推进；或【论文线】Intro 章基本成形（4 段完整）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Intro 段 3-4 含糊 → 打磨清楚（Gap+贡献是核心）；贡献没列清 → 明确列贡献点(bullet)。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>贡献怎么列?→ 你方法的创新点（如针对新场景的改进、效率、泛化）;Intro 不连贯 → 检查背景→Gap→解法→贡献的逻辑线。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进主线（补实验 / 完善 Intro）</strong>。<strong>做了</strong>（继续补实验 / 完善 Intro）、<strong>学了</strong>(Intro 完整=背景+Gap+解法+贡献)、<strong>会了</strong>（完成论文的 Introduction 或推进审稿响应）。</p>
+</div></section></section><section class="slot" id="d248-pm" data-d="248" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D248 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">继续补实验 / 写论文</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上集中推进——【审稿线】补数据集出结果则记录分析（泛化性仍好?）；【论文线】Intro 完成后，可开始 Related Work 的准备或继续打磨 Intro。M9 末周稳步推进两条线之一。</p>
+<ul>
+<li><strong>进度把握</strong>：无论哪条线，本周要有实质进展——审稿线：补实验 + 准备 Response；论文线：Intro 完成、向 RW/Method 推进。<strong>M9 末周，稳扎稳打。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】补数据集结果记录分析。</li>
+<li>【论文线】Intro 完成 → 准备 Related Work（明天写）。</li>
+<li>集中推进。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】补实验结果就位；或【论文线】Intro 完成，RW 准备就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>进度松 → M9 末周稳步推进；不衔接下一步 → 审稿线接 Response、论文线接 RW。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>补实验还没完?→ 排期，Response 可先写已完成部分；Intro 反复改不满意 → 先到“清楚完整”即可，后续整体打磨。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进主线到下一步衔接</strong>。<strong>做了</strong>（补实验 / Intro 完成）、<strong>学了</strong>（稳步推进、衔接下一步）、<strong>会了</strong>（把审稿响应或论文写作推进到位）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜补数据集响应+写好Intro</strong>：【审稿线】“补更多数据集验证”是另一常见要求（回应泛化质疑、契合你跨域泛化卖点），复用跨数据集流程快速补。【论文线】Intro核心=背景（段1-2）+Gap和解法贡献（段3-4）：说清领域→现有方法缺什么→你补什么→贡献点。复用第一篇Intro写法，填第二课题内容（从Limitation延伸的Gap）。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 进展（补实验 或 Intro 完成）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D248</summary><textarea data-note="d248" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d249" data-d="249"><header class="day-head"><span class="dnum">D249</span><h2 class="day-t">周四 · 【审稿线】写 Response Letter / 【论文线】写 Related Work</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午【审稿线】写Response Letter（逐条回复）、【论文线】写Related Work；中午晚上继续。</p>
+<p><strong>预期管理</strong>：今天写Response Letter或Related Work。提醒：【审稿线】<strong>Response Letter格式</strong>——每条：审稿人原文（蓝色）→你的回复（黑色）→论文中修改位置（红色标页码行号）；态度诚恳、语气专业(&quot;We thank the reviewer for this insightful comment. We have addressed this concern by...&quot;)；【论文线】写Related Work（分主题介绍相关工作+你的差异，复用第一篇RW结构）。</p>
+</blockquote>
+</div><section class="slot" id="d249-am" data-d="249" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D249 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">【审稿线】写 Response Letter / 【论文线】写 Related Work</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ Response Letter 格式 / RW 写法）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】写 Response Letter——逐条回复审稿意见</strong>。<strong>格式（关键）</strong>：每条回复包含——① <strong>审稿人原文</strong>（蓝色）;② <strong>你的回复</strong>（黑色）;③ <strong>论文中修改的位置</strong>（红色，标页码和行号）。<strong>态度要诚恳，语气要专业</strong>——典型开头：“We thank the reviewer for this insightful comment. We have addressed this concern by...”。</li>
+<li><strong>★ 为什么 Response Letter 这样写（让审稿人容易认可）</strong>:① <strong>逐条对应</strong>（审稿人能清楚看到你回应了每一条）;② <strong>颜色区分</strong>（原文/回复/修改位置一目了然，审稿人不用翻找）;③ <strong>标修改位置</strong>（审稿人能去论文里核对你确实改了）;④ <strong>诚恳专业的语气</strong>（&quot;感谢您的意见&quot;&quot;我们已通过……解决&quot;）——即使是反驳，也礼貌有据。<strong>Response Letter 的目标是让审稿人觉得&quot;我的意见被认真对待、被妥善回应了&quot;</strong>，从而愿意接受。</li>
+<li><strong>为什么&quot;诚恳专业的语气&quot;在 rebuttal 里如此关键（审稿人也是人）</strong>：技术上你把实验补了、问题改了固然重要，但 Response Letter 的语气同样影响结果——因为<strong>评判你修改的还是那位审稿人（一个有情绪的人）</strong>。如果你的回复语气傲慢、对抗、或显得不耐烦（&quot;审稿人显然没读懂&quot;&quot;这个要求毫无道理&quot;），即使你技术上对，也容易激怒审稿人、让他更挑剔；反之，诚恳专业的语气（&quot;感谢您的宝贵意见&quot;&quot;我们已认真考虑并修改&quot;）会让审稿人感到被尊重、更愿意正面看待你的修改。<strong>这不是虚伪客套，而是有效沟通的智慧：你的目标是让论文被接收，而不是在 Response 里&quot;赢&quot;一场辩论</strong>。即使是回应你不认同的意见，也用&quot;我们尊重地澄清(We respectfully clarify)...因为...（给出理由）&quot;这种有礼有据的方式，而非生硬反驳——既维护了你的立场，又不失风度。记住：rebuttal 是说服，不是对抗；诚恳专业的语气，是让审稿人愿意被你说服的润滑剂。</li>
+<li><strong>不同意的意见怎么回应</strong>：礼貌、有据地解释（为什么你的做法是合理的/审稿人可能的误解），而非生硬反驳。“We respectfully clarify that...” 之类。<strong>有理有据 + 礼貌，而非对抗。</strong></li>
+<li><strong>【论文线】写 Related Work</strong>：分主题介绍相关工作（如：旋转检测方法、SAR 检测、跨域泛化）+ 每个主题里你的工作的差异/定位。<strong>复用第一篇 RW 结构</strong>，填第二课题的相关工作（含 W34/W35 读的最新论文）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】写 Response Letter（逐条：原文蓝/回复黑/修改位置红，诚恳专业）。</li>
+<li>【审稿线】不同意的礼貌据理回应。</li>
+<li>【论文线】写 Related Work（分主题 + 你的差异，复用结构）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】Response Letter 草稿（逐条、格式规范、诚恳专业）；或【论文线】Related Work 进展（分主题+差异）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★审稿线）</h4><div class="blk-b"><ul>
+<li><strong>Response Letter 不逐条/无格式</strong> → 逐条 + 颜色区分（原文蓝/回复黑/修改红）+ 标页码行号。</li>
+<li><strong>语气生硬/对抗</strong> → 诚恳专业(&quot;We thank...We have addressed...&quot;)；不同意也礼貌据理。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】不知怎么回复某条?→ 同意的“已按建议修改（见 X 页）”、不同意的“礼貌澄清+理由”；【论文线】RW 怎么组织?→ 复用第一篇 RW 的主题分类。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你学会<strong>写专业的 Response Letter / 写 RW</strong>。<strong>做了</strong>(Response Letter / Related Work)、<strong>学了</strong>(Response Letter 格式[逐条+颜色+修改位置]+诚恳专业语气、RW 复用结构)、<strong>会了</strong>（专业回应审稿意见或写好相关工作）。</p>
+</div></section></section><section class="slot" id="d249-noon" data-d="249" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D249 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">继续 Response Letter / RW</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续推进——【审稿线】完善 Response Letter（每条回复都到位）；【论文线】完善 Related Work（主题全、差异清）。这两者都是“逐条/分主题”的系统工作，稳步完成。</p>
+<ul>
+<li><strong>系统性</strong>:Response Letter 要覆盖所有意见（不遗漏）;RW 要覆盖主要相关方向（不缺重要工作）。系统、不遗漏地完成。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】完善 Response Letter（所有意见都回应）。</li>
+<li>【论文线】完善 Related Work（主题全、差异清）。</li>
+<li>系统、不遗漏。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】Response Letter 覆盖所有意见；或【论文线】RW 覆盖主要方向。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Response 遗漏某条 → 覆盖所有意见；RW 缺重要工作 → 覆盖主要相关方向。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>意见太多?→ 逐条来，按计划推进；RW 工作太多?→ 选最相关的，按主题组织。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>系统完成主线工作</strong>。<strong>做了</strong>（完善 Response / RW）、<strong>学了</strong>（系统不遗漏）、<strong>会了</strong>（系统完成审稿响应或相关工作）。</p>
+</div></section></section><section class="slot" id="d249-pm" data-d="249" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D249 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">继续 Response Letter / RW</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上集中推进——【审稿线】Response Letter 基本完成（明天改稿标变更）；【论文线】RW 完成，可向 Method 推进。M9 末周，主线工作接近本周目标。</p>
+<ul>
+<li><strong>进度衔接</strong>：审稿线：Response Letter → 明天改稿（标红变更）；论文线：RW → Method。本周稳步推进到这一步。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】Response Letter 基本完成。</li>
+<li>【论文线】RW 完成 → 准备 Method（明天写）。</li>
+<li>衔接下一步。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】Response Letter 基本完成；或【论文线】RW 完成，Method 准备就绪。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Response/RW 拖到最后 → 稳步推进、衔接下一步；不检查完整性 → 确认覆盖全。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>Response 还没写完?→ 优先重要意见，次要的简短回应；RW 没完?→ 主要主题先写，细节后补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进主线到衔接点</strong>。<strong>做了</strong>（Response/RW 基本完成）、<strong>学了</strong>（衔接改稿/Method）、<strong>会了</strong>（把审稿响应或论文写作推进到衔接下一步）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜Response Letter（专业回应审稿）</strong>：逐条回复，每条格式=审稿人原文（蓝）→你的回复（黑）→论文修改位置（红，标页码行号）。态度诚恳语气专业(&quot;We thank the reviewer for this insightful comment. We have addressed this concern by...&quot;)。同意的照改并标位置、不同意的礼貌据理澄清(&quot;We respectfully clarify that...&quot;)。目标：让审稿人觉得意见被认真对待、妥善回应。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ Response Letter 草稿 或 ✅ RW 进展。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D249</summary><textarea data-note="d249" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d250" data-d="250"><header class="day-head"><span class="dnum">D250</span><h2 class="day-t">周五 · 【审稿线】修改稿标红变更 / 【论文线】写 Method 章</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午【审稿线】修改论文标记变更处（红色）、【论文线】写Method章；中午晚上继续。</p>
+<p><strong>预期管理</strong>：今天改稿标红变更或写Method。提醒：【审稿线】根据Response Letter在论文里做实际修改，<strong>用红色标记所有修改处</strong>（方便审稿人核对你改了什么）；【论文线】写Method章（复用第一篇Method写法：总分结构，先Overview再各组件，让人能复现），你有完整方法，写起来快；两条线推进到本周尾声。</p>
+</blockquote>
+</div><section class="slot" id="d250-am" data-d="250" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D250 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">【审稿线】改稿标红变更 / 【论文线】写 Method 章</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（改稿标红 / Method 写法）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】修改论文标记变更处（红色）</strong>：根据 Response Letter，在论文里做实际修改，<strong>用红色标记所有修改的地方</strong>——这样审稿人能清楚看到你改了什么（对应他的意见）。</li>
+<li><strong>为什么标红变更（方便审稿人核对）</strong>：审稿人需要核对你是否真的按意见改了。<strong>用红色标出所有修改处，审稿人一看就知道“哪里改了、对应哪条意见”</strong>，不用逐字对比原稿。这大大方便审稿人，提升他对你的修改的认可。修改稿 + 标红 + Response Letter 三者配合，审稿人能高效复审。</li>
+<li><strong>【论文线】写 Method 章</strong>：复用第一篇 Method 写法（总分结构：先 Overview 给全局，再逐组件讲；每个组件直觉+公式+图；目标是让人能复现）。<strong>你有完整的方法（绝对最终版），写 Method 就是把它清楚地描述出来</strong>，复用第一篇的写法，快。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】据 Response Letter 在论文做修改，红色标记所有变更处。</li>
+<li>【论文线】写 Method 章（总分结构，复用第一篇写法）。</li>
+<li>推进主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】修改稿（变更处标红，对应意见）；或【论文线】Method 章进展（总分结构，可复现）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>【审稿线】改了不标红 → 标红（方便审稿人核对）；【论文线】Method 只堆公式 → 总分结构+直觉+图（让人能复现，复用第一篇）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】怎么标红?→ Word/LaTeX 用红色字体标修改；【论文线】Method 卡壳?→ 复用第一篇 Method 结构，填第二课题的组件。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进主线（改稿标红 / 写 Method）</strong>。<strong>做了</strong>（改稿标红 / Method 章）、<strong>学了</strong>（标红方便审稿人核对、Method 复用总分写法）、<strong>会了</strong>（规范修改论文或写好方法章）。</p>
+</div></section></section><section class="slot" id="d250-noon" data-d="250" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D250 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">继续改稿 / 写 Method</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续推进——【审稿线】完善修改稿（所有意见对应的修改都做到、标红）；【论文线】继续写 Method（各组件）。稳步推进。</p>
+<ul>
+<li><strong>完整性</strong>：审稿线：每条意见都要有对应的实际修改（Response 里说改了，论文里就要真改）；论文线：Method 覆盖你方法的所有组件。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】完善修改稿（意见对应修改都做到、标红）。</li>
+<li>【论文线】继续写 Method（各组件）。</li>
+<li>保持完整性。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】修改稿完善（意见都对应修改）；或【论文线】Method 推进（各组件）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>Response 说改了论文没真改 → 言行一致（都真改、标红）;Method 漏组件 → 覆盖所有组件。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>改稿对应不上意见?→ 逐条对照 Response 检查；Method 某组件难写 → 复用第一篇类似组件的写法。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>保持主线完整推进</strong>。<strong>做了</strong>（完善改稿 / Method）、<strong>学了</strong>（言行一致、覆盖完整）、<strong>会了</strong>（完整地修改论文或写方法）。</p>
+</div></section></section><section class="slot" id="d250-pm" data-d="250" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D250 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">继续改稿 / 写 Method</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上集中推进——【审稿线】修改稿接近完成（明天提交）；【论文线】Method 推进。本周主线工作接近尾声。</p>
+<ul>
+<li><strong>本周收尾在望</strong>：审稿线：修改稿 + Response Letter 接近可提交；论文线：Intro + RW + Method 大部分完成（第二篇主体框架成形）。M9 末周的实质进展。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】修改稿接近完成（准备明天提交）。</li>
+<li>【论文线】Method 推进。</li>
+<li>本周主线收尾在望。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】修改稿接近可提交；或【论文线】Method 大部分完成。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>收尾松懈 → 推进到可提交/大部分完成；不为提交做准备 → 审稿线检查修改稿+Response 齐备。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>改稿没完?→ 优先重要修改，确保核心意见都响应；Method 没写完?→ 核心组件先写，细节后补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>推进主线接近收尾</strong>。<strong>做了</strong>（改稿接近完成 / Method 推进）、<strong>学了</strong>（收尾在望、为提交准备）、<strong>会了</strong>（把审稿响应或论文写作推进到接近完成）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜修改稿标红变更</strong>：据Response Letter在论文做实际修改，用红色标记所有变更处——审稿人一看就知道哪里改了、对应哪条意见，不用逐字对比原稿（方便高效复审、提升认可）。言行一致：Response里说改了，论文里就真改。修改稿+标红+Response Letter三者配合。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 修改稿 或 ✅ Method 进展。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D250</summary><textarea data-note="d250" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d251" data-d="251"><header class="day-head"><span class="dnum">D251</span><h2 class="day-t">周六 · 【审稿线】提交修改稿 / 【论文线】继续 Method + GitHub 适度维护</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>上午【审稿线】提交修改稿+Response Letter（如本周内改完）、【论文线】继续Method；中午继续；晚上GitHub仓库维护（回Issue/更新文档）。</p>
+<p><strong>预期管理</strong>：今天提交修改稿或继续Method+GitHub维护。提醒：【审稿线】如本周内能改完就提交修改稿+Response Letter（改不完则下周续，别为赶而降质量）；【论文线】继续写Method；晚上GitHub仓库维护（回复Issues/更新文档）——★呼应上周：运营已回归副线，适度维护即可（回Issue、更新文档），别又陷进去。</p>
+</blockquote>
+</div><section class="slot" id="d251-am" data-d="251" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D251 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">【审稿线】提交修改稿 / 【论文线】继续 Method</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（提交 / 继续推进）</h4><div class="blk-b"><ul>
+<li><strong>【审稿线】提交修改稿 + Response Letter</strong>（如果本周内能改完的话）。检查齐备（修改稿标红 + Response Letter 逐条），通过系统提交。<strong>如果本周改不完，下周续——别为赶时限而降低质量</strong>（质量比赶更重要，且通常有合理的改稿期）。</li>
+<li><strong>提交前的检查</strong>:① 修改稿（所有意见对应的修改都做到、标红）;② Response Letter（逐条回复、格式规范、诚恳专业）;③ 两者一致（Response 说的改动论文里都有）。<strong>齐备、一致再提交。</strong></li>
+<li><strong>【论文线】继续写 Method</strong>：推进 Method 章（剩余组件、伪代码、架构图引用）。Method 完成后，第二篇的核心章节(Intro+RW+Method)基本成形。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】检查修改稿 + Response Letter 齐备一致 → 提交（如改完；没改完下周续）。</li>
+<li>【论文线】继续写 Method（剩余组件）。</li>
+<li>推进主线。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】修改稿 + Response Letter 提交（或合理地下周续）；或【论文线】Method 推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>【审稿线】为赶时限草草提交 → 质量优先（改不完下周续，通常有期）；提交前不检查一致 → 检查 Response 和论文一致。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>【审稿线】改不完?→ 下周续（别降质量），或申请短延期；不确定提交格式?→ 看期刊系统的修改稿提交说明。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>提交修改稿 / 推进 Method</strong>。<strong>做了</strong>（提交修改稿 / 写 Method）、<strong>学了</strong>（齐备一致再提交、质量优先于赶时限、Method 推进）、<strong>会了</strong>（完成审稿响应的提交或推进论文）。</p>
+</div></section></section><section class="slot" id="d251-noon" data-d="251" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D251 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">继续 Method / 收尾审稿线</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>继续推进——【审稿线】（已提交则）整理归档审稿材料，或处理剩余；【论文线】继续 Method 或回顾 Intro+RW+Method 的整体连贯。第二篇主体成形，检查连贯。</p>
+<ul>
+<li><strong>第二篇主体的连贯</strong>:Intro（提 Gap）→ RW（铺垫）→ Method（解法）——这三章要逻辑连贯（Intro 提的问题，Method 解决了；RW 为它铺垫）。回顾整体连贯性。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>【审稿线】（已提交）归档审稿材料 / 处理剩余。</li>
+<li>【论文线】继续 Method / 回顾 Intro+RW+Method 连贯。</li>
+<li>检查第二篇主体连贯。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>【审稿线】审稿材料归档；或【论文线】Intro+RW+Method 主体连贯。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>章节脱节 → 检查 Intro→RW→Method 逻辑连贯；审稿材料不归档 → 归档（可追溯）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>连贯性有问题?→ 检查 Intro 的 Gap 是否被 Method 解决、RW 是否铺垫；审稿剩余?→ 列清单逐个处理。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>检查主体连贯 / 收尾审稿</strong>。<strong>做了</strong>（归档/处理 / 回顾连贯）、<strong>学了</strong>（第二篇主体连贯、审稿归档）、<strong>会了</strong>（确保论文连贯或妥善收尾审稿）。</p>
+</div></section></section><section class="slot" id="d251-pm" data-d="251" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D251 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">GitHub 仓库适度维护（★运营已回归副线）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（★ 适度维护：运营已回归副线）</h4><div class="blk-b"><p>GitHub 仓库维护——回复 Issues、更新文档。<strong>★ 关键：运营已经回归副线了（W35 集中做完），现在只是适度维护（回 issue、更新文档），别又陷进去。</strong></p>
+<ul>
+<li><strong>★ 适度维护的分寸（呼应 W35 的定位）</strong>:W35 你集中把仓库做成了专业项目并引流，<strong>之后就回归研究主线了</strong>。现在的 GitHub 维护是<strong>适度的</strong>:① 有人提 issue（问题/bug）→ 回复、修;② 文档有需要更新的 → 更新;③ 有 PR → 看看。<strong>但这是“维护”，不是“运营”——花少量时间处理即可，不要又投入大量精力刷数据/追 star/做新的引流</strong>。你的核心是研究产出（第二篇）,GitHub 是放大它的副线，适度维护、保持健康即可。</li>
+<li><strong>为什么要适度维护（而非不管）</strong>：完全不管会让项目显得“死了”（issue 没人回、文档过时），影响口碑；但过度投入又会偏离主线。<strong>适度维护——回 issue、更新文档，保持项目“活着、健康”，但不喧宾夺主。</strong> 这是守住“运营是副线”定位的具体实践。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>回复 GitHub Issues（问题/bug）。</li>
+<li>更新文档（如有需要）。</li>
+<li>★适度——花少量时间，别又陷入运营（保持研究为核心）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>GitHub 适度维护（回 issue、更新文档），项目健康，但不喧宾夺主。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑（★定位）</h4><div class="blk-b"><ul>
+<li><strong>借维护又陷入大量运营</strong> → 适度维护（回 issue/更新文档），核心是研究。</li>
+<li><strong>完全不管项目</strong> → 适度维护保持健康（回 issue、文档不过时）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>issue 很多?→ 优先回有价值的（真 bug/真问题），简单的批量回；又想做引流?→ 提醒自己运营是副线，适度维护即可。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>学会了适度维护（守住副线定位）</strong>。<strong>做了</strong>（回 issue + 更新文档，适度）、<strong>学了</strong>（运营回归副线、适度维护保持健康不喧宾夺主）、<strong>会了</strong>（在维护开源和专注研究间把握分寸）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜开源项目适度维护（守住副线）</strong>:W35集中运营完后回归研究主线，之后是“适度维护”非“持续运营”——回Issue（真bug/问题）、更新文档、看PR，保持项目“活着健康”，但花少量时间、不喧宾夺主（别又陷入刷数据/追star/做新引流）。完全不管→项目显得死了（影响口碑）；过度投入→偏离主线。适度=守住“研究为核心、运营是放大副线”的定位。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 修改稿提交（如适用） / Method 推进 ✅ GitHub 适度维护。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D251</summary><textarea data-note="d251" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d252" data-d="252"><header class="day-head"><span class="dnum">D252</span><h2 class="day-t">周日 · （M9 月复盘日）· W36 复盘 + M9 月报 + 计划 W37-40</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p>本周+M9收尾：复盘W36;M9月度复盘（检查star是否达50、M9硬交付清单、战略检视）；计划W37-40。</p>
+<p><strong>预期管理</strong>:M9收官日：W36复盘+M9月报+计划W37-40。提醒：M9月报检查GitHub star是否达50+M9硬交付清单（第二课题主实验/消融/可视化/50+stars/引流帖≥5篇/审稿响应/第二篇启动）+<strong>战略检视</strong>（第一篇审稿进展、第二篇进度、整体在通往空天院的轨道上吗）；计划W37-40（第二篇Method+Experiment→完稿，M10）；这是阶段二后半第一个月收官。</p>
+</blockquote>
+</div><section class="slot" id="d252-am" data-d="252" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D252 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">W36 复盘（审稿处理 / 第二篇启动）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>周复盘 + 记本周主线进展（审稿线：意见处理/补实验/Response/改稿/提交；或论文线：第二篇 Intro+RW+Method 启动）。本周你处理了审稿（如收到）或启动了第二篇写作。</p>
+<ul>
+<li><strong>本周成果回顾</strong>：【审稿线】读懂意见 + 补实验（baseline/数据集）+ Response Letter + 改稿标红 + 提交（如改完）——专业地响应了第一篇审稿；或【论文线】第二篇 Intro + RW + Method 启动——第二篇写作正式开始（主体框架成形）。<strong>无论哪条线，都是 M9 末周的实质产出。</strong></li>
+<li><strong>值得记的能力</strong>：【审稿线】学会了专业处理审稿意见（读三遍管理情绪、Response Letter 格式、改稿标红）；【论文线】启动第二篇写作（复用第一篇经验，更顺）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>W36 周报（审稿处理 / 第二篇启动进展）。</li>
+<li>记本周学到的（处理审稿 / 第二篇写作）。</li>
+<li>准备 M9 月报。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W36 周报（本周主线进展 + 学到的）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>流水账 → 记关键进展和能力；不衔接 M9 月报 → 周报后做月报。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>进展梳理不出?→ 回看本周做了什么（审稿响应步骤 / 第二篇章节）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了 M9 末周</strong>。<strong>做了</strong>（W36 周报）、<strong>学了</strong>（本周审稿/写作能力）、<strong>会了</strong>（总结本周主线进展）。</p>
+</div></section></section><section class="slot" id="d252-noon" data-d="252" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D252 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">M9 月度复盘（star + 硬交付 + 战略检视）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念(M9 月报 = 硬交付检查 + 战略检视)</h4><div class="blk-b"><p>做 <strong>M9 月度复盘</strong>——这是阶段二后半第一个月的收官。① 检查 GitHub star 是否达 50;② 对照 <strong>M9 硬交付清单</strong>;③ <strong>战略检视</strong>。</p>
+<ul>
+<li><strong>检查 star（W35 目标）</strong>:GitHub star 是否达 50？达到 → W35 运营有效；没达到 → 不必焦虑（好项目持续被发现），理性看（运营是副线、结果非目的）。</li>
+<li><strong>M9 硬交付清单</strong>:① 第二课题主实验完成（多数据集 + 消融）;② 第二课题可视化 8-10 张;③ <strong>GitHub 仓库 50+ stars</strong>;④ 社区引流帖 ≥5 篇（知乎/CSDN/Reddit/Twitter/小红书）;⑤ 第一篇论文审稿意见已响应（如收到）;⑥ 第二篇论文写作已启动。<strong>逐项对照，如实标注完成情况。</strong></li>
+<li><strong>★ 战略检视（更重要）</strong>：除了清单，检视整体是否在通往空天院的轨道上——① <strong>第一篇审稿进展</strong>（Under Review / Revision / 录用?）;② <strong>第二篇进度</strong>（实验完成、写作启动，M10-M11 能完稿投稿?）;③ <strong>开源影响力</strong>（仓库 + star，作品集是否在积累）;④ <strong>★对接空天院的准备</strong>(你现在有：第一篇[投稿/可能录用]+ 第二篇[在写]+ 开源作品集——这些硬成果是否在朝“围绕空天院方向、用硬成果建立联系”积累？M10-M12 该开始准备首批冷邮件了)。<strong>战略检视让你确认方向、为后续对接空天院铺垫。</strong></li>
+<li><strong>★ M9 是该开始认真规划“对接空天院”的节点了（为什么是现在）</strong>：回顾你的整体目标——进中科院空天院（孙显/付琨/王超组）。这个目标不会自己实现，需要你主动建立联系。<strong>而建立联系的底气，来自你实打实的、与他们方向相关的硬成果</strong>。到 M9 末，你已经有了:① 第一篇论文（已投稿，可能在审或接近录用）;② 第二篇论文（在写，做的是旋转检测→可能延伸到 SAR，正对接王超组的 TACMT 线）;③ 一个有影响力的开源作品集（50+ stars 的专业项目）。<strong>这些已经是相当有分量的筹码了</strong>——你不再是一个“零基础、什么都没有”的人，而是“独立做出了两篇相关方向论文 + 有开源作品 + 在往空天院关心的 SAR 难题/跨域泛化深耕”的人。<strong>所以从战略上，M9-M12 这个阶段，你应该开始为“首批冷邮件联系空天院老师”做准备</strong>:① 梳理你的成果亮点（哪些最能打动空天院）;② 找准对接点（你的工作和孙显/付琨/王超组的哪条线最相关）;③ 想清楚怎么写一封“围绕硬成果和对接点”的邮件（而非空泛的“我很想加入您的组”）。<strong>真正有说服力的联系，是“我做了 XX 工作、和您 YY 方向相关、开源在此、想请教/探讨”——用成果说话</strong>。这件事不用 M9 就动手（先专注第二篇完稿），但 M9 月报的战略检视要把它正式纳入视野、开始酝酿，M11-M12 时机成熟就启动。这是你这条“用扎实工作叩开空天院大门”的路上，最关键的一步主动出击。</li>
+<li><strong>阶段二后半第一个月的意义</strong>:M9 你完成了第二课题的实验主体（矩阵+消融+可视化）、把开源做成专业项目（50+ stars 目标）、处理了审稿/启动了第二篇——<strong>产出期下半场开了个扎实的头</strong>。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>检查 star（达 50？理性看）。</li>
+<li>对照 M9 硬交付清单（逐项标注）。</li>
+<li>★战略检视（审稿/第二篇/开源/对接空天院准备）。</li>
+<li>写 M9 月报（清单 + 战略检视）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>M9 月报（star 检查 + 硬交付清单逐项 + 战略检视：审稿/第二篇/对接空天院准备）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>月报只盘点不战略检视 → 战略检视（是否在通往空天院的轨道上）更重要；star 没达 50 焦虑 → 理性看（运营副线、好项目持续被发现）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>战略检视无从下手?→ 问：第一篇审稿到哪？第二篇 M10-11 能投出去吗？对接空天院的成果亮点和对接点是什么？进度看着慢?→ 对照起点（零基础），你已有第一篇+第二课题+开源作品集，是巨大进步。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>做了 M9 月复盘 + 战略检视</strong>。<strong>做了</strong>（star 检查 + 硬交付清单 + 战略检视 + M9 月报）、<strong>学了</strong>(月报=清单+战略检视、对接空天院的准备、产出期下半场开头)、<strong>会了</strong>（从战略高度检视产出期进展）。</p>
+</div></section></section><section class="slot" id="d252-pm" data-d="252" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D252 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W37-40（第二篇 Method+Experiment → 完稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W37-40：第二篇完稿冲刺）</h4><div class="blk-b"><p>计划 W37-W40(M10)——核心：<strong>第二篇论文的 Method + Experiment 写作 → 推进到完稿</strong>。</p>
+<ul>
+<li><strong>W37-40 的核心任务</strong>:① <strong>第二篇 Method + Experiment</strong>（W37 起重点写，你有完整方法和实验结果，复用第一篇经验）;② 完善其他章节(Abstract/Conclusion);③ 打磨 → 推进到完稿。<strong>M10 是第二篇从“主体框架”到“完整可投稿”的冲刺。</strong></li>
+<li><strong>复用第一篇投稿经验（M10 后续）</strong>：第二篇完稿后投稿，直接复用第一篇的投稿经验（选期刊/会议、格式、流程）——又快又稳。</li>
+<li><strong>★ 同时为对接空天院做准备（M10-M12 渐进）</strong>:M9 月报里战略检视提到——你有了硬成果（两篇 + 开源）,M10-M12 要开始准备首批冷邮件（围绕硬成果和对接点联系空天院老师）。W37-40 先专注第二篇完稿，但心里有这条线（后续 M11-M12 会启动联系）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><ol>
+<li>制定 W37-40 计划（第二篇 Method+Experiment → 完稿）。</li>
+<li>明确 M10 重点（第二篇完稿冲刺）。</li>
+<li>★心里有“对接空天院”这条线（M11-M12 启动）。</li>
+</ol>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>合格样例</h4><div class="blk-b"><p>W37-40 计划（第二篇 Method+Experiment → 完稿，M10 冲刺）。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>常踩的坑</h4><div class="blk-b"><p>计划太松 → M10 是第二篇完稿冲刺（有节奏）；忘了对接空天院的线 → 心里有（M11-M12 启动准备）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住自救</h4><div class="blk-b"><p>W37-40 怎么排?→ Method+Experiment 优先(W37-38)、其他章节+打磨(W39-40)；第二篇写作担心慢?→ 你有完整内容+第一篇经验，复用更快。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划了第二篇完稿冲刺</strong>。<strong>做了</strong>（W37-40 计划）、<strong>学了</strong>(M10=第二篇完稿、复用投稿经验、心里有对接空天院的线)、<strong>会了</strong>（规划产出期下半场的论文冲刺）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜M9月报（硬交付+战略检视）</strong>:① 检查star（达50？理性看，运营副线）;② M9硬交付清单（第二课题主实验/消融/可视化/50+stars/引流帖≥5篇/审稿响应/第二篇启动）逐项;③ ★战略检视(第一篇审稿进展/第二篇M10-11能否完稿投稿/开源作品集/★对接空天院准备[有两篇+开源硬成果，M10-12启动首批冷邮件])。产出期下半场开扎实的头。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>:✅ 周报 W36 ✅ <strong>M9 月报</strong> ✅ W37-40 计划。</p>
+</blockquote>
+<hr />
+</div></section></section><section class="wtail"><h2>✅ W36 累计交付</h2><p>【审稿线】（如收到第一篇审稿意见）读懂意见（读三遍管理情绪、标三类）+ 补实验（baseline + 数据集）+ Response Letter（逐条、格式规范、诚恳专业）+ 改稿标红变更 + 提交修改稿；或【论文线】（未收到）第二篇论文启动（Intro + Related Work + Method 主体成形）。+ GitHub 适度维护（回 issue/更新文档，守住副线）+ W36 周报 + <strong>M9 月报</strong>（star 检查 + 硬交付清单 + 战略检视）+ W37-40 计划。本周是 <strong>M9 收官周</strong>：你或专业地响应了第一篇审稿（学会处理审稿意见这一硬技能），或启动了第二篇的系统写作（复用第一篇经验）；并做了 M9 月度复盘的战略检视（含对接空天院的准备）。<strong>M9 全月（阶段二后半第一个月）到此完成——第二课题实验主体 + 开源专业化 + 审稿响应/第二篇启动，产出期下半场开了个扎实的头。</strong></p>
+</section><section class="wtail"><h2>🎓 W36 + M9 全月能力总览</h2><p><strong>本周新增能力</strong>：</p>
+<ul>
+<li><strong>专业处理审稿意见</strong>(读三遍管理情绪[关注“对不对”非“好不好听”]、标三类、补实验、Response Letter 格式[原文蓝/回复黑/修改红+诚恳专业]、改稿标红、提交)</li>
+<li><strong>第二篇论文启动</strong>（Intro/RW/Method，复用第一篇经验，主体成形）</li>
+<li><strong>开源适度维护</strong>（回归副线后回 issue/更新文档，不喧宾夺主）</li>
+<li><strong>M9 月报战略检视</strong>（star/硬交付清单 + 审稿/第二篇/★对接空天院准备）</li>
+</ul>
+<p><strong>M9 全月能力总览</strong>：</p>
+<ul>
+<li><strong>第二课题加速生产</strong>（W33 实验矩阵铺开一天一版 + W34 消融可视化绝对最终版，复用红利，3 个月 vs 第一篇 8 个月）</li>
+<li><strong>开源项目运营</strong>（W35 门面级仓库 + Colab + badge + 中英文双渠道引流，冲击 50+ stars）</li>
+<li><strong>审稿响应/第二篇启动</strong>（W36 专业处理审稿 或 启动第二篇写作）</li>
+<li><strong>★定位与心态</strong>：运营是放大强作品的副线（集中做、回归主线、不被 star 绑架）、未发表核心代码延后开源、读审稿意见管理情绪关注实质、节制跟进审稿、可持续性</li>
+</ul>
+<hr />
+</section><section class="wtail"><h2>🏁 M9（阶段二后半第一个月）收官小结</h2><p>进入产出期下半场的第一个月，你完成了：<strong>第二课题的完整实验生产（实验矩阵 2-3 数据集 × 5 baseline × v1-v3 × 3 seed + 6 个消融 + 绝对最终版 + 8-10 张可视化 + 多数据集大表）、把开源仓库做成专业的社区项目（门面级 README + Colab demo + badge + 中英文双渠道引流，冲击 50+ stars）、专业处理第一篇审稿意见（或启动第二篇写作）。</strong> 而这一切的速度，得益于你前 8 个月积累的复利（框架/流程/写作/方法论复用）——第二课题 3 个月 vs 第一篇 8 个月。<strong>你已经从“能做研究”进化到“能高效、持续地产出研究 + 经营有影响力的作品集”。</strong></p>
+<blockquote class="quote">
+<p><strong>下一阶段预告（M10–M12，产出期收官）</strong>：<strong>第二篇论文完稿投稿（复用第一篇投稿经验）+ 第三课题酝酿（继续往 SAR 难题/跨域泛化深耕）+ 开源持续运营（副线）+ ★首批冷邮件联系空天院老师(围绕你已有的硬成果[两篇论文 + 开源作品集]和对接点，而非空泛自我介绍)</strong>。带教手册会继续把 M10–M12 逐周重写，补齐整个阶段二，然后进入阶段三(M13–M18)、阶段四(M19–M24)，最终合成全程总包。<strong>你正一步步把“零基础转型 + 用扎实硬成果对接空天院”这条路走通——目标越来越近。</strong></p>
+</blockquote>
+<hr />
+</section><details class="notes"><summary>我的笔记 · D252</summary><textarea data-note="d252" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W36 加厚补充包（范例 / 实用工具+模板 / 每日自测 / 报错速查）</h2><h2>一、合格范例 — Response Letter + Intro结构 + M9月报</h2>
+<figure class="code" data-lang="markdown"><pre><code><span class="gh"># Response Letter 格式（专业回应审稿）</span>
+We thank all reviewers for their constructive comments. Below we respond
+point-by-point (reviewer comments in blue, our responses in black,
+changes in red with page/line numbers).
+
+<span class="gu">## Reviewer 1</span>
+[蓝]Comment 1.1: The comparison lacks recent SOTA baselines.
+[黑]Response: We thank the reviewer for this insightful comment. We have
+added 3 recent baselines (X, Y, Z) in Table 2. Our method still achieves
+the best performance while being more efficient.
+[红]Changes: Added baselines in Table 2 (Page 6, Lines 312-320).
+
+[蓝]Comment 1.3: Why not evaluate on dataset W?
+[黑]Response: We respectfully clarify that... / We have added dataset W...
+→ 同意的照改并标位置；不同意的礼貌据理(&quot;We respectfully clarify...&quot;)
+
+<span class="gh"># 第二篇 Introduction 结构（复用第一篇）</span>
+段1-2：研究背景（遥感检测的重要性/应用）→ 引出问题领域
+段3：现有方法的Gap（从第一篇Limitation延伸/新场景难点：如SAR的speckle/方位角）
+段4：我们的解法 + 贡献点（bullet：针对新场景的改进/效率/泛化）
+
+<span class="gh"># M9 月报（硬交付 + ★战略检视）</span>
+硬交付：第二课题主实验✅ 消融8-10可视化✅ GitHub star=?  引流帖≥5✅
+       审稿响应(如收到)✅ 第二篇启动✅
+战略检视：①第一篇审稿到哪？②第二篇M10-11能完稿投稿吗？
+         ③开源作品集在积累吗？④★对接空天院：有两篇+开源硬成果，
+           M10-12启动首批冷邮件(围绕硬成果和对接点)
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、实用工具 — 读审稿意见的SOP + 补实验</h2>
+<figure class="code" data-lang="text"><pre><code>① 读审稿意见 SOP（管理情绪、关注实质）
+第一遍：感受情绪 → 承认不舒服是正常的 → 放下（措辞严厉是学术常态，不针对你）
+第二遍：提取实质 → 他指出了什么具体问题？要补什么实验？（忽略语气）
+第三遍：定方案 → 每条标&quot;同意/部分同意/不同意&quot; → 对应回复+修改方案
+核心：重要的是&quot;他说的对不对&quot;而非&quot;好不好听&quot;
+
+② 补实验（最常见两类，复用框架快速补）
+补baseline：复用实验框架，加新baseline的config → 同设置跑 → 记录
+           （你的方法通常仍优；接近则Response里讲效率/泛化优势）
+补数据集：复用跨数据集流程，加新数据集解析 → 跑你的方法+baseline
+           （回应泛化质疑，契合跨域泛化卖点）</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期</strong>:① 读审稿意见的 SOP 把“情绪”和“实质”分开（读三遍），专业不内耗;② 补实验复用框架快速响应最常见的两类要求（baseline/数据集）。</p>
+<h2>三、每日“今日自测”</h2>
+<ul>
+<li><strong>D246</strong>：① 收到审稿意见为什么要优先处理（中断第二篇）？② ★如何读审稿意见（读三遍+关注什么）？③ 意见标哪三类、各怎么应对？④ 为什么“情绪与实质分开”对科研长跑特别重要？</li>
+<li><strong>D247</strong>：① 最常见的审稿要求是什么、怎么快速响应？② Intro段1-2写什么？③ 补baseline后你的方法接近了怎么办（诚实讨论什么优势）？</li>
+<li><strong>D248</strong>：① 另一常见审稿要求是什么、契合你什么卖点？② Intro段3-4（核心）写什么？为什么说这是整个Introduction最关键的部分？</li>
+<li><strong>D249</strong>：① ★Response Letter的格式（三色+标什么）？② 诚恳专业的语气示例？③ 不同意的意见怎么回应？④ 为什么“诚恳专业的语气”在rebuttal里如此关键？</li>
+<li><strong>D250</strong>：① 改稿为什么要“标红变更”（对审稿人有什么方便）？② Method章怎么写（复用什么）？</li>
+<li><strong>D251</strong>：① 改不完时该怎么办（质量vs赶）？② ★GitHub“适度维护”的分寸（呼应运营是副线）？</li>
+<li><strong>D252</strong>：① M9硬交付清单有哪几项？② ★M9月报的战略检视检视哪四点（尤其对接空天院）？③ W37-40(M10)的核心任务？</li>
+</ul>
+<h2>四、本周报错速查表</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>收到审稿意见还按原计划写第二篇</td>
+<td>优先级错</td>
+<td>审稿响应有时限，优先处理（暂停第二篇）</td>
+</tr>
+<tr>
+<td>被审稿语气带走、沮丧内耗</td>
+<td>情绪主导</td>
+<td>读三遍（情绪→放下→实质），关注“对不对”非“好不好听”</td>
+</tr>
+<tr>
+<td>无条件接受所有审稿意见</td>
+<td>不分类</td>
+<td>标三类：同意改/部分同意部分改/不同意礼貌据理回应</td>
+</tr>
+<tr>
+<td>Response Letter不逐条/无格式</td>
+<td>不规范</td>
+<td>逐条+三色（原文蓝/回复黑/修改红标页码行号）+诚恳专业</td>
+</tr>
+<tr>
+<td>语气生硬对抗</td>
+<td>不专业</td>
+<td>“We thank...We have addressed...”；不同意也“respectfully clarify”</td>
+</tr>
+<tr>
+<td>改了论文不标红</td>
+<td>审稿人难核对</td>
+<td>红色标记所有变更处（对应意见，方便复审）</td>
+</tr>
+<tr>
+<td>Response说改了论文没真改</td>
+<td>言行不一</td>
+<td>言行一致：都真改+标红</td>
+</tr>
+<tr>
+<td>为赶时限草草提交</td>
+<td>质量打折</td>
+<td>质量优先（改不完下周续，通常有期或可短延）</td>
+</tr>
+<tr>
+<td>借GitHub维护又陷入大量运营</td>
+<td>没守住副线</td>
+<td>★适度维护（回issue/更新文档），核心是研究（第二篇）</td>
+</tr>
+<tr>
+<td>月报只盘点不战略检视</td>
+<td>缺战略视角</td>
+<td>★战略检视：审稿/第二篇/开源/对接空天院准备</td>
+</tr>
+<tr>
+<td>star没达50就焦虑</td>
+<td>把运营当目的</td>
+<td>理性看（运营副线、好项目持续被发现），不被数字绑架</td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p></section>
+<div class="pager"><a class="prev" href="w35.html"><span class="dir">← 上一篇</span><span class="nm">W35 GitHub 仓库爆款打造周</span></a><a class="next" href="w37.html"><span class="dir">下一篇 →</span><span class="nm">W37 第二篇论文 Method + Exper</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d246">D246 周一</a><a class="sub" href="#d246-am">上午 查审稿状态 + 决定走哪条线</a><a class="sub" href="#d246-noon">中午 【如收到】逐条读意见、标三类、列</a><a class="sub" href="#d246-pm">晚上 【审稿线】制定回复计划 / 【论</a><a href="#d247">D247 周二</a><a class="sub" href="#d247-am">上午 【审稿线】补实验 1（补 bas</a><a class="sub" href="#d247-noon">中午 继续补实验 / 写论文</a><a class="sub" href="#d247-pm">晚上 继续补实验 / 写论文</a><a href="#d248">D248 周三</a><a class="sub" href="#d248-am">上午 【审稿线】补实验 2（补数据集）</a><a class="sub" href="#d248-noon">中午 继续补实验 / 写论文</a><a class="sub" href="#d248-pm">晚上 继续补实验 / 写论文</a><a href="#d249">D249 周四</a><a class="sub" href="#d249-am">上午 【审稿线】写 Response </a><a class="sub" href="#d249-noon">中午 继续 Response Lett</a><a class="sub" href="#d249-pm">晚上 继续 Response Lett</a><a href="#d250">D250 周五</a><a class="sub" href="#d250-am">上午 【审稿线】改稿标红变更 / 【论</a><a class="sub" href="#d250-noon">中午 继续改稿 / 写 Method</a><a class="sub" href="#d250-pm">晚上 继续改稿 / 写 Method</a><a href="#d251">D251 周六</a><a class="sub" href="#d251-am">上午 【审稿线】提交修改稿 / 【论文</a><a class="sub" href="#d251-noon">中午 继续 Method / 收尾审稿</a><a class="sub" href="#d251-pm">晚上 GitHub 仓库适度维护（★运</a><a href="#d252">D252 周日</a><a class="sub" href="#d252-am">上午 W36 复盘（审稿处理 / 第二</a><a class="sub" href="#d252-noon">中午 M9 月度复盘（star + 硬</a><a class="sub" href="#d252-pm">晚上 计划 W37-40（第二篇 Me</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

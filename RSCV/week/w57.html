@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-root="../" data-stage="3" data-week="57">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>W57 · 论文冲刺（上）—— 把第三篇论文从 v0.5 打 · 遥感 CV 转型手册</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>(function(){try{var t=JSON.parse(localStorage.getItem('rscv.theme'));if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="iconbtn railtoggle" id="railBtn" type="button" aria-label="目录">☰</button>
+  <a class="brand" href="../index.html"><b>遥感 CV 转型</b><span>教 · 学 · 做</span></a>
+  <div class="spacer"></div>
+  <nav><a class="" href="../index.html">首页</a><a class="hide-sm" href="../calendar.html">进度地图</a><a class="hide-sm" href="../guide.html">使用指南</a><a class="hide-sm" href="../glossary.html">术语表</a></nav>
+  <div class="searchbox"><input id="q" type="search" placeholder="搜索全书…" aria-label="搜索"></div>
+  <button class="iconbtn" id="themeBtn" type="button" aria-label="切换深浅色">☾</button>
+</header>
+<div class="readbar"><i></i></div>
+<div class="layout">
+  <aside class="rail" id="rail"><noscript>目录需要 JavaScript 才能展开，请直接使用首页的阶段导航。</noscript></aside>
+  <main class="main" data-page="week">
+    <div class="wrap">
+<div class="pagehead"><div class="eyebrow"><a href="../index.html">首页</a><span>›</span><span class="chip">阶段三 · 深化期</span><span>M15 访问 / 远程合作</span><span>·</span><span>Week 57</span><span>·</span><span>D393–D399</span></div><h1 class="title">论文冲刺（上）—— 把第三篇论文从 v0.5 打磨到接近 v1.0 投稿级</h1><p class="subtitle">「教-学-做」带教版（满深度·对齐 M3-W11 标杆 · 单周文件）</p><div class="swath" title="本周 21 个时段的完成情况"><span class="sday"><i data-d="393" data-k="am" title="D393 上午段"></i><i data-d="393" data-k="noon" title="D393 中午段"></i><i data-d="393" data-k="pm" title="D393 晚上段"></i></span><span class="sday"><i data-d="394" data-k="am" title="D394 上午段"></i><i data-d="394" data-k="noon" title="D394 中午段"></i><i data-d="394" data-k="pm" title="D394 晚上段"></i></span><span class="sday"><i data-d="395" data-k="am" title="D395 上午段"></i><i data-d="395" data-k="noon" title="D395 中午段"></i><i data-d="395" data-k="pm" title="D395 晚上段"></i></span><span class="sday"><i data-d="396" data-k="am" title="D396 上午段"></i><i data-d="396" data-k="noon" title="D396 中午段"></i><i data-d="396" data-k="pm" title="D396 晚上段"></i></span><span class="sday"><i data-d="397" data-k="am" title="D397 上午段"></i><i data-d="397" data-k="noon" title="D397 中午段"></i><i data-d="397" data-k="pm" title="D397 晚上段"></i></span><span class="sday"><i data-d="398" data-k="am" title="D398 上午段"></i><i data-d="398" data-k="noon" title="D398 中午段"></i><i data-d="398" data-k="pm" title="D398 晚上段"></i></span><span class="sday"><i data-d="399" data-k="am" title="D399 上午段"></i><i data-d="399" data-k="noon" title="D399 中午段"></i><i data-d="399" data-k="pm" title="D399 晚上段"></i></span></div></div>
+<section class="preface"><blockquote class="quote">
+<p><strong>这一周在整张地图的位置</strong>：欢迎进入 <strong>W57（M15 第一周，论文冲刺 + 等待访问确认·上半）</strong>！上个月（M14）你提交了访问申请、把第三篇论文写到了 v0.5（初稿框架完整）。这一周做两件事并行：① ★ <strong>把论文从 v0.5 打磨到接近 v1.0 投稿级</strong>——写好 Conclusion + Abstract、整理参考文献、做精良的可视化图、把各章整体串联、补充实验，并像审稿人一样做 mock review 自审、提前挑刺修复；② <strong>持续追踪访问申请</strong>（耐心跟进、适度追问，为 W58 的最终判断做准备）。★ W57 的主线：“把第三篇论文这个完全属于你的硬产出，打磨到投稿级；同时耐心等待访问的回音。”
+<strong>本周科研能力目标</strong>（你原计划，保留）：论文 v0.5→接近 v1.0（Conclusion/Abstract/参考文献/图表/整体串联/补充实验/mock review 自审）+ 访问申请追踪。
+<strong>承上</strong>：M14 你提交了访问申请、论文写到 v0.5。<strong>本周把论文从 v0.5 冲刺到接近 v1.0、做投稿前的自审，同时耐心追踪访问申请。</strong></p>
+<p><strong>🧩 贯穿线索</strong>：论文打磨复用前两篇的定稿经验（Conclusion/Abstract/参考文献/图表/串联都有现成的写法）。★ <strong>mock review（审稿人视角自审）是本周的关键</strong>——像审稿人一样批判性地挑自己论文的刺（创新性/有效性/清晰性），提前发现并修复问题，大大提高被接受概率。访问申请耐心追踪（满 1 周可礼貌追问 1-2 次）。守核心延后（论文 PDF 可分享，核心代码延后开源）、单卡高效照旧（论文里突出 Params/FPS 卖点）。下一周（W58）论文 v1.0 定稿 + 访问确认最终判断 + 投稿准备。</p>
+<p><strong>📌 本周结构</strong>：D393 论文 Conclusion + 访问追踪 + 补充实验；D394 论文 Abstract + ★ 访问追问（1 周未回复）+ 可视化图制作；D395 参考文献整理 + 可视化图制作 + 访问跟进；D396 v0.5→v1.0 整体串联 + 补充实验完成；D397 各章完善（v1.0 细节）+ 图最终检查；D398 ★ 通读自审 + mock review（审稿人视角）+ 据自审修改；D399 周复盘 + 论文 v1.0 进度 + 计划 W58。</p>
+</blockquote>
+<hr />
+<h2>🧭 W57 总览：论文打磨到接近 v1.0 + 访问追踪</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>这一周做什么</th>
+<th>产物</th>
+<th>它的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conclusion + Abstract（复用经验）</td>
+<td>结论 + 摘要</td>
+<td>论文首尾立住</td>
+</tr>
+<tr>
+<td>参考文献整理 + 可视化图制作</td>
+<td>规范引用 + 精良图表</td>
+<td>专业度、说服力</td>
+</tr>
+<tr>
+<td>v0.5→v1.0 整体串联 + 补充实验</td>
+<td>连贯的论文 + 补全证据</td>
+<td>从拼凑到连贯、证据完整</td>
+</tr>
+<tr>
+<td>★ 通读自审 + mock review</td>
+<td>修改清单 + 修复问题</td>
+<td>投稿前提前挑刺、提高接受率</td>
+</tr>
+<tr>
+<td>访问申请追踪 + 适度追问</td>
+<td>访问状态明确</td>
+<td>为 W58 最终判断做准备</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote class="quote">
+<p><strong>本周节奏提醒</strong>：D393 Conclusion + 追踪 + 补充实验；D394 Abstract + ★ 访问追问 + 可视化图；D395 参考文献 + 图制作 + 跟进；D396 整体串联 + 补充实验完成；D397 各章完善 + 图检查；D398 ★ 通读自审 + mock review；D399 复盘 + 计划 W58。<strong>核心心态：这一周是“把论文磨到能投”——v0.5 是初稿框架，v1.0 是投稿级（语言地道、图表精良、内容完整、逻辑严谨）。其中 ★ mock review 是关键一招：在投稿前，像审稿人一样狠狠地挑自己论文的刺（创新性够不够新、实验支不支撑结论、方法讲没讲清），把审稿人可能挑出的问题提前发现、提前修复——这比投出去被拒、再返工，效率高得多，也大大提高一次中稿的概率。同时，访问申请耐心追踪（满 1 周可礼貌追问，访问申请可比冷邮件稍多追 1-2 次），但不焦虑——把精力放在论文这个你完全掌控的产出上。★ 这篇第三论文，是你不依赖任何人的硬资产：不管访问成不成，它都是你的成果。把它磨到投稿级，本身就是这一周最实在的胜利。下一周（W58）论文定稿投出、访问做最终判断。</strong></p>
+</blockquote>
+<hr />
+</section>
+<article class="day" id="d393" data-d="393"><header class="day-head"><span class="dnum">D393</span><h2 class="day-t">周一 · 论文打磨——Conclusion（结论）+ 访问申请状态追踪 + 补充实验</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：2 周块第一天，论文冲刺启动——① 上午写论文 Conclusion（结论：总结贡献 + 局限 + 未来工作）；② 中午访问申请状态追踪（看有无回复，还在 1 周内则耐心等）；③ 晚上补充实验（看 v0.5 哪里实验不足，补上）。提醒：论文从 v0.5→v1.0 是“打磨到投稿级”——今天从 Conclusion 开始（结论是论文的收尾，呼应引言、升华贡献）。</p>
+</blockquote>
+</div><section class="slot" id="d393-am" data-d="393" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D393 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文打磨——Conclusion（结论：总结贡献 + 局限 + 未来工作）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Conclusion 怎么写）</h4><div class="blk-b"><ul>
+<li><strong>Conclusion（结论）= 论文的收尾</strong>——① <strong>总结贡献</strong>（简洁重述你做了什么、解决了什么、效果如何，呼应引言的承诺）；② <strong>局限</strong>（诚实说明方法的局限——审稿人欣赏诚实，也显你思考全面）；③ <strong>未来工作</strong>（指出可继续的方向）。★ <strong>复用前两篇的 Conclusion 写法</strong>——结构、表述都有经验。Conclusion 要简洁有力（不是重复全文，是升华）。一个好的 Conclusion 会让审稿人读完后对你工作的价值有清晰的印象——它不是简单地说“我们做了 A、B、C”，而是提炼出“这项工作的意义在于…、它为这个领域带来了…”，把具体的贡献上升到更有高度的认识。</li>
+<li><strong>为什么从 Conclusion 开始打磨</strong>：v0.5 已有 Method/Experiment/Intro/Related Work，Conclusion 和 Abstract 是补全论文的“头尾”。先写 Conclusion（基于已有内容总结），再写 Abstract（D394）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写 Conclusion（总结贡献：呼应引言、重述做了什么/效果）；② 写局限（诚实、思考全面）；③ 写未来工作（可继续的方向，可关联和目标组的合作）；④ 复用前两篇 Conclusion 结构；⑤ 简洁有力（升华非重复）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Conclusion 写好——总结贡献（呼应引言）+ 局限（诚实）+ 未来工作，简洁有力，复用前两篇结构。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>Conclusion 重复全文（冗长）→ 简洁升华（总结贡献，非复述）。</li>
+<li>不写局限（显不全面）→ 诚实写局限（审稿人欣赏）。</li>
+<li>不复用前两篇 → 复用结构表述。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>Conclusion 写什么？→ 总结贡献（呼应引言）+ 局限 + 未来工作；局限怎么写？→ 诚实说方法的不足（如某场景待改进）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写好了论文 Conclusion</strong>。<strong>做了</strong>（写 Conclusion[贡献/局限/未来工作]+ 呼应引言 + 复用前两篇 + 简洁有力）、<strong>学了</strong>（Conclusion 升华非重复、诚实写局限、复用结构）、<strong>会了</strong>（写出简洁有力的论文结论）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜论文 v0.5→v1.0 打磨（投稿级）</strong>：把初稿打磨到投稿级，补全+精修——①Conclusion（总结贡献呼应引言+诚实局限+未来工作，简洁升华非重复）②Abstract（浓缩问题+方法+结果+贡献，独立可读）③参考文献整理（规范引用+补全）④英文润色（语法/表达/学术性）⑤图表定稿（清晰专业）⑥supplementary（补充材料）。★ 复用前两篇打磨经验。配合通读自审+mock review（审稿人视角挑刺）。v1.0=投稿级（各章完整精修、可投）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d393-noon" data-d="393" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D393 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问申请状态追踪</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>访问申请（W55 发出）现在过了约 1 周。<strong>追踪访问申请状态</strong>——① 有回复（约谈/确认/补材料）→ 及时认真处理；② 还在 1 周内、无回复 → 耐心等（教授 3–7 天才回，访问申请也需时间审）；③ 满 1 周无回复 → 准备追问（明天 D394）。<strong>追踪让你掌握访问申请的进展，据此跟进。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查邮箱（访问申请有无回复）；② 有回复→及时认真处理（确认/补材料/约谈）；③ 无回复且未满 1 周→耐心等；④ 记录访问申请状态（发给谁/回应/天数）；⑤ 更新追踪表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问申请状态追踪清楚（有回复则处理/无则等），追踪表更新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不追踪（不知进展）→ 追踪状态；② 有回复拖着不处理 → 及时认真处理。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>访问申请有回应？→ 及时处理（确认/补材料）；没有？→ 未满 1 周耐心等、满 1 周追问。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>追踪了访问申请状态</strong>。<strong>做了</strong>（检查回复 + 处理/等待 + 记录状态 + 更新追踪表）、<strong>学了</strong>（追踪访问申请进展、有回复处理/无回复按时间等或追问）、<strong>会了</strong>（追踪访问申请并据进展跟进）。</p>
+</div></section></section><section class="slot" id="d393-pm" data-d="393" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D393 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">补充实验（如需要：看 v0.5 哪里实验不足）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（为什么补充实验）</h4><div class="blk-b"><ul>
+<li>v0.5 的论文可能有<strong>实验不足</strong>的地方——审稿人/mock review 会问的：① 某个对比缺失（漏了某个 baseline/setting）；② 某个分析缺失（如不同参数/场景的分析）；③ 泛化性验证不够。<strong>补充实验</strong>把论文的实验补齐、更有说服力。今晚看 v0.5 哪里实验不足，补上（如算力允许）。</li>
+<li><strong>怎么判断要补什么</strong>：站在审稿人视角，问“这篇论文的实验完整吗、有说服力吗、有没有明显的缺口”——补最关键的缺口。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 审视 v0.5 的实验（主结果 + 消融），找不足（缺的对比/分析/泛化验证）；② 确定要补的关键实验；③ 启动补充实验（基于代码框架，单卡）；④ 实验管理记录；⑤ 让补充实验跑起来（结果出来整合进论文）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>补充实验（如需）启动——找了 v0.5 的实验不足、补关键实验，跑起来。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 实验有缺口不补（论文弱）→ 补关键实验（更有说服力）；② 补无关紧要的实验 → 补审稿人会问的关键缺口。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知补什么？→ 站审稿人视角找明显缺口（缺的对比/分析/泛化）；算力不够？→ 补最关键的、控规模。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>补齐了论文的关键实验</strong>。<strong>做了</strong>（审视 v0.5 实验找不足 + 确定关键补充 + 启动 + 实验管理）、<strong>学了</strong>（补充实验补缺口更有说服力、站审稿人视角找缺口、补关键的）、<strong>会了</strong>（识别并补齐论文的实验缺口）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜补充实验（审稿人视角补缺口）</strong>：投稿前看论文实验哪里不足、补关键缺口——站审稿人视角问“实验完整吗/有说服力吗/有明显缺口吗”，补：缺的对比（漏的 baseline/setting）/缺的分析（参数/场景）/泛化验证不够。★ 补最关键的缺口（审稿人会问的），不补无关紧要的。单卡控规模、基于代码框架快速补、结果整合进 Experiment 章。补充实验让论文更有说服力、减少被审稿人挑出缺口的风险。</p>
+</blockquote>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 Conclusion 写好 ✅ 访问申请状态追踪 ✅ 补充实验启动（如需要）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D393</summary><textarea data-note="d393" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d394" data-d="394"><header class="day-head"><span class="dnum">D394</span><h2 class="day-t">周二 · 论文打磨——Abstract（摘要）+ ★ 访问申请追问（1 周未回复）+ 可视化图制作</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天——① 上午写论文 Abstract（摘要：浓缩问题 + 方法 + 结果 + 贡献）；② 中午 ★ 如果访问申请 1 周未回复 → 发追问邮件；③ 晚上可视化图制作（方法图/结果图）。提醒：Abstract 是论文的“门面”（审稿人/读者第一眼看的），要浓缩精华、独立可读；访问申请追问要礼貌（同冷邮件追问的分寸）。</p>
+</blockquote>
+</div><section class="slot" id="d394-am" data-d="394" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D394 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文打磨——Abstract（摘要：浓缩问题 + 方法 + 结果 + 贡献）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（Abstract 怎么写）</h4><div class="blk-b"><ul>
+<li><strong>Abstract（摘要）= 论文的浓缩门面</strong>——审稿人/读者第一眼看的，决定他们是否继续读。结构：① <strong>问题/背景</strong>（一句话）；② <strong>方法</strong>（你做了什么）；③ <strong>结果</strong>（关键提升/发现）；④ <strong>贡献/意义</strong>。★ <strong>要点</strong>：浓缩（150–250 字）、独立可读（不依赖正文也能看懂）、突出亮点（最强的结果/贡献）。复用前两篇 Abstract 写法。</li>
+<li><strong>为什么 Abstract 重要</strong>：很多人只看 Abstract 决定要不要读全文；审稿人的第一印象也常来自 Abstract。写好 Abstract = 论文的好门面。有个实用技巧：Abstract 最好在论文主体写完后再写（或写完后再回头精修）——因为这时你对全文的贡献和结果最清楚，能提炼出最准确、最有力的浓缩版。先有内容、再提炼门面，比一开始就憋 Abstract 要高效得多。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 写 Abstract（问题→方法→结果→贡献）；② 浓缩（150–250 字）；③ 独立可读（不依赖正文）；④ 突出亮点（最强结果/贡献，如“mAP 提升 X、单卡高效”）；⑤ 复用前两篇结构；⑥ 反复精炼（每句都有信息量）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>Abstract 写好——问题/方法/结果/贡献齐全、浓缩独立可读、突出亮点，复用前两篇。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>Abstract 冗长/不浓缩 → 150–250 字、精炼。</li>
+<li>不突出亮点 → 突出最强结果/贡献。</li>
+<li>依赖正文（看不懂）→ 独立可读。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>Abstract 写什么？→ 问题→方法→结果→贡献；太长？→ 删次要、每句有信息量。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>写好了论文 Abstract</strong>。<strong>做了</strong>（写 Abstract[问题/方法/结果/贡献]+ 浓缩独立可读 + 突出亮点 + 复用前两篇 + 精炼）、<strong>学了</strong>（Abstract 是浓缩门面、独立可读、突出亮点）、<strong>会了</strong>（写出精炼有力的论文摘要）。</p>
+</div></section></section><section class="slot" id="d394-noon" data-d="394" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D394 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">★ 访问申请追问（如果 1 周未回复）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（访问申请追问的分寸）</h4><div class="blk-b"><ul>
+<li>访问申请发出满 1 周，如<strong>未回复 → 发追问邮件</strong>。★ 追问的分寸同冷邮件追问：① <strong>礼貌、简短</strong>（“不知您是否看到我上周的访问申请，理解您繁忙”）；② <strong>给台阶</strong>（“邮件可能被淹没”）；③ <strong>重申意愿 + 附材料</strong>（“很希望有机会到贵团队访问，研究计划书见附件”）；④ <strong>不施压、追问适度</strong>（访问申请可追问 1-2 次，比冷邮件可稍多，因为这是正式申请、对方可能在内部讨论需要时间）。<strong>追问给访问申请一次再被看到/推进的机会。</strong></li>
+<li><strong>为什么访问申请的追问可稍多于冷邮件</strong>：访问申请是正式的、对方可能需要内部讨论/安排，所以回复周期可能更长，礼貌追问 1-2 次是合理的（但仍要礼貌、不催逼）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查访问申请是否满 1 周无回复；② 如是，发追问邮件（礼貌+简短+给台阶+重申意愿+附研究计划书，见补充包）；③ 对未回复的老师/师兄都可追问（各自定制）；④ 更新追踪表（已追问）；⑤ 追问后平常心（等回复，继续论文）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>如访问申请 1 周未回复，发了礼貌追问（重申意愿+附材料），追踪表更新，心态平稳。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不追问（干等）→ 满 1 周礼貌追问；② 追问催逼/施压 → 礼貌、给台阶、不施压；③ 追问太频繁 → 适度（1-2 次）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>追问怎么写？→ 礼貌+是否看到+给台阶+重申意愿+附材料；担心打扰？→ 礼貌适度的追问是正常跟进。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>礼貌地追问了访问申请</strong>。<strong>做了</strong>（检查满 1 周无回复 + 发礼貌追问[重申意愿+附材料]+ 更新追踪表 + 平常心）、<strong>学了</strong>（访问申请追问礼貌简短给台阶、可稍多于冷邮件[1-2 次]、不施压）、<strong>会了</strong>（得体地追问访问申请）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜访问申请追问（礼貌·适度）</strong>：访问申请发出满 1 周未回复→发追问。分寸：礼貌、简短（“不知您是否看到上周的访问申请，理解您繁忙”）+给台阶（“邮件可能被淹没”）+重申意愿+附研究计划书+不施压。★ 访问申请可追问 1-2 次（比冷邮件稍多，因正式申请对方可能需内部讨论/安排，回复周期更长），但仍礼貌不催逼。追问给申请一次再被推进的机会。追问后平常心。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d394-pm" data-d="394" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D394 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">可视化图制作（方法图/结果图）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（论文的图为什么重要）</h4><div class="blk-b"><ul>
+<li>论文的<strong>图（方法图、结果图、可视化）很重要</strong>——① <strong>方法图/架构图</strong>（让读者快速理解你的方法）；② <strong>结果图</strong>（曲线/对比图，直观展示提升）；③ <strong>可视化</strong>（如检测结果可视化，定性展示效果）。★ <strong>好的图 = 论文的加分项</strong>（审稿人看图就能 get 你的工作）。今晚制作/完善论文的图。复用前两篇的画图经验/风格。</li>
+<li><strong>图的标准</strong>：清晰（线条/字体清楚）、专业（配色/排版规范）、信息量（图说明问题/展示结果）、自解释（配 caption）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 制作/完善方法图（架构图，清晰展示方法流程）；② 制作结果图（曲线/对比图，直观展示提升）；③ 制作可视化（定性结果，如检测/分割可视化）；④ 确保图清晰专业、有信息量、配 caption；⑤ 复用前两篇画图风格。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文的图制作/完善——方法图/结果图/可视化清晰专业、有信息量、配 caption。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 图模糊/不专业 → 清晰专业（线条/字体/配色）；② 图无信息量 → 说明问题/展示结果；③ 无 caption → 配自解释 caption。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>图怎么画？→ 方法图（架构流程）+ 结果图（曲线/对比）+ 可视化（定性）；不专业？→ 参考前两篇/好论文的图。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>制作了论文的图</strong>。<strong>做了</strong>（制作方法图/结果图/可视化 + 清晰专业 + 配 caption + 复用前两篇风格）、<strong>学了</strong>（论文的图是加分项、清晰专业有信息量自解释）、<strong>会了</strong>（制作专业的论文配图）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文 Abstract 写好 ✅ ★ 访问申请追问（如 1 周未回复）✅ 可视化图制作（方法图/结果图）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D394</summary><textarea data-note="d394" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d395" data-d="395"><header class="day-head"><span class="dnum">D395</span><h2 class="day-t">周三 · 论文打磨——参考文献整理 + 可视化图制作（继续）+ 访问跟进</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天——① 上午论文参考文献整理（规范引用 + 补全）；② 中午访问跟进；③ 晚上可视化图制作（继续，图定稿）。提醒：参考文献是论文的规范要求（引用格式统一、相关工作引全），细节但重要（审稿人会看引用是否规范、是否漏引重要工作）。</p>
+</blockquote>
+</div><section class="slot" id="d395-am" data-d="395" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D395 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文打磨——参考文献整理（规范引用 + 补全）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（参考文献为什么要认真整理）</h4><div class="blk-b"><ul>
+<li><strong>参考文献整理</strong>——① <strong>规范引用</strong>（格式统一，按目标期刊的引用格式）；② <strong>补全</strong>（相关工作引全，尤其领域重要工作和目标组的工作——漏引重要工作会被审稿人指出）；③ <strong>准确</strong>（引用信息准确：作者/标题/年份/出处）。★ <strong>参考文献体现你的文献功底和严谨性</strong>——引用规范、引全、准确，显你了解领域、做事严谨。复用你的文献库（W49 的 A/B/C 分级）。</li>
+<li><strong>为什么重要</strong>：审稿人常看引用——① 是否漏引重要工作（尤其他自己的或领域经典）；② 引用是否规范准确。参考文献做好，是论文严谨性的体现。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 整理参考文献（规范引用格式，按目标期刊）；② 补全（相关工作引全，尤其领域重要工作 + 目标组工作）；③ 确保引用准确（作者/标题/年份/出处）；④ 用文献管理工具（如 BibTeX）规范管理；⑤ 检查正文引用和参考文献列表一致。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>参考文献整理好——规范引用、引全（含重要工作和目标组）、准确，正文和列表一致。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>引用格式不统一 → 规范（按目标期刊格式）。</li>
+<li>漏引重要工作（被审稿人指出）→ 引全（领域重要 + 目标组）。</li>
+<li>引用信息不准 → 准确（作者/标题/年份/出处）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>引用怎么规范？→ 用 BibTeX + 目标期刊格式；漏引怎么查？→ 对照领域重要工作/你的文献库（W49）、看相关论文的引用列表补；目标组的工作引了吗？→ 务必引全（既是学术规范，也是对接的善意——老师看到你认真读引了他的工作会有好感）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规范整理了参考文献</strong>。<strong>做了</strong>（规范引用 + 补全[重要工作/目标组]+ 准确 + 文献工具 + 正文列表一致）、<strong>学了</strong>（参考文献体现严谨性、规范/引全/准确、复用文献库）、<strong>会了</strong>（规范整理论文的参考文献）。</p>
+</div></section></section><section class="slot" id="d395-noon" data-d="395" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D395 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问跟进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午——访问跟进（追问后的回复处理/持续追踪）。<strong>论文冲刺中持续跟进访问。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查邮箱（访问申请追问后的回复）；② 有回复→及时处理（确认/约谈/补材料）；③ 无回复→平常心等（追问后给时间）；④ 更新追踪表。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进到位（有回复处理/无则等），追踪表更新。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不跟进 → 持续；② 有回复拖延 → 及时处理。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>访问有回应？→ 及时处理；没有？→ 等 W58 周四做最终判断。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>持续跟进了访问</strong>。<strong>做了</strong>（检查回复 + 处理/等 + 更新追踪表）、<strong>学了</strong>（论文冲刺中持续跟进访问）、<strong>会了</strong>（持续跟进访问申请）。</p>
+</div></section></section><section class="slot" id="d395-pm" data-d="395" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D395 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">可视化图制作（继续，图定稿）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>完成可视化图（图定稿）</strong>——把方法图/结果图/可视化都做完、定稿（清晰、专业、统一风格）。<strong>论文的所有图定稿后，论文的视觉部分就齐了</strong>（v1.0 的图）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 完成所有图（方法图/结果图/可视化）；② 统一风格（配色/字体/排版一致）；③ 确保清晰专业、有信息量、配 caption；④ 图定稿（v1.0）；⑤ 检查图在论文中的位置和引用。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文所有图定稿——风格统一、清晰专业、配 caption，论文视觉部分齐全。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 图风格不统一 → 统一（配色/字体/排版）；② 图未定稿（拖着）→ 定稿（v1.0）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>图风格乱？→ 统一模板/配色；图位置不对？→ 放在对应内容附近、正文引用。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完成了论文的图定稿</strong>。<strong>做了</strong>（完成所有图 + 统一风格 + 清晰专业 + 定稿 + 检查位置引用）、<strong>学了</strong>（图定稿统一风格、视觉部分齐全）、<strong>会了</strong>（完成论文的全部配图并定稿）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文参考文献整理（规范引用 + 补全）✅ 访问跟进 ✅ 可视化图定稿。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D395</summary><textarea data-note="d395" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d396" data-d="396"><header class="day-head"><span class="dnum">D396</span><h2 class="day-t">周四 · 论文打磨——v0.5→v1.0 整体串联（各章衔接）+ 补充实验完成 + 访问跟进</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天——① 上午论文整体串联（各章衔接、逻辑连贯，从 v0.5 向 v1.0 整合）；② 中午访问跟进；③ 晚上补充实验完成（整合进论文）。提醒：整体串联是把各章（Method/Experiment/Intro/Related Work/Conclusion/Abstract）串成一篇连贯的论文——各章衔接自然、逻辑一致、术语统一，这是 v1.0 的关键。</p>
+</blockquote>
+</div><section class="slot" id="d396-am" data-d="396" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D396 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文 v0.5→v1.0 整体串联（各章衔接，逻辑连贯）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（整体串联是什么）</h4><div class="blk-b"><ul>
+<li>论文各章（Intro/Related Work/Method/Experiment/Conclusion/Abstract）写好后，要<strong>整体串联</strong>——① <strong>各章衔接自然</strong>（Intro 引出问题→Related Work 综述→Method 你的方法→Experiment 验证→Conclusion 总结，过渡顺）；② <strong>逻辑一致</strong>（全文围绕一个核心贡献，不矛盾、不重复）；③ <strong>术语/符号统一</strong>（全文一致）；④ <strong>呼应</strong>（Abstract/Intro 的承诺在正文兑现、Conclusion 呼应）。★ <strong>整体串联让论文从“各章拼凑”变成“一篇连贯的论文”</strong>——这是 v1.0 的关键（投稿级论文要逻辑连贯、读起来顺）。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 通读全文，检查各章衔接（过渡自然）；② 检查逻辑一致（围绕核心贡献、不矛盾重复）；③ 统一术语/符号；④ 检查呼应（Abstract/Intro 承诺→正文兑现→Conclusion 呼应）；⑤ 调整使全文连贯（v0.5→v1.0）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文整体串联——各章衔接自然、逻辑一致、术语统一、前后呼应，从 v0.5 向 v1.0 整合。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>各章拼凑（衔接生硬）→ 整体串联（过渡自然）。</li>
+<li>逻辑矛盾/重复 → 围绕核心贡献、一致不重复。</li>
+<li>术语/符号不统一 → 全文统一。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>衔接生硬？→ 加过渡句（章末引出下章）；逻辑乱？→ 围绕核心贡献理顺。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把论文整体串联成连贯的一篇</strong>。<strong>做了</strong>（通读检查衔接 + 逻辑一致 + 统一术语 + 检查呼应 + 调整连贯）、<strong>学了</strong>（整体串联=各章衔接/逻辑一致/术语统一/呼应、从拼凑到连贯）、<strong>会了</strong>（把论文各章串联成连贯的整体）。</p>
+</div></section></section><section class="slot" id="d396-noon" data-d="396" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D396 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问跟进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午——访问跟进。<strong>临近 W58 周四的最终判断，持续关注访问回复。</strong></p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查访问回复；② 处理/等；③ 更新追踪表；④ 为 W58 周四的最终判断积累信息（有无确认）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进到位，为 W58 最终判断积累信息。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不跟进 → 持续；② 不为最终判断准备 → 关注确认情况。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>访问有回应？→ 处理；临近判断？→ 关注是否确认。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>持续跟进了访问</strong>。<strong>做了</strong>（检查回复 + 处理/等 + 更新追踪表 + 为判断准备）、<strong>学了</strong>（持续跟进、为最终判断积累信息）、<strong>会了</strong>（跟进访问并为决策准备）。</p>
+</div></section></section><section class="slot" id="d396-pm" data-d="396" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D396 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">补充实验完成（整合进论文）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>完成补充实验 + 整合进论文</strong>——D393 启动的补充实验跑完了，收集结果、整合进论文的 Experiment 章（补齐之前的缺口）。<strong>补充实验整合后，论文的实验就完整了</strong>（v1.0 的实验部分）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 收集补充实验结果；② 分析（补齐的缺口说明了什么）；③ 整合进 Experiment 章（表格/分析）；④ 确保论文实验完整（主结果 + 消融 + 补充）；⑤ 论文实验部分 v1.0。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>补充实验完成 + 整合进论文——论文实验完整（主结果/消融/补充），v1.0 实验部分。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 补充实验不整合 → 整合进 Experiment 章；② 实验仍不完整 → 确认覆盖关键缺口。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>结果怎么整合？→ 加进 Experiment 章对应部分（表格+分析）；还有缺口？→ 评估是否关键、是否需再补。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>补齐并整合了论文实验</strong>。<strong>做了</strong>（收集补充实验 + 分析 + 整合进 Experiment + 确认完整）、<strong>学了</strong>（补充实验整合后实验完整、v1.0 实验部分）、<strong>会了</strong>（把补充实验整合成完整的论文实验）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文整体串联（v0.5→v1.0，各章衔接连贯）✅ 访问跟进 ✅ 补充实验完成 + 整合进论文。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D396</summary><textarea data-note="d396" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d397" data-d="397"><header class="day-head"><span class="dnum">D397</span><h2 class="day-t">周五 · 论文各章完善（v1.0 细节）+ 图最终检查 + 访问跟进</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天——① 上午论文各章完善（v1.0 的细节：表述、逻辑、细节打磨）；② 中午访问跟进；③ 晚上图最终检查 + 论文整体过一遍。提醒：各章完善是把论文的每个章节打磨到位（表述准确、逻辑顺、细节无误），为明天的通读自审 + mock review 做好基础。</p>
+</blockquote>
+</div><section class="slot" id="d397-am" data-d="397" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D397 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文各章完善（v1.0 细节打磨）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>论文整体串联后，<strong>各章完善</strong>——逐章打磨细节：① 表述（学术、准确、流畅）；② 逻辑（每段论证清楚）；③ 细节（数据准确、符号一致、无笔误）。★ <strong>细节决定论文的专业度</strong>——表述精准、逻辑清晰、无低级错误，是投稿级论文的要求。今天逐章完善，把 v1.0 的细节打磨到位。投稿级论文和初稿的差距，往往就藏在这些细节里：一个表述不清的句子、一处前后不一致的符号、一个没对齐的数据——单看都是小事，累积起来却会让审稿人觉得“这篇论文不够严谨/作者不够用心”。打磨细节，本质是在传递一种专业和认真的态度。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 逐章完善（Intro/Related Work/Method/Experiment/Conclusion）；② 打磨表述（学术、准确、流畅）；③ 检查逻辑（每段论证清楚）；④ 核对细节（数据/符号/笔误）；⑤ 各章 v1.0 细节到位。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文各章完善——表述准确流畅、逻辑清楚、细节无误，v1.0 细节到位。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只串联不完善细节 → 逐章打磨；② 细节有误（数据/符号/笔误）→ 核对无误。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>表述不学术？→ 参考前两篇/好论文的表述；细节多？→ 逐章核对（数据/符号）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>完善了论文各章的细节</strong>。<strong>做了</strong>（逐章完善 + 打磨表述 + 检查逻辑 + 核对细节）、<strong>学了</strong>（细节决定专业度、逐章打磨、表述/逻辑/细节）、<strong>会了</strong>（把论文各章打磨到投稿级细节）。</p>
+</div></section></section><section class="slot" id="d397-noon" data-d="397" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D397 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">访问跟进</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>中午——访问跟进（临近 W58 周四最终判断）。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 检查访问回复；② 处理/等；③ 更新追踪表；④ 关注是否确认（为周四判断）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>访问跟进到位。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不跟进 → 持续；② 不关注确认 → 关注（为判断）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>有回应？→ 处理；临近判断？→ 关注确认情况。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>持续跟进了访问</strong>。<strong>做了</strong>（检查+处理/等+更新追踪表）、<strong>学了</strong>（持续跟进、关注确认）、<strong>会了</strong>（跟进访问为决策准备）。</p>
+</div></section></section><section class="slot" id="d397-pm" data-d="397" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D397 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">图最终检查 + 论文整体过一遍</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>图最终检查 + 论文整体过一遍</strong>——确认所有图清晰专业、在论文中位置和引用正确；通读论文整体（v1.0 雏形），找明显问题（为明天通读自审热身）。<strong>今天把论文调到“接近 v1.0”的状态</strong>，明天自审 + mock review。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 图最终检查（清晰/专业/位置/引用/caption）；② 论文整体过一遍（通读，找明显问题）；③ 记录待改的点；④ 确认论文接近 v1.0；⑤ 为明天通读自审 + mock review 准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>图最终检查完成、论文整体过了一遍（接近 v1.0），待改点记录，明天可自审。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 图位置/引用错 → 检查正确；② 不整体过（漏问题）→ 通读找问题。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>图有问题？→ 修正（清晰/位置/引用）；论文哪里不顺？→ 记录待改、明天自审处理。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>把论文调到了接近 v1.0</strong>。<strong>做了</strong>（图最终检查 + 论文整体过一遍 + 记录待改 + 接近 v1.0）、<strong>学了</strong>（图检查、整体通读找问题、为自审准备）、<strong>会了</strong>（把论文整体调到投稿前状态）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文各章完善（v1.0 细节打磨）✅ 访问跟进 ✅ 图最终检查 + 论文整体过一遍。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D397</summary><textarea data-note="d397" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d398" data-d="398"><header class="day-head"><span class="dnum">D398</span><h2 class="day-t">周六 · 论文通读自审 + mock review（审稿人视角）+ 据自审修改</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：今天集中做投稿前的关键自检——① 上午论文通读自审（从头到尾读，找问题）；② 中午 mock review（站审稿人视角批判性审视）；③ 晚上据自审 + mock review 列修改清单 + 开始改。提醒：mock review 是投稿前的“模拟审稿”——像审稿人一样挑自己论文的刺，提前发现并修复问题，大大提高论文被接受的概率。</p>
+</blockquote>
+</div><section class="slot" id="d398-am" data-d="398" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D398 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">论文通读自审（从头到尾读，找问题）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（通读自审找什么）</h4><div class="blk-b"><ul>
+<li><strong>通读自审 = 从头到尾完整读一遍论文，找问题</strong>：① 逻辑（论证是否清楚、有无漏洞）；② 表述（是否准确流畅、有无歧义）；③ 完整性（实验是否充分、贡献是否说清）；④ 细节（数据/符号/引用/笔误）。★ <strong>以“第一次读这篇论文的读者”的视角读</strong>——能不能看懂、有没有疑问、被不被说服。通读自审找出论文自己能发现的问题。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 从头到尾完整通读论文（v1.0 雏形）；② 以“第一次读的读者”视角，记下：看不懂的、有疑问的、不被说服的、有问题的（逻辑/表述/完整性/细节）；③ 列出通读发现的问题清单；④ 标出严重程度（必改/可改）；⑤ 为 mock review 和修改做准备。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文通读自审完成——以读者视角找出问题清单（逻辑/表述/完整性/细节），标了严重程度。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>最常踩的坑</h4><div class="blk-b"><ul>
+<li>不通读就投（带病投稿）→ 通读自审找问题。</li>
+<li>以“作者视角”读（看不出问题）→ 以“第一次读的读者”视角。</li>
+<li>发现问题不记录 → 列问题清单（待改）。</li>
+</ul>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>卡住怎么自救（决策树）</h4><div class="blk-b"><p>看不出问题？→ 假装第一次读、问“能看懂吗/被说服吗/有疑问吗”；问题多？→ 标严重程度（必改先改）。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>通读自审找出了论文的问题</strong>。<strong>做了</strong>（完整通读 + 读者视角 + 列问题清单[逻辑/表述/完整性/细节]+ 标严重程度）、<strong>学了</strong>（通读自审以读者视角找问题、列清单标严重程度）、<strong>会了</strong>（以读者视角通读自审论文）。</p>
+</div></section></section><section class="slot" id="d398-noon" data-d="398" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D398 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">mock review（站审稿人视角批判性审视）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（mock review 是什么、为什么做）</h4><div class="blk-b"><ul>
+<li><strong>mock review（模拟审稿）= 站在审稿人的视角，批判性地审视自己的论文</strong>——像审稿人写评审意见一样，问：① <strong>创新性</strong>（贡献够不够、新不新）；② <strong>有效性</strong>（实验是否支撑结论、对比是否充分、消融是否到位）；③ <strong>清晰性</strong>（方法/实验是否讲清楚、能否复现）；④ <strong>可能的质疑</strong>（审稿人会挑什么刺、问什么问题）。★ <strong>提前用审稿人视角挑刺，把问题在投稿前修复</strong>——这大大提高论文被接受的概率（你先发现并修复了审稿人会指出的问题）。复用前两篇的审稿经验（你被审过、也理解审稿视角）。</li>
+<li><strong>为什么 mock review 有用</strong>：审稿人会批判性地审视论文、挑刺。你提前做 mock review，相当于“自己先当一次审稿人”——发现论文的弱点、可能被质疑的地方，提前修复或准备应对。这里的关键是要“狠得下心”——对自己的论文，人天然会有“护短”心理，容易自我说服“这样应该没问题”。但 mock review 要求你暂时抛开作者身份、像一个挑剔的审稿人那样找茬：哪里证据不足、哪里逻辑有跳跃、哪里说得含糊。越能狠心挑出问题，投稿后被真审稿人挑出的就越少。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 站审稿人视角，批判性审视论文（创新性/有效性/清晰性/可能的质疑）；② 像写评审意见一样列出“审稿人会指出的问题/质疑”；③ 对每个质疑，想：能修复吗（改论文）/能回应吗（补实验/解释）；④ 形成 mock review 清单（问题 + 应对）；⑤ 合并到修改清单。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>mock review 完成——以审稿人视角列出可能的质疑（创新性/有效性/清晰性）+ 应对，合并到修改清单。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不做 mock review（投稿被审稿人挑出问题）→ 提前 mock review 挑刺修复；② mock review 不够批判（手软）→ 像真审稿人一样严格挑刺。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>不知审稿人会挑什么？→ 创新性够吗/实验支撑吗/对比充分吗/能复现吗/有什么弱点；挑出的问题怎么办？→ 能改的改、能回应的准备回应。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>用审稿人视角挑出了论文的刺</strong>。<strong>做了</strong>（审稿人视角批判审视 + 列可能质疑[创新/有效/清晰]+ 想应对 + 合并修改清单）、<strong>学了</strong>（mock review 提前挑刺修复、像真审稿人严格、复用审稿经验）、<strong>会了</strong>（用审稿人视角自审论文并准备应对）。</p>
+<blockquote class="quote callout callout-skill">
+<p><strong>技能卡｜mock review（审稿人视角自审）</strong>：投稿前的关键自检——站审稿人视角批判性审视论文，像写评审意见一样挑刺:①创新性（贡献够不够新）②有效性（实验支撑结论吗/对比充分吗/消融到位吗）③清晰性（方法实验讲清了吗/能复现吗）④可能的质疑（审稿人会挑什么刺）。★ 提前用审稿人视角挑刺、在投稿前修复，大大提高被接受概率（你先发现修复了审稿人会指出的问题）。复用前两篇审稿经验（你被审过、理解审稿视角）。配合通读自审（读者视角找问题）。</p>
+</blockquote>
+</div></section></section><section class="slot" id="d398-pm" data-d="398" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D398 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">据自审 + mock review 列修改清单 + 开始修改</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>晚上<strong>据通读自审 + mock review 列修改清单 + 开始修改</strong>——把上午通读自审和中午 mock review 发现的问题汇总成修改清单（按严重程度排序），开始修改论文。★ <strong>自审 + mock review 的价值在于修改</strong>——发现的问题要修复，论文才能从 v1.0 雏形到真正的 v1.0（投稿级）。修改时分两类处理：能直接改的（表述/逻辑/笔误/补个小实验）立即改；一时改不了或涉及根本性质疑的（如“创新性不够”这种），想清楚怎么在论文里更好地论证、或在 rebuttal 时怎么回应。把“自审发现的问题”变成“已修复或已准备好应对”，论文的抗审稿能力就强了。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 汇总修改清单（通读自审 + mock review 的问题）；② 按严重程度排序（必改先改）；③ 开始修改（改逻辑/表述/补实验/回应质疑）；④ 重要的改完、次要的记录（W58 继续）；⑤ 论文向真正的 v1.0 推进。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>修改清单汇总（排序）、开始修改（重要的改完），论文向 v1.0 推进。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 自审了不改（白审）→ 据清单修改；② 不排序（眉毛胡子一把抓）→ 按严重程度（必改先改）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>改不完？→ 必改的先改、次要的 W58 继续；某质疑难回应？→ 补实验/解释、或在论文中说明。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>据自审修改了论文</strong>。<strong>做了</strong>（汇总修改清单 + 排序 + 开始改[逻辑/表述/补/回应]+ 重要的改完）、<strong>学了</strong>（自审价值在修改、按严重程度排序、向 v1.0 推进）、<strong>会了</strong>（据自审和 mock review 修改论文）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 论文通读自审（读者视角找问题）✅ mock review（审稿人视角挑刺）✅ 据自审 + mock review 列修改清单 + 开始修改。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D398</summary><textarea data-note="d398" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<article class="day" id="d399" data-d="399"><header class="day-head"><span class="dnum">D399</span><h2 class="day-t">周日 · 周复盘 W57 + 论文 v1.0 进度 + 访问追踪 + 计划 W58</h2><span class="day-meta"><span class="prog">0/3</span></span></header><div class="day-body"><div class="day-intro"><blockquote class="quote callout callout-expect">
+<p><strong>预期管理</strong>：W57 收尾——① 上午周复盘 W57；② 中午论文 v1.0 进度盘点 + 访问追踪；③ 晚上计划 W58。提醒：W57 完成了论文 v0.5→v1.0 的主体打磨（结论/摘要/参考文献/图/串联/自审）；W58 是 v1.0 定稿 + 访问确认最终判断 + 投稿准备。</p>
+</blockquote>
+</div><section class="slot" id="d399-am" data-d="399" data-k="am"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D399 上午段"><span class="slot-tag">上午段</span><h3 class="slot-t">周复盘 W57</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W57 复盘什么）</h4><div class="blk-b"><ul>
+<li>W57 复盘重点：① <strong>论文打磨进度</strong>（Conclusion/Abstract/参考文献/图/整体串联/补充实验/自审 mock review）；② <strong>访问跟进</strong>（追问了、有无回应）；③ 论文 v1.0 的完成度（还差什么——英文润色/图表定稿/supplementary）。<strong>W57 是论文冲刺的前半——主体打磨完成，向 v1.0 定稿推进。</strong></li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>写 W57 周报——① 论文打磨（各项完成情况）；② 访问跟进（追问/回应）；③ 论文 v1.0 完成度（已完成/待定稿）；④ 对照 W57 交付（论文 v0.5→v1.0 主体/自审/补充实验）；⑤ 心态。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W57 周报——论文打磨 + 访问跟进 + v1.0 完成度，下一步（W58 定稿 + 访问判断 + 投稿）明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 只盘论文忘访问 → 都盘；② 不对照交付 → 逐项确认。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>论文进度？→ 客观盘（主体完成、待定稿）；访问没回应？→ 客观看、W58 周四判断。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>复盘了论文冲刺前半</strong>。<strong>做了</strong>（W57 周报 + 论文 + 访问 + 对照交付）、<strong>学了</strong>（W57=论文主体打磨完成、都盘）、<strong>会了</strong>（复盘论文冲刺和访问跟进）。</p>
+</div></section></section><section class="slot" id="d399-noon" data-d="399" data-k="noon"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D399 中午段"><span class="slot-tag">中午段</span><h3 class="slot-t">论文 v1.0 进度盘点 + 访问追踪</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念</h4><div class="blk-b"><p>① <strong>论文 v1.0 进度盘点</strong>——盘点论文写到哪了（主体完成，还差英文润色/图表定稿/supplementary），明确 W58 的定稿任务；② <strong>访问追踪</strong>——访问申请的状态（追问后有无回应），为 W58 周四的最终判断准备。<strong>盘点 + 追踪让你清楚论文和访问的现状。</strong> 临近投稿和访问判断这两个节点，把现状盘清楚很重要——它让你在 W58 不慌不乱：论文差哪几项定稿任务、访问处在什么状态、周四该怎么判断，心里都有数。有数，才能从容地把这两件大事都办好。</p>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>① 盘点论文进度（已完成主体；待定稿：英文润色/图表/supplementary）；② 追踪访问状态（追问后回应/天数）；③ 更新追踪表；④ 明确 W58 任务（论文定稿 + 访问判断 + 投稿）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>论文 v1.0 进度盘点（待定稿项）、访问追踪（状态），W58 任务明确。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不盘论文（不知差什么）→ 盘（待定稿项）；② 不追踪访问 → 追踪（为判断）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>论文还差什么？→ 英文润色/图表定稿/supplementary；访问怎么样？→ 看回应、W58 判断。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>盘点了论文进度、追踪了访问</strong>。<strong>做了</strong>（盘点论文待定稿 + 追踪访问 + 更新追踪表 + 明确 W58）、<strong>学了</strong>（盘点论文/追踪访问、明确 W58 任务）、<strong>会了</strong>（盘点论文进度并追踪访问为决策准备）。</p>
+</div></section></section><section class="slot" id="d399-pm" data-d="399" data-k="pm"><div class="slot-head"><input class="chk" type="checkbox" aria-label="标记完成 D399 晚上段"><span class="slot-tag">晚上段</span><h3 class="slot-t">计划 W58（论文 v1.0 定稿 + 访问确认判断 + 投稿准备）</h3></div><section class="blk blk-concept"><h4 class="blk-h"><span class="blk-n">1</span>先垫概念（W58 该规划什么）</h4><div class="blk-b"><ul>
+<li>W58 是 M15 开篇的后半：① <strong>论文 v1.0 定稿</strong>（英文润色 + 图表定稿 + supplementary）；② ★ <strong>访问确认最终判断</strong>（周四：确认→准备出行+通知导师 / 被拒或无回复→最后追问+Plan B）；③ <strong>选第三篇投稿目标 + 投稿准备</strong>（Cover Letter + 格式）。本周的论文进度、访问状态作 W58 输入。</li>
+</ul>
+</div></section>
+<section class="blk blk-do"><h4 class="blk-h"><span class="blk-n">2</span>手把手带做</h4><div class="blk-b"><p>规划 W58——① 论文 v1.0 定稿（润色/图表/supplementary）；② ★ 访问确认最终判断（周四，确认或 Plan B）；③ 选投稿目标 + 投稿准备（Cover Letter/格式）；④ 本周进度作输入；⑤ 留弹性（访问结果不同→不同后续）。</p>
+</div></section>
+<section class="blk blk-check"><h4 class="blk-h"><span class="blk-n">3</span>这一步合格的样子</h4><div class="blk-b"><p>W58 规划——论文定稿 + 访问判断 + 投稿准备的安排清晰，本周进度作输入，留弹性。</p>
+</div></section>
+<section class="blk blk-pit"><h4 class="blk-h"><span class="blk-n">4</span>坑</h4><div class="blk-b"><p>① 不规划 W58 → 规划（定稿/判断/投稿）；② 访问判断没排 → 周四做最终判断；③ W58 是 2 周块后半没注意 → 注意（收尾段）。</p>
+</div></section>
+<section class="blk blk-rescue"><h4 class="blk-h"><span class="blk-n">5</span>自救</h4><div class="blk-b"><p>W58 怎么排？→ 论文定稿 + 周四访问判断 + 投稿准备；访问判断怎么做？→ 确认→出行/未确认→Plan B。</p>
+</div></section>
+<section class="blk blk-gain"><h4 class="blk-h"><span class="blk-n">6</span>今天（这一步）你同时学会了什么</h4><div class="blk-b"><p>你<strong>规划好了 W58</strong>。<strong>做了</strong>（W58 规划：论文定稿+访问判断+投稿准备 + 进度作输入 + 留弹性）、<strong>学了</strong>（W58=定稿+访问判断+投稿、周四最终判断）、<strong>会了</strong>（规划论文定稿与访问判断）。</p>
+<blockquote class="quote callout callout-deliver">
+<p><strong>今日交付</strong>：✅ 周报 W57（论文打磨 + 访问跟进）✅ 论文 v1.0 进度盘点 + 访问追踪 ✅ W58 计划（定稿 + 访问判断 + 投稿）。</p>
+</blockquote>
+<hr />
+</div></section></section><details class="notes"><summary>我的笔记 · D399</summary><textarea data-note="d399" placeholder="今天的产出、卡点、明天要补的事…（存在这台浏览器里）"></textarea></details></div></article>
+<section class="supp" id="supp"><h2>📎 W57 加厚补充包（范例 / 完整代码 / 每日自测 / 报错速查）</h2><blockquote class="quote">
+<p>论文冲刺（上），补充包给你四样可直接照用的：① 三个范例（论文 v0.5→v1.0 打磨清单 + mock review 自审清单 · 补充实验要点 + 可视化图制作要点 · 论文整体串联要点 + 访问追问邮件模板）；② 一个完整可运行的“论文 v1.0 打磨就绪检查器”+ 预期输出；③ 每日自测；④ 报错/坑速查表。</p>
+</blockquote>
+<h2>一、合格范例（照着填就能用）</h2>
+<h3>范例 1 · 论文 v0.5→v1.0 打磨清单 + mock review 自审清单</h3>
+<figure class="code" data-lang="text"><pre><code>【论文 v0.5→v1.0 打磨清单】
+□ Conclusion（总结贡献呼应引言+诚实局限+未来工作,简洁升华）
+□ Abstract（问题→方法→结果→贡献,150-250字,独立可读,突出亮点）
+□ 参考文献整理（规范引用+补全重要工作和目标组+准确+正文列表一致）
+□ 整体串联（各章衔接自然+逻辑一致+术语符号统一+前后呼应）
+□ 补充实验（补审稿人会问的关键缺口+整合进Experiment）
+□ 图表定稿（清晰专业+风格统一+caption完整+位置引用正确）
+□ 英文润色（语法/表达/学术性,工具辅助+人工通读)
+□ supplementary（补充材料,如有）
+
+【mock review 自审清单（审稿人视角挑刺）】
+□ 创新性: 贡献够不够新?和现有工作的区别清楚吗?
+□ 有效性: 实验支撑结论吗?对比充分吗(多 baseline)?消融到位吗?2数据集泛化?
+□ 清晰性: 方法讲清了吗?能复现吗?图表清楚吗?
+□ 可能质疑: 审稿人会挑什么刺?→对每个想:能改/能回应(补实验/解释)
+→ 提前挑刺修复,大大提高被接受概率。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 2 · 补充实验要点 + 可视化图制作要点</h3>
+<figure class="code" data-lang="text"><pre><code>【补充实验要点（审稿人视角补缺口）】
+· 看 v0.5 哪里实验不足:对比够吗(baseline数)?消融全吗(每个部分)?
+  泛化验证够吗(2数据集)?有没有审稿人会追问的 setting?
+· 补关键缺口(不是无限做,而是补&quot;审稿人会质疑的&quot;那些)
+· 单卡合理排队,优先论文必需的关键实验
+· 补完整合进 Experiment 章(表+分析)
+→ 在投稿前补上,避免被审稿人挑出&quot;实验不足&quot;。
+
+【可视化图制作要点】
+· 方法图(架构图): 清晰展示你的方法流程/模块,一图看懂
+· 结果图: 对比曲线/柱状/可视化样例,直观展示提升(★突出单卡高效Params/FPS)
+· 风格统一: 配色/字体/线宽一致,专业美观
+· caption完整: 每图说清画的什么、说明什么
+→ 图是论文的&quot;门面&quot;,精良的图大大提升专业度和说服力。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h3>范例 3 · 论文整体串联要点 + 访问追问邮件模板</h3>
+<figure class="code" data-lang="yaml"><pre><code><span class="l l-Scalar l-Scalar-Plain">【论文整体串联要点（v0.5→v1.0,从拼凑到连贯）】</span>
+<span class="l l-Scalar l-Scalar-Plain">· 逻辑连贯</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Intro提的问题/贡献→Method实现→Experiment验证→Conclusion呼应</span>
+<span class="nt">· 术语/符号统一</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">同一概念全文同一术语(别Method叫A、Experiment叫B)</span>
+<span class="nt">· 章节过渡自然</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">每章结尾→下章开头有衔接</span>
+<span class="l l-Scalar l-Scalar-Plain">· 图表编号连续+正文都引用</span>
+<span class="l l-Scalar l-Scalar-Plain">→ 各章分开写易&quot;局部好整体散&quot;,串联拧成连贯整体=v1.0的关键。</span>
+
+<span class="l l-Scalar l-Scalar-Plain">【访问追问邮件模板（1周未回复,可追问1-2次）】</span>
+<span class="nt">X老师您好</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">冒昧再次打扰。不知您是否看到我上周的暑期访问申请——理解您工作繁忙,</span>
+<span class="l l-Scalar l-Scalar-Plain">邮件可能被淹没。我对到贵团队访问交流很期待,研究计划书见附件(基于您之前</span>
+<span class="l l-Scalar l-Scalar-Plain">的建议做了调整)。无论如何,感谢您的时间和考虑!  [签名]</span>
+<span class="l l-Scalar l-Scalar-Plain">→ 礼貌+给台阶+重申意愿+附材料+不施压。访问申请可比冷邮件稍多追问1-2次。</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<h2>二、完整可运行代码 · 论文 v1.0 打磨就绪检查器（+ 预期输出）</h2>
+<blockquote class="quote">
+<p>这个脚本把“论文 v1.0（投稿级）就绪度”做成可勾选的检查器——输入各打磨环节的完成状态，输出就绪度和“还差什么”，帮你清楚看到论文距投稿级还差哪些。</p>
+</blockquote>
+<figure class="code" data-lang="python"><pre><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># paper_v1_polish_checklist.py —— 论文 v1.0 打磨就绪检查器</span>
+<span class="n">checklist</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;首尾章节&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Conclusion(贡献/局限/未来)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Abstract(独立可读/突出亮点)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="s2">&quot;证据与引用&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;参考文献整理(规范/补全/含目标组)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;补充实验(补审稿人会问的缺口)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;整体性&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;v0.5→v1.0整体串联(逻辑/术语/呼应)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;各章细节完善&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+    <span class="s2">&quot;图表&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;可视化图(方法图/结果图)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;图表定稿(清晰/统一/caption)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="s2">&quot;投稿级要求&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;英文润色(语法/表达/学术性)&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;通读自审(读者视角)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;mock review(审稿人视角挑刺)&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;据自审修改&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">checklist</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 论文 v1.0（投稿级）就绪度 ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">done</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">todo</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cat</span><span class="p">,</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">checklist</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">c_done</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">);</span> <span class="n">done</span> <span class="o">+=</span> <span class="n">c_done</span>
+        <span class="n">bar</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">c_done</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;⏳&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bar</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">c_done</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     □ 待办: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">pct</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">done</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">论文 v1.0 就绪度: </span><span class="si">{</span><span class="n">done</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">pct</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">todo</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;还差：&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">todo</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">→ W58 定稿前补齐(尤其英文润色 + 据自审修改)。&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎉 论文 v1.0 投稿级就绪！W58 定稿投出。&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">check</span><span class="p">(</span><span class="n">checklist</span><span class="p">)</span>
+</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<p><strong>预期输出</strong>：</p>
+<figure class="code" data-lang="text"><pre><code>=== 论文 v1.0（投稿级）就绪度 ===
+
+✅ 首尾章节: 2/2
+✅ 证据与引用: 2/2
+⏳ 整体性: 1/2
+     □ 待办: 各章细节完善
+✅ 图表: 2/2
+⏳ 投稿级要求: 2/4
+     □ 待办: 英文润色(语法/表达/学术性)
+     □ 待办: 据自审修改
+
+论文 v1.0 就绪度: 9/12 = 75%
+还差：
+  - 整体性 · 各章细节完善
+  - 投稿级要求 · 英文润色(语法/表达/学术性)
+  - 投稿级要求 · 据自审修改
+
+→ W58 定稿前补齐(尤其英文润色 + 据自审修改)。</code></pre><button class="copy" type="button" aria-label="复制代码">复制</button></figure>
+<blockquote class="quote">
+<p>解读：把各打磨环节的状态填进 checklist，脚本算出 v1.0 就绪度并列出“还差什么”。示例 75%——首尾/证据/图表就绪，还差各章细节、英文润色、据自审修改（这些正是 W58 定稿要做的）。这把“论文距投稿级还差什么”从凭感觉变成一目了然，让 W57 的打磨有抓手、W58 的定稿有清单。</p>
+</blockquote>
+<h2>三、每日自测（答不上来就回看当天正文）</h2>
+<p><strong>D393（论文 Conclusion + 补充实验）</strong></p>
+<ol>
+<li>Conclusion 写哪三部分（贡献/局限/未来工作）？为什么诚实写局限？</li>
+<li>补充实验补什么？怎么判断（审稿人视角找缺口）？</li>
+</ol>
+<p><strong>D394（论文 Abstract + ★ 访问追问）</strong></p>
+<ol>
+<li>Abstract 写哪四部分？为什么要独立可读、突出亮点？</li>
+<li>★ 访问申请追问的分寸是什么？为什么可比冷邮件稍多（1-2 次）？</li>
+</ol>
+<p><strong>D395（参考文献 + 图定稿）</strong></p>
+<ol>
+<li>参考文献为什么要认真整理（规范/补全/准确）？审稿人看什么？</li>
+</ol>
+<p><strong>D396（整体串联 + 补充实验完成）</strong></p>
+<ol>
+<li>整体串联是什么（各章衔接/逻辑/术语/呼应）？为什么从“拼凑”到“连贯”？</li>
+</ol>
+<p><strong>D397（各章完善 + 图检查）</strong></p>
+<ol>
+<li>各章完善打磨什么细节（表述/逻辑/细节）？为什么细节决定专业度？</li>
+</ol>
+<p><strong>D398（★ 通读自审 + mock review）</strong></p>
+<ol>
+<li>通读自审以什么视角找问题？mock review 以什么视角挑刺？</li>
+<li>★ 为什么 mock review 能提高论文被接受概率？</li>
+</ol>
+<p><strong>D399（复盘 + 计划 W58）</strong></p>
+<ol>
+<li>W57 完成了论文打磨的哪些？W58 要做什么（定稿 + 访问判断 + 投稿）？</li>
+</ol>
+<h2>四、本周报错 / 坑 速查表（现象 → 根因 → 解法）</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>现象</th>
+<th>根因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Conclusion 重复全文</td>
+<td>冗长</td>
+<td>简洁升华（总结贡献，非复述）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不写局限</td>
+<td>显不全面</td>
+<td>诚实写局限（审稿人欣赏）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Abstract 冗长/依赖正文</td>
+<td>不独立</td>
+<td>150-250字、独立可读、突出亮点</td>
+</tr>
+<tr>
+<td>4</td>
+<td>漏引重要工作</td>
+<td>被审稿人指出</td>
+<td>引全（领域重要+目标组）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>各章拼凑衔接生硬</td>
+<td>不连贯</td>
+<td>整体串联（过渡/逻辑/术语/呼应）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>图模糊/风格不统一</td>
+<td>不专业</td>
+<td>清晰专业+统一风格+caption</td>
+</tr>
+<tr>
+<td>7</td>
+<td>补充实验无限做</td>
+<td>拖延</td>
+<td>只补审稿人会质疑的关键缺口</td>
+</tr>
+<tr>
+<td>8</td>
+<td>不通读就投</td>
+<td>带病投稿</td>
+<td>★ 通读自审（读者视角找问题）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>不做 mock review</td>
+<td>被审稿人挑出</td>
+<td>★ mock review（审稿人视角提前挑刺修复）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>自审了不改</td>
+<td>白审</td>
+<td>据清单修改（必改先改）</td>
+</tr>
+<tr>
+<td>11</td>
+<td>访问无回复就干等</td>
+<td>节奏停</td>
+<td>满1周礼貌追问（可1-2次）</td>
+</tr>
+<tr>
+<td>12</td>
+<td>因等访问焦虑停滞</td>
+<td>心态</td>
+<td>精力放论文（你掌控的产出）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>图不突出单卡高效卖点</td>
+<td>埋没优势</td>
+<td>★ 结果图突出 Params/FPS</td>
+</tr>
+<tr>
+<td>14</td>
+<td>术语全文不统一</td>
+<td>读者困惑</td>
+<td>列术语表、全文统一</td>
+</tr>
+<tr>
+<td>15</td>
+<td>投稿前不润色英文</td>
+<td>语言失分</td>
+<td>英文润色（语法/表达/学术性）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<blockquote class="quote">
+<p><strong>W57 收尾 · 论文冲刺（上）</strong>：你完成了 M15 开篇这一周——把第三篇论文从 v0.5 朝 v1.0 投稿级狠狠地推进了一大步：写好了 Conclusion（总结贡献、诚实局限、未来工作）和 Abstract（浓缩问题/方法/结果/贡献）、整理了规范的参考文献、做了精良的可视化图（突出单卡高效卖点）、把各章整体串联成连贯的论文、补充了审稿人会追问的实验。★ 更关键的是，你像审稿人一样做了 mock review——在投稿前狠狠地挑自己论文的刺（创新性、有效性、清晰性），把审稿人可能挑出的问题提前发现、提前修复，大大提高了一次中稿的概率。同时，你耐心追踪了访问申请（适度追问、不焦虑），把精力稳稳放在论文这个你完全掌控的产出上。★ 这篇第三论文，是你不依赖任何人的硬资产——把它磨到投稿级，本身就是这一周最实在的胜利。下一程（W58）是论文 v1.0 定稿投出 + 访问确认最终判断 + 投稿准备。<strong>论文磨到接近投稿级、访问耐心等待——带着这份扎实和专注，走完 M15 前半的冲刺。</strong></p>
+</blockquote>
+</section>
+<section class="deep-sec" id="deep-guide"><h2 class="deep-h">本周会用到的通用方法</h2><div class="note">这一周原文的动手步骤如果不够细，用下面这几招自己补；完整版见 <a href="../self-rescue.html">通用自救手册</a>，论文/工具/数据集的获取途径见 <a href="../resources-master.html">全书资源总表</a>。</div><h4>写作与投稿</h4><p>排版用 LaTeX + Overleaf，参考文献用 Zotero 导 <code>refs.bib</code>；图表导出<b>矢量 PDF</b>并设 <code>pdf.fonttype=42</code>。<b>先定目标期刊再动笔</b>——GRSL 最多 5 页。详见 <a href="w13.html">W13–W16</a> 与 <a href="w17.html">W17</a>。</p><h4>竞赛</h4><p>每个 trick 单独记一行分数增量，并记<b>耗时</b>和<b>要不要保留</b>——诚实记录没用的 trick 比只报有用的更有参考价值。表格格式见 <a href="w29.html">W29</a>。</p></section>
+<div class="pager"><a class="prev" href="w56.html"><span class="dir">← 上一篇</span><span class="nm">W56 论文写到 v0.5 + GitHub 更</span></a><a class="next" href="w58.html"><span class="dir">下一篇 →</span><span class="nm">W58 论文冲刺（下）</span></a></div>
+
+</div>
+  </main>
+  <aside class="outline"><div class="oh">本周结构</div><a href="#d393">D393 周一</a><a class="sub" href="#d393-am">上午 论文打磨——Conclusion</a><a class="sub" href="#d393-noon">中午 访问申请状态追踪</a><a class="sub" href="#d393-pm">晚上 补充实验（如需要：看 v0.5 </a><a href="#d394">D394 周二</a><a class="sub" href="#d394-am">上午 论文打磨——Abstract（摘</a><a class="sub" href="#d394-noon">中午 ★ 访问申请追问（如果 1 周未</a><a class="sub" href="#d394-pm">晚上 可视化图制作（方法图/结果图）</a><a href="#d395">D395 周三</a><a class="sub" href="#d395-am">上午 论文打磨——参考文献整理（规范引</a><a class="sub" href="#d395-noon">中午 访问跟进</a><a class="sub" href="#d395-pm">晚上 可视化图制作（继续，图定稿）</a><a href="#d396">D396 周四</a><a class="sub" href="#d396-am">上午 论文 v0.5→v1.0 整体串</a><a class="sub" href="#d396-noon">中午 访问跟进</a><a class="sub" href="#d396-pm">晚上 补充实验完成（整合进论文）</a><a href="#d397">D397 周五</a><a class="sub" href="#d397-am">上午 论文各章完善（v1.0 细节打磨</a><a class="sub" href="#d397-noon">中午 访问跟进</a><a class="sub" href="#d397-pm">晚上 图最终检查 + 论文整体过一遍</a><a href="#d398">D398 周六</a><a class="sub" href="#d398-am">上午 论文通读自审（从头到尾读，找问题</a><a class="sub" href="#d398-noon">中午 mock review（站审稿人</a><a class="sub" href="#d398-pm">晚上 据自审 + mock revie</a><a href="#d399">D399 周日</a><a class="sub" href="#d399-am">上午 周复盘 W57</a><a class="sub" href="#d399-noon">中午 论文 v1.0 进度盘点 + 访</a><a class="sub" href="#d399-pm">晚上 计划 W58（论文 v1.0 定</a><a href="#supp">加厚补充包</a><a href="#deep-guide">本周通用方法</a></aside>
+</div>
+<script src="../assets/nav-data.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
